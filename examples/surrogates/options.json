@@ -1,0 +1,19 @@
+{
+    "wp_function_name": "Poly",
+    "wp_function_arg": 0,
+    "indim": 1,
+    "outdim": 1,
+    "layer_pre": true,
+    "layer_post": true,
+    "biasorno": true,
+    "nonlin": true,
+    "mlp": false,
+    "final_layer": null,
+    "device": "cpu",
+    "datanoise": 0.02,
+    "lrate": 0.01,
+    "batch_size": null,
+    "nsam": 1,
+    "nepochs": 200,
+    "verbose": false
+}

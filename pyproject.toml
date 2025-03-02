@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pytuq"
+version = "0.1.0"
+description = "Python-only set of tools for uncertainty quantification."
+authors = [ 
+  {name = "Khachik Sargsyan"},
+  {name = "Bert Debusschere"},
+  ]
+maintainers = [ 
+  {name = "Emilie Grace Baillo"}
+]
+requires-python = ">=3.8"
+
+readme = "README.md"
+license = {file = "LICENSE.txt"}
+keywords = ["uncertainty quantification"]
+classifiers = [
+    'Programming Language :: Python :: 3',
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
+    'Programming Language :: Python :: 3.13',
+    'Programming Language :: Python :: 3 :: Only',
+    'Intended Audience :: Science/Research',
+    'Topic :: Scientific/Engineering :: Mathematics',
+    'Natural Language :: English',
+    'Operating System :: Unix',
+    'Operating System :: MacOS',]
+
+dependencies = [
+  "numpy",
+  "scipy",
+  "matplotlib",
+  "torch"
+]
+
+[tool.setuptools.packages.find]
+where = ["src"] 
+namespaces = false 
+
+[tool.setuptools]
+package-dir = {"" = "src"}

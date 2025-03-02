@@ -1,0 +1,57 @@
+
+environment
+        tabular_data
+          tabular_data_file = "exp_pytuq_tabular.dat"
+#          tabular_data_file = "exp_surr_py_tabular.dat"
+        method_pointer = 'UQ'
+
+method,
+        id_method = 'UQ'
+        model_pointer = 'SURR'
+        sampling,
+        sample_type lhs
+          samples = 20
+          seed = 98765
+        response_levels = 0.1 1.0 10.0 100.0
+        distribution cumulative
+
+model,
+        id_model = 'SURR'
+        surrogate global,
+          dace_method_pointer = 'DACE'
+          reuse_samples all
+          experimental_python
+            class_path_and_name = "surrogate.Pytuq"
+#            class_path_and_name = "surrogate.Polynomial"
+
+method,
+        id_method = 'DACE'
+        model_pointer = 'DACE_M'
+        sampling
+          sample_type lhs
+          samples = 10
+          seed = 5034
+model,
+        id_model = 'DACE_M'
+        single
+          interface_pointer = 'I1'
+
+variables,
+        uniform_uncertain = 3
+          lower_bounds = -1.0  -1.0   -1.0
+          upper_bounds =  1.0   1.0    1.0
+          descriptors  = 'x1'   'x2'   'x3'
+
+interface,
+        id_interface = 'I1'
+#        direct
+#          analysis_driver = 'rosenbrock'
+        python
+          analysis_driver = 'surrogate.fcb_sin4'
+
+responses,
+        response_functions = 1
+        no_gradients
+#        analytic_gradients
+        no_hessians
+

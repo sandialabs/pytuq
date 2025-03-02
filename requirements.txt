@@ -1,0 +1,5 @@
+numpy<2
+scipy
+torch
+matplotlib
+git+https://github.com/sandialabs/quinn.git#egg=QUINN
