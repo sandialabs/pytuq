@@ -1,4 +1,4 @@
-# Python Toolkfit for Uncertainty Quantification (PyTUQ)
+# Python Toolkit for Uncertainty Quantification (PyTUQ)
 
 #### Khachik Sargsyan, Bert Debusschere, Emilie Grace Baillo
 
