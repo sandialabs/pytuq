@@ -4,7 +4,7 @@
 
 ## Overview
 
-Python Toolkfit for Uncertainty Quantification (PyTUQ) is a Python-only set of tools for uncertainty quantification.
+Python Toolkit for Uncertainty Quantification (PyTUQ) is a Python-only set of tools for uncertainty quantification.
 
 ## Dependencies
 PyTUQ requires:
