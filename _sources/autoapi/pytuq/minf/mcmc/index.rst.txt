@@ -1,0 +1,155 @@
+pytuq.minf.mcmc
+===============
+
+.. py:module:: pytuq.minf.mcmc
+
+.. autoapi-nested-parse::
+
+   Module for various MCMC flavors.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.minf.mcmc.AMCMC
+   pytuq.minf.mcmc.HMC
+   pytuq.minf.mcmc.MALA
+
+
+Module Contents
+---------------
+
+.. py:class:: AMCMC(cov_ini=None, gamma=0.1, t0=100, tadapt=1000)
+
+   Bases: :py:obj:`pytuq.minf.calib.MCMCBase`
+
+
+   Adaptive MCMC class. Based on :cite:t:`Haario:2001`.
+
+   .. attribute:: cov_ini
+
+      Initial covariance array of size `(p,p)`.
+
+      :type: np.ndarray
+
+   .. attribute:: gamma
+
+      Proposal jump size factor :math:`\gamma`.
+
+      :type: float
+
+   .. attribute:: propcov
+
+      Proposal covariance, working array.
+
+      :type: np.ndarray
+
+   .. attribute:: t0
+
+      Step where adaptivity begins.
+
+      :type: int
+
+   .. attribute:: tadapt
+
+      Adapt/update covariance every `tadapt` steps.
+
+      :type: int
+
+
+   .. py:attribute:: cov_ini
+      :value: None
+
+
+
+   .. py:attribute:: t0
+      :value: 100
+
+
+
+   .. py:attribute:: tadapt
+      :value: 1000
+
+
+
+   .. py:attribute:: gamma
+      :value: 0.1
+
+
+
+   .. py:method:: sampler(current, imcmc)
+
+      Sampler function of a single step.
+
+      :param current: The current chain state.
+      :type current: np.ndarray
+      :param imcmc: Current step.
+      :type imcmc: int
+
+      :returns: Current proposal, and two auxiliary ratios.
+      :rtype: tuple(float, float, float)
+
+
+
+.. py:class:: HMC(epsilon=0.05, L=3)
+
+   Bases: :py:obj:`pytuq.minf.calib.MCMCBase`
+
+
+   Base class for calibration.
+
+
+   .. py:attribute:: epsilon
+      :value: 0.05
+
+
+
+   .. py:attribute:: L
+      :value: 3
+
+
+
+   .. py:method:: sampler(current, imcmc)
+
+      Sampler function of a single step.
+
+      :param current: The current chain state.
+      :type current: np.ndarray
+      :param imcmc: Current step.
+      :type imcmc: int
+
+      :returns: Current proposal, and two auxiliary ratios.
+      :rtype: tuple(float, float, float)
+
+
+
+.. py:class:: MALA(epsilon=0.05)
+
+   Bases: :py:obj:`pytuq.minf.calib.MCMCBase`
+
+
+   Base class for calibration.
+
+
+   .. py:attribute:: epsilon
+      :value: 0.05
+
+
+
+   .. py:method:: sampler(current, imcmc)
+
+      Sampler function of a single step.
+
+      :param current: The current chain state.
+      :type current: np.ndarray
+      :param imcmc: Current step.
+      :type imcmc: int
+
+      :returns: Current proposal, and two auxiliary ratios.
+      :rtype: tuple(float, float, float)
+
+
+

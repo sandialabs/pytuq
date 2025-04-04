@@ -1,0 +1,15 @@
+pytuq.gsa
+=========
+
+.. py:module:: pytuq.gsa
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/pytuq/gsa/gsa/index
+
+

@@ -1,0 +1,481 @@
+pytuq.func.oper
+===============
+
+.. py:module:: pytuq.func.oper
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.func.oper.CartesProdFcn
+   pytuq.func.oper.GradFcn
+   pytuq.func.oper.ComposeFcn
+   pytuq.func.oper.SliceFcn
+   pytuq.func.oper.ShiftFcn
+   pytuq.func.oper.LinTransformFcn
+   pytuq.func.oper.PickDim
+
+
+Module Contents
+---------------
+
+.. py:class:: CartesProdFcn(fcn1, fcn2, name='CartesProduct')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Base class for a function.
+
+   .. attribute:: dim
+
+      Input dimensionality, :math:`d`.
+
+      :type: int
+
+   .. attribute:: dmax
+
+      Default domain half-size. That is, default domain is :math:`[-d_{max}, + d_{max}]`.
+
+      :type: float
+
+   .. attribute:: domain
+
+      A 2d array of size :math:`(d,2)` indicating the input domain of the function.
+
+      :type: np.ndarray
+
+   .. attribute:: eval
+
+      Callable evaluator of the function.
+
+      :type: callable
+
+   .. attribute:: name
+
+      Name of the function.
+
+      :type: str
+
+   .. attribute:: outdim
+
+      Output dimensionality, :math:`o`.
+
+      :type: int
+
+
+   .. py:attribute:: fcn1
+
+
+   .. py:attribute:: fcn2
+
+
+   .. py:attribute:: name
+      :value: 'CartesProduct'
+
+
+
+   .. py:attribute:: outdim
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: GradFcn(fcn, idim, name='GradFcn')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Base class for a function.
+
+   .. attribute:: dim
+
+      Input dimensionality, :math:`d`.
+
+      :type: int
+
+   .. attribute:: dmax
+
+      Default domain half-size. That is, default domain is :math:`[-d_{max}, + d_{max}]`.
+
+      :type: float
+
+   .. attribute:: domain
+
+      A 2d array of size :math:`(d,2)` indicating the input domain of the function.
+
+      :type: np.ndarray
+
+   .. attribute:: eval
+
+      Callable evaluator of the function.
+
+      :type: callable
+
+   .. attribute:: name
+
+      Name of the function.
+
+      :type: str
+
+   .. attribute:: outdim
+
+      Output dimensionality, :math:`o`.
+
+      :type: int
+
+
+   .. py:attribute:: fcn
+
+
+   .. py:attribute:: idim
+
+
+   .. py:attribute:: outdim
+
+
+   .. py:attribute:: name
+      :value: 'GradFcn'
+
+
+
+.. py:class:: ComposeFcn(fcn1, fcn2, name='Composite')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Base class for a function.
+
+   .. attribute:: dim
+
+      Input dimensionality, :math:`d`.
+
+      :type: int
+
+   .. attribute:: dmax
+
+      Default domain half-size. That is, default domain is :math:`[-d_{max}, + d_{max}]`.
+
+      :type: float
+
+   .. attribute:: domain
+
+      A 2d array of size :math:`(d,2)` indicating the input domain of the function.
+
+      :type: np.ndarray
+
+   .. attribute:: eval
+
+      Callable evaluator of the function.
+
+      :type: callable
+
+   .. attribute:: name
+
+      Name of the function.
+
+      :type: str
+
+   .. attribute:: outdim
+
+      Output dimensionality, :math:`o`.
+
+      :type: int
+
+
+   .. py:attribute:: fcn1
+
+
+   .. py:attribute:: fcn2
+
+
+   .. py:attribute:: outdim
+
+
+   .. py:attribute:: name
+      :value: 'Composite'
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: SliceFcn(fcn, name='Slice', ind=[0], nom=None)
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Base class for a function.
+
+   .. attribute:: dim
+
+      Input dimensionality, :math:`d`.
+
+      :type: int
+
+   .. attribute:: dmax
+
+      Default domain half-size. That is, default domain is :math:`[-d_{max}, + d_{max}]`.
+
+      :type: float
+
+   .. attribute:: domain
+
+      A 2d array of size :math:`(d,2)` indicating the input domain of the function.
+
+      :type: np.ndarray
+
+   .. attribute:: eval
+
+      Callable evaluator of the function.
+
+      :type: callable
+
+   .. attribute:: name
+
+      Name of the function.
+
+      :type: str
+
+   .. attribute:: outdim
+
+      Output dimensionality, :math:`o`.
+
+      :type: int
+
+
+   .. py:attribute:: fcn
+
+
+   .. py:attribute:: name
+      :value: 'Slice'
+
+
+
+   .. py:attribute:: nom
+      :value: None
+
+
+
+   .. py:attribute:: ind
+      :value: [0]
+
+
+
+   .. py:attribute:: outdim
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: ShiftFcn(fcn, shift, domain=None, name='Shift')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Base class for a function.
+
+   .. attribute:: dim
+
+      Input dimensionality, :math:`d`.
+
+      :type: int
+
+   .. attribute:: dmax
+
+      Default domain half-size. That is, default domain is :math:`[-d_{max}, + d_{max}]`.
+
+      :type: float
+
+   .. attribute:: domain
+
+      A 2d array of size :math:`(d,2)` indicating the input domain of the function.
+
+      :type: np.ndarray
+
+   .. attribute:: eval
+
+      Callable evaluator of the function.
+
+      :type: callable
+
+   .. attribute:: name
+
+      Name of the function.
+
+      :type: str
+
+   .. attribute:: outdim
+
+      Output dimensionality, :math:`o`.
+
+      :type: int
+
+
+   .. py:attribute:: fcn
+
+
+   .. py:attribute:: shift
+
+
+   .. py:attribute:: name
+      :value: 'Shift'
+
+
+
+   .. py:attribute:: outdim
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: LinTransformFcn(fcn, scale, shift, name='LinTransform')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Base class for a function.
+
+   .. attribute:: dim
+
+      Input dimensionality, :math:`d`.
+
+      :type: int
+
+   .. attribute:: dmax
+
+      Default domain half-size. That is, default domain is :math:`[-d_{max}, + d_{max}]`.
+
+      :type: float
+
+   .. attribute:: domain
+
+      A 2d array of size :math:`(d,2)` indicating the input domain of the function.
+
+      :type: np.ndarray
+
+   .. attribute:: eval
+
+      Callable evaluator of the function.
+
+      :type: callable
+
+   .. attribute:: name
+
+      Name of the function.
+
+      :type: str
+
+   .. attribute:: outdim
+
+      Output dimensionality, :math:`o`.
+
+      :type: int
+
+
+   .. py:attribute:: fcn
+
+
+   .. py:attribute:: scale
+
+
+   .. py:attribute:: shift
+
+
+   .. py:attribute:: name
+      :value: 'LinTransform'
+
+
+
+   .. py:attribute:: outdim
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: PickDim(dim, pdim, cf=1.0, name='Dimension-Pick')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Picking dimension function [REF]
+
+
+
+
+   .. py:attribute:: cf
+      :value: 1.0
+
+
+
+   .. py:attribute:: name
+      :value: 'Dimension-Pick'
+
+
+
+   .. py:attribute:: pdim
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
