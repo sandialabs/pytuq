@@ -4,15 +4,17 @@
 
 ## Overview
 
-Python Toolkit for Uncertainty Quantification (PyTUQ) is a Python-only set of tools for uncertainty quantification.
+The Python Toolkit for Uncertainty Quantification (PyTUQ) is a Python-only collection of libraries and tools designed for quantifying uncertainty in computational models. PyTUQ offers a range of UQ functionalities, including Bayesian inference and linear regression methods, polynomial chaos expansions, and global sensitivity analysis methods. PyTUQ features advanced techniques for dimensionality reduction, such as SVD and Karhunen-Loeve expansions, along with various MCMC methods for calibration and inference. The toolkit also includes robust classes for multivariate random variables and integration techniques, making it a versatile resource for researchers and practitioners seeking to quantify uncertainty in their numerical predictions.
 
 ## Dependencies
 PyTUQ requires:
 * numpy
 * scipy
 * matplotlib
+
+Optional dependencies include:
 * pytorch
-* QUINN (optional)
+* QUiNN (Quantification of Uncertainties in Neural Networks)
 
 ## Installation
 1. To install PyTUQ from source, start up a Python virtual environment and clone the repository:
@@ -21,10 +23,13 @@ PyTUQ requires:
     $ git clone git@github.com:sandialabs/pytuq.git
     $ cd pytuq
 ```
-2. Install PyTUQ dependencies and PyTUQ via `pip`:
+2. (Optional) To take advantage of the neural network surrogate model capabilites in PyTUQ, use the following command to install PyTUQ's optional dependencies:
 ```
-    $ pip install -r requirements.txt # installs QUINN
-    $ pip install .  
+    $ pip install -r requirements.txt
+```
+3. Install primary PyTUQ dependencies and PyTUQ:
+```
+    $ pip install .
 ```
 
 ## License
