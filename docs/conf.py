@@ -29,7 +29,7 @@ try:
 except Exception:
     import traceback
     traceback.print_exc()
-    version = release = "0.1.0"
+    version = release = "1.0.0"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
