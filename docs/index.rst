@@ -9,7 +9,7 @@ PyTUQ Documentation
 
 .. _PyTUQ: https://github.com/sandialabs/pytuq
 
-**Date**: |today| **Version**: |version|
+**Last Updated**: |today| **Version**: |version|
 
 Hello, :ref:`PyTUQ <PyTUQ>` is a Python-only toolkit for uncertainty quantification in computational models.
 To explore the modules offered by PyTUQ, use the navigation panel on the left or below.

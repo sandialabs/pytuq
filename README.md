@@ -4,7 +4,7 @@
 
 ## Overview
 
-The Python Toolkit for Uncertainty Quantification (PyTUQ) is a Python-only collection of libraries and tools designed for quantifying uncertainty in computational models. PyTUQ offers a range of UQ functionalities, including Bayesian inference and linear regression methods, polynomial chaos expansions, and global sensitivity analysis methods. PyTUQ features advanced techniques for dimensionality reduction, such as SVD and Karhunen-Loeve expansions, along with various MCMC methods for calibration and inference. The toolkit also includes robust classes for multivariate random variables and integration techniques, making it a versatile resource for researchers and practitioners seeking to quantify uncertainty in their numerical predictions.
+The Python Toolkit for Uncertainty Quantification (PyTUQ) is a Python-only collection of libraries and tools designed for quantifying uncertainty in computational models. PyTUQ offers a range of UQ functionalities, including Bayesian inference and linear regression methods, polynomial chaos expansions, and global sensitivity analysis methods. PyTUQ features advanced techniques for dimensionality reduction, such as SVD and Karhunen-Loeve expansions, along with various MCMC methods for calibration and inference. The toolkit also includes robust classes for multivariate random variables and integration techniques, making it a versatile resource for researchers and practitioners seeking to quantify uncertainty in their numerical predictions. To explore the PyTUQ documentation and learn more, visit our website [here](https://sandialabs.github.io/pytuq/).
 
 ## Dependencies
 PyTUQ requires:
