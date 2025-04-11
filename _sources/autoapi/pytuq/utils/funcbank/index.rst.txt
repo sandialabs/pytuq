@@ -1,0 +1,111 @@
+pytuq.utils.funcbank
+====================
+
+.. py:module:: pytuq.utils.funcbank
+
+.. autoapi-nested-parse::
+
+   Collection of various test functions.
+
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   pytuq.utils.funcbank.sin4
+   pytuq.utils.funcbank.const
+   pytuq.utils.funcbank.f2d
+   pytuq.utils.funcbank.cosine
+   pytuq.utils.funcbank.sinsum
+   pytuq.utils.funcbank.prodabs
+
+
+Module Contents
+---------------
+
+.. py:function:: sin4(xx)
+
+   Fourth order of a shifted sine:
+
+   .. math::
+       f(x_1, ..., x_d) = \sin(2\sum_{i=1}^d x_i - 0.3)^4.
+
+   :param xx: 2d input array :math:`x` of size `(N,d)`.
+   :type xx: np.ndarray
+
+   :returns: 1d array of size `N`.
+   :rtype: np.ndarray
+
+
+.. py:function:: const(xx)
+
+   Constant function:
+
+   .. math::
+       f(x_1,...,x_d)=3.
+
+   :param xx: 2d input array :math:`x` of size `(N,d)` or 1d array of size `N`.
+   :type xx: np.ndarray
+
+   :returns: 1d array of size `N`.
+   :rtype: np.ndarray
+
+
+.. py:function:: f2d(xx)
+
+   A simple bivariate function:
+
+   .. math::
+       f(x_1,x_2)=-x_1+x_2^2.
+
+   :param xx: 2d input array :math:`x` of size `(N,2)`.
+   :type xx: np.ndarray
+
+   :returns: 1d array of size `N`.
+   :rtype: np.ndarray
+
+
+.. py:function:: cosine(xx)
+
+   Cosine function:
+
+   .. math::
+       f(x_1,...,x_d)=\cos(x_1).
+
+   :param xx: 2d input array :math:`x` of size `(N,d)`.
+   :type xx: np.ndarray
+
+   :returns: 1d array of size `N`.
+   :rtype: np.ndarray
+
+
+.. py:function:: sinsum(xx)
+
+   Sine of sum function:
+
+   .. math::
+       f(x_1, ..., x_d) = \sin(\sum_{i=1}^d x_i).
+
+   :param xx: 2d input array :math:`x` of size `(N,d)`.
+   :type xx: np.ndarray
+
+   :returns: 1d array of size `N`.
+   :rtype: np.ndarray
+
+
+.. py:function:: prodabs(xx)
+
+   Absolute product function:
+
+   .. math::
+       f(x_1, ..., x_d) = \prod_{i=1}^d |x_i|).
+
+   :param xx: 2d input array :math:`x` of size `(N,d)`.
+   :type xx: np.ndarray
+
+   :returns: 1d array of size `N`.
+   :rtype: np.ndarray
+
+

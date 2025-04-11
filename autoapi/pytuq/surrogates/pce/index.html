@@ -1,0 +1,403 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytuq.surrogates.pce &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+
+  
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="pytuq.utils" href="../../utils/index.html" />
+    <link rel="prev" title="pytuq.surrogates.nn" href="../nn/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            PyTUQ
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Section Navigation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">pytuq</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../func/index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rv/index.html">pytuq.rv</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Section Navigation</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">pytuq</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">pytuq.surrogates</a></li>
+      <li class="breadcrumb-item active">pytuq.surrogates.pce</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/autoapi/pytuq/surrogates/pce/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-pytuq.surrogates.pce">
+<span id="pytuq-surrogates-pce"></span><h1>pytuq.surrogates.pce<a class="headerlink" href="#module-pytuq.surrogates.pce" title="Link to this heading"></a></h1>
+<p>This module provides a KLPC (Karhunen-Loeve and Polynomial Chaos) wrapper class to facilitate
+the universal coupling of FASTMath UQ tools and libraries. This class focuses on the use case
+of surrogate models built with PCE and linear regression, keeping in mind
+flexibility to implement additional UQ functionalities in the future.</p>
+<p>The PCE class supports a minimal API, with methods to construct the model, build it with training data,
+evaluate it with input data, and offer predictions with covariance, variance, and standard deviation.
+It is capable of handling multidimensional inputs and is optimized for scalar-valued function outputs.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The current implementation focuses on providing a general foundation for polynomial chaos
+expansions with simple least squares regression or advanced analytical regression. While not all
+construct and build options are currently supported, the class was developed with future growth in mind.</p>
+</div>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.surrogates.pce.PCE" title="pytuq.surrogates.pce.PCE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PCE</span></code></a></p></td>
+<td><p>A wrapper class to access KLPC functionalities for PCE surrogate models.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.surrogates.pce.PCE">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.surrogates.pce.</span></span><span class="sig-name descname"><span class="pre">PCE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pce_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pce_order</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pce_type</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/pce.html#PCE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.surrogates.pce.PCE" title="Link to this definition"></a></dt>
+<dd><p>A wrapper class to access KLPC functionalities for PCE surrogate models.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.surrogates.pce.PCE.pcrv">
+<span class="sig-name descname"><span class="pre">pcrv</span></span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/pce.html#PCE.pcrv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.surrogates.pce.PCE.pcrv" title="Link to this definition"></a></dt>
+<dd><p>Polynomial Chaos random variable object, encapsulates details for polynomial chaos expansion.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>PCRV object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.surrogates.pce.PCE.sdim">
+<span class="sig-name descname"><span class="pre">sdim</span></span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/pce.html#PCE.sdim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.surrogates.pce.PCE.sdim" title="Link to this definition"></a></dt>
+<dd><p>Stochastic dimensionality, i.e. # of stochastic inputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.surrogates.pce.PCE.order">
+<span class="sig-name descname"><span class="pre">order</span></span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/pce.html#PCE.order"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.surrogates.pce.PCE.order" title="Link to this definition"></a></dt>
+<dd><p>Order of polynomial chaos expansion.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.surrogates.pce.PCE.pctype">
+<span class="sig-name descname"><span class="pre">pctype</span></span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/pce.html#PCE.pctype"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.surrogates.pce.PCE.pctype" title="Link to this definition"></a></dt>
+<dd><p>Type of PC polynomial used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.surrogates.pce.PCE.outdim">
+<span class="sig-name descname"><span class="pre">outdim</span></span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/pce.html#PCE.outdim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.surrogates.pce.PCE.outdim" title="Link to this definition"></a></dt>
+<dd><p>Physical dimensionality, i.e. # of output variables.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.surrogates.pce.PCE.lreg">
+<span class="sig-name descname"><span class="pre">lreg</span></span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/pce.html#PCE.lreg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.surrogates.pce.PCE.lreg" title="Link to this definition"></a></dt>
+<dd><p>Linear regression object used for fitting the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>lreg object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.surrogates.pce.PCE.regression_method">
+<span class="sig-name descname"><span class="pre">regression_method</span></span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/pce.html#PCE.regression_method"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.surrogates.pce.PCE.regression_method" title="Link to this definition"></a></dt>
+<dd><p>Method used for linear regression. ex] anl, opt, lsq</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.surrogates.pce.PCE._x_train">
+<span class="sig-name descname"><span class="pre">_x_train</span></span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/pce.html#PCE._x_train"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.surrogates.pce.PCE._x_train" title="Link to this definition"></a></dt>
+<dd><p>Input training data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.surrogates.pce.PCE._y_train">
+<span class="sig-name descname"><span class="pre">_y_train</span></span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/pce.html#PCE._y_train"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.surrogates.pce.PCE._y_train" title="Link to this definition"></a></dt>
+<dd><p>Output training data, corresponding to x_train</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">sdim</span></span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/pce.html#PCE.sdim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">order</span></span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/pce.html#PCE.order"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id1" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">pctype</span></span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/pce.html#PCE.pctype"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id2" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">outdim</span></span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/pce.html#PCE.outdim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id3" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id4">
+<span class="sig-name descname"><span class="pre">lreg</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="reference internal" href="../../../../_modules/pytuq/surrogates/pce.html#PCE.lreg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id4" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id5">
+<span class="sig-name descname"><span class="pre">regression_method</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="reference internal" href="../../../../_modules/pytuq/surrogates/pce.html#PCE.regression_method"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id5" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id6">
+<span class="sig-name descname"><span class="pre">pcrv</span></span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/pce.html#PCE.pcrv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id6" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.surrogates.pce.PCE.set_training_data">
+<span class="sig-name descname"><span class="pre">set_training_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_train</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/pce.html#PCE.set_training_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.surrogates.pce.PCE.set_training_data" title="Link to this definition"></a></dt>
+<dd><p>Sets the training data with validation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_train</strong> (<em>np.ndarray</em>) – 2d array of size <cite>(N, d)</cite> representing training input data,
+where <cite>N</cite> is the number of samples and <cite>d</cite> is the dimensionality (sdim) of each sample.</p></li>
+<li><p><strong>y_train</strong> (<em>np.ndarray</em>) – 1d array of size <cite>N</cite> representing the training output data,
+where each element corresponds to the output value for each input sample in <cite>x_train</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If x_train or y_train do not meet the required dimensions.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.surrogates.pce.PCE.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/pce.html#PCE.build"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.surrogates.pce.PCE.build" title="Link to this definition"></a></dt>
+<dd><p>Builds and initializes the linear regression model for the pcrv object with training data.
+Returns coefficients for evaluated Polynomial Chaos Expansion.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> (<em>dict</em>) – <p>Optional keyword arguments for configuring the regression model, including:</p>
+<ul>
+<li><dl>
+<dt>regression (str): Type of regression to be used.</dt><dd><dl class="simple">
+<dt>Options are:</dt><dd><ul class="simple">
+<li><p>’anl’: Advanced regression analysis.</p></li>
+<li><p>’lsq’: Least squares regression.</p></li>
+</ul>
+</dd>
+</dl>
+<p>The default is ‘lsq’. Future regression methods to implement include ‘opt’ and ‘lreg_merr’.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>method (str): Method to be used when ‘regression’ is set to ‘anl’.</dt><dd><dl class="simple">
+<dt>Options are:</dt><dd><ul class="simple">
+<li><p>’vi’: Variational inference.</p></li>
+<li><p>’full’: Full analytical solution, the default for anl().</p></li>
+</ul>
+</dd>
+</dl>
+<p>The default is ‘vi’ when ‘regression’ is ‘anl’.</p>
+</dd>
+</dl>
+</li>
+<li><p>datavar (float): Available for regression type ‘anl’.</p></li>
+<li><p>cov_nugget (float): Available for regression type ‘anl’.</p></li>
+<li><p>prior_var (float): Available for regression type ‘anl’, method ‘full’.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Coefficients for matrix</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.surrogates.pce.PCE.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_eval</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/pce.html#PCE.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.surrogates.pce.PCE.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Generates predictions and related uncertainty calculations for given input data.
+Returns predicted y-values, along with standard deviation, covariance, and variance of predictions if applicable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_eval</strong> (<em>np.ndarray</em>) – 2d array of size <cite>(N,d)</cite> as input data for evaluation. Can also be a single sample as input.</p></li>
+<li><p><strong>data_variance</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to compute posterior-predictive (i.e. add data variance) or not.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary of predicted y-values, along with standard deviation, covariance, and variance of predictions if applicable.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dictionary</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../nn/index.html" class="btn btn-neutral float-left" title="pytuq.surrogates.nn" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../utils/index.html" class="btn btn-neutral float-right" title="pytuq.utils" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

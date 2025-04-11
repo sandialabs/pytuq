@@ -1,0 +1,215 @@
+pytuq.func.poly
+===============
+
+.. py:module:: pytuq.func.poly
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.func.poly.PolyBase
+   pytuq.func.poly.Leg
+   pytuq.func.poly.Mon
+
+
+Module Contents
+---------------
+
+.. py:class:: PolyBase(mindex, cfs, domain=None, name='Poly')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Base class for a function.
+
+   .. attribute:: dim
+
+      Input dimensionality, :math:`d`.
+
+      :type: int
+
+   .. attribute:: dmax
+
+      Default domain half-size. That is, default domain is :math:`[-d_{max}, + d_{max}]`.
+
+      :type: float
+
+   .. attribute:: domain
+
+      A 2d array of size :math:`(d,2)` indicating the input domain of the function.
+
+      :type: np.ndarray
+
+   .. attribute:: eval
+
+      Callable evaluator of the function.
+
+      :type: callable
+
+   .. attribute:: name
+
+      Name of the function.
+
+      :type: str
+
+   .. attribute:: outdim
+
+      Output dimensionality, :math:`o`.
+
+      :type: int
+
+
+   .. py:attribute:: mindex
+
+
+   .. py:attribute:: cfs
+
+
+   .. py:attribute:: nbases
+
+
+   .. py:attribute:: name
+      :value: 'Poly'
+
+
+
+   .. py:attribute:: max_deg
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:attribute:: bases1d
+      :value: None
+
+
+
+   .. py:attribute:: bases1d_deriv
+      :value: None
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Leg(mindex, cfs, domain=None, name='Legendre_Poly')
+
+   Bases: :py:obj:`PolyBase`
+
+
+   Base class for a function.
+
+   .. attribute:: dim
+
+      Input dimensionality, :math:`d`.
+
+      :type: int
+
+   .. attribute:: dmax
+
+      Default domain half-size. That is, default domain is :math:`[-d_{max}, + d_{max}]`.
+
+      :type: float
+
+   .. attribute:: domain
+
+      A 2d array of size :math:`(d,2)` indicating the input domain of the function.
+
+      :type: np.ndarray
+
+   .. attribute:: eval
+
+      Callable evaluator of the function.
+
+      :type: callable
+
+   .. attribute:: name
+
+      Name of the function.
+
+      :type: str
+
+   .. attribute:: outdim
+
+      Output dimensionality, :math:`o`.
+
+      :type: int
+
+
+   .. py:attribute:: bases1d
+      :value: []
+
+
+
+   .. py:attribute:: bases1d_deriv
+      :value: []
+
+
+
+.. py:class:: Mon(mindex, cfs, domain=None, name='Monomial_Poly')
+
+   Bases: :py:obj:`PolyBase`
+
+
+   Base class for a function.
+
+   .. attribute:: dim
+
+      Input dimensionality, :math:`d`.
+
+      :type: int
+
+   .. attribute:: dmax
+
+      Default domain half-size. That is, default domain is :math:`[-d_{max}, + d_{max}]`.
+
+      :type: float
+
+   .. attribute:: domain
+
+      A 2d array of size :math:`(d,2)` indicating the input domain of the function.
+
+      :type: np.ndarray
+
+   .. attribute:: eval
+
+      Callable evaluator of the function.
+
+      :type: callable
+
+   .. attribute:: name
+
+      Name of the function.
+
+      :type: str
+
+   .. attribute:: outdim
+
+      Output dimensionality, :math:`o`.
+
+      :type: int
+
+
+   .. py:attribute:: bases1d
+      :value: []
+
+
+
+   .. py:attribute:: bases1d_deriv
+      :value: []
+
+
+

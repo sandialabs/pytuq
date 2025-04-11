@@ -1,0 +1,74 @@
+pytuq.utils.uqtk_utils
+======================
+
+.. py:module:: pytuq.utils.uqtk_utils
+
+.. autoapi-nested-parse::
+
+   Routines that are wrappers of UQTk apps' system calls.
+
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   pytuq.utils.uqtk_utils.pce_eval
+   pytuq.utils.uqtk_utils.pce_sens
+   pytuq.utils.uqtk_utils.get_pdf_uqtk
+
+
+Module Contents
+---------------
+
+.. py:function:: pce_eval(xdata, pctype, mi, pccf)
+
+   Evaluates Polynomial Chaos (PC) expansion.
+
+   :param xdata: 2d input array of size `(N,d)`.
+   :type xdata: np.ndarray
+   :param pctype: PC type.
+   :type pctype: str
+   :param mi: 2d integer array of multiindex, of size `(K,d)`.
+   :type mi: np.ndarray
+   :param pccf: 1d array of coefficients of size `K`.
+   :type pccf: np.ndarray
+
+   :returns: 1d array of PC outputs of size `N`.
+   :rtype: np.ndarray
+
+
+.. py:function:: pce_sens(pctype, mi, pccf, mv=False)
+
+   Evaluate input sensitivities of a PC expansion.
+
+   :param pctype: PC type.
+   :type pctype: str
+   :param mi: 2d integer array of multiindex, of size `(K,d)`.
+   :type mi: np.ndarray
+   :param pccf: 1d array of coefficients of size `K`.
+   :type pccf: np.ndarray
+   :param mv: Whether to return mean and variance as well
+   :type mv: bool, optional
+
+   :returns: tuple of main (1d array of size `d`), total (1d array of size `d`) and joint (2d array of size `(d,d)`) sensitivities. Optionally, extra two elements are returned, mean and variance.
+   :rtype: (np.ndarray, np.ndarray, np.ndarray)
+
+
+.. py:function:: get_pdf_uqtk(data, target, verbose=1)
+
+   Compute PDF given data at target points with the UQTk app.
+
+   :param data: `(N,d) array of N samples in d dimensions.
+   :type data: np.ndarray
+   :param target: `(M,d) array of target points. Can be an integer, in which case it is interpreted as the number of grid points per dimension for a target grid.
+   :type target: np.ndarray
+   :param verbose: Verbosity on the screen, 0, 1, or 2. Defaults to 1.
+   :type verbose: int, optional
+
+   :returns: target points (same as target, or a grid, if target is an integer).
+             np.ndarray: PDF values at xtarget.
+   :rtype: np.ndarray
+
+

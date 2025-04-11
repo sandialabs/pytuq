@@ -1,0 +1,115 @@
+pytuq.lreg.bcs
+==============
+
+.. py:module:: pytuq.lreg.bcs
+
+.. autoapi-nested-parse::
+
+   A module for Bayesian compressive sensing.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.lreg.bcs.bcs
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   pytuq.lreg.bcs.bcs_fit
+
+
+Module Contents
+---------------
+
+.. py:class:: bcs(eta=1e-08, datavar_init=None)
+
+   Bases: :py:obj:`pytuq.lreg.lreg.lreg`
+
+
+   Bayesian compressive sensing (BCS) class.
+
+   .. attribute:: eta
+
+      The tolerance parameter of the BCS algorithm.
+
+      :type: float
+
+   .. attribute:: datavar_init
+
+      Initial value of the data variance.
+
+      :type: float
+
+   .. attribute:: fitted
+
+      Indicates whether the fit is done or note.
+
+      :type: bool
+
+   .. attribute:: used
+
+      Indices of retained bases.
+
+      :type: np.ndarray
+
+
+   .. py:attribute:: eta
+      :value: 1e-08
+
+
+
+   .. py:attribute:: used
+      :value: None
+
+
+
+   .. py:attribute:: datavar_init
+      :value: None
+
+
+
+   .. py:method:: fita(Amat, y)
+
+      Fit given A-matrix of basis evaluations and data array.
+
+      :param Amat: A 2d array of size :math:`(N, K)` each row holding basis evaluations at a training point.
+      :type Amat: np.ndarray
+      :param y: An 1d array of size :math:`N` holding the data.
+      :type y: np.ndarray
+
+
+
+.. py:function:: bcs_fit(A, y, sigma2=None, eta=1e-08, adaptive=0, optimal=1, scale=0.1, nugget=1e-06)
+
+   BCS fitting algorithm. See "Bayesian Compressive Sesning" (Preprint, 2007). The algorithm
+   adopts from the fast RVM algorithm, https://www.miketipping.com/papers/met-fastsbl.pdf [Tipping & Faul, 2003]. Original code in Matlab by Shihao Ji, ECE, Duke University.
+
+
+   :param A: A 2d array of size :math:`(N, K)` each row holding basis evaluations at a training point.
+   :type A: np.ndarray
+   :param y: An 1d array of size :math:`N` holding the data.
+   :type y: np.ndarray
+   :param sigma2: Initial data variance. Defaults to None, which picks a rule-of-thumb default value.
+   :type sigma2: None, optional
+   :param eta: The tolerance parameter of the BCS algorithm. Defaults to 1.e-6.
+   :type eta: float, optional
+   :param adaptive: Integer-Boolean flag whether to turn on the adaptive algorithm or not. Defaults to 0.
+   :type adaptive: int, optional
+   :param optimal: Integer-Boolean flag whether to use the rigorous implementation of adaptive algorithm. Defaults to 1.
+   :type optimal: int, optional
+   :param scale: Diagonal loading parameter of adaptive algorithm. Defaults to 0.1.
+   :type scale: float, optional
+   :param nugget: Small diagonal nugget to improve the conditioning of matrix :math:`\Sigma`.
+   :type nugget: float, optional
+
+   :returns: Tuple of sparse coefficients (weights), one st.dev. errorbars on coefficients, used indices, re-estimated noise variance, the next estimated basis vector (if adaptive method), and covariance matrix (Sig).
+   :rtype: tuple(weights, errbars, used, sigma2, basis, Sig)
+
+
