@@ -1,9 +1,5 @@
 #!/usr/bin/env python
-
-"""[summary]
-
-[description]
-"""
+"""This script generates training data for benchmark functions."""
 import sys
 import argparse
 import numpy as np

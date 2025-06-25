@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
+"""App to build KL-pbased reduced-dimensional surrogates of multioutput models."""
 
-"""[summary]
-
-[description]
-"""
 import sys
 import argparse
 import numpy as np
@@ -24,7 +21,7 @@ myrc()
 #plt.rcParams.update({'figure.max_open_warning': 2000})
 
 
-usage_str = 'Script to build PC surrogates of multioutput models.'
+usage_str = 'App to build KL-based reduced-dimensional surrogates of multioutput models.'
 parser = argparse.ArgumentParser(description=usage_str)
 #parser.add_argument('ind_show', type=int, nargs='*',
 #                    help="indices of requested parameters (count from 0)")

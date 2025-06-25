@@ -1,9 +1,5 @@
 #!/usr/bin/env python
-
-"""[summary]
-
-[description]
-"""
+"""App to build NN-based surrogates for multioutput models."""
 import sys
 import torch
 import argparse
@@ -27,7 +23,7 @@ torch.set_default_dtype(torch.double)
 myrc()
 
 
-usage_str = 'Script to build PC surrogates of multioutput models.'
+usage_str = 'Script to build NN-based surrogates for multioutput models.'
 parser = argparse.ArgumentParser(description=usage_str)
 #parser.add_argument('ind_show', type=int, nargs='*',
 #                    help="indices of requested parameters (count from 0)")
