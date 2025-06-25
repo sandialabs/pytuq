@@ -1,9 +1,5 @@
 #!/usr/bin/env python
-
-"""[summary]
-
-[description]
-"""
+"""App to build PC surrogates of multioutput models."""
 import sys
 import argparse
 import numpy as np
@@ -18,7 +14,7 @@ from pytuq.workflows.fits import pc_fit
 myrc()
 
 
-usage_str = 'Script to build PC surrogates of multioutput models.'
+usage_str = 'App to build PC surrogates of multioutput models.'
 parser = argparse.ArgumentParser(description=usage_str)
 #parser.add_argument('ind_show', type=int, nargs='*',
 #                    help="indices of requested parameters (count from 0)")

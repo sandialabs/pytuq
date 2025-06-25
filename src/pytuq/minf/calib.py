@@ -33,7 +33,7 @@ class MCMCBase(object):
             imcmc (int): Current step.
 
         Raises:
-            NotImplementedError: Description
+            NotImplementedError: Not Implemented in the parent class.
         """
         raise NotImplementedError("Sampler is not implemented in the parent class.")
 
@@ -48,16 +48,15 @@ class MCMCBase(object):
             dict: Dictionary of results. Keys are 'chain' (chain samples array), 'mapparams' (MAP parameters array), 'maxpost' (maximal log-post value), 'accrate' (acceptance rate), 'logpost' (log-post values throughout the chain), 'alphas' (acceptance probabilities throughout the chain).
         """
         assert(self.logPost is not None)
-        cdim = len(param_ini)            # chain dimensionality
         samples = []  # MCMC samples
         alphas = [] # Store alphas (posterior ratios)
-        logposts = []  # Log-posterior values]
+        logposts = []  # Log-posterior values
         na = 0                        # counter for accepted steps
 
         current = param_ini.copy()                # first step
         current_U = -self.logPost(current, **self.postInfo)  # NEGATIVE logposterior
         pmode = -current_U  # record MCMC 'mode', which is the current MAP value (maximum posterior)
-        cmode = current  # MAP sample
+        cmode = current+0.0  # MAP sample
 
         samples.append(current)
         logposts.append(-current_U)
