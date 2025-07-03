@@ -37,6 +37,12 @@ dependencies = [
   "matplotlib",
 ]
 
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov"
+]
+
 [tool.setuptools.packages.find]
 where = ["src"] 
 namespaces = false 
