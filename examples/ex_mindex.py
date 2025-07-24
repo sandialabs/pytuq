@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 """Example of multiindex manipulations."""
 
-import numpy as np
-
 from pytuq.utils.mindex import get_mi, encode_mindex
 
 
