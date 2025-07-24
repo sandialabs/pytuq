@@ -133,3 +133,111 @@ def micf_join(mindex_list, cfs_list):
     return mindex_all, cfs_all
 
 
+
+def mi_addfront_cons(mindex):
+    """
+    Adding a front to multiindex in a conservative way, i.e.
+    a multiindex is added only if *all* parents are in the current set
+
+    Args:
+        mindex (np.ndarray): The current multiindex
+
+    Returns:
+        list[np.ndarray, np.ndarray, np.ndarray]: A triplet of muliindices, the new muliindex, the added new multiindices, and the 'front', i.e. multiindices whose children are added.
+    """
+
+    #print('Adding multiindex front (conservative)')
+
+    npc=mindex.shape[0]
+    ndim=mindex.shape[1]
+    mindex_f=np.zeros((1,ndim),dtype=int)
+    mindex_add=np.zeros((1,ndim),dtype=int)
+    mindex_new=np.zeros((1,ndim),dtype=int)
+    for i in range(npc):
+        cur_mi=mindex[i,:]
+
+        fflag=True
+        for j in range(ndim):
+            test_mi=np.copy(cur_mi)
+            test_mi[j] += 1
+            #print "Trying test_mi", test_mi
+            fl=True
+
+
+            if not any(np.equal(mindex,test_mi).all(1)):
+                for k in range(ndim):
+                    if(test_mi[k]!=0):
+                        subt_mi=np.copy(test_mi)
+                        subt_mi[k] -= 1
+
+                        if any(np.equal(mindex,subt_mi).all(1)):
+                            cfl=True
+                            fl=cfl*fl
+
+                        else:
+                            fl=False
+                            break
+
+
+                if (fl):
+                    if not any(np.equal(mindex_add,test_mi).all(1)):
+                        mindex_add=np.vstack((mindex_add,test_mi))
+                    if fflag:
+                        mindex_f=np.vstack((mindex_f,cur_mi))
+                    fflag=False
+
+    mindex_f=mindex_f[1:]
+    mindex_add=mindex_add[1:]
+    mindex_new=np.vstack((mindex,mindex_add))
+
+    #print('Multiindex resized from %d to %d.'%(mindex.shape[0],mindex_new.shape[0]))
+
+    return [mindex_new,mindex_add,mindex_f]
+
+#############################################################
+#############################################################
+#############################################################
+
+def mi_addfront(mindex):
+    """
+    Adding a front to multiindex in a non-conservative way, i.e.
+    a multiindex is added only if *any* of the parents is in the current set
+
+    Args:
+        mindex (np.ndarray): The current multiindex
+
+    Returns:
+        list[np.ndarray, np.ndarray, np.ndarray]: A triplet of muliindices, the new muliindex, the added new multiindices, and the 'front', i.e. multiindices whose children are added.
+    """
+
+    #print('Adding multiindex front (non-conservative)')
+
+    npc=mindex.shape[0]
+    ndim=mindex.shape[1]
+
+    mindex_f=np.zeros((1,ndim),dtype=int)
+    mindex_add=np.zeros((1,ndim),dtype=int)
+    mindex_new=np.zeros((1,ndim),dtype=int)
+    for i in range(npc):
+        cur_mi=mindex[i,:]
+
+        fflag=True
+        for j in range(ndim):
+            test_mi=np.copy(cur_mi)
+            test_mi[j] += 1
+            if not any(np.equal(mindex,test_mi).all(1)):
+                if not any(np.equal(mindex_add,test_mi).all(1)):
+                    mindex_add=np.vstack((mindex_add,test_mi))
+                if fflag:
+                    mindex_f=np.vstack((mindex_f,cur_mi))
+                fflag=False
+
+    mindex_f=mindex_f[1:]
+    mindex_add=mindex_add[1:]
+    mindex_new=np.vstack((mindex,mindex_add))
+
+
+    #print('Multiindex resized from %d to %d.'%(mindex.shape[0],mindex_new.shape[0]))
+
+    return [mindex_new,mindex_add,mindex_f]
+

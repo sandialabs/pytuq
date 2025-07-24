@@ -59,7 +59,7 @@ pcrv = PCRV(1, dim, 'LU', mi=mindex)
 # Evaluate PC bases to get the A-matrix
 Amat = pcrv.evalBases(x, 0)
 
-# BCS obkect
+# BCS object
 lreg = bcs(eta=1.e-11) # eta is the tolerance parameter: usually, the smaller it is, the more terms are retained
 
 # BCS fit
