@@ -1,0 +1,22 @@
+pytuq.workflows.uprop
+=====================
+
+.. py:module:: pytuq.workflows.uprop
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   pytuq.workflows.uprop.uprop_proj
+   pytuq.workflows.uprop.uprop_regr
+
+
+Module Contents
+---------------
+
+.. py:function:: uprop_proj(in_pc, model, nqd, out_pc)
+
+.. py:function:: uprop_regr(in_pc, model, nsam, out_pc)
+

@@ -1,0 +1,115 @@
+pytuq.func.chem
+===============
+
+.. py:module:: pytuq.func.chem
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.func.chem.LennardJones
+   pytuq.func.chem.MullerBrown
+
+
+Module Contents
+---------------
+
+.. py:class:: LennardJones(name='Lennard Jones', eps=1.0, r0=1.0, n=6)
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Lennard Jones Potential
+
+
+
+
+   .. py:attribute:: name
+      :value: 'Lennard Jones'
+
+
+
+   .. py:attribute:: eps
+      :value: 1.0
+
+
+
+   .. py:attribute:: r0
+      :value: 1.0
+
+
+
+   .. py:attribute:: n
+      :value: 6
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: MullerBrown(name='Muller-Brown')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Muller Brown Potential.
+
+
+
+
+   .. py:attribute:: name
+      :value: 'Muller-Brown'
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:attribute:: factor
+
+
+   .. py:attribute:: a
+
+
+   .. py:attribute:: b
+
+
+   .. py:attribute:: c
+
+
+   .. py:attribute:: x0
+
+
+   .. py:attribute:: y0
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+

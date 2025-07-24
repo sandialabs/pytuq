@@ -1,0 +1,346 @@
+pytuq.fit.gp
+============
+
+.. py:module:: pytuq.fit.gp
+
+.. autoapi-nested-parse::
+
+   Module for Gaussian Process regression.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.fit.gp.gp
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   pytuq.fit.gp.kernel_rbf
+   pytuq.fit.gp.kernel_sin
+
+
+Module Contents
+---------------
+
+.. py:function:: kernel_rbf(x, y, corlength)
+
+   Radial basis function kernel :math:`K(x,y)=e^{-\frac{||x-y||^2}{2 l^2}}`.
+
+   :param x: 1d array of size `d`.
+   :type x: np.ndarray
+   :param y: 1d array of size `d`.
+   :type y: np.ndarray
+   :param corlength: Correlation length.
+   :type corlength: float
+
+   :returns: Kernel value.
+   :rtype: float
+
+
+.. py:function:: kernel_sin(x, y, corlength, period)
+
+   Sinusoidal kernel :math:`K(x,y)=e^{-\frac{2}{l^2} \sin^2\left({\frac{\pi ||x-y||}{T}}\right)}`.
+
+   :param x: 1d array of size `d`.
+   :type x: np.ndarray
+   :param y: 1d array of size `d`.
+   :type y: np.ndarray
+   :param corlength: Correlation length.
+   :type corlength: float
+
+   :returns: Kernel value.
+   :rtype: float
+
+
+.. py:class:: gp(kernel, kernel_params, kernel_params_range=None, sigma2=None, nugget=0.0, sigma2prior=None, prior_mean=None, prior_invcov=None, basis=None)
+
+   Bases: :py:obj:`pytuq.fit.fit.fitbase`
+
+
+   Gaussian process class.
+
+   .. attribute:: nbas
+
+      Number of regression bases, :math:`K`.
+
+      :type: int
+
+   .. attribute:: basisEval
+
+      Basis evaluator function of signature :math:`f(x,p_{bas})`, where :math:`x` is a 2d array of size `(N,d)` and output is a 2d array of size :math:`(N, K)`.
+
+      :type: callable
+
+   .. attribute:: basisEvalPars
+
+      Parameters :math:`p_{bas}` of the basis evaluator.
+
+      :type: list
+
+   .. attribute:: basisEvaluatorSet
+
+      Indicates whether the basis evaluator is set or not.
+
+      :type: bool
+
+   .. attribute:: AinvH
+
+      A 2d matrix :math:`A^{-1}H` of size :math:`(N,K)`.
+
+      :type: np.ndarray
+
+   .. attribute:: c_hat
+
+      The best regression coefficient, an 1d array :math:`\hat{c}` of size :math:`K`.
+
+      :type: np.ndarray
+
+   .. attribute:: fitted
+
+      Indicates whether the GP is already built.
+
+      :type: bool
+
+   .. attribute:: kernel
+
+      Kernel evaluator function of signature :math:`K(x_1, x_2, p_{ker})`, where :math:`x_1` and :math:`x_2` are 1d arrays of size :math:`d`, and the output is a scalar.
+
+      :type: callable
+
+   .. attribute:: kernel_params
+
+      Parameters :math:`p_{ker}` of the kernel.
+
+      :type: list
+
+   .. attribute:: kernel_params_range
+
+      List of (min, max) tuples of size of kernel parameter list.
+
+      :type: list[tuple]
+
+   .. attribute:: LVst
+
+      Cholesky factor of :math:`V^*`, a 2d array of size :math:`(K,K)`.
+
+      :type: np.ndarray
+
+   .. attribute:: Vstinv
+
+      Inverse of :math:`V^*`, a 2d array of size :math:`(K,K)`.
+
+      :type: np.ndarray
+
+   .. attribute:: sigma2
+
+      Data variance, given or inferred.
+
+      :type: float
+
+   .. attribute:: nugget
+
+      Covariance nugget :math:`\epsilon` to improve conditioning.
+
+      :type: float
+
+   .. attribute:: prior_invcov
+
+      Inverse-covariance of the prior, a 2d array of size :math:`(K,K)`.
+
+      :type: np.ndarray
+
+   .. attribute:: prior_mean
+
+      Mean of the prior, a 1d array of size :math:`(K,K)`.
+
+      :type: np.ndarray
+
+   .. attribute:: kf_
+
+      An 1d array :math:`k_f` of size :math:`N`.
+
+      :type: np.ndarray
+
+   .. attribute:: L_
+
+      Cholesky factor, a 2d array of size :math:`(N,N)`.
+
+      :type: np.ndarray
+
+   .. attribute:: x_
+
+      An 2d array of size :math:`(N,d)`, the training x-data.
+
+      :type: np.ndarray
+
+   .. attribute:: y_
+
+      An 1d array of size :math:`N`, the training y-data.
+
+      :type: np.ndarray
+
+
+   .. py:attribute:: kernel
+
+
+   .. py:attribute:: kernel_params
+
+
+   .. py:attribute:: kernel_params_range
+      :value: None
+
+
+
+   .. py:attribute:: sigma2
+      :value: None
+
+
+
+   .. py:attribute:: nugget
+      :value: 0.0
+
+
+
+   .. py:attribute:: prior_mean
+      :value: None
+
+
+
+   .. py:attribute:: prior_invcov
+      :value: None
+
+
+
+   .. py:attribute:: nbas
+      :value: 0
+
+
+
+   .. py:attribute:: basisEvaluatorSet
+      :value: False
+
+
+
+   .. py:method:: setBasisEvaluator(basiseval, basisevalpars)
+
+      Setting basis evaluator.
+
+      :param basiseval: Basis evaluator function of signature :math:`f(x,p_{bas})`, where :math:`x` is a 2d array of size `(N,d)` and output is a 2d array of size :math:`(N, K)`.
+      :type basiseval: callable
+      :param basisevalpars: Parameters :math:`p_{bas}` of the basis evaluator.
+      :type basisevalpars: list
+
+
+
+   .. py:method:: set_prior(nbas)
+
+      Setting the prior on basis coefficients.
+
+      :param nbas: Number of bases
+      :type nbas: int
+
+
+
+   .. py:method:: get_sigma2hat(y)
+
+      Get best variance.
+
+      :param y: An 1d array of training y-data of size :math:`N`.
+      :type y: np.ndarray
+
+      :returns: Best data variance, :math:`\hat{\sigma}^2`.
+      :rtype: float
+
+
+
+   .. py:method:: fit(x, y)
+
+      Fitting the GP.
+
+      :param x: An 2d array of size :math:`(N,d)`, the training x-data.
+      :type x: np.ndarray
+      :param y: An 1d array of size :math:`N`, the training y-data.
+      :type y: np.ndarray
+
+
+
+   .. py:method:: predict(xc, msc=0, pp=False)
+
+      Predict function, given input :math:`x`, assuming the GP is built.
+
+      :param xc: A 2d array of inputs of size :math:`(N,d)` at which bases are evaluated.
+      :type xc: np.ndarray
+      :param msc: Prediction mode: 0 (mean-only), 1 (mean and variance), or 2 (mean, variance and covariance). Defaults to 0.
+      :type msc: int, optional
+      :param pp: Whether to compute posterior-predictive (i.e. add data variance) or not.
+      :type pp: bool, optional
+
+      :returns: triple of Mean (array of size :math:`N`), Variance (array of size :math:`N` or None), Covariance (array of size :math:`(N, N)` or None).
+      :rtype: tuple(np.ndarray, np.ndarray, np.ndarray)
+
+
+
+   .. py:method:: set_kernel(kernel, kernel_params, kernel_params_range=None)
+
+      Set the kernel function.
+
+      :param kernel: Kernel evaluator function of signature :math:`K(x_1, x_2, p_{ker})`, where :math:`x_1` and :math:`x_2` are 1d arrays of size :math:`d`, and the output is a scalar.
+      :type kernel: callable
+      :param kernel_params: Parameters :math:`p_{ker}` of the kernel.
+      :type kernel_params: list
+      :param kernel_params_range: List of (min, max) tuples of size of kernel parameter list. Defaults to None, i.e. no bounds in optimizing kernel parameters.
+      :type kernel_params_range: list[tuple], optional
+
+
+
+   .. py:method:: get_kmat_self(x, kernel_params=None)
+
+      Get the self-matrix of kernel evaluations.
+
+      :param x: A 2d array of inputs of size :math:`(N,d)` at which kernel is evaluated.
+      :type x: np.ndarray
+      :param kernel_params: Parameters :math:`p_{ker}` of the kernel.
+      :type kernel_params: list
+
+      :returns: Kernel matrix, a 2d array of size :math:`(N,N)`.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: get_kmat_cross(xc, kernel_params=None)
+
+      Get the cross-matrix of kernel evaluations of given points crossed with the training points.
+
+      :param xc: A 2d array of inputs of size :math:`(N,d)` at which kernel is evaluated.
+      :type xc: np.ndarray
+      :param kernel_params: Parameters :math:`p_{ker}` of the kernel.
+      :type kernel_params: list
+
+      :returns: Kernel matrix, a 2d array of size :math:`(N,N_{tr})`.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: neglogmarglik(params, x, y)
+
+      Evaluates negative marginal log-likelihood.
+
+      :param params: Parameters :math:`p_{ker}` of the kernel to be optimized.
+      :type params: list
+      :param x: An 2d array x-data of size :math:`(N,d)`.
+      :type x: np.ndarray
+      :param y: An 1d array y-data of size :math:`N`.
+      :type y: np.ndarray
+
+      :returns: The scalar value of the negative log-likelihood.
+      :rtype: float
+
+
+
