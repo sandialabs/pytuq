@@ -1,4 +1,4 @@
-name: documentation
+name: Deploy to GitHub Pages
 
 on: [push, pull_request, workflow_dispatch]
 
@@ -13,16 +13,30 @@ jobs:
       - uses: actions/setup-python@v5
         with:
             python-version: '3.9'
+
       - name: Install dependencies
         run: |
           pip install sphinx sphinx_rtd_theme myst_parser sphinx-autoapi ipython
           pip install .[dev]
+
       - name: List files
         run: |
           ls -R
+
       - name: Sphinx build
         run: |
           sphinx-build -b html docs docs/_build/html
+
+      - name: Generating coverage report for coveralls
+        run: |
+          coverage run --source=pytuq -m pytest tests/
+          coverage report -m
+
+      - name: Coveralls GitHub Action
+        uses: coverallsapp/github-action@v2.3.6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }} 
+          
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}

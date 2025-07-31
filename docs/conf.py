@@ -23,13 +23,14 @@ copyright = f"{year}, {author}"
 
 source_suffix = ".rst"
 master_doc = "index"
+
+from pkg_resources import get_distribution, DistributionNotFound
+
 try:
-    from pkg_resources import get_distribution
-    version = release = get_distribution("pytuq").version
-except Exception:
-    import traceback
-    traceback.print_exc()
+    version = get_distribution("package-name").version
+except DistributionNotFound:
     version = release = "1.0.0"
+    pass
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
