@@ -1,0 +1,50 @@
+pytuq.optim.gd
+==============
+
+.. py:module:: pytuq.optim.gd
+
+.. autoapi-nested-parse::
+
+   Gradient descent optimization module.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.optim.gd.GD
+
+
+Module Contents
+---------------
+
+.. py:class:: GD(step_size=0.01)
+
+   Bases: :py:obj:`pytuq.optim.optim.OptBase`
+
+
+   "Gradient descent optimization class.
+
+
+
+   .. py:attribute:: step_size
+      :value: 0.01
+
+
+
+   .. py:method:: stepper(current, istep)
+
+      Sampler function of a single step.
+
+      :param current: The current state.
+      :type current: np.ndarray
+      :param istep: Current step.
+      :type istep: int
+
+      :returns: New state.
+      :rtype: tuple(float, float, float)
+
+
+

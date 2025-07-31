@@ -1,0 +1,137 @@
+pytuq.func.genz
+===============
+
+.. py:module:: pytuq.func.genz
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.func.genz.GenzBase
+   pytuq.func.genz.GenzOscillatory
+   pytuq.func.genz.GenzSum
+   pytuq.func.genz.GenzCornerPeak
+
+
+Module Contents
+---------------
+
+.. py:class:: GenzBase(weights=[1.0], domain=None, name='Genz')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Base class for Genz function family.
+
+   Sets up shift, dimensional weights and domain.
+
+   .. attribute:: shifts
+
+      Shift parameter.
+
+      :type: {number}
+
+   .. attribute:: weights
+
+      Dimensional weights.
+
+      :type: {numpy array, 1d}
+
+
+   .. py:attribute:: weights
+
+
+   .. py:attribute:: dim
+
+
+   .. py:attribute:: name
+      :value: 'Genz'
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+.. py:class:: GenzOscillatory(shift=0.0, weights=[1.0], domain=None, name='Genz Oscillatory')
+
+   Bases: :py:obj:`GenzBase`
+
+
+   Genz Oscillatory function.
+
+
+
+
+   .. py:attribute:: shift
+      :value: 0.0
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: intgl()
+
+
+.. py:class:: GenzSum(shift=0.0, weights=[1.0], domain=None, name='Genz Summation')
+
+   Bases: :py:obj:`GenzBase`
+
+
+   Genz Oscillatory function.
+
+
+
+
+   .. py:attribute:: shift
+      :value: 0.0
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: GenzCornerPeak(weights=[1.0], domain=None, name='Genz Corner Peak')
+
+   Bases: :py:obj:`GenzBase`
+
+
+   Genz Corner Peak function.
+
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
