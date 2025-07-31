@@ -5,6 +5,7 @@
 
 [![Deploy to GitHub Pages](https://github.com/sandialabs/pytuq/actions/workflows/documentation.yml/badge.svg)](https://github.com/sandialabs/pytuq/actions/workflows/documentation.yml)
 [![Run Tests](https://github.com/sandialabs/pytuq/actions/workflows/python-test.yml/badge.svg)](https://github.com/sandialabs/pytuq/actions/workflows/python-test.yml)
+[![Coverage Status](https://coveralls.io/repos/github/sandialabs/pytuq/badge.svg?branch=main)](https://coveralls.io/github/sandialabs/pytuq?branch=main)
 
 
 
