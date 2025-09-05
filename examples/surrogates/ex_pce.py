@@ -10,6 +10,8 @@ from pytuq.surrogates.pce import PCE
 from pytuq.utils.maps import scale01ToDom
 from pytuq.lreg.anl import anl
 from pytuq.lreg.lreg import lsq
+from pytuq.utils.mindex import get_mi
+
 
 ########################################################
 ########################################################
@@ -49,6 +51,7 @@ pce.set_training_data(x, y)
 # print(pce.build(regression = 'anl', method = 'vi'))
 print(pce.build())
 # print(pce.build(regression = 'lsq'))
+# print(pce.build(regression = 'bcs'))
 
 # (3) Make predictions for data points and print results:
 results = pce.evaluate(x)
