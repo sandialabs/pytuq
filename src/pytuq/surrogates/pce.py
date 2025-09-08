@@ -21,6 +21,7 @@ from pytuq.rv.pcrv import PCRV
 from pytuq.utils.mindex import get_mi
 from pytuq.lreg.lreg import lsq
 from pytuq.lreg.anl import anl
+from pytuq.lreg.bcs import bcs
 
 
 class PCE:
@@ -33,12 +34,13 @@ class PCE:
         pctype (list[str]): Type of PC polynomial used.
         outdim (int): Physical dimensionality, i.e. # of output variables.
         lreg (lreg object): Linear regression object used for fitting the model.
+        mindex (int np.ndarray): Multiindex array carrying the powers to which the basis functions will be raised to within the PC terms.
         regression_method (str): Method used for linear regression. ex] anl, opt, lsq
         _x_train (np.ndarray): Input training data
         _y_train (np.ndarray): Output training data, corresponding to x_train
     """
 
-    def __init__(self, pce_dim, pce_order, pce_type, **kwargs):
+    def __init__(self, pce_dim, pce_order, pce_type, verbose=0, **kwargs):
         r"""Initializes a Polynomial Chaos Random Variable (PCRV) with, at minimum:
         stochastic dimensionality, order, and polynomial chaos (PC) type. 
 
@@ -48,6 +50,7 @@ class PCE:
             pce_order (int): Order of the PC expansion.
             pce_type (str or list): PC type. Either a list of :math:`s` strings (one per stochastic dimension), 
                 or a single string for all dimensions. Supported types include 'LU' (Legendre) and 'HG' (Hermite-Gaussian).
+            verbose (int): Output verbosity. Higher values print out more information. Default of 0
             pce_outdim (int, optional): Physical dimensionality :math:`s` of the PC random variable/vector.
                 Default of 1 indicates a scalar-valued output.
             mi (list or np.ndarray, optional): List of :math:`d` multiindex arrays, each of size :math:`(K_i,s)` for :math:`i=1, \dots, d`. 
@@ -66,18 +69,24 @@ class PCE:
         self.order = pce_order
         self.pctype = pce_type   # Choose from options: 'LU', 'HG', or mix of ['HG', 'LU']
         self.outdim = kwargs.get('pce_outdim', 1) # Scalar valued output
+        self.verbose = verbose
 
         self.lreg = None
         self._x_train = None
         self._y_train = None
         self.regression_method = None
 
-        self.pcrv = PCRV(self.outdim, self.sdim, self.pctype, 
-                         mi = kwargs.get('mi', get_mi(self.order, self.sdim)), 
-                         cfs = kwargs.get('cfs'))
+        # Get the original multiindex, before possible modification in build
+        self.mindex = kwargs.get('mi', get_mi(self.order, self.sdim))
 
-        print(self.pcrv, end='\n\n')
-        # self.pcrv.printInfo()  # Useful for vector valued functions
+        self.pcrv = PCRV(self.outdim, self.sdim, self.pctype, 
+                    mi = self.mindex, 
+                    cfs = kwargs.get('cfs'))
+
+        if self.verbose > 0:
+            print("Constructed PC Surrogate with the following attributes:")
+            print(self.pcrv, end='\n\n')
+            # self.pcrv.printInfo()
 
     def set_training_data(self, x_train, y_train):
         r"""Sets the training data with validation.
@@ -127,10 +136,13 @@ class PCE:
                 - prior_var (float): Available for regression type 'anl', method 'full'.
         
         Returns:
-            np.ndarray: Coefficients for matrix 
+            np.ndarray: PC coefficients  
         """
         if self._x_train is None or self._y_train is None:
             raise RuntimeError("Training data must be set using set_training_data() before calling build().")
+
+        # Reset the multiindex and coefficients
+        self.pcrv.setMiCfs(self.mindex, cfs=None)
 
         regression = kwargs.get('regression', 'lsq')
 
@@ -142,11 +154,15 @@ class PCE:
                 self.lreg = anl(method='vi', datavar=kwargs.get('datavar'), cov_nugget=kwargs.get('cov_nugget', 0.0))
             else:
                 self.lreg = anl(datavar=kwargs.get('datavar'), prior_var=kwargs.get('prior_var'), cov_nugget=kwargs.get('cov_nugget', 0.0))
+        elif regression == 'bcs':
+            self.lreg = bcs(eta=kwargs.get('eta', 1.e-8), datavar_init=kwargs.get('datavar_init'))
         else:
             raise ValueError(f"Regression method '{regression}' is not recognized and/or supported yet.")
 
         self.regression_method = type(self.lreg).__name__
-        print("Regression method:", self.regression_method)
+
+        if self.verbose > 0:
+            print("Regression method:", self.regression_method)
                 
         def basisevaluator(x, pars):
             self.pcrv, = pars
@@ -155,6 +171,10 @@ class PCE:
         self.lreg.setBasisEvaluator(basisevaluator, (self.pcrv,))
         self.lreg.fit(self._x_train, self._y_train)  
 
+        # Update the multi-index and coefficients retained by BCS as attributes of pcrv object
+        if regression == 'bcs':
+            self.pcrv.setMiCfs([self.mindex[self.lreg.used,:]], [self.lreg.cf])
+    
         return self.lreg.cf
 
     def evaluate(self, x_eval, **kwargs):
@@ -166,7 +186,7 @@ class PCE:
             data_variance (bool, optional): Whether to compute posterior-predictive (i.e. add data variance) or not.
 
         Returns:
-            dictionary: Dictionary of predicted y-values, along with standard deviation, covariance, and variance of predictions if applicable. 
+            dict: Values for predicted y-values, standard deviation, covariance, and variance of predictions (if applicable) as np.ndarrays.
         """
         # If single output (scalar-valued function), standard deviation and variance are calculated,
         # but not covariance.
