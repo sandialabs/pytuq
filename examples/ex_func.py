@@ -69,7 +69,7 @@ for fcn in fcns:
     print(f"Domain is {fcn.domain}")
 
     print("Plotting 1d slice")
-    fcn.plot_1d(ngr=555)
+    fcn.plot_1d(ngr=556)
 
     if fcn.dim>1:
         print("Plotting 2d slice")

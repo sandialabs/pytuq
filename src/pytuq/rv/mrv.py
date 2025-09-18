@@ -445,6 +445,85 @@ class Pareto_1d(MRV):
 
 
 ############################################################
+
+class Normal_1d(MRV):
+    """A class for univariate Normal distribution.
+
+    Attributes:
+        mu (float): Location parameter.
+        sigma (float): Scale parameter.
+    """
+
+    def __init__(self, mu=0.0, sigma=1.0):
+        """Initialization.
+
+        Args:
+            mu (float): Location parameter.
+            sigma (float): Scale parameter.
+        """
+        super().__init__(1)  # univariate
+        assert sigma > 0.0, f'{sigma}'
+        self.mu = mu
+        self.sigma = sigma
+
+        self.params = [self.mu, self.sigma]
+
+    def __repr__(self):
+        """String representation.
+
+        Returns:
+            str: String description.
+        """
+        return f"Univariate Normal Random Variable"
+
+    def sample(self, nsam):
+        """Sampling routine.
+
+        Args:
+            nsam (int): Number of samples requested.
+
+        Returns:
+            np.ndarray: A 1d array of samples.
+        """
+        return self.sigma * np.random.randn(nsam) + self.mu
+
+    def pdf(self, x):
+        """Evaluate the PDF.
+
+        Args:
+            x (np.ndarray): 1d array at which PDF is evaluated.
+
+        Returns:
+            np.ndarray: 1d array of PDF values.
+        """
+        return np.exp(-0.5 * ((x - self.mu) / self.sigma)**2) / (self.sigma * np.sqrt(2. * np.pi))
+
+    def logpdf(self, x):
+        """Evaluate the log-PDF.
+
+        Args:
+            x (np.ndarray): 1d array at which log-PDF is evaluated.
+
+        Returns:
+            np.ndarray: 1d array of log-PDF values.
+        """
+        return -np.log(self.sigma) - 0.5 * np.log(2. * np.pi) - 0.5 * ((x - self.mu) / self.sigma)**2
+
+    def cdf(self, x):
+        """Evaluate the CDF.
+
+        Args:
+            x (np.ndarray): 1d array at which CDF is evaluated.
+
+        Returns:
+            np.ndarray: 1d array of CDF values.
+        """
+        cumdf = np.zeros_like(x)
+
+        cumdf[x > 0] = 0.5 + 0.5 * erf((x - self.mu) / (np.sqrt(2.0) * self.sigma))
+
+        return cumdf
+
 ############################################################
 
 class Lognormal_1d(MRV):

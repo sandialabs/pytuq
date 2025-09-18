@@ -3,7 +3,7 @@
 import numpy as np
 
 class OptBase(object):
-    """Base class for calibration."""
+    """Base class for optimization."""
 
     def __init__(self):
         """Dummy instantiation."""
@@ -45,7 +45,7 @@ class OptBase(object):
             param_ini (np.ndarray): Initial position, an 1d array.
 
         Returns:
-            dict: Dictionary of results. Keys are 'objvalues' (optimization history array), 'best' (best parameters array), 'bestobj' (best objective value).
+            dict: Dictionary of results. Keys are 'samples' (history array of parameters), 'objvalues' (history of objective values), 'best' (best parameters array), 'bestobj' (best objective value).
         """
         assert(self.Objective is not None)
         samples = []  # Parameter samples
@@ -61,7 +61,7 @@ class OptBase(object):
 
         # Loop over Optimization steps
         for istep in range(nsteps):
-            current = self.stepper(current, istep)
+            current = self.stepper(current)
 
             current_obj = self.Objective(current, **self.ObjectiveInfo)
 
