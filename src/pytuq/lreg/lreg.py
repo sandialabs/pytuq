@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 """Module for the base linear regression class and a bare minimum least-squares implementation."""
 
-import functools
 import numpy as np
 from scipy.linalg import lstsq
 import matplotlib.pyplot as plt
@@ -266,7 +265,7 @@ class lreg(fitbase):
         for y, y_pred, y_pred_std, label, color in zip(yy_list, yy_pred_list, yy_pred_std_list, labels, colors):
             _ = plt.figure(figsize=(12,8))
             plt.plot((y_pred-y)/y_pred_std, 'o', color=color, markeredgecolor='w')
-            plt.fill_between([0, len(y)], [-1.0, -1.0], [1.0, 1.0], color='grey', alpha=1.0, label='$1\sigma$ region')
+            plt.fill_between([0, len(y)], [-1.0, -1.0], [1.0, 1.0], color='grey', alpha=1.0, label=r'$1\sigma$ region')
             plt.xlabel(label + ' Sample')
             plt.ylabel('Residual / Fit StDev')
             if label == 'Training':

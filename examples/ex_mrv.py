@@ -69,8 +69,8 @@ mypcrv.setRandomCfs()
 print(mypcrv.coefs)
 xx = mypcrv.sampleGerm(1000)
 yy = mypcrv.evalPC(xx)
-print(yy)
-np.savetxt('yy', yy)
+
+
 #setRandomCfs
 cfs_flat=mypcrv.cfsFlatten()
 print(cfs_flat)

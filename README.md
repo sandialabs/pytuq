@@ -20,8 +20,9 @@ PyTUQ requires:
 * matplotlib
 
 Optional dependencies include:
-* pytorch
+* pytorch (NN surrogates)
 * QUiNN (Quantification of Uncertainties in Neural Networks)
+* pyswarms (Particle Swarm Optimization)
 
 ## Installation
 1. To install PyTUQ from source, start up a Python virtual environment and clone the repository:

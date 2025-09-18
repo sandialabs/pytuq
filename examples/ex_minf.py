@@ -13,7 +13,7 @@ try:
 except ImportError:
     print("Warning: QUiNN not installed. NN functionality won't work.")
 
-torch.set_default_tensor_type(torch.DoubleTensor)
+#torch.set_default_tensor_type(torch.DoubleTensor)
 
 
 

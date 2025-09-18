@@ -357,22 +357,37 @@ class MVN(Function):
         return
 
     def __call__(self, x):
-        """Function call.
-
-        Parameters
-        ----------
-        x : numpy array, 2dim
-            Nxd array of N points in d=1 dimensions
-
-        Returns
-        -------
-        numpy array, 1dim
-            Vector of N values
-        """
-
         self.checkDim(x)
 
         yy = multivariate_normal.pdf(x, mean=self.mean, cov=self.cov)
 
         return yy.reshape(-1,1)
 
+
+
+
+class TFData(Function):
+    """Data generating model inspired by https://colab.research.google.com/github/tensorflow/probability/blob/master/tensorflow_probability/examples/jupyter_notebooks/Probabilistic_Layers_Regression.ipynb#scrollTo=5zCEYpzu7bDX.
+    """
+
+    def __init__(self, name='tfdata'):
+        super().__init__()
+        self.name = name
+
+        self.dim = 1
+        self.outdim = 1
+
+        self.w0 = 0.125
+        self.b0 = 5.
+        self.a = -20.
+        self.b = 60.
+
+        self.setDimDom(domain=np.array([[self.a, self.b]]))
+
+        return
+
+    def __call__(self, x):
+
+        y = (self.w0 * x * (1. + np.sin(x)) + self.b0)
+
+        return y
