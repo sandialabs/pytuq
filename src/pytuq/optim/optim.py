@@ -9,19 +9,22 @@ class OptBase(object):
         """Dummy instantiation."""
         self.Objective = None
         self.ObjectiveGrad = None
+        self.ObjectiveHess = None
         self.ObjectiveInfo = {}
 
 
-    def setObjective(self, Objective, ObjectiveGrad, **ObjectiveInfo):
-        """Setting Objective and optionally its Gradient.
+    def setObjective(self, Objective, ObjectiveGrad=None, ObjectiveHess=None, **ObjectiveInfo):
+        """Setting Objective and optionally its Gradient and Hessian.
 
         Args:
             Objective (callable): Objective evaluator function.
-            ObjectiveGrad (callable): Objective gradient evaluator function. Can be None.
-            **ObjectiveInfo: Dictionary arguments for the Objective and its gradient.
+            ObjectiveGrad (callable, optional): Objective gradient evaluator function. Defaults to None.
+            ObjectiveHess (callable, optional): Objective hessian evaluator function. Defaults to None.
+            **ObjectiveInfo: Dictionary arguments for the Objective and its gradient and hessian.
         """
         self.Objective = Objective
         self.ObjectiveGrad = ObjectiveGrad
+        self.ObjectiveHess = ObjectiveHess
         self.ObjectiveInfo = ObjectiveInfo
 
 
