@@ -42,6 +42,7 @@ class ScipyWrapper(OptBase):
                        args=(),
                        method=self.method,
                        jac = self.ObjectiveGrad,
+                       hess = self.ObjectiveHess,
                        bounds = self.bounds,
                        options=self.options,
                        callback=self.store_history)
