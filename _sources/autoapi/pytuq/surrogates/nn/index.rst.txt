@@ -1,0 +1,219 @@
+pytuq.surrogates.nn
+===================
+
+.. py:module:: pytuq.surrogates.nn
+
+.. autoapi-nested-parse::
+
+   This module provides a QUiNN (Quantification of Uncertainties in Neural Networks) wrapper class to facilitate
+   the universal coupling of FASTMath UQ tools and libraries. This class focuses on the use case
+   of a Residual Neural Network fitted with variational inference, keeping in mind
+   flexibility to implement additional UQ functionalities in the future.
+
+   The NN class supports a minimal API, with methods to construct the model, build it with training data,
+   evaluate it with input data, and offer samples of predictions with variance and covariance.
+
+   .. note::
+
+      The current implementation focuses on providing a general foundation for Neural Network surrogate model creation.
+      While not all construct and build options are currently supported, the class was developed with future growth in mind.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.surrogates.nn.NN
+
+
+Module Contents
+---------------
+
+.. py:class:: NN(type, n_layers, n_nodes, **kwargs)
+
+   A wrapper class to access QUiNN functionalities for Neural Network surrogate models.
+
+   .. attribute:: nnet
+
+      Neural network, defaults to Residual Neural Network object.
+
+      :type: RNet object
+
+   .. attribute:: type
+
+      Type of neural network, defaults to 'RNet'.
+
+      :type: str
+
+   .. attribute:: n_layers
+
+      Layers in neural network.
+
+      :type: int
+
+   .. attribute:: n_nodes
+
+      Nodes per layer.
+
+      :type: int
+
+   .. attribute:: uqnet
+
+      UQ method, defaults to variational inference object and method.
+
+      :type: NN_VI object
+
+   .. attribute:: options
+
+      Dictionary with user-specified options for instantiation of Neural Network, building, and evaluating.
+
+      :type: dict
+
+   .. attribute:: _x_trn
+
+      Input training data.
+
+      :type: np.ndarray
+
+   .. attribute:: _y_trn
+
+      Output training data.
+
+      :type: np.ndarray
+
+   .. attribute:: _x_val
+
+      Input validation data.
+
+      :type: np.ndarray, optional
+
+   .. attribute:: _y_val
+
+      Output validation data.
+
+      :type: np.ndarray, optional
+
+
+   .. py:attribute:: n_layers
+
+
+   .. py:attribute:: n_nodes
+
+
+   .. py:attribute:: options
+
+
+   .. py:attribute:: options_valid
+      :value: False
+
+
+
+   .. py:attribute:: uqnet
+      :value: None
+
+
+
+   .. py:attribute:: nnet
+      :value: None
+
+
+
+   .. py:method:: read_options_from_file(json_filename)
+
+      Read in options from given json file.
+
+
+
+   .. py:method:: check_options()
+
+      Sanity check on current set of options, including instantiation of neural network, building,
+      and evaluating. Throws error if invalid option.
+
+
+
+   .. py:method:: get_options(json_print=None)
+
+      Return options in a dictionary and, if provided, write options to a json file.
+
+
+
+   .. py:method:: set_validation_data(x_val, y_val)
+
+      Sets the validation data with input validation (optional). If not implemented,
+      the fitting method will default to using the training set for validation.
+
+      :param x_val: Validation input array.
+      :type x_val: np.ndarray
+      :param y_val: Validation output array.
+      :type y_val: np.ndarray
+
+      :raises ValueError: If x_val or y_val do not meet the required dimensions.
+
+
+
+   .. py:method:: set_training_data(x_trn, y_trn)
+
+      Sets the training data with input validation.
+
+      :param x_trn: Training input array of size (N,d).
+      :type x_trn: np.ndarray
+      :param y_trn: Training output array of size (N,o).
+      :type y_trn: np.ndarray
+
+      :raises ValueError: If x_trn or y_trn do not meet the required dimensions.
+
+
+
+   .. py:method:: instantiate_network()
+
+      Instantiate neural network with validated options.
+
+
+
+   .. py:method:: update_options(new_options)
+
+      Update only the options for building/fitting and evaluating of neural network.
+
+
+
+   .. py:method:: nn_vi()
+
+      Performs variational inference fitting and training of the neural network using the NN_VI wrapper class.
+
+      :param val: x,y tuple of validation points. Default uses the training set for validation.
+      :type val: tuple
+
+
+
+   .. py:method:: build(**kwargs)
+
+      Builds the model with training data by calling the correct fitting method for model training.
+
+      :param fit_options: Options/training parameters for model fitting.
+      :type fit_options: dict, optional
+
+
+
+   .. py:method:: evaluate(x_eval, **kwargs)
+
+      Generates samples of predictions.
+
+      :param x_eval: 2d array of size `(N,d)` as input data for evaluation. Can also be a single sample as input.
+      :type x_eval: np.ndarray
+      :param nens: Number of samples requested, M.
+      :type nens: int, optional
+      :param msc: Prediction mode: 0 (mean-only), 1 (mean and variance), or 2 (mean, variance and covariance). Defaults to 0.
+      :type msc: int, optional
+      :param nens = nsam: Number of samples requested, `M`.
+      :type nens = nsam: int, optional
+
+      :returns: Dictionary with samples of predictions.
+                tuple(np.ndarray, np.ndarray, np.ndarray): triple of Mean (array of size `(N, o)`),
+                Variance (array of size `(N, o)` or None),
+                Covariance (array of size `(N, N, o)` or None).
+      :rtype: dictionary
+
+
+

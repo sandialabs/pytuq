@@ -1,0 +1,223 @@
+pytuq.linred.klsurr
+===================
+
+.. py:module:: pytuq.linred.klsurr
+
+.. autoapi-nested-parse::
+
+   Module for KL+Surrogate construction.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.linred.klsurr.KLSurr
+
+
+Module Contents
+---------------
+
+.. py:class:: KLSurr
+
+   KL+Surrogate Class.
+
+   .. attribute:: built
+
+      Indicates whether KLSurr is built or not.
+
+      :type: bool
+
+   .. attribute:: function
+
+      A callable function that is the KLSurr evaluator.
+
+      :type: callable
+
+   .. attribute:: kl
+
+      The underlying KLE object.
+
+      :type: KLE
+
+   .. attribute:: ndim
+
+      The input dimensionality.
+
+      :type: int
+
+   .. attribute:: neig
+
+      The number of retained eigenvalues in the KLE.
+
+      :type: int
+
+   .. attribute:: smodel
+
+      Surrogate model object, either NN or PC.
+
+      :type: torch.nn or PCRV
+
+   .. attribute:: xisurr
+
+      Surrogate evaluator of the latent features.
+
+      :type: callable
+
+   .. attribute:: xitrain_kl
+
+      KL latent features.
+
+      :type: np.ndarray
+
+   .. attribute:: ytrain_kl
+
+      KL-compressed training data.
+
+      :type: np.ndarray
+
+   .. attribute:: ytrain_klsurr
+
+      KL+Surrogate approximation of the training data.
+
+      :type: np.ndarray
+
+
+   .. py:attribute:: ndim
+      :value: None
+
+
+
+   .. py:attribute:: built
+      :value: False
+
+
+
+   .. py:attribute:: xisurr
+      :value: None
+
+
+
+   .. py:attribute:: smodel
+      :value: None
+
+
+
+   .. py:attribute:: function
+      :value: None
+
+
+
+   .. py:attribute:: neig
+      :value: None
+
+
+
+   .. py:method:: setDim(ndim)
+
+      Set the input dimensionality.
+
+      :param ndim: Input dimensionality, `d`.
+      :type ndim: int
+
+
+
+   .. py:method:: build(ptrain, ytrain, neig=None, surr='PC', tr_frac=0.9, pc_order=3, bcs_eta=1e-08)
+
+      Build the KL+Surrogate.
+
+      :param ptrain: An input array of size `(M,d)`.
+      :type ptrain: np.ndarray
+      :param ytrain: Output training data array of size `(M,N)`.
+      :type ytrain: np.ndarray
+      :param neig: Number of eigenvalues. Defaults to None, which means all eigenvalues are retained.
+      :type neig: int, optional
+      :param surr: Surrogate type, PC or NN. Defaults to PC.
+      :type surr: str, optional
+      :param tr_frac: Fraction of samples used for training. Defaults to 0.9.
+      :type tr_frac: float, optional
+      :param pc_order: PC order. Defaults to 3.
+      :type pc_order: int, optional
+      :param bcs_eta: BCS tolerance. Defaults to 1.e-8.
+      :type bcs_eta: float, optional
+
+
+
+   .. py:method:: setFunction()
+
+      Creates the function evaluator corresponding to the surrogate.
+
+
+
+   .. py:method:: evalxi(ptrain, otherpars=None)
+
+      Evaluates new latent features at given inputs.
+
+      :param ptrain: Input array of size `(M, d)`.
+      :type ptrain: np.ndarray
+      :param otherpars: Optional parameters (unused currently).
+      :type otherpars: None, optional
+
+      :returns: Predictions of latent features, an array of size `(M, K)`.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: eval(ptrain, neig=None)
+
+      Evaluate the KL+Surrogate at given inputs.
+
+      :param ptrain: Input array of size `(M, d)`.
+      :type ptrain: np.ndarray
+      :param neig: Number of eigenvalues. Defaults to None, which means all eigenvalues are retained.
+      :type neig: int, optional
+
+      :returns: Output array of size `(M,N)`.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: plot_parity_xi()
+
+      Plots diagonal parity plots for each latent feature.
+
+
+
+   .. py:method:: compute_sens(domain, npar, colors=None, pnames=None, totmain='main')
+
+      Computes and plots Sobol sensitivities via sampling.
+
+      :param domain: Domain of input, array of size `(d,2)`.
+      :type domain: np.ndarray
+      :param npar: Number of parameters.
+      :type npar: int
+      :param colors: Optional list of colors for plotting.
+      :type colors: None, optional
+      :param pnames: Optional list of names for plotting.
+      :type pnames: None, optional
+      :param totmain: Total or main sensitivity. Defaults to main.
+      :type totmain: str, optional
+
+      :returns: Returns Sobol sensitivities, an array of size `(N,d)`.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: compute_sens_pc(colors=None, pnames=None, totmain='main')
+
+      Computes PC-based sensitivities if PC surrogate is used.
+
+      :param colors: Optional list of colors for plotting.
+      :type colors: None, optional
+      :param pnames: Optional list of names for plotting.
+      :type pnames: None, optional
+      :param totmain: Total or main sensitivity. Defaults to main.
+      :type totmain: str, optional
+
+      :returns: Returns Sobol sensitivities, an array of size `(N,d)`.
+      :rtype: np.ndarray
+
+
+

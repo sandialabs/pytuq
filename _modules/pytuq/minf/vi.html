@@ -1,0 +1,343 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytuq.minf.vi &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            PyTUQ
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../autoapi/index.html">Section Navigation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../autoapi/pytuq/index.html">pytuq</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/pytuq/index.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/func/index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/minf/index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/rv/index.html">pytuq.rv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/surrogates/index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/utils/index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pytuq.minf.vi</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pytuq.minf.vi</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="sd">&quot;&quot;&quot;Variational Inference module.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pytuq.rv.mrv</span><span class="w"> </span><span class="kn">import</span> <span class="n">Normal_1d</span>
+
+<div class="viewcode-block" id="MFVI">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/vi/index.html#pytuq.minf.vi.MFVI">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MFVI</span><span class="p">():</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">y_data</span><span class="p">,</span> <span class="n">pdim</span><span class="p">,</span> <span class="n">lossinfo</span><span class="p">,</span> <span class="n">reparam</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">priors</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Mean-Field Variational Inference class</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            model (callable): Forward model.</span>
+<span class="sd">            y_data (np.ndarray): Data array.</span>
+<span class="sd">            pdim (int): Parameter dimensionality.</span>
+<span class="sd">            lossinfo (dict): Dictionary of loss computation auxiliary parameters. Keys are &#39;nmc&#39; and &#39;datasigma&#39;.</span>
+<span class="sd">            reparam (str, optional): Input parameter sigma reparameterization. Defaults to no reparameterization.</span>
+<span class="sd">            priors (list[pytuq.rv.mrv.MRV], optional): Defaults to None, which is i.i.d. normal with wide variance.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            TYPE: Description</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="MFVI.model">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/vi/index.html#pytuq.minf.vi.MFVI.model">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span></div>
+
+<div class="viewcode-block" id="MFVI.pdim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/vi/index.html#pytuq.minf.vi.MFVI.pdim">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pdim</span> <span class="o">=</span> <span class="n">pdim</span></div>
+
+<div class="viewcode-block" id="MFVI.y_data">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/vi/index.html#pytuq.minf.vi.MFVI.y_data">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y_data</span> <span class="o">=</span> <span class="n">y_data</span></div>
+
+
+<div class="viewcode-block" id="MFVI.reparam">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/vi/index.html#pytuq.minf.vi.MFVI.reparam">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reparam</span> <span class="o">=</span> <span class="n">reparam</span></div>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reparam</span> <span class="o">==</span> <span class="s1">&#39;exp&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma_exp</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">reparam</span> <span class="o">==</span> <span class="s1">&#39;logexp&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma_logexp</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma_idt</span>
+
+<div class="viewcode-block" id="MFVI.priors">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/vi/index.html#pytuq.minf.vi.MFVI.priors">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">priors</span> <span class="o">=</span> <span class="n">priors</span></div>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">priors</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">priors</span> <span class="o">=</span> <span class="p">[</span><span class="n">Normal_1d</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdim</span>
+
+<div class="viewcode-block" id="MFVI.nmc">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/vi/index.html#pytuq.minf.vi.MFVI.nmc">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nmc</span> <span class="o">=</span> <span class="n">lossinfo</span><span class="p">[</span><span class="s1">&#39;nmc&#39;</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="MFVI.datasigma">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/vi/index.html#pytuq.minf.vi.MFVI.datasigma">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">datasigma</span> <span class="o">=</span> <span class="n">lossinfo</span><span class="p">[</span><span class="s1">&#39;datasigma&#39;</span><span class="p">]</span></div>
+
+
+        <span class="k">return</span>
+
+<div class="viewcode-block" id="MFVI.sigma_exp">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/vi/index.html#pytuq.minf.vi.MFVI.sigma_exp">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sigma_exp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rho</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">rho</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MFVI.sigma_logexp">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/vi/index.html#pytuq.minf.vi.MFVI.sigma_logexp">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sigma_logexp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rho</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">rho</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="MFVI.sigma_idt">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/vi/index.html#pytuq.minf.vi.MFVI.sigma_idt">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sigma_idt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rho</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">rho</span> <span class="o">+</span> <span class="mf">0.0</span></div>
+
+
+<div class="viewcode-block" id="MFVI.get_posteriors">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/vi/index.html#pytuq.minf.vi.MFVI.get_posteriors">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_posteriors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var_params</span><span class="p">):</span>
+        <span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">var_params</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">)</span>
+        <span class="n">means</span> <span class="o">=</span> <span class="n">var_params</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">]</span>
+        <span class="n">sigmas</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">var_params</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">:]]</span>
+
+        <span class="c1"># Set up the posteriors</span>
+        <span class="n">var_posteriors</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">ipar</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">):</span>
+            <span class="n">var_posterior</span> <span class="o">=</span> <span class="n">Normal_1d</span><span class="p">(</span><span class="n">means</span><span class="p">[</span><span class="n">ipar</span><span class="p">],</span> <span class="n">sigmas</span><span class="p">[</span><span class="n">ipar</span><span class="p">])</span>
+            <span class="n">var_posteriors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">var_posterior</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">var_posteriors</span></div>
+
+
+<div class="viewcode-block" id="MFVI.eval_loss">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/vi/index.html#pytuq.minf.vi.MFVI.eval_loss">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval_loss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var_params</span><span class="p">,</span> <span class="n">ps</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="c1">#print(&quot;Evaluating Loss ========================&quot;)</span>
+        <span class="c1"># Set up the posteriors</span>
+        <span class="n">var_posteriors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_posteriors</span><span class="p">(</span><span class="n">var_params</span><span class="p">)</span>
+        <span class="c1">#print(&quot;Means &quot;, [vp.mu for vp in var_posteriors])</span>
+        <span class="c1"># Sample model parameters</span>
+        <span class="k">if</span> <span class="n">ps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1">#print(&quot;Grabbing previous parsample&quot;)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">par_samples</span> <span class="o">=</span> <span class="n">ps</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1">#print(&quot;Creating new parsample&quot;)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">par_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">nmc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">ipar</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">par_samples</span><span class="p">[:,</span> <span class="n">ipar</span><span class="p">]</span> <span class="o">=</span> <span class="n">var_posteriors</span><span class="p">[</span><span class="n">ipar</span><span class="p">]</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nmc</span><span class="p">)</span>
+            <span class="c1"># need to trace back to xi_samples for grad computation</span>
+
+        <span class="c1"># Evaluate model</span>
+        <span class="n">y_samples</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">par_samples</span><span class="p">)</span>  <span class="c1"># nmc, ndata</span>
+
+        <span class="n">variational_logpost_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">nmc</span><span class="p">,))</span>
+        <span class="n">log_prior_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">nmc</span><span class="p">,))</span>
+        <span class="k">for</span> <span class="n">imc</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nmc</span><span class="p">):</span>
+            <span class="n">variational_logpost_samples</span><span class="p">[</span><span class="n">imc</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+            <span class="n">log_prior_samples</span><span class="p">[</span><span class="n">imc</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+            <span class="k">for</span> <span class="n">ipar</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">):</span>
+                <span class="n">variational_logpost_samples</span><span class="p">[</span><span class="n">imc</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span><span class="n">var_posteriors</span><span class="p">[</span><span class="n">ipar</span><span class="p">]</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">par_samples</span><span class="p">[</span><span class="n">imc</span><span class="p">,</span> <span class="n">ipar</span><span class="p">]))</span>  <span class="c1"># - np.log(sigmas[ipar]) # this was needed if we started with N(0,1) posterior.</span>
+                <span class="n">log_prior_samples</span><span class="p">[</span><span class="n">imc</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">priors</span><span class="p">[</span><span class="n">ipar</span><span class="p">]</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">par_samples</span><span class="p">[</span><span class="n">imc</span><span class="p">,</span> <span class="n">ipar</span><span class="p">])</span>
+
+        <span class="n">variational_logpost</span> <span class="o">=</span> <span class="n">variational_logpost_samples</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="n">log_prior</span> <span class="o">=</span> <span class="n">log_prior_samples</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+        <span class="n">neg_log_likelihood</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">datasigma</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">+</span> \
+            <span class="mf">0.5</span> <span class="o">*</span> <span class="p">((</span><span class="n">y_samples</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_data</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">datasigma</span><span class="o">**</span><span class="mi">2</span>
+        <span class="n">neg_log_likelihood</span> <span class="o">*=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">var_loss</span> <span class="o">=</span> <span class="n">variational_logpost</span> <span class="o">-</span> <span class="n">log_prior</span> <span class="o">+</span> <span class="n">neg_log_likelihood</span>
+
+        <span class="k">return</span> <span class="n">var_loss</span></div>
+
+
+<div class="viewcode-block" id="MFVI.eval_loss_grad_">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/vi/index.html#pytuq.minf.vi.MFVI.eval_loss_grad_">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval_loss_grad_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1.e-3</span><span class="p">):</span>
+        <span class="c1">#print(&quot;Evaluating Gradient ========================&quot;)</span>
+        <span class="n">ndim</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">grad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">ndim</span><span class="p">,))</span>
+        <span class="k">for</span> <span class="n">idim</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ndim</span><span class="p">):</span>
+            <span class="c1">#print(&quot;Dim &quot;, idim)</span>
+            <span class="n">xx2</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">xx2</span><span class="p">[</span><span class="n">idim</span><span class="p">]</span> <span class="o">+=</span> <span class="n">eps</span>
+            <span class="n">xx1</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">xx1</span><span class="p">[</span><span class="n">idim</span><span class="p">]</span> <span class="o">-=</span> <span class="n">eps</span>
+            <span class="n">grad</span><span class="p">[</span><span class="n">idim</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">eval_loss</span><span class="p">(</span><span class="n">xx2</span><span class="p">,</span> <span class="n">ps</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">par_samples</span><span class="p">)</span> <span class="o">-</span>
+                          <span class="bp">self</span><span class="o">.</span><span class="n">eval_loss</span><span class="p">(</span><span class="n">xx1</span><span class="p">,</span> <span class="n">ps</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">par_samples</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.</span> <span class="o">*</span> <span class="n">eps</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">grad</span></div>
+
+
+<div class="viewcode-block" id="MFVI.plot_parpdf">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/vi/index.html#pytuq.minf.vi.MFVI.plot_parpdf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">plot_parpdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var_params</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+        <span class="n">var_posteriors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_posteriors</span><span class="p">(</span><span class="n">var_params</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">ipar</span><span class="p">,</span> <span class="n">posterior</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">var_posteriors</span><span class="p">):</span>
+            <span class="n">xgrid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">posterior</span><span class="o">.</span><span class="n">mu</span> <span class="o">-</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">posterior</span><span class="o">.</span><span class="n">sigma</span><span class="p">,</span>
+                                <span class="n">posterior</span><span class="o">.</span><span class="n">mu</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">posterior</span><span class="o">.</span><span class="n">sigma</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
+            <span class="n">ygrid</span> <span class="o">=</span> <span class="n">posterior</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">xgrid</span><span class="p">)</span>
+
+            <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xgrid</span><span class="p">,</span> <span class="n">ygrid</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;VI Posterior PDF&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Param #</span><span class="si">{</span><span class="n">ipar</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;post_vi_</span><span class="si">{</span><span class="n">ipar</span><span class="si">}</span><span class="s1">.png&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="MFVI.compute_pred">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/vi/index.html#pytuq.minf.vi.MFVI.compute_pred">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_pred</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var_params</span><span class="p">,</span> <span class="n">nsam</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">var_posteriors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_posteriors</span><span class="p">(</span><span class="n">var_params</span><span class="p">)</span>
+
+
+
+        <span class="n">par_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">nsam</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">ipar</span><span class="p">,</span> <span class="n">posterior</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">var_posteriors</span><span class="p">):</span>
+            <span class="n">par_samples</span><span class="p">[:,</span> <span class="n">ipar</span><span class="p">]</span> <span class="o">=</span> <span class="n">posterior</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">nsam</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">model</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span>
+
+        <span class="n">y_samples</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">par_samples</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">y_samples</span></div>
+</div>
+
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
