@@ -50,14 +50,14 @@ dev = [
 ]
 nn = [
     "torch",
-    "quinn @ git+https://github.com/sandialabs/quinn.git"
+    "uqinn"
 ]
 optim = [
     "pyswarms"
 ]
 all = [
     "torch",
-    "quinn @ git+https://github.com/sandialabs/quinn.git",
+    "uqinn",
     "pyswarms"
 ]
 

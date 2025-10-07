@@ -37,22 +37,22 @@ $ pip install pytuq
 Install additional features as needed:
 * Neural network surrogates
 ```bash
-$ pip install pytuq[nn]
+$ pip install 'pytuq[nn]'
 ```
 
 * Particle swarm optimization
 ```bash
-$ pip install pytuq[optim]
+$ pip install 'pytuq[optim]'
 ```
 
 * All optional features
 ```bash
-pip install pytuq[all]
+$ pip install 'pytuq[all]'
 ```
 
 * Development tools
-```bash 
-pip install pytuq[dev]
+```bash
+$ pip install 'pytuq[dev]'
 ```
 
 ### Installation from Source
