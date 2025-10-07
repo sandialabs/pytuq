@@ -37,11 +37,30 @@ dependencies = [
   "matplotlib",
 ]
 
+[project.urls]
+Homepage = "https://sandialabs.github.io/pytuq/"
+Repository = "https://github.com/sandialabs/pytuq"
+Documentation = "https://sandialabs.github.io/pytuq/"
+
+
 [project.optional-dependencies]
 dev = [
     "pytest>=7.0",
     "pytest-cov"
 ]
+nn = [
+    "torch",
+    "quinn @ git+https://github.com/sandialabs/quinn.git"
+]
+optim = [
+    "pyswarms"
+]
+all = [
+    "torch",
+    "quinn @ git+https://github.com/sandialabs/quinn.git",
+    "pyswarms"
+]
+
 
 [tool.setuptools.packages.find]
 where = ["src"] 

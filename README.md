@@ -25,8 +25,39 @@ Optional dependencies include:
 * pyswarms (Particle Swarm Optimization)
 
 ## Installation
-1. To install PyTUQ from source, start up a Python virtual environment and clone the repository:
+
+### Basic Installation
+Install PyTUQ with core dependencies:
+```bash
+$ pip install pytuq
 ```
+
+#### Optional Features
+
+Install additional features as needed:
+* Neural network surrogates
+```bash
+$ pip install pytuq[nn]
+```
+
+* Particle swarm optimization
+```bash
+$ pip install pytuq[optim]
+```
+
+* All optional features
+```bash
+pip install pytuq[all]
+```
+
+* Development tools
+```bash 
+pip install pytuq[dev]
+```
+
+### Installation from Source
+1. To install PyTUQ from source, start up a Python virtual environment and clone the repository:
+```bash
     $ source <PYTHON_VENV_DIR>/bin/activate
     $ git clone git@github.com:sandialabs/pytuq.git
     $ cd pytuq
