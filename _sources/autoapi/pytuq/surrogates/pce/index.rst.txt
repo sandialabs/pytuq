@@ -1,0 +1,194 @@
+pytuq.surrogates.pce
+====================
+
+.. py:module:: pytuq.surrogates.pce
+
+.. autoapi-nested-parse::
+
+   This module provides a KLPC (Karhunen-Loeve and Polynomial Chaos) wrapper class to facilitate
+   the universal coupling of FASTMath UQ tools and libraries. This class focuses on the use case
+   of surrogate models built with PCE and linear regression, keeping in mind
+   flexibility to implement additional UQ functionalities in the future.
+
+   The PCE class supports a minimal API, with methods to construct the model, build it with training data,
+   evaluate it with input data, and offer predictions with covariance, variance, and standard deviation.
+   It is capable of handling multidimensional inputs and is optimized for scalar-valued function outputs.
+
+   .. note::
+
+      The current implementation focuses on providing a general foundation for polynomial chaos
+      expansions with simple least squares regression or advanced analytical regression. While not all
+      construct and build options are currently supported, the class was developed with future growth in mind.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.surrogates.pce.PCE
+
+
+Module Contents
+---------------
+
+.. py:class:: PCE(pce_dim, pce_order, pce_type, verbose=0, **kwargs)
+
+   A wrapper class to access KLPC functionalities for PCE surrogate models.
+
+   .. attribute:: pcrv
+
+      Polynomial Chaos random variable object, encapsulates details for polynomial chaos expansion.
+
+      :type: PCRV object
+
+   .. attribute:: sdim
+
+      Stochastic dimensionality, i.e. # of stochastic inputs.
+
+      :type: int
+
+   .. attribute:: order
+
+      Order of polynomial chaos expansion.
+
+      :type: int
+
+   .. attribute:: pctype
+
+      Type of PC polynomial used.
+
+      :type: list[str]
+
+   .. attribute:: outdim
+
+      Physical dimensionality, i.e. # of output variables.
+
+      :type: int
+
+   .. attribute:: lreg
+
+      Linear regression object used for fitting the model.
+
+      :type: lreg object
+
+   .. attribute:: mindex
+
+      Multiindex array carrying the powers to which the basis functions will be raised to within the PC terms.
+
+      :type: int np.ndarray
+
+   .. attribute:: regression_method
+
+      Method used for linear regression. ex] anl, opt, lsq
+
+      :type: str
+
+   .. attribute:: _x_train
+
+      Input training data
+
+      :type: np.ndarray
+
+   .. attribute:: _y_train
+
+      Output training data, corresponding to x_train
+
+      :type: np.ndarray
+
+
+   .. py:attribute:: sdim
+
+
+   .. py:attribute:: order
+
+
+   .. py:attribute:: pctype
+
+
+   .. py:attribute:: outdim
+
+
+   .. py:attribute:: verbose
+      :value: 0
+
+
+
+   .. py:attribute:: lreg
+      :value: None
+
+
+
+   .. py:attribute:: regression_method
+      :value: None
+
+
+
+   .. py:attribute:: mindex
+
+
+   .. py:attribute:: pcrv
+
+
+   .. py:method:: set_training_data(x_train, y_train)
+
+      Sets the training data with validation.
+
+      :param x_train: 2d array of size `(N, d)` representing training input data,
+                      where `N` is the number of samples and `d` is the dimensionality (sdim) of each sample.
+      :type x_train: np.ndarray
+      :param y_train: 1d array of size `N` representing the training output data,
+                      where each element corresponds to the output value for each input sample in `x_train`.
+      :type y_train: np.ndarray
+
+      :raises ValueError: If x_train or y_train do not meet the required dimensions.
+
+
+
+   .. py:method:: build(**kwargs)
+
+      Builds and initializes the linear regression model for the pcrv object with training data.
+      Returns coefficients for evaluated Polynomial Chaos Expansion.
+
+      :param \*\*kwargs: Optional keyword arguments for configuring the regression model, including:
+
+                         - regression (str): Type of regression to be used.
+                             Options are:
+                                 + 'anl': Advanced regression analysis.
+                                 + 'lsq': Least squares regression.
+
+                             The default is 'lsq'. Future regression methods to implement include 'opt' and 'lreg_merr'.
+
+                         - method (str): Method to be used when 'regression' is set to 'anl'.
+                             Options are:
+                                 + 'vi': Variational inference.
+                                 + 'full': Full analytical solution, the default for anl().
+
+                             The default is 'vi' when 'regression' is 'anl'.
+
+                         - datavar (float): Available for regression type 'anl'.
+                         - cov_nugget (float): Available for regression type 'anl'.
+                         - prior_var (float): Available for regression type 'anl', method 'full'.
+      :type \*\*kwargs: dict
+
+      :returns: PC coefficients
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: evaluate(x_eval, **kwargs)
+
+      Generates predictions and related uncertainty calculations for given input data.
+      Returns predicted y-values, along with standard deviation, covariance, and variance of predictions if applicable.
+
+      :param x_eval: 2d array of size `(N,d)` as input data for evaluation. Can also be a single sample as input.
+      :type x_eval: np.ndarray
+      :param data_variance: Whether to compute posterior-predictive (i.e. add data variance) or not.
+      :type data_variance: bool, optional
+
+      :returns: Values for predicted y-values, standard deviation, covariance, and variance of predictions (if applicable) as np.ndarrays.
+      :rtype: dict
+
+
+

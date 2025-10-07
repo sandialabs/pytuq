@@ -1,0 +1,37 @@
+pytuq.linred.klnn
+=================
+
+.. py:module:: pytuq.linred.klnn
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.linred.klnn.KLNN
+
+
+Module Contents
+---------------
+
+.. py:class:: KLNN
+
+   docstring for KLNN
+
+
+   .. py:method:: build(ptrain, ytrain, neig=None, tr_frac=0.9)
+
+
+   .. py:method:: evalxi(ptrain, otherpars=None)
+
+
+   .. py:method:: eval(ptrain, neig=None)
+
+
+   .. py:method:: plot_parity_xi()
+
+
+   .. py:method:: compute_sens(domain, npar, colors=None, pnames=None)
+
+

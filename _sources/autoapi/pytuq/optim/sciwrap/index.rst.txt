@@ -1,0 +1,68 @@
+pytuq.optim.sciwrap
+===================
+
+.. py:module:: pytuq.optim.sciwrap
+
+.. autoapi-nested-parse::
+
+   LBFGS Optimization Module.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.optim.sciwrap.ScipyWrapper
+
+
+Module Contents
+---------------
+
+.. py:class:: ScipyWrapper(method='BFGS', bounds=None, options=None)
+
+   Bases: :py:obj:`pytuq.optim.optim.OptBase`
+
+
+   "Optimization class wrapper to scipy options. See https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html.
+
+
+
+   .. py:attribute:: method
+      :value: 'BFGS'
+
+
+
+   .. py:attribute:: bounds
+      :value: None
+
+
+
+   .. py:attribute:: options
+      :value: None
+
+
+
+   .. py:method:: run(nsteps, param_ini)
+
+      An optimization run.
+
+      :param param_ini: Initial position, an 1d array.
+      :type param_ini: np.ndarray
+
+      :returns: Dictionary of results. Keys are 'samples' (history array of parameters), 'objvalues' (history of objective values), 'best' (best parameters array), 'bestobj' (best objective value).
+      :rtype: dict
+
+
+
+   .. py:method:: store_history(x, *args)
+
+      Store the current parameter vector and the objective function value.
+
+      :param x: Current state.
+      :type x: np.ndarray
+      :param \*args: Positional arguments, if any.
+
+
+

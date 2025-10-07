@@ -1,0 +1,16 @@
+pytuq.workflows
+===============
+
+.. py:module:: pytuq.workflows
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/pytuq/workflows/fits/index
+   /autoapi/pytuq/workflows/uprop/index
+
+

@@ -1,0 +1,125 @@
+pytuq.lreg.anl
+==============
+
+.. py:module:: pytuq.lreg.anl
+
+.. autoapi-nested-parse::
+
+   Analytically available Bayesian linear regression.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.lreg.anl.anl
+
+
+Module Contents
+---------------
+
+.. py:class:: anl(datavar=None, prior_var=None, cov_nugget=0.0, method='full')
+
+   Bases: :py:obj:`pytuq.lreg.lreg.lreg`
+
+
+   Bayesian linear regression class.
+
+   .. attribute:: cf
+
+      An 1d array of coefficients, of size :math:`K`.
+
+      :type: np.ndarray
+
+   .. attribute:: cf_cov
+
+      A 2d array of coefficient covariance of size :math:`(K,K)`.
+
+      :type: np.ndarray
+
+   .. attribute:: cov_nugget
+
+      A diagonal covariance nugget to regularize the matrix inversion.
+
+      :type: float
+
+   .. attribute:: datavar
+
+      A single value for homogenous data variance.
+
+      :type: float
+
+   .. attribute:: fitted
+
+      Flag to indicate whether fit is performed or not.
+
+      :type: bool
+
+   .. attribute:: method
+
+      Method of fitting. Can be 'full' (the conventional Bayesian linear regression) or 'vi' (the variational approximation, still available analytically).
+
+      :type: string
+
+   .. attribute:: prior_var
+
+      A single value for homogenous prior variance.
+
+      :type: float
+
+   .. attribute:: used
+
+      An array of integers indicating the bases used (i.e. all basis in this case).
+
+      :type: np.ndarray
+
+
+   .. py:attribute:: prior_var
+      :value: None
+
+
+
+   .. py:attribute:: datavar
+      :value: None
+
+
+
+   .. py:attribute:: cov_nugget
+      :value: 0.0
+
+
+
+   .. py:attribute:: method
+      :value: 'full'
+
+
+
+   .. py:method:: fita(Amat, y)
+
+      Fit given A-matrix of basis evaluations and data array.
+
+      :param Amat: A 2d array of size :math:`(N, K)` each row holding basis evaluations at a training point.
+      :type Amat: np.ndarray
+      :param y: An 1d array of size :math:`N` holding the data.
+      :type y: np.ndarray
+
+
+
+   .. py:method:: compute_evidence(Amat, ydata)
+
+      Compute the evidence.
+
+      :param Amat: A 2d array of size :math:`(N, K)` each row holding basis evaluations at a training point.
+      :type Amat: np.ndarray
+      :param ydata: An 1d array of size :math:`N` holding the data.
+      :type ydata: np.ndarray
+
+      :returns: log-evidence value
+      :rtype: float
+
+      Note: see https://krasserm.github.io/2019/02/23/bayesian-linear-regression/ Eq (18) for the closest (and equivalent) formula to the one implemented.
+
+
+

@@ -1,0 +1,484 @@
+pytuq.func.benchmark
+====================
+
+.. py:module:: pytuq.func.benchmark
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.func.benchmark.Franke
+   pytuq.func.benchmark.Sobol
+   pytuq.func.benchmark.Ishigami
+   pytuq.func.benchmark.NegAlpineN2
+   pytuq.func.benchmark.Adjiman
+   pytuq.func.benchmark.Branin
+   pytuq.func.benchmark.SumSquares
+   pytuq.func.benchmark.Quadratic
+   pytuq.func.benchmark.MVN
+   pytuq.func.benchmark.TFData
+
+
+Module Contents
+---------------
+
+.. py:class:: Franke(name='Franke')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Base class for a function.
+
+   .. attribute:: dim
+
+      Input dimensionality, :math:`d`.
+
+      :type: int
+
+   .. attribute:: dmax
+
+      Default domain half-size. That is, default domain is :math:`[-d_{max}, + d_{max}]`.
+
+      :type: float
+
+   .. attribute:: domain
+
+      A 2d array of size :math:`(d,2)` indicating the input domain of the function.
+
+      :type: np.ndarray
+
+   .. attribute:: eval
+
+      Callable evaluator of the function.
+
+      :type: callable
+
+   .. attribute:: name
+
+      Name of the function.
+
+      :type: str
+
+   .. attribute:: outdim
+
+      Output dimensionality, :math:`o`.
+
+      :type: int
+
+
+   .. py:attribute:: name
+      :value: 'Franke'
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Sobol(name='Sobol', dim=5)
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Base class for a function.
+
+   .. attribute:: dim
+
+      Input dimensionality, :math:`d`.
+
+      :type: int
+
+   .. attribute:: dmax
+
+      Default domain half-size. That is, default domain is :math:`[-d_{max}, + d_{max}]`.
+
+      :type: float
+
+   .. attribute:: domain
+
+      A 2d array of size :math:`(d,2)` indicating the input domain of the function.
+
+      :type: np.ndarray
+
+   .. attribute:: eval
+
+      Callable evaluator of the function.
+
+      :type: callable
+
+   .. attribute:: name
+
+      Name of the function.
+
+      :type: str
+
+   .. attribute:: outdim
+
+      Output dimensionality, :math:`o`.
+
+      :type: int
+
+
+   .. py:attribute:: name
+      :value: 'Sobol'
+
+
+
+   .. py:attribute:: dim
+      :value: 5
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:attribute:: a
+
+
+.. py:class:: Ishigami(name='Ishigami')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Base class for a function.
+
+   .. attribute:: dim
+
+      Input dimensionality, :math:`d`.
+
+      :type: int
+
+   .. attribute:: dmax
+
+      Default domain half-size. That is, default domain is :math:`[-d_{max}, + d_{max}]`.
+
+      :type: float
+
+   .. attribute:: domain
+
+      A 2d array of size :math:`(d,2)` indicating the input domain of the function.
+
+      :type: np.ndarray
+
+   .. attribute:: eval
+
+      Callable evaluator of the function.
+
+      :type: callable
+
+   .. attribute:: name
+
+      Name of the function.
+
+      :type: str
+
+   .. attribute:: outdim
+
+      Output dimensionality, :math:`o`.
+
+      :type: int
+
+
+   .. py:attribute:: name
+      :value: 'Ishigami'
+
+
+
+   .. py:attribute:: dim
+      :value: 3
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:attribute:: a
+      :value: 7
+
+
+
+   .. py:attribute:: b
+      :value: 0.1
+
+
+
+.. py:class:: NegAlpineN2(name='Alpine N2', dim=2)
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Negative Alpine function [http://benchmarkfcns.xyz/benchmarkfcns/alpinen2fcn.html]
+
+
+
+
+   .. py:attribute:: name
+      :value: 'Alpine N2'
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Adjiman(name='Adjiman')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Adjiman function [http://benchmarkfcns.xyz/benchmarkfcns/adjimanfcn.html]
+
+
+
+
+   .. py:attribute:: name
+      :value: 'Adjiman'
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Branin(name='Branin')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Branin function [https://www.sfu.ca/~ssurjano/branin.html]
+
+
+
+
+   .. py:attribute:: name
+      :value: 'Branin'
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:attribute:: a_
+      :value: 1.0
+
+
+
+   .. py:attribute:: b_
+
+
+   .. py:attribute:: c_
+
+
+   .. py:attribute:: r_
+      :value: 6.0
+
+
+
+   .. py:attribute:: s_
+      :value: 10.0
+
+
+
+   .. py:attribute:: t_
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: SumSquares(name='SumSquares', dim=5)
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   SumSquares function [http://benchmarkfcns.xyz/benchmarkfcns/sumsquaresfcn.html]
+
+
+
+
+   .. py:attribute:: name
+      :value: 'SumSquares'
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Quadratic(center, hess, name='Quadratic')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   MVN function [REF]
+
+
+
+
+   .. py:attribute:: center
+
+
+   .. py:attribute:: hess
+
+      Hessian evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 4d array of size :math:`(N,o,d,d)`.
+      :rtype: np.ndarray
+
+
+   .. py:attribute:: name
+      :value: 'Quadratic'
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+.. py:class:: MVN(mean, cov, name='MVN')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   MVN function [REF]
+
+
+
+
+   .. py:attribute:: mean
+
+
+   .. py:attribute:: cov
+
+
+   .. py:attribute:: name
+      :value: 'MVN'
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+.. py:class:: TFData(name='tfdata')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Data generating model inspired by https://colab.research.google.com/github/tensorflow/probability/blob/master/tensorflow_probability/examples/jupyter_notebooks/Probabilistic_Layers_Regression.ipynb#scrollTo=5zCEYpzu7bDX.
+
+
+
+   .. py:attribute:: name
+      :value: 'tfdata'
+
+
+
+   .. py:attribute:: dim
+      :value: 1
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:attribute:: w0
+      :value: 0.125
+
+
+
+   .. py:attribute:: b0
+      :value: 5.0
+
+
+
+   .. py:attribute:: a
+      :value: -20.0
+
+
+
+   .. py:attribute:: b
+      :value: 60.0
+
+
+

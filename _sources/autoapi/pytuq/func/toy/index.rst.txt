@@ -1,0 +1,355 @@
+pytuq.func.toy
+==============
+
+.. py:module:: pytuq.func.toy
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.func.toy.Constant
+   pytuq.func.toy.Identity
+   pytuq.func.toy.Quad
+   pytuq.func.toy.Quad2d
+   pytuq.func.toy.Exp
+   pytuq.func.toy.Log
+
+
+Module Contents
+---------------
+
+.. py:class:: Constant(dim, const, name='Constant')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Multioutput Constant function [REF]
+
+
+
+
+   .. py:attribute:: name
+      :value: 'Constant'
+
+
+
+   .. py:attribute:: const
+
+
+   .. py:attribute:: outdim
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Identity(dim, name='Identity')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Identity
+
+
+
+
+   .. py:attribute:: name
+      :value: 'Identity'
+
+
+
+   .. py:attribute:: outdim
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Quad(name='Quad')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Base class for a function.
+
+   .. attribute:: dim
+
+      Input dimensionality, :math:`d`.
+
+      :type: int
+
+   .. attribute:: dmax
+
+      Default domain half-size. That is, default domain is :math:`[-d_{max}, + d_{max}]`.
+
+      :type: float
+
+   .. attribute:: domain
+
+      A 2d array of size :math:`(d,2)` indicating the input domain of the function.
+
+      :type: np.ndarray
+
+   .. attribute:: eval
+
+      Callable evaluator of the function.
+
+      :type: callable
+
+   .. attribute:: name
+
+      Name of the function.
+
+      :type: str
+
+   .. attribute:: outdim
+
+      Output dimensionality, :math:`o`.
+
+      :type: int
+
+
+   .. py:attribute:: name
+      :value: 'Quad'
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Quad2d(name='Quad2d')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Base class for a function.
+
+   .. attribute:: dim
+
+      Input dimensionality, :math:`d`.
+
+      :type: int
+
+   .. attribute:: dmax
+
+      Default domain half-size. That is, default domain is :math:`[-d_{max}, + d_{max}]`.
+
+      :type: float
+
+   .. attribute:: domain
+
+      A 2d array of size :math:`(d,2)` indicating the input domain of the function.
+
+      :type: np.ndarray
+
+   .. attribute:: eval
+
+      Callable evaluator of the function.
+
+      :type: callable
+
+   .. attribute:: name
+
+      Name of the function.
+
+      :type: str
+
+   .. attribute:: outdim
+
+      Output dimensionality, :math:`o`.
+
+      :type: int
+
+
+   .. py:attribute:: name
+      :value: 'Quad2d'
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Exp(weights=[1.0], name='Exp')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Base class for a function.
+
+   .. attribute:: dim
+
+      Input dimensionality, :math:`d`.
+
+      :type: int
+
+   .. attribute:: dmax
+
+      Default domain half-size. That is, default domain is :math:`[-d_{max}, + d_{max}]`.
+
+      :type: float
+
+   .. attribute:: domain
+
+      A 2d array of size :math:`(d,2)` indicating the input domain of the function.
+
+      :type: np.ndarray
+
+   .. attribute:: eval
+
+      Callable evaluator of the function.
+
+      :type: callable
+
+   .. attribute:: name
+
+      Name of the function.
+
+      :type: str
+
+   .. attribute:: outdim
+
+      Output dimensionality, :math:`o`.
+
+      :type: int
+
+
+   .. py:attribute:: name
+      :value: 'Exp'
+
+
+
+   .. py:attribute:: weights
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Log(weights=[1.0], name='Log')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Base class for a function.
+
+   .. attribute:: dim
+
+      Input dimensionality, :math:`d`.
+
+      :type: int
+
+   .. attribute:: dmax
+
+      Default domain half-size. That is, default domain is :math:`[-d_{max}, + d_{max}]`.
+
+      :type: float
+
+   .. attribute:: domain
+
+      A 2d array of size :math:`(d,2)` indicating the input domain of the function.
+
+      :type: np.ndarray
+
+   .. attribute:: eval
+
+      Callable evaluator of the function.
+
+      :type: callable
+
+   .. attribute:: name
+
+      Name of the function.
+
+      :type: str
+
+   .. attribute:: outdim
+
+      Output dimensionality, :math:`o`.
+
+      :type: int
+
+
+   .. py:attribute:: name
+      :value: 'Log'
+
+
+
+   .. py:attribute:: weights
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
