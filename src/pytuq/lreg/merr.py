@@ -10,6 +10,9 @@ from scipy.linalg import lstsq
 
 from .lreg import lreg
 from ..minf.mcmc import AMCMC
+from ..optim.pso import PSO
+from ..optim.sciwrap import ScipyWrapper
+
 
 
 def map_flat_to_tri(ij, n, embedding):
@@ -46,7 +49,7 @@ def map_flat_to_tri(ij, n, embedding):
 
 
 
-def logpost_emb(x, aw=None, bw=None, ind_embed=None, dvinfo=None, multiplicative=False, merr_method='abc', embedding='iid', mean_fixed=False, cfs_mean=None):
+def logpost_emb(x, aw=None, bw=None, ind_embed=None, dvinfo=None, multiplicative=False, merr_method='abc', embedding='iid', mean_fixed=False, cfs_mean=None, flag=1.0):
     """Log-posterior of embedded model.
 
     Args:
@@ -60,6 +63,7 @@ def logpost_emb(x, aw=None, bw=None, ind_embed=None, dvinfo=None, multiplicative
         embedding (str, optional): Model error embedding type. Options are 'iid' (default) and 'mvn'.
         mean_fixed (bool, optional): Whether the mean fit parameters are fixed or it is being inferred together with the model error parameters. Defaults to False.
         cfs_mean (None, optional): Mean coefficient vector. Part (or the whole, depending on ind_embed) of this will be overwritten if mean_fixed is False. Default is None, but it should never be used.
+        flag (float, optional): A multiplicative flag to the log-posterior value. Defaults to 1.0.
 
     Returns:
         float: Log-posterior value.
@@ -67,7 +71,7 @@ def logpost_emb(x, aw=None, bw=None, ind_embed=None, dvinfo=None, multiplicative
     assert(aw is not None and bw is not None)
     assert(isinstance(dvinfo, dict))
     npt, nbas = aw.shape
-    nchain = x.shape[0]
+    chdim = x.shape[0]
 
     if ind_embed is None:
         ind_embed = range(nbas)
@@ -75,15 +79,15 @@ def logpost_emb(x, aw=None, bw=None, ind_embed=None, dvinfo=None, multiplicative
 
     # Set data variance
     dvnpar = dvinfo['npar']
-    data_variance = dvinfo['fcn'](x[nchain-dvnpar:], dvinfo['aux'])
+    data_variance = dvinfo['fcn'](x[chdim-dvnpar:], dvinfo['aux'])
 
     assert(cfs_mean is not None)
     cfs = cfs_mean.copy()
     if mean_fixed:
-        coefs_flat = x[:nchain-dvnpar]
+        coefs_flat = x[:chdim-dvnpar]
     else:
         cfs[ind_embed] = x[:nbas_emb]
-        coefs_flat = x[nbas_emb:nchain-dvnpar]
+        coefs_flat = x[nbas_emb:chdim-dvnpar]
 
     # if(np.min(coefs_flat)<=0.0):
     #     return -1.e+80
@@ -135,7 +139,7 @@ def logpost_emb(x, aw=None, bw=None, ind_embed=None, dvinfo=None, multiplicative
     # Prior?
     #val -= np.sum(np.log(np.abs(sig_cfs)))
 
-    return val
+    return flag*val
 
 
 
@@ -216,7 +220,7 @@ class lreg_merr(lreg):
         #cfs_mean -= np.random.rand(cfs_mean.shape[0])
 
 
-        logpost_params = {'aw': A, 'bw':y, 'ind_embed':self.ind_embed, 'dvinfo':self.dvinfo, 'multiplicative':self.multiplicative, 'merr_method':self.merr_method, 'embedding':self.embedding, 'mean_fixed':self.mean_fixed, 'cfs_mean':cfs_mean}
+        logpost_params = {'aw': A, 'bw':y, 'ind_embed':self.ind_embed, 'dvinfo':self.dvinfo, 'multiplicative':self.multiplicative, 'merr_method':self.merr_method, 'embedding':self.embedding, 'mean_fixed':self.mean_fixed, 'cfs_mean':cfs_mean, 'flag': 1.0}
 
 
         if self.mean_fixed:
@@ -226,7 +230,7 @@ class lreg_merr(lreg):
             params_ini[:nbas_emb] = cfs_mean[self.ind_embed]
 
 
-        nchain = params_ini.shape[0]
+        chdim = params_ini.shape[0]
 
         if self.opt_method == 'mcmc':
 
@@ -234,7 +238,7 @@ class lreg_merr(lreg):
             # print(res)
             # params_ini = res.x
 
-            covini = 0.1 * np.ones((nchain, nchain))
+            covini = 0.1 * np.ones((chdim, chdim))
             nmcmc = 10000
             gamma = 0.05
             t0 = 100
@@ -256,10 +260,24 @@ class lreg_merr(lreg):
             solution = cmode
 
         elif self.opt_method == 'bfgs':
-            #params_ini[nbas:] = np.random.rand(nbas_emb,)
-            res = minimize((lambda x, fcn, p: -fcn(x, **p)), params_ini, args=(logpost_emb, logpost_params), method='BFGS', options={'gtol': 1e-3})
-            print(res)
-            solution = res.x
+            # #params_ini[nbas:] = np.random.rand(nbas_emb,)
+            # logpost_params['flag']=-1.0
+            # res = minimize(lambda x, p: logpost_emb(x, **p), params_ini, args=(logpost_params,), method='BFGS', options={'gtol': 1e-3})
+            # solution = res.x
+
+            detopt = ScipyWrapper('BFGS')
+            logpost_params['flag']=-1.0
+            detopt.setObjective(logpost_emb, None, **logpost_params)
+            opt_results = detopt.run(None, params_ini)
+            solution = opt_results['best']
+
+
+        elif self.opt_method == 'pso':
+            detopt = PSO(chdim)
+            logpost_params['flag']=-1.0
+            detopt.setObjective(logpost_emb, None, **logpost_params)
+            opt_results = detopt.run(1000, None)
+            solution = opt_results['best']
 
         else:
             print(f"Method {self.opt_method} is unknown. Exiting.")
@@ -267,13 +285,13 @@ class lreg_merr(lreg):
 
         self.cf = cfs_mean.copy()
         if self.mean_fixed:
-            coefs_flat = solution[:nchain-self.dvinfo['npar']]
+            coefs_flat = solution[:chdim-self.dvinfo['npar']]
         else:
             self.cf[self.ind_embed] = solution[:nbas_emb]
-            coefs_flat = solution[nbas_emb:nchain-self.dvinfo['npar']]
+            coefs_flat = solution[nbas_emb:chdim-self.dvinfo['npar']]
 
         # TODO: unused so far
-        varpar = solution[nchain-self.dvinfo['npar']:]
+        varpar = solution[chdim-self.dvinfo['npar']:]
 
         coefs_Lmat = np.zeros((nbas,nbas))
         for ij in range(coefs_flat.shape[0]):
@@ -281,7 +299,7 @@ class lreg_merr(lreg):
             #print(ij, i, j)
             coefs_Lmat[self.ind_embed[i], self.ind_embed[j]] = coefs_flat[ij]
 
-        #print(solution, nbas_emb, nchain, self.dvinfo['npar'], coefs_flat)
+        #print(solution, nbas_emb, chdim, self.dvinfo['npar'], coefs_flat)
 
         if self.multiplicative:
             coefs_Lmat = np.dot(np.diag(np.abs(self.cf)),coefs_Lmat)

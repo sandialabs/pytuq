@@ -50,8 +50,8 @@ kl.plot_expvar()
 xitrain = kl.xi[:, :neig]
 
 ## Fit a PC to these eigenfeatures
-# pcrv = pc_fit(ptrain, xitrain, order=3, pctype='LU', method='bcs', bcs_eta=1.e-8)
-pcrv = pc_fit(ptrain, xitrain, order=3, pctype='LU', method='lsq')
+# pcrv, _ = pc_fit(ptrain, xitrain, order=3, pctype='LU', method='bcs', bcs_eta=1.e-8)
+pcrv, _ = pc_fit(ptrain, xitrain, order=3, pctype='LU', method='lsq')
 ## Evaluate PC surrogate in eigen-space
 xitrain_kl = pcrv.function(ptrain)
 ## Plug-in to KLE to get the 'physical' approximation

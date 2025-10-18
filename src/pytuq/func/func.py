@@ -87,6 +87,17 @@ class Function():
         """
         self.eval = eval
 
+    def call1d(self, odim=0):
+        r"""Wrapper function for single output evaluation.
+
+        Args:
+            odim (int, optional): Output dimension index. Defaults to 0.
+
+        Returns:
+            callable: A callable function from :math:`(N,d)` to :math:`(N,)`.
+        """
+        return lambda x: self.__call__(x)[:, odim]
+
     def __add__(self, other):
         """Adding operation.
 

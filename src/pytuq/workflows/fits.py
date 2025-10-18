@@ -20,12 +20,12 @@ def pc_fit(x, y, order=3, pctype='LU', method='anl', **kwargs):
     mindex=get_mi(order, ndim)
     pcrv = PCRV(nout, ndim, pctype, mi=mindex)
 
-    Amat = pcrv.evalBases(x, 0)
 
     #TODO: To impl. quadrature, see ex_uprop.py
 
     mindices_list=[]
     cfs_list = []
+    lregs = []
     ypred = np.zeros_like(y)
     for iout in range(nout):
         print(f"Fitting output {iout+1} / {nout}")
@@ -39,10 +39,12 @@ def pc_fit(x, y, order=3, pctype='LU', method='anl', **kwargs):
         elif method == 'lsq':
             lreg = lsq()
 
+        Amat = pcrv.evalBases(x, iout)
+
         lreg.fita(Amat, y[:,iout])
         mindices_list.append(mindex[lreg.used, :])
         cfs_list.append(lreg.cf)
-
+        lregs.append(lreg)
 
         #Amat_ = Amat[:, lreg.used]
         #ypred[:,iout], _, _ = lreg.predicta(Amat_)
@@ -59,7 +61,7 @@ def pc_fit(x, y, order=3, pctype='LU', method='anl', **kwargs):
     pcrv.setFunction()
 
 
-    return pcrv
+    return pcrv, lregs
 
 
 # Create PC given samples

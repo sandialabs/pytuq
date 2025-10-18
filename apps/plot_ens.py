@@ -5,13 +5,12 @@ import argparse
 import numpy as np
 import matplotlib.pyplot as plt
 
+from pytuq.utils.plotting import myrc
 
+myrc()
 
 usage_str = 'Script to plot ensemble.'
 parser = argparse.ArgumentParser(description=usage_str)
-#parser.add_argument('ind_show', type=int, nargs='*',
-#                    help="indices of requested parameters (count from 0)")
-
 parser.add_argument("-y", "--ydata", dest="ydata", type=str, default='ytrain.dat',
                     help="Ydata file")
 
@@ -22,11 +21,13 @@ ydata = np.loadtxt(args.ydata)
 
 nsam, nout = ydata.shape
 
-ind_plot=np.arange(nout)
 
-nout_plot=len(ind_plot)
 
 for i in range(nsam):
-    plt.plot(np.arange(1, nout+1)[ind_plot], ydata[i, ind_plot], 'b-', lw=0.1)
+    plt.plot(np.arange(1, nout+1), ydata[i, :], 'bo-', markeredgecolor='w', lw=0.5)
 
+plt.xticks(np.arange(1, nout+1))
+plt.xtickslabels = [str(i) for i in range(1, nout+1)]
+plt.xlabel('Output Id')
+plt.ylabel('Output Value')
 plt.savefig('ensemble.png')

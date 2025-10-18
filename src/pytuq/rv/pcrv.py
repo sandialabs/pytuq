@@ -334,15 +334,19 @@ class PCRV(MRV):
 
         return groupsens
     
-    def sampleGerm(self, nsam=1):
+    def sampleGerm(self, nsam=1, seed=None):
         r"""Sample PC germ vector.
 
         Args:
             nsam (int, optional): Number of samples requested. Defaults to :math:`M=1`.
+            seed (None, optional): Seed for the random generation. Default is None, which does not set any seed.
 
         Returns:
             np.ndarray: A 2d array of size :math:`(M,s)`.
         """
+        if seed is not None:
+            np.random.seed(seed)
+
         germSam = np.empty((nsam, self.sdim))
         for i in range(self.sdim):
             germSam[:, i] = self.PC1ds[i].sample(nsam)
@@ -388,7 +392,7 @@ class PCRV(MRV):
 
         Args:
             xi (np.ndarray): A 2d array of size :math:`(M,s)` for the input.
-            jdim (int): The index of :math:`i` of the PC random variable/vector. Should be between :math:`0` and :math:`d-1`.
+            jdim (int): The index :math:`i` of the PC random variable/vector. Should be between :math:`0` and :math:`d-1`.
 
         Returns:
             np.ndarray: A 2d output array of size :math:`(M, K_i)` where :math:`K_i` is the number of PC bases for the :math:`i`-th dimension.
@@ -480,16 +484,20 @@ class PCRV(MRV):
         self.function.setDimDom(domain=np.clip(domain, -5.0, 5.0))
         self.function.setCall(self.evalPC)
 
-    def sample(self, nsam):
+    def sample(self, nsam, seed=None):
         r"""Sample from the PC random variable. Basically chaining sampling the germ and evaluating the PC.
 
         Args:
             nsam (int): Number of samples requested, :math:`M`.
+            seed (None, optional): Seed for the random generation. Default is None, which does not set any seed.
 
         Returns:
             np.ndarray: A 2d array of size :math:`(M,d)` for the output.
         """
-        x = self.sampleGerm(nsam)
+        if seed is not None:
+            np.random.seed(seed)
+
+        x = self.sampleGerm(nsam, seed=seed)
         return self.evalPC(x)
 
     def cfsFlatten(self):
