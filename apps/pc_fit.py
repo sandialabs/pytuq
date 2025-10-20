@@ -113,7 +113,7 @@ if plot_samfit:
     for isam in range(0, nsam, nevery):
         f = plt.figure(figsize=(12,4))
         plt.plot(xc, y[isam,:], 'bo-', ms=8, label='Model')
-        plt.plot(xc, ypred[isam,:], 'go-', ms=8, label='PC apprx.')
+        plt.plot(xc, ypred[isam,:], 'go-', ms=8, label='PC Apprx.')
         plt.title(f'Sample #{isam+1}')
         plt.xlabel(xlabel)
         plt.ylabel(ylabel)

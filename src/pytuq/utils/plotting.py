@@ -1878,7 +1878,18 @@ def plot_cov_tri(mean, cov, names=None, figname='cov_tri.png'):
 ####################################################################################
 
 
-def plot_sensmat(sensdata,pars,cases,vis="bar",reverse=False,par_labels=[],case_labels=[],cutoff=-1000., figname='sensmat.png'):
+def plot_sensmat(sensdata,pars,cases,par_labels=[],case_labels=[],cutoff=-1000., figname='sensmat.png'):
+    r"""Plot sensitivity matrix as a heatmap or bar plot.
+
+    Args:
+        sensdata (np.ndarray): 2d array of sensitivity data, size (ncases, npars).
+        pars (list): List of parameter names.
+        cases (list): List of case names.
+        par_labels (list, optional): List of parameter labels for plotting. Defaults to None, which uses generic names.
+        case_labels (list, optional): List of case labels for plotting. Defaults to None, which uses generic names.
+        cutoff (float, optional): Cutoff value for sensitivity inclusion. Defaults to -1000.
+        figname (str, optional): Figure filename to save. Defaults to 'sensmat.png'.
+    """
 
     cdict = mpl.cm.jet._segmentdata.copy()
     cdict['red']=tuple([tuple([0.0,  1,   1  ]),
@@ -1907,6 +1918,7 @@ def plot_sensmat(sensdata,pars,cases,vis="bar",reverse=False,par_labels=[],case_
                          ]
                         )
 
+
     cp=mpl.colors.LinearSegmentedColormap('colormap',cdict,64)
 
     # Read varfrac files and retain indices of important params
@@ -1927,6 +1939,13 @@ def plot_sensmat(sensdata,pars,cases,vis="bar",reverse=False,par_labels=[],case_
     npar=len(allV);
     print("Number of observables plotted = %d" % nobs)
     print("Number of parameters plotted = %d" % npar)
+
+    if par_labels is None:
+        par_labels = ['p'+str(j) for j in range(npar)]
+    if case_labels is None:
+        case_labels = ['out'+str(j) for j in range(nobs)]
+
+
     jsens=np.array(np.zeros([nobs,npar]));
     for i in range(nobs):
         for j in range(npar):
@@ -1959,4 +1978,45 @@ def plot_sensmat(sensdata,pars,cases,vis="bar",reverse=False,par_labels=[],case_
     #cbar.set_ticklabels(['$10^{'+str(i)+'}$' for i in range(-13,1,1)])
 
     ax.grid(False);
+    plt.savefig(figname)
+
+
+def plot_joy(sams_list, xcond, outnames, color_list, nominal=None, offset_factor=1.0, ax=None, figname='joyplot.png'):
+    r"""Plots a joyplot of multiple sample sets along given output conditions.
+
+    Args:
+        sams_list (list[np.ndarray]): List of sample sets, each in a 2d array of size `(M,N)`.
+        xcond (list[float]): List of output condition values, length N.
+        outnames (list[str]): List of output condition names, length N.
+        color_list (list[str]): List of colors for each sample set.
+        nominal (np.ndarray, optional): Nominal values for each output condition, an 1d array of size `(N,)`. Defaults to None.
+        offset_factor (float, optional): Factor to scale the pdf heights. Defaults to 1.0.
+        ax (plt.Axes, optional): Axis handle. If None, use the current axis.
+        figname (str, optional): Figure filename to save.
+    """
+    if ax is None:
+        ax = plt.gca()
+
+    for ic, xc in enumerate(xcond):
+        # plot gray horizontal lines where bottom of each pdf will sit
+        offset = xc
+        for isam, sams in enumerate(sams_list):
+            a = 4.
+            pnom = np.mean(sams[:, ic])
+            pdel = np.std(sams[:, ic])
+            pgrid = np.linspace(pnom - a * pdel, pnom + a * pdel, 111)
+            kde_py = ss.gaussian_kde(sams[:, ic], 'silverman')
+            pdf = kde_py(pgrid)
+            ff = offset_factor
+            ax.fill_between(pgrid, xc * np.ones_like(pgrid), ff * pdf + offset,
+                            fc=color_list[isam], ec='black',
+                            lw=1, label='', alpha=0.4)
+        if nominal is not None:
+            ax.plot([nominal[ic], nominal[ic]], [
+                    offset, offset + 1.2 * ff * np.max(pdf)], 'k--', lw=1)
+    ax = plt.gca()
+    ax.grid(False, axis='x')
+    ax.set_yticks(xcond)
+    ax.set_yticklabels(outnames)
+    plt.tight_layout()
     plt.savefig(figname)

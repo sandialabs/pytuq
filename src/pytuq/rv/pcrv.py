@@ -284,6 +284,9 @@ class PCRV(MRV):
 
         Returns:
             np.ndarray: A 3d array of joint sensitivities of size :math:`(d,s,s)`.
+
+        Note:
+            This is joint in the 'total' sense, i.e. any term involving both dimensions are counted.
         """
         var = self.computeVar()
 
@@ -333,6 +336,26 @@ class PCRV(MRV):
             groupsens[i] /= var[i]
 
         return groupsens
+
+    def slice_1d(self, jdim):
+        r"""Extracts a 1d PC random variable along a given stochastic dimension.
+        Args:
+            jdim (int): The index :math:`j` of the stochastic dimension. Should be between :math:`0` and :math:`s-1`.
+
+        Returns:
+            PCRV: A 1d PC random variable object along the given stochastic dimension.
+        """
+        assert(jdim>=0 and jdim<self.sdim)
+
+        mindices_new = []
+        cfs_new = []
+        for i in range(self.pdim):
+            indOfOnlyj = np.where(np.sum(np.delete(self.mindices[i], jdim, axis=1), axis=1)==0)[0]
+            mindices_new.append(self.mindices[i][indOfOnlyj, :][:, jdim][:, np.newaxis])
+            cfs_new.append(self.coefs[i][indOfOnlyj])
+
+        PC1dslice = PCRV(self.pdim, 1, self.pctypes[jdim], mi=mindices_new, cfs=cfs_new)
+        return PC1dslice
     
     def sampleGerm(self, nsam=1, seed=None):
         r"""Sample PC germ vector.

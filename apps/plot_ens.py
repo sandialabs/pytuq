@@ -17,6 +17,8 @@ parser.add_argument("-y", "--ydata", dest="ydata", type=str, default='ytrain.dat
 args = parser.parse_args()
 
 ydata = np.loadtxt(args.ydata)
+if len(ydata.shape)==1:
+    ydata = ydata[:, np.newaxis]
 
 
 nsam, nout = ydata.shape
