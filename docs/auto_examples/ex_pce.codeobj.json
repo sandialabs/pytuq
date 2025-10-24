@@ -1,0 +1,65 @@
+{
+ "PCE": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "pytuq.surrogates.pce",
+   "module_short": "pytuq.surrogates.pce",
+   "name": "PCE"
+  }
+ ],
+ "fcb.sin4": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "pytuq.utils.funcbank",
+   "module_short": "pytuq.utils.funcbank",
+   "name": "sin4"
+  }
+ ],
+ "np.array": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "numpy",
+   "module_short": "numpy",
+   "name": "array"
+  }
+ ],
+ "np.ones": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "numpy",
+   "module_short": "numpy",
+   "name": "ones"
+  }
+ ],
+ "np.random.rand": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "numpy.random",
+   "module_short": "numpy.random",
+   "name": "rand"
+  }
+ ],
+ "np.random.seed": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "numpy.random",
+   "module_short": "numpy.random",
+   "name": "seed"
+  }
+ ],
+ "scale01ToDom": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "pytuq.utils.maps",
+   "module_short": "pytuq.utils.maps",
+   "name": "scale01ToDom"
+  }
+ ]
+}

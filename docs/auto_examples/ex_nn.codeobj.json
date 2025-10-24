@@ -1,0 +1,137 @@
+{
+ "NN": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "pytuq.surrogates.nn",
+   "module_short": "pytuq.surrogates.nn",
+   "name": "NN"
+  }
+ ],
+ "Poly": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "quinn.nns.rnet",
+   "module_short": "quinn.nns.rnet",
+   "name": "Poly"
+  }
+ ],
+ "Sine": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "quinn.func.funcs",
+   "module_short": "quinn.func.funcs",
+   "name": "Sine"
+  }
+ ],
+ "__name__": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "builtins",
+   "module_short": "builtins",
+   "name": "str"
+  }
+ ],
+ "myrc": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "quinn.utils.plotting",
+   "module_short": "quinn.utils.plotting",
+   "name": "myrc"
+  }
+ ],
+ "np.array": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "numpy",
+   "module_short": "numpy",
+   "name": "array"
+  }
+ ],
+ "np.pi": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "numpy",
+   "module_short": "numpy",
+   "name": "pi"
+  }
+ ],
+ "np.random.rand": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "numpy.random",
+   "module_short": "numpy.random",
+   "name": "rand"
+  }
+ ],
+ "np.random.seed": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "numpy.random",
+   "module_short": "numpy.random",
+   "name": "seed"
+  }
+ ],
+ "np.tile": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "numpy",
+   "module_short": "numpy",
+   "name": "tile"
+  }
+ ],
+ "scale01ToDom": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "quinn.utils.maps",
+   "module_short": "quinn.utils.maps",
+   "name": "scale01ToDom"
+  }
+ ],
+ "torch.cuda.is_available": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "torch.cuda",
+   "module_short": "torch.cuda",
+   "name": "is_available"
+  }
+ ],
+ "torch.device": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "torch",
+   "module_short": "torch",
+   "name": "device"
+  }
+ ],
+ "torch.double": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "torch",
+   "module_short": "torch",
+   "name": "double"
+  }
+ ],
+ "torch.set_default_dtype": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "torch",
+   "module_short": "torch",
+   "name": "set_default_dtype"
+  }
+ ]
+}
