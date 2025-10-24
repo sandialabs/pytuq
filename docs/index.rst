@@ -50,6 +50,12 @@ Check out the :ref:`Getting Started <about>` section for further information, in
 
 .. toctree::
    :maxdepth: 4
+   :caption: Tutorials
+
+   auto_examples/index
+
+.. toctree::
+   :maxdepth: 4
    :caption: API Reference
 
    autoapi/index

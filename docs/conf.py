@@ -55,7 +55,7 @@ extensions += ['matplotlib.sphinxext.plot_directive',
                'IPython.sphinxext.ipython_console_highlighting',
                'IPython.sphinxext.ipython_directive']
 
-# extensions += ['sphinx_gallery.gen_gallery']
+extensions += ['sphinx_gallery.gen_gallery']
 
 numpydoc_show_class_members = False 
 
@@ -68,7 +68,7 @@ autoapi_dirs = ['../src'] # Where the PyTUQ source code is
 autoapi_type = "python"
 autoapi_template_dir = "_templates/autoapi" # Templates for AutoAPI documentation
 # autoapi_add_toctree_entry = False  # Adding the generateed documentation into the TOC Tree
-suppress_warnings = ["autoapi"]
+suppress_warnings = ["autoapi", 'ref.python', 'toc.excluded']
 autoapi_options = [
     "members",
     "undoc-members",
@@ -81,6 +81,15 @@ autoapi_own_page_level = 'module'
 autoapi_keep_files = False # Keep the AutoAPI generated files on the filesystem
 
 # -----------------------------------------------------------------------------
+# Sphinx Gallery
+# -----------------------------------------------------------------------------
+sphinx_gallery_conf = {
+    'examples_dirs': '../examples/surrogates',   # path to your example scripts. WIP: currently generating just surrogate examples
+    'gallery_dirs': 'auto_examples',  # path to where to save gallery generated output
+    'filename_pattern': r'ex_genz_bcs\.py',  # prefix for files that should be executed. Currently only 1 file being executed
+    'ignore_pattern': r'ex_nn_json\.py',  # exclude this specific file
+    # 'run_stale_examples': False, # default behavior is to only rebuild changed examples. Make True to force rebuild of examples (e.g. if underlying code changed)
+}
 
 # Add any paths that contain templates here, relative to this directory.
 # templates_path = ['_templates']
@@ -96,6 +105,7 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
+# https://sphinx-rtd-theme.readthedocs.io/en/stable/configuring.html#
 
 # html_theme = 'furo'
 html_theme = 'sphinx_rtd_theme'
@@ -103,13 +113,15 @@ html_theme = 'sphinx_rtd_theme'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-# html_static_path = ['_static']
+html_static_path = ['_static']
+html_logo = 'pytuq logo.png'
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
 
 html_theme_options = {
     'prev_next_buttons_location': 'bottom',
+    'logo_only': True,
     'style_external_links': False,
     'vcs_pageview_mode': '',
     'flyout_display': 'hidden',
