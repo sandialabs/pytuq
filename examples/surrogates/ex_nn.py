@@ -1,8 +1,11 @@
-#!/usr/bin/env python
+r"""
+Residual Neural Network Construction
+=====================================
 
-"""This file is for testing the NN wrapper class with scalar valued functions.
-    Calling the NN constructor passes in an example net_options dictionary, while the build and evaluate
-    sections pass in both dictionaries and explicit keyword arguments during their respective function calls."""
+This example demonstrates how to use the Neural Network wrapper class, ``pytuq.surrogates.nn`` with scalar valued functions.
+The constructor of the NN class accepts in an optional dictionary, ``net_options``, to specify additional hyperparameters. 
+The ``build()`` and ``evaluate()`` functions similarly accept dictionaries and explicit keyword arguments during their respective function calls.
+"""
 
 import sys
 import torch

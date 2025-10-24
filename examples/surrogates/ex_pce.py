@@ -1,6 +1,21 @@
-#!/usr/bin/env python
+r"""
+Polynomial Chaos Expansion Construction
+========================================
 
-"""This file is for testing the PCE wrapper class with scalar valued functions."""
+This tutorial demonstrates how to create a Polynomial Chaos Expansion (PCE) surrogate model for scalar valued
+functions. We will use the ``pytuq.surrogates.pce`` wrapper class to approximate the function :math:`\sin^4(x)`.
+
+PyTUQ provides a number of utilities for your workflows, including modules for mapping, test functions, and metric comparisons --
+these, along with others, can be found in the ``utils`` directory. You can also explore the ``func`` directory for additional sample functions to use.
+
+This example below outlines how to:
+
+- Define basic parameters for the surrogate model
+- Use a sample function of :math:`\sin^4(x)` from the ``utils`` directory
+- Set up a PCE surrogate model
+- And evaluate the performance of your model
+
+"""
 
 import numpy as np
 import pytuq.utils.funcbank as fcb
