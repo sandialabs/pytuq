@@ -708,6 +708,15 @@
    "name": "function"
   }
  ],
+ "ksi_domain": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "numpy",
+   "module_short": "numpy",
+   "name": "ndarray"
+  }
+ ],
  "math.sqrt": [
   {
    "is_class": false,
@@ -1076,13 +1085,27 @@
    "name": "PCE.evaluate"
   }
  ],
- "pce_surr.pcrv.mindices": [
+ "pce_surr.get_pc_terms": [
   {
    "is_class": false,
    "is_explicit": false,
-   "module": "builtins",
-   "module_short": "builtins",
-   "name": "list"
+   "module": "pytuq.surrogates.pce",
+   "module_short": "pytuq.surrogates.pce",
+   "name": "PCE.get_pc_terms"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "pytuq.surrogates",
+   "module_short": "pytuq.surrogates",
+   "name": "PCE.get_pc_terms"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "pytuq",
+   "module_short": "pytuq",
+   "name": "PCE.get_pc_terms"
   }
  ],
  "pce_surr.pcrv.printInfo": [
@@ -1501,6 +1524,40 @@
    "module": "sklearn.metrics",
    "module_short": "sklearn.metrics",
    "name": "root_mean_squared_error"
+  }
+ ],
+ "scaleDomTo01": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "builtins",
+   "module_short": "builtins",
+   "name": "function"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "pytuq.utils.maps",
+   "module_short": "pytuq.utils.maps",
+   "name": "scaleDomTo01"
+  }
+ ],
+ "value_ksi_trn": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "numpy",
+   "module_short": "numpy",
+   "name": "ndarray"
+  }
+ ],
+ "value_ksi_tst": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "numpy",
+   "module_short": "numpy",
+   "name": "ndarray"
   }
  ],
  "x_trn": [

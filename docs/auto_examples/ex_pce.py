@@ -12,7 +12,7 @@ This example below outlines how to:
 
 - Define basic parameters for the surrogate model
 - Use a sample function of :math:`\sin^4(x)` from the ``utils`` directory
-- Set up a PCE surrogate model
+- Set up a PCE surrogate model, with different regression options for build (lsq, anl, vi, bcs)
 - And evaluate the performance of your model
 
 """
@@ -20,13 +20,8 @@ This example below outlines how to:
 import numpy as np
 import pytuq.utils.funcbank as fcb
 
-
 from pytuq.surrogates.pce import PCE
 from pytuq.utils.maps import scale01ToDom
-from pytuq.lreg.anl import anl
-from pytuq.lreg.lreg import lsq
-from pytuq.utils.mindex import get_mi
-
 
 ########################################################
 ########################################################
@@ -53,7 +48,7 @@ y = true_model(x)
 
 # Testing PCE class:
 
-# (1) Construct polynomial chaos expansion
+# (1) Construct polynomial chaos expansion by defining at least a stochastic dimensionality, polynomial order, and polynomial type.
 pce = PCE(dim, order, 'LU')
 # pce = PCE(dim, order, 'HG')
 # pce = PCE(dim, order, ['LU', 'HG']) # dim = 2
@@ -61,12 +56,25 @@ pce = PCE(dim, order, 'LU')
 
 pce.set_training_data(x, y)
 
-# (2) Pick method for linear regression object, defaulting to least squares regression
+# (2) Pick a linear regression method to build your surrogate model with. build() returns the coefficients of your PC model,
+# and with no arguments, will default to least squares regression.
+print(pce.build())
+
+# You may choose different regression options by specifying the correct argument: 
+# print(pce.build(regression = 'lsq'))
 # print(pce.build(regression = 'anl'))
 # print(pce.build(regression = 'anl', method = 'vi'))
-print(pce.build())
-# print(pce.build(regression = 'lsq'))
-# print(pce.build(regression = 'bcs'))
+
+# For a BCS build, if the eta argument is given a list or an array, the optimum value will be chosen through cross-validation
+# on a specified number of folds (nfolds, defaulting to 3). Setting the eta_plot argument to True generates a RMSE vs. eta plot
+# of the cross-validation results. While this example does not necessarily benefit from building with BCS, the statements below
+# demonstrate calling this functionality.
+
+# etas = 1/np.power(10,[i for i in range(0,16)]) # List of etas to pass in: [1e-16, 1e-15, ... , 1e-2, 1e-1, 1]
+# cfs = pce.build(regression = 'bcs', eta = etas, nfolds = 2, eta_plot = True, eta_verbose = False)
+
+# To see an problem better suited to using a BCS build and to explore BCS in more detail, visit 
+# the example "Function Approximation with Sparse Regression".
 
 # (3) Make predictions for data points and print results:
 results = pce.evaluate(x)
