@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
-"""This module provides a Polynomial Chais Expansion (PCE) wrapper class to facilitate 
+"""This module provides a Polynomial Chaos Expansion (PCE) wrapper class to facilitate 
     the universal coupling of FASTMath UQ tools and libraries. This class focuses on the use case 
-    of surrogate models built with PCE and linear regression, keeping in mind 
+    of PC surrogate models built with linear regression, keeping in mind 
     flexibility to implement additional UQ functionalities in the future.
 
     The PCE class supports a minimal API, with methods to construct the model, build it with training data,
@@ -204,7 +204,7 @@ class PCE:
         return kfold_data
 
     
-    def optimize_eta(self, etas, verbose, nfolds=3, plot=False):
+    def optimize_eta(self, etas, verbose=0, nfolds=3, plot=False):
         """Choose the optimum eta for Bayesian compressive sensing. Calculates the RMSE for each eta for a specified number of folds. 
         Selects the eta with the lowest RMSE after averaging the RMSEs over the folds.
 
@@ -213,10 +213,10 @@ class PCE:
             x: N-dimensional NumPy array with sample points [#samples, #dimensions]
             etas: NumPy array or list with the threshold for stopping the algorithm. Smaller values retain more nonzero coefficients.
             plot: Flag for whether to generate a plot for eta optimization
+            verbose: Flag for print statements during cross-validation 
 
         Returns:
-            eta_opt: Optimum eta
-
+            eta_opt: Optimum eta value to be used in BCS build
         """
         # Split data in k folds -> Get dictionary of data split in training + testing folds
         kfold_data = self.kfold_cv(self._x_train, self._y_train, nfolds)
@@ -259,7 +259,7 @@ class PCE:
                 y_test_eval = (pce_copy.evaluate(x_test))['Y_eval']
 
                 # Print statement for verbose flag
-                if verbose > 1:
+                if verbose > 0:
                     print("Fold " + str(i + 1) + ", eta " + str(eta) + ", " + str(len(cfs)) + " terms retained out of a full basis of size " + str(len(pce_copy.pcrv.mindices[0])))
                 
                 # Calculate the RMSEs for the training and validation points.
@@ -361,13 +361,13 @@ class PCE:
                 self.lreg = anl(datavar=kwargs.get('datavar'), prior_var=kwargs.get('prior_var'), cov_nugget=kwargs.get('cov_nugget', 0.0))
         elif regression == 'bcs':
             eta = kwargs.get('eta', 1.e-8)
-            if isinstance(eta, (list, np.ndarray)):
+            if (isinstance(eta, list) and not any(isinstance(eta, list) for item in eta)) or (isinstance(eta, np.ndarray) and eta.ndim == 1):
                 opt_eta = self.optimize_eta(eta, nfolds=kwargs.get('nfolds', 3), verbose=kwargs.get('eta_verbose', False), plot=kwargs.get('eta_plot', False))
                 self.lreg = bcs(eta=opt_eta, datavar_init=kwargs.get('datavar_init'))
-            elif isinstance(eta, float):
+            elif isinstance(eta, float) and eta > 0:
                 self.lreg = bcs(eta=eta, datavar_init=kwargs.get('datavar_init'))
             else:
-                raise ValueError("You may provide either a float (defaulting to 1.e-8) or list/numpy array for the value of eta. If a list/numpy array is provided, the most optimal eta from the array will be chosen.")
+                raise ValueError("You may provide either a positive float (defaulting to 1.e-8) or 1D list/numpy array for the value of eta. If a list/numpy array is provided, the most optimal eta from the array will be chosen.")
         else:
             raise ValueError(f"Regression method '{regression}' is not recognized and/or supported yet.")
 
