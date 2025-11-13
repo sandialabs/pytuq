@@ -26,7 +26,7 @@ Optional dependencies include:
 
 ## Installation
 
-### Basic Installation
+### Basic Installation (pip)
 Install PyTUQ with core dependencies:
 ```bash
 $ pip install pytuq
@@ -55,20 +55,42 @@ $ pip install 'pytuq[all]'
 $ pip install 'pytuq[dev]'
 ```
 
+* Documentation tools
+```bash
+$ pip install 'pytuq[doc]'
+```
+
+### Installation via Spack
+
+PyTUQ is available through [Spack](https://spack.io/):
+
+```bash
+$ spack install py-pytuq
+```
+
+To enable neural network support:
+```bash
+$ spack install py-pytuq+nn
+```
+
+**Note:** The Spack package currently does not include the optimization variant (pyswarms dependency) that is available 
+via pip installation. For full functionality including optimization features, use pip installation.
+
+
 ### Installation from Source
 1. To install PyTUQ from source, start up a Python virtual environment and clone the repository:
 ```bash
-    $ source <PYTHON_VENV_DIR>/bin/activate
-    $ git clone git@github.com:sandialabs/pytuq.git
-    $ cd pytuq
+$ source <PYTHON_VENV_DIR>/bin/activate
+$ git clone git@github.com:sandialabs/pytuq.git
+$ cd pytuq
 ```
 2. (Optional) To take advantage of the neural network surrogate model capabilites in PyTUQ, use the following command to install PyTUQ's optional dependencies:
 ```
-    $ pip install -r requirements.txt
+$ pip install -r requirements.txt
 ```
 3. Install primary PyTUQ dependencies and PyTUQ:
 ```
-    $ pip install .
+$ pip install .
 ```
 
 ## License

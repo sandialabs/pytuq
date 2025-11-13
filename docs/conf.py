@@ -47,6 +47,7 @@ extensions = [
     "sphinx.ext.viewcode",
     "sphinx_rtd_theme",
     "sphinx.ext.mathjax",
+    "sphinxcontrib.bibtex",
     # "numpydoc",
     "myst_parser"
 ]
@@ -59,6 +60,9 @@ extensions += ['matplotlib.sphinxext.plot_directive',
 
 numpydoc_show_class_members = False 
 
+# Bibliography configuration
+bibtex_bibfiles = ['references.bib']
+
 # -----------------------------------------------------------------------------
 # Sphinx AutoAPI
 # -----------------------------------------------------------------------------
@@ -68,17 +72,15 @@ autoapi_dirs = ['../src'] # Where the PyTUQ source code is
 autoapi_type = "python"
 autoapi_template_dir = "_templates/autoapi" # Templates for AutoAPI documentation
 # autoapi_add_toctree_entry = False  # Adding the generateed documentation into the TOC Tree
-suppress_warnings = ["autoapi"]
+suppress_warnings = ["autoapi", "ref.python"]
 autoapi_options = [
     "members",
-    "undoc-members",
     "show-inheritance",
-    "show-module-summary",
-    "imported-members",
+    "show-module-summary"
 ]
 
 autoapi_own_page_level = 'module'
-autoapi_keep_files = False # Keep the AutoAPI generated files on the filesystem
+autoapi_keep_files = True # Keep the AutoAPI generated files on the filesystem
 
 # -----------------------------------------------------------------------------
 
@@ -92,7 +94,7 @@ pygments_style = "trac"
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', '_templates']
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output

@@ -39,7 +39,7 @@ class gp(fitbase):
 
     Attributes:
         nbas (int): Number of regression bases, :math:`K`.
-        basisEval (callable): Basis evaluator function of signature :math:`f(x,p_{bas})`, where :math:`x` is a 2d array of size `(N,d)` and output is a 2d array of size :math:`(N, K)`.
+        basisEval (callable): Basis evaluator function of signature :math:`f(x,p_{bas})`, where :math:`x` is a 2d array of size `(N,d)` and output is a 2d array of size `(N, K)`.
         basisEvalPars (list): Parameters :math:`p_{bas}` of the basis evaluator.
         basisEvaluatorSet (bool): Indicates whether the basis evaluator is set or not.
         AinvH (np.ndarray): A 2d matrix :math:`A^{-1}H` of size :math:`(N,K)`.

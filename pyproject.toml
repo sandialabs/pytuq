@@ -48,6 +48,14 @@ dev = [
     "pytest>=7.0",
     "pytest-cov"
 ]
+doc = [
+    "sphinx",
+    "sphinx-rtd-theme",
+    "myst-parser",
+    "ipython",
+    "sphinx-autoapi",
+    "sphinxcontrib-bibtex"
+]
 nn = [
     "torch",
     "uqinn"
@@ -58,7 +66,13 @@ optim = [
 all = [
     "torch",
     "uqinn",
-    "pyswarms"
+    "pyswarms",
+    "sphinx",
+    "sphinx-rtd-theme",
+    "myst-parser",
+    "ipython",
+    "sphinx-autoapi",
+    "sphinxcontrib-bibtex"
 ]
 
 

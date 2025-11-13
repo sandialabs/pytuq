@@ -46,6 +46,7 @@ Check out the :ref:`Getting Started <about>` section for further information, in
    :caption: Getting Started
 
    misc/installation
+   misc/quickstart
    misc/about
 
 .. toctree::
