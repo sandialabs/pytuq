@@ -1,10 +1,13 @@
-#!/usr/bin/env python
+r"""
+Residual Neural Network Construction (JSON)
+=============================================
 
-"""This file is for testing the NN wrapper class with scalar valued functions.
-    Calls the NN constructor with no optional keyword arguments before passing in an example json file with user-defined
-    fitting and building options. The build and evaluate sections pass in explicit keyword arguments 
-    during their respective function calls to demonstrate updates to the neural network fitting/evaluating options.
-    When requested with a provided filename, the updated options are printed out to a json file."""
+This file is for testing the NN wrapper class with scalar valued functions.
+Calls the NN constructor with no optional keyword arguments before passing in an example json file with user-defined
+fitting and building options. The build and evaluate sections pass in explicit keyword arguments 
+during their respective function calls to demonstrate updates to the neural network fitting/evaluating options.
+When requested with a provided filename, the updated options are printed out to a json file.
+"""
 
 import sys
 import torch

@@ -34,6 +34,6 @@ latexpdf-noplot:
 
 clean:
 	rm -rf $(BUILDDIR)/*
-	rm -rf source/auto_examples/
-	rm -rf source/auto_tutorials/
-	rm -rf source/api/
+# 	rm -rf auto_examples/
+	rm -rf auto_tutorials/
+	rm -rf api/
