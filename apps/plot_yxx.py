@@ -42,6 +42,7 @@ assert(nsam == nsam_)
 outnames = read_textlist(args.outnames_file, nout, names_prefix='out')
 pnames = read_textlist(args.pnames_file, ndim, names_prefix='par')
 
+#def plot_tri(xi, names=None, msize=3, axarr=None, clr='b', zorder=None, figname=None):
 
 
 for iout in range(nout):

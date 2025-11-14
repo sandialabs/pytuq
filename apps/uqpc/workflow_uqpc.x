@@ -6,12 +6,12 @@ export UQPC=`dirname "$0"`
 export PUQAPPS=$UQPC/..
 
 
-###############################
-##    Setup the problem      ##
-###############################
+################################
+##    0. Setup the problem    ##
+################################
 
 
-## Four simple options for uncertaininput parameter setup. 
+## Four simple options for uncertain input parameter setup. 
 ## Uncomment one of them. 
 
 ## (a) Given mean and standard deviation of each normal random parameter
