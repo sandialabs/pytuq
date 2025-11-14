@@ -72,7 +72,7 @@ ulabels = np.unique(labels)
 labels=labels[::args.every]
 
 for i in range(ndg):
-    print("Plotting %d / %d " % (i+1,ndg))
+    print(f"Plotting parallel coordinates for output {i+1} / {ndg}")
     #names=range(1+i*ndcut,min(1+(i+1)*ndcut,ndim+1))
 
     values=xdata[::args.every,i*ndcut:min((i+1)*ndcut, ndim)].T
@@ -90,7 +90,7 @@ for i in range(ndg):
         parallel_coordinates(pnames_this,
                              values[:, np.array(labels)==lab],
                              list(labels_),
-                             'pcoord_'+str(i+1)+'_lab'+lab+'.png')
+                             'pcoord_'+str(i+1)+'_lab_'+lab+'.png')
 
 
     #labels_only=labels[labels==True]

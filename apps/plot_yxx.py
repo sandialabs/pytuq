@@ -5,7 +5,7 @@ import argparse
 import numpy as np
 import matplotlib.pyplot as plt
 
-from pytuq.utils.plotting import plot_yx, myrc
+from pytuq.utils.plotting import plot_tri, myrc
 from pytuq.utils.xutils import read_textlist
 
 myrc()
@@ -24,10 +24,7 @@ parser.add_argument("-p", "--pnames_file", dest="pnames_file", type=str, default
                     help="Param names file")
 parser.add_argument("-e", "--every", dest="every", type=int, default=1,
                     help="Samples thinning")
-parser.add_argument("-c", "--cols", dest="cols", type=int, default=4,
-                    help="Num of columns")
-parser.add_argument("-r", "--rows", dest="rows", type=int, default=6,
-                    help="Num of rows")
+
 
 
 args = parser.parse_args()
@@ -45,12 +42,12 @@ assert(nsam == nsam_)
 outnames = read_textlist(args.outnames_file, nout, names_prefix='out')
 pnames = read_textlist(args.pnames_file, ndim, names_prefix='par')
 
+#def plot_tri(xi, names=None, msize=3, axarr=None, clr='b', zorder=None, figname=None):
 
 
 for iout in range(nout):
     outname = outnames[iout]
-    print(f"Plotting output {outname} vs all inputs")
-    plot_yx(xdata[::args.every], ydata[::args.every, iout], rowcols=(args.rows, args.cols), ylabel=outname, xlabels=pnames, log=False, filename='yx_'+outname+'.png', ypad=1.2, gridshow=False, ms=6, labelsize=16)
-    plot_yx(xdata[::args.every], ydata[::args.every, iout], rowcols=(args.rows, args.cols), ylabel=outname, xlabels=pnames, log=True, filename='yx_'+outname+'_log.png', ypad=1.2, gridshow=False, ms=6, labelsize=16)
+    print(f"Plotting pairwise samples for output {outname}")
+    plot_tri(xdata, yy=ydata[:, iout], names=pnames, msize=50, figname=f'yxx_{iout}.png')
     plt.gcf().clear()
 

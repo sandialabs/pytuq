@@ -37,9 +37,8 @@ class ScipyWrapper(OptBase):
         assert(self.Objective is not None)
 
         self.history = []
-
-        res = minimize(self.Objective, param_ini,
-                       args=(),
+        res = minimize(lambda x, p: self.Objective(x, **p), param_ini,
+                       args=(self.ObjectiveInfo,),
                        method=self.method,
                        jac = self.ObjectiveGrad,
                        hess = self.ObjectiveHess,
@@ -67,6 +66,6 @@ class ScipyWrapper(OptBase):
             *args: Positional arguments, if any.
         """
         #
-        self.history.append({'x': np.copy(x), 'fun_val': self.Objective(x)})
+        self.history.append({'x': np.copy(x), 'fun_val': self.Objective(x, **self.ObjectiveInfo)})
 
 

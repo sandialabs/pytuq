@@ -5,8 +5,8 @@ import argparse
 import numpy as np
 import matplotlib.pyplot as plt
 
-from xuq.plotting import plot_yx, myrc
-from xuq.myutils import read_textlist
+from pytuq.utils.xutils import read_textlist
+from pytuq.utils.plotting import plot_yx, myrc
 
 myrc()
 
@@ -38,7 +38,7 @@ pnames = read_textlist(args.pnames_file, ndim, names_prefix='par')
 if args.labels_file is not None:
     labels=read_textlist(args.labels_file, nsam)
 else:
-    labels=['']*nsam
+    labels=['Input Data']*nsam
 
 labels=labels[::args.every]
 xdata = xdata[::args.every, :]
@@ -50,7 +50,7 @@ for idim in range(ndim):
     for jdim in range(idim+1, ndim):
         xname = pnames[idim]
         yname = pnames[jdim]
-        print(xname, yname)
+        print(f"Plotting pairwise samples for : {xname}, {yname}")
 
         plt.figure(figsize=(10,9))
 

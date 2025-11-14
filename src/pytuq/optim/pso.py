@@ -57,12 +57,12 @@ class PSO(OptBase):
         def obj_func(x):
             out = np.zeros([x.shape[0]])
             for i in range(x.shape[0]):
-                out[i] = self.Objective(np.squeeze(x[i,:]))
+                out[i] = self.Objective(np.squeeze(x[i,:]), **self.ObjectiveInfo)
             return out
 
         optimizer = ps.single.GlobalBestPSO(n_particles=nparticles, dimensions=self.dim, bounds = bounds, options=psoptions)
         cost, opt = optimizer.optimize(obj_func, iters=nsteps)
-        print('Optimal values via PSO: ', opt)
+        #print('Optimal values via PSO: ', opt)
         objvalues = np.array(optimizer.cost_history)
 
         samples = np.mean(optimizer.pos_history, axis=1)

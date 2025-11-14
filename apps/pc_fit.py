@@ -87,7 +87,7 @@ indtst = rperm[ntrn:]
 ################################################################################
 
 
-pcrv = pc_fit(x[indtrn], y[indtrn], order=order, pctype=pctype, method=method, eta=1.e-3)
+pcrv, lregs = pc_fit(x[indtrn], y[indtrn], order=order, pctype=pctype, method=method, eta=1.e-3)
 ypred=pcrv.function(x)
 
 if nout>=1000:
@@ -113,7 +113,7 @@ if plot_samfit:
     for isam in range(0, nsam, nevery):
         f = plt.figure(figsize=(12,4))
         plt.plot(xc, y[isam,:], 'bo-', ms=8, label='Model')
-        plt.plot(xc, ypred[isam,:], 'go-', ms=8, label='PC apprx.')
+        plt.plot(xc, ypred[isam,:], 'go-', ms=8, label='PC Apprx.')
         plt.title(f'Sample #{isam+1}')
         plt.xlabel(xlabel)
         plt.ylabel(ylabel)
@@ -128,13 +128,6 @@ cases = range(nout)
 
 plot_sens(mainsens,pars,cases,vis="bar", ncol=5, par_labels=pnames, case_labels=[str(i) for i in cases], lbl_size=25, xticklabel_size=18, legend_size=18, figname='sens_pc.png')
 
-# plot_sens(sensdata, pars, cases,
-#               vis="bar", reverse=False, topsens=None,
-#               par_labels=None, case_labels=None, colors=None,
-#               xlbl='', title='', grid_show=True,
-#               legend_show=2, legend_size=10, ncol=4,
-#               lbl_size=22, yoffset=0.1,
-#               xdatatick=None, xticklabel_size=None, xticklabel_rotation=0,
-#               figname='sens.png')
 
 savepk(pcrv, 'pcrv')
+savepk(lregs, 'lregs')

@@ -97,6 +97,21 @@ class lreg(fitbase):
 
         return self.predicta(Amat, msc=msc, pp=pp)
 
+    def predict_samples(self, x, nsamples=100):
+        r"""Predict samples given input :math:`x`, assuming the basis evaluator is set.
+
+        Args:
+            x (np.ndarray): A 2d array of inputs of size :math:`(N,d)` at which bases are evaluated.
+            nsamples (int, optional): Number of samples to draw. Defaults to 100.
+
+        Returns:
+            np.ndarray: A 2d array of size :math:`(N, R)` holding the prediction samples.
+        """
+        assert(self.basisEvaluatorSet)
+        Amat = self.basisEval(x, self.basisEvalPars)
+
+        return self.predicta_samples(Amat, nsamples=nsamples)
+
 
     def predicta(self, Amat, msc=0, pp=False):
         r"""Predict given the A-matrix of basis evaluations.
@@ -121,7 +136,6 @@ class lreg(fitbase):
                 ypred_var = self.compute_stdev(Amat, method='chol')**2
             except np.linalg.LinAlgError:
                 ypred_var = self.compute_stdev(Amat, method='svd')**2
-
             ypred_var += int(pp)*self.datavar
         elif msc==0:
             ypred_cov = None #np.zeros((Amat.shape[1], Amat.shape[1]))
@@ -131,6 +145,25 @@ class lreg(fitbase):
             sys.exit()
 
         return ypred, ypred_var, ypred_cov
+
+    def predicta_samples(self, Amat, nsamples=100):
+        r"""Predict samples given the A-matrix of basis evaluations.
+
+        Args:
+            Amat (np.ndarray): A 2d array of size :math:`(N, K)` each row holding basis evaluations at a training point.
+            nsamples (int, optional): Number of samples to draw. Defaults to 100.
+
+        Returns:
+            np.ndarray: A 2d array of size :math:`(N, R)` holding the prediction samples.
+        """
+        assert(self.fitted)
+        assert(self.cf_cov is not None)
+
+        cf_samples = np.random.multivariate_normal(self.cf, self.cf_cov, nsamples).T
+        ypred_samples = Amat @ cf_samples
+
+        return ypred_samples
+
 
     def compute_stdev(self, Amat, method="chol"):
         r"""Computation of pushed-forward standard deviation using a few different methods.
