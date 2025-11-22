@@ -164,9 +164,9 @@ def plot_dm(datas, models, errorbars=None, labels=None, colors=None,
                              fmt='o', markersize=msize,
                              markeredgecolor='w',
                              color=colors[i],
-                             ecolor=colors[i], label=labels[i])
+                             ecolor=colors[i], label=labels[i], alpha=0.5)
             else:
-                plt.plot(ddata[:, j], model, 'o', color=colors[i], label=labels[i], markeredgecolor='w', markersize=msize)
+                plt.plot(ddata[:, j], model, 'o', color=colors[i], label=labels[i], markeredgecolor='w', markersize=msize, alpha=0.5)
 
     delt = 0.03 * (yy.max() - yy.min())
     minmax = [yy.min() - delt, yy.max() + delt]

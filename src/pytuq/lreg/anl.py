@@ -55,6 +55,7 @@ class anl(lreg):
         """
         npt, nbas = Amat.shape
         bp = np.dot(y, y - np.dot(Amat, self.cf))/2.
+        #bp = np.dot(y- np.dot(Amat, self.cf), y - np.dot(Amat, self.cf))/2.
 
         ap = (npt - nbas)/2.
         sigmahatsq = bp/(ap-1.)
@@ -74,12 +75,19 @@ class anl(lreg):
         """
         npt, nbas = Amat.shape
 
-        ptp = np.dot(Amat.T, Amat)
+        ptp = np.matmul(Amat.T, Amat)
         if self.prior_var is not None:
             ptp += (self.datavar/self.prior_var) * np.eye(nbas)
         ptp += self.cov_nugget*np.eye(nbas)
-        invptp = np.linalg.inv(ptp)
-        self.cf = np.dot(invptp, np.dot(Amat.T, y))
+        invptp = np.linalg.pinv(ptp)
+        invptp = invptp*0.5 + invptp.T*0.5 
+        np.savetxt('invptp2.txt', invptp)
+        np.savetxt('ptp2.txt', ptp)
+        Aty = np.matmul(Amat.T, y)
+        np.savetxt('Aty2.txt', Aty)
+
+
+        self.cf = np.matmul(invptp, Aty)
 
         if self.datavar is None:
             sigmahatsq = self._compute_sigmahatsq(Amat, y)
