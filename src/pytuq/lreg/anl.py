@@ -79,16 +79,8 @@ class anl(lreg):
         if self.prior_var is not None:
             ptp += (self.datavar/self.prior_var) * np.eye(nbas)
         ptp += self.cov_nugget*np.eye(nbas)
-        invptp = np.linalg.pinv(ptp)
-        invptp = invptp*0.5 + invptp.T*0.5 
-        np.savetxt('invptp2.txt', invptp)
-        np.savetxt('ptp2.txt', ptp)
-        Aty = np.matmul(Amat.T, y)
-        np.savetxt('Aty2.txt', Aty)
-
-
-        self.cf = np.matmul(invptp, Aty)
-
+        invptp = np.linalg.inv(ptp)
+        self.cf = np.dot(invptp, np.dot(Amat.T, y))
         if self.datavar is None:
             sigmahatsq = self._compute_sigmahatsq(Amat, y)
         else:
@@ -102,7 +94,7 @@ class anl(lreg):
         # True posterior covariance
         if self.method == 'full':
             self.cf_cov = sigmahatsq*invptp
-            #np.savetxt('cov.txt', self.cf_cov)
+            np.savetxt('covar.txt', self.cf_cov)
         # Variational covariance
         elif self.method == 'vi':
             self.cf_cov = np.diag(sigmahatsq/np.diag(np.dot(Amat.T, Amat)+self.cov_nugget*np.diag(np.ones((nbas,)))))
@@ -112,6 +104,7 @@ class anl(lreg):
 
         self.fitted = True
         self.used = np.arange(Amat.shape[1])
+
 
 
     def compute_evidence(self, Amat, ydata):

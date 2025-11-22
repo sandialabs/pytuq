@@ -112,8 +112,8 @@ class KLSurr():
             self.smodel = nnmodel
 
         elif surr == 'PC':
-            pcrv = pc_fit(ptrain, xitrain,
-                          order=pc_order, pctype='LU', method='bcs', eta = bcs_eta)
+            pcrv, _ = pc_fit(ptrain, xitrain,
+                             order=pc_order, pctype='LU', method='bcs', eta = bcs_eta)
             self.xisurr = lambda x: pcrv.function(x)
             self.smodel = pcrv
 

@@ -284,6 +284,9 @@ class PCRV(MRV):
 
         Returns:
             np.ndarray: A 3d array of joint sensitivities of size :math:`(d,s,s)`.
+
+        Note:
+            This is joint in the 'total' sense, i.e. any term involving both dimensions are counted.
         """
         var = self.computeVar()
 
@@ -333,16 +336,40 @@ class PCRV(MRV):
             groupsens[i] /= var[i]
 
         return groupsens
+
+    def slice_1d(self, jdim):
+        r"""Extracts a 1d PC random variable along a given stochastic dimension.
+        Args:
+            jdim (int): The index :math:`j` of the stochastic dimension. Should be between :math:`0` and :math:`s-1`.
+
+        Returns:
+            PCRV: A 1d PC random variable object along the given stochastic dimension.
+        """
+        assert(jdim>=0 and jdim<self.sdim)
+
+        mindices_new = []
+        cfs_new = []
+        for i in range(self.pdim):
+            indOfOnlyj = np.where(np.sum(np.delete(self.mindices[i], jdim, axis=1), axis=1)==0)[0]
+            mindices_new.append(self.mindices[i][indOfOnlyj, :][:, jdim][:, np.newaxis])
+            cfs_new.append(self.coefs[i][indOfOnlyj])
+
+        PC1dslice = PCRV(self.pdim, 1, self.pctypes[jdim], mi=mindices_new, cfs=cfs_new)
+        return PC1dslice
     
-    def sampleGerm(self, nsam=1):
+    def sampleGerm(self, nsam=1, seed=None):
         r"""Sample PC germ vector.
 
         Args:
             nsam (int, optional): Number of samples requested. Defaults to :math:`M=1`.
+            seed (None, optional): Seed for the random generation. Default is None, which does not set any seed.
 
         Returns:
             np.ndarray: A 2d array of size :math:`(M,s)`.
         """
+        if seed is not None:
+            np.random.seed(seed)
+
         germSam = np.empty((nsam, self.sdim))
         for i in range(self.sdim):
             germSam[:, i] = self.PC1ds[i].sample(nsam)
@@ -388,7 +415,7 @@ class PCRV(MRV):
 
         Args:
             xi (np.ndarray): A 2d array of size :math:`(M,s)` for the input.
-            jdim (int): The index of :math:`i` of the PC random variable/vector. Should be between :math:`0` and :math:`d-1`.
+            jdim (int): The index :math:`i` of the PC random variable/vector. Should be between :math:`0` and :math:`d-1`.
 
         Returns:
             np.ndarray: A 2d output array of size :math:`(M, K_i)` where :math:`K_i` is the number of PC bases for the :math:`i`-th dimension.
@@ -480,16 +507,20 @@ class PCRV(MRV):
         self.function.setDimDom(domain=np.clip(domain, -5.0, 5.0))
         self.function.setCall(self.evalPC)
 
-    def sample(self, nsam):
+    def sample(self, nsam, seed=None):
         r"""Sample from the PC random variable. Basically chaining sampling the germ and evaluating the PC.
 
         Args:
             nsam (int): Number of samples requested, :math:`M`.
+            seed (None, optional): Seed for the random generation. Default is None, which does not set any seed.
 
         Returns:
             np.ndarray: A 2d array of size :math:`(M,d)` for the output.
         """
-        x = self.sampleGerm(nsam)
+        if seed is not None:
+            np.random.seed(seed)
+
+        x = self.sampleGerm(nsam, seed=seed)
         return self.evalPC(x)
 
     def cfsFlatten(self):

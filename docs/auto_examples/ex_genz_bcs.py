@@ -16,10 +16,15 @@ Where:
 - :math:`x_i`: The input variables.
 - :math:`d`: The dimensionality of the input :math:`x` (number of components in :math:`x`).
 
-Through 2 different build processes, we will construct two different PC surrogates to demonstrate effects of the BCS eta hyperparameter on model results. 
-The first build process will demonstrate most simply the construct-build-evaluate process when using BCS for our PC surrogate, along with a given a eta of 1e-10.
-The second build process will select the most optimal eta for BCS through cross-validation algorithms (exposed here), which will soon be implemented in PyTUQ under-the-hood.
-Afterwards, we will evaluate both models on testing and training data, returning parity plots and a Root Mean Square Error for each evaluation.
+Through three different build processes, we will construct three PC surrogates to highlight the advantages of BCS and explore the effects of the `eta` hyperparameter on model results.
+
+First, we'll build with least squares regression to demonstrate the limitations of non-sparse methods and the need for BCS. 
+Then we'll build with BCS using a given eta of :math:`1 \times 10^{-10}` and identify aspects for model improvement. 
+Last, we'll build with the most optimal eta, as found through cross-validation algorithms exposed here. All three surrogates will be evaluated on testing and training data, 
+with parity plots and Root Mean Square Error (RMSE) values used to compare their performance. 
+
+To follow along with the cross-validation algorithm for selecting the optimal eta, see section "Functions for cross-validation algorithm" in the second half of the notebook. 
+These methods have been implemented under-the-hood in PyTUQ. Refer to example "Polynomial Chaos Expansion Construction" (``ex_pce.py``) for a demonstration of how to use these methods through a direct call to the PCE class.
 """
 # %%
 
@@ -34,44 +39,55 @@ from matplotlib import pyplot as plt
 from sklearn.metrics import root_mean_squared_error
 
 from pytuq.surrogates.pce import PCE
-from pytuq.utils.maps import scale01ToDom
+from pytuq.utils.maps import scaleDomTo01
 from pytuq.func.genz import GenzOscillatory
 
 # %%
-# Setting a random number generator seed:
+# Constructing PC surrogate and generating data
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+# To start, we begin with defining our true model and input parameters for our PC surrogate.
+#
+# After importing GenzOscillatory from ``pytuq.func.genz``, we generate the Genz function below, 
+# along with training data and testing data with output noise. This data and the corresponding Genz function 
+# will be used to create the same PC surrogate fitted in all three examples: first with linear regression, 
+# next using BCS with a given eta, and third using BCS with the most optimal eta. 
+
+# %%
 
 # Random number generator
 from scipy.stats import qmc
 rng_seed = 43
 
 # %%
-# Constructing PC surrogate and generating data
-# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-# After importing GenzOscillatory from ``pytuq.func.genz``, we generate the Genz function below, along with training data and testing data with output noise. 
-# This data and the corresponding Genz function will be used to create the same PC surrogate fitted in both examples: 
-# (1) The first surrogate will be fitted using BCS with a given eta, and (2) the second surrogate will be fitted using BCS with the most optimal eta.
 
-# Use Genz Oscillatory function in multiple dimensions for the true model
+# Define our true model as the Genz Oscillatory function in multiple dimensions
 func_dim = 4
-func_weights = [1.0/(i+1)**2 for i in range(func_dim)]
+func_weights = [1.0/(i+1)**2 for i in range(func_dim)] 
 func = GenzOscillatory(shift=0.25, weights=func_weights)
-noise_std = 0.1
+noise_std = 0.025
+
 rng = qmc.LatinHypercube(d=func_dim, seed=rng_seed)
+np.random.seed(42)
+
+# As we choose to use Legendre polynomials later in the surrogate construction, we define the domain of ξ on [-1, 1]^d
+ksi_domain = np.array([[-1.0, 1.0]] * func_dim)  
 
 # Training data
-np.random.seed(42)
 n_trn = 70
-x_trn = rng.random(n=n_trn) # random numbers in [0,1]^d
-y_trn = func(x_trn) + np.random.normal(0, noise_std, size = (n_trn,1))
+value_ksi_trn = 2*rng.random(n=n_trn) - 1            # Randomly generating 70 data points within the domain of ξ (ksi)
+x_trn = scaleDomTo01(value_ksi_trn, ksi_domain)      # We scale our training data to [0, 1]^d, the domain of the Genz function
+y_trn = func(x_trn) + np.random.normal(0, noise_std, size = (n_trn, 1))
 
 # Testing data
 n_tst = 10000
-x_tst = rng.random(n=n_tst) # random numbers in [0,1]^d
-y_tst = func(x_tst) + np.random.normal(0, noise_std, size = (n_tst,1))
+value_ksi_tst = 2*rng.random(n=n_tst) - 1 
+x_tst = scaleDomTo01(value_ksi_tst, ksi_domain)
+y_tst = func(x_tst)
 
 # %%
-# With a stochastic dimensionality of 4 (defined above) and a polynomial order of 4, we construct the PC surrogate that will be used in both builds. 
-# You have the option of printing the PC surrogate's full basis, before BCS selects and retains the most significant PC coefficients to reduce the basis.
+# With a stochastic dimensionality of 4 (defined above) and a chosen polynomial order of 4, we construct the PC surrogate that 
+# will be used in both builds. By calling the ``printInfo()`` method from the PCRV variable, you can print the PC surrogate's 
+# full basis and current coefficients, before BCS selects and retains the most significant PC terms to reduce the basis.
 
 # (1) Construct a PC surrogate
 order = 4
@@ -80,52 +96,37 @@ pce_surr = PCE(func_dim, order, 'LU', verbose = 1)
 # Optional verbosity output:
 print("Full Basis and Current Coefficients:")
 pce_surr.pcrv.printInfo()
-print("Number of Basis Terms:", len(pce_surr.pcrv.mindices[0]))
+print("Number of Basis Terms:", pce_surr.get_pc_terms())
 
 # (1.5) Set training data
-pce_surr.set_training_data(x_trn, y_trn[:,0])
+pce_surr.set_training_data(value_ksi_trn, y_trn[:,0])
 
 # %%
-# BCS with default settings (default eta)
-# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-# Here, we call the PCE class method of ``build()`` to build the linear regression model used to fit the surrogate. 
-# With the flag ``regression='bcs'``, we choose the BCS method for the fitting. A user-defined eta of 1e-10 is also passed in.
+# From the input parameters of our PC surrogate, we have 70 basis terms in our PCE. With 70 training points and no noise, having 70 basis terms would mean that we have a fully determined system, as the number of training points is the same as the number of basis terms. However, with the addition of noise in our training data, it becomes harder for the model to accurately fit all basis terms, leading to potential overfitting. This demonstrates the helpful role BCS might play as a choice for our regression build. As a sparse regression approach, BCS uses regularization to select only the most relevant basis terms, making it particularly effective in situations like this, where we do not have enough clear information to fit all basis terms without overfitting.
+#
+# In the next sections, we will explore the effects of overfitting in more detail.
+
+# %%
+# Least Squares Regression
+# ^^^^^^^^^^^^^^^^^^^^^^^^^
+# To start, we call the PCE class method of ``build()`` with no arguments to use the default regression option of least squares. Then, through ``evaluate()``, we can generate model predictions for our training and testing data.
+
+# %%
 
 # (2) Build the linear regression object for fitting
-pce_surr.build(regression='bcs', eta=1.e-10)
-
-# Optional verbosity output:
-print("Retained Basis and Coefficients:")
-pce_surr.pcrv.printInfo()
-print("Number of retained basis terms:", len(pce_surr.pcrv.mindices[0]))
-
-# %%
-# After fitting, we evaluate the PCE using our training and testing data. To analyze the model's goodness of fit, 
-# we calculate the root mean square error between the surrogate results and the training and testing data.
+pce_surr.build()
 
 # (3) Evaluate the PC model
-y_trn_approx = pce_surr.evaluate(x_trn)
-y_tst_approx = pce_surr.evaluate(x_tst)
-
-# Evaluate goodness of fit with RMSE
-rmse_trn = root_mean_squared_error(y_trn[:,0],y_trn_approx["Y_eval"])
-print("The training RMSE error in the PCE BCS approximation is %.2e"%rmse_trn)
-
-rmse_tst = root_mean_squared_error(y_tst[:,0],y_tst_approx["Y_eval"])
-print("The testing RMSE error in the PCE BCS approximation is %.2e"%rmse_tst)
+y_trn_approx = pce_surr.evaluate(value_ksi_trn)
+y_tst_approx = pce_surr.evaluate(value_ksi_tst)
 
 # %%
-# Notice above how the training RMSE error is almost half that of the testing RMSE error. This shows that our current model is overfitting, 
-# learning the training data with noise too well. To address this issue, we can explore selecting a better eta for the BCS fitting.
 
 # Plot the surrogate model's output vs. the training data output
-
 y_trn_mM = [y_trn[:,0].min(),y_trn[:,0].max()]
-
 
 fig1 = plt.figure(figsize=(8,6))
 ax1 = fig1.add_axes([0.15, 0.15, 0.80, 0.75])
-
 
 ax1.plot(y_trn[:,0],y_trn_approx["Y_eval"],".")
 ax1.plot(y_trn_mM,y_trn_mM) # Diagonal line
@@ -151,18 +152,94 @@ ax2.set_xlabel("Test Data y", size=16)
 ax2.set_ylabel("Predicted y", size=16); 
 
 # %%
+
+# Evaluate goodness of fit with RMSE
+rmse_trn = root_mean_squared_error(y_trn[:,0],y_trn_approx["Y_eval"])
+print("The training RMSE in the PCE LSQ approximation is %.2e"%rmse_trn)
+
+rmse_tst = root_mean_squared_error(y_tst[:,0],y_tst_approx["Y_eval"])
+print("The testing RMSE in the PCE LSQ approximation is %.2e"%rmse_tst)
+
+# %%
+# The results above show us the limitations of using least squares regression to construct our surrogate. From the parity plots, we can see how the testing predictions from the LSQ regression are more spread out from the parity line, while the training predictions are extremely close to the line. Because LSQ fits all the basis terms to the training data, the model fits too closely to the noisy training dataset, and the true underlying pattern of the function is not effectively captured. Our RMSE values align with this as well: while the training RMSE is extremely low, the testing RMSE is significantly higher, as the model struggles to generalize to the unseen test data. 
+# 
+# To improve our model's generalization, we can build our model with BCS instead. As a sparse regression method, BCS reduces the number of basis terms with which we can fit our data to, reducing the risk of overfitting. 
+
+# %%
+# BCS with default settings (default eta)
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+# In this section, we use the same PC surrogate, ``pce_surr``, for the second build. With the flag ``regression='bcs'``, we choose the BCS method for the fitting. A user-defined eta of 1e-10 is also passed in.
+
+# (2) Build the linear regression object for fitting
+pce_surr.build(regression='bcs', eta=1.e-10)
+
+# Optional verbosity output:
+print("Retained Basis and Coefficients:")
+pce_surr.pcrv.printInfo()
+print("Number of retained basis terms:", pce_surr.get_pc_terms())
+
+# %%
+# After fitting, we evaluate the PCE using our training and testing data. To analyze the model's goodness of fit, we first plot the surrogate predictions against the training and testing data respectively.
+
+# (3) Evaluate the PC model
+y_trn_approx = pce_surr.evaluate(value_ksi_trn)
+y_tst_approx = pce_surr.evaluate(value_ksi_tst)
+
+# %%
+
+# Plot the surrogate model's output vs. the training data output
+y_trn_mM = [y_trn[:,0].min(),y_trn[:,0].max()]
+
+fig1 = plt.figure(figsize=(8,6))
+ax1 = fig1.add_axes([0.15, 0.15, 0.80, 0.75])
+
+ax1.plot(y_trn[:,0],y_trn_approx["Y_eval"],".")
+ax1.plot(y_trn_mM,y_trn_mM) # Diagonal line
+
+ax1.set_xlabel("Train Data y", size=16)
+ax1.set_ylabel("Predicted y", size=16); 
+
+# %%
+
+# Plot the surrogate model's output vs. the testing data output
+
+y_tst_mM = [y_tst[:,0].min(),y_tst[:,0].max()]
+
+fig2 = plt.figure(figsize=(8,6))
+ax2 = fig2.add_axes([0.15, 0.15, 0.80, 0.75])
+
+ax2.plot(y_tst[:,0],y_tst_approx["Y_eval"],".")
+ax2.plot(y_tst_mM,y_tst_mM) # Diagonal line
+
+ax2.set_xlabel("Test Data y", size=16)
+ax2.set_ylabel("Predicted y", size=16); 
+
+# sphinx_gallery_thumbnail_number = 2
+
+# %%
+
+# Evaluate goodness of fit with RMSE
+rmse_trn = root_mean_squared_error(y_trn[:,0],y_trn_approx["Y_eval"])
+print("The training RMSE in the PCE BCS approximation is %.2e"%rmse_trn)
+
+rmse_tst = root_mean_squared_error(y_tst[:,0],y_tst_approx["Y_eval"])
+print("The testing RMSE in the PCE BCS approximation is %.2e"%rmse_tst)
+
+# %%
+# From our parity plots, we can see how BCS already generalizes better to unseen data as compared to LSQ, with reduced error in our testing data predictions. In our RMSE calculations, notice how the training error is smaller than the testing error. Though the difference in value is small, this amount is still significant as we have noise in our training data yet no noise in our testing data. That the testing error is higher than the training error suggests that overfitting is still happening within our model. 
+#
+# In the next section, we explore how finding the optimal value of eta -- the stopping criterion for the BCS parameter of gamma, determined through a Bayesian evidence maximization approach -- can impact model sparsity and accuracy to avoid overfitting.
+
+
+# %%
 # BCS with optimal eta (found through cross-validation) 
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-# In this section, we use the same PC surrogate, ``pce_surr``, for the second build. We call the PCE class method of ``build()`` 
-# to build the linear regression model used to fit the surrogate. With the flag ``regression='bcs'``, we choose the BCS method for the fitting. 
+# Before we build our PC surrogate again with the most optimal eta, we first expose the cross-validation algorithm ``optimize_eta`` and its two helper functions, ``kfold_split`` and ``kfold_cv`` below. These functions have been implemented under-the-hood in the PCE surrogate class, but for the purposes of this tutorial, you may find it useful to follow along with the K-fold cross-validation method used to find the most optimal eta (the eta with the lowest validation RMSE across all of its folds).
 #
-##############################################################################
-# Instead of using a default eta, we call the cross-validation algorithm, ``optimize_eta()``, to choose the most optimal eta below. 
-#
-# - With the flag ``plot=True``, the CV algorithm produces a graph of the training and testing (validation) data's RMSE values for each eta. The eta with the smallest RMSE for the validation data is the one chosen as the optimal eta.
-#
-##############################################################################
-# Before that, we expose the cross-validation algorithm ``optimize_eta`` and its two helper functions, ``kfold_split`` and ``kfold_cv`` that will be called in this section.
+# Functions for cross-validation algorithm
+# +++++++++++++++++++++++++++++++++++++++++
+
+# %%
 
 def kfold_split(nsamples,nfolds,seed=13):
     """
@@ -251,7 +328,8 @@ def kfold_cv(x,y,nfolds=3,seed=13):
     return kfold_data
 
 # %%
-def optimize_eta(pce, etas, nfolds, verbose=0, plot=False):
+
+def optimize_eta(pce, etas, nfolds=3, verbose=0, plot=False):
     """
     Choose the optimum eta for Bayesian compressive sensing. Calculates the RMSE
         for each eta for a specified number of folds. Selects the eta with the lowest
@@ -312,7 +390,7 @@ def optimize_eta(pce, etas, nfolds, verbose=0, plot=False):
             y_test_eval = (pce_copy.evaluate(x_test))['Y_eval']
 
             # Print statement for verbose flag
-            if verbose > 1:
+            if verbose > 0:
                 print("Fold " + str(i + 1) + ", eta " + str(eta) + ", " + str(len(cfs)) + " terms retained out of a full basis of size " + str(len(pce.pcrv.mindices[0])))
             
             # Calculate the RMSEs for the training and validation points.
@@ -368,16 +446,24 @@ def optimize_eta(pce, etas, nfolds, verbose=0, plot=False):
     return eta_opt
 
 # %%
+# BCS build with the most optimal eta
+# +++++++++++++++++++++++++++++++++++++
+# Instead of using a default eta, here we call the cross-validation algorithm, ``optimize_eta()``, to choose the most optimal eta from a range of etas given below. 
+# 
+# - With the flag ``plot=True``, the CV algorithm produces a graph of the training and testing (validation) data's RMSE values for each eta. The eta with the smallest RMSE for the validation data is the one chosen as the optimal eta.
 
 # We first create a list of possible etas to pass in: [1e-16, 1e-15, ... , 1e-2, 1e-1, 1]
 etas = 1/np.power(10,[i for i in range(0,16)])
 
 # Then, we call the function to choose the optimal eta:
-eta_opt = optimize_eta(pce_surr, etas, 10, plot=True)
+eta_opt = optimize_eta(pce_surr, etas, nfolds=10, verbose = True, plot=True)
 
 # %%
-# Now, with the optimal eta obtained, we run the fitting again. Then, we evaluate the PCE and produce a parity plot for the predicted output vs. the testing data. 
-# Notice that the larger eta, 10e-2, retained fewer basis terms (6) compared to the smaller user-defined eta of 10e-10 (which retained 20 basis terms).
+# From our eta plot above, we can see that our most optimal eta falls at :math:`1 \times 10^{-10}`, where the validation error is the lowest. While this indicates that the model performs well at this eta value, we can still observe a tendency towards overfitting in the model. For larger eta values, the training and validation RMSE lines are close together, suggesting that the model is performing similarly on both seen and unseen datasets, as would be desired. However, as eta decreases, the training RMSE falls while the validation RMSE rises, highlighting a region where overfitting occurs. 
+# 
+# This behavior is expected because smaller eta values retain more basis terms, increasing the model's degrees of freedom. While this added flexibility allows the model to fit the training data more closely, it also makes the model more prone to fitting noise rather than capturing the true underlying function. Selecting the most optimal eta of :math:`1 \times 10^{-4}`, as compared to the earlier user-defined eta of :math:`1 \times 10^{-10}`, allows us to balance model complexity and generalization.
+# 
+# Now, with the optimum eta obtained, we can run the fitting again and produce parity plots for our predicted output.
 
 # Build the linear regression object for fitting
 pce_surr.build(regression='bcs', eta=eta_opt)
@@ -385,31 +471,35 @@ pce_surr.build(regression='bcs', eta=eta_opt)
 # Optional verbosity output:
 print("Retained Basis and Coefficients:")
 pce_surr.pcrv.printInfo()
-print("Number of retained basis terms:", len(pce_surr.pcrv.mindices[0]))
+print("Number of retained basis terms:", pce_surr.get_pc_terms())
 
 # %%
+
 # Evaluate the PC model with training and testing data
-y_trn_approx = pce_surr.evaluate(x_trn)
-y_tst_approx = pce_surr.evaluate(x_tst)
-
-# Evaluate goodness of fit with RMSE
-rmse_trn = root_mean_squared_error(y_trn[:,0],y_trn_approx["Y_eval"])
-print("The training RMSE error in the PCE BCS approximation is %.2e"%rmse_trn)
-
-rmse_tst = root_mean_squared_error(y_tst[:,0],y_tst_approx["Y_eval"])
-print("The testing RMSE error in the PCE BCS approximation is %.2e"%rmse_tst)
+y_trn_approx = pce_surr.evaluate(value_ksi_trn)
+y_tst_approx = pce_surr.evaluate(value_ksi_tst)
 
 # %%
-# While the training RMSE error was almost half that of the testing RMSE error for the first fitting, the RMSE errors here are much closer to each other in value. 
-# This suggests that the model has more effectively generalized to the unseen data; a better eta has improved performance.
 
-# Plot the surrogate model's output vs. the testing data output
-y_tst_mM = [y_tst[:,0].min(),y_tst[:,0].max()]
-
+# Plot the surrogate model's output vs. the training data output
+y_tst_mM = [y_trn[:,0].min(),y_trn[:,0].max()]
 
 fig2 = plt.figure(figsize=(8,6))
 ax2 = fig2.add_axes([0.15, 0.15, 0.80, 0.75])
 
+ax2.plot(y_trn[:,0],y_trn_approx["Y_eval"],".")
+ax2.plot(y_tst_mM,y_tst_mM) # Diagonal line
+
+ax2.set_xlabel("Train Data y", size=16)
+ax2.set_ylabel("Predicted y", size=16); 
+
+# %%
+
+# Plot the surrogate model's output vs. the testing data output
+y_tst_mM = [y_tst[:,0].min(),y_tst[:,0].max()]
+
+fig2 = plt.figure(figsize=(8,6))
+ax2 = fig2.add_axes([0.15, 0.15, 0.80, 0.75])
 
 ax2.plot(y_tst[:,0],y_tst_approx["Y_eval"],".")
 ax2.plot(y_tst_mM,y_tst_mM) # Diagonal line
@@ -417,4 +507,17 @@ ax2.plot(y_tst_mM,y_tst_mM) # Diagonal line
 ax2.set_xlabel("Test Data y", size=16)
 ax2.set_ylabel("Predicted y", size=16); 
 
-# sphinx_gallery_thumbnail_number = 2
+# %%
+
+# Evaluate goodness of fit with RMSE
+rmse_trn = root_mean_squared_error(y_trn[:,0],y_trn_approx["Y_eval"])
+print("The training RMSE in the PCE BCS approximation is %.2e"%rmse_trn)
+
+rmse_tst = root_mean_squared_error(y_tst[:,0],y_tst_approx["Y_eval"])
+print("The testing RMSE in the PCE BCS approximation is %.2e"%rmse_tst)
+
+# %%
+# 
+# In these final RMSE calculations, we can see how our training RMSE has decreased from 1.80e-02 to 1.21e-02 by building with the most optimal eta. This indicates that our model has improved in generalization and is performing better on unseen data. Though our training error is still larger than our testing error, this can be attributed to the lack of noise in our testing data, while noise is present in our training data. While the optimal eta reduces overfitting and improves generalization, the noise in our training data still impacts the training error and remains an important consideration during our evaluation of the model performance.
+# 
+# While this demonstration calls the cross-validation algorithm as a function outside of the PCE class, these methods have been implemented in PyTUQ through the PCE class. The example "Polynomial Chaos Expansion Construction" demonstrates how to call the eta optimization methods directly from the PCE class.

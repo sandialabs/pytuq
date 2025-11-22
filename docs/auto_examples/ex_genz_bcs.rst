@@ -35,12 +35,17 @@ Where:
 - :math:`x_i`: The input variables.
 - :math:`d`: The dimensionality of the input :math:`x` (number of components in :math:`x`).
 
-Through 2 different build processes, we will construct two different PC surrogates to demonstrate effects of the BCS eta hyperparameter on model results. 
-The first build process will demonstrate most simply the construct-build-evaluate process when using BCS for our PC surrogate, along with a given a eta of 1e-10.
-The second build process will select the most optimal eta for BCS through cross-validation algorithms (exposed here), which will soon be implemented in PyTUQ under-the-hood.
-Afterwards, we will evaluate both models on testing and training data, returning parity plots and a Root Mean Square Error for each evaluation.
+Through three different build processes, we will construct three PC surrogates to highlight the advantages of BCS and explore the effects of the `eta` hyperparameter on model results.
 
-.. GENERATED FROM PYTHON SOURCE LINES 25-40
+First, we'll build with least squares regression to demonstrate the limitations of non-sparse methods and the need for BCS. 
+Then we'll build with BCS using a given eta of :math:`1 \times 10^{-10}` and identify aspects for model improvement. 
+Last, we'll build with the most optimal eta, as found through cross-validation algorithms exposed here. All three surrogates will be evaluated on testing and training data, 
+with parity plots and Root Mean Square Error (RMSE) values used to compare their performance. 
+
+To follow along with the cross-validation algorithm for selecting the optimal eta, see section "Functions for cross-validation algorithm" in the second half of the notebook. 
+These methods have been implemented under-the-hood in PyTUQ. Refer to example "Polynomial Chaos Expansion Construction" (``ex_pce.py``) for a demonstration of how to use these methods through a direct call to the PCE class.
+
+.. GENERATED FROM PYTHON SOURCE LINES 30-45
 
 .. code-block:: Python
 
@@ -56,7 +61,7 @@ Afterwards, we will evaluate both models on testing and training data, returning
     from sklearn.metrics import root_mean_squared_error
 
     from pytuq.surrogates.pce import PCE
-    from pytuq.utils.maps import scale01ToDom
+    from pytuq.utils.maps import scaleDomTo01
     from pytuq.func.genz import GenzOscillatory
 
 
@@ -66,11 +71,18 @@ Afterwards, we will evaluate both models on testing and training data, returning
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 41-42
+.. GENERATED FROM PYTHON SOURCE LINES 46-54
 
-Setting a random number generator seed:
+Constructing PC surrogate and generating data
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+To start, we begin with defining our true model and input parameters for our PC surrogate.
 
-.. GENERATED FROM PYTHON SOURCE LINES 42-47
+After importing GenzOscillatory from ``pytuq.func.genz``, we generate the Genz function below, 
+along with training data and testing data with output noise. This data and the corresponding Genz function 
+will be used to create the same PC surrogate fitted in all three examples: first with linear regression, 
+next using BCS with a given eta, and third using BCS with the most optimal eta. 
+
+.. GENERATED FROM PYTHON SOURCE LINES 56-61
 
 .. code-block:: Python
 
@@ -86,36 +98,34 @@ Setting a random number generator seed:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 48-53
-
-Constructing PC surrogate and generating data
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-After importing GenzOscillatory from ``pytuq.func.genz``, we generate the Genz function below, along with training data and testing data with output noise. 
-This data and the corresponding Genz function will be used to create the same PC surrogate fitted in both examples: 
-(1) The first surrogate will be fitted using BCS with a given eta, and (2) the second surrogate will be fitted using BCS with the most optimal eta.
-
-.. GENERATED FROM PYTHON SOURCE LINES 53-72
+.. GENERATED FROM PYTHON SOURCE LINES 62-87
 
 .. code-block:: Python
 
 
-    # Use Genz Oscillatory function in multiple dimensions for the true model
+    # Define our true model as the Genz Oscillatory function in multiple dimensions
     func_dim = 4
-    func_weights = [1.0/(i+1)**2 for i in range(func_dim)]
+    func_weights = [1.0/(i+1)**2 for i in range(func_dim)] 
     func = GenzOscillatory(shift=0.25, weights=func_weights)
-    noise_std = 0.1
+    noise_std = 0.025
+
     rng = qmc.LatinHypercube(d=func_dim, seed=rng_seed)
+    np.random.seed(42)
+
+    # As we choose to use Legendre polynomials later in the surrogate construction, we define the domain of ξ on [-1, 1]^d
+    ksi_domain = np.array([[-1.0, 1.0]] * func_dim)  
 
     # Training data
-    np.random.seed(42)
     n_trn = 70
-    x_trn = rng.random(n=n_trn) # random numbers in [0,1]^d
-    y_trn = func(x_trn) + np.random.normal(0, noise_std, size = (n_trn,1))
+    value_ksi_trn = 2*rng.random(n=n_trn) - 1            # Randomly generating 70 data points within the domain of ξ (ksi)
+    x_trn = scaleDomTo01(value_ksi_trn, ksi_domain)      # We scale our training data to [0, 1]^d, the domain of the Genz function
+    y_trn = func(x_trn) + np.random.normal(0, noise_std, size = (n_trn, 1))
 
     # Testing data
     n_tst = 10000
-    x_tst = rng.random(n=n_tst) # random numbers in [0,1]^d
-    y_tst = func(x_tst) + np.random.normal(0, noise_std, size = (n_tst,1))
+    value_ksi_tst = 2*rng.random(n=n_tst) - 1 
+    x_tst = scaleDomTo01(value_ksi_tst, ksi_domain)
+    y_tst = func(x_tst)
 
 
 
@@ -124,12 +134,13 @@ This data and the corresponding Genz function will be used to create the same PC
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 73-75
+.. GENERATED FROM PYTHON SOURCE LINES 88-91
 
-With a stochastic dimensionality of 4 (defined above) and a polynomial order of 4, we construct the PC surrogate that will be used in both builds. 
-You have the option of printing the PC surrogate's full basis, before BCS selects and retains the most significant PC coefficients to reduce the basis.
+With a stochastic dimensionality of 4 (defined above) and a chosen polynomial order of 4, we construct the PC surrogate that 
+will be used in both builds. By calling the ``printInfo()`` method from the PCRV variable, you can print the PC surrogate's 
+full basis and current coefficients, before BCS selects and retains the most significant PC terms to reduce the basis.
 
-.. GENERATED FROM PYTHON SOURCE LINES 75-88
+.. GENERATED FROM PYTHON SOURCE LINES 91-104
 
 .. code-block:: Python
 
@@ -141,10 +152,10 @@ You have the option of printing the PC surrogate's full basis, before BCS select
     # Optional verbosity output:
     print("Full Basis and Current Coefficients:")
     pce_surr.pcrv.printInfo()
-    print("Number of Basis Terms:", len(pce_surr.pcrv.mindices[0]))
+    print("Number of Basis Terms:", pce_surr.get_pc_terms())
 
     # (1.5) Set training data
-    pce_surr.set_training_data(x_trn, y_trn[:,0])
+    pce_surr.set_training_data(value_ksi_trn, y_trn[:,0])
 
 
 
@@ -230,90 +241,34 @@ You have the option of printing the PC surrogate's full basis, before BCS select
      [0 0 0 4]] [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
      0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
      0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
-    Number of Basis Terms: 70
+    Number of Basis Terms: [70]
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 89-93
+.. GENERATED FROM PYTHON SOURCE LINES 105-108
 
-BCS with default settings (default eta)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Here, we call the PCE class method of ``build()`` to build the linear regression model used to fit the surrogate. 
-With the flag ``regression='bcs'``, we choose the BCS method for the fitting. A user-defined eta of 1e-10 is also passed in.
+From the input parameters of our PC surrogate, we have 70 basis terms in our PCE. With 70 training points and no noise, having 70 basis terms would mean that we have a fully determined system, as the number of training points is the same as the number of basis terms. However, with the addition of noise in our training data, it becomes harder for the model to accurately fit all basis terms, leading to potential overfitting. This demonstrates the helpful role BCS might play as a choice for our regression build. As a sparse regression approach, BCS uses regularization to select only the most relevant basis terms, making it particularly effective in situations like this, where we do not have enough clear information to fit all basis terms without overfitting.
 
-.. GENERATED FROM PYTHON SOURCE LINES 93-102
+In the next sections, we will explore the effects of overfitting in more detail.
+
+.. GENERATED FROM PYTHON SOURCE LINES 110-113
+
+Least Squares Regression
+^^^^^^^^^^^^^^^^^^^^^^^^^
+To start, we call the PCE class method of ``build()`` with no arguments to use the default regression option of least squares. Then, through ``evaluate()``, we can generate model predictions for our training and testing data.
+
+.. GENERATED FROM PYTHON SOURCE LINES 115-123
 
 .. code-block:: Python
 
 
     # (2) Build the linear regression object for fitting
-    pce_surr.build(regression='bcs', eta=1.e-10)
-
-    # Optional verbosity output:
-    print("Retained Basis and Coefficients:")
-    pce_surr.pcrv.printInfo()
-    print("Number of retained basis terms:", len(pce_surr.pcrv.mindices[0]))
-
-
-
-
-
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    Regression method: bcs
-    Warning: Sigma matrix has a negative diagonal element. Setting them to zero, but this may lead to inaccuracies.
-    Retained Basis and Coefficients:
-    [[2 0 0 0]
-     [1 0 3 0]
-     [0 2 0 2]
-     [0 0 1 2]
-     [4 0 0 0]
-     [3 1 0 0]
-     [1 1 0 1]
-     [2 0 0 2]
-     [2 0 1 1]
-     [0 0 0 4]
-     [1 0 0 3]
-     [0 0 0 1]
-     [1 1 0 0]
-     [1 0 0 1]
-     [0 3 1 0]
-     [0 1 0 2]
-     [0 1 1 2]
-     [2 0 2 0]
-     [0 1 0 1]
-     [0 0 0 0]] [ 0.11844696 -0.1286659  -0.23890894  0.20561299 -0.65563148  1.41773821
-     -0.20218904 -0.30625401  0.40503892 -0.27250245  0.99544673 -0.90463019
-     -2.75925351 -0.66386396  0.13068211 -0.96868699 -0.65718534 -0.27253516
-      3.07988105  0.12550357]
-    Number of retained basis terms: 20
-
-
-
-
-.. GENERATED FROM PYTHON SOURCE LINES 103-105
-
-After fitting, we evaluate the PCE using our training and testing data. To analyze the model's goodness of fit, 
-we calculate the root mean square error between the surrogate results and the training and testing data.
-
-.. GENERATED FROM PYTHON SOURCE LINES 105-117
-
-.. code-block:: Python
-
+    pce_surr.build()
 
     # (3) Evaluate the PC model
-    y_trn_approx = pce_surr.evaluate(x_trn)
-    y_tst_approx = pce_surr.evaluate(x_tst)
-
-    # Evaluate goodness of fit with RMSE
-    rmse_trn = root_mean_squared_error(y_trn[:,0],y_trn_approx["Y_eval"])
-    print("The training RMSE error in the PCE BCS approximation is %.2e"%rmse_trn)
-
-    rmse_tst = root_mean_squared_error(y_tst[:,0],y_tst_approx["Y_eval"])
-    print("The testing RMSE error in the PCE BCS approximation is %.2e"%rmse_tst)
+    y_trn_approx = pce_surr.evaluate(value_ksi_trn)
+    y_tst_approx = pce_surr.evaluate(value_ksi_tst)
 
 
 
@@ -323,30 +278,21 @@ we calculate the root mean square error between the surrogate results and the tr
 
  .. code-block:: none
 
-    The training RMSE error in the PCE BCS approximation is 1.72e-01
-    The testing RMSE error in the PCE BCS approximation is 2.73e-01
+    Regression method: lsq
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 118-120
-
-Notice above how the training RMSE error is almost half that of the testing RMSE error. This shows that our current model is overfitting, 
-learning the training data with noise too well. To address this issue, we can explore selecting a better eta for the BCS fitting.
-
-.. GENERATED FROM PYTHON SOURCE LINES 120-136
+.. GENERATED FROM PYTHON SOURCE LINES 124-137
 
 .. code-block:: Python
 
 
     # Plot the surrogate model's output vs. the training data output
-
     y_trn_mM = [y_trn[:,0].min(),y_trn[:,0].max()]
-
 
     fig1 = plt.figure(figsize=(8,6))
     ax1 = fig1.add_axes([0.15, 0.15, 0.80, 0.75])
-
 
     ax1.plot(y_trn[:,0],y_trn_approx["Y_eval"],".")
     ax1.plot(y_trn_mM,y_trn_mM) # Diagonal line
@@ -372,7 +318,7 @@ learning the training data with noise too well. To address this issue, we can ex
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 137-153
+.. GENERATED FROM PYTHON SOURCE LINES 138-154
 
 .. code-block:: Python
 
@@ -406,26 +352,230 @@ learning the training data with noise too well. To address this issue, we can ex
  .. code-block:: none
 
 
+    Text(84.34722222222221, 0.5, 'Predicted y')
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 155-163
+
+.. code-block:: Python
+
+
+    # Evaluate goodness of fit with RMSE
+    rmse_trn = root_mean_squared_error(y_trn[:,0],y_trn_approx["Y_eval"])
+    print("The training RMSE in the PCE LSQ approximation is %.2e"%rmse_trn)
+
+    rmse_tst = root_mean_squared_error(y_tst[:,0],y_tst_approx["Y_eval"])
+    print("The testing RMSE in the PCE LSQ approximation is %.2e"%rmse_tst)
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    The training RMSE in the PCE LSQ approximation is 1.91e-15
+    The testing RMSE in the PCE LSQ approximation is 9.22e-01
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 164-167
+
+The results above show us the limitations of using least squares regression to construct our surrogate. From the parity plots, we can see how the testing predictions from the LSQ regression are more spread out from the parity line, while the training predictions are extremely close to the line. Because LSQ fits all the basis terms to the training data, the model fits too closely to the noisy training dataset, and the true underlying pattern of the function is not effectively captured. Our RMSE values align with this as well: while the training RMSE is extremely low, the testing RMSE is significantly higher, as the model struggles to generalize to the unseen test data. 
+
+To improve our model's generalization, we can build our model with BCS instead. As a sparse regression method, BCS reduces the number of basis terms with which we can fit our data to, reducing the risk of overfitting. 
+
+.. GENERATED FROM PYTHON SOURCE LINES 169-172
+
+BCS with default settings (default eta)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+In this section, we use the same PC surrogate, ``pce_surr``, for the second build. With the flag ``regression='bcs'``, we choose the BCS method for the fitting. A user-defined eta of 1e-10 is also passed in.
+
+.. GENERATED FROM PYTHON SOURCE LINES 172-181
+
+.. code-block:: Python
+
+
+    # (2) Build the linear regression object for fitting
+    pce_surr.build(regression='bcs', eta=1.e-10)
+
+    # Optional verbosity output:
+    print("Retained Basis and Coefficients:")
+    pce_surr.pcrv.printInfo()
+    print("Number of retained basis terms:", pce_surr.get_pc_terms())
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    Regression method: bcs
+    Retained Basis and Coefficients:
+    [[0 0 0 0]
+     [1 0 0 0]
+     [0 1 0 0]
+     [0 0 0 1]
+     [2 0 0 0]
+     [0 0 1 0]
+     [1 1 0 0]
+     [2 1 0 0]
+     [0 4 0 0]
+     [0 0 3 0]
+     [2 0 2 0]
+     [1 0 0 2]
+     [2 1 1 0]
+     [1 0 2 0]
+     [1 2 1 0]
+     [1 2 0 1]
+     [1 0 0 3]] [-0.62694767 -0.37426547 -0.08797315 -0.02795855  0.04176134 -0.03783695
+      0.01375504  0.02559825 -0.01616989 -0.01758198 -0.02274328  0.01132392
+     -0.01835694 -0.00490663 -0.00938681 -0.00898039  0.00175116]
+    Number of retained basis terms: [17]
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 182-183
+
+After fitting, we evaluate the PCE using our training and testing data. To analyze the model's goodness of fit, we first plot the surrogate predictions against the training and testing data respectively.
+
+.. GENERATED FROM PYTHON SOURCE LINES 183-188
+
+.. code-block:: Python
+
+
+    # (3) Evaluate the PC model
+    y_trn_approx = pce_surr.evaluate(value_ksi_trn)
+    y_tst_approx = pce_surr.evaluate(value_ksi_tst)
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 189-202
+
+.. code-block:: Python
+
+
+    # Plot the surrogate model's output vs. the training data output
+    y_trn_mM = [y_trn[:,0].min(),y_trn[:,0].max()]
+
+    fig1 = plt.figure(figsize=(8,6))
+    ax1 = fig1.add_axes([0.15, 0.15, 0.80, 0.75])
+
+    ax1.plot(y_trn[:,0],y_trn_approx["Y_eval"],".")
+    ax1.plot(y_trn_mM,y_trn_mM) # Diagonal line
+
+    ax1.set_xlabel("Train Data y", size=16)
+    ax1.set_ylabel("Predicted y", size=16); 
+
+
+
+
+.. image-sg:: /auto_examples/images/sphx_glr_ex_genz_bcs_003.png
+   :alt: ex genz bcs
+   :srcset: /auto_examples/images/sphx_glr_ex_genz_bcs_003.png
+   :class: sphx-glr-single-img
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+
     Text(71.09722222222221, 0.5, 'Predicted y')
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 154-166
+.. GENERATED FROM PYTHON SOURCE LINES 203-219
+
+.. code-block:: Python
+
+
+    # Plot the surrogate model's output vs. the testing data output
+
+    y_tst_mM = [y_tst[:,0].min(),y_tst[:,0].max()]
+
+    fig2 = plt.figure(figsize=(8,6))
+    ax2 = fig2.add_axes([0.15, 0.15, 0.80, 0.75])
+
+    ax2.plot(y_tst[:,0],y_tst_approx["Y_eval"],".")
+    ax2.plot(y_tst_mM,y_tst_mM) # Diagonal line
+
+    ax2.set_xlabel("Test Data y", size=16)
+    ax2.set_ylabel("Predicted y", size=16); 
+
+    # sphinx_gallery_thumbnail_number = 2
+
+
+
+
+.. image-sg:: /auto_examples/images/sphx_glr_ex_genz_bcs_004.png
+   :alt: ex genz bcs
+   :srcset: /auto_examples/images/sphx_glr_ex_genz_bcs_004.png
+   :class: sphx-glr-single-img
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+
+    Text(71.09722222222221, 0.5, 'Predicted y')
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 220-228
+
+.. code-block:: Python
+
+
+    # Evaluate goodness of fit with RMSE
+    rmse_trn = root_mean_squared_error(y_trn[:,0],y_trn_approx["Y_eval"])
+    print("The training RMSE in the PCE BCS approximation is %.2e"%rmse_trn)
+
+    rmse_tst = root_mean_squared_error(y_tst[:,0],y_tst_approx["Y_eval"])
+    print("The testing RMSE in the PCE BCS approximation is %.2e"%rmse_tst)
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    The training RMSE in the PCE BCS approximation is 1.62e-02
+    The testing RMSE in the PCE BCS approximation is 1.80e-02
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 229-232
+
+From our parity plots, we can see how BCS already generalizes better to unseen data as compared to LSQ, with reduced error in our testing data predictions. In our RMSE calculations, notice how the training error is smaller than the testing error. Though the difference in value is small, this amount is still significant as we have noise in our training data yet no noise in our testing data. That the testing error is higher than the training error suggests that overfitting is still happening within our model. 
+
+In the next section, we explore how finding the optimal value of eta -- the stopping criterion for the BCS parameter of gamma, determined through a Bayesian evidence maximization approach -- can impact model sparsity and accuracy to avoid overfitting.
+
+.. GENERATED FROM PYTHON SOURCE LINES 235-241
 
 BCS with optimal eta (found through cross-validation) 
- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
- In this section, we use the same PC surrogate, ``pce_surr``, for the second build. We call the PCE class method of ``build()`` 
- to build the linear regression model used to fit the surrogate. With the flag ``regression='bcs'``, we choose the BCS method for the fitting. 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Before we build our PC surrogate again with the most optimal eta, we first expose the cross-validation algorithm ``optimize_eta`` and its two helper functions, ``kfold_split`` and ``kfold_cv`` below. These functions have been implemented under-the-hood in the PCE surrogate class, but for the purposes of this tutorial, you may find it useful to follow along with the K-fold cross-validation method used to find the most optimal eta (the eta with the lowest validation RMSE across all of its folds).
 
-#############################################################################
- Instead of using a default eta, we call the cross-validation algorithm, ``optimize_eta()``, to choose the most optimal eta below. 
+Functions for cross-validation algorithm
++++++++++++++++++++++++++++++++++++++++++
 
- - With the flag ``plot=True``, the CV algorithm produces a graph of the training and testing (validation) data's RMSE values for each eta. The eta with the smallest RMSE for the validation data is the one chosen as the optimal eta.
-
-#############################################################################
- Before that, we expose the cross-validation algorithm ``optimize_eta`` and its two helper functions, ``kfold_split`` and ``kfold_cv`` that will be called in this section.
-
-.. GENERATED FROM PYTHON SOURCE LINES 166-208
+.. GENERATED FROM PYTHON SOURCE LINES 243-285
 
 .. code-block:: Python
 
@@ -478,7 +628,7 @@ BCS with optimal eta (found through cross-validation)
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 209-253
+.. GENERATED FROM PYTHON SOURCE LINES 286-330
 
 .. code-block:: Python
 
@@ -533,11 +683,12 @@ BCS with optimal eta (found through cross-validation)
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 254-370
+.. GENERATED FROM PYTHON SOURCE LINES 331-448
 
 .. code-block:: Python
 
-    def optimize_eta(pce, etas, nfolds, verbose=0, plot=False):
+
+    def optimize_eta(pce, etas, nfolds=3, verbose=0, plot=False):
         """
         Choose the optimum eta for Bayesian compressive sensing. Calculates the RMSE
             for each eta for a specified number of folds. Selects the eta with the lowest
@@ -598,7 +749,7 @@ BCS with optimal eta (found through cross-validation)
                 y_test_eval = (pce_copy.evaluate(x_test))['Y_eval']
 
                 # Print statement for verbose flag
-                if verbose > 1:
+                if verbose > 0:
                     print("Fold " + str(i + 1) + ", eta " + str(eta) + ", " + str(len(cfs)) + " terms retained out of a full basis of size " + str(len(pce.pcrv.mindices[0])))
             
                 # Calculate the RMSEs for the training and validation points.
@@ -660,7 +811,15 @@ BCS with optimal eta (found through cross-validation)
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 371-378
+.. GENERATED FROM PYTHON SOURCE LINES 449-454
+
+BCS build with the most optimal eta
++++++++++++++++++++++++++++++++++++++
+Instead of using a default eta, here we call the cross-validation algorithm, ``optimize_eta()``, to choose the most optimal eta from a range of etas given below. 
+
+- With the flag ``plot=True``, the CV algorithm produces a graph of the training and testing (validation) data's RMSE values for each eta. The eta with the smallest RMSE for the validation data is the one chosen as the optimal eta.
+
+.. GENERATED FROM PYTHON SOURCE LINES 454-461
 
 .. code-block:: Python
 
@@ -669,14 +828,14 @@ BCS with optimal eta (found through cross-validation)
     etas = 1/np.power(10,[i for i in range(0,16)])
 
     # Then, we call the function to choose the optimal eta:
-    eta_opt = optimize_eta(pce_surr, etas, 10, plot=True)
+    eta_opt = optimize_eta(pce_surr, etas, nfolds=10, verbose = True, plot=True)
 
 
 
 
-.. image-sg:: /auto_examples/images/sphx_glr_ex_genz_bcs_003.png
+.. image-sg:: /auto_examples/images/sphx_glr_ex_genz_bcs_005.png
    :alt: ex genz bcs
-   :srcset: /auto_examples/images/sphx_glr_ex_genz_bcs_003.png
+   :srcset: /auto_examples/images/sphx_glr_ex_genz_bcs_005.png
    :class: sphx-glr-single-img
 
 
@@ -684,27 +843,179 @@ BCS with optimal eta (found through cross-validation)
 
  .. code-block:: none
 
-    Warning: Sigma matrix has a negative diagonal element. Setting them to zero, but this may lead to inaccuracies.
-    Warning: Sigma matrix has a negative diagonal element. Setting them to zero, but this may lead to inaccuracies.
-    Warning: Sigma matrix has a negative diagonal element. Setting them to zero, but this may lead to inaccuracies.
-    Warning: Sigma matrix has a negative diagonal element. Setting them to zero, but this may lead to inaccuracies.
-    Warning: Sigma matrix has a negative diagonal element. Setting them to zero, but this may lead to inaccuracies.
-    Warning: Sigma matrix has a negative diagonal element. Setting them to zero, but this may lead to inaccuracies.
-    Warning: Sigma matrix has a negative diagonal element. Setting them to zero, but this may lead to inaccuracies.
-    Warning: Sigma matrix has a negative diagonal element. Setting them to zero, but this may lead to inaccuracies.
-    Warning: Sigma matrix has a negative diagonal element. Setting them to zero, but this may lead to inaccuracies.
-    Warning: Sigma matrix has a negative diagonal element. Setting them to zero, but this may lead to inaccuracies.
-    Warning: Sigma matrix has a negative diagonal element. Setting them to zero, but this may lead to inaccuracies.
+    Fold 1, eta 1.0, 3 terms retained out of a full basis of size 17
+    Fold 1, eta 0.1, 3 terms retained out of a full basis of size 17
+    Fold 1, eta 0.01, 4 terms retained out of a full basis of size 17
+    Fold 1, eta 0.001, 5 terms retained out of a full basis of size 17
+    Fold 1, eta 0.0001, 9 terms retained out of a full basis of size 17
+    Fold 1, eta 1e-05, 12 terms retained out of a full basis of size 17
+    Fold 1, eta 1e-06, 13 terms retained out of a full basis of size 17
+    Fold 1, eta 1e-07, 16 terms retained out of a full basis of size 17
+    Fold 1, eta 1e-08, 16 terms retained out of a full basis of size 17
+    Fold 1, eta 1e-09, 16 terms retained out of a full basis of size 17
+    Fold 1, eta 1e-10, 16 terms retained out of a full basis of size 17
+    Fold 1, eta 1e-11, 16 terms retained out of a full basis of size 17
+    Fold 1, eta 1e-12, 16 terms retained out of a full basis of size 17
+    Fold 1, eta 1e-13, 16 terms retained out of a full basis of size 17
+    Fold 1, eta 1e-14, 16 terms retained out of a full basis of size 17
+    Fold 1, eta 1e-15, 16 terms retained out of a full basis of size 17
+    Fold 2, eta 1.0, 3 terms retained out of a full basis of size 17
+    Fold 2, eta 0.1, 3 terms retained out of a full basis of size 17
+    Fold 2, eta 0.01, 4 terms retained out of a full basis of size 17
+    Fold 2, eta 0.001, 5 terms retained out of a full basis of size 17
+    Fold 2, eta 0.0001, 9 terms retained out of a full basis of size 17
+    Fold 2, eta 1e-05, 12 terms retained out of a full basis of size 17
+    Fold 2, eta 1e-06, 16 terms retained out of a full basis of size 17
+    Fold 2, eta 1e-07, 18 terms retained out of a full basis of size 17
+    Fold 2, eta 1e-08, 18 terms retained out of a full basis of size 17
+    Fold 2, eta 1e-09, 18 terms retained out of a full basis of size 17
+    Fold 2, eta 1e-10, 18 terms retained out of a full basis of size 17
+    Fold 2, eta 1e-11, 18 terms retained out of a full basis of size 17
+    Fold 2, eta 1e-12, 18 terms retained out of a full basis of size 17
+    Fold 2, eta 1e-13, 18 terms retained out of a full basis of size 17
+    Fold 2, eta 1e-14, 18 terms retained out of a full basis of size 17
+    Fold 2, eta 1e-15, 18 terms retained out of a full basis of size 17
+    Fold 3, eta 1.0, 3 terms retained out of a full basis of size 17
+    Fold 3, eta 0.1, 3 terms retained out of a full basis of size 17
+    Fold 3, eta 0.01, 4 terms retained out of a full basis of size 17
+    Fold 3, eta 0.001, 8 terms retained out of a full basis of size 17
+    Fold 3, eta 0.0001, 9 terms retained out of a full basis of size 17
+    Fold 3, eta 1e-05, 12 terms retained out of a full basis of size 17
+    Fold 3, eta 1e-06, 14 terms retained out of a full basis of size 17
+    Fold 3, eta 1e-07, 17 terms retained out of a full basis of size 17
+    Fold 3, eta 1e-08, 17 terms retained out of a full basis of size 17
+    Fold 3, eta 1e-09, 18 terms retained out of a full basis of size 17
+    Fold 3, eta 1e-10, 18 terms retained out of a full basis of size 17
+    Fold 3, eta 1e-11, 18 terms retained out of a full basis of size 17
+    Fold 3, eta 1e-12, 18 terms retained out of a full basis of size 17
+    Fold 3, eta 1e-13, 18 terms retained out of a full basis of size 17
+    Fold 3, eta 1e-14, 18 terms retained out of a full basis of size 17
+    Fold 3, eta 1e-15, 18 terms retained out of a full basis of size 17
+    Fold 4, eta 1.0, 3 terms retained out of a full basis of size 17
+    Fold 4, eta 0.1, 3 terms retained out of a full basis of size 17
+    Fold 4, eta 0.01, 4 terms retained out of a full basis of size 17
+    Fold 4, eta 0.001, 5 terms retained out of a full basis of size 17
+    Fold 4, eta 0.0001, 11 terms retained out of a full basis of size 17
+    Fold 4, eta 1e-05, 11 terms retained out of a full basis of size 17
+    Fold 4, eta 1e-06, 16 terms retained out of a full basis of size 17
+    Fold 4, eta 1e-07, 17 terms retained out of a full basis of size 17
+    Fold 4, eta 1e-08, 17 terms retained out of a full basis of size 17
+    Fold 4, eta 1e-09, 17 terms retained out of a full basis of size 17
+    Fold 4, eta 1e-10, 17 terms retained out of a full basis of size 17
+    Fold 4, eta 1e-11, 17 terms retained out of a full basis of size 17
+    Fold 4, eta 1e-12, 17 terms retained out of a full basis of size 17
+    Fold 4, eta 1e-13, 17 terms retained out of a full basis of size 17
+    Fold 4, eta 1e-14, 17 terms retained out of a full basis of size 17
+    Fold 4, eta 1e-15, 17 terms retained out of a full basis of size 17
+    Fold 5, eta 1.0, 3 terms retained out of a full basis of size 17
+    Fold 5, eta 0.1, 3 terms retained out of a full basis of size 17
+    Fold 5, eta 0.01, 4 terms retained out of a full basis of size 17
+    Fold 5, eta 0.001, 7 terms retained out of a full basis of size 17
+    Fold 5, eta 0.0001, 10 terms retained out of a full basis of size 17
+    Fold 5, eta 1e-05, 12 terms retained out of a full basis of size 17
+    Fold 5, eta 1e-06, 14 terms retained out of a full basis of size 17
+    Fold 5, eta 1e-07, 14 terms retained out of a full basis of size 17
+    Fold 5, eta 1e-08, 14 terms retained out of a full basis of size 17
+    Fold 5, eta 1e-09, 14 terms retained out of a full basis of size 17
+    Fold 5, eta 1e-10, 14 terms retained out of a full basis of size 17
+    Fold 5, eta 1e-11, 14 terms retained out of a full basis of size 17
+    Fold 5, eta 1e-12, 14 terms retained out of a full basis of size 17
+    Fold 5, eta 1e-13, 14 terms retained out of a full basis of size 17
+    Fold 5, eta 1e-14, 14 terms retained out of a full basis of size 17
+    Fold 5, eta 1e-15, 14 terms retained out of a full basis of size 17
+    Fold 6, eta 1.0, 3 terms retained out of a full basis of size 17
+    Fold 6, eta 0.1, 3 terms retained out of a full basis of size 17
+    Fold 6, eta 0.01, 4 terms retained out of a full basis of size 17
+    Fold 6, eta 0.001, 7 terms retained out of a full basis of size 17
+    Fold 6, eta 0.0001, 11 terms retained out of a full basis of size 17
+    Fold 6, eta 1e-05, 11 terms retained out of a full basis of size 17
+    Fold 6, eta 1e-06, 16 terms retained out of a full basis of size 17
+    Fold 6, eta 1e-07, 16 terms retained out of a full basis of size 17
+    Fold 6, eta 1e-08, 16 terms retained out of a full basis of size 17
+    Fold 6, eta 1e-09, 17 terms retained out of a full basis of size 17
+    Fold 6, eta 1e-10, 17 terms retained out of a full basis of size 17
+    Fold 6, eta 1e-11, 17 terms retained out of a full basis of size 17
+    Fold 6, eta 1e-12, 17 terms retained out of a full basis of size 17
+    Fold 6, eta 1e-13, 17 terms retained out of a full basis of size 17
+    Fold 6, eta 1e-14, 17 terms retained out of a full basis of size 17
+    Fold 6, eta 1e-15, 17 terms retained out of a full basis of size 17
+    Fold 7, eta 1.0, 3 terms retained out of a full basis of size 17
+    Fold 7, eta 0.1, 3 terms retained out of a full basis of size 17
+    Fold 7, eta 0.01, 4 terms retained out of a full basis of size 17
+    Fold 7, eta 0.001, 4 terms retained out of a full basis of size 17
+    Fold 7, eta 0.0001, 7 terms retained out of a full basis of size 17
+    Fold 7, eta 1e-05, 13 terms retained out of a full basis of size 17
+    Fold 7, eta 1e-06, 13 terms retained out of a full basis of size 17
+    Fold 7, eta 1e-07, 13 terms retained out of a full basis of size 17
+    Fold 7, eta 1e-08, 13 terms retained out of a full basis of size 17
+    Fold 7, eta 1e-09, 13 terms retained out of a full basis of size 17
+    Fold 7, eta 1e-10, 13 terms retained out of a full basis of size 17
+    Fold 7, eta 1e-11, 13 terms retained out of a full basis of size 17
+    Fold 7, eta 1e-12, 13 terms retained out of a full basis of size 17
+    Fold 7, eta 1e-13, 13 terms retained out of a full basis of size 17
+    Fold 7, eta 1e-14, 13 terms retained out of a full basis of size 17
+    Fold 7, eta 1e-15, 13 terms retained out of a full basis of size 17
+    Fold 8, eta 1.0, 3 terms retained out of a full basis of size 17
+    Fold 8, eta 0.1, 3 terms retained out of a full basis of size 17
+    Fold 8, eta 0.01, 4 terms retained out of a full basis of size 17
+    Fold 8, eta 0.001, 7 terms retained out of a full basis of size 17
+    Fold 8, eta 0.0001, 10 terms retained out of a full basis of size 17
+    Fold 8, eta 1e-05, 11 terms retained out of a full basis of size 17
+    Fold 8, eta 1e-06, 15 terms retained out of a full basis of size 17
+    Fold 8, eta 1e-07, 16 terms retained out of a full basis of size 17
+    Fold 8, eta 1e-08, 16 terms retained out of a full basis of size 17
+    Fold 8, eta 1e-09, 16 terms retained out of a full basis of size 17
+    Fold 8, eta 1e-10, 16 terms retained out of a full basis of size 17
+    Fold 8, eta 1e-11, 16 terms retained out of a full basis of size 17
+    Fold 8, eta 1e-12, 16 terms retained out of a full basis of size 17
+    Fold 8, eta 1e-13, 16 terms retained out of a full basis of size 17
+    Fold 8, eta 1e-14, 16 terms retained out of a full basis of size 17
+    Fold 8, eta 1e-15, 16 terms retained out of a full basis of size 17
+    Fold 9, eta 1.0, 3 terms retained out of a full basis of size 17
+    Fold 9, eta 0.1, 3 terms retained out of a full basis of size 17
+    Fold 9, eta 0.01, 4 terms retained out of a full basis of size 17
+    Fold 9, eta 0.001, 7 terms retained out of a full basis of size 17
+    Fold 9, eta 0.0001, 8 terms retained out of a full basis of size 17
+    Fold 9, eta 1e-05, 12 terms retained out of a full basis of size 17
+    Fold 9, eta 1e-06, 14 terms retained out of a full basis of size 17
+    Fold 9, eta 1e-07, 15 terms retained out of a full basis of size 17
+    Fold 9, eta 1e-08, 15 terms retained out of a full basis of size 17
+    Fold 9, eta 1e-09, 15 terms retained out of a full basis of size 17
+    Fold 9, eta 1e-10, 15 terms retained out of a full basis of size 17
+    Fold 9, eta 1e-11, 15 terms retained out of a full basis of size 17
+    Fold 9, eta 1e-12, 15 terms retained out of a full basis of size 17
+    Fold 9, eta 1e-13, 15 terms retained out of a full basis of size 17
+    Fold 9, eta 1e-14, 15 terms retained out of a full basis of size 17
+    Fold 9, eta 1e-15, 15 terms retained out of a full basis of size 17
+    Fold 10, eta 1.0, 3 terms retained out of a full basis of size 17
+    Fold 10, eta 0.1, 3 terms retained out of a full basis of size 17
+    Fold 10, eta 0.01, 4 terms retained out of a full basis of size 17
+    Fold 10, eta 0.001, 4 terms retained out of a full basis of size 17
+    Fold 10, eta 0.0001, 9 terms retained out of a full basis of size 17
+    Fold 10, eta 1e-05, 14 terms retained out of a full basis of size 17
+    Fold 10, eta 1e-06, 14 terms retained out of a full basis of size 17
+    Fold 10, eta 1e-07, 14 terms retained out of a full basis of size 17
+    Fold 10, eta 1e-08, 14 terms retained out of a full basis of size 17
+    Fold 10, eta 1e-09, 14 terms retained out of a full basis of size 17
+    Fold 10, eta 1e-10, 14 terms retained out of a full basis of size 17
+    Fold 10, eta 1e-11, 14 terms retained out of a full basis of size 17
+    Fold 10, eta 1e-12, 14 terms retained out of a full basis of size 17
+    Fold 10, eta 1e-13, 14 terms retained out of a full basis of size 17
+    Fold 10, eta 1e-14, 14 terms retained out of a full basis of size 17
+    Fold 10, eta 1e-15, 14 terms retained out of a full basis of size 17
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 379-381
+.. GENERATED FROM PYTHON SOURCE LINES 462-467
 
-Now, with the optimal eta obtained, we run the fitting again. Then, we evaluate the PCE and produce a parity plot for the predicted output vs. the testing data. 
-Notice that the larger eta, 10e-2, retained fewer basis terms (6) compared to the smaller user-defined eta of 10e-10 (which retained 20 basis terms).
+From our eta plot above, we can see that our most optimal eta falls at :math:`1 \times 10^{-10}`, where the validation error is the lowest. While this indicates that the model performs well at this eta value, we can still observe a tendency towards overfitting in the model. For larger eta values, the training and validation RMSE lines are close together, suggesting that the model is performing similarly on both seen and unseen datasets, as would be desired. However, as eta decreases, the training RMSE falls while the validation RMSE rises, highlighting a region where overfitting occurs. 
 
-.. GENERATED FROM PYTHON SOURCE LINES 381-390
+This behavior is expected because smaller eta values retain more basis terms, increasing the model's degrees of freedom. While this added flexibility allows the model to fit the training data more closely, it also makes the model more prone to fitting noise rather than capturing the true underlying function. Selecting the most optimal eta of :math:`1 \times 10^{-4}`, as compared to the earlier user-defined eta of :math:`1 \times 10^{-10}`, allows us to balance model complexity and generalization.
+
+Now, with the optimum eta obtained, we can run the fitting again and produce parity plots for our predicted output.
+
+.. GENERATED FROM PYTHON SOURCE LINES 467-476
 
 .. code-block:: Python
 
@@ -715,7 +1026,7 @@ Notice that the larger eta, 10e-2, retained fewer basis terms (6) compared to th
     # Optional verbosity output:
     print("Retained Basis and Coefficients:")
     pce_surr.pcrv.printInfo()
-    print("Number of retained basis terms:", len(pce_surr.pcrv.mindices[0]))
+    print("Number of retained basis terms:", pce_surr.get_pc_terms())
 
 
 
@@ -727,79 +1038,59 @@ Notice that the larger eta, 10e-2, retained fewer basis terms (6) compared to th
 
     Regression method: bcs
     Retained Basis and Coefficients:
-    [[1 0 0 0]
+    [[0 0 0 0]
+     [1 0 0 0]
+     [0 1 0 0]
+     [0 0 0 1]
      [2 0 0 0]
-     [0 1 0 1]
-     [1 0 3 0]
-     [0 2 0 2]
-     [0 0 1 2]] [-1.15692903  0.24292952 -0.29524043 -0.15503765  0.13276008  0.06118484]
-    Number of retained basis terms: 6
+     [0 0 1 0]
+     [1 1 0 0]
+     [2 1 0 0]] [-0.62783727 -0.37134989 -0.08735439 -0.02919352  0.0480559  -0.03471433
+      0.0232746   0.0196456 ]
+    Number of retained basis terms: [8]
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 391-392
-
-Evaluate the PC model with training and testing data
-
-.. GENERATED FROM PYTHON SOURCE LINES 392-402
-
-.. code-block:: Python
-
-    y_trn_approx = pce_surr.evaluate(x_trn)
-    y_tst_approx = pce_surr.evaluate(x_tst)
-
-    # Evaluate goodness of fit with RMSE
-    rmse_trn = root_mean_squared_error(y_trn[:,0],y_trn_approx["Y_eval"])
-    print("The training RMSE error in the PCE BCS approximation is %.2e"%rmse_trn)
-
-    rmse_tst = root_mean_squared_error(y_tst[:,0],y_tst_approx["Y_eval"])
-    print("The testing RMSE error in the PCE BCS approximation is %.2e"%rmse_tst)
-
-
-
-
-
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    The training RMSE error in the PCE BCS approximation is 8.11e-02
-    The testing RMSE error in the PCE BCS approximation is 1.10e-01
-
-
-
-
-.. GENERATED FROM PYTHON SOURCE LINES 403-405
-
-While the training RMSE error was almost half that of the testing RMSE error for the first fitting, the RMSE errors here are much closer to each other in value. 
-This suggests that the model has more effectively generalized to the unseen data; a better eta has improved performance.
-
-.. GENERATED FROM PYTHON SOURCE LINES 405-420
+.. GENERATED FROM PYTHON SOURCE LINES 477-482
 
 .. code-block:: Python
 
 
-    # Plot the surrogate model's output vs. the testing data output
-    y_tst_mM = [y_tst[:,0].min(),y_tst[:,0].max()]
+    # Evaluate the PC model with training and testing data
+    y_trn_approx = pce_surr.evaluate(value_ksi_trn)
+    y_tst_approx = pce_surr.evaluate(value_ksi_tst)
 
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 483-496
+
+.. code-block:: Python
+
+
+    # Plot the surrogate model's output vs. the training data output
+    y_tst_mM = [y_trn[:,0].min(),y_trn[:,0].max()]
 
     fig2 = plt.figure(figsize=(8,6))
     ax2 = fig2.add_axes([0.15, 0.15, 0.80, 0.75])
 
-
-    ax2.plot(y_tst[:,0],y_tst_approx["Y_eval"],".")
+    ax2.plot(y_trn[:,0],y_trn_approx["Y_eval"],".")
     ax2.plot(y_tst_mM,y_tst_mM) # Diagonal line
 
-    ax2.set_xlabel("Test Data y", size=16)
+    ax2.set_xlabel("Train Data y", size=16)
     ax2.set_ylabel("Predicted y", size=16); 
 
-    # sphinx_gallery_thumbnail_number = 2
 
 
-.. image-sg:: /auto_examples/images/sphx_glr_ex_genz_bcs_004.png
+
+.. image-sg:: /auto_examples/images/sphx_glr_ex_genz_bcs_006.png
    :alt: ex genz bcs
-   :srcset: /auto_examples/images/sphx_glr_ex_genz_bcs_004.png
+   :srcset: /auto_examples/images/sphx_glr_ex_genz_bcs_006.png
    :class: sphx-glr-single-img
 
 
@@ -812,10 +1103,77 @@ This suggests that the model has more effectively generalized to the unseen data
 
 
 
+.. GENERATED FROM PYTHON SOURCE LINES 497-510
+
+.. code-block:: Python
+
+
+    # Plot the surrogate model's output vs. the testing data output
+    y_tst_mM = [y_tst[:,0].min(),y_tst[:,0].max()]
+
+    fig2 = plt.figure(figsize=(8,6))
+    ax2 = fig2.add_axes([0.15, 0.15, 0.80, 0.75])
+
+    ax2.plot(y_tst[:,0],y_tst_approx["Y_eval"],".")
+    ax2.plot(y_tst_mM,y_tst_mM) # Diagonal line
+
+    ax2.set_xlabel("Test Data y", size=16)
+    ax2.set_ylabel("Predicted y", size=16); 
+
+
+
+
+.. image-sg:: /auto_examples/images/sphx_glr_ex_genz_bcs_007.png
+   :alt: ex genz bcs
+   :srcset: /auto_examples/images/sphx_glr_ex_genz_bcs_007.png
+   :class: sphx-glr-single-img
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+
+    Text(71.09722222222221, 0.5, 'Predicted y')
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 511-519
+
+.. code-block:: Python
+
+
+    # Evaluate goodness of fit with RMSE
+    rmse_trn = root_mean_squared_error(y_trn[:,0],y_trn_approx["Y_eval"])
+    print("The training RMSE in the PCE BCS approximation is %.2e"%rmse_trn)
+
+    rmse_tst = root_mean_squared_error(y_tst[:,0],y_tst_approx["Y_eval"])
+    print("The testing RMSE in the PCE BCS approximation is %.2e"%rmse_tst)
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    The training RMSE in the PCE BCS approximation is 2.02e-02
+    The testing RMSE in the PCE BCS approximation is 1.21e-02
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 520-523
+
+In these final RMSE calculations, we can see how our training RMSE has decreased from 1.80e-02 to 1.21e-02 by building with the most optimal eta. This indicates that our model has improved in generalization and is performing better on unseen data. Though our training error is still larger than our testing error, this can be attributed to the lack of noise in our testing data, while noise is present in our training data. While the optimal eta reduces overfitting and improves generalization, the noise in our training data still impacts the training error and remains an important consideration during our evaluation of the model performance.
+
+While this demonstration calls the cross-validation algorithm as a function outside of the PCE class, these methods have been implemented in PyTUQ through the PCE class. The example "Polynomial Chaos Expansion Construction" demonstrates how to call the eta optimization methods directly from the PCE class.
+
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 5.760 seconds)
+   **Total running time of the script:** (0 minutes 6.413 seconds)
 
 
 .. _sphx_glr_download_auto_examples_ex_genz_bcs.py:

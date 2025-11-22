@@ -7,7 +7,7 @@ import numpy as np
 import scipy.stats as ss
 import matplotlib.pyplot as plt
 
-from pytuq.utils.plotting import myrc
+from pytuq.utils.plotting import myrc, plot_cov, plot_cov_tri
 
 myrc()
 
@@ -36,25 +36,14 @@ else:
 dim_show = len(ind_show)
 
 
-f=3.
-
 for ii in range(dim_show):
     for jj in range(ii+1,dim_show):
         i, j = ind_show[ii], ind_show[jj]
-        x = np.linspace(mean[i]-f*np.sqrt(cov[i,i]), mean[i]+f*np.sqrt(cov[i,i]), 100)
-        y = np.linspace(mean[j]-f*np.sqrt(cov[j,j]), mean[j]+f*np.sqrt(cov[j,j]), 100)
-        X, Y = np.meshgrid(x, y)
 
-        try:
-            rv = ss.multivariate_normal([mean[i], mean[j]], [[cov[i,i], cov[i,j]],[cov[j,i], cov[j,j]]], allow_singular=True)
-            XY = np.dstack((X, Y))
+        mm = np.array([mean[i], mean[j]])
+        cc = np.array([[cov[i,i], cov[i,j]],[cov[j,i], cov[j,j]]])
+        plot_cov(mm, cc, f=3., pnames=[f'p{i}', f'p{j}'], ngr=100, savefig=True)
+        plt.clf()
 
-            Z = rv.pdf(XY)
-            plt.contour(X,Y,Z)
-            plt.xlabel('p'+str(i+1))
-            plt.ylabel('p'+str(j+1))
-            plt.savefig('cov_'+str(i)+'_'+str(j)+'.png')
-            plt.clf()
+plot_cov_tri(mean[ind_show], cov[np.ix_(ind_show, ind_show)], names=[f'p{i}' for i in ind_show])
 
-        except ValueError:
-            print(f"Covariance for pair ({i},{j}) is not positive-semidefinite.")

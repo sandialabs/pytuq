@@ -1,34 +1,45 @@
 #!/usr/bin/env python
 
-################################################################################
-# Input PC generation given mvn, samples or marginal pc
-################################################################################
-
-
-
-# Input
-# Usage  : pc_prep.py <format> <filename> <input_pcorder>
-# e.g.   : pc_prep.py marg marg_pc.txt 3
-#        : pc_prep.py sam inp_sam.txt 3
-#        : pc_prep.py mvn mean.txt cov.txt
-# Output : pcf.txt
-
-
 import os
 import sys
+import argparse
 import numpy as np
 
 from pytuq.utils.mindex import get_mi
 from pytuq.utils.xutils import safe_cholesky
+from pytuq.workflows.fits import pc_ros
 
-input_format=sys.argv[1]
-filename=sys.argv[2]
+################################################################################
+################################################################################
+################################################################################
+
+usage_str = 'Input PC generation given mvn, samples or marginal PC.'
+parser = argparse.ArgumentParser(description=usage_str)
+parser.add_argument("-f", "--fmt", dest="input_format", type=str, default='sam', help="Input format", choices=['marg', 'sam', 'mvn'])
+parser.add_argument("-i", "--inp", dest="filename", type=str, default='xsam.txt', help="Input filename: marginal coefficients (if format is marg), samples (if format is sam), mean (if format is mvn).")
+parser.add_argument("-c", "--cov", dest="cov_filename", type=str, default='cov.txt', help="Covariance filename (relevant if format is mvn).")
+parser.add_argument("-p", "--pco", dest="pcorder", type=int, default=1, help="PC order (relevant if format is marg or sam).")
+parser.add_argument("-t", "--pct", dest="pctype", type=str, default='HG', help="PC type (relevant if format is sam).")
+args = parser.parse_args()
+
+################################################################################
+################################################################################
+################################################################################
+
+input_format=args.input_format
+filename=args.filename
 
 if input_format == "marg" or input_format == "sam":
-	input_pcorder=int(sys.argv[3])
-elif input_format == "mvn":
-	filename2=sys.argv[3]
+	pcorder=args.pcorder
+if input_format == "mvn":
+	cov_filename=args.cov_filename
+if input_format == "sam":
+	pctype = args.pctype
 
+
+################################################################################
+################################################################################
+################################################################################
 
 if input_format=="marg":
 
@@ -50,8 +61,8 @@ if input_format=="marg":
 		margpc_all.append(margpc_cur)
 
 
-	assert(input_pcorder >= maxord)
-	mindex_totalorder=get_mi(input_pcorder, dim)
+	assert(pcorder >= maxord)
+	mindex_totalorder=get_mi(pcorder, dim)
 
 	mindex=np.zeros((1,dim),dtype=int)
 	cfs=np.zeros((1,dim))
@@ -81,18 +92,15 @@ if input_format=="marg":
 
 
 elif input_format=="sam":
-	sam = np.loadtxt(filename)
-	ros = Rosenblatt(sam)
-	print("Not implemented yet")
-	sys.exit()
-	# TODO: make ex_ros_pc.py a function and use it here
+	sams = np.loadtxt(filename)
 
-	# cmd=uqtkbin+'pce_quad -o '+str(input_pcorder)+' -w HG -f '+filename+ ' > pcq.log; mv PCcoeff.dat pcf.txt'
-	# os.system(cmd)
+	nsam, dim = sams.shape
+	pcrv = pc_ros(sams, pctype=pctype, order=pcorder, nreg=nsam, bwfactor=1.0)
+	np.savetxt('pcf.txt', np.array(pcrv.coefs).T)
 
 elif input_format=="mvn":
 	mean = np.loadtxt(filename)
-	cov = np.loadtxt(filename2)
+	cov = np.loadtxt(cov_filename)
 
 	dim = mean.shape[0]
 
@@ -106,4 +114,4 @@ elif input_format=="mvn":
 	np.savetxt('pcf.txt', param_pcf)
 
 else:
-	print("pc_prep.py : Input format not recognized. Must be marg or sam.")
+	print("pc_prep.py : Input format not recognized. Must be marg or sam or mvn.")
