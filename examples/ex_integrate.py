@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import numpy as np
-from pytuq.utils.integr import *
+from pytuq.ftools.integr import *
 
 def single_gaussian(x, w=1.0):
 

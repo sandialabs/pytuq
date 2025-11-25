@@ -7,7 +7,7 @@ import numpy as np
 from scipy.stats import multivariate_normal, kde
 from scipy.integrate import nquad
 
-from .maps import Domainizer
+from ..utils.maps import Domainizer
 from ..rv.mrv import MCMCRV, GMM
 
 
@@ -25,7 +25,7 @@ class Integrator():
             domain (None, optional): Optionally provide a domain of integration, `(d, 2)`.
             func_args (None, optional): Optional keyword arguments of the function.
             xdata (None, optional): Provide input samples, if needed by the integrator.
-            **kw_args: Other keyword arguments necessary for the integratior at hand.
+            **kw_args: Other keyword arguments necessary for the integrator at hand.
 
         Raises:
             NotImplementedError: This needs to be implemented by children classes.
