@@ -59,6 +59,8 @@ extensions += ['sphinx_gallery.gen_gallery']
 
 numpydoc_show_class_members = False 
 
+napoleon_use_admonition_for_examples = True
+
 # -----------------------------------------------------------------------------
 # Sphinx AutoAPI
 # -----------------------------------------------------------------------------
