@@ -39,7 +39,7 @@ class GLMAP:
             L (np.ndarray or callable or None)        : 2d float array of shape :math:`(M,npt)` or a callable user-provided function or None.
             verbose  (bool) : controls verbosity
         '''
-        self.x = np.asarray(x,copy=True)
+        self.x = np.array(x)
         if verbose:
             print(f'x: {self.x.shape}')
 
@@ -51,7 +51,7 @@ class GLMAP:
                 if verbose:
                     print(f'L: function:',self.L)
             else:
-                self.L = np.asarray(L,copy=True)
+                self.L = np.array(L)
                 assert (self.L.shape[1] == self.npt), 'with L as array, it must have shape (:,npt)'
                 if verbose:
                     print(f'L: matrix: {self.L.shape}')
@@ -428,7 +428,6 @@ class MGS:
             self.Z[i,i] = 1.0
 
             if i > 0:
-                #rgam = np.array([self.iprod(self.phi[i],self.tht[j]) for j in range(i)])
                 rgam = self.iprod(self.phi,self.tht,k=i,l=0,kmxp=i+1,lmxp=i)[0] 
                 if np.all(self.lam[0:i]):
                     self.Z[i,0:i] = np.multiply(rgam,self.lam[0:i])
@@ -581,16 +580,16 @@ class MMGS:
 
             if False:
                 with open('gso_P'+str(stage)+'.txt', 'w') as f:
-                    f.write('pymgs gso P'+str(stage)+':\n')
+                    f.write('gso P'+str(stage)+':\n')
                     np.savetxt(f, self.mgs[stage].Pmat, fmt='%.18e', delimiter=' ')
                 xt = np.linspace(0,1,100)
                 phixt = np.array([f(xt) for f in self.mgs[stage].phi]).T
                 thtxt = np.array([f(xt) for f in self.mgs[stage].tht]).T
                 with open('gso_phi'+str(stage)+'.txt', 'w') as f:
-                    f.write('pymgs gso phixt'+str(stage)+':\n')
+                    f.write('gso phixt'+str(stage)+':\n')
                     np.savetxt(f, phixt, fmt='%.18e', delimiter=' ')
                 with open('gso_tht'+str(stage)+'.txt', 'w') as f:
-                    f.write('pymgs gso thtxt'+str(stage)+':\n')
+                    f.write('gso thtxt'+str(stage)+':\n')
                     np.savetxt(f, thtxt, fmt='%.18e', delimiter=' ')
 
             self.thta[stage] = copy.deepcopy(self.mgs[stage].tht)
