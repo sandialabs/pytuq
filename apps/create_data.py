@@ -28,6 +28,8 @@ parser.add_argument("-x", "--xtrain", dest="xtrain_file", type=str, default=None
 parser.add_argument("-s", "--sigma", dest="sig", type=float, default=0.0, help="Noise size")
 parser.add_argument('-g', dest="grad", action='store_true',
                     help='Whether to compute gradients (default: False)')
+parser.add_argument("-z", "--seed", dest="seed", type=int, default=None,
+                    help="Seed for exact reproduction. If None, random seed is used.")
 
 args = parser.parse_args()
 
@@ -36,6 +38,10 @@ nsam = args.npts
 grad = args.grad
 sig = args.sig
 xtrain_file = args.xtrain_file
+seed = args.seed
+
+if seed is not None:
+    np.random.seed(seed)
 
 try:
     fcn = fcn_dict[fname]
