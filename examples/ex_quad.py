@@ -1,5 +1,9 @@
 #!/usr/bin/env python
-"""A test for sampling routines."""
+"""Example demonstrating quadrature point generation for PC germ variables.
+
+This script generates and visualizes quadrature points for polynomial chaos
+germ variables using tensor product quadrature rules.
+"""
 
 import matplotlib.pyplot as plt
 

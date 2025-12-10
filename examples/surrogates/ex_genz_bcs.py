@@ -28,13 +28,10 @@ These methods have been implemented under-the-hood in PyTUQ. Refer to example "P
 """
 # %%
 
-import os
-import sys
 
 import numpy as np
 import copy
 import math
-import pytuq.utils.funcbank as fcb
 from matplotlib import pyplot as plt
 from sklearn.metrics import root_mean_squared_error
 

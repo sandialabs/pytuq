@@ -1,4 +1,9 @@
 #!/usr/bin/env python
+"""Example demonstrating numerical integration of Gaussian functions.
+
+This script tests various integration methods on single and double Gaussian
+functions, comparing numerical results with analytical solutions.
+"""
 
 import numpy as np
 from pytuq.ftools.integr import *

@@ -19,6 +19,8 @@ try:
     from quinn.nns.rnet import RNet, NonPar
 except ImportError:
     print("Warning: QUiNN not installed. NN functionality won't work.")
+    sys.exit()
+
 
 myrc()
 

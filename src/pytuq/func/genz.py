@@ -1,39 +1,19 @@
 #!/usr/bin/env python
-
+"""
+    Genz function family module."""
 import numpy as np
 
 from .func import Function
 
 
 class GenzBase(Function):
-    """Base class for Genz function family.
+    """Base class for Genz function family
 
-    Sets up shift, dimensional weights and domain.
-
-    Attributes
-    -----------
-    shifts : {number}
-        Shift parameter.
-    weights : {numpy array, 1d}
-        Dimensional weights.
-
+    Attributes:
+        weights (np.ndarray): Dimensional weights.
     """
 
-    def __init__(self, weights=[1.0], domain=None, name='Genz'):
-        """Initialization.
-
-        Parameters
-        ----------
-        shift : {number}, optional
-            Shift parameter (the default is 0.0, which means no shift)
-        weights : {list or numpy array, 1d}, optional
-            Dimensional weights (the default is [1.0],
-                                 which means 1d function with weight 1)
-        domain : {list or numpy array, 2d}, optional
-            Input domain of the function (the default is None,
-                                          which means [0,1]^d)
-        """
-
+    def __init__(self, weights=[1.0], domain=None, name='GenzBase'):
         super().__init__()
 
         self.weights = np.array(weights)
@@ -50,7 +30,14 @@ class GenzBase(Function):
 
 
 class GenzOscillatory(GenzBase):
-    """Genz Oscillatory function.
+    r"""Genz Oscillatory function
+
+    Reference: [https://www.sfu.ca/~ssurjano/oscil.html]
+
+    .. math::
+        f(x) = \cos\left(2 \pi s + w^T x \right)
+
+    Default values are :math:`s = 0` and :math:`w = [1.0]`.
 
     """
     def __init__(self, shift=0.0, weights=[1.0], domain=None,
@@ -81,7 +68,13 @@ class GenzOscillatory(GenzBase):
 
 
 class GenzSum(GenzBase):
-    """Genz Oscillatory function.
+    r"""Genz Summation function
+
+    .. math::
+        f(x) = s + w^T x
+
+    Default values are :math:`s = 0` and :math:`w = [1.0]`.
+
 
     """
     def __init__(self, shift=0.0, weights=[1.0], domain=None,
@@ -108,7 +101,15 @@ class GenzSum(GenzBase):
         return grad
 
 class GenzCornerPeak(GenzBase):
-    """Genz Corner Peak function.
+    r"""Genz Corner Peak function
+
+    Reference: [https://www.sfu.ca/~ssurjano/copeak.html]
+
+    .. math::
+        f(x) = \frac{1}{(1 + w^T x)^{d+1}}
+
+     Default values are :math:`w = [1.0]`.
+
 
     """
     def __init__(self, weights=[1.0], domain=None, name='Genz Corner Peak'):

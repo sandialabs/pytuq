@@ -1,7 +1,10 @@
 #!/usr/bin/env python
+"""Example demonstrating KLE combined with Polynomial Chaos for high-dimensional output approximation.
 
+This script uses Karhunen-Loève Expansion to reduce output dimensionality, then builds
+PC surrogates for the reduced modes to efficiently represent high-dimensional model outputs.
+"""
 
-import sys
 import numpy as np
 import matplotlib.pyplot as plt
 

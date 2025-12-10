@@ -12,7 +12,7 @@ The Python Toolkit for Uncertainty Quantification (PyTUQ) is a Python-only set o
 - Methods for Gaussian process regression
 - Global sensitivity analysis methods
 - SVD-based dimensionality reduction techniques
-- Karhunen-Loeve expansions
+- Karhunen-Loève expansions
 - Various methods for linear regression
 - Bayesian compressive sensing techniques
 - MCMC classes for calibration and parameter inference
@@ -22,9 +22,18 @@ The Python Toolkit for Uncertainty Quantification (PyTUQ) is a Python-only set o
 
 Authors
 --------
-- Khachik Sargsyan
-- Bert Debusschere
-- Emilie Grace Baillo
+- Khachik Sargsyan (Sandia National Laboratories)
+- Bert Debusschere (Sandia National Laboratories)
+- Emilie Grace Baillo (Sandia National Laboratories)
+
+Contributors
+-------------
+- Habib N. Najm (Sandia National Laboratories)
+- Javier Murgoitio-Esandi (Google)
+- Cosmin Safta (Sandia National Laboratories)
+- Joy Bahr-Mueller (Sandia National Laboratories)
+- Vahan Sargsyan (Stuyvesant High School)
+
 
 Acknowledgements
 -----------------

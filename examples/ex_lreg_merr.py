@@ -1,8 +1,8 @@
 #!/usr/bin/env python
+"""Example demonstrating linear regression with measurement error.
 
-"""[summary]
-
-[description]
+This script shows how to perform polynomial chaos regression accounting for
+measurement errors in the data using the MERR (Measurement Error in Regression) method.
 """
 import numpy as np
 import matplotlib.pyplot as plt
@@ -13,8 +13,6 @@ from pytuq.utils.mindex import get_mi
 from pytuq.utils.plotting import myrc, lighten_color
 from pytuq.utils.maps import scale01ToDom
 from pytuq.lreg.merr import lreg_merr
-from pytuq.lreg.anl import anl
-import pytuq.utils.funcbank as fcb
 
 myrc()
 

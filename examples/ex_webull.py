@@ -1,8 +1,10 @@
 #!/usr/bin/env python
+"""Example demonstrating Weibull distribution and mixture models.
 
+This script creates Weibull distributions and mixtures with Gaussian components,
+demonstrating sampling from complex mixed distributions.
+"""
 
-import os
-import sys
 import numpy as np
 import matplotlib.pyplot as plt
 

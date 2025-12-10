@@ -13,6 +13,7 @@ try:
     from quinn.nns.mlp import MLP
 except ImportError:
     print("Warning: QUiNN not installed. NN functionality won't work.")
+    sys.exit()
 
 myrc()
 

@@ -1,5 +1,9 @@
 #!/usr/bin/env python
-"""A test for some operations with the PCRV class."""
+"""Example demonstrating PCRV compression and random dimension selection.
+
+This script creates a multivariate normal PCRV with specified random dimensions,
+samples from it, and demonstrates PC compression operations.
+"""
 
 import numpy as np
 

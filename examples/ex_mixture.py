@@ -1,8 +1,10 @@
 #!/usr/bin/env python
+"""Example demonstrating mixture distributions with Weibull and Gaussian components.
 
+This script creates and samples from a mixture distribution combining Weibull and
+multivariate normal distributions with specified weights.
+"""
 
-import os
-import sys
 import numpy as np
 import matplotlib.pyplot as plt
 

@@ -94,7 +94,6 @@ class anl(lreg):
         # True posterior covariance
         if self.method == 'full':
             self.cf_cov = sigmahatsq*invptp
-            np.savetxt('covar.txt', self.cf_cov)
         # Variational covariance
         elif self.method == 'vi':
             self.cf_cov = np.diag(sigmahatsq/np.diag(np.dot(Amat.T, Amat)+self.cov_nugget*np.diag(np.ones((nbas,)))))

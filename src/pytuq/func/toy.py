@@ -1,15 +1,21 @@
 #!/usr/bin/env python
-
+"""
+    Toy benchmark functions module."""
 import numpy as np
 
 from .func import Function
 
 
 class Constant(Function):
-    """Multioutput Constant function [REF]
+    r"""Multioutput Constant function
+
+    Returns a constant vector for any input.
+
+    .. math::
+        f(x) = (c, c, \ldots, c)
 
     """
-    def __init__(self, dim, const, name='Constant'):
+    def __init__(self, dim=1, const=np.array([1.0]), name='Constant'):
         super().__init__()
         self.setDimDom(dimension=dim)
         self.name = name
@@ -19,19 +25,6 @@ class Constant(Function):
         return
 
     def __call__(self, x):
-        """Function call.
-
-        Parameters
-        ----------
-        x : numpy array, 2dim
-            Nxd array of N points in d=1 dimensions
-
-        Returns
-        -------
-        numpy array, 1dim
-            Vector of N values
-        """
-
         self.checkDim(x)
 
         nx = x.shape[0]
@@ -45,10 +38,15 @@ class Constant(Function):
 
 
 class Identity(Function):
-    """Identity
+    r"""Identity function
+
+    Returns the input unchanged.
+
+    .. math::
+        f(x) = x
 
     """
-    def __init__(self, dim, name='Identity'):
+    def __init__(self, dim=1, name='Identity'):
         super().__init__()
         self.setDimDom(dimension=dim)
         self.name = name
@@ -57,20 +55,7 @@ class Identity(Function):
         return
 
     def __call__(self, x):
-        """Function call.
-
-        Parameters
-        ----------
-        x : numpy array, 2dim
-            Nxd array of N points in d=1 dimensions
-
-        Returns
-        -------
-        numpy array, 1dim
-            Vector of N values
-        """
-
-        self.checkDim(x) # TODO: MAKE THIS A DECORATOR?
+        self.checkDim(x)
 
         return x
 
@@ -82,6 +67,12 @@ class Identity(Function):
 
 
 class Quad(Function):
+    r"""Quadratic function.
+
+    .. math::
+        f(x) = 3 + x - x^2
+
+    """
     def __init__(self, name='Quad'):
         super().__init__()
         self.setDimDom(dimension=1)
@@ -89,19 +80,6 @@ class Quad(Function):
         self.outdim = 1
 
     def __call__(self, x):
-        """Function call.
-
-        Parameters
-        ----------
-        x : numpy array, 2d
-            Nxd array of N points in d dimensions
-
-        Returns
-        -------
-        numpy array, 1d
-            Vector of N values
-        """
-
         #: Ensure x is of the right dimensionality
         self.checkDim(x)
 
@@ -115,6 +93,12 @@ class Quad(Function):
 
 
 class Quad2d(Function):
+    r"""2D Quadratic function
+
+    .. math::
+        f(x) = 3 + x_1 - x_2^2
+
+    """
     def __init__(self, name='Quad2d'):
         super().__init__()
         self.setDimDom(dimension=2)
@@ -122,19 +106,6 @@ class Quad2d(Function):
         self.outdim = 1
 
     def __call__(self, x):
-        """Function call.
-
-        Parameters
-        ----------
-        x : numpy array, 2d
-            Nxd array of N points in d dimensions
-
-        Returns
-        -------
-        numpy array, 1d
-            Vector of N values
-        """
-
         #: Ensure x is of the right dimensionality
         self.checkDim(x)
 
@@ -153,6 +124,12 @@ class Quad2d(Function):
 
 
 class Exp(Function):
+    r"""Exponential function with weighted input
+
+    .. math::
+        f(x) = e^{w^T x}
+
+    """
     def __init__(self, weights=[1.], name='Exp'):
         super().__init__()
         self.name = name
@@ -161,19 +138,6 @@ class Exp(Function):
         self.outdim = 1
 
     def __call__(self, x):
-        """Function call.
-
-        Parameters
-        ----------
-        x : numpy array, 2d
-            Nxd array of N points in d dimensions
-
-        Returns
-        -------
-        numpy array, 1d
-            Vector of N values
-        """
-
         #: Ensure x is of the right dimensionality
         self.checkDim(x)
 
@@ -190,6 +154,11 @@ class Exp(Function):
 
 
 class Log(Function):
+    r"""Logarithm function with weighted input
+
+    .. math::
+        f(x) = \log|w^T x|
+    """
     def __init__(self, weights=[1.], name='Log'):
         super().__init__()
         self.name = name
@@ -198,19 +167,6 @@ class Log(Function):
         self.outdim = 1
 
     def __call__(self, x):
-        """Function call.
-
-        Parameters
-        ----------
-        x : numpy array, 2d
-            Nxd array of N points in d dimensions
-
-        Returns
-        -------
-        numpy array, 1d
-            Vector of N values
-        """
-
         #: Ensure x is of the right dimensionality
         self.checkDim(x)
 

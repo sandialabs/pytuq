@@ -1,8 +1,8 @@
 #!/usr/bin/env python
+"""Example demonstrating polynomial chaos linear regression methods.
 
-"""[summary]
-
-[description]
+This script compares various linear regression techniques (LSQ, ANL, OPT, MERR)
+for constructing polynomial chaos surrogates and evaluates their performance.
 """
 import numpy as np
 import matplotlib.pyplot as plt
@@ -12,10 +12,7 @@ from pytuq.rv.pcrv import PCRV
 from pytuq.utils.mindex import get_mi
 from pytuq.utils.plotting import myrc, lighten_color, plot_dm
 from pytuq.utils.maps import scale01ToDom
-from pytuq.lreg.merr import lreg_merr
 from pytuq.lreg.anl import anl
-from pytuq.lreg.opt import opt
-from pytuq.lreg.lreg import lsq
 import pytuq.utils.funcbank as fcb
 
 myrc()

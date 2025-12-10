@@ -1,10 +1,13 @@
 #!/usr/bin/env python
+"""Example demonstrating multivariate normal polynomial chaos random variables.
 
+This script creates PCRV_mvn objects with specified means and covariances,
+and generates samples from the multivariate normal distribution.
+"""
 
 import numpy as np
 
-from pytuq.rv.pcrv import PCRV_iid, PCRV_mvn
-from pytuq.utils.mindex import get_mi
+from pytuq.rv.pcrv import PCRV_mvn
 
 
 covMatSize=14 #dimension of L and C

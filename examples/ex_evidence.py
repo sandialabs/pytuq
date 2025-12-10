@@ -1,8 +1,8 @@
 #!/usr/bin/env python
+"""Example demonstrating model selection using Bayesian evidence computation.
 
-"""[summary]
-
-[description]
+This script compares different models using analytical linear regression (ANL) and 
+computes evidence values to determine which model best fits the data.
 """
 import numpy as np
 import matplotlib.pyplot as plt

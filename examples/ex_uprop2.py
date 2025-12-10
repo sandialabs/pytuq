@@ -1,6 +1,10 @@
 #!/usr/bin/env python
+"""Example demonstrating uncertainty propagation workflows using projection and regression.
 
-import sys
+This script compares projection-based and regression-based methods for propagating
+PC input uncertainties through nonlinear forward models.
+"""
+
 import numpy as np
 
 from pytuq.rv.pcrv import PCRV

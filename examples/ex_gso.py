@@ -1,5 +1,8 @@
 #!/usr/bin/env python
-"""Example for testing Multistage Modified Gram-Schmidt (MMGS) orthogonalization for functions."""
+"""Example for testing Multistage Modified Gram-Schmidt (MMGS) orthogonalization for functions.
+
+Written by Habib N. Najm (2025).
+"""
 
 import sys
 import argparse

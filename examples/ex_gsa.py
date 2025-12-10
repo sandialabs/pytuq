@@ -1,7 +1,11 @@
 #!/usr/bin/env python
+"""Example demonstrating global sensitivity analysis using Sobol indices.
 
+This script computes main and total Sobol sensitivity indices using either
+sampling-based (SamSobol) or PC-based (PCSobol) methods for a test function.
+"""
 
-import os, sys
+import sys
 import numpy as np
 try:
     import pprint
@@ -9,7 +13,6 @@ except ModuleNotFoundError:
     print("Please pip install pprint for more readable printing.")
 
 
-from pytuq.func.benchmark import Ishigami
 from pytuq.gsa.gsa import SamSobol, PCSobol
 from pytuq.utils.plotting import plot_sens, plot_jsens, myrc
 
