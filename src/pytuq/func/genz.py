@@ -41,7 +41,7 @@ class GenzOscillatory(GenzBase):
 
     """
     def __init__(self, shift=0.0, weights=[1.0], domain=None,
-                 name='Genz Oscillatory'):
+                 name='GenzOscillatory'):
         super().__init__(weights=weights, domain=domain, name=name)
         self.shift = shift
 
@@ -78,7 +78,7 @@ class GenzSum(GenzBase):
 
     """
     def __init__(self, shift=0.0, weights=[1.0], domain=None,
-                 name='Genz Summation'):
+                 name='GenzSummation'):
         super().__init__(weights=weights, domain=domain, name=name)
         self.shift = shift
 
@@ -112,7 +112,7 @@ class GenzCornerPeak(GenzBase):
 
 
     """
-    def __init__(self, weights=[1.0], domain=None, name='Genz Corner Peak'):
+    def __init__(self, weights=[1.0], domain=None, name='GenzCornerPeak'):
         super().__init__(weights=weights, domain=domain, name=name)
 
     def __call__(self, x):
