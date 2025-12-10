@@ -1,7 +1,11 @@
 #!/usr/bin/env python
+"""Example demonstrating MCMC-based Bayesian calibration of a multivariate linear model.
+
+This script uses Adaptive MCMC to infer parameters of a linear model with
+multiple features, including bias and weight parameters.
+"""
 
 import sys
-import torch
 import numpy as np
 
 import matplotlib.pyplot as plt

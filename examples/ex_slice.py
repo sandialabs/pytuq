@@ -1,8 +1,8 @@
 #!/usr/bin/env python
+"""Example demonstrating 2D function slicing and visualization.
 
-"""[summary]
-
-[description]
+This script shows how to plot 2D slices of functions at various anchor points,
+useful for exploring function behavior around specific parameter values.
 """
 
 import numpy as np

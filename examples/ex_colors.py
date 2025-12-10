@@ -1,5 +1,9 @@
 #!/usr/bin/env python
-"""Example that creates RGB triples."""
+"""Example demonstrating color palette generation and visualization.
+
+This script creates and displays a set of RGB color triples using PyTUQ's
+plotting utilities, useful for creating consistent color schemes in plots.
+"""
 
 from matplotlib import pyplot as plt
 

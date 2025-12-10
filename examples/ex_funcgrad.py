@@ -1,16 +1,14 @@
 #!/usr/bin/env python
+"""Example demonstrating gradient checking and evaluation for benchmark functions.
 
-"""[summary]
-
-[description]
+This script tests the analytical gradients of functions against numerical gradients,
+and visualizes function values and derivatives.
 """
 
-import sys
 import numpy as np
 from matplotlib import pyplot as plt
 
-from pytuq.utils.mindex import get_mi, get_npc
-from pytuq.func import toy, genz, chem, benchmark, poly, oper, func
+from pytuq.func import chem
 from pytuq.utils.plotting import myrc
 
 myrc()

@@ -1,10 +1,13 @@
 #!/usr/bin/env python
+"""Example demonstrating multivariate random variable (MRV) operations.
 
+This script shows how to create and manipulate polynomial chaos random variables
+including independent and multivariate normal PC random variables.
+"""
 
 import numpy as np
 
 from pytuq.rv.pcrv import PCRV_iid, PCRV_mvn
-from pytuq.utils.mindex import get_mi
 
 
 

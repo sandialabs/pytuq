@@ -1,18 +1,21 @@
 #!/usr/bin/env python
+"""Example demonstrating Mean-Field Variational Inference (MFVI) for Bayesian inference.
+
+This script uses MFVI with different optimization methods (PSO, Scipy) to approximate
+posterior distributions for parameters in a simple model.
+"""
 
 import numpy as np
 #from autograd import grad
 
 import matplotlib.pyplot as plt
-from scipy.special import erf
 
 
 from pytuq.minf.vi import MFVI
 from pytuq.optim.pso import PSO
-from pytuq.optim.sciwrap import ScipyWrapper
 
 from pytuq.func.func import Function
-from pytuq.func.benchmark import TFData
+from pytuq.func.bench1d import TFData
 from pytuq.utils.maps import scale01ToDom
 from pytuq.utils.plotting import plot_dm, myrc
 

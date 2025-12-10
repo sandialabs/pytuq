@@ -1,5 +1,9 @@
 #!/usr/bin/env python
-"""Example of multiindex manipulations."""
+"""Example demonstrating multiindex generation and encoding operations.
+
+This script shows how to generate polynomial chaos multiindices and encode
+them for efficient storage and manipulation.
+"""
 
 from pytuq.utils.mindex import get_mi, encode_mindex
 

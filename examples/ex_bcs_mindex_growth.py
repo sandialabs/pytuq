@@ -1,15 +1,18 @@
 #!/usr/bin/env python
-"""An example demonstrating bcs and multiindex growth.
+"""Example demonstrating adaptive multiindex growth with Bayesian Compressive Sensing.
+
+This script shows how to iteratively grow a polynomial chaos surrogate using
+adaptive multiindex selection and BCS regression for sparse approximation.
 """
 import numpy as np
 
 
 from pytuq.rv.pcrv import PCRV
 from pytuq.utils.mindex import get_mi
-from pytuq.utils.plotting import myrc, lighten_color, plot_dm, plot_jsens
+from pytuq.utils.plotting import myrc, plot_dm
 from pytuq.utils.maps import scale01ToDom
 from pytuq.lreg.bcs import bcs
-from pytuq.utils.mindex import mi_addfront_cons, mi_addfront
+from pytuq.utils.mindex import mi_addfront
 
 import pytuq.utils.funcbank as fcb
 

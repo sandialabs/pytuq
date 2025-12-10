@@ -1,5 +1,8 @@
 #!/usr/bin/env python
-"""Module for Gram-Schmidt orthogonalization for functions."""
+"""Module for Gram-Schmidt orthogonalization for functions.
+
+Written by Habib N. Najm (2025).
+"""
 
 import sys
 import time

@@ -1,11 +1,12 @@
 #!/usr/bin/env python
+"""Example demonstrating Karhunen-Loève Expansion (KLE) and SVD for dimensionality reduction.
 
+This script builds KLE or SVD representations of model output data to capture
+variance with reduced dimensionality.
+"""
 
-import sys
 import numpy as np
-import matplotlib.pyplot as plt
 
-from pytuq.linred.kle import KLE
 from pytuq.linred.svd import SVD
 
 

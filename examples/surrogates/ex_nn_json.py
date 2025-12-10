@@ -9,17 +9,13 @@ during their respective function calls to demonstrate updates to the neural netw
 When requested with a provided filename, the updated options are printed out to a json file.
 """
 
-import sys
 import torch
-import json
 import numpy as np
 
 from pytuq.surrogates.nn import NN
-from quinn.solvers.nn_vi import NN_VI
-from quinn.nns.rnet import RNet, Poly
 from quinn.utils.plotting import myrc
 from quinn.utils.maps import scale01ToDom
-from quinn.func.funcs import Sine, Sine10, blundell
+from quinn.func.funcs import Sine
 
 def main():
     """Main function."""

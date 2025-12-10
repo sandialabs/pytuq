@@ -1,13 +1,21 @@
 #!/usr/bin/env python
-
+"""
+Chemistry benchmark potential functions module.
+"""
 import numpy as np
 
 from .func import Function
 
 
 class LennardJones(Function):
-    """Lennard Jones Potential
+    r"""Lennard Jones Potential
 
+    Reference: [https://en.wikipedia.org/wiki/Lennard-Jones_potential]
+
+    .. math::
+        f(r) = \epsilon \left( \left(\frac{r_0}{r}\right)^{2n} - 2 \left(\frac{r_0}{r}\right)^n \right)
+
+    Default parameters are :math:`\epsilon = 1.0`, :math:`r_0 = 1.0`, and :math:`n=6`.
     """
     def __init__(self, name='Lennard Jones', eps=1.0, r0=1.0, n=6):
         super().__init__()
@@ -24,18 +32,7 @@ class LennardJones(Function):
         return
 
     def __call__(self, x):
-        """Function call.
 
-        Parameters
-        ----------
-        x : numpy array, 2dim
-            Nxd array of N points in d=1 dimensions
-
-        Returns
-        -------
-        numpy array, 1dim
-            Vector of N values
-        """
 
         self.checkDim(x)
 
@@ -54,7 +51,12 @@ class LennardJones(Function):
 
 
 class MullerBrown(Function):
-    """Muller Brown Potential.
+    r"""Muller Brown Potential.
+
+    Reference: [https://hunterheidenreich.com/notes/computational-chemistry/benchmark-problems/muller-brown-1979/]
+
+    .. math::
+        f(x,y) = \sum_{i=1}^{4} A_i \exp\left(a_i(x - x_{0i})^2 + b_i(x - x_{0i})(y - y_{0i}) + c_i(y - y_{0i})^2\right)
 
     """
     def __init__(self, name='Muller-Brown'):
@@ -74,18 +76,7 @@ class MullerBrown(Function):
         return
 
     def __call__(self, x):
-        """Function call.
 
-        Parameters
-        ----------
-        x : numpy array, 2dim
-            Nxd array of N points in d=2 dimensions
-
-        Returns
-        -------
-        numpy array, 1dim
-            Vector of N values
-        """
         #: Ensure x is of the right dimensionality
         self.checkDim(x)
 

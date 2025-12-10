@@ -1,6 +1,10 @@
 #!/usr/bin/env python
+"""Example demonstrating basic polynomial chaos random variable operations.
 
-import sys
+This script creates a PCRV with random coefficients and demonstrates computing
+statistics (mean, variance), basis norms, and sampling.
+"""
+
 import numpy as np
 
 from pytuq.rv.pcrv import PCRV

@@ -1,8 +1,8 @@
 #!/usr/bin/env python
+"""Example demonstrating Bayesian Compressive Sensing (BCS) for sparse polynomial chaos regression.
 
-"""[summary]
-
-[description]
+This script shows how to use BCS to construct a sparse polynomial chaos surrogate model
+with specified multiindex and model data, comparing predictions with true function values.
 """
 import numpy as np
 import matplotlib.pyplot as plt

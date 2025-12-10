@@ -1,8 +1,8 @@
 #!/usr/bin/env python
+"""Example demonstrating 1D Genz test functions.
 
-"""[summary]
-
-[description]
+This script evaluates and plots various 1D Genz functions including oscillatory,
+corner peak, and sum functions across their domains.
 """
 import numpy as np
 from matplotlib import pyplot as plt
