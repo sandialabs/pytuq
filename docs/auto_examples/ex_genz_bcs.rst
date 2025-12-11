@@ -45,18 +45,15 @@ with parity plots and Root Mean Square Error (RMSE) values used to compare their
 To follow along with the cross-validation algorithm for selecting the optimal eta, see section "Functions for cross-validation algorithm" in the second half of the notebook. 
 These methods have been implemented under-the-hood in PyTUQ. Refer to example "Polynomial Chaos Expansion Construction" (``ex_pce.py``) for a demonstration of how to use these methods through a direct call to the PCE class.
 
-.. GENERATED FROM PYTHON SOURCE LINES 30-45
+.. GENERATED FROM PYTHON SOURCE LINES 30-42
 
 .. code-block:: Python
 
 
-    import os
-    import sys
 
     import numpy as np
     import copy
     import math
-    import pytuq.utils.funcbank as fcb
     from matplotlib import pyplot as plt
     from sklearn.metrics import root_mean_squared_error
 
@@ -71,7 +68,7 @@ These methods have been implemented under-the-hood in PyTUQ. Refer to example "P
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 46-54
+.. GENERATED FROM PYTHON SOURCE LINES 43-51
 
 Constructing PC surrogate and generating data
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -82,7 +79,7 @@ along with training data and testing data with output noise. This data and the c
 will be used to create the same PC surrogate fitted in all three examples: first with linear regression, 
 next using BCS with a given eta, and third using BCS with the most optimal eta. 
 
-.. GENERATED FROM PYTHON SOURCE LINES 56-61
+.. GENERATED FROM PYTHON SOURCE LINES 53-58
 
 .. code-block:: Python
 
@@ -98,7 +95,7 @@ next using BCS with a given eta, and third using BCS with the most optimal eta.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 62-87
+.. GENERATED FROM PYTHON SOURCE LINES 59-84
 
 .. code-block:: Python
 
@@ -134,13 +131,13 @@ next using BCS with a given eta, and third using BCS with the most optimal eta.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 88-91
+.. GENERATED FROM PYTHON SOURCE LINES 85-88
 
 With a stochastic dimensionality of 4 (defined above) and a chosen polynomial order of 4, we construct the PC surrogate that 
 will be used in both builds. By calling the ``printInfo()`` method from the PCRV variable, you can print the PC surrogate's 
 full basis and current coefficients, before BCS selects and retains the most significant PC terms to reduce the basis.
 
-.. GENERATED FROM PYTHON SOURCE LINES 91-104
+.. GENERATED FROM PYTHON SOURCE LINES 88-101
 
 .. code-block:: Python
 
@@ -246,19 +243,19 @@ full basis and current coefficients, before BCS selects and retains the most sig
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 105-108
+.. GENERATED FROM PYTHON SOURCE LINES 102-105
 
 From the input parameters of our PC surrogate, we have 70 basis terms in our PCE. With 70 training points and no noise, having 70 basis terms would mean that we have a fully determined system, as the number of training points is the same as the number of basis terms. However, with the addition of noise in our training data, it becomes harder for the model to accurately fit all basis terms, leading to potential overfitting. This demonstrates the helpful role BCS might play as a choice for our regression build. As a sparse regression approach, BCS uses regularization to select only the most relevant basis terms, making it particularly effective in situations like this, where we do not have enough clear information to fit all basis terms without overfitting.
 
 In the next sections, we will explore the effects of overfitting in more detail.
 
-.. GENERATED FROM PYTHON SOURCE LINES 110-113
+.. GENERATED FROM PYTHON SOURCE LINES 107-110
 
 Least Squares Regression
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 To start, we call the PCE class method of ``build()`` with no arguments to use the default regression option of least squares. Then, through ``evaluate()``, we can generate model predictions for our training and testing data.
 
-.. GENERATED FROM PYTHON SOURCE LINES 115-123
+.. GENERATED FROM PYTHON SOURCE LINES 112-120
 
 .. code-block:: Python
 
@@ -283,7 +280,7 @@ To start, we call the PCE class method of ``build()`` with no arguments to use t
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 124-137
+.. GENERATED FROM PYTHON SOURCE LINES 121-134
 
 .. code-block:: Python
 
@@ -318,7 +315,7 @@ To start, we call the PCE class method of ``build()`` with no arguments to use t
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 138-154
+.. GENERATED FROM PYTHON SOURCE LINES 135-151
 
 .. code-block:: Python
 
@@ -356,7 +353,7 @@ To start, we call the PCE class method of ``build()`` with no arguments to use t
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 155-163
+.. GENERATED FROM PYTHON SOURCE LINES 152-160
 
 .. code-block:: Python
 
@@ -382,19 +379,19 @@ To start, we call the PCE class method of ``build()`` with no arguments to use t
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 164-167
+.. GENERATED FROM PYTHON SOURCE LINES 161-164
 
 The results above show us the limitations of using least squares regression to construct our surrogate. From the parity plots, we can see how the testing predictions from the LSQ regression are more spread out from the parity line, while the training predictions are extremely close to the line. Because LSQ fits all the basis terms to the training data, the model fits too closely to the noisy training dataset, and the true underlying pattern of the function is not effectively captured. Our RMSE values align with this as well: while the training RMSE is extremely low, the testing RMSE is significantly higher, as the model struggles to generalize to the unseen test data. 
 
 To improve our model's generalization, we can build our model with BCS instead. As a sparse regression method, BCS reduces the number of basis terms with which we can fit our data to, reducing the risk of overfitting. 
 
-.. GENERATED FROM PYTHON SOURCE LINES 169-172
+.. GENERATED FROM PYTHON SOURCE LINES 166-169
 
 BCS with default settings (default eta)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 In this section, we use the same PC surrogate, ``pce_surr``, for the second build. With the flag ``regression='bcs'``, we choose the BCS method for the fitting. A user-defined eta of 1e-10 is also passed in.
 
-.. GENERATED FROM PYTHON SOURCE LINES 172-181
+.. GENERATED FROM PYTHON SOURCE LINES 169-178
 
 .. code-block:: Python
 
@@ -441,11 +438,11 @@ In this section, we use the same PC surrogate, ``pce_surr``, for the second buil
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 182-183
+.. GENERATED FROM PYTHON SOURCE LINES 179-180
 
 After fitting, we evaluate the PCE using our training and testing data. To analyze the model's goodness of fit, we first plot the surrogate predictions against the training and testing data respectively.
 
-.. GENERATED FROM PYTHON SOURCE LINES 183-188
+.. GENERATED FROM PYTHON SOURCE LINES 180-185
 
 .. code-block:: Python
 
@@ -461,7 +458,7 @@ After fitting, we evaluate the PCE using our training and testing data. To analy
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 189-202
+.. GENERATED FROM PYTHON SOURCE LINES 186-199
 
 .. code-block:: Python
 
@@ -496,7 +493,7 @@ After fitting, we evaluate the PCE using our training and testing data. To analy
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 203-219
+.. GENERATED FROM PYTHON SOURCE LINES 200-216
 
 .. code-block:: Python
 
@@ -534,7 +531,7 @@ After fitting, we evaluate the PCE using our training and testing data. To analy
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 220-228
+.. GENERATED FROM PYTHON SOURCE LINES 217-225
 
 .. code-block:: Python
 
@@ -560,13 +557,13 @@ After fitting, we evaluate the PCE using our training and testing data. To analy
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 229-232
+.. GENERATED FROM PYTHON SOURCE LINES 226-229
 
 From our parity plots, we can see how BCS already generalizes better to unseen data as compared to LSQ, with reduced error in our testing data predictions. In our RMSE calculations, notice how the training error is smaller than the testing error. Though the difference in value is small, this amount is still significant as we have noise in our training data yet no noise in our testing data. That the testing error is higher than the training error suggests that overfitting is still happening within our model. 
 
 In the next section, we explore how finding the optimal value of eta -- the stopping criterion for the BCS parameter of gamma, determined through a Bayesian evidence maximization approach -- can impact model sparsity and accuracy to avoid overfitting.
 
-.. GENERATED FROM PYTHON SOURCE LINES 235-241
+.. GENERATED FROM PYTHON SOURCE LINES 232-238
 
 BCS with optimal eta (found through cross-validation) 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -575,7 +572,7 @@ Before we build our PC surrogate again with the most optimal eta, we first expos
 Functions for cross-validation algorithm
 +++++++++++++++++++++++++++++++++++++++++
 
-.. GENERATED FROM PYTHON SOURCE LINES 243-285
+.. GENERATED FROM PYTHON SOURCE LINES 240-282
 
 .. code-block:: Python
 
@@ -628,7 +625,7 @@ Functions for cross-validation algorithm
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 286-330
+.. GENERATED FROM PYTHON SOURCE LINES 283-327
 
 .. code-block:: Python
 
@@ -683,7 +680,7 @@ Functions for cross-validation algorithm
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 331-448
+.. GENERATED FROM PYTHON SOURCE LINES 328-445
 
 .. code-block:: Python
 
@@ -811,7 +808,7 @@ Functions for cross-validation algorithm
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 449-454
+.. GENERATED FROM PYTHON SOURCE LINES 446-451
 
 BCS build with the most optimal eta
 +++++++++++++++++++++++++++++++++++++
@@ -819,7 +816,7 @@ Instead of using a default eta, here we call the cross-validation algorithm, ``o
 
 - With the flag ``plot=True``, the CV algorithm produces a graph of the training and testing (validation) data's RMSE values for each eta. The eta with the smallest RMSE for the validation data is the one chosen as the optimal eta.
 
-.. GENERATED FROM PYTHON SOURCE LINES 454-461
+.. GENERATED FROM PYTHON SOURCE LINES 451-458
 
 .. code-block:: Python
 
@@ -1007,7 +1004,7 @@ Instead of using a default eta, here we call the cross-validation algorithm, ``o
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 462-467
+.. GENERATED FROM PYTHON SOURCE LINES 459-464
 
 From our eta plot above, we can see that our most optimal eta falls at :math:`1 \times 10^{-10}`, where the validation error is the lowest. While this indicates that the model performs well at this eta value, we can still observe a tendency towards overfitting in the model. For larger eta values, the training and validation RMSE lines are close together, suggesting that the model is performing similarly on both seen and unseen datasets, as would be desired. However, as eta decreases, the training RMSE falls while the validation RMSE rises, highlighting a region where overfitting occurs. 
 
@@ -1015,7 +1012,7 @@ This behavior is expected because smaller eta values retain more basis terms, in
 
 Now, with the optimum eta obtained, we can run the fitting again and produce parity plots for our predicted output.
 
-.. GENERATED FROM PYTHON SOURCE LINES 467-476
+.. GENERATED FROM PYTHON SOURCE LINES 464-473
 
 .. code-block:: Python
 
@@ -1052,7 +1049,7 @@ Now, with the optimum eta obtained, we can run the fitting again and produce par
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 477-482
+.. GENERATED FROM PYTHON SOURCE LINES 474-479
 
 .. code-block:: Python
 
@@ -1068,7 +1065,7 @@ Now, with the optimum eta obtained, we can run the fitting again and produce par
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 483-496
+.. GENERATED FROM PYTHON SOURCE LINES 480-493
 
 .. code-block:: Python
 
@@ -1103,7 +1100,7 @@ Now, with the optimum eta obtained, we can run the fitting again and produce par
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 497-510
+.. GENERATED FROM PYTHON SOURCE LINES 494-507
 
 .. code-block:: Python
 
@@ -1138,7 +1135,7 @@ Now, with the optimum eta obtained, we can run the fitting again and produce par
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 511-519
+.. GENERATED FROM PYTHON SOURCE LINES 508-516
 
 .. code-block:: Python
 
@@ -1164,7 +1161,7 @@ Now, with the optimum eta obtained, we can run the fitting again and produce par
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 520-523
+.. GENERATED FROM PYTHON SOURCE LINES 517-520
 
 In these final RMSE calculations, we can see how our training RMSE has decreased from 1.80e-02 to 1.21e-02 by building with the most optimal eta. This indicates that our model has improved in generalization and is performing better on unseen data. Though our training error is still larger than our testing error, this can be attributed to the lack of noise in our testing data, while noise is present in our training data. While the optimal eta reduces overfitting and improves generalization, the noise in our training data still impacts the training error and remains an important consideration during our evaluation of the model performance.
 
@@ -1173,7 +1170,7 @@ While this demonstration calls the cross-validation algorithm as a function outs
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 6.413 seconds)
+   **Total running time of the script:** (0 minutes 10.810 seconds)
 
 
 .. _sphx_glr_download_auto_examples_ex_genz_bcs.py:
