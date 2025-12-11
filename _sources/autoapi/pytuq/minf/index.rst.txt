@@ -1,0 +1,21 @@
+pytuq.minf
+==========
+
+.. py:module:: pytuq.minf
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/pytuq/minf/calib/index
+   /autoapi/pytuq/minf/infer/index
+   /autoapi/pytuq/minf/likelihoods/index
+   /autoapi/pytuq/minf/mcmc/index
+   /autoapi/pytuq/minf/minf/index
+   /autoapi/pytuq/minf/priors/index
+   /autoapi/pytuq/minf/vi/index
+
+

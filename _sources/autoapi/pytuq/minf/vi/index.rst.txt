@@ -1,0 +1,73 @@
+pytuq.minf.vi
+=============
+
+.. py:module:: pytuq.minf.vi
+
+.. autoapi-nested-parse::
+
+   Variational Inference module.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.minf.vi.MFVI
+
+
+Module Contents
+---------------
+
+.. py:class:: MFVI(model, y_data, pdim, lossinfo, reparam=None, priors=None)
+
+   .. py:attribute:: model
+
+
+   .. py:attribute:: pdim
+
+
+   .. py:attribute:: y_data
+
+
+   .. py:attribute:: reparam
+      :value: None
+
+
+
+   .. py:attribute:: priors
+      :value: None
+
+
+
+   .. py:attribute:: nmc
+
+
+   .. py:attribute:: datasigma
+
+
+   .. py:method:: sigma_exp(rho)
+
+
+   .. py:method:: sigma_logexp(rho)
+
+
+   .. py:method:: sigma_idt(rho)
+
+
+   .. py:method:: get_posteriors(var_params)
+
+
+   .. py:method:: eval_loss(var_params, ps=None)
+
+
+   .. py:method:: eval_loss_grad_(x, eps=0.001)
+
+
+   .. py:method:: plot_parpdf(var_params, ax=None)
+
+
+   .. py:method:: compute_pred(var_params, nsam, model=None)
+
+

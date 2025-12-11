@@ -1,0 +1,104 @@
+pytuq.utils.mindex
+==================
+
+.. py:module:: pytuq.utils.mindex
+
+.. autoapi-nested-parse::
+
+   Various routines dealing with multiindices.
+
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   pytuq.utils.mindex.get_npc
+   pytuq.utils.mindex.get_mi
+   pytuq.utils.mindex.encode_mindex
+   pytuq.utils.mindex.micf_join
+   pytuq.utils.mindex.mi_addfront_cons
+   pytuq.utils.mindex.mi_addfront
+
+
+Module Contents
+---------------
+
+.. py:function:: get_npc(ord, dim)
+
+   Get number of polynomial basis with a total-degree truncation.
+
+   :param ord: Order `p`
+   :type ord: int
+   :param dim: Dimension `d`
+   :type dim: int
+
+   :returns: Number of bases with order up to `p` and dimension `d`, i.e. `(p+d)!/p!d!`.
+   :rtype: int
+
+
+.. py:function:: get_mi(ord, dim)
+
+   Get multiindex array with a total-degree truncation.
+
+   :param ord: Order `p`
+   :type ord: int
+   :param dim: Dimension `d`
+   :type dim: int
+
+   :returns: Multiindex array of size `(K,d)`, where `K=(p+d)!/p!d!`.
+   :rtype: int np.ndarray
+
+
+.. py:function:: encode_mindex(mindex)
+
+   Encodes the multiindex into a list of dimension-order pairs.
+
+   :param mindex: Integer 2d array of multiindices.
+   :type mindex: np.ndarray
+
+   :returns: List of tuples, where each tuple contains two lists, dimension list and order list, corresponding to a multiindex.
+   :rtype: list[tuple]
+
+   .. note:: This is convenient for sparse and high-dimensional multiindices, for readability and for analysis.
+
+
+.. py:function:: micf_join(mindex_list, cfs_list)
+
+   Merge a list of multiindices and corresponding coefficients.
+   TODO: what happens to common coefficients?
+
+   :param mindex_list: List of 2d multiindex arrays.
+   :type mindex_list: list[np.ndarray]
+   :param cfs_list: List of 1d coefficient arrays
+   :type cfs_list: list[np.ndarray]
+
+   :returns: A tuple of multiindex and coefficient lists.
+   :rtype: (np.ndarray, np.ndarray)
+
+
+.. py:function:: mi_addfront_cons(mindex)
+
+   Adding a front to multiindex in a conservative way, i.e.
+   a multiindex is added only if *all* parents are in the current set
+
+   :param mindex: The current multiindex
+   :type mindex: np.ndarray
+
+   :returns: A triplet of muliindices, the new muliindex, the added new multiindices, and the 'front', i.e. multiindices whose children are added.
+   :rtype: list[np.ndarray, np.ndarray, np.ndarray]
+
+
+.. py:function:: mi_addfront(mindex)
+
+   Adding a front to multiindex in a non-conservative way, i.e.
+   a multiindex is added only if *any* of the parents is in the current set
+
+   :param mindex: The current multiindex
+   :type mindex: np.ndarray
+
+   :returns: A triplet of muliindices, the new muliindex, the added new multiindices, and the 'front', i.e. multiindices whose children are added.
+   :rtype: list[np.ndarray, np.ndarray, np.ndarray]
+
+

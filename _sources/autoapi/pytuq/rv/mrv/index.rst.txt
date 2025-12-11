@@ -1,0 +1,678 @@
+pytuq.rv.mrv
+============
+
+.. py:module:: pytuq.rv.mrv
+
+.. autoapi-nested-parse::
+
+   Classes for various multivariate random variables.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.rv.mrv.MRV
+   pytuq.rv.mrv.GMM
+   pytuq.rv.mrv.Mixture
+   pytuq.rv.mrv.Inverse
+   pytuq.rv.mrv.Pareto_1d
+   pytuq.rv.mrv.Normal_1d
+   pytuq.rv.mrv.Lognormal_1d
+   pytuq.rv.mrv.Weibull_1d
+   pytuq.rv.mrv.MCMCRV
+
+
+Module Contents
+---------------
+
+.. py:class:: MRV(pdim)
+
+   Base class for multivariate random variables.
+
+   .. attribute:: pdim
+
+      The dimensionality of the random variable.
+
+      :type: int
+
+
+   .. py:attribute:: pdim
+
+
+   .. py:method:: sample(nsam)
+      :abstractmethod:
+
+
+
+   .. py:method:: pdf(x)
+      :abstractmethod:
+
+
+
+   .. py:method:: logpdf(x)
+
+
+   .. py:method:: cdf(x)
+      :abstractmethod:
+
+
+
+   .. py:method:: sample_indomain(nsam, domain, itry_max=1000)
+
+      Sampling according to the distribution truncated within a given domain.
+
+      :param nsam: Number of samples requested, :math:`N`.
+      :type nsam: int
+      :param domain: A domain given as a 2d array of size :math:`(d,2)`.
+      :type domain: np.ndarray
+      :param itry_max: maximum number of chunks of :math:`N` sampled. Effectively this is the rejection ratio. If too high, end without having :math:`N` samples in the domain and provide a warning.
+      :type itry_max: int
+
+      :returns: A 2d array of samples of size `(N,d)`.
+      :rtype: np.ndarray
+
+      .. note:: This is based on rejection sampling, and if the domain has small intersection with the volume of sampling, it may take long time.
+
+
+
+   .. py:method:: volume_indomain(domain)
+
+      Compute volume of the PDF of this random variable truncated within a given domain.
+
+      :param domain: A domain given as a 2d array of size :math:`(d,2)`.
+      :type domain: np.ndarray
+
+      :returns: Volume of the PDF inside the given domain.
+      :rtype: float
+
+      .. note:: see :cite:t:`Kan:2017` or https://www.cesarerobotti.com/wp-content/uploads/2019/04/JCGS-KR.pdf for the math.
+
+
+
+.. py:class:: GMM(means, covs=None, weights=None)
+
+   Bases: :py:obj:`MRV`
+
+
+   Gaussian mixture model random variable.
+
+   .. attribute:: means
+
+      List of :math:`K` means, each a 1d array of size :math:`d`.
+
+      :type: list[np.ndarray]
+
+   .. attribute:: covs
+
+      List of :math:`K` covariances, each a 2d array of size :math:`(d, d)`.
+
+      :type: list[np.ndarray]
+
+   .. attribute:: weights
+
+      An 1d array of size :math:`K` for the mixture weights.
+
+      :type: np.ndarray
+
+
+   .. py:attribute:: means
+
+
+   .. py:method:: size_checks()
+
+      Size checks to make sure everything is consistent.
+
+
+
+
+   .. py:method:: sample(nsam)
+
+      Sampling function for this random variable.
+
+      :param nsam: Number of requested samples :math:`N`.
+      :type nsam: int
+
+      :returns: A 2d array of size :math:`(N,d)`.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: pdf(xdata)
+
+      PDF evaluated at given points.
+
+      :param xdata: A 2d array of size :math:`(M,d)` for :math:`M` points at which PDF is evaluated.
+      :type xdata: np.ndarray
+
+      :returns: A 1d array of size :math:`M` for PDF evaluation at the given points.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: cdf(xdata)
+
+      CDF evaluated at given points.
+
+      :param xdata: A 2d array of size :math:`(M,d)` for :math:`M` points at which CDF is evaluated.
+      :type xdata: np.ndarray
+
+      :returns: A 1d array of size :math:`M` for CDF evaluation at the given points.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Mixture(rv_list, weights=None)
+
+   Bases: :py:obj:`MRV`
+
+
+   A class for a mixture of random variables.
+
+   .. attribute:: rv_list
+
+      List of Multivariate Random Variable objects.
+
+      :type: list[rv.mrv.MRV]
+
+   .. attribute:: weights
+
+      Mixture weights, an 1d array.
+
+      :type: np.ndarray
+
+
+   .. py:attribute:: rv_list
+
+
+   .. py:method:: sample(nsam)
+
+      Sampling routine.
+
+      :param nsam: Number of samples requested.
+      :type nsam: int
+
+      :returns: A 1d array of samples.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: pdf(x)
+
+      Evaluate the PDF.
+
+      :param x: 1d array at which PDF is evaluated.
+      :type x: np.ndarray
+
+      :returns: 1d array of PDF values.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: cdf(x)
+
+      Evaluate the CDF.
+
+      :param x: 1d array at which CDF is evaluated.
+      :type x: np.ndarray
+
+      :returns: 1d array of CDF values.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Inverse(rv)
+
+   Bases: :py:obj:`MRV`
+
+
+   Class for an inverse of a random variable.
+
+   .. attribute:: rv
+
+      Underlying original Multivariate Random Variable object.
+
+      :type: rv.mrv.MRV
+
+
+   .. py:attribute:: rv
+
+
+   .. py:method:: sample(nsam)
+
+      Sampling routine.
+
+      :param nsam: Number of samples requested.
+      :type nsam: int
+
+      :returns: A 1d array of samples.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: pdf(x)
+
+      Evaluate the PDF.
+
+      :param x: 1d array at which PDF is evaluated.
+      :type x: np.ndarray
+
+      :returns: 1d array of PDF values.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: logpdf(x)
+
+      Evaluate the log-PDF.
+
+      :param x: 1d array at which log-PDF is evaluated.
+      :type x: np.ndarray
+
+      :returns: 1d array of log-PDF values.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: cdf(x)
+
+      Evaluate the CDF.
+
+      :param x: 1d array at which CDF is evaluated.
+      :type x: np.ndarray
+
+      :returns: 1d array of CDF values.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Pareto_1d(alpha=1.0, xm=1.0)
+
+   Bases: :py:obj:`MRV`
+
+
+   A class for univariate Pareto distribution.
+
+   .. attribute:: b
+
+      Power parameter.
+
+      :type: float
+
+
+   .. py:attribute:: alpha
+      :value: 1.0
+
+
+
+   .. py:attribute:: xm
+      :value: 1.0
+
+
+
+   .. py:attribute:: params
+
+
+   .. py:method:: sample(nsam)
+
+      Sampling routine.
+
+      :param nsam: Number of samples requested.
+      :type nsam: int
+
+      :returns: A 1d array of samples.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: pdf(x)
+
+      Evaluate the PDF.
+
+      :param x: 1d array at which PDF is evaluated.
+      :type x: np.ndarray
+
+      :returns: 1d array of PDF values.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: logpdf(x)
+
+      Evaluate the log-PDF.
+
+      :param x: 1d array at which log-PDF is evaluated.
+      :type x: np.ndarray
+
+      :returns: 1d array of log-PDF values.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: cdf(x)
+
+      Evaluate the CDF.
+
+      :param x: 1d array at which CDF is evaluated.
+      :type x: np.ndarray
+
+      :returns: 1d array of CDF values.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Normal_1d(mu=0.0, sigma=1.0)
+
+   Bases: :py:obj:`MRV`
+
+
+   A class for univariate Normal distribution.
+
+   .. attribute:: mu
+
+      Location parameter.
+
+      :type: float
+
+   .. attribute:: sigma
+
+      Scale parameter.
+
+      :type: float
+
+
+   .. py:attribute:: mu
+      :value: 0.0
+
+
+
+   .. py:attribute:: sigma
+      :value: 1.0
+
+
+
+   .. py:attribute:: params
+
+
+   .. py:method:: sample(nsam)
+
+      Sampling routine.
+
+      :param nsam: Number of samples requested.
+      :type nsam: int
+
+      :returns: A 1d array of samples.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: pdf(x)
+
+      Evaluate the PDF.
+
+      :param x: 1d array at which PDF is evaluated.
+      :type x: np.ndarray
+
+      :returns: 1d array of PDF values.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: logpdf(x)
+
+      Evaluate the log-PDF.
+
+      :param x: 1d array at which log-PDF is evaluated.
+      :type x: np.ndarray
+
+      :returns: 1d array of log-PDF values.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: cdf(x)
+
+      Evaluate the CDF.
+
+      :param x: 1d array at which CDF is evaluated.
+      :type x: np.ndarray
+
+      :returns: 1d array of CDF values.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Lognormal_1d(mu=0.0, sigma=1.0)
+
+   Bases: :py:obj:`MRV`
+
+
+   A class for univariate Lognormal distribution.
+
+   .. attribute:: mu
+
+      Location parameter.
+
+      :type: float
+
+   .. attribute:: sigma
+
+      Scale parameter.
+
+      :type: float
+
+
+   .. py:attribute:: mu
+      :value: 0.0
+
+
+
+   .. py:attribute:: sigma
+      :value: 1.0
+
+
+
+   .. py:attribute:: params
+
+
+   .. py:method:: sample(nsam)
+
+      Sampling routine.
+
+      :param nsam: Number of samples requested.
+      :type nsam: int
+
+      :returns: A 1d array of samples.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: pdf(x)
+
+      Evaluate the PDF.
+
+      :param x: 1d array at which PDF is evaluated.
+      :type x: np.ndarray
+
+      :returns: 1d array of PDF values.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: logpdf(x)
+
+      Evaluate the log-PDF.
+
+      :param x: 1d array at which log-PDF is evaluated.
+      :type x: np.ndarray
+
+      :returns: 1d array of log-PDF values.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: cdf(x)
+
+      Evaluate the CDF.
+
+      :param x: 1d array at which CDF is evaluated.
+      :type x: np.ndarray
+
+      :returns: 1d array of CDF values.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Weibull_1d(lam, k=1.0)
+
+   Bases: :py:obj:`MRV`
+
+
+   A class for univariate Weibull distribution.
+
+   .. attribute:: k
+
+      Shape parameter.
+
+      :type: float
+
+   .. attribute:: lam
+
+      Scale parameter.
+
+      :type: float
+
+
+   .. py:attribute:: lam
+
+
+   .. py:attribute:: k
+      :value: 1.0
+
+
+
+   .. py:attribute:: params
+
+
+   .. py:method:: sample(nsam)
+
+      Sampling routine.
+
+      :param nsam: Number of samples requested.
+      :type nsam: int
+
+      :returns: A 1d array of samples.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: pdf(x)
+
+      Evaluate the PDF.
+
+      :param x: 1d array at which PDF is evaluated.
+      :type x: np.ndarray
+
+      :returns: 1d array of PDF values.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: logpdf(x)
+
+      Evaluate the log-PDF.
+
+      :param x: 1d array at which log-PDF is evaluated.
+      :type x: np.ndarray
+
+      :returns: 1d array of log-PDF values.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: cdf(x)
+
+      Evaluate the CDF.
+
+      :param x: 1d array at which PDF is evaluated.
+      :type x: np.ndarray
+
+      :returns: 1d array of PDF values.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: MCMCRV(pdim, logpost, param_ini=None, nmcmc=10000)
+
+   Bases: :py:obj:`MRV`
+
+
+   A class for MCMC-based random variable.
+
+   .. attribute:: logpost
+
+      Function evaluator np.ndarray->float for log-posterior. Can take optional keyword arguments as well.
+
+      :type: callable
+
+   .. attribute:: nmcmc
+
+      Number of MCMC steps
+
+      :type: int
+
+   .. attribute:: param_ini
+
+      Initial condition of the chain, a 1d array of size :math:`d`.
+
+      :type: np.ndarray
+
+
+   .. py:attribute:: logpost
+
+
+   .. py:attribute:: nmcmc
+      :value: 10000
+
+
+
+   .. py:method:: sample(nsam, **post_info)
+
+      Sampling function.
+
+      :param nsam: Number of requested samples :math:`N`.
+      :type nsam: int
+      :param post_info: Dictionary keyword arguments for the logpost function.
+      :type post_info: dict
+
+      :returns: A 2d array of size :math:`(N,d)`.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: pdf_unscaled(x)
+
+      PDF evaluation without scaling.
+
+      :param x: 1d array of size :math:`M` where PDF is evaluated.
+      :type x: np.ndarray
+
+      :returns: PDF evaluated at requested points, an array of size :math:`M`.
+      :rtype: np.ndarray
+
+      .. note:: PDF is unscaled, i.e. only evaluates exponential of the log-posterior.
+
+
+
+   .. py:method:: pdf(x)
+      :abstractmethod:
+
+
+
+   .. py:method:: cdf(x)
+      :abstractmethod:
+
+
+

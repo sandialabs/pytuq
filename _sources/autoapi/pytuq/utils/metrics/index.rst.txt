@@ -1,0 +1,143 @@
+pytuq.utils.metrics
+===================
+
+.. py:module:: pytuq.utils.metrics
+
+.. autoapi-nested-parse::
+
+   Module for various metrics of comparison.
+
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   pytuq.utils.metrics.rel_l2
+   pytuq.utils.metrics.rmse
+   pytuq.utils.metrics.rel_rmse
+   pytuq.utils.metrics.norm_rmse
+   pytuq.utils.metrics.fast_auc
+   pytuq.utils.metrics.mae
+   pytuq.utils.metrics.crps_gauss
+   pytuq.utils.metrics.crps_samples
+
+
+Module Contents
+---------------
+
+.. py:function:: rel_l2(predictions, targets)
+
+   Relative L2 metric.
+
+   :param predictions: prediction array
+   :type predictions: np.ndarray
+   :param targets: target array
+   :type targets: np.ndarray
+
+   :returns: relative L2 error
+   :rtype: float
+
+
+.. py:function:: rmse(predictions, targets)
+
+   Root-mean-square error (RMSE).
+
+   :param predictions: prediction array
+   :type predictions: np.ndarray
+   :param targets: target array
+   :type targets: np.ndarray
+
+   :returns: RMSE error
+   :rtype: float
+
+
+.. py:function:: rel_rmse(predictions, targets)
+
+   Relative Root-mean-square error (RMSE).
+
+   :param predictions: prediction array
+   :type predictions: np.ndarray
+   :param targets: target array
+   :type targets: np.ndarray
+
+   :returns: Relative RMSE error
+   :rtype: float
+
+
+.. py:function:: norm_rmse(predictions, targets)
+
+   Normalized root-mean-square error (RMSE).
+
+   :param predictions: prediction array
+   :type predictions: np.ndarray
+   :param targets: target array
+   :type targets: np.ndarray
+
+   :returns: Normalized RMSE error
+   :rtype: float
+
+
+.. py:function:: fast_auc(y_prob, targets)
+
+   Fast Area-Under-Curve (AUC) computation.
+
+   See: https://www.kaggle.com/c/microsoft-malware-prediction/discussion/76013
+
+   :param targets: true array
+   :type targets: int np.ndarray
+   :param y_prob: predicted probabilities
+   :type y_prob: float np.ndarray
+
+   :returns: AUC metric
+   :rtype: float
+
+
+.. py:function:: mae(predictions, targets)
+
+   Mean absolute error (MAE).
+
+   :param predictions: predicted array
+   :type predictions: np.ndarray
+   :param targets: true array
+   :type targets: np.ndarray
+
+   :returns: MAE metric
+   :rtype: float
+
+
+.. py:function:: crps_gauss(y, mu, sig)
+
+   Continuous Ranked Probability Score (CRPS) for Gaussian forecast.
+
+   :param y: true array
+   :type y: np.ndarray
+   :param mu: mean array
+   :type mu: np.ndarray
+   :param sig: standard deviation array
+   :type sig: np.ndarray
+
+   :returns: CRPS metric
+   :rtype: np.ndarray
+
+
+.. py:function:: crps_samples(y, samples)
+
+   Compute CRPS from predictive samples.
+
+   :param y: true array of shape `(M,)` or scalar
+   :type y: np.ndarray
+   :param samples: predictive samples of shape `(M, N)` or `(N,)`.
+   :type samples: np.ndarray
+
+   :returns: CRPS metric of shape `(M,)`
+   :rtype: np.ndarray
+
+   .. rubric:: Notes
+
+   Empirical CRPS:
+   CRPS = mean(|X - y|) - 0.5 * mean(|X_i - X_j|)
+   where X_i are Monte Carlo samples from the predictive distribution.
+
+

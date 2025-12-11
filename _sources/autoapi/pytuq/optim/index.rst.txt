@@ -1,0 +1,18 @@
+pytuq.optim
+===========
+
+.. py:module:: pytuq.optim
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/pytuq/optim/gd/index
+   /autoapi/pytuq/optim/optim/index
+   /autoapi/pytuq/optim/pso/index
+   /autoapi/pytuq/optim/sciwrap/index
+
+

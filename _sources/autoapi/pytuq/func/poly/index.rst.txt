@@ -1,0 +1,166 @@
+pytuq.func.poly
+===============
+
+.. py:module:: pytuq.func.poly
+
+.. autoapi-nested-parse::
+
+   Polynomial expansions module.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.func.poly.PolyBase
+   pytuq.func.poly.Leg
+   pytuq.func.poly.Mon
+
+
+Module Contents
+---------------
+
+.. py:class:: PolyBase(mindex=np.array([[0], [1]]), cfs=None, domain=None, name='Poly')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Base class for polynomial functions
+
+   .. attribute:: mindex
+
+      Multi-index array for polynomial terms.
+
+      :type: numpy array, 2d
+
+   .. attribute:: cfs
+
+      Coefficients for polynomial terms.
+
+      :type: numpy array, 1d
+
+   .. attribute:: nbases
+
+      Number of basis functions.
+
+      :type: int
+
+   .. attribute:: name
+
+      Name of the polynomial function.
+
+      :type: str
+
+   .. attribute:: max_deg
+
+      Maximum degree for each dimension.
+
+      :type: numpy array, 1d
+
+   .. attribute:: outdim
+
+      Output dimension (default is 1).
+
+      :type: int
+
+   .. attribute:: bases1d
+
+      List of 1D basis functions.
+
+      :type: list
+
+   .. attribute:: bases1d_deriv
+
+      List of derivatives of 1D basis functions.
+
+      :type: list
+
+
+   .. py:attribute:: mindex
+
+
+   .. py:attribute:: cfs
+      :value: None
+
+
+
+   .. py:attribute:: nbases
+
+
+   .. py:attribute:: name
+      :value: 'Poly'
+
+
+
+   .. py:attribute:: max_deg
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:attribute:: bases1d
+      :value: None
+
+
+
+   .. py:attribute:: bases1d_deriv
+      :value: None
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Leg(mindex=np.array([[0], [1]]), cfs=None, domain=None, name='Legendre_Poly')
+
+   Bases: :py:obj:`PolyBase`
+
+
+   Legendre polynomial expansion
+
+   Reference: [https://en.wikipedia.org/wiki/Legendre_polynomials]
+
+
+   .. py:attribute:: bases1d
+      :value: []
+
+
+
+   .. py:attribute:: bases1d_deriv
+      :value: []
+
+
+
+.. py:class:: Mon(mindex=np.array([[0], [1]]), cfs=None, domain=None, name='Monomial_Poly')
+
+   Bases: :py:obj:`PolyBase`
+
+
+   Monomial polynomial expansion
+
+   Reference: [https://en.wikipedia.org/wiki/Monomial]
+
+
+   .. py:attribute:: bases1d
+      :value: []
+
+
+
+   .. py:attribute:: bases1d_deriv
+      :value: []
+
+
+

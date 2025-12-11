@@ -1,0 +1,23 @@
+pytuq.utils
+===========
+
+.. py:module:: pytuq.utils
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/pytuq/utils/decors/index
+   /autoapi/pytuq/utils/funcbank/index
+   /autoapi/pytuq/utils/maps/index
+   /autoapi/pytuq/utils/metrics/index
+   /autoapi/pytuq/utils/mindex/index
+   /autoapi/pytuq/utils/plotting/index
+   /autoapi/pytuq/utils/stats/index
+   /autoapi/pytuq/utils/uqtk_utils/index
+   /autoapi/pytuq/utils/xutils/index
+
+
