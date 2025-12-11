@@ -37,3 +37,4 @@ clean:
 # 	rm -rf auto_examples/
 	rm -rf auto_tutorials/
 	rm -rf api/
+	rm sg_execution_times.rst

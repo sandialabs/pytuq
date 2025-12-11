@@ -1,6 +1,12 @@
 name: Deploy to GitHub Pages
 
-on: [push, pull_request, workflow_dispatch]
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main # Change this to your main branch if different
 
 permissions:
   contents: write
@@ -18,6 +24,7 @@ jobs:
         run: |
           pip install sphinx sphinx_rtd_theme myst_parser sphinx-autoapi ipython sphinx-gallery
           pip install .[dev]
+          pip install .[all]
 
       - name: List files
         run: |
@@ -50,4 +57,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: sphinx-html
-          path: docs/_build/html
+          path: docs/_build/html/index.html
