@@ -63,7 +63,7 @@ def nn_model_surrogate(pp, xx):
 ###
 data_sigma = 0.05  # std.dev. for data perturbations
 npt = 13   # no. of data points
-# Uniformly random x samples
+# Uniform x samples
 xd = np.arange(npt)/npt
 
 true_model, true_model_params = quad_model_single, xd

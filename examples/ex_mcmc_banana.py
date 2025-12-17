@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Example demonstrating MCMC sampling for a banana-shaped (Rosenbrock) distribution.
 
-This script compares different MCMC methods (AMCMC, HMC, MALA) for sampling from
+This script demonstrates different MCMC methods (AMCMC, HMC, MALA) for sampling from
 a challenging banana-shaped posterior distribution.
 """
 

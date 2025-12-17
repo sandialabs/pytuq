@@ -605,7 +605,7 @@ def plot_jsens(msens,jsens,varname='', inpar_names=None,figname='senscirc.png'):
 
 #############################################################
 
-def plot_tri(xi, names=None, msize=3, axarr=None, clr='b', yy=None, zorder=None, figname=None):
+def plot_tri(xi, names=None, msize=3, axarr=None, clr='b', yy=None, lsize=12, zorder=None, figname=None):
     """Plots multidimensional samples in a triangular way, i.e. 1d and 2d cuts.
 
     Args:
@@ -616,6 +616,7 @@ def plot_tri(xi, names=None, msize=3, axarr=None, clr='b', yy=None, zorder=None,
         clr (str, optional): Optional color.
         yy (None, optional): Optional if we want to color-code by value. Overwrites clr.
         zorder (None, optional): Order of plotting.
+        lsize (int, optional): Label size. Defaults to 12.
         figname (str, optional): Figure file name.
 
     """
@@ -632,17 +633,20 @@ def plot_tri(xi, names=None, msize=3, axarr=None, clr='b', yy=None, zorder=None,
 
     for i in range(npar):
         thisax = axarr[i][i]
+        thisax.tick_params(labelsize=lsize)
+
         if yy is None:
             thisax.plot(np.arange(nsam), xi[:, i], 'o', color=clr, markersize=msize, zorder=zorder)
         else:
+            #thisax.plot(np.arange(nsam), xi[:, i], '-', linewidth=0.5, color='k', zorder=zorder)
             thisax.scatter(np.arange(nsam), xi[:, i], c=yy, s=msize, zorder=zorder)
 
 
 
         if i == 0:
-            thisax.set_ylabel(names[i])
+            thisax.set_ylabel(names[i], size=lsize)
         if i == npar - 1:
-            thisax.set_xlabel(names[i])
+            thisax.set_xlabel(names[i], size=lsize)
         if i > 0:
             thisax.yaxis.set_ticks_position("right")
         # thisax.yaxis.set_label_coords(-0.12, 0.5)
@@ -650,6 +654,8 @@ def plot_tri(xi, names=None, msize=3, axarr=None, clr='b', yy=None, zorder=None,
 
         for j in range(i):
             thisax = axarr[i][j]
+            thisax.tick_params(labelsize=lsize)
+
             axarr[j][i].axis('off')
 
             if yy is None:
@@ -664,11 +670,11 @@ def plot_tri(xi, names=None, msize=3, axarr=None, clr='b', yy=None, zorder=None,
             # #thisax.set_aspect((x1 - x0) / (y1 - y0))
 
             if j == 0:
-                thisax.set_ylabel(names[i])
+                thisax.set_ylabel(names[i], size=lsize)
             if i == npar - 1:
-                thisax.set_xlabel(names[j])
+                thisax.set_xlabel(names[j], size=lsize)
             if j > 0:
-                thisax.yaxis.set_ticklabels([])
+                thisax.yaxis.set_ticklabels([], size=lsize)
 
     plt.tight_layout()
     if figname is not None:
@@ -1044,7 +1050,7 @@ def plot_ens(xdata, ydata,
     if connected:
         for i in range(nsam):
             ax.plot(xdata_, ydata_[:, i],
-                       color=color, linewidth=lw)
+                       color=color, linewidth=lw, label=label)
     else:
         for i in range(nsam):
             ax.plot(xdata_, ydata_[:, i], color=color,
@@ -1698,7 +1704,7 @@ def plot_samples_pdfs(xx_list, legends=None, colors=None, file_prefix='x', title
 
     return
 
-def plot_1d(func, domain, ax=None, idim=0, odim=0, nom=None, ngr=100, color='orange', label='', lstyle='-', figname='func1d.png'):
+def plot_1d(func, domain, ax=None, idim=0, odim=0, nom=None, ngr=100, color='orange', label='', lstyle='-', figname=None):
     """Plotting 1d slice of a function.
 
     Args:
@@ -1729,11 +1735,12 @@ def plot_1d(func, domain, ax=None, idim=0, odim=0, nom=None, ngr=100, color='ora
     yg = func(xg)[:, odim]
 
     ax.plot(xg[:, idim], yg, color=color, label=label, linestyle=lstyle)
-    plt.savefig(figname)
+    if figname is not None:
+        plt.savefig(figname)
 
     return
 
-def plot_2d(func, domain, ax=None, idim=0, jdim=1, odim=0, nom=None, ngr=33, figname='func2d.png'):
+def plot_2d(func, domain, ax=None, idim=0, jdim=1, odim=0, nom=None, ngr=33, figname=None):
     """Plotting 2d slice of a function.
 
     Args:
@@ -1769,7 +1776,8 @@ def plot_2d(func, domain, ax=None, idim=0, jdim=1, odim=0, nom=None, ngr=33, fig
     cs = ax.contourf(X, Y, yg, 22, cmap='RdYlGn_r')
     ax.contour(cs, colors='k', linewidths=0.5)
     plt.colorbar(cs, ax=ax)
-    plt.savefig(figname)
+    if figname is not None:
+        plt.savefig(figname)
 
     return
 
@@ -1997,7 +2005,7 @@ def plot_sensmat(sensdata,pars,cases,par_labels=[],case_labels=[],cutoff=-1000.,
     plt.savefig(figname)
 
 
-def plot_joy(sams_list, xcond, outnames, color_list, nominal=None, offset_factor=1.0, ax=None, figname='joyplot.png'):
+def plot_joy(sams_list, xcond, outnames, color_list, nominal=None, offset_factor=1.0, ax=None, figname=None):
     r"""Plots a joyplot of multiple sample sets along given output conditions.
 
     Args:
@@ -2035,4 +2043,5 @@ def plot_joy(sams_list, xcond, outnames, color_list, nominal=None, offset_factor
     ax.set_yticks(xcond)
     ax.set_yticklabels(outnames)
     plt.tight_layout()
-    plt.savefig(figname)
+    if figname is not None:
+        plt.savefig(figname)

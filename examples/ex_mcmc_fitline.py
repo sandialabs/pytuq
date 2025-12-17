@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 """Example demonstrating MCMC-based Bayesian linear model calibration.
 
-This script uses Adaptive MCMC to calibrate a linear model to noisy data,
-inferring posterior distributions of the model parameters and observation noise.
+This script uses Adaptive MCMC to calibrate a linear model to noisy data.
 """
 
 import sys

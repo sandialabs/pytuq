@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 from itertools import combinations
 
 from pytuq.utils.plotting import myrc, plot_dm, plot_sens, plot_jsens, plot_pdf1d, plot_sensmat, plot_vars, plot_1d, plot_2d, plot_joy
-from pytuq.utils.xutils import loadpk
+from pytuq.utils.xutils import loadpk, read_textlist
 
 
 myrc()
@@ -104,21 +104,10 @@ pctypes = pcrv.pctypes
 print(f"Dimensionality : {ndim}")
 print(f"Num of outputs : {nout}")
 
-# Parameter names file, if any. Must have ndim rows
-if os.path.exists('pnames.txt'):
-    with open('pnames.txt') as f:
-        pnames = f.read().splitlines()
-        assert(len(pnames) == ndim)
-else:
-    pnames = ['Param # ' + str(i) for i in range(1, ndim + 1)]
+# Parameter names and output names files, if any. If files do not exist, uses the defaults.
+pnames = read_textlist('pnames.txt', ndim, names_prefix='Par')
+outnames = read_textlist('outnames.txt', nout, names_prefix='Out')
 
-# Output names file, if any. Must have nout rows
-if os.path.exists('outnames.txt'):
-    with open('outnames.txt') as f:
-        outnames = f.read().splitlines()
-        assert(len(outnames) == nout)
-else:
-    outnames = ['Output # ' + str(i) for i in range(1, nout + 1)]
 
 
 if(plot_type == 'sens'):
