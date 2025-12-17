@@ -288,18 +288,23 @@ def plot_1dfit(xgrid, ygrid_pred, ygrid_true=None, xydata=None):
     if ygrid_true is not None:
         plt.plot(xgrid, ygrid_true, 'k--', label='Truth')
     ymind, ymaxd = -np.inf, np.inf
+    idata = 0
     if xydata is not None:
+        idata = 1
         xdata, ydata = xydata
-        plt.plot(xdata, ydata, 'ko', zorder=1000, ms=11, label='Data')
+        plt.plot(xdata, ydata, 'ko', zorder=1000, ms=8,
+                 markeredgecolor='w', label='Data')
         ymind, ymaxd = np.min(ydata), np.max(ydata)
     plt.xlabel('x')
     plt.ylabel('y')
-    plt.xlim([np.min(xgrid), np.max(xgrid)])
+    #plt.xlim([np.min(xgrid), np.max(xgrid)])
     ymin, ymax = np.min(ygrid_pred['mean_mean']), np.max(ygrid_pred['mean_mean'])
     ymin, ymax = min(ymin, ymind), max(ymax, ymaxd)
     ymin, ymax = ymin - 0.15* (ymax-ymin), ymax + 0.15* (ymax-ymin)
     plt.ylim([ymin, ymax])
-    plt.legend()
+    h, l = plt.gca().get_legend_handles_labels()
+    plt.legend(h[:4+idata], l[:4+idata])
+
     plt.savefig('fit_1d.png')
     plt.clf()
 
@@ -323,19 +328,23 @@ def plot_1dfit_vars(xgrid, ygrid_pred, xydata=None):
                  interp=None, connected=True, ax=thisax)
 
     ymind, ymaxd = -np.inf, np.inf
+    idata = 0
     if xydata is not None:
+        idata = 1
         xdata, ydata = xydata
-        thisax.plot(xdata, ydata, 'ko', ms=11, zorder=1000, label='Data')
+        thisax.plot(xdata, ydata, 'ko', zorder=1000, ms=8,
+                    markeredgecolor='w', label='Data')
         ymind, ymaxd = np.min(ydata), np.max(ydata)
 
     thisax.set_xlabel('x')
     thisax.set_ylabel('y')
-    thisax.set_xlim([np.min(xgrid), np.max(xgrid)])
+    #thisax.set_xlim([np.min(xgrid), np.max(xgrid)])
     ymin, ymax = np.min(ygrid_pred['mean_mean']), np.max(ygrid_pred['mean_mean'])
     ymin, ymax = min(ymin, ymind), max(ymax, ymaxd)
     ymin, ymax = ymin - 0.15* (ymax-ymin), ymax + 0.15* (ymax-ymin)
     thisax.set_ylim([ymin, ymax])
-    thisax.legend(fontsize=14, ncol=1)
+    h, l = plt.gca().get_legend_handles_labels()
+    thisax.legend(h[:3+idata], l[:3+idata], fontsize=14, ncol=1)
     #thisax.grid(False)
     plt.savefig('fit_1d_vars.png')
 
@@ -353,14 +362,17 @@ def plot_1dfit_shade(xgrid, ygrid_samples, xydata=None):
     plot_shade(xgrid, ygrid_samples, ax=thisax)
 
     ymind, ymaxd = -np.inf, np.inf
+    idata = 0
     if xydata is not None:
+        idata = 1
         xdata, ydata = xydata
-        thisax.plot(xdata, ydata, 'ko', ms=11, zorder=1000, label='Data')
+        thisax.plot(xdata, ydata, 'ko', zorder=1000, ms=8,
+                    markeredgecolor='w', label='Data')
         ymind, ymaxd = np.min(ydata), np.max(ydata)
 
     thisax.set_xlabel('x')
     thisax.set_ylabel('y')
-    thisax.set_xlim([np.min(xgrid), np.max(xgrid)])
+    #thisax.set_xlim([np.min(xgrid), np.max(xgrid)])
     ymin, ymax = np.min(ygrid_samples), np.max(ygrid_samples)
     ymin, ymax = min(ymin, ymind), max(ymax, ymaxd)
     ymin, ymax = ymin - 0.15* (ymax-ymin), ymax + 0.15* (ymax-ymin)
@@ -368,7 +380,7 @@ def plot_1dfit_shade(xgrid, ygrid_samples, xydata=None):
     handles, labels = thisax.get_legend_handles_labels()
     handles.append(plt.Rectangle((0, 0), 1, 1, fc='g'))
     labels.append('Posterior PDF')
-    thisax.legend(handles, labels, fontsize=24, ncol=1)
+    thisax.legend(handles[-1-idata:], labels[-1-idata:], fontsize=24, ncol=1)
     #thisax.grid(False)
     plt.savefig('fit_1d_shade.png')
 
