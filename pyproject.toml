@@ -55,10 +55,14 @@ nn = [
 optim = [
     "pyswarms"
 ]
+utils = [
+    "dill"
+]
 all = [
     "torch",
     "uqinn",
-    "pyswarms"
+    "pyswarms",
+    "dill"
 ]
 
 

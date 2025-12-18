@@ -1,8 +1,8 @@
 #!/usr/bin/env python
+"""Example demonstrating polynomial chaos random variable slicing operations.
 
-"""[summary]
-
-[description]
+This script shows how to slice a PC random variable by fixing certain dimensions
+at nominal values to obtain a reduced-dimension PCRV.
 """
 import numpy as np
 

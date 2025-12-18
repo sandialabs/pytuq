@@ -1,5 +1,9 @@
 #!/usr/bin/env python
-"""A test for sampling routines."""
+"""Example demonstrating domain-constrained sampling from Gaussian Mixture Models.
+
+This script samples from a GMM within a specified domain and visualizes
+the resulting samples and probability densities.
+"""
 
 import numpy as np
 

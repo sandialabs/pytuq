@@ -1,5 +1,8 @@
 #!/usr/bin/env python
-"""Module for orthonormalization of functions using Gram-Schmidt or QR decomposition."""
+"""Module for orthonormalization of functions using Gram-Schmidt or QR decomposition.
+
+Written by Habib N. Najm (2025).
+"""
 
 import sys
 import time
@@ -675,7 +678,7 @@ class QR:
         self.Lmap   = copy.deepcopy(Lmap)
         return
 
-    def iprod(self, pk, pl, **kwargs): 
+    def iprod(self, pk, pl, **kwargs):
         r'''Pairwise inner product between (lists of) functions.
 
         Args:
@@ -714,28 +717,28 @@ class QR:
         verbose_warning = kwargs.get('verbose_warning',False)
 
         if isinstance(pk,(list,tuple,np.ndarray)):
-            if k is None: sys.exit('Need k spec for this pk')            
+            if k is None: sys.exit('Need k spec for this pk')
             if kmxp is None: kmxp = k + 1
             fk = np.array([self.Lmap.eval(pk[ki]) for ki in range(k,kmxp)])
         elif callable(pk):
             if any(v is None for v in [k,kmxp]) and verbose_warning:
-                print('Warning: no use for k|kmxp for this pk')            
+                print('Warning: no use for k|kmxp for this pk')
             fk = self.Lmap.eval(pk).reshape(1,-1)
         else:
             sys.exit('Unexpected input pk')
 
         if isinstance(pl,(list,tuple,np.ndarray)):
-            if l is None: sys.exit('Need l spec for this pl')            
+            if l is None: sys.exit('Need l spec for this pl')
             if lmxp is None: lmxp = l + 1
             fl = np.array([self.Lmap.eval(pl[li]) for li in range(l,lmxp)])
         elif callable(pl):
             if any(v is None for v in [l,lmxp]) and verbose_warning:
-                print('Warning: no use for l|lmxp for this pl')            
+                print('Warning: no use for l|lmxp for this pl')
             fl = self.Lmap.eval(pl).reshape(1,-1)
         else:
             sys.exit('Unexpected input pl')
 
-        # for x containing npt data points (whether each is a scalar or a vector is immaterial), 
+        # for x containing npt data points (whether each is a scalar or a vector is immaterial),
         # then fk is a 2d numpy array with kmxp-k rows and npt columns
         # and fl is a 2d numpy array with lmxp-l rows and npt columns
         # fklT is a 2d numpy array with kmxp-k rows and lmxp-l columns
@@ -746,7 +749,7 @@ class QR:
 
     def bld_tht(self,P,i,phiv):
         r'''Build and return tht (:math:`\theta`) function for index `i`
-            
+
         Args:
             i (int)             : row index
             P (p.ndarray)       : 2d float projection matrix
@@ -760,13 +763,13 @@ class QR:
         return lfnc
 
     def ortho(self,verbose=False):
-        '''Orthonormalize phi functions to provide the tht functions            
+        '''Orthonormalize phi functions to provide the tht functions
 
         Args:
             verbose (bool)      : controls verbosity
 
         Returns:
-            Pmat (np.ndarray)   : 2d float projection matrix 
+            Pmat (np.ndarray)   : 2d float projection matrix
             tht (np.ndarray)    : 1d array of tht function pointers
 
         Uses QR factorization to find Pmat
@@ -786,7 +789,7 @@ class QR:
 
         if verbose:
             with np.printoptions(precision=6,suppress=False):
-                print('P:\n',self.Pmat)    
+                print('P:\n',self.Pmat)
 
         return self.Pmat, self.tht
 
@@ -798,7 +801,7 @@ class QR:
         '''
         ipmat = np.zeros((self.m,self.m))
         for i in range(self.m):
-            ipmat[i,i:self.m] = self.iprod(self.phi,self.phi,k=i,l=i,kmxp=i+1,lmxp=self.m)[0] 
+            ipmat[i,i:self.m] = self.iprod(self.phi,self.phi,k=i,l=i,kmxp=i+1,lmxp=self.m)[0]
         return ipmat
 
     def ortho_check(self,):
@@ -809,7 +812,7 @@ class QR:
         '''
         ipmat = np.zeros((self.m,self.m))
         for i in range(self.m):
-            ipmat[i,i:self.m] = self.iprod(self.tht,self.tht,k=i,l=i,kmxp=i+1,lmxp=self.m)[0] 
+            ipmat[i,i:self.m] = self.iprod(self.tht,self.tht,k=i,l=i,kmxp=i+1,lmxp=self.m)[0]
         return ipmat
 
 

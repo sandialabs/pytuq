@@ -1,9 +1,12 @@
 #!/usr/bin/env python
-"""Test script for gmm."""
+"""Example demonstrating Gaussian Mixture Model (GMM) sampling and visualization.
+
+This script creates a GMM with multiple components, samples from it within
+a specified domain, and visualizes the samples and probability density.
+"""
 
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.stats import truncnorm, multivariate_normal
 
 from pytuq.rv.mrv import GMM
 from pytuq.utils.plotting import plot_pdfs, plot_xrv

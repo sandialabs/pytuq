@@ -1,17 +1,15 @@
 #!/usr/bin/env python
+"""Example demonstrating global sensitivity analysis for multi-output models.
 
+This script performs Sobol sensitivity analysis on a simple multi-output model
+to compute main and total sensitivity indices for each output dimension.
+"""
 
-import os, sys
 import numpy as np
-try:
-    import pprint
-except ModuleNotFoundError:
-    print("Please pip install pprint for more readable printing.")
 
 
-from pytuq.func.benchmark import Ishigami
-from pytuq.gsa.gsa import SamSobol, PCSobol, model_sens
-from pytuq.utils.plotting import plot_sens, plot_jsens, myrc
+from pytuq.gsa.gsa import model_sens
+from pytuq.utils.plotting import myrc
 
 myrc()
 

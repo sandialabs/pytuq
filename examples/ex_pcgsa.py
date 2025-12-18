@@ -1,17 +1,19 @@
 #!/usr/bin/env python
+"""Example demonstrating PC-based global sensitivity analysis.
+
+This script computes Sobol sensitivity indices using polynomial chaos expansions,
+optionally building a PC surrogate first or directly using the Ishigami function.
+"""
 
 
-import os, sys
 try:
     import pprint
 except ModuleNotFoundError:
     print("Please pip install pprint for more readable printing.")
-import numpy as np
-from matplotlib import pyplot as plt
 
 from pytuq.lreg.lreg import lsq
-from pytuq.func.benchmark import Ishigami
-from pytuq.gsa.gsa import SamSobol, PCSobol
+from pytuq.func.bench import Ishigami
+from pytuq.gsa.gsa import PCSobol
 from pytuq.utils.plotting import plot_sens, plot_jsens, myrc
 
 myrc()

@@ -3,8 +3,12 @@
 
 import sys
 import os
+import inspect
 import itertools
 import numpy as np
+import importlib.util
+from pathlib import Path
+
 try:
     import dill as pk
 except ModuleNotFoundError:
@@ -286,3 +290,25 @@ def safe_cholesky(cov):
     assert(np.linalg.norm(cov - np.dot(lower, lower.T)) < 1.e-12)
 
     return lower
+
+####################################################################
+####################################################################
+
+def instantiate_classes_from_module(module_name):
+    """
+    Imports a module and returns a list of instantiated objects for every class in it.
+    Only classes defined inside the module are included (not imported ones).
+    """
+    module = importlib.import_module(module_name)
+    objects = []
+
+    for name, obj in inspect.getmembers(module, inspect.isclass):
+        # Only include classes actually defined in this module
+        if obj.__module__ == module_name:
+            try:
+                instance = obj()  # Try to instantiate without arguments
+                objects.append(instance)
+            except Exception as e:
+                print(f"Could not instantiate {name}: {e}")
+
+    return objects

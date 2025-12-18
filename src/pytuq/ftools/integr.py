@@ -11,6 +11,7 @@ from ..utils.maps import Domainizer
 from ..rv.mrv import MCMCRV, GMM
 
 
+
 class Integrator():
     """Base class for integration objects."""
 

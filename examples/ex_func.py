@@ -1,25 +1,23 @@
 #!/usr/bin/env python
+"""Example demonstrating function composition and operations with PyTUQ function classes.
 
-"""[summary]
-
-[description]
+This script shows how to combine, transform, and manipulate various function objects
+including toy functions, Genz functions, chemistry functions, and benchmark functions.
 """
 
-import sys
 import numpy as np
 
 from pytuq.utils.mindex import get_mi, get_npc
-from pytuq.func import toy, genz, chem, benchmark, poly, oper, func
+from pytuq.func import toy, genz, chem, bench2d, bench, benchNd, poly, oper, func
 from pytuq.utils.plotting import myrc
 
 myrc()
-
 
 fcns = [
         func.ModelWrapperFcn(lambda x,p : x[:,0]**p[0]+np.sin(x[:,1]**p[0]), 3, modelpar=[3]), \
         oper.PickDim(2, 1, cf=100.)+chem.MullerBrown(),\
         oper.PickDim(2, 1, cf=1.)-chem.MullerBrown(),\
-        benchmark.Adjiman()*benchmark.Branin(), \
+        bench2d.Adjiman()*bench2d.Branin(), \
         oper.PickDim(2, 1, cf=1.) / (toy.Constant(2,np.ones(1,)) + oper.PickDim(2, 0, cf=1.)), \
         oper.PickDim(2, 1, cf=100.)**3, \
         toy.Quad(),\
@@ -33,15 +31,11 @@ fcns = [
         genz.GenzCornerPeak(weights=[7., 2.]),\
         chem.MullerBrown(),\
         chem.LennardJones(),\
-        benchmark.Sobol(dim=3),\
-        benchmark.Franke(),\
-        benchmark.Ishigami(),\
-        benchmark.NegAlpineN2(),\
-        benchmark.Adjiman(),\
-        benchmark.Branin(),\
-        benchmark.SumSquares(),\
-        benchmark.Quadratic([-1., 2.], [[2., -1.], [-1., 1.]]),\
-        benchmark.MVN([-1., 2.], [[2., -1.], [-1., 1.]]),\
+        benchNd.Sobol(dim=3),\
+        bench.Ishigami(),\
+        benchNd.NegAlpineN2(),\
+        benchNd.SumSquares(),\
+        benchNd.MVN([-1., 2.], [[2., -1.], [-1., 1.]]),\
         poly.Leg(get_mi(4,3), np.ones((get_npc(4, 3),))),\
         poly.Mon(get_mi(4,3), np.ones((get_npc(4, 3),))),\
         oper.CartesProdFcn(toy.Identity(1),toy.Identity(1)), \
@@ -50,8 +44,8 @@ fcns = [
         oper.SliceFcn(chem.MullerBrown(), ind=[0,1]),\
         oper.ComposeFcn(toy.Identity(2), genz.GenzOscillatory(weights=[-3., -1.])),\
         oper.ComposeFcn(toy.Exp(), genz.GenzOscillatory(), name='Composite1d'),\
-        oper.GradFcn(benchmark.Adjiman(), 1), \
-        oper.GradFcn(benchmark.Franke(), 1), \
+        oper.GradFcn(bench2d.Adjiman(), 1), \
+        oper.GradFcn(bench2d.Franke(), 1), \
         oper.PickDim(2, 1)
         ]
 

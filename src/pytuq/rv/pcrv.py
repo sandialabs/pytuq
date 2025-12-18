@@ -506,6 +506,7 @@ class PCRV(MRV):
             domain[i, :] = self.PC1ds[i].domain
         self.function.setDimDom(domain=np.clip(domain, -5.0, 5.0))
         self.function.setCall(self.evalPC)
+        self.function.outdim = self.pdim
 
     def sample(self, nsam, seed=None):
         r"""Sample from the PC random variable. Basically chaining sampling the germ and evaluating the PC.

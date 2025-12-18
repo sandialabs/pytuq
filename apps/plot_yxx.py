@@ -48,6 +48,6 @@ pnames = read_textlist(args.pnames_file, ndim, names_prefix='par')
 for iout in range(nout):
     outname = outnames[iout]
     print(f"Plotting pairwise samples for output {outname}")
-    plot_tri(xdata, yy=ydata[:, iout], names=pnames, msize=50, figname=f'yxx_{iout}.png')
+    plot_tri(xdata, yy=ydata[:, iout], names=pnames, msize=3, figname=f'yxx_{iout}.png')
     plt.gcf().clear()
 

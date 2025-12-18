@@ -1,10 +1,13 @@
 #!/usr/bin/env python
-"""A Gaussian Process fit example."""
+"""Example demonstrating Gaussian Process regression for function approximation.
+
+This script builds a Gaussian Process surrogate model from training data,
+performs hyperparameter optimization, and evaluates prediction accuracy.
+"""
 
 import numpy as np
 import matplotlib.pyplot as plt
 
-from scipy.optimize import minimize
 
 from pytuq.fit.gp import gp
 from pytuq.rv.pcrv import PCRV

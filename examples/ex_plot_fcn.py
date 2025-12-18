@@ -1,5 +1,9 @@
 #!/usr/bin/env python
+"""Example demonstrating anchored 1D and 2D function plotting utilities.
 
+This script shows how to use plotting utilities to visualize model functions
+with respect to one or two parameters while fixing others at nominal values.
+"""
 
 import numpy as np
 

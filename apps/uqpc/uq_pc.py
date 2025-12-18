@@ -10,7 +10,7 @@ import sys
 import numpy as np
 
 from pytuq.rv.pcrv import PCRV
-from pytuq.func.benchmark import Ishigami
+from pytuq.func.bench import Ishigami
 from pytuq.utils.xutils import savepk
 from pytuq.utils.mindex import get_mi, get_npc
 from pytuq.workflows.fits import pc_fit

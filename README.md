@@ -23,6 +23,7 @@ Optional dependencies include:
 * pytorch (NN surrogates)
 * QUiNN (Quantification of Uncertainties in Neural Networks)
 * pyswarms (Particle Swarm Optimization)
+* dill (for saving python objects)
 
 ## Installation
 
@@ -70,6 +71,13 @@ $ pip install 'pytuq[dev]'
 ```
     $ pip install .
 ```
+
+## Contributors
+* Habib N. Najm (Sandia National Laboratories)
+* Javier Murgoitio-Esandi (Google)
+* Cosmin Safta (Sandia National Laboratories)
+* Joy Bahr-Mueller (Sandia National Laboratories)
+* Vahan Sargsyan (Stuyvesant High School)
 
 ## License
 Distributed under BSD 3-Clause License. See `LICENSE.txt` for more information.

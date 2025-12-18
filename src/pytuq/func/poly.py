@@ -1,14 +1,34 @@
 #!/usr/bin/env python
-
+"""
+    Polynomial expansions module.
+"""
 import numpy as np
 
 from .func import Function
 
 
 class PolyBase(Function):
+    r"""Base class for polynomial functions
 
-    def __init__(self, mindex, cfs, domain=None, name='Poly'):
+    Attributes:
+        mindex (numpy array, 2d): Multi-index array for polynomial terms.
+        cfs (numpy array, 1d): Coefficients for polynomial terms.
+        nbases (int): Number of basis functions.
+        name (str): Name of the polynomial function.
+        max_deg (numpy array, 1d): Maximum degree for each dimension.
+        outdim (int): Output dimension (default is 1).
+        bases1d (list): List of 1D basis functions.
+        bases1d_deriv (list): List of derivatives of 1D basis functions.
+
+    """
+
+    def __init__(self, mindex=np.array([[0], [1]]), cfs=None, domain=None, name='Poly'):
         super().__init__()
+
+
+        nbases = mindex.shape[0]
+        if cfs is None:
+            cfs = np.random.rand(nbases)
 
         self.mindex = mindex
         self.cfs = cfs
@@ -91,8 +111,12 @@ class PolyBase(Function):
         return gval
 
 class Leg(PolyBase):
-    def __init__(self, mindex, cfs, domain=None, name='Legendre_Poly'):
-        super().__init__(mindex, cfs, domain=domain, name=name)
+    r"""Legendre polynomial expansion
+
+    Reference: [https://en.wikipedia.org/wiki/Legendre_polynomials]
+    """
+    def __init__(self, mindex=np.array([[0], [1]]), cfs=None, domain=None, name='Legendre_Poly'):
+        super().__init__(mindex=mindex, cfs=cfs, domain=domain, name=name)
 
         cfs_ = np.zeros(np.max(self.max_deg) + 1)
         poly = np.polynomial.legendre.Legendre(cfs_)
@@ -105,8 +129,12 @@ class Leg(PolyBase):
 
 
 class Mon(PolyBase):
-    def __init__(self, mindex, cfs, domain=None, name='Monomial_Poly'):
-        super().__init__(mindex, cfs, domain=domain, name=name)
+    r"""Monomial polynomial expansion
+
+    Reference: [https://en.wikipedia.org/wiki/Monomial]
+    """
+    def __init__(self, mindex=np.array([[0], [1]]), cfs=None, domain=None, name='Monomial_Poly'):
+        super().__init__(mindex=mindex, cfs=cfs, domain=domain, name=name)
 
         cfs_ = np.zeros(np.max(self.max_deg) + 1)
         poly = np.polynomial.polynomial.Polynomial(cfs_)

@@ -1,5 +1,7 @@
 numpy<2
 scipy
-torch
 matplotlib
+dill
+pyswarms
+torch
 git+https://github.com/sandialabs/quinn.git#egg=QUINN

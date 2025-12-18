@@ -25,21 +25,19 @@ This example demonstrates how to use the Neural Network wrapper class, ``pytuq.s
 The constructor of the NN class accepts in an optional dictionary, ``net_options``, to specify additional hyperparameters. 
 The ``build()`` and ``evaluate()`` functions similarly accept dictionaries and explicit keyword arguments during their respective function calls.
 
-.. GENERATED FROM PYTHON SOURCE LINES 9-109
+.. GENERATED FROM PYTHON SOURCE LINES 9-107
 
 .. code-block:: Python
 
 
-    import sys
     import torch
     import numpy as np
 
     from pytuq.surrogates.nn import NN
-    from quinn.solvers.nn_vi import NN_VI
-    from quinn.nns.rnet import RNet, Poly
+    from quinn.nns.rnet import Poly
     from quinn.utils.plotting import myrc
     from quinn.utils.maps import scale01ToDom
-    from quinn.func.funcs import Sine, Sine10, blundell
+    from quinn.func.funcs import Sine
 
     def main():
         """Main function."""

@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:06.413** total execution time for 3 files **from auto_examples**:
+**00:10.810** total execution time for 3 files **from auto_examples**:
 
 .. container::
 
@@ -33,7 +33,7 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_auto_examples_ex_genz_bcs.py` (``ex_genz_bcs.py``)
-     - 00:06.413
+     - 00:10.810
      - 0.0
    * - :ref:`sphx_glr_auto_examples_ex_nn.py` (``ex_nn.py``)
      - 00:00.000

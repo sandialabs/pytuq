@@ -1,15 +1,23 @@
 #!/usr/bin/env python
+"""Example demonstrating model inference workflows for parameter estimation.
 
-import sys
+This script shows different approaches to Bayesian parameter inference including
+optimization-based and sampling-based methods for model calibration.
+"""
+
 import torch
 import numpy as np
-
 
 import pytuq.minf.minf as minf
 import pytuq.gsa.gsa as gsa
 
 try:
-    from quinn.nns.nnwrap import nn_p, nnwrapper
+    import pprint
+except ModuleNotFoundError:
+    print("Please pip install pprint for more readable printing.")
+
+try:
+    from quinn.nns.nnwrap import nn_p
 except ImportError:
     print("Warning: QUiNN not installed. NN functionality won't work.")
 
@@ -55,7 +63,7 @@ def nn_model_surrogate(pp, xx):
 ###
 data_sigma = 0.05  # std.dev. for data perturbations
 npt = 13   # no. of data points
-# Uniformly random x samples
+# Uniform x samples
 xd = np.arange(npt)/npt
 
 true_model, true_model_params = quad_model_single, xd

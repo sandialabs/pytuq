@@ -1,9 +1,12 @@
 #!/usr/bin/env python
+"""Example demonstrating MCMC sampling for a banana-shaped (Rosenbrock) distribution.
 
-import sys
+This script demonstrates different MCMC methods (AMCMC, HMC, MALA) for sampling from
+a challenging banana-shaped posterior distribution.
+"""
+
 import numpy as np
 
-import matplotlib.pyplot as plt
 from scipy.stats import multivariate_normal
 
 from pytuq.minf.mcmc import AMCMC, HMC,MALA

@@ -1,6 +1,10 @@
 #!/usr/bin/env python
+"""Example demonstrating uncertainty propagation through a model with PC inputs.
 
-import os
+This script shows how to propagate polynomial chaos input uncertainties through
+a nonlinear model using projection or regression methods.
+"""
+
 import numpy as np
 
 from pytuq.rv.pcrv import PCRV, PCRV_iid

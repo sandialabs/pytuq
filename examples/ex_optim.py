@@ -1,4 +1,9 @@
 #!/usr/bin/env python
+"""Example demonstrating optimization algorithms on the Rosenbrock function.
+
+This script compares different optimization methods (Gradient Descent, Adam, PSO, Scipy)
+for minimizing the Rosenbrock function.
+"""
 
 import sys
 import numpy as np

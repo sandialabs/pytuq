@@ -1,5 +1,9 @@
 #!/usr/bin/env python
-"""A"""
+"""Example demonstrating 1D polynomial chaos basis evaluation and plotting.
+
+This script evaluates and plots Hermite polynomial basis functions of various
+orders to illustrate orthogonal polynomial behavior.
+"""
 
 import numpy as np
 import matplotlib.pyplot as plt

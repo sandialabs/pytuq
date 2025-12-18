@@ -7,7 +7,6 @@ except ModuleNotFoundError:
     print("Please pip install pprint for more readable printing.")
 
 import numpy as np
-import matplotlib.pyplot as plt
 
 import pytuq.func.func as func
 import pytuq.minf.minf as minf

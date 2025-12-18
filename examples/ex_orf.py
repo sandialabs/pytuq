@@ -1,5 +1,8 @@
 #!/usr/bin/env python
-"""Example for testing orthonormalization of functions using Gram-Schmidt or QR decomposition."""
+"""Example for testing orthonormalization of functions using Gram-Schmidt or QR decomposition.
+
+Written by Habib N. Najm (2025).
+"""
 
 import sys
 import argparse
@@ -143,7 +146,7 @@ if plot:
         phixt = np.array([f(xt) for f in phi]).T
         thtxt = np.array([f(xt) for f in tht]).T
         for q in range(ntrm):
-            fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6)) 
+            fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
             ax1.plot(xt, phixt[:,q], label='k:'+str(q))
             ax2.plot(xt, thtxt[:,q], label='k:'+str(q))
             ax1.set_title(r'$\phi_{'+str(q)+'}(x)$')
