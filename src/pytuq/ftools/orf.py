@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Module for Gram-Schmidt orthogonalization for functions."""
+"""Module for orthonormalization of functions using Gram-Schmidt or QR decomposition."""
 
 import sys
 import time
@@ -649,3 +649,167 @@ class MMGS:
         if stage is None:
             stage = self.nstage-1
         return self.mgs[stage].ortho_check_phi()
+
+
+class QR:
+    r'''QR decomposition class. Builds QR object for functions.
+
+    Attributes:
+        m   (int)           : number of basis functions in expansion.
+        phi (np.ndarray)    : 1d numpy array (size :math:`m`) of starting functions.
+        tht (np.ndarray)    : 1d numpy array (size :math:`m`) of to-be-constructed orthonormal functions.
+        Lmap (object)       : pointer to local copy of Linear map and data object.
+        Pmat (np.ndarray)   : 2d :math:`(m, m)` numpy array ... the P projection matrix
+    '''
+
+    def __init__(self,phi_,Lmap):
+        '''Initialization.
+
+        Args:
+            phi_ (np.ndarray): input numpy array of pointers to starting functions.
+            Lmap (object)    : input pointer to Linear map and data object.
+        '''
+        self.phi    = copy.deepcopy(phi_)
+        self.tht    = np.full_like(self.phi,None,dtype=object)
+        self.m      = self.phi.shape[0]
+        self.Lmap   = copy.deepcopy(Lmap)
+        return
+
+    def iprod(self, pk, pl, **kwargs): 
+        r'''Pairwise inner product between (lists of) functions.
+
+        Args:
+            pk  : a list|tuple|numpy array of function pointers, or otherwise a function pointer
+            pl  : a list|tuple|numpy array of function pointers, or otherwise a function pointer
+            kwargs : optional keyword arguments:
+
+                - k    (int)  : starting index in `pk`. Required iff `pk` is a list|tuple|array
+                - l    (int)  : starting index in `pl`. Required iff `pl` is a list|tuple|array
+                - kmxp (int)  : (default: k+1) max-k plus 1, so that range(k,kmxp) goes over `pk[k], ..., pk[kmxp-1]`
+                - lmxp (int)  : (default: l+1) max-l plus 1, so that range(l,lmxp) goes over `pl[l], ..., pl[lmxp-1]`
+                - verbose_warning (bool) : controls verbosity of warnings.
+
+        Returns:
+            fklT (np.ndarray)   : 2d float numpy array with `kmxp-k` rows and `lmxp-l` columns
+
+        Example:
+            Say, we have `pk` list and `pl` single function
+
+                - ``pk = [lambda x : 2*x, lambda x : x**2, lambda x : x**3]``
+                - ``pl = lambda x : 10*x``
+            then
+
+                - ``iprod(pk[3],pl)`` returns: ``[[<Lmap.eval(pk[3]),Lmap.eval(pl)>]]``, a 2d `(1, 1)` numpy array and
+                - ``iprod(pk,pl,k=1,kmxp=3)`` returns ``[[<Lmap.eval(pk[1]),Lmap.eval(pl)>, <Lmap.eval(pk[2]),Lmap.eval(pl)>]]``, a 2d `(1, 2)` numpy array.
+                - ``iprod(pk,pl,k=0,kmxp=3,l=0,lmxp=2)`` returns  ``[ [<Lmap.eval(pk[0]),Lmap.eval(pl[0])>, <Lmap.eval(pk[0]),Lmap.eval(pl[1])>], [<Lmap.eval(pk[1]),Lmap.eval(pl[0])>, <Lmap.eval(pk[1]),Lmap.eval(pl[1])>], [<Lmap.eval(pk[2]),Lmap.eval(pl[0])>, <Lmap.eval(pk[2]),Lmap.eval(pl[1])>]]``  a 2d `(3, 2)` numpy array.
+
+            NB. if x is an `npt`-long vector of data points, then for any of the above functions, say ``pk[2]``, ``Lmap.eval(pk[2])`` will return a 2d `(1, npt)` numpy array.
+
+        '''
+
+        k    = kwargs.get('k')
+        kmxp = kwargs.get('kmxp')
+        l    = kwargs.get('l')
+        lmxp = kwargs.get('lmxp')
+        verbose_warning = kwargs.get('verbose_warning',False)
+
+        if isinstance(pk,(list,tuple,np.ndarray)):
+            if k is None: sys.exit('Need k spec for this pk')            
+            if kmxp is None: kmxp = k + 1
+            fk = np.array([self.Lmap.eval(pk[ki]) for ki in range(k,kmxp)])
+        elif callable(pk):
+            if any(v is None for v in [k,kmxp]) and verbose_warning:
+                print('Warning: no use for k|kmxp for this pk')            
+            fk = self.Lmap.eval(pk).reshape(1,-1)
+        else:
+            sys.exit('Unexpected input pk')
+
+        if isinstance(pl,(list,tuple,np.ndarray)):
+            if l is None: sys.exit('Need l spec for this pl')            
+            if lmxp is None: lmxp = l + 1
+            fl = np.array([self.Lmap.eval(pl[li]) for li in range(l,lmxp)])
+        elif callable(pl):
+            if any(v is None for v in [l,lmxp]) and verbose_warning:
+                print('Warning: no use for l|lmxp for this pl')            
+            fl = self.Lmap.eval(pl).reshape(1,-1)
+        else:
+            sys.exit('Unexpected input pl')
+
+        # for x containing npt data points (whether each is a scalar or a vector is immaterial), 
+        # then fk is a 2d numpy array with kmxp-k rows and npt columns
+        # and fl is a 2d numpy array with lmxp-l rows and npt columns
+        # fklT is a 2d numpy array with kmxp-k rows and lmxp-l columns
+
+        fklT = np.matmul(fk,fl.T)
+
+        return fklT
+
+    def bld_tht(self,P,i,phiv):
+        r'''Build and return tht (:math:`\theta`) function for index `i`
+            
+        Args:
+            i (int)             : row index
+            P (p.ndarray)       : 2d float projection matrix
+        Returns:
+            lfnc (function)     : tht function for index `i`
+        '''
+        def lfnc(x):
+            Phix = np.array([ph(x) for ph in phiv])
+            arr  = np.sum(np.broadcast_to(P[i], Phix.T.shape).T * Phix,axis=0)
+            return arr
+        return lfnc
+
+    def ortho(self,verbose=False):
+        '''Orthonormalize phi functions to provide the tht functions            
+
+        Args:
+            verbose (bool)      : controls verbosity
+
+        Returns:
+            Pmat (np.ndarray)   : 2d float projection matrix 
+            tht (np.ndarray)    : 1d array of tht function pointers
+
+        Uses QR factorization to find Pmat
+        '''
+
+        if verbose:
+            fname = 'qro_gs'+str(stage)+'.txt'
+            with open(fname, 'w') as f:
+                f.write('ortho\n')
+
+        Aphi      = np.array([self.Lmap.eval(pf) for pf in self.phi]).T
+        Q, R      = np.linalg.qr(Aphi)
+        Pqr       = np.linalg.inv(R)
+
+        self.Pmat = Pqr.T
+        self.tht  = np.array([self.bld_tht(self.Pmat,i,self.phi) for i in range(self.m)])
+
+        if verbose:
+            with np.printoptions(precision=6,suppress=False):
+                print('P:\n',self.Pmat)    
+
+        return self.Pmat, self.tht
+
+    def ortho_check_phi(self,):
+        '''Check orthonormality of phi functions
+
+        Returns:
+            ipmat (np.ndarray)  : float 2d array containing orthonormality check matrix output
+        '''
+        ipmat = np.zeros((self.m,self.m))
+        for i in range(self.m):
+            ipmat[i,i:self.m] = self.iprod(self.phi,self.phi,k=i,l=i,kmxp=i+1,lmxp=self.m)[0] 
+        return ipmat
+
+    def ortho_check(self,):
+        '''Check orthogonality of tht functions
+
+        Returns:
+            ipmat (np.ndarray)  : float 2d array containing orthonormality check matrix output
+        '''
+        ipmat = np.zeros((self.m,self.m))
+        for i in range(self.m):
+            ipmat[i,i:self.m] = self.iprod(self.tht,self.tht,k=i,l=i,kmxp=i+1,lmxp=self.m)[0] 
+        return ipmat
+
+
