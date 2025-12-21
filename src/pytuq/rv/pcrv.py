@@ -738,7 +738,7 @@ class PC1d():
         domain (np.ndarray): A 1d array of size :math:`2` indicating the domain of definition.
         p0 (callable): The 0th order basis evaluator from 1d np.ndarray to 1d np.ndarray.
         p1 (callable): The 1rd order basis evaluator from 1d np.ndarray to 1d np.ndarray.
-        pctype (str): The PC type. Only 'LU' and 'HG' are implemented.
+        pctype (str): The PC type. Only 'LU', 'nLU', 'HG' and 'nHG' are implemented.
         sample (callable): int->float sampling function, where the input is a number of samples requested, and the output is an 1d array of the corresponding size.
     """
 
@@ -746,7 +746,7 @@ class PC1d():
         """Initialization.
 
         Args:
-            pctype (str): The PC type. Only 'LU' and 'HG' are implemented. Defaults to 'LU'.
+            pctype (str): The PC type. Only 'LU', 'nLU', 'HG' and 'nHG'are implemented. Defaults to 'LU'.
         """
         self.pctype = pctype
         if self.pctype == 'LU':
@@ -756,11 +756,25 @@ class PC1d():
             self.b = lambda n: -n / (n + 1.)
             self.sample = lambda m: 2.*np.random.rand(m)-1.
             self.domain = np.array([-1., 1.])
+        elif self.pctype == 'nLU':
+            self.p0 = lambda x: np.ones_like(x)
+            self.p1 = lambda x: x * np.sqrt(3.)
+            self.a = lambda n: np.sqrt((2.*n+3.)/(2.*n+1.)) * (2. * n + 1.) / (n + 1.)
+            self.b = lambda n: - np.sqrt((2.*n+3.)/(2.*n-1.)) * n / (n + 1.)
+            self.sample = lambda m: 2.*np.random.rand(m)-1.
+            self.domain = np.array([-1., 1.])
         elif self.pctype == 'HG':
             self.p0 = lambda x: np.ones_like(x)
             self.p1 = lambda x: x
             self.a = lambda n: 1.
             self.b = lambda n: -n
+            self.sample = lambda m: np.random.randn(m)
+            self.domain = np.array([-np.inf, np.inf])
+        elif self.pctype == 'nHG':
+            self.p0 = lambda x: np.ones_like(x)
+            self.p1 = lambda x: x
+            self.a = lambda n: 1./(n+1.)
+            self.b = lambda n: -1./(n+1.)
             self.sample = lambda m: np.random.randn(m)
             self.domain = np.array([-np.inf, np.inf])
         else:
@@ -799,11 +813,11 @@ class PC1d():
         Returns:
             np.ndarray: A size :math:`M` 1d array of outputs containing CDF evaluations.
         """
-        if self.pctype == 'LU':
+        if self.pctype == 'LU' or self.pctype == 'nLU':
             cdf = (x+1.)/2.
             cdf[cdf>1]=1.0
             cdf[cdf<=-1]=0.0
-        elif self.pctype == 'HG':
+        elif self.pctype == 'HG' or self.pctype == 'nHG':
             cdf = (1.0 + erf(x / np.sqrt(2.0))) / 2.0
         else:
             print(f'PC1d type {self.pctype} is not recognized. Exiting.')
@@ -820,9 +834,9 @@ class PC1d():
         Returns:
             np.ndarray: A 1d array of size :math:`M` containing the germ samples.
         """
-        if self.pctype == 'LU':
+        if self.pctype == 'LU' or self.pctype == 'nLU':
             germ_sam = np.random.rand(nsam)*2.0-1.0
-        elif self.pctype == 'HG':
+        elif self.pctype == 'HG' or self.pctype == 'nHG':
             germ_sam = np.random.randn(nsam)
         else:
             print(f'PC1d type {self.pctype} is not recognized. Exiting.')
@@ -841,11 +855,15 @@ class PC1d():
         """
         if self.pctype == 'LU':
             val = 1./(2.*float(ord)+1.)
+        elif self.pctype == 'nLU':
+            val = 1.0
         elif self.pctype == 'HG':
             if ord == 0:
                 val = 1.0
             else:
                 val = float(np.prod(np.arange(1, ord+1)))
+        elif self.pctype == 'nHG':
+            val = 1.0
         else:
             print(f'PC1d type {self.pctype} is not recognized. Exiting.')
             sys.exit()

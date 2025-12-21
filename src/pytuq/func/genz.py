@@ -66,6 +66,36 @@ class GenzOscillatory(GenzBase):
         return np.cos(2. * np.pi * self.shift + 0.5 * np.sum(self.weights) ) * \
                np.prod(2. * np.sin(0.5 * self.weights) / self.weights)
 
+class GenzQuadOscillatory(GenzBase):
+    r"""Genz Quadratic Oscillatory function
+
+    .. math::
+        f(x) = \cos\left(2 \pi s + w^T x^2 \right)
+
+    Default values are :math:`s = 0` and :math:`w = [1.0]`.
+
+    """
+    def __init__(self, shift=0.0, weights=[1.0], domain=None,
+                 name='GenzQuadOscillatory'):
+        super().__init__(weights=weights, domain=domain, name=name)
+        self.shift = shift
+
+    def __call__(self, x):
+
+        self.checkDim(x)
+
+        y = np.cos(2. * np.pi * self.shift + np.dot(x**2, self.weights))
+
+        return y.reshape(-1,1)
+
+    def grad(self, x):
+        self.checkDim(x)
+
+        grad = np.empty((x.shape[0], self.outdim, self.dim))
+        for i in range(x.shape[1]):
+            grad[:, 0, i] = -2.*self.weights[i]*x[:, i]*np.sin(2. * np.pi * self.shift + np.dot(x**2, self.weights))
+
+        return grad
 
 class GenzSum(GenzBase):
     r"""Genz Summation function
