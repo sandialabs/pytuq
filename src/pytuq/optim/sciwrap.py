@@ -37,7 +37,18 @@ class ScipyWrapper(OptBase):
         assert(self.Objective is not None)
 
         self.history = []
-        res = minimize(lambda x, p: self.Objective(x, **p), param_ini,
+
+        if not self.ObjectiveInfo:
+            res = minimize(self.Objective, param_ini,
+                       args=(),
+                       method=self.method,
+                       jac = self.ObjectiveGrad,
+                       hess = self.ObjectiveHess,
+                       bounds = self.bounds,
+                       options=self.options,
+                       callback=self.store_history)
+        else:
+            res = minimize(lambda x, p: self.Objective(x, **p), param_ini,
                        args=(self.ObjectiveInfo,),
                        method=self.method,
                        jac = self.ObjectiveGrad,
