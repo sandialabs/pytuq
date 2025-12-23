@@ -1,0 +1,136 @@
+pytuq.optim.gd
+==============
+
+.. py:module:: pytuq.optim.gd
+
+.. autoapi-nested-parse::
+
+   Gradient descent optimization module.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.optim.gd.GD
+   pytuq.optim.gd.SGD
+   pytuq.optim.gd.Adam
+
+
+Module Contents
+---------------
+
+.. py:class:: GD(step_size=0.01)
+
+   Bases: :py:obj:`pytuq.optim.optim.OptBase`
+
+
+   "Gradient descent optimization class.
+
+
+
+   .. py:attribute:: step_size
+      :value: 0.01
+
+
+
+   .. py:method:: stepper(current)
+
+      Stepper function of a single step.
+
+      :param current: The current state.
+      :type current: np.ndarray
+
+      :returns: New state.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: SGD(step_size=0.01, batch_size=1)
+
+   Bases: :py:obj:`pytuq.optim.optim.OptBase`
+
+
+   "Stochastic gradient descent optimization class.
+
+
+
+   .. py:attribute:: step_size
+      :value: 0.01
+
+
+
+   .. py:attribute:: batch_size
+      :value: 1
+
+
+
+   .. py:method:: stepper(current)
+
+      Stepper function of a single step.
+
+      :param current: The current state.
+      :type current: np.ndarray
+
+      :returns: New state.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Adam(dim, lr=0.01, beta1=0.9, beta2=0.999, eps=1e-08)
+
+   Bases: :py:obj:`pytuq.optim.optim.OptBase`
+
+
+   Simple Adam optimizer that performs gradient descent.
+
+
+
+   .. py:attribute:: dim
+
+
+   .. py:attribute:: m
+
+
+   .. py:attribute:: v
+
+
+   .. py:attribute:: t
+      :value: 0
+
+
+
+   .. py:attribute:: lr
+      :value: 0.01
+
+
+
+   .. py:attribute:: beta1
+      :value: 0.9
+
+
+
+   .. py:attribute:: beta2
+      :value: 0.999
+
+
+
+   .. py:attribute:: eps
+      :value: 1e-08
+
+
+
+   .. py:method:: stepper(current)
+
+      Stepper function of a single step.
+
+      :param current: The current state.
+      :type current: np.ndarray
+
+      :returns: New state.
+      :rtype: np.ndarray
+
+
+

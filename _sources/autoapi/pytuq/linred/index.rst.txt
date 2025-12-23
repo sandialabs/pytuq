@@ -1,0 +1,19 @@
+pytuq.linred
+============
+
+.. py:module:: pytuq.linred
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/pytuq/linred/kle/index
+   /autoapi/pytuq/linred/klnn/index
+   /autoapi/pytuq/linred/klsurr/index
+   /autoapi/pytuq/linred/linred/index
+   /autoapi/pytuq/linred/svd/index
+
+

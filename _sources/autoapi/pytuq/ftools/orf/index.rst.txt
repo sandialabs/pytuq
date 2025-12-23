@@ -1,0 +1,685 @@
+pytuq.ftools.orf
+================
+
+.. py:module:: pytuq.ftools.orf
+
+.. autoapi-nested-parse::
+
+   Module for orthonormalization of functions using Gram-Schmidt or QR decomposition.
+
+   Written by Habib N. Najm (2025).
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.ftools.orf.GLMAP
+   pytuq.ftools.orf.HMAT
+   pytuq.ftools.orf.MGSV
+   pytuq.ftools.orf.MGS
+   pytuq.ftools.orf.MMGS
+   pytuq.ftools.orf.QR
+
+
+Module Contents
+---------------
+
+.. py:class:: GLMAP(x, L=None, verbose=False)
+
+   General linear map and data class
+
+   .. attribute:: npt
+
+      number of data points
+
+      :type: int
+
+   .. attribute:: x
+
+      2d float data array of shape :math:`(npt,n)`, i.e. :math:`npt` points each in :math:`R^n`.
+
+      :type: np.ndarray
+
+   .. attribute:: L
+
+      2d float array of shape :math:`(M,npt)` or a callable user-provided function or None
+
+      :type: np.ndarray or callable or None
+
+   .. rubric:: Notes
+
+   Builds linear map and data object, presumed to underly a regression problem of the form
+   :math:`y = L(x,f(x;w))`, given data :math:`\{(x_1,y_1),...,(x_{npt},y_{npt})\}` where :math:`x_i \in R^n`, :math:`x \in R^{npt \times n}`, and :math:`y_i\in R`.
+   and where :math:`w \in R^m` is a vector of parameters to be estimated.
+
+   L needs to be linear in :math:`f()`, with separate L dependence on :math:`x` being an arbitrary function, so that, with :math:`u = f(x,w) = \sum_k w_k f_k(x)`, we have :math:`y = L(x, \sum_k w_k f_k(x) ) = \sum_k w_k L(x,f_k(x))` or :math:`y = A w` with :math:`A \in R^{npt \times m}` where :math:`A[i,j] = L(x_i,f_j(x_i))`.
+
+   This class can take specs of different linear maps L on functions :math:`f(x): x \rightarrow u`, with :math:`u \in R^{npt}`. We list here multiple options for illustration. The specification of the linear map ``lmap=gso.GLMAP(x,L)`` can be done with L given as either no spec, a function, or an array
+       * if L is a user-defined callable L (function), then `lmap.eval(f)` returns :math:`L(x,u)` as specified by the user. If want a map, e.g.: :math:`L(x,f(x)) = e^x + x^3 f(x)`, one can use e.g. ``lmap = gso.GLMAP(x, lambda x, u: np.exp(x) + x**3 * u)``.
+       * if L is a user-defined array L, i.e. :math:`L(x,u):=Lu`, (L shape needs to be :math:`(M,npt)`) then ``lmap.eval(f)`` returns :math:`Lu`. If we want a linear matrix map, say :math:`L = B` (shape :math:`(m,npt)` ), then can use either ``lmap = gso.GLMAP(x, B)`` or ``lmap = gso.GLMAP(x, lambda x, u: B@u)``.
+       * if L is None or not specified, then an identiy map is implied, and ``lmap.eval(f)`` returns :math:`L(x,u) = u`; Thus, the following are all equivalent specs of the None option for L
+           * ``lmap = gso.GLMAP(x)``
+           * ``lmap = gso.GLMAP(x, np.eye(npt))``
+           * ``lmap = gso.GLMAP(x, lambda x, u: u)``.
+
+
+   .. py:attribute:: x
+
+
+   .. py:attribute:: npt
+
+
+   .. py:method:: eval(f)
+
+      Evaluate the map on function f.
+
+
+
+.. py:class:: HMAT(mgs_, verbose=False)
+
+   Utilities class for H matrix construction.
+
+   .. attribute:: mgs
+
+      MGS class object handle.
+
+      :type: object
+
+   .. attribute:: m
+
+      number of basis functions in expansion.
+
+      :type: int
+
+   .. attribute:: mat
+
+      3D array where `H` matrix is constructed.
+
+      :type: np.ndarray
+
+   .. attribute:: level
+
+      recursion level counter.
+
+      :type: int
+
+   .. attribute:: verbose
+
+      controls verbosity.
+
+      :type: bool
+
+   .. attribute:: Fthmap
+
+      2d int array, :math:`(i,j)` entry `0/1` => corresponding :math:`(\theta_i,\theta_j)` inner product has-not/has been evaluated.
+
+      :type: np.ndarray
+
+   .. attribute:: Fmap
+
+      2d int array, :math:`(i,j)` entry `0/1` => corresponding :math:`(\phi_i,\theta_j)` inner product has-not/has been evaluated.
+
+      :type: np.ndarray
+
+   .. attribute:: Fthval
+
+      2d array of :math:`(\theta,\theta)` inner products.
+
+      :type: np.ndarray
+
+   .. attribute:: Fval
+
+      2d array of :math:`(\phi,\theta)` inner products.
+
+      :type: np.ndarray
+
+
+   .. py:attribute:: mgs
+
+
+   .. py:attribute:: m
+
+
+   .. py:attribute:: mat
+
+
+   .. py:attribute:: level
+      :value: 0
+
+
+
+   .. py:attribute:: verbose
+      :value: False
+
+
+
+   .. py:attribute:: Fthmap
+
+
+   .. py:attribute:: Fmap
+
+
+   .. py:attribute:: Fthval
+
+
+   .. py:attribute:: Fval
+
+
+   .. py:method:: Fth(i, j)
+
+      Evaluate :math:`(\theta_i,\theta_j)` inner product.
+
+      :param i: :math:`0 <= i < m` index for :math:`\theta_i`
+      :type i: int
+      :param j: :math:`0 <= j < m` index for :math:`\theta_j`
+      :type j: int
+
+
+
+   .. py:method:: F(i, j)
+
+      Evaluate :math:`(\phi_i,\theta_j)` inner product.
+
+      :param i: :math:`0 <= i < m` index for :math:`\phi_i`
+      :type i: int
+      :param j: :math:`0 <= j < m` index for :math:`\theta_j`
+      :type j: int
+
+
+
+   .. py:method:: Heval(n, r, ilom, ihim)
+
+      Evaluate :math:`H` matrix recursively.
+
+      :param n: summation index limit
+      :type n: int
+      :param r: summation index limit
+      :type r: int
+      :param ilom: initial summation index in previous sum
+      :type ilom: int
+      :param ihim: final summation index in previous sum
+      :type ihim: int
+
+
+
+   .. py:method:: fill(n, r, i1, i)
+
+      Fill in :math:`H` matrix recursively.
+
+      :param n: summation index limit
+      :type n: int
+      :param r: summation index limit
+      :type r: int
+      :param i1: initial summation index
+      :type i1: int
+      :param i: relevant i index
+      :type i: int
+
+
+
+.. py:class:: MGSV(mgs_, verbose=False)
+
+   Utilities class for :math:`V` matrix construction.
+
+   .. attribute:: m
+
+      number of basis functions in expansion.
+
+      :type: int
+
+   .. attribute:: mat
+
+      2D :math:`(m, m)` array where the :math:`V` matrix is constructed.
+
+      :type: np.ndarray
+
+   .. attribute:: verbose
+
+      controls verbosity.
+
+      :type: bool
+
+   .. attribute:: Smat
+
+      3D :math:`(m, m, m)` array where the :math:`S` matrix is constructed.
+
+      :type: np.ndarray
+
+   .. attribute:: H
+
+      pointer to HMAT object.
+
+      :type: object
+
+
+   .. py:attribute:: m
+
+
+   .. py:attribute:: mat
+
+
+   .. py:attribute:: Smat
+
+
+   .. py:attribute:: H
+
+
+   .. py:method:: fill_row(i)
+
+      Fill in :math:`V` matrix row.
+
+      :param i: row index
+      :type i: int
+
+
+
+.. py:class:: MGS(phi_, Lmap)
+
+   Modified Gram-Schmidt (MGS) class. Builds MGS object for functions.
+
+   .. attribute:: m
+
+      number of basis functions in expansion.
+
+      :type: int
+
+   .. attribute:: phi
+
+      1d numpy array (size :math:`m`) of starting functions.
+
+      :type: np.ndarray
+
+   .. attribute:: psi
+
+      1d numpy array (size :math:`m`) of to-be-constructed orthogonal functions.
+
+      :type: np.ndarray
+
+   .. attribute:: tht
+
+      1d numpy array (size :math:`m`) of to-be-constructed orthonormal functions.
+
+      :type: np.ndarray
+
+   .. attribute:: Lmap
+
+      pointer to local copy of Linear map and data object.
+
+      :type: object
+
+   .. attribute:: modified
+
+      True/False for modified/original GS orthogonalization.
+
+      :type: bool
+
+   .. attribute:: V
+
+      2d :math:`(m, m)` numpy array ... the V matrix.
+
+      :type: np.ndarray
+
+   .. attribute:: Z
+
+      2d :math:`(m, m)` numpy array ... the Z matrix.
+
+      :type: np.ndarray
+
+   .. attribute:: Pmat
+
+      2d :math:`(m, m)` numpy array ... the P projection matrix
+
+      :type: np.ndarray
+
+   .. attribute:: lam
+
+      1d numpy array of size :math:`m`.
+
+      :type: np.ndarray
+
+
+   .. py:attribute:: phi
+
+
+   .. py:attribute:: psi
+
+
+   .. py:attribute:: tht
+
+
+   .. py:attribute:: m
+
+
+   .. py:attribute:: Lmap
+
+
+   .. py:method:: iprod(pk, pl, **kwargs)
+
+      Pairwise inner product between (lists of) functions.
+
+      :param pk: a list|tuple|numpy array of function pointers, or otherwise a function pointer
+      :param pl: a list|tuple|numpy array of function pointers, or otherwise a function pointer
+      :param kwargs: optional keyword arguments:
+
+                     - k    (int)  : starting index in `pk`. Required iff `pk` is a list|tuple|array
+                     - l    (int)  : starting index in `pl`. Required iff `pl` is a list|tuple|array
+                     - kmxp (int)  : (default: k+1) max-k plus 1, so that range(k,kmxp) goes over `pk[k], ..., pk[kmxp-1]`
+                     - lmxp (int)  : (default: l+1) max-l plus 1, so that range(l,lmxp) goes over `pl[l], ..., pl[lmxp-1]`
+                     - verbose_warning (bool) : controls verbosity of warnings.
+
+      :returns: 2d float numpy array with `kmxp-k` rows and `lmxp-l` columns
+      :rtype: fklT (np.ndarray)
+
+      .. admonition:: Example
+
+         Say, we have `pk` list and `pl` single function
+         
+             - ``pk = [lambda x : 2*x, lambda x : x**2, lambda x : x**3]``
+             - ``pl = lambda x : 10*x``
+         then
+         
+             - ``iprod(pk[3],pl)`` returns: ``[[<Lmap.eval(pk[3]),Lmap.eval(pl)>]]``, a 2d `(1, 1)` numpy array and
+             - ``iprod(pk,pl,k=1,kmxp=3)`` returns ``[[<Lmap.eval(pk[1]),Lmap.eval(pl)>, <Lmap.eval(pk[2]),Lmap.eval(pl)>]]``, a 2d `(1, 2)` numpy array.
+             - ``iprod(pk,pl,k=0,kmxp=3,l=0,lmxp=2)`` returns  ``[ [<Lmap.eval(pk[0]),Lmap.eval(pl[0])>, <Lmap.eval(pk[0]),Lmap.eval(pl[1])>], [<Lmap.eval(pk[1]),Lmap.eval(pl[0])>, <Lmap.eval(pk[1]),Lmap.eval(pl[1])>], [<Lmap.eval(pk[2]),Lmap.eval(pl[0])>, <Lmap.eval(pk[2]),Lmap.eval(pl[1])>]]``  a 2d `(3, 2)` numpy array.
+         
+         NB. if x is an `npt`-long vector of data points, then for any of the above functions, say ``pk[2]``, ``Lmap.eval(pk[2])`` will return a 2d `(1, npt)` numpy array.
+
+
+
+   .. py:method:: bld_psi(i, Rinv)
+
+      Build and return \psi function for index `i`
+
+      :param i: row index
+      :type i: int
+      :param Rinv: 2d float matrix
+      :type Rinv: np.ndarray
+
+      :returns: :math:`\psi` function for index `i`
+      :rtype: lfnc (function)
+
+
+
+   .. py:method:: bld_tht(i, laml)
+
+      Build and return tht (:math:`\theta`) function for index `i`
+
+      :param i: row index
+      :type i: int
+      :param laml: float specified scale factor to normalize :math:`\psi[i]`
+      :type laml: float
+
+      :returns: tht function for index `i`
+      :rtype: lfnc (function)
+
+
+
+   .. py:method:: ortho(modified=False, verbose=False, stage=0)
+
+      Orthonormalize phi functions to provide the tht functions
+
+      :param modified: controls whether using modified Gram-Schmidt, or unmodified
+      :type modified: bool
+      :param verbose: controls verbosity
+      :type verbose: bool
+      :param stage: stage index within multistage Gram-Schmidt
+      :type stage: int
+
+      :returns: 2d float projection matrix
+                tht (np.ndarray)    : 1d array of tht function pointers
+      :rtype: Pmat (np.ndarray)
+
+
+
+   .. py:method:: ortho_check_phi()
+
+      Check orthonormality of phi functions
+
+      :returns: float 2d array containing orthonormality check matrix output
+      :rtype: ipmat (np.ndarray)
+
+
+
+   .. py:method:: ortho_check()
+
+      Check orthogonality of tht functions
+
+      :returns: float 2d array containing orthonormality check matrix output
+      :rtype: ipmat (np.ndarray)
+
+
+
+.. py:class:: MMGS(phi_, Lmap)
+
+   Multistage Modified Gram-Schmidt (MMGS) class.
+   Builds MMGS object for functions.
+
+   .. attribute:: m
+
+      number of functions
+
+      :type: int
+
+   .. attribute:: phi
+
+      1d numpy array of starting functions
+
+      :type: np.ndarray
+
+   .. attribute:: phi_
+
+      1d numpy array of starting functions
+
+      :type: np.ndarray
+
+   .. attribute:: Lmap
+
+      Linear map and data object
+
+      :type: object
+
+   .. attribute:: Pmat
+
+      2d `(m, m)` numpy array, the projection matrix `P`
+
+      :type: np.ndarray
+
+   .. attribute:: mgs
+
+      1d `(nstage,)` array of MGS objects
+
+      :type: np.ndarray
+
+   .. attribute:: phia
+
+      2d `(nstage, m)` numpy array of starting functions
+
+      :type: np.ndarray
+
+   .. attribute:: thta
+
+      2d `(nstage, m)` numpy array of orthonormalized functions
+
+      :type: np.ndarray
+
+   .. attribute:: Parr
+
+      3d `(nstage, m, m)` matrix, holds nstage P matrices
+
+      :type: np.ndarray
+
+
+   .. py:attribute:: phi_
+
+
+   .. py:attribute:: m
+
+
+   .. py:attribute:: Lmap
+
+
+   .. py:method:: ortho(modified=False, nstage=1, verbose=False)
+
+      Multiscale Modified Gram-Schmidt class orthonormalization
+      Runs multistage and/or Modified GS for functions
+
+      :returns: float `(m,m)` aggregated projection matrix
+                thta[-1]            : 1d array of final tht functions
+      :rtype: Pmat (np.ndarray)
+
+
+
+   .. py:method:: ortho_check(stage=None)
+
+      Check orthonormality of tht functions at given stage
+
+      :param stage: stage within multistage MGS
+      :type stage: int
+
+      :returns: float 2d array containing orthonormality check matrix output for this stage
+      :rtype: ipmat (np.ndarray)
+
+
+
+   .. py:method:: ortho_check_phi(stage=None)
+
+      Check orthonormality of phi functions at given stage
+
+      :param stage: stage within multistage MGS
+      :type stage: int
+
+      :returns: float 2d array containing orthonormality check matrix output for this stage
+      :rtype: ipmat (np.ndarray)
+
+
+
+.. py:class:: QR(phi_, Lmap)
+
+   QR decomposition class. Builds QR object for functions.
+
+   .. attribute:: m
+
+      number of basis functions in expansion.
+
+      :type: int
+
+   .. attribute:: phi
+
+      1d numpy array (size :math:`m`) of starting functions.
+
+      :type: np.ndarray
+
+   .. attribute:: tht
+
+      1d numpy array (size :math:`m`) of to-be-constructed orthonormal functions.
+
+      :type: np.ndarray
+
+   .. attribute:: Lmap
+
+      pointer to local copy of Linear map and data object.
+
+      :type: object
+
+   .. attribute:: Pmat
+
+      2d :math:`(m, m)` numpy array ... the P projection matrix
+
+      :type: np.ndarray
+
+
+   .. py:attribute:: phi
+
+
+   .. py:attribute:: tht
+
+
+   .. py:attribute:: m
+
+
+   .. py:attribute:: Lmap
+
+
+   .. py:method:: iprod(pk, pl, **kwargs)
+
+      Pairwise inner product between (lists of) functions.
+
+      :param pk: a list|tuple|numpy array of function pointers, or otherwise a function pointer
+      :param pl: a list|tuple|numpy array of function pointers, or otherwise a function pointer
+      :param kwargs: optional keyword arguments:
+
+                     - k    (int)  : starting index in `pk`. Required iff `pk` is a list|tuple|array
+                     - l    (int)  : starting index in `pl`. Required iff `pl` is a list|tuple|array
+                     - kmxp (int)  : (default: k+1) max-k plus 1, so that range(k,kmxp) goes over `pk[k], ..., pk[kmxp-1]`
+                     - lmxp (int)  : (default: l+1) max-l plus 1, so that range(l,lmxp) goes over `pl[l], ..., pl[lmxp-1]`
+                     - verbose_warning (bool) : controls verbosity of warnings.
+
+      :returns: 2d float numpy array with `kmxp-k` rows and `lmxp-l` columns
+      :rtype: fklT (np.ndarray)
+
+      .. admonition:: Example
+
+         Say, we have `pk` list and `pl` single function
+         
+             - ``pk = [lambda x : 2*x, lambda x : x**2, lambda x : x**3]``
+             - ``pl = lambda x : 10*x``
+         then
+         
+             - ``iprod(pk[3],pl)`` returns: ``[[<Lmap.eval(pk[3]),Lmap.eval(pl)>]]``, a 2d `(1, 1)` numpy array and
+             - ``iprod(pk,pl,k=1,kmxp=3)`` returns ``[[<Lmap.eval(pk[1]),Lmap.eval(pl)>, <Lmap.eval(pk[2]),Lmap.eval(pl)>]]``, a 2d `(1, 2)` numpy array.
+             - ``iprod(pk,pl,k=0,kmxp=3,l=0,lmxp=2)`` returns  ``[ [<Lmap.eval(pk[0]),Lmap.eval(pl[0])>, <Lmap.eval(pk[0]),Lmap.eval(pl[1])>], [<Lmap.eval(pk[1]),Lmap.eval(pl[0])>, <Lmap.eval(pk[1]),Lmap.eval(pl[1])>], [<Lmap.eval(pk[2]),Lmap.eval(pl[0])>, <Lmap.eval(pk[2]),Lmap.eval(pl[1])>]]``  a 2d `(3, 2)` numpy array.
+         
+         NB. if x is an `npt`-long vector of data points, then for any of the above functions, say ``pk[2]``, ``Lmap.eval(pk[2])`` will return a 2d `(1, npt)` numpy array.
+
+
+
+   .. py:method:: bld_tht(P, i, phiv)
+
+      Build and return tht (:math:`\theta`) function for index `i`
+
+      :param i: row index
+      :type i: int
+      :param P: 2d float projection matrix
+      :type P: p.ndarray
+
+      :returns: tht function for index `i`
+      :rtype: lfnc (function)
+
+
+
+   .. py:method:: ortho(verbose=False)
+
+      Orthonormalize phi functions to provide the tht functions
+
+      :param verbose: controls verbosity
+      :type verbose: bool
+
+      :returns: 2d float projection matrix
+                tht (np.ndarray)    : 1d array of tht function pointers
+      :rtype: Pmat (np.ndarray)
+
+      Uses QR factorization to find Pmat
+
+
+
+   .. py:method:: ortho_check_phi()
+
+      Check orthonormality of phi functions
+
+      :returns: float 2d array containing orthonormality check matrix output
+      :rtype: ipmat (np.ndarray)
+
+
+
+   .. py:method:: ortho_check()
+
+      Check orthogonality of tht functions
+
+      :returns: float 2d array containing orthonormality check matrix output
+      :rtype: ipmat (np.ndarray)
+
+
+

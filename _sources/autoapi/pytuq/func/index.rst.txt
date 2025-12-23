@@ -1,0 +1,24 @@
+pytuq.func
+==========
+
+.. py:module:: pytuq.func
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/pytuq/func/bench/index
+   /autoapi/pytuq/func/bench1d/index
+   /autoapi/pytuq/func/bench2d/index
+   /autoapi/pytuq/func/benchNd/index
+   /autoapi/pytuq/func/chem/index
+   /autoapi/pytuq/func/func/index
+   /autoapi/pytuq/func/genz/index
+   /autoapi/pytuq/func/oper/index
+   /autoapi/pytuq/func/poly/index
+   /autoapi/pytuq/func/toy/index
+
+

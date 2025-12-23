@@ -1,0 +1,366 @@
+pytuq.func.bench
+================
+
+.. py:module:: pytuq.func.bench
+
+.. autoapi-nested-parse::
+
+   Benchmark functions module that are not 1d, 2d, or Nd.
+
+   Most of the functions are taken from https://github.com/Vahanosi4ek/pytuq_funcs that autogenerates the codes given function's latex strings.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.func.bench.Ishigami
+   pytuq.func.bench.Wolfe
+   pytuq.func.bench.Colville
+   pytuq.func.bench.MieleCantrell
+   pytuq.func.bench.Powell
+   pytuq.func.bench.Dolan
+   pytuq.func.bench.Friedman
+   pytuq.func.bench.GramacyLee
+
+
+Module Contents
+---------------
+
+.. py:class:: Ishigami(name='Ishigami')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Ishigami function
+
+   Reference: [https://www.sfu.ca/~ssurjano/ishigami.html]
+
+   .. math::
+       f(x) = \sin(x_1) + a \sin^2(x_2) + b x_3^4 \sin(x_1)
+
+   Default constant values are :math:`a = 7` and :math:`b = 0.1`
+
+
+
+   .. py:attribute:: name
+      :value: 'Ishigami'
+
+
+
+   .. py:attribute:: dim
+      :value: 3
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:attribute:: a
+      :value: 7
+
+
+
+   .. py:attribute:: b
+      :value: 0.1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Wolfe(c1=4.0 / 3.0, c2=0.75, name='Wolfe')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Wolfe function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_W.html#go_benchmark.Wolfe]
+
+   .. math::
+       f(x)=c_1(x_1^2 + x_2^2 - x_1x_2)^{c_2} + x_3
+
+
+   Default constant values are :math:`c = (4/3, 0.75)`
+
+
+
+   .. py:attribute:: dim
+      :value: 3
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Colville(c1=1.0, c2=100.0, c3=10.1, c4=1.0, c5=1.0, c6=90.0, c7=10.1, c8=1.0, c9=19.8, c10=1.0, name='Colville')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Colville function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_C.html#go_benchmark.Colville]
+
+   .. math::
+       f(x)=(x_1 - c_1)^{2} + c_2 (x_1^{2} - x_2)^{2} + c_3 (x_2 - c_4)^{2} + (x_3 - c_5)^{2} + c_6 (x_3^{2} - x_4)^{2} + c_7 (x_4 - c_8)^{2} + c_9 \frac{x_4 - c_{10}}{x_2}
+
+
+   Default constant values are :math:`c = (1.0, 100.0, 10.1, 1.0, 1.0, 90.0, 10.1, 1.0, 19.8, 1.0)`
+
+
+
+   .. py:attribute:: dim
+      :value: 4
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: MieleCantrell(c1=100.0, name='MieleCantrell')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   MieleCantrell function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_M.html#go_benchmark.MieleCantrell]
+
+   A multimodal minimization function
+
+   .. math::
+       f(x)=(e^{-x_1} - x_2)^4 + c_1(x_2 - x_3)^6 + \tan^4(x_3 - x_4) + x_1^8
+
+
+   Default constant values are :math:`c_1 = 100.0`
+
+
+   .. py:attribute:: c1
+      :value: 100.0
+
+
+
+   .. py:attribute:: dim
+      :value: 4
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Powell(c1=10.0, c2=5.0, c3=2.0, c4=10.0, name='Powell')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Powell function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_P.html#go_benchmark.Powell]
+
+   .. math::
+       f(x)=(x_3+c_1x_1)^2+c_2(x_2-x_4)^2+(x_1-c_3x_2)^4+c_4(x_3-x_4)^4
+
+
+   Default constant values are :math:`c = (10.0, 5.0, 2.0, 10.0)`
+
+
+
+   .. py:attribute:: dim
+      :value: 4
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Dolan(c1=1.7, c2=1.5, c3=0.1, c4=0.2, c5=1, name='Dolan')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Dolan function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_D.html#go_benchmark.Dolan]
+
+   .. math::
+       f(x)=|(x_1 + c_1x_2)\sin(x_1) - c_2x_3 - c_3x_4\cos(x_5 + x_5 - x_1) + c_4x_5^2 - x_2 - c_5|
+
+
+   Default constant values are :math:`c = (1.7, 1.5, 0.1, 0.2, 1)`
+
+
+
+   .. py:attribute:: dim
+      :value: 5
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Friedman(c1=10.0, c2=20.0, c3=-0.5, c4=2.0, c5=10.0, c6=5.0, name='Friedman')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Friedman function
+
+   Reference: [https://www.sfu.ca/~ssurjano/fried.html]
+
+   A 5d trigonometric function, linear in :math:`x_4` and :math:`x_5`
+
+
+   Default constant values are :math:`c = (10., 20., 0.5, 2., 10., 5.)`
+
+   .. math::
+       f(x)=c_1\sin(\pi x_1x_2)+c_2(x_3-c_3)^{c_4}+c_5x_4+c_6x_5
+
+
+
+   .. py:attribute:: dim
+      :value: 5
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: GramacyLee(c1=0.9, c2=0.48, c3=10.0, name='GramacyLee')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Gramacy and Lee function
+
+   Reference: [https://www.sfu.ca/~ssurjano/grlee09.html]
+
+   A 6d function, where :math:`x_5` and :math:`x_6` aren't active
+
+   .. math::
+       f(x)=e^{sin((c_1(x_1+c_2))^{c_3})}+x_2x_3+x_4
+
+   Default constant values are :math:`c = (0.9, 0.48, 10.)`.
+
+
+
+   .. py:attribute:: dim
+      :value: 6
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+

@@ -1,0 +1,197 @@
+pytuq.utils.xutils
+==================
+
+.. py:module:: pytuq.utils.xutils
+
+.. autoapi-nested-parse::
+
+   Collection of various useful utilities.
+
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   pytuq.utils.xutils.idt
+   pytuq.utils.xutils.savepk
+   pytuq.utils.xutils.loadpk
+   pytuq.utils.xutils.cartes_list
+   pytuq.utils.xutils.read_textlist
+   pytuq.utils.xutils.sample_sphere
+   pytuq.utils.xutils.get_opt_bw
+   pytuq.utils.xutils.get_pdf
+   pytuq.utils.xutils.strarr
+   pytuq.utils.xutils.project
+   pytuq.utils.xutils.pick_basis
+   pytuq.utils.xutils.safe_cholesky
+   pytuq.utils.xutils.instantiate_classes_from_module
+
+
+Module Contents
+---------------
+
+.. py:function:: idt(x)
+
+   Identity function.
+
+   :param x: input
+   :type x: any type
+
+   :returns: output
+   :rtype: any type
+
+
+.. py:function:: savepk(sobj, nameprefix='savestate')
+
+   Pickle a python object.
+
+   :param sobj: Object to be pickled.
+   :type sobj: any type
+   :param nameprefix: Name prefix.
+   :type nameprefix: str, optional
+
+
+.. py:function:: loadpk(nameprefix='savestate')
+
+   Unpickle a python object from a pickle file.
+
+   :param nameprefix: Filename prefix
+   :type nameprefix: str, optional
+
+   :returns: Unpickled object
+   :rtype: any type
+
+
+.. py:function:: cartes_list(somelists)
+
+   Generate a list of all combination of elements in given lists.
+
+   :param somelists: List of lists
+   :type somelists: list
+
+   :returns: List of all combinations of elements in lists that make up somelists
+   :rtype: list[tuple]
+
+   .. admonition:: Example
+
+      >>> cartes_list([['a', 'b'], [3, 4, 2]])
+      [('a', 3), ('a', 4), ('a', 2), ('b', 3), ('b', 4), ('b', 2)]
+
+
+.. py:function:: read_textlist(filename, nsize, names_prefix='')
+
+   Read a textfile into a list containing the rows.
+
+   :param filename: File name
+   :type filename: str
+   :param nsize: Number of rows in the file
+   :type nsize: int
+   :param names_prefix: Prefix of a dummy list entry names if the file is not present.
+   :type names_prefix: str, optional
+
+   :returns: List of elements that are rows of the file
+   :rtype: list[str]
+
+
+.. py:function:: sample_sphere(center=None, rad=1.0, nsam=100)
+
+   Sample on a hypersphere of a given radius.
+
+   :param center: Center of the sphere. Defaults to origin.
+   :type center: np.ndarray, optional
+   :param rad: Radius of the sphere. Defaults to 1.0.
+   :type rad: float, optional
+   :param nsam: Number of samples requested. Defaults to 100.
+   :type nsam: int, optional
+
+   :returns: Array of size `(N,d)`
+   :rtype: np.ndarray
+
+
+.. py:function:: get_opt_bw(xsam, bwf=1.0)
+
+   Get the rule-of-thumb optimal bandwidth for kernel density estimation.
+
+   :param xsam: Data array, `(N,d)`
+   :type xsam: np.ndarray
+   :param bwf: Factor behind the scaling optimal rule
+   :type bwf: float
+
+   :returns: Array of length `d`, the optimal per-dimension bandwidth
+   :rtype: np.ndarray
+
+
+.. py:function:: get_pdf(data, target)
+
+   Compute PDF given data at target points.
+
+   :param data: an `(N,d)` array of `N` samples in `d` dimensions
+   :type data: np.ndarray
+   :param target np.ndarray): an `(M,d)` array of target points
+
+   :returns: PDF values at target
+   :rtype: np.ndarray
+
+
+.. py:function:: strarr(array)
+
+   Turn an array into a neatly formatted one for annotating figures.
+
+   :param array: 1d array
+   :type array: np.ndarray
+
+   :returns: list of floats with two decimal digits
+   :rtype: list
+
+
+.. py:function:: project(a, b)
+
+   Project a vector onto another vector in high-d space.
+
+   :param a: The 1d array to be projected.
+   :type a: np.ndarray
+   :param b: The array to project onto.
+   :type b: np.ndarray
+
+   :returns: tuple (projection, residual) where projection+residual=a, and projection is orthogonal to residual, and colinear with b.
+   :rtype: tuple(np.ndarray, np.ndarray)
+
+
+.. py:function:: pick_basis(x1, x2, x3, x0=None, random_direction_in_plane=None)
+
+   Given three points in a high-d space, picks a basis in a plane that goes through these points.
+
+   :param x1: 1d array, the first point
+   :type x1: np.ndarray
+   :param x2: 1d array, the second point
+   :type x2: np.ndarray
+   :param x3: 1d array, the third point
+   :type x3: np.ndarray
+   :param x0: 1d array, the central point of basis. Defaults to None, in which case the center-of-mass is selected.
+   :type x0: np.ndarray, optional
+   :param random_direction_in_plane: Direction aligned with the first basis. Has to be in the plane already. Defaults to None, in which case a random direction is selected.
+   :type random_direction_in_plane: np.ndarray, optional
+
+   :returns: tuple(origin, e1, e2) of the origin and two basis directions.
+   :rtype: tuple(np.ndarray, np.ndarray, np.ndarray)
+
+
+.. py:function:: safe_cholesky(cov)
+
+   Cholesky decomposition with some error handlers, and using SVD+QR trick in case the covariance is degenerate.
+
+   :param cov: Positive-definite or zero-determinant symmetric matrix `C`.
+   :type cov: np.ndarray
+
+   :returns: Lower-triangular factor `L` such that `C=L L^T`.
+   :rtype: np.ndarray
+
+
+.. py:function:: instantiate_classes_from_module(module_name)
+
+   Imports a module and returns a list of instantiated objects for every class in it.
+   Only classes defined inside the module are included (not imported ones).
+
+

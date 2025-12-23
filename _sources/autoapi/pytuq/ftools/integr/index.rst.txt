@@ -1,0 +1,244 @@
+pytuq.ftools.integr
+===================
+
+.. py:module:: pytuq.ftools.integr
+
+.. autoapi-nested-parse::
+
+   Module for integration classes.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.ftools.integr.Integrator
+   pytuq.ftools.integr.IntegratorScipy
+   pytuq.ftools.integr.IntegratorMCMC
+   pytuq.ftools.integr.IntegratorMC
+   pytuq.ftools.integr.IntegratorWMC
+   pytuq.ftools.integr.IntegratorGMM
+   pytuq.ftools.integr.IntegratorGMMT
+
+
+Module Contents
+---------------
+
+.. py:class:: Integrator
+
+   Base class for integration objects.
+
+
+   .. py:method:: integrate(function, domain=None, func_args=None, xdata=None, **kw_args)
+      :abstractmethod:
+
+
+      Dummy method to be implemented by children classes.
+
+      :param function: The function to integrate f(x, **func_args), where the first argument should be a 2d array of size `(N, d)`.
+      :type function: callable
+      :param domain: Optionally provide a domain of integration, `(d, 2)`.
+      :type domain: None, optional
+      :param func_args: Optional keyword arguments of the function.
+      :type func_args: None, optional
+      :param xdata: Provide input samples, if needed by the integrator.
+      :type xdata: None, optional
+      :param \*\*kw_args: Other keyword arguments necessary for the integrator at hand.
+
+      :raises NotImplementedError: This needs to be implemented by children classes.
+
+
+
+   .. py:method:: integrate_multiple(f_arg_list, **kwargs)
+
+      Integrate multiple functions at once with the same input samples.
+
+      :param f_arg_list: List of pairs (function, argument).
+      :type f_arg_list: list[tuple]
+      :param \*\*kwargs: Keyword arguments for the function.
+
+      :returns: List of integral values.
+      :rtype: list[float]
+
+      TODO: assumes all functions take the same keyword arguments.
+
+
+
+.. py:class:: IntegratorScipy
+
+   Bases: :py:obj:`Integrator`
+
+
+   Integrator that uses SciPy.
+
+
+   .. py:method:: integrate(function, domain=None, func_args=None, xdata=None, epsrel=1e-05)
+
+      Integration via SciPy.
+
+      :param function: The function to integrate f(x, **func_args), where the first argument should be a 2d array of size `(N, d)`.
+      :type function: callable
+      :param domain: Optionally provide a domain of integration, `(d, 2)`.
+      :type domain: None, optional
+      :param func_args: Optional keyword arguments of the function.
+      :type func_args: None, optional
+      :param xdata: Provide input samples, if needed by the integrator.
+      :type xdata: None, optional
+      :param epsrel: Integration tolerance. Defaults to 1.e-5.
+      :type epsrel: float, optional
+
+      :returns: tuple of integral value and dictionary containing error.
+      :rtype: (float, dict)
+
+
+
+.. py:class:: IntegratorMCMC
+
+   Bases: :py:obj:`Integrator`
+
+
+   Integration via MCMC sampling.
+
+
+   .. py:method:: integrate(function, domain=None, func_args=None, xdata=None, nmc=100)
+
+      Integrate via MCMC sampling.
+
+      :param function: The function to integrate f(x, **func_args), where the first argument should be a 2d array of size `(N, d)`.
+      :type function: callable
+      :param domain: Optionally provide a domain of integration, `(d, 2)`.
+      :type domain: None, optional
+      :param func_args: Optional keyword arguments of the function.
+      :type func_args: None, optional
+      :param xdata: Provide input samples, if needed by the integrator.
+      :type xdata: None, optional
+      :param nmc: Number of requested samples. Defaults to 100.
+      :type nmc: int, optional
+
+      :returns: tuple of integral value and dictionary containing useful info.
+      :rtype: (float, dict)
+
+
+
+.. py:class:: IntegratorMC(seed=None)
+
+   Bases: :py:obj:`Integrator`
+
+
+   Integrator via Monte-Carlo sampling.
+
+
+   .. py:method:: integrate(function, domain=None, func_args=None, xdata=None, nmc=100)
+
+      Integration via Monte-Carlo.
+
+       Args:
+          function (callable): The function to integrate f(x, **func_args), where the first argument should be a 2d array of size `(N, d)`.
+          domain (None, optional): Optionally provide a domain of integration, `(d, 2)`.
+          func_args (None, optional): Optional keyword arguments of the function.
+          xdata (None, optional): Provide input samples, if needed by the integrator.
+          nmc (int, optional): Number of requested samples. Defaults to 100.
+
+      :returns: tuple of integral value and dictionary containing useful info.
+      :rtype: (float, dict)
+
+
+
+.. py:class:: IntegratorWMC(seed=None)
+
+   Bases: :py:obj:`Integrator`
+
+
+   Integrator via weighted Monte-Carlo.
+
+
+   .. py:method:: integrate(function, func_args=None, xdata=None, mean=None, cov=None, nmc=100)
+
+      Integration by weighted single Gaussian.
+
+      :param function: The function to integrate f(x, **func_args), where the first argument should be a 2d array of size `(N, d)`.
+      :type function: callable
+      :param func_args: Optional keyword arguments of the function.
+      :type func_args: None, optional
+      :param xdata: Provide input samples, if needed by the integrator.
+      :type xdata: None, optional
+      :param mean: Mean array of size `d` of the associated gaussian weight. This argument is not optional.
+      :type mean: None, optional
+      :param cov: Covariance matrix of size `(d,d)` of the associated gaussian weight. Defaults to identity matrix.
+      :type cov: None, optional
+      :param nmc: Number of requested samples. Defaults to 100.
+      :type nmc: int, optional
+
+      :returns: tuple of integral value and dictionary containing useful info.
+      :rtype: (float, dict)
+
+
+
+.. py:class:: IntegratorGMM
+
+   Bases: :py:obj:`Integrator`
+
+
+   Integrator via Gaussian mixture models.
+
+
+   .. py:method:: integrate(function, func_args=None, xdata=None, weights=None, means=None, covs=None, nmc=100)
+
+      Integration by Gaussian mixtures.
+
+      :param function: The function to integrate f(x, **func_args), where the first argument should be a 2d array of size `(N, d)`.
+      :type function: callable
+      :param func_args: Optional keyword arguments of the function.
+      :type func_args: None, optional
+      :param xdata: Provide input samples, if needed by the integrator.
+      :type xdata: None, optional
+      :param weights: Weights of associated mixtures. Defaults to None, which automatically picks the weights based on function values and its width at the peaks.
+      :type weights: list[float], optional
+      :param means: List of mean arrays. This is not optional.
+      :type means: list[np.ndarray], optional
+      :param covs: List of covariance matrices.
+      :type covs: list[np.ndarray], optional
+      :param nmc: Number of requested samples. Defaults to 100.
+      :type nmc: int, optional
+
+      :returns: tuple of integral value and dictionary containing useful info.
+      :rtype: (float, dict)
+
+
+
+.. py:class:: IntegratorGMMT
+
+   Bases: :py:obj:`Integrator`
+
+
+   Integrator via truncated Gaussian mixture models.
+
+
+   .. py:method:: integrate(function, domain=None, func_args=None, xdata=None, weights=None, means=None, covs=None, nmc=100)
+
+      Integration by truncated Gaussian mixtures.
+
+      :param function: The function to integrate f(x, **func_args), where the first argument should be a 2d array of size `(N, d)`.
+      :type function: callable
+      :param domain: Provide a domain of integration/truncation, `(d, 2)`.
+      :type domain: None, optional
+      :param func_args: Optional keyword arguments of the function.
+      :type func_args: None, optional
+      :param xdata: Provide input samples, if needed by the integrator.
+      :type xdata: None, optional
+      :param weights: Weights of associated mixtures. Defaults to None, which automatically picks the weights based on function values and its width at the peaks.
+      :type weights: list[float], optional
+      :param means: List of mean arrays. This is not optional.
+      :type means: list[np.ndarray], optional
+      :param covs: List of covariance matrices.
+      :type covs: list[np.ndarray], optional
+      :param nmc: Number of requested samples. Defaults to 100.
+      :type nmc: int, optional
+
+      :returns: tuple of integral value and dictionary containing useful info.
+      :rtype: (float, dict)
+
+
+

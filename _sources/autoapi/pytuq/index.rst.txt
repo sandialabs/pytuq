@@ -1,0 +1,26 @@
+pytuq
+=====
+
+.. py:module:: pytuq
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/pytuq/fit/index
+   /autoapi/pytuq/ftools/index
+   /autoapi/pytuq/func/index
+   /autoapi/pytuq/gsa/index
+   /autoapi/pytuq/linred/index
+   /autoapi/pytuq/lreg/index
+   /autoapi/pytuq/minf/index
+   /autoapi/pytuq/optim/index
+   /autoapi/pytuq/rv/index
+   /autoapi/pytuq/surrogates/index
+   /autoapi/pytuq/utils/index
+   /autoapi/pytuq/workflows/index
+
+

@@ -1,0 +1,497 @@
+pytuq.rv.pcrv
+=============
+
+.. py:module:: pytuq.rv.pcrv
+
+.. autoapi-nested-parse::
+
+   Classes for various multivariate random variables.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.rv.pcrv.PCRV
+   pytuq.rv.pcrv.PCRV_iid
+   pytuq.rv.pcrv.PCRV_mvn
+   pytuq.rv.pcrv.PC1d
+
+
+Module Contents
+---------------
+
+.. py:class:: PCRV(pdim, sdim, pctype, mi=None, cfs=None)
+
+   Bases: :py:obj:`pytuq.rv.mrv.MRV`
+
+
+   A class for a multivariate PC random variable.
+
+   .. attribute:: sdim
+
+      Stochastic dimension :math:`s`, i.e. germ dimensionality.
+
+      :type: int
+
+   .. attribute:: mindices
+
+      List of :math:`d` multiindex arrays, each of size :math:`(K_i,s)`.
+
+      :type: list[np.ndarray]
+
+   .. attribute:: coefs
+
+      List of :math:`d` coefficient arrays, each of size :math:`K_i` for :math:`i=1,\dots,d`.
+
+      :type: list[np.ndarray]
+
+   .. attribute:: maxOrd
+
+      A 1d array of size :math:`s` indicating maximal order across all physical dimensions.
+
+      :type: np.ndarray
+
+   .. attribute:: pind
+
+      List of tuples :math:`(i,k)` accounting for all coefficients: the first element is the physical dimension :math:`i` (between :math:`0` and :math:`d-1`), and the second element is the coefficient index :math:`k` (between :math:`0` and :math:`K_i`).
+
+      :type: list[tuple]
+
+   .. attribute:: rndind
+
+      Indices of random physical dimensions, each entry is between :math:`0` and :math:`d-1`.
+
+      :type: list[int]
+
+   .. attribute:: detind
+
+      Indices of deterministic physical dimensions, each entry is between :math:`0` and :math:`d-1`.
+
+      :type: list[int]
+
+   .. attribute:: function
+
+      PC evaluator function, :math:`(N,s)\rightarrow N`.
+
+      :type: callable
+
+   .. attribute:: pctypes
+
+      List of :math:`s` PC types, one for each stochastic dimension.
+
+      :type: list[str]
+
+   .. attribute:: PC1ds
+
+      List of :math:`s` 1d PC objects that comprise this multivariate PC random variable.
+
+      :type: list[PC1d]
+
+
+   .. py:attribute:: function
+      :value: None
+
+
+
+   .. py:attribute:: PC1ds
+
+
+   .. py:method:: setMiCfs(mi, cfs=None)
+
+      Sets the multiindex and coefficients together.
+
+      :param mi: List of :math:`d` multiindex arrays, each of size :math:`(K_i,s)` for :math:`i=1, \dots, d`. Or a single multiindex array of size :math:`(K,s)`, meaning all dimensions get the same multiindex.
+      :type mi: list or np.ndarray
+      :param cfs: List of :math:`d` coefficient arrays, each of size :math:`K_i` for :math:`i=1, \dots, d`. Or a single coefficient array of size :math:`K`, meaning all dimensions get the same coefficient array. Or a 2d array of size :math:`(d, K)`. Defaults to None, which is populating coefficients with all zeros.
+      :type cfs: list or np.ndarray, optional
+
+
+
+   .. py:method:: setMi(mi)
+
+      Sets the multiindex.
+
+      :param mi: List of :math:`d` multiindex arrays, each of size :math:`(K_i,s)` for :math:`i=1, \dots, d`. Or a single multiindex array of size :math:`(K,s)`, meaning all dimensions get the same multiindex.
+      :type mi: list or np.ndarray
+
+      .. note:: Dangerous to use externally, as it may conflict with other attributes/sizes. Prefer to use setMiCfs() externally.
+
+
+
+   .. py:method:: setCfs(cfs=None)
+
+      Sets the coefficients. Dangerous to use externally, as it may conflict with other attributes/sizes. Prefer to use setMiCfs() externally.
+
+      :param cfs: List of :math:`d` coefficient arrays, each of size :math:`K_i` for :math:`i=1, \dots, d`. Or a single coefficient array of size :math:`K`, meaning all dimensions get the same coefficient array. Or a 2d array of size :math:`(d, K)`. Defaults to None, which is populating coefficients with all zeros.
+      :type cfs: list or np.ndarray
+
+      .. note:: Dangerous to use externally, as it may conflict with other attributes. Prefer to use setMiCfs() externally.
+
+
+
+   .. py:method:: checkMiCfsizes()
+
+      Checks the multiindex and coeffient list for any size incompatibility.
+
+
+
+
+   .. py:method:: setRandomCfs()
+
+      Sets coefficients randomly, sampling unniformly in :math:`[0,1]`.
+
+
+
+
+   .. py:method:: getMaxOrders()
+
+      Computes and populates an internal array maxOrd storing maximal order per physical dimension.
+
+
+
+
+   .. py:method:: getParamIndices()
+
+      Populates the bookkeeping list of index pairs pind.
+
+
+
+
+   .. py:method:: printInfo()
+
+      Core dump of multiindices and coefficients.
+
+
+
+
+   .. py:method:: computeMean()
+
+      Computes the mean of the random variable.
+
+      :returns: A 1d array of size :math:`d` for means per physical dimension.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: computeVar()
+
+      Computes the variance of the random variable.
+
+      :returns: A 1d array of size :math:`d` for variance per physical dimension.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: computeSens()
+
+      Computes main Sobol sensitivity indices of the PC with respect to stochastic dimensions.
+
+      :returns: A 2d array of main sensitivities of size :math:`(d,s)`.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: computeTotSens()
+
+      Computes total Sobol sensitivity indices of the PC with respect to stochastic dimensions.
+
+      :returns: A 2d array of total sensitivities of size :math:`(d,s)`.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: computeJointSens()
+
+      Computes joint Sobol sensitivity indices of the PC with respect to stochastic dimension pairs.
+
+      :returns: A 3d array of joint sensitivities of size :math:`(d,s,s)`.
+      :rtype: np.ndarray
+
+      .. note:: This is joint in the 'total' sense, i.e. any term involving both dimensions are counted.
+
+
+
+   .. py:method:: computeGroupSens(paramIndices)
+
+      Computes group sensitivities of a subset of parameters.
+
+      :param paramIndices: List of indices to group. Each element should be between :math:`0` and :math:`s-1`.
+      :type paramIndices: list
+
+      :returns: An 1d array of size `d` for sensitivities of this group for all :math:`d` dimensions.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: slice_1d(jdim)
+
+      Extracts a 1d PC random variable along a given stochastic dimension.
+      :param jdim: The index :math:`j` of the stochastic dimension. Should be between :math:`0` and :math:`s-1`.
+      :type jdim: int
+
+      :returns: A 1d PC random variable object along the given stochastic dimension.
+      :rtype: PCRV
+
+
+
+   .. py:method:: sampleGerm(nsam=1, seed=None)
+
+      Sample PC germ vector.
+
+      :param nsam: Number of samples requested. Defaults to :math:`M=1`.
+      :type nsam: int, optional
+      :param seed: Seed for the random generation. Default is None, which does not set any seed.
+      :type seed: None, optional
+
+      :returns: A 2d array of size :math:`(M,s)`.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: quadGerm(pts=None)
+
+      Generates quadrature samples of PC germ vector.
+
+      :param pts: An integer 1d array of size :math:`s` indicating how many points per each stochastic dimension, :math:`q_i` for :math:`i=1, \dots, s`. Default is None, which means 2 points per stochastic dimension.
+      :type pts: np.ndarray, optional
+
+      :returns: A pair of arrays: a 2d array of quadrature points of size :math:`(Q,s)` and corresponding 1d array of weights of size :math:`Q`, where :math:`Q=q_1 q_2 \cdots q_s` is the total number of points.
+      :rtype: tuple[np.ndarray, np.ndarray]
+
+      .. note:: This is full tensor product quadrature. Sparse quadrature is not implemented.
+
+
+
+   .. py:method:: evalBases(xi, jdim)
+
+      Evaluation of PC bases at given input germ values for a given physical dimension.
+
+      :param xi: A 2d array of size :math:`(M,s)` for the input.
+      :type xi: np.ndarray
+      :param jdim: The index :math:`i` of the PC random variable/vector. Should be between :math:`0` and :math:`d-1`.
+      :type jdim: int
+
+      :returns: A 2d output array of size :math:`(M, K_i)` where :math:`K_i` is the number of PC bases for the :math:`i`-th dimension.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: evalBasesNormsSq(jdim)
+
+      Evaluates bases norms-squared for a given physical dimension.
+
+      :param jdim: The index of :math:`i` of the PC random variable/vector. Should be between :math:`0` and :math:`d-1`.
+      :type jdim: int
+
+      :returns: An 1d array of size :math:`K_i`, the number of bases for the :math:`i`-th dimension.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: evalPC(x)
+
+      Evaluate PC expansion for a given set of inputs.
+
+      :param x: A 2d array of size :math:`(M,s)` for the input.
+      :type x: np.ndarray
+
+      :returns: A 2d array of size :math:`(M,d)` for the output.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: setFunction()
+
+      Set the PC evaluator as an internal function, an object of a class Function, with all the useful features of the class.
+
+
+
+
+   .. py:method:: sample(nsam, seed=None)
+
+      Sample from the PC random variable. Basically chaining sampling the germ and evaluating the PC.
+
+      :param nsam: Number of samples requested, :math:`M`.
+      :type nsam: int
+      :param seed: Seed for the random generation. Default is None, which does not set any seed.
+      :type seed: None, optional
+
+      :returns: A 2d array of size :math:`(M,d)` for the output.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: cfsFlatten()
+
+      Flatten all the PC coefficients.
+
+      :returns: An 1d array of size :math:`K_1+\dots +K_d`, the total number of PC coefficients for all dimensions.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: cfsUnflatten(cfs_flat)
+
+      Reverse the flattening operation, given a long flat array, this sets the coefficient array list appropriately.
+
+      :param cfs_flat: An 1d array of size :math:`K_1+\cdots +K_d`, the total number of PC coefficients for all dimensions.
+      :type cfs_flat: np.ndarray
+
+
+
+   .. py:method:: compressPC()
+
+      A method to produce a new, compressed PCRV object in case some stochastic dimensions are irrelevant (i.e. 0 order across all physical dimensions)
+
+      :returns: New PCRV object that has fewer stochastic dimensions.
+      :rtype: PCRV
+
+
+
+   .. py:method:: compressMI()
+
+      A method to compress potentially identical multiindex rows, by adding their corresponding coefficients.
+
+
+
+
+   .. py:method:: slicePC(fixind=None, nominal=None)
+
+
+.. py:class:: PCRV_iid(pdim, pctype, orders=None, cfs=None)
+
+   Bases: :py:obj:`PCRV`
+
+
+   A PC random variable/vector with a special structure of one germ per dimension. As a consequence, the number of stochastic and physical dimensions coincide. It inherits all the attributes of the parent PCRV class.
+
+
+
+.. py:class:: PCRV_mvn(pdim, rndind=None, mean=None, cov=None)
+
+   Bases: :py:obj:`PCRV`
+
+
+   A PC random variable/vector that is a multivariate normal. As a consequence, the number of stochastic and physical dimensions coincide and PC type is Gauss-Hermite for all dimensions. It inherits all the attributes of the parent PCRV class.
+
+   .. attribute:: cov
+
+      Covariance array.
+
+      :type: np.ndarray
+
+   .. attribute:: mean
+
+      Mean array.
+
+      :type: np.ndarray
+
+
+   .. py:method:: pdf(x)
+
+
+.. py:class:: PC1d(pctype='LU')
+
+   1-dimensional PC random variable.
+
+   .. attribute:: a
+
+      int->float function :math:`a_n` in the recurrent relation
+
+      :type: callable
+
+   .. attribute:: b
+
+      int->float function :math:`b_n` in the recurrent relation
+
+      :type: callable
+
+   .. attribute:: domain
+
+      A 1d array of size :math:`2` indicating the domain of definition.
+
+      :type: np.ndarray
+
+   .. attribute:: p0
+
+      The 0th order basis evaluator from 1d np.ndarray to 1d np.ndarray.
+
+      :type: callable
+
+   .. attribute:: p1
+
+      The 1rd order basis evaluator from 1d np.ndarray to 1d np.ndarray.
+
+      :type: callable
+
+   .. attribute:: pctype
+
+      The PC type. Only 'LU', 'nLU', 'HG' and 'nHG' are implemented.
+
+      :type: str
+
+   .. attribute:: sample
+
+      int->float sampling function, where the input is a number of samples requested, and the output is an 1d array of the corresponding size.
+
+      :type: callable
+
+
+   .. py:attribute:: pctype
+      :value: 'LU'
+
+
+
+   .. py:method:: germCdf(x)
+
+      Evaluate the germ cumulative distribution functions (CDFs).
+
+      :param x: A size :math:`M` 1d array of inputs at which CDF is evaluated.
+      :type x: np.ndarray
+
+      :returns: A size :math:`M` 1d array of outputs containing CDF evaluations.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: germSample(nsam)
+
+      Samples the germ.
+
+      :param nsam: Input number of samples requested, :math:`M`.
+      :type nsam: int
+
+      :returns: A 1d array of size :math:`M` containing the germ samples.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: normsq(ord)
+
+      Computes norm-squared of a basis with a given order.
+
+      :param ord: Requested order :math:`p`.
+      :type ord: int
+
+      :returns: The norm-squared of the basis of order :math:`p`.
+      :rtype: float
+
+
+
+   .. py:method:: quad(k)
+
+      One-dimensional quadrature point/weight generation.
+
+      :param k: The level of the quadrature.
+      :type k: int
+
+      :returns: A pair of 1d arrays of the same size, one for the quadrature points, and the other for the corresponding weights.
+      :rtype: tuple
+
+      .. note:: Utilizes the Golub-Welsch method, see :cite:t:`Golub:1969` or https://www.ams.org/journals/mcom/1969-23-106/S0025-5718-69-99647-1/S0025-5718-69-99647-1.pdf.
+
+
+

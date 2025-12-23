@@ -1,0 +1,541 @@
+pytuq.func.benchNd
+==================
+
+.. py:module:: pytuq.func.benchNd
+
+.. autoapi-nested-parse::
+
+   Nd benchmark functions module.
+
+   Most of the functions are taken from https://github.com/Vahanosi4ek/pytuq_funcs that autogenerates the codes given function's latex strings.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.func.benchNd.Ackley
+   pytuq.func.benchNd.Alpine01
+   pytuq.func.benchNd.Alpine02
+   pytuq.func.benchNd.AMGM
+   pytuq.func.benchNd.Bohachevsky
+   pytuq.func.benchNd.Cigar
+   pytuq.func.benchNd.CosineMixture
+   pytuq.func.benchNd.Griewank
+   pytuq.func.benchNd.Mishra07
+   pytuq.func.benchNd.MVN
+   pytuq.func.benchNd.NegAlpineN2
+   pytuq.func.benchNd.Sobol
+   pytuq.func.benchNd.SumSquares
+
+
+Module Contents
+---------------
+
+.. py:class:: Ackley(c1=20.0, c2=0.2, c3=2 * np.pi, c4=20.0, d=2, name='Ackley')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Ackley function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_A.html#go_benchmark.Ackley]
+
+   Complex cosine function with many local minima
+
+   .. math::
+       f(x)=-c_1e^{-c_2\sqrt{\sum_{i=1}^{d}x_1^2}}-e^{\frac{1}{d}\sum_{i=1}^{d}\cos(c_3x_i)}+c_4+e
+
+
+   Default constant values are :math:`c = (20., 0.2, 2\pi)` and :math:`d = 2`.
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Alpine01(c1=0.1, d=2, name='Alpine01')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Alpine01 function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_A.html#go_benchmark.Alpine01]
+
+   A N-d multimodal function
+
+   .. math::
+       f(x)=\sum_{i=1}^n |x_i\sin(x_i)+c_1x_2|
+
+
+   Default constant values are :math:`c_1 = 0.1`.
+
+
+   .. py:attribute:: c1
+      :value: 0.1
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Alpine02(d=2, name='Alpine02')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Alpine02 function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_A.html#go_benchmark.Alpine02]
+
+   A N-d multimodal function
+
+   .. math::
+       f(x)=\prod_{i=1}^{n}\sqrt{x_i}\sin(x_i)
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: AMGM(d=2, name='AMGM')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   AMGM function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_A.html#go_benchmark.AMGM]
+
+   Difference-squared between AM and GM
+
+   .. math::
+       f(x)=\left ( \frac{1}{n} \sum_{i=1}^{n} x_i - \sqrt[n]{ \prod_{i=1}^{n} x_i} \right )^2
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Bohachevsky(c1=2.0, c2=0.3, c3=3.0, c4=0.4, c5=4.0, c6=0.7, d=2, name='Bohachevsky')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Bohachevsky function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_B.html#go_benchmark.Bohachevsky]
+
+   A N-d multimodal function
+
+   .. math::
+       f(x)=\sum_{i=1}^{n-1}\left[x_i^2 + c_1x_{i+1}^2 - c_2\cos(c_3\pi x_i) - c_4\cos(c_5\pi x_{i+1}) + c_6\right]
+
+
+   Default constant values are :math:`c = (2., 0.3, 3., 0.4, 4., 0.7)`.
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Cigar(c1=10**3, d=4, name='Cigar')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Cigar function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_C.html#go_benchmark.Cigar]
+
+   A N-d multimodal function
+
+   .. math::
+       f(x)=x_1^2 + c_1 \sum_{i=2}^{n} x_i^2
+
+
+   Default constant values are :math:`c = 10^3`
+
+
+   .. py:attribute:: dim
+      :value: 4
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: CosineMixture(c1=0.1, c2=5.0, d=2, name='CosineMixture')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   CosineMixture function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_C.html#go_benchmark.CosineMixture]
+
+   A N-d multimodal function
+
+   .. math::
+       f(x)=-c_1 \sum_{i=1}^n \cos(c_2 \pi x_i) - \sum_{i=1}^n x_i^2
+
+
+   Default constant values are :math:`c = (0.1, 5.0)
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Griewank(c1=4000.0, c2=1.0, d=2, name='Griewank')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Griewank function
+
+   Reference: [https://www.sfu.ca/~ssurjano/griewank.html]
+
+   .. math::
+       f(x)=\sum_{i=1}^{d}\frac{x_i^2}{c_1}-\prod_{i=1}^{d}\cos(\frac{x_i}{\sqrt{i}}) + c_2
+
+
+   Default constant values are :math:`c = (4000., 1.)` and :math:`d = 2`.
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Mishra07(d=2, name='Mishra07')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Mishra07 function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_M.html#go_benchmark.Mishra07]
+
+   A multimodal minimization function
+
+   .. math::
+       f(x)=\left(\prod_{i=1}^d x_i-d!\right)^2
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: MVN(mean=[0.0, 0.0], cov=[[1.0, 0.0], [0.0, 1.0]], name='MVN')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Multivariate Normal function.
+
+   Reference: [https://en.wikipedia.org/wiki/Multivariate_normal_distribution]
+
+   .. math::
+       f(x) = \frac{1}{(2\pi)^{d/2} |\Sigma|^{1/2}} \exp\left( -\frac{1}{2} (x - \mu)^T \Sigma^{-1} (x - \mu) \right)
+
+
+   .. py:attribute:: mean
+
+
+   .. py:attribute:: cov
+
+
+   .. py:attribute:: name
+      :value: 'MVN'
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: NegAlpineN2(name='Alpine N2', dim=2)
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Negative Alpine function.
+
+   ... math::
+       f(x) = - \sqrt{\prod_{i=1}^{d} x_i \cdot \sin(x_i)}
+
+
+   .. py:attribute:: name
+      :value: 'Alpine N2'
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Sobol(name='Sobol', dim=5)
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Sobol function
+
+   Reference: [https://www.sfu.ca/~ssurjano/gfunc.html]
+
+   .. math::
+       f(x) = \prod_{i=1}^{d} \frac{|4x_i -2| + a_i}{1 + a_i}
+
+
+   .. py:attribute:: name
+      :value: 'Sobol'
+
+
+
+   .. py:attribute:: dim
+      :value: 5
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:attribute:: a
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: SumSquares(name='SumSquares', dim=5)
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   SumSquares function.
+
+   .. math::
+       f(x) = \sum_{i=1}^{d} (1 + i) x_i^2
+
+
+
+   .. py:attribute:: name
+      :value: 'SumSquares'
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+

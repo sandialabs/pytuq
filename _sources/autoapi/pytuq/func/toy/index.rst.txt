@@ -1,0 +1,241 @@
+pytuq.func.toy
+==============
+
+.. py:module:: pytuq.func.toy
+
+.. autoapi-nested-parse::
+
+   Toy benchmark functions module.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.func.toy.Constant
+   pytuq.func.toy.Identity
+   pytuq.func.toy.Quad
+   pytuq.func.toy.Quad2d
+   pytuq.func.toy.Exp
+   pytuq.func.toy.Log
+
+
+Module Contents
+---------------
+
+.. py:class:: Constant(dim=1, const=np.array([1.0]), name='Constant')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Multioutput Constant function
+
+   Returns a constant vector for any input.
+
+   .. math::
+       f(x) = (c, c, \ldots, c)
+
+
+
+   .. py:attribute:: name
+      :value: 'Constant'
+
+
+
+   .. py:attribute:: const
+
+
+   .. py:attribute:: outdim
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Identity(dim=1, name='Identity')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Identity function
+
+   Returns the input unchanged.
+
+   .. math::
+       f(x) = x
+
+
+
+   .. py:attribute:: name
+      :value: 'Identity'
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Quad(name='Quad')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Quadratic function.
+
+   .. math::
+       f(x) = 3 + x - x^2
+
+
+
+   .. py:attribute:: name
+      :value: 'Quad'
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Quad2d(name='Quad2d')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   2D Quadratic function
+
+   .. math::
+       f(x) = 3 + x_1 - x_2^2
+
+
+
+   .. py:attribute:: name
+      :value: 'Quad2d'
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Exp(weights=[1.0], name='Exp')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Exponential function with weighted input
+
+   .. math::
+       f(x) = e^{w^T x}
+
+
+
+   .. py:attribute:: name
+      :value: 'Exp'
+
+
+
+   .. py:attribute:: weights
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Log(weights=[1.0], name='Log')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Logarithm function with weighted input
+
+   .. math::
+       f(x) = \log|w^T x|
+
+
+   .. py:attribute:: name
+      :value: 'Log'
+
+
+
+   .. py:attribute:: weights
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+

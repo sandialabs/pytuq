@@ -1,0 +1,80 @@
+pytuq.lreg.opt
+==============
+
+.. py:module:: pytuq.lreg.opt
+
+.. autoapi-nested-parse::
+
+   A module for a simple quadratic optimization to fit the coefficients.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.lreg.opt.opt
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   pytuq.lreg.opt.distance
+   pytuq.lreg.opt.distance_grad
+
+
+Module Contents
+---------------
+
+.. py:function:: distance(x, aw, bw)
+
+   Quadratic (least-squares) distance metric.
+
+   :param x: A 1d coefficient array of size :math:`K`.
+   :type x: np.ndarray
+   :param aw: A 2d array of size :math:`(N, K)` each row holding basis evaluations at a training point.
+   :type aw: np.ndarray
+   :param bw: An 1d array of size :math:`N` holding the data.
+   :type bw: np.ndarray
+
+   :returns: Squared-residual distance.
+   :rtype: float
+
+
+.. py:function:: distance_grad(x, aw, bw)
+
+   Gradient of the distance metric, analytically avaliable.
+
+   :param x: A 1d coefficient array of size :math:`K`.
+   :type x: np.ndarray
+   :param aw: A 2d array of size :math:`(N, K)` each row holding basis evaluations at a training point.
+   :type aw: np.ndarray
+   :param bw: An 1d array of size :math:`N` holding the data.
+   :type bw: np.ndarray
+
+   :returns: Gradient array of size :math:`K`.
+   :rtype: np.ndarray
+
+
+.. py:class:: opt
+
+   Bases: :py:obj:`pytuq.lreg.lreg.lreg`
+
+
+   A class of a simple quadratic optimization to fit the coefficients.
+
+
+   .. py:method:: fita(Amat, y)
+
+      Fit given A-matrix of basis evaluations and data array.
+
+      :param Amat: A 2d array of size :math:`(N, K)` each row holding basis evaluations at a training point.
+      :type Amat: np.ndarray
+      :param y: An 1d array of size :math:`N` holding the data.
+      :type y: np.ndarray
+
+
+

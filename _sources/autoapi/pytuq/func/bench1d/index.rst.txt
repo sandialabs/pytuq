@@ -1,0 +1,689 @@
+pytuq.func.bench1d
+==================
+
+.. py:module:: pytuq.func.bench1d
+
+.. autoapi-nested-parse::
+
+   1d benchmark functions module.
+
+   Most of the functions are taken from https://github.com/Vahanosi4ek/pytuq_funcs.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.func.bench1d.TFData
+   pytuq.func.bench1d.SineSum
+   pytuq.func.bench1d.SineSum2
+   pytuq.func.bench1d.QuadxExp
+   pytuq.func.bench1d.LinxSin
+   pytuq.func.bench1d.SinexExp
+   pytuq.func.bench1d.SineLogSum
+   pytuq.func.bench1d.CosineSum
+   pytuq.func.bench1d.Sinex
+   pytuq.func.bench1d.CosineSum2
+   pytuq.func.bench1d.Sinusoidal
+   pytuq.func.bench1d.Forrester
+   pytuq.func.bench1d.GramacyLee2
+   pytuq.func.bench1d.Higdon
+   pytuq.func.bench1d.Holsclaw
+   pytuq.func.bench1d.DampedCosine
+
+
+Module Contents
+---------------
+
+.. py:class:: TFData(name='tfdata')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   TensorFlow function
+
+   Data generating toy model inspired by https://colab.research.google.com/github/tensorflow/probability/blob/master/tensorflow_probability/examples/jupyter_notebooks/Probabilistic_Layers_Regression.ipynb#scrollTo=5zCEYpzu7bDX .
+
+   .. math::
+       f(x)=w_0 x (1 + \sin(x)) + b_0
+
+   Default constant values are :math:`w_0 = 0.125`, :math:`b_0 = 5.0`, :math:`a = -20.0`, :math:`b = 60.0`.
+
+
+   .. py:attribute:: name
+      :value: 'tfdata'
+
+
+
+   .. py:attribute:: dim
+      :value: 1
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:attribute:: w0
+      :value: 0.125
+
+
+
+   .. py:attribute:: b0
+      :value: 5.0
+
+
+
+   .. py:attribute:: a
+      :value: -20.0
+
+
+
+   .. py:attribute:: b
+      :value: 60.0
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: SineSum(c1=1.0, c2=10.0 / 3.0, name='SineSum')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Simple sum of sines
+
+   Problem 02 [https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem02]
+
+   .. math::
+       f(x)=\sin(c_1x)+\sin(c_2x)
+
+
+   Default constant values are :math:`c = (1., 10./3.)`.
+
+
+
+   .. py:attribute:: dim
+      :value: 1
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: SineSum2(c1=6, name='SineSum2')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   A more complex sum of sines
+
+   Problem 03 [https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem03]
+
+   .. math::
+       f(x)=-\sum_{k=1}^{c_1}k\sin((k+1)x+k)
+
+
+   Default constant value is :math:`c = 6`.
+
+
+
+   .. py:attribute:: c1
+      :value: 6
+
+
+
+   .. py:attribute:: dim
+      :value: 1
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: QuadxExp(c1=16.0, c2=-24.0, c3=5.0, name='QuadxExp')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Product of quadratic and exponent
+
+   Problem 04 [https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem04]
+
+   .. math::
+       f(x)=-(c_1x^2+c_2x+c_3)e^{-x}
+
+
+   Default constant values are :math:`c = (16., -24., 5.)`.
+
+
+
+   .. py:attribute:: dim
+      :value: 1
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: LinxSin(c1=1.4, c2=-3.0, c3=18.0, name='LinxSin')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Product of linear and sine functions
+
+   Problem 05 [https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem05]
+
+   .. math::
+       f(x)=-(c_1-c_2x)sin(c_3x)
+
+
+   Default constant values are :math:`c = (1.4, -3., 18.)`.
+
+
+
+   .. py:attribute:: dim
+      :value: 1
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: SinexExp(name='SinexExp')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Product of sine and exp functions
+
+   Problem06 [https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem06]
+
+   .. math::
+       f(x)=-(x+\sin(x))e^{-x^2}
+
+
+
+   .. py:attribute:: dim
+      :value: 1
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: SineLogSum(c1=1.0, c2=10 / 3, c3=np.exp(1), c4=-0.84, c5=3.0, name='SineLogSum')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Sum of sine and log functions
+
+   Problem07 [https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem07]
+
+   .. math::
+       f(x)=\sin(c_1x) + \sin(c_2x) + \log_{c_3}(x) + c_4x + c_5
+
+
+   Default constant values are :math:`c = (1., 10/3, e, -0.84, 3.)`.
+
+
+
+   .. py:attribute:: dim
+      :value: 1
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: CosineSum(c1=6, name='CosineSum')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Simple sum of cosines
+
+   Problem 08 [https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem08]
+
+   .. math::
+       f(x)=-\sum_{k=1}^{c_1}k\cos((k+1)x+k)
+
+
+   Default constant value is :math:`c = 6`.
+
+
+
+   .. py:attribute:: c1
+      :value: 6
+
+
+
+   .. py:attribute:: dim
+      :value: 1
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Sinex(name='Sinex')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Product of x and sine function
+
+   Problem10 [https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem10]
+
+   .. math::
+       f(x)=-x\sin(x)
+
+
+
+   .. py:attribute:: dim
+      :value: 1
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: CosineSum2(c1=2.0, c2=2.0, name='CosineSum2')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Simple sum of cosines
+
+   Problem11 [https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem11]
+
+   .. math::
+       f(x)=c_1\cos(x) + \cos(c_2x)
+
+
+   Default constant values are :math:`c = (2., 2.)`.
+
+
+
+   .. py:attribute:: dim
+      :value: 1
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Sinusoidal(c1=2.0, c2=0.1, name='Sinusoidal')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Simple 1d sine function
+
+   Sinusoidal [https://www.sfu.ca/~ssurjano/curretal88sin.html]
+
+   .. math::
+       f(x)=\sin(c_1\pi(x-c_2))
+
+   Default constant values are :math:`c = (2., 0.1)`.
+
+
+
+   .. py:attribute:: dim
+      :value: 1
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Forrester(c1=6.0, c2=2.0, c3=12.0, c4=4.0, name='Forrester')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Forrester function
+
+   Forrester [https://www.sfu.ca/~ssurjano/forretal08.html]
+
+   .. math::
+       f(x)=(c_1x-c_2)^2\sin(c_3x-c_4)
+
+   Default constant values are :math:`c = (6., 2., 12., 4)`.
+
+
+
+   .. py:attribute:: dim
+      :value: 1
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: GramacyLee2(c1=10.0, c2=2.0, c3=1.0, c4=4.0, name='GramacyLee2')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Complicated oscillatory 1d function
+
+   Gramacy and Lee (2012) [https://www.sfu.ca/~ssurjano/grlee12.html]
+
+   .. math::
+       f(x)=\frac{\sin(c_1\pi x)}{c_2x}+(x-c_3)^{c_4}
+
+   Default constant values are :math:`c = (10., 2., 1., 4.)`.
+
+
+
+   .. py:attribute:: dim
+      :value: 1
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Higdon(c1=10.0, c2=0.2, c3=2.5, name='Higdon')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Higdon function
+
+   Higdon (2002) [https://www.sfu.ca/~ssurjano/hig02.html]
+
+   .. math::
+       f(x)=\sin(2\pi x/c_1) + c_2\sin(2\pi x/c_3)
+
+   Default constant values are :math:`c = (10., 0.2, 2.5)`.
+
+
+
+   .. py:attribute:: dim
+      :value: 1
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Holsclaw(c1=10.0, name='Holsclaw')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Holsclaw function
+
+   Holsclaw et al. [https://www.sfu.ca/~ssurjano/holsetal13sin.html]
+
+   .. math::
+       f(x)=\frac{x\sin(x)}{c_1}
+
+   Default constant value is :math:`c = 10.0`.
+
+
+
+   .. py:attribute:: c1
+      :value: 10.0
+
+
+
+   .. py:attribute:: dim
+      :value: 1
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: DampedCosine(c1=-1.4, c2=3.5, name='DampedCosine')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   A simple 1d cosine function
+
+   Damped Cosine [https://www.sfu.ca/~ssurjano/santetal03dc.html]
+
+   .. math::
+       f(x)=e^{c_1x}\cos(c_2\pi x)
+
+   Default constant values are :math:`c = (-1.4, 3.5)`.
+
+
+
+   .. py:attribute:: dim
+      :value: 1
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+

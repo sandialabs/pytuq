@@ -1,0 +1,435 @@
+pytuq.func.oper
+===============
+
+.. py:module:: pytuq.func.oper
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.func.oper.CartesProdFcn
+   pytuq.func.oper.GradFcn
+   pytuq.func.oper.ComposeFcn
+   pytuq.func.oper.SliceFcn
+   pytuq.func.oper.ShiftFcn
+   pytuq.func.oper.LinTransformFcn
+   pytuq.func.oper.PickDim
+
+
+Module Contents
+---------------
+
+.. py:class:: CartesProdFcn(fcn1, fcn2, name='CartesProduct')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Cartesian product of two functions.
+
+   Computes the element-wise product of two functions evaluated on different
+   subspaces of the input domain.
+
+   :param fcn1: First function to multiply.
+   :param fcn2: Second function to multiply.
+   :param name: Name of the composite function. Defaults to 'CartesProduct'.
+
+   .. attribute:: fcn1
+
+      The first function in the product.
+
+   .. attribute:: fcn2
+
+      The second function in the product.
+
+   .. attribute:: domain
+
+      Combined domain from both functions.
+
+   .. attribute:: outdim
+
+      Output dimension (must match for both functions).
+
+
+   .. py:attribute:: fcn1
+
+
+   .. py:attribute:: fcn2
+
+
+   .. py:attribute:: name
+      :value: 'CartesProduct'
+
+
+
+   .. py:attribute:: outdim
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: GradFcn(fcn, idim, name='GradFcn')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Gradient extraction function.
+
+   Extracts the gradient with respect to a specific input dimension from a function.
+
+   :param fcn: The function to extract gradient from.
+   :param idim: Index of the input dimension for gradient extraction.
+   :param name: Name of the gradient function. Defaults to 'GradFcn'.
+
+   .. attribute:: fcn
+
+      The underlying function.
+
+   .. attribute:: idim
+
+      Input dimension index for gradient extraction.
+
+   .. attribute:: outdim
+
+      Output dimension (inherited from fcn).
+
+   .. attribute:: domain
+
+      Domain of the function (inherited from fcn).
+
+
+   .. py:attribute:: fcn
+
+
+   .. py:attribute:: idim
+
+
+   .. py:attribute:: outdim
+
+
+   .. py:attribute:: name
+      :value: 'GradFcn'
+
+
+
+.. py:class:: ComposeFcn(fcn1, fcn2, name='Composite')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Function composition.
+
+   Composes two functions such that the output is fcn2(fcn1(x)).
+   The output dimension of fcn1 must match the input dimension of fcn2.
+
+   :param fcn1: The inner function to be evaluated first.
+   :param fcn2: The outer function to be evaluated on fcn1's output.
+   :param name: Name of the composite function. Defaults to 'Composite'.
+
+   .. attribute:: fcn1
+
+      The inner function.
+
+   .. attribute:: fcn2
+
+      The outer function.
+
+   .. attribute:: outdim
+
+      Output dimension (inherited from fcn2).
+
+   .. attribute:: domain
+
+      Domain of the composite function (inherited from fcn1).
+
+
+   .. py:attribute:: fcn1
+
+
+   .. py:attribute:: fcn2
+
+
+   .. py:attribute:: outdim
+
+
+   .. py:attribute:: name
+      :value: 'Composite'
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: SliceFcn(fcn, name='Slice', ind=[0], nom=None)
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Sliced function evaluation.
+
+   Evaluates a function on a subset of input dimensions while fixing others at
+   nominal values.
+
+   :param fcn: The function to slice.
+   :param name: Name of the sliced function. Defaults to 'Slice'.
+   :param ind: List of input dimension indices to keep active. Defaults to [0].
+   :param nom: Nominal values for fixed dimensions. Defaults to None.
+
+   .. attribute:: fcn
+
+      The underlying function.
+
+   .. attribute:: ind
+
+      Active dimension indices.
+
+   .. attribute:: nom
+
+      Nominal values for fixed dimensions.
+
+   .. attribute:: domain
+
+      Sliced domain containing only active dimensions.
+
+   .. attribute:: outdim
+
+      Output dimension (inherited from fcn).
+
+
+   .. py:attribute:: fcn
+
+
+   .. py:attribute:: name
+      :value: 'Slice'
+
+
+
+   .. py:attribute:: nom
+      :value: None
+
+
+
+   .. py:attribute:: ind
+      :value: [0]
+
+
+
+   .. py:attribute:: outdim
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: ShiftFcn(fcn, shift, domain=None, name='Shift')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Shifted function.
+
+   Applies a spatial shift to the input domain of a function, evaluating
+   fcn(x - shift).
+
+   :param fcn: The function to shift.
+   :param shift: Shift vector to subtract from input.
+   :param domain: New domain for the shifted function. If None, automatically
+                  computed from fcn's domain. Defaults to None.
+   :param name: Name of the shifted function. Defaults to 'Shift'.
+
+   .. attribute:: fcn
+
+      The underlying function.
+
+   .. attribute:: shift
+
+      The shift vector.
+
+   .. attribute:: domain
+
+      Domain of the shifted function.
+
+   .. attribute:: outdim
+
+      Output dimension (inherited from fcn).
+
+
+   .. py:attribute:: fcn
+
+
+   .. py:attribute:: shift
+
+
+   .. py:attribute:: name
+      :value: 'Shift'
+
+
+
+   .. py:attribute:: outdim
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: LinTransformFcn(fcn, scale, shift, name='LinTransform')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Linear transformation of function output.
+
+   Applies a linear transformation to the function output: scale * fcn(x) + shift.
+
+   :param fcn: The function to transform.
+   :param scale: Scaling factor for the output.
+   :param shift: Shift/offset to add to the scaled output.
+   :param name: Name of the transformed function. Defaults to 'LinTransform'.
+
+   .. attribute:: fcn
+
+      The underlying function.
+
+   .. attribute:: scale
+
+      Output scaling factor.
+
+   .. attribute:: shift
+
+      Output shift/offset.
+
+   .. attribute:: domain
+
+      Domain of the function (inherited from fcn).
+
+   .. attribute:: outdim
+
+      Output dimension (inherited from fcn).
+
+
+   .. py:attribute:: fcn
+
+
+   .. py:attribute:: scale
+
+
+   .. py:attribute:: shift
+
+
+   .. py:attribute:: name
+      :value: 'LinTransform'
+
+
+
+   .. py:attribute:: outdim
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: PickDim(dim, pdim, cf=1.0, name='Dimension-Pick')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Dimension picking function.
+
+   Selects a single dimension from the input vector and optionally scales it.
+   Returns cf * x[pdim] as a scalar output.
+
+   :param dim: Total number of input dimensions.
+   :param pdim: Index of the dimension to pick.
+   :param cf: Scaling coefficient for the picked dimension. Defaults to 1.0.
+   :param name: Name of the function. Defaults to 'Dimension-Pick'.
+
+   .. attribute:: cf
+
+      Scaling coefficient.
+
+   .. attribute:: pdim
+
+      Index of picked dimension.
+
+   .. attribute:: dim
+
+      Total input dimensions.
+
+   .. attribute:: outdim
+
+      Output dimension (always 1).
+
+
+   .. py:attribute:: cf
+      :value: 1.0
+
+
+
+   .. py:attribute:: name
+      :value: 'Dimension-Pick'
+
+
+
+   .. py:attribute:: pdim
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
