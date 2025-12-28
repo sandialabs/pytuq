@@ -63,7 +63,7 @@ $ pip install 'pytuq[dev]'
     $ git clone git@github.com:sandialabs/pytuq.git
     $ cd pytuq
 ```
-2. (Optional) To take advantage of the neural network surrogate model capabilites in PyTUQ, use the following command to install PyTUQ's optional dependencies:
+2. (Optional) To take advantage of the neural network surrogate model capabilities in PyTUQ, use the following command to install PyTUQ's optional dependencies:
 ```
     $ pip install -r requirements.txt
 ```
@@ -82,7 +82,7 @@ $ pip install 'pytuq[dev]'
 ## License
 Distributed under BSD 3-Clause License. See `LICENSE.txt` for more information.
 
-## Acknowledgements
-This work is supported by the Scientific Discovery through Advanced Computing (SciDAC) Program under the Office of Science at the U.S. Department of Energy. 
+## Acknowledgments
+This work is supported by the Scientific Discovery through Advanced Computing (SciDAC) Program under the Office of Science at the U.S. Department of Energy.
 
 Sandia National Laboratories is a multimission laboratory managed and operated by National Technology & Engineering Solutions of Sandia, LLC, a wholly owned subsidiary of Honeywell International Inc., for the U.S. Department of Energy’s National Nuclear Security Administration under contract DE-NA0003525.
