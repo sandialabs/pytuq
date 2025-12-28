@@ -21,17 +21,17 @@ To install from source for the most recent stable release of PyTUQ, start up a P
 
 Then, install the PyTUQ package and its dependencies via 'pip'.
 
-To install just the primary PyTUQ dependencies, use the following command: 
+To install just the primary PyTUQ dependencies, use the following command:
 
 .. code-block:: console
 
     $ pip install .
 
-To take advantage of the neural network surrogate model capabilites in PyTUQ, use the following commands to install PyTUQ along with its optional dependencies:
+To take advantage of the neural network surrogate model capabilities in PyTUQ, use the following commands to install PyTUQ along with its optional dependencies:
 
 .. code-block:: console
 
-    $ pip install -r requirements.txt 
+    $ pip install -r requirements.txt
     $ pip install .
 
 If you don't have `pip`_ installed, this `Python installation guide`_ can guide
