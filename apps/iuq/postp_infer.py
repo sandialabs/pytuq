@@ -1,6 +1,6 @@
 #!/usr/bin/env python
+
 import os
-import sys
 import argparse
 import numpy as np
 import matplotlib as mpl
@@ -8,7 +8,6 @@ import matplotlib.cm as cm
 import matplotlib.pyplot as plt
 
 
-import pytuq.gsa.gsa as gsa
 import pytuq.minf.minf as minf
 import pytuq.utils.plotting as pup
 from pytuq.utils.xutils import loadpk, read_textlist

@@ -4,7 +4,6 @@ import sys
 import argparse
 import numpy as np
 
-import scipy.stats as ss
 import matplotlib.pyplot as plt
 
 from pytuq.utils.plotting import myrc, plot_cov, plot_cov_tri

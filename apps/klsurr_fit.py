@@ -1,7 +1,6 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """App to build KL-pbased reduced-dimensional surrogates of multioutput models."""
 
-import sys
 import argparse
 import numpy as np
 import matplotlib
@@ -12,10 +11,8 @@ from pytuq.linred.klsurr import KLSurr
 from pytuq.rv.pcrv import PCRV
 
 from pytuq.utils.xutils import read_textlist, savepk
-from pytuq.utils.plotting import myrc, lighten_color, plot_dm, plot_sens
+from pytuq.utils.plotting import myrc, plot_dm, plot_sens
 from pytuq.utils.stats import get_domain
-
-from pytuq.workflows.fits import pc_fit
 
 myrc()
 #plt.rcParams.update({'figure.max_open_warning': 2000})

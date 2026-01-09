@@ -1,14 +1,13 @@
 #!/usr/bin/env python
 
 
-import sys
 import argparse
 import numpy as np
 import matplotlib.pyplot as plt
 
 from pytuq.linred.kle import KLE
 from pytuq.linred.svd import SVD
-from pytuq.utils.plotting import myrc, lighten_color, plot_dm, plot_xrv
+from pytuq.utils.plotting import myrc, plot_dm
 
 myrc()
 

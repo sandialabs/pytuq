@@ -3,9 +3,7 @@
 
 import sys
 import numpy as np
-from scipy.optimize import minimize
 from scipy.stats import multivariate_normal
-from scipy.linalg import lstsq
 
 
 from .lreg import lreg
@@ -163,13 +161,6 @@ class lreg_merr(lreg):
         """Initialization.
 
         Args:
-            dvinfo (None, optional): Description
-            multiplicative (bool, optional): Description
-            merr_method (str, optional): Description
-            opt_method (str, optional): Description
-            mean_fixed (bool, optional): Description
-            embedding (str, optional): Description
-
             ind_embed (None, optional): Indices of parameters/coefficients/bases to embed model error in. Defaults to None, which means embed in all.
             dvinfo (dict, optional): Dictionary of parameters controlling data variance. Keys are 'npar' (number of parameters), 'fcn' (callable to return data variance vector given the last part of the chain, and auxiliary paraemters), 'aux' (auxiliary parameters of the data variance function). Default is None, but should not be used.
             multiplicative (bool, optional): Indicates whether the embedding is multiplicative. Defaults to False.

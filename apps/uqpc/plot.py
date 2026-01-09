@@ -1,11 +1,9 @@
 #!/usr/bin/env python
-import os
+
 import sys
 import argparse
 import numpy as np
-import matplotlib.cm as cm
 import matplotlib.pyplot as plt
-from itertools import combinations
 
 from pytuq.utils.plotting import myrc, plot_dm, plot_sens, plot_jsens, plot_pdf1d, plot_sensmat, plot_vars, plot_1d, plot_2d, plot_joy
 from pytuq.utils.xutils import loadpk, read_textlist

@@ -5,7 +5,6 @@ import argparse
 import numpy as np
 import matplotlib.pyplot as plt
 
-from pytuq.func import toy, genz, chem, bench, poly, oper, func
 from pytuq.utils.xutils import instantiate_classes_from_module
 
 

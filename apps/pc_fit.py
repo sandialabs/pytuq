@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 """App to build PC surrogates of multioutput models."""
-import sys
+
 import argparse
 import numpy as np
 import matplotlib.pyplot as plt
 
 from pytuq.utils.xutils import read_textlist, savepk
-from pytuq.utils.plotting import myrc, lighten_color, plot_dm, plot_sens
+from pytuq.utils.plotting import myrc, plot_dm, plot_sens
 #from pytuq.utils.maps import scale01ToDom
 
 from pytuq.workflows.fits import pc_fit

@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 
 from pytuq.rv.pcrv import PCRV
 from pytuq.utils.xutils import read_textlist
-from pytuq.utils.plotting import myrc, lighten_color, plot_dm, plot_sens
+from pytuq.utils.plotting import myrc, plot_dm
 #from pytuq.utils.maps import scale01ToDom
 
 try:

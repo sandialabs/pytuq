@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 
 import argparse
-from scipy import stats
-import matplotlib.pyplot as plt
 
 from pytuq.utils.plotting import plot_pdfs, myrc
 

@@ -1,6 +1,5 @@
 #!/usr/bin/env python
-import os
-import sys
+
 import argparse
 import numpy as np
 
@@ -9,9 +8,8 @@ try:
 except ModuleNotFoundError:
     print("Please pip install pprint for more readable printing.")
 
-import pytuq.gsa.gsa as gsa
 import pytuq.minf.minf as minf
-from pytuq.utils.xutils import savepk, loadpk, read_textlist
+from pytuq.utils.xutils import savepk, loadpk
 
 
 
