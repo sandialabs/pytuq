@@ -1,10 +1,9 @@
 #!/usr/bin/env python
-import os
-import sys
+
 import argparse
 import numpy as np
 
-from pytuq.utils.xutils import loadpk, read_textlist
+from pytuq.utils.xutils import loadpk
 
 
 # Parse input arguments

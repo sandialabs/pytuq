@@ -9,7 +9,6 @@ from scipy.stats import multivariate_normal
 from scipy.special import erf
 
 from ..minf.mcmc import AMCMC
-from ..func.func import Function
 
 
 ############################################################
@@ -227,11 +226,6 @@ class Mixture(MRV):
         assert np.isclose(np.sum(self.weights),1.0), f'{np.sum(self.weights)}'
 
     def __repr__(self):
-        """String representation.
-
-        Returns:
-            str: String description.
-        """
         return f"Mixture of random variables {[i for i in self.rv_list]}"
 
     def sample(self, nsam):
@@ -303,11 +297,6 @@ class Inverse(MRV):
         self.rv = rv
 
     def __repr__(self):
-        """String representation.
-
-        Returns:
-            str: String description.
-        """
         return f"Inverse of random variable {self.rv}"
 
     def sample(self, nsam):
@@ -381,11 +370,6 @@ class Pareto_1d(MRV):
         self.params = [self.alpha, self.xm]
 
     def __repr__(self):
-        """String representation.
-
-        Returns:
-            str: String description.
-        """
         return f"Univariate Pareto Random Variable"
 
     def sample(self, nsam):
@@ -469,11 +453,6 @@ class Normal_1d(MRV):
         self.params = [self.mu, self.sigma]
 
     def __repr__(self):
-        """String representation.
-
-        Returns:
-            str: String description.
-        """
         return f"Univariate Normal Random Variable"
 
     def sample(self, nsam):
@@ -550,11 +529,6 @@ class Lognormal_1d(MRV):
 
 
     def __repr__(self):
-        """String representation.
-
-        Returns:
-            str: String description.
-        """
         return f"Univariate Lognormal Random Variable"
 
     def sample(self, nsam):
@@ -636,11 +610,6 @@ class Weibull_1d(MRV):
 
 
     def __repr__(self):
-        """String representation.
-
-        Returns:
-            str: String description.
-        """
         return f"Univariate Weibull Random Variable"
 
     def sample(self, nsam):

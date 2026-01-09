@@ -40,15 +40,11 @@ class lreg(fitbase):
         Args:
         basiseval (callable): Basis evaluator function.
         basisevalpars (tuple): Parameters of the basis evaluator function.
-
-        Returns:
-            TYPE: Description
         """
         self.basisEval = basiseval
         self.basisEvalPars = basisevalpars
         self.basisEvaluatorSet = True
 
-        return
 
     def fita(self, Amat, y):
         r"""Fitting function. Not implemented in the base class.
@@ -58,7 +54,7 @@ class lreg(fitbase):
             y (np.ndarray): An 1d array of size :math:`N` holding the data.
 
         Raises:
-            NotImplementedError: Description
+            NotImplementedError: Not implemented in the base class.
         """
         raise NotImplementedError("Fitting not implemented in the base class.")
 

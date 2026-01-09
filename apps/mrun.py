@@ -1,5 +1,5 @@
-#!/usr/bin/env python3
-import os,sys,time
+#!/usr/bin/env python
+import os,sys
 import numpy as np
 from multiprocessing import Process, Lock, Pool, Manager
 

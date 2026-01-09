@@ -13,6 +13,7 @@ import matplotlib.pyplot as plt
 
 from pytuq.minf.vi import MFVI
 from pytuq.optim.pso import PSO
+from pytuq.minf.mcmc import AMCMC
 
 from pytuq.func.func import Function
 from pytuq.func.bench1d import TFData
@@ -29,7 +30,7 @@ myrc()
 domain = np.array([[-20., 60.]])
 
 ngr = 133
-ntrn = 150
+ntrn = 110
 
 xtrn = scale01ToDom(np.random.rand(ntrn), domain)[:, np.newaxis]
 
@@ -41,7 +42,13 @@ ytrn = (ytrn - ytrn.mean()) / ytrn.std()
 
 print(xtrn.shape, ytrn.shape)
 
-pdim = 3
+# # np.savetxt('xdata.txt', xtrn)
+# # np.savetxt('ydata.txt', ytrn)
+
+# xtrn = np.loadtxt('xdata.txt')
+# ytrn = np.loadtxt('ydata.txt').reshape(-1,1)
+
+pdim = 2
 
 
 class linear_model(Function):
@@ -67,9 +74,9 @@ xgrid = np.linspace(domain[0, 0], domain[0, 1], ngr)
 nsteps = 10000  # number of steps
 param_ini = np.random.rand(2 * pdim)  # initial parameter values
 
-lossinfo = {'nmc': 222, 'datasigma': 1.0}
+lossinfo = {'nmc': 222, 'datasigma': 0.01*np.ones(ntrn)}
 mfvi = MFVI(linear_model(xtrn), ytrn[:,0], pdim, lossinfo, reparam='logexp')
-objective, objectivegrad, objectiveinfo = mfvi.eval_loss, mfvi.eval_loss_grad_, {}
+objective, objectivegrad, objectiveinfo = mfvi.eval_loss_gmarg, None, {}
 
 
 myopt = PSO(2*pdim)
@@ -77,6 +84,13 @@ myopt.setObjective(objective, objectivegrad, **objectiveinfo)
 results = myopt.run(100, np.random.rand(2*pdim,))
 cmode, pmode = results['best'], results['bestobj']
 
+# myopt = AMCMC(t0=1000, tadapt=100, gamma=0.001)
+# def logpost(modelpars, lpinfo):
+#     return -mfvi.eval_loss_gmarg(modelpars)
+# myopt.setLogPost(logpost, None, lpinfo=None)
+# mcmc_results = myopt.run(param_ini=param_ini, nmcmc=nsteps)
+# cmode, pmode = mcmc_results['mapparams'], -mcmc_results['maxpost']
+# np.savetxt('chain.txt', mcmc_results['chain'])
 
 
 

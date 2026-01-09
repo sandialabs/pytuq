@@ -6,7 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from pytuq.utils.xutils import read_textlist
-from pytuq.utils.plotting import plot_yx, myrc
+from pytuq.utils.plotting import myrc
 
 myrc()
 

@@ -776,12 +776,20 @@ class QR:
         '''
 
         if verbose:
-            fname = 'qro_gs'+str(stage)+'.txt'
+            fname = 'qro_qr.txt'
             with open(fname, 'w') as f:
-                f.write('ortho\n')
+                f.write('ortho QR\n')
 
         Aphi      = np.array([self.Lmap.eval(pf) for pf in self.phi]).T
         Q, R      = np.linalg.qr(Aphi)
+
+        if R.shape[0] != R.shape[1] :
+            print('Failure in orf: QR.ortho : orthonormalization via QR decomposition')
+            print('Aphi:',Aphi.shape,'Q:',Q.shape,'R:',R.shape)
+            print('R is not square, and cannot be inverted')
+            print('Make sure you have more data points than basis functions to avoid this failure!')
+            sys.exit('1')
+
         Pqr       = np.linalg.inv(R)
 
         self.Pmat = Pqr.T
