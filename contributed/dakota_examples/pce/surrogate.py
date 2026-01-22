@@ -29,7 +29,7 @@ class Pytuq:
 
     def __init__(self, params=None):
 
-        print("Pytuq surrogate class constructer...")
+        print("Pytuq surrogate class constructor...")
         self.pce = PCE(dim, order, 'LU')
 
 
@@ -78,7 +78,7 @@ class Polynomial:
 
     def __init__(self, params=None):
 
-        print("python Polynomial Surrogate class constructer...")
+        print("python Polynomial Surrogate class constructor...")
         self.coeffs = None
         if params is not None:
             self.params = params
