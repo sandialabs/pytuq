@@ -1,0 +1,747 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytuq.func.benchNd &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="pytuq.func.chem" href="../chem/index.html" />
+    <link rel="prev" title="pytuq.func.bench2d" href="../bench2d/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../auto_examples/index.html">Software Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../auto_examples/index.html#surrogates">Surrogates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_pce.html">Polynomial Chaos Expansion Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Section Navigation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">pytuq</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../ftools/index.html">pytuq.ftools</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rv/index.html">pytuq.rv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../surrogates/index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Section Navigation</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">pytuq</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">pytuq.func</a></li>
+      <li class="breadcrumb-item active">pytuq.func.benchNd</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/autoapi/pytuq/func/benchNd/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-pytuq.func.benchNd">
+<span id="pytuq-func-benchnd"></span><h1>pytuq.func.benchNd<a class="headerlink" href="#module-pytuq.func.benchNd" title="Link to this heading"></a></h1>
+<p>Nd benchmark functions module.</p>
+<p>Most of the functions are taken from <a class="reference external" href="https://github.com/Vahanosi4ek/pytuq_funcs">https://github.com/Vahanosi4ek/pytuq_funcs</a> that autogenerates the codes given function’s latex strings.</p>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.func.benchNd.Ackley" title="pytuq.func.benchNd.Ackley"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Ackley</span></code></a></p></td>
+<td><p>Ackley function</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.func.benchNd.Alpine01" title="pytuq.func.benchNd.Alpine01"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Alpine01</span></code></a></p></td>
+<td><p>Alpine01 function</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.func.benchNd.Alpine02" title="pytuq.func.benchNd.Alpine02"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Alpine02</span></code></a></p></td>
+<td><p>Alpine02 function</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.func.benchNd.AMGM" title="pytuq.func.benchNd.AMGM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AMGM</span></code></a></p></td>
+<td><p>AMGM function</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.func.benchNd.Bohachevsky" title="pytuq.func.benchNd.Bohachevsky"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Bohachevsky</span></code></a></p></td>
+<td><p>Bohachevsky function</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.func.benchNd.Cigar" title="pytuq.func.benchNd.Cigar"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Cigar</span></code></a></p></td>
+<td><p>Cigar function</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.func.benchNd.CosineMixture" title="pytuq.func.benchNd.CosineMixture"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CosineMixture</span></code></a></p></td>
+<td><p>CosineMixture function</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.func.benchNd.Griewank" title="pytuq.func.benchNd.Griewank"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Griewank</span></code></a></p></td>
+<td><p>Griewank function</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.func.benchNd.Mishra07" title="pytuq.func.benchNd.Mishra07"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Mishra07</span></code></a></p></td>
+<td><p>Mishra07 function</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.func.benchNd.MVN" title="pytuq.func.benchNd.MVN"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MVN</span></code></a></p></td>
+<td><p>Multivariate Normal function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.func.benchNd.NegAlpineN2" title="pytuq.func.benchNd.NegAlpineN2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NegAlpineN2</span></code></a></p></td>
+<td><p>Negative Alpine function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.func.benchNd.Sobol" title="pytuq.func.benchNd.Sobol"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Sobol</span></code></a></p></td>
+<td><p>Sobol function</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.func.benchNd.SumSquares" title="pytuq.func.benchNd.SumSquares"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SumSquares</span></code></a></p></td>
+<td><p>SumSquares function.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.Ackley">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.benchNd.</span></span><span class="sig-name descname"><span class="pre">Ackley</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c3</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span> <span class="pre">*</span> <span class="pre">np.pi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c4</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Ackley'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#Ackley"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.Ackley" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>Ackley function</p>
+<p>Reference: [<a class="reference external" href="https://infinity77.net/global_optimization/test_functions_nd_A.html#go_benchmark.Ackley">https://infinity77.net/global_optimization/test_functions_nd_A.html#go_benchmark.Ackley</a>]</p>
+<p>Complex cosine function with many local minima</p>
+<div class="math notranslate nohighlight">
+\[f(x)=-c_1e^{-c_2\sqrt{\sum_{i=1}^{d}x_1^2}}-e^{\frac{1}{d}\sum_{i=1}^{d}\cos(c_3x_i)}+c_4+e\]</div>
+<p>Default constant values are <span class="math notranslate nohighlight">\(c = (20., 0.2, 2\pi)\)</span> and <span class="math notranslate nohighlight">\(d = 2\)</span>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.Ackley.dim">
+<span class="sig-name descname"><span class="pre">dim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#Ackley.dim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.Ackley.dim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.Ackley.outdim">
+<span class="sig-name descname"><span class="pre">outdim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#Ackley.outdim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.Ackley.outdim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.Ackley.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#Ackley.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.Ackley.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.Alpine01">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.benchNd.</span></span><span class="sig-name descname"><span class="pre">Alpine01</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Alpine01'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#Alpine01"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.Alpine01" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>Alpine01 function</p>
+<p>Reference: [<a class="reference external" href="https://infinity77.net/global_optimization/test_functions_nd_A.html#go_benchmark.Alpine01">https://infinity77.net/global_optimization/test_functions_nd_A.html#go_benchmark.Alpine01</a>]</p>
+<p>A N-d multimodal function</p>
+<div class="math notranslate nohighlight">
+\[f(x)=\sum_{i=1}^n |x_i\sin(x_i)+c_1x_2|\]</div>
+<p>Default constant values are <span class="math notranslate nohighlight">\(c_1 = 0.1\)</span>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.Alpine01.c1">
+<span class="sig-name descname"><span class="pre">c1</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#Alpine01.c1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.Alpine01.c1" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.Alpine01.dim">
+<span class="sig-name descname"><span class="pre">dim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#Alpine01.dim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.Alpine01.dim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.Alpine01.outdim">
+<span class="sig-name descname"><span class="pre">outdim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#Alpine01.outdim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.Alpine01.outdim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.Alpine01.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#Alpine01.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.Alpine01.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.Alpine02">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.benchNd.</span></span><span class="sig-name descname"><span class="pre">Alpine02</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Alpine02'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#Alpine02"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.Alpine02" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>Alpine02 function</p>
+<p>Reference: [<a class="reference external" href="https://infinity77.net/global_optimization/test_functions_nd_A.html#go_benchmark.Alpine02">https://infinity77.net/global_optimization/test_functions_nd_A.html#go_benchmark.Alpine02</a>]</p>
+<p>A N-d multimodal function</p>
+<div class="math notranslate nohighlight">
+\[f(x)=\prod_{i=1}^{n}\sqrt{x_i}\sin(x_i)\]</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.Alpine02.dim">
+<span class="sig-name descname"><span class="pre">dim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#Alpine02.dim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.Alpine02.dim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.Alpine02.outdim">
+<span class="sig-name descname"><span class="pre">outdim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#Alpine02.outdim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.Alpine02.outdim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.Alpine02.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#Alpine02.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.Alpine02.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.AMGM">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.benchNd.</span></span><span class="sig-name descname"><span class="pre">AMGM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'AMGM'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#AMGM"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.AMGM" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>AMGM function</p>
+<p>Reference: [<a class="reference external" href="https://infinity77.net/global_optimization/test_functions_nd_A.html#go_benchmark.AMGM">https://infinity77.net/global_optimization/test_functions_nd_A.html#go_benchmark.AMGM</a>]</p>
+<p>Difference-squared between AM and GM</p>
+<div class="math notranslate nohighlight">
+\[f(x)=\left ( \frac{1}{n} \sum_{i=1}^{n} x_i - \sqrt[n]{ \prod_{i=1}^{n} x_i} \right )^2\]</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.AMGM.dim">
+<span class="sig-name descname"><span class="pre">dim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#AMGM.dim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.AMGM.dim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.AMGM.outdim">
+<span class="sig-name descname"><span class="pre">outdim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#AMGM.outdim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.AMGM.outdim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.AMGM.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#AMGM.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.AMGM.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.Bohachevsky">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.benchNd.</span></span><span class="sig-name descname"><span class="pre">Bohachevsky</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c3</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c4</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c5</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c6</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Bohachevsky'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#Bohachevsky"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.Bohachevsky" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>Bohachevsky function</p>
+<p>Reference: [<a class="reference external" href="https://infinity77.net/global_optimization/test_functions_nd_B.html#go_benchmark.Bohachevsky">https://infinity77.net/global_optimization/test_functions_nd_B.html#go_benchmark.Bohachevsky</a>]</p>
+<p>A N-d multimodal function</p>
+<div class="math notranslate nohighlight">
+\[f(x)=\sum_{i=1}^{n-1}\left[x_i^2 + c_1x_{i+1}^2 - c_2\cos(c_3\pi x_i) - c_4\cos(c_5\pi x_{i+1}) + c_6\right]\]</div>
+<p>Default constant values are <span class="math notranslate nohighlight">\(c = (2., 0.3, 3., 0.4, 4., 0.7)\)</span>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.Bohachevsky.dim">
+<span class="sig-name descname"><span class="pre">dim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#Bohachevsky.dim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.Bohachevsky.dim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.Bohachevsky.outdim">
+<span class="sig-name descname"><span class="pre">outdim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#Bohachevsky.outdim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.Bohachevsky.outdim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.Bohachevsky.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#Bohachevsky.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.Bohachevsky.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.Cigar">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.benchNd.</span></span><span class="sig-name descname"><span class="pre">Cigar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10**3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Cigar'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#Cigar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.Cigar" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>Cigar function</p>
+<p>Reference: [<a class="reference external" href="https://infinity77.net/global_optimization/test_functions_nd_C.html#go_benchmark.Cigar">https://infinity77.net/global_optimization/test_functions_nd_C.html#go_benchmark.Cigar</a>]</p>
+<p>A N-d multimodal function</p>
+<div class="math notranslate nohighlight">
+\[f(x)=x_1^2 + c_1 \sum_{i=2}^{n} x_i^2\]</div>
+<p>Default constant values are <span class="math notranslate nohighlight">\(c = 10^3\)</span></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.Cigar.dim">
+<span class="sig-name descname"><span class="pre">dim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#Cigar.dim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.Cigar.dim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.Cigar.outdim">
+<span class="sig-name descname"><span class="pre">outdim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#Cigar.outdim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.Cigar.outdim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.Cigar.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#Cigar.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.Cigar.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.CosineMixture">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.benchNd.</span></span><span class="sig-name descname"><span class="pre">CosineMixture</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'CosineMixture'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#CosineMixture"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.CosineMixture" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>CosineMixture function</p>
+<p>Reference: [<a class="reference external" href="https://infinity77.net/global_optimization/test_functions_nd_C.html#go_benchmark.CosineMixture">https://infinity77.net/global_optimization/test_functions_nd_C.html#go_benchmark.CosineMixture</a>]</p>
+<p>A N-d multimodal function</p>
+<div class="math notranslate nohighlight">
+\[f(x)=-c_1 \sum_{i=1}^n \cos(c_2 \pi x_i) - \sum_{i=1}^n x_i^2\]</div>
+<p>Default constant values are :math:<a href="#id1"><span class="problematic" id="id2">`</span></a>c = (0.1, 5.0)</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.CosineMixture.dim">
+<span class="sig-name descname"><span class="pre">dim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#CosineMixture.dim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.CosineMixture.dim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.CosineMixture.outdim">
+<span class="sig-name descname"><span class="pre">outdim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#CosineMixture.outdim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.CosineMixture.outdim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.CosineMixture.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#CosineMixture.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.CosineMixture.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.Griewank">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.benchNd.</span></span><span class="sig-name descname"><span class="pre">Griewank</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Griewank'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#Griewank"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.Griewank" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>Griewank function</p>
+<p>Reference: [<a class="reference external" href="https://www.sfu.ca/~ssurjano/griewank.html">https://www.sfu.ca/~ssurjano/griewank.html</a>]</p>
+<div class="math notranslate nohighlight">
+\[f(x)=\sum_{i=1}^{d}\frac{x_i^2}{c_1}-\prod_{i=1}^{d}\cos(\frac{x_i}{\sqrt{i}}) + c_2\]</div>
+<p>Default constant values are <span class="math notranslate nohighlight">\(c = (4000., 1.)\)</span> and <span class="math notranslate nohighlight">\(d = 2\)</span>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.Griewank.dim">
+<span class="sig-name descname"><span class="pre">dim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#Griewank.dim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.Griewank.dim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.Griewank.outdim">
+<span class="sig-name descname"><span class="pre">outdim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#Griewank.outdim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.Griewank.outdim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.Griewank.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#Griewank.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.Griewank.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.Mishra07">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.benchNd.</span></span><span class="sig-name descname"><span class="pre">Mishra07</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Mishra07'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#Mishra07"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.Mishra07" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>Mishra07 function</p>
+<p>Reference: [<a class="reference external" href="https://infinity77.net/global_optimization/test_functions_nd_M.html#go_benchmark.Mishra07">https://infinity77.net/global_optimization/test_functions_nd_M.html#go_benchmark.Mishra07</a>]</p>
+<p>A multimodal minimization function</p>
+<div class="math notranslate nohighlight">
+\[f(x)=\left(\prod_{i=1}^d x_i-d!\right)^2\]</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.Mishra07.dim">
+<span class="sig-name descname"><span class="pre">dim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#Mishra07.dim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.Mishra07.dim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.Mishra07.outdim">
+<span class="sig-name descname"><span class="pre">outdim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#Mishra07.outdim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.Mishra07.outdim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.Mishra07.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#Mishra07.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.Mishra07.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.MVN">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.benchNd.</span></span><span class="sig-name descname"><span class="pre">MVN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mean</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0.0,</span> <span class="pre">0.0]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cov</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[[1.0,</span> <span class="pre">0.0],</span> <span class="pre">[0.0,</span> <span class="pre">1.0]]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'MVN'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#MVN"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.MVN" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>Multivariate Normal function.</p>
+<p>Reference: [<a class="reference external" href="https://en.wikipedia.org/wiki/Multivariate_normal_distribution">https://en.wikipedia.org/wiki/Multivariate_normal_distribution</a>]</p>
+<div class="math notranslate nohighlight">
+\[f(x) = \frac{1}{(2\pi)^{d/2} |\Sigma|^{1/2}} \exp\left( -\frac{1}{2} (x - \mu)^T \Sigma^{-1} (x - \mu) \right)\]</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.MVN.mean">
+<span class="sig-name descname"><span class="pre">mean</span></span><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#MVN.mean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.MVN.mean" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.MVN.cov">
+<span class="sig-name descname"><span class="pre">cov</span></span><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#MVN.cov"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.MVN.cov" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.MVN.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'MVN'</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#MVN.name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.MVN.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.MVN.outdim">
+<span class="sig-name descname"><span class="pre">outdim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#MVN.outdim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.MVN.outdim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.MVN.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#MVN.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.MVN.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.NegAlpineN2">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.benchNd.</span></span><span class="sig-name descname"><span class="pre">NegAlpineN2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Alpine</span> <span class="pre">N2'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#NegAlpineN2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.NegAlpineN2" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>Negative Alpine function.</p>
+<dl class="simple">
+<dt>… math::</dt><dd><p>f(x) = - sqrt{prod_{i=1}^{d} x_i cdot sin(x_i)}</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.NegAlpineN2.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Alpine</span> <span class="pre">N2'</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#NegAlpineN2.name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.NegAlpineN2.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.NegAlpineN2.outdim">
+<span class="sig-name descname"><span class="pre">outdim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#NegAlpineN2.outdim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.NegAlpineN2.outdim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.NegAlpineN2.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#NegAlpineN2.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.NegAlpineN2.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.Sobol">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.benchNd.</span></span><span class="sig-name descname"><span class="pre">Sobol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Sobol'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#Sobol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.Sobol" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>Sobol function</p>
+<p>Reference: [<a class="reference external" href="https://www.sfu.ca/~ssurjano/gfunc.html">https://www.sfu.ca/~ssurjano/gfunc.html</a>]</p>
+<div class="math notranslate nohighlight">
+\[f(x) = \prod_{i=1}^{d} \frac{|4x_i -2| + a_i}{1 + a_i}\]</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.Sobol.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Sobol'</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#Sobol.name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.Sobol.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.Sobol.dim">
+<span class="sig-name descname"><span class="pre">dim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#Sobol.dim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.Sobol.dim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.Sobol.outdim">
+<span class="sig-name descname"><span class="pre">outdim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#Sobol.outdim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.Sobol.outdim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.Sobol.a">
+<span class="sig-name descname"><span class="pre">a</span></span><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#Sobol.a"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.Sobol.a" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.Sobol.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#Sobol.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.Sobol.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.SumSquares">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.benchNd.</span></span><span class="sig-name descname"><span class="pre">SumSquares</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'SumSquares'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#SumSquares"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.SumSquares" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>SumSquares function.</p>
+<div class="math notranslate nohighlight">
+\[f(x) = \sum_{i=1}^{d} (1 + i) x_i^2\]</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.SumSquares.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'SumSquares'</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#SumSquares.name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.SumSquares.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.SumSquares.outdim">
+<span class="sig-name descname"><span class="pre">outdim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#SumSquares.outdim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.SumSquares.outdim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.benchNd.SumSquares.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/benchNd.html#SumSquares.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.benchNd.SumSquares.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../bench2d/index.html" class="btn btn-neutral float-left" title="pytuq.func.bench2d" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../chem/index.html" class="btn btn-neutral float-right" title="pytuq.func.chem" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

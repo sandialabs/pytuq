@@ -1,0 +1,22 @@
+pytuq.workflows.fits
+====================
+
+.. py:module:: pytuq.workflows.fits
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   pytuq.workflows.fits.pc_fit
+   pytuq.workflows.fits.pc_ros
+
+
+Module Contents
+---------------
+
+.. py:function:: pc_fit(x, y, order=3, pctype='LU', method='anl', **kwargs)
+
+.. py:function:: pc_ros(xsam, pctype='HG', order=1, nreg=13, n_pcsam=None, bwfactor=1.0)
+

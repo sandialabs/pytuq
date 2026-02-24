@@ -1,0 +1,91 @@
+pytuq.optim.optim
+=================
+
+.. py:module:: pytuq.optim.optim
+
+.. autoapi-nested-parse::
+
+   Optimization base module.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.optim.optim.OptBase
+
+
+Module Contents
+---------------
+
+.. py:class:: OptBase
+
+   Bases: :py:obj:`object`
+
+
+   Base class for optimization.
+
+
+   .. py:attribute:: Objective
+      :value: None
+
+
+
+   .. py:attribute:: ObjectiveGrad
+      :value: None
+
+
+
+   .. py:attribute:: ObjectiveHess
+      :value: None
+
+
+
+   .. py:attribute:: ObjectiveInfo
+
+
+   .. py:method:: setObjective(Objective, ObjectiveGrad=None, ObjectiveHess=None, **ObjectiveInfo)
+
+      Setting Objective and optionally its Gradient and Hessian.
+
+      :param Objective: Objective evaluator function.
+      :type Objective: callable
+      :param ObjectiveGrad: Objective gradient evaluator function. Defaults to None.
+      :type ObjectiveGrad: callable, optional
+      :param ObjectiveHess: Objective hessian evaluator function. Defaults to None.
+      :type ObjectiveHess: callable, optional
+      :param \*\*ObjectiveInfo: Dictionary arguments for the Objective and its gradient and hessian.
+
+
+
+   .. py:method:: stepper(current, istep)
+      :abstractmethod:
+
+
+      Sampler function of a single step.
+
+      :param current: The current state.
+      :type current: np.ndarray
+      :param istep: Current step.
+      :type istep: int
+
+      :raises NotImplementedError: Not Implemented in the parent class.
+
+
+
+   .. py:method:: run(nsteps, param_ini)
+
+      An optimization run.
+
+      :param nsteps: Number of optimization steps.
+      :type nsteps: int
+      :param param_ini: Initial position, an 1d array.
+      :type param_ini: np.ndarray
+
+      :returns: Dictionary of results. Keys are 'samples' (history array of parameters), 'objvalues' (history of objective values), 'best' (best parameters array), 'bestobj' (best objective value).
+      :rtype: dict
+
+
+

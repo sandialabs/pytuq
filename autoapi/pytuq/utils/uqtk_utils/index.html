@@ -1,0 +1,261 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytuq.utils.uqtk_utils &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="pytuq.utils.xutils" href="../xutils/index.html" />
+    <link rel="prev" title="pytuq.utils.stats" href="../stats/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../auto_examples/index.html">Software Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../auto_examples/index.html#surrogates">Surrogates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_pce.html">Polynomial Chaos Expansion Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Section Navigation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">pytuq</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../ftools/index.html">pytuq.ftools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../func/index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rv/index.html">pytuq.rv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../surrogates/index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Section Navigation</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">pytuq</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">pytuq.utils</a></li>
+      <li class="breadcrumb-item active">pytuq.utils.uqtk_utils</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/autoapi/pytuq/utils/uqtk_utils/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-pytuq.utils.uqtk_utils">
+<span id="pytuq-utils-uqtk-utils"></span><h1>pytuq.utils.uqtk_utils<a class="headerlink" href="#module-pytuq.utils.uqtk_utils" title="Link to this heading"></a></h1>
+<p>Routines that are wrappers of UQTk apps’ system calls.</p>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.utils.uqtk_utils.pce_eval" title="pytuq.utils.uqtk_utils.pce_eval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pce_eval</span></code></a>(xdata, pctype, mi, pccf)</p></td>
+<td><p>Evaluates Polynomial Chaos (PC) expansion.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.utils.uqtk_utils.pce_sens" title="pytuq.utils.uqtk_utils.pce_sens"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pce_sens</span></code></a>(pctype, mi, pccf[, mv])</p></td>
+<td><p>Evaluate input sensitivities of a PC expansion.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.utils.uqtk_utils.get_pdf_uqtk" title="pytuq.utils.uqtk_utils.get_pdf_uqtk"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_pdf_uqtk</span></code></a>(data, target[, verbose])</p></td>
+<td><p>Compute PDF given data at target points with the UQTk app.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.uqtk_utils.pce_eval">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.uqtk_utils.</span></span><span class="sig-name descname"><span class="pre">pce_eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xdata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pctype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pccf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/uqtk_utils.html#pce_eval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.uqtk_utils.pce_eval" title="Link to this definition"></a></dt>
+<dd><p>Evaluates Polynomial Chaos (PC) expansion.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xdata</strong> (<em>np.ndarray</em>) – 2d input array of size <cite>(N,d)</cite>.</p></li>
+<li><p><strong>pctype</strong> (<em>str</em>) – PC type.</p></li>
+<li><p><strong>mi</strong> (<em>np.ndarray</em>) – 2d integer array of multiindex, of size <cite>(K,d)</cite>.</p></li>
+<li><p><strong>pccf</strong> (<em>np.ndarray</em>) – 1d array of coefficients of size <cite>K</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>1d array of PC outputs of size <cite>N</cite>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.uqtk_utils.pce_sens">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.uqtk_utils.</span></span><span class="sig-name descname"><span class="pre">pce_sens</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pctype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pccf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/uqtk_utils.html#pce_sens"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.uqtk_utils.pce_sens" title="Link to this definition"></a></dt>
+<dd><p>Evaluate input sensitivities of a PC expansion.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pctype</strong> (<em>str</em>) – PC type.</p></li>
+<li><p><strong>mi</strong> (<em>np.ndarray</em>) – 2d integer array of multiindex, of size <cite>(K,d)</cite>.</p></li>
+<li><p><strong>pccf</strong> (<em>np.ndarray</em>) – 1d array of coefficients of size <cite>K</cite>.</p></li>
+<li><p><strong>mv</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to return mean and variance as well</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple of main (1d array of size <cite>d</cite>), total (1d array of size <cite>d</cite>) and joint (2d array of size <cite>(d,d)</cite>) sensitivities. Optionally, extra two elements are returned, mean and variance.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(np.ndarray, np.ndarray, np.ndarray)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.uqtk_utils.get_pdf_uqtk">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.uqtk_utils.</span></span><span class="sig-name descname"><span class="pre">get_pdf_uqtk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/uqtk_utils.html#get_pdf_uqtk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.uqtk_utils.get_pdf_uqtk" title="Link to this definition"></a></dt>
+<dd><p>Compute PDF given data at target points with the UQTk app.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>np.ndarray</em>) – <a href="#id1"><span class="problematic" id="id2">`</span></a>(N,d) array of N samples in d dimensions.</p></li>
+<li><p><strong>target</strong> (<em>np.ndarray</em>) – <a href="#id3"><span class="problematic" id="id4">`</span></a>(M,d) array of target points. Can be an integer, in which case it is interpreted as the number of grid points per dimension for a target grid.</p></li>
+<li><p><strong>verbose</strong> (<em>int</em><em>, </em><em>optional</em>) – Verbosity on the screen, 0, 1, or 2. Defaults to 1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>target points (same as target, or a grid, if target is an integer).
+np.ndarray: PDF values at xtarget.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../stats/index.html" class="btn btn-neutral float-left" title="pytuq.utils.stats" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../xutils/index.html" class="btn btn-neutral float-right" title="pytuq.utils.xutils" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

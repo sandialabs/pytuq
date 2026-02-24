@@ -1,0 +1,882 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytuq.func.bench1d &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="pytuq.func.bench2d" href="../bench2d/index.html" />
+    <link rel="prev" title="pytuq.func.bench" href="../bench/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../auto_examples/index.html">Software Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../auto_examples/index.html#surrogates">Surrogates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_pce.html">Polynomial Chaos Expansion Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Section Navigation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">pytuq</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../ftools/index.html">pytuq.ftools</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rv/index.html">pytuq.rv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../surrogates/index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Section Navigation</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">pytuq</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">pytuq.func</a></li>
+      <li class="breadcrumb-item active">pytuq.func.bench1d</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/autoapi/pytuq/func/bench1d/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-pytuq.func.bench1d">
+<span id="pytuq-func-bench1d"></span><h1>pytuq.func.bench1d<a class="headerlink" href="#module-pytuq.func.bench1d" title="Link to this heading"></a></h1>
+<p>1d benchmark functions module.</p>
+<p>Most of the functions are taken from <a class="reference external" href="https://github.com/Vahanosi4ek/pytuq_funcs">https://github.com/Vahanosi4ek/pytuq_funcs</a>.</p>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.func.bench1d.TFData" title="pytuq.func.bench1d.TFData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TFData</span></code></a></p></td>
+<td><p>TensorFlow function</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.func.bench1d.SineSum" title="pytuq.func.bench1d.SineSum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SineSum</span></code></a></p></td>
+<td><p>Simple sum of sines</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.func.bench1d.SineSum2" title="pytuq.func.bench1d.SineSum2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SineSum2</span></code></a></p></td>
+<td><p>A more complex sum of sines</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.func.bench1d.QuadxExp" title="pytuq.func.bench1d.QuadxExp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">QuadxExp</span></code></a></p></td>
+<td><p>Product of quadratic and exponent</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.func.bench1d.LinxSin" title="pytuq.func.bench1d.LinxSin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LinxSin</span></code></a></p></td>
+<td><p>Product of linear and sine functions</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.func.bench1d.SinexExp" title="pytuq.func.bench1d.SinexExp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SinexExp</span></code></a></p></td>
+<td><p>Product of sine and exp functions</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.func.bench1d.SineLogSum" title="pytuq.func.bench1d.SineLogSum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SineLogSum</span></code></a></p></td>
+<td><p>Sum of sine and log functions</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.func.bench1d.CosineSum" title="pytuq.func.bench1d.CosineSum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CosineSum</span></code></a></p></td>
+<td><p>Simple sum of cosines</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.func.bench1d.Sinex" title="pytuq.func.bench1d.Sinex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Sinex</span></code></a></p></td>
+<td><p>Product of x and sine function</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.func.bench1d.CosineSum2" title="pytuq.func.bench1d.CosineSum2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CosineSum2</span></code></a></p></td>
+<td><p>Simple sum of cosines</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.func.bench1d.Sinusoidal" title="pytuq.func.bench1d.Sinusoidal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Sinusoidal</span></code></a></p></td>
+<td><p>Simple 1d sine function</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.func.bench1d.Forrester" title="pytuq.func.bench1d.Forrester"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Forrester</span></code></a></p></td>
+<td><p>Forrester function</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.func.bench1d.GramacyLee2" title="pytuq.func.bench1d.GramacyLee2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GramacyLee2</span></code></a></p></td>
+<td><p>Complicated oscillatory 1d function</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.func.bench1d.Higdon" title="pytuq.func.bench1d.Higdon"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Higdon</span></code></a></p></td>
+<td><p>Higdon function</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.func.bench1d.Holsclaw" title="pytuq.func.bench1d.Holsclaw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Holsclaw</span></code></a></p></td>
+<td><p>Holsclaw function</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.func.bench1d.DampedCosine" title="pytuq.func.bench1d.DampedCosine"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DampedCosine</span></code></a></p></td>
+<td><p>A simple 1d cosine function</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.TFData">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.bench1d.</span></span><span class="sig-name descname"><span class="pre">TFData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tfdata'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#TFData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.TFData" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>TensorFlow function</p>
+<p>Data generating toy model inspired by <a class="reference external" href="https://colab.research.google.com/github/tensorflow/probability/blob/master/tensorflow_probability/examples/jupyter_notebooks/Probabilistic_Layers_Regression.ipynb#scrollTo=5zCEYpzu7bDX">https://colab.research.google.com/github/tensorflow/probability/blob/master/tensorflow_probability/examples/jupyter_notebooks/Probabilistic_Layers_Regression.ipynb#scrollTo=5zCEYpzu7bDX</a> .</p>
+<div class="math notranslate nohighlight">
+\[f(x)=w_0 x (1 + \sin(x)) + b_0\]</div>
+<p>Default constant values are <span class="math notranslate nohighlight">\(w_0 = 0.125\)</span>, <span class="math notranslate nohighlight">\(b_0 = 5.0\)</span>, <span class="math notranslate nohighlight">\(a = -20.0\)</span>, <span class="math notranslate nohighlight">\(b = 60.0\)</span>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.TFData.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'tfdata'</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#TFData.name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.TFData.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.TFData.dim">
+<span class="sig-name descname"><span class="pre">dim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#TFData.dim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.TFData.dim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.TFData.outdim">
+<span class="sig-name descname"><span class="pre">outdim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#TFData.outdim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.TFData.outdim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.TFData.w0">
+<span class="sig-name descname"><span class="pre">w0</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.125</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#TFData.w0"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.TFData.w0" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.TFData.b0">
+<span class="sig-name descname"><span class="pre">b0</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5.0</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#TFData.b0"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.TFData.b0" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.TFData.a">
+<span class="sig-name descname"><span class="pre">a</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-20.0</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#TFData.a"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.TFData.a" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.TFData.b">
+<span class="sig-name descname"><span class="pre">b</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">60.0</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#TFData.b"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.TFData.b" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.TFData.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#TFData.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.TFData.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.SineSum">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.bench1d.</span></span><span class="sig-name descname"><span class="pre">SineSum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span> <span class="pre">/</span> <span class="pre">3.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'SineSum'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#SineSum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.SineSum" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>Simple sum of sines</p>
+<p>Problem 02 [<a class="reference external" href="https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem02">https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem02</a>]</p>
+<div class="math notranslate nohighlight">
+\[f(x)=\sin(c_1x)+\sin(c_2x)\]</div>
+<p>Default constant values are <span class="math notranslate nohighlight">\(c = (1., 10./3.)\)</span>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.SineSum.dim">
+<span class="sig-name descname"><span class="pre">dim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#SineSum.dim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.SineSum.dim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.SineSum.outdim">
+<span class="sig-name descname"><span class="pre">outdim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#SineSum.outdim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.SineSum.outdim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.SineSum.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#SineSum.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.SineSum.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.SineSum2">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.bench1d.</span></span><span class="sig-name descname"><span class="pre">SineSum2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'SineSum2'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#SineSum2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.SineSum2" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>A more complex sum of sines</p>
+<p>Problem 03 [<a class="reference external" href="https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem03">https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem03</a>]</p>
+<div class="math notranslate nohighlight">
+\[f(x)=-\sum_{k=1}^{c_1}k\sin((k+1)x+k)\]</div>
+<p>Default constant value is <span class="math notranslate nohighlight">\(c = 6\)</span>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.SineSum2.c1">
+<span class="sig-name descname"><span class="pre">c1</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">6</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#SineSum2.c1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.SineSum2.c1" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.SineSum2.dim">
+<span class="sig-name descname"><span class="pre">dim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#SineSum2.dim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.SineSum2.dim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.SineSum2.outdim">
+<span class="sig-name descname"><span class="pre">outdim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#SineSum2.outdim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.SineSum2.outdim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.SineSum2.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#SineSum2.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.SineSum2.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.QuadxExp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.bench1d.</span></span><span class="sig-name descname"><span class="pre">QuadxExp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">16.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-24.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c3</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'QuadxExp'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#QuadxExp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.QuadxExp" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>Product of quadratic and exponent</p>
+<p>Problem 04 [<a class="reference external" href="https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem04">https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem04</a>]</p>
+<div class="math notranslate nohighlight">
+\[f(x)=-(c_1x^2+c_2x+c_3)e^{-x}\]</div>
+<p>Default constant values are <span class="math notranslate nohighlight">\(c = (16., -24., 5.)\)</span>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.QuadxExp.dim">
+<span class="sig-name descname"><span class="pre">dim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#QuadxExp.dim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.QuadxExp.dim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.QuadxExp.outdim">
+<span class="sig-name descname"><span class="pre">outdim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#QuadxExp.outdim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.QuadxExp.outdim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.QuadxExp.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#QuadxExp.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.QuadxExp.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.LinxSin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.bench1d.</span></span><span class="sig-name descname"><span class="pre">LinxSin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-3.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c3</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">18.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LinxSin'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#LinxSin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.LinxSin" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>Product of linear and sine functions</p>
+<p>Problem 05 [<a class="reference external" href="https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem05">https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem05</a>]</p>
+<div class="math notranslate nohighlight">
+\[f(x)=-(c_1-c_2x)sin(c_3x)\]</div>
+<p>Default constant values are <span class="math notranslate nohighlight">\(c = (1.4, -3., 18.)\)</span>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.LinxSin.dim">
+<span class="sig-name descname"><span class="pre">dim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#LinxSin.dim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.LinxSin.dim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.LinxSin.outdim">
+<span class="sig-name descname"><span class="pre">outdim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#LinxSin.outdim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.LinxSin.outdim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.LinxSin.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#LinxSin.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.LinxSin.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.SinexExp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.bench1d.</span></span><span class="sig-name descname"><span class="pre">SinexExp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'SinexExp'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#SinexExp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.SinexExp" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>Product of sine and exp functions</p>
+<p>Problem06 [<a class="reference external" href="https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem06">https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem06</a>]</p>
+<div class="math notranslate nohighlight">
+\[f(x)=-(x+\sin(x))e^{-x^2}\]</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.SinexExp.dim">
+<span class="sig-name descname"><span class="pre">dim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#SinexExp.dim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.SinexExp.dim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.SinexExp.outdim">
+<span class="sig-name descname"><span class="pre">outdim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#SinexExp.outdim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.SinexExp.outdim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.SinexExp.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#SinexExp.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.SinexExp.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.SineLogSum">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.bench1d.</span></span><span class="sig-name descname"><span class="pre">SineLogSum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span> <span class="pre">/</span> <span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c3</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">np.exp(1)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c4</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-0.84</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c5</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'SineLogSum'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#SineLogSum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.SineLogSum" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>Sum of sine and log functions</p>
+<p>Problem07 [<a class="reference external" href="https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem07">https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem07</a>]</p>
+<div class="math notranslate nohighlight">
+\[f(x)=\sin(c_1x) + \sin(c_2x) + \log_{c_3}(x) + c_4x + c_5\]</div>
+<p>Default constant values are <span class="math notranslate nohighlight">\(c = (1., 10/3, e, -0.84, 3.)\)</span>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.SineLogSum.dim">
+<span class="sig-name descname"><span class="pre">dim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#SineLogSum.dim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.SineLogSum.dim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.SineLogSum.outdim">
+<span class="sig-name descname"><span class="pre">outdim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#SineLogSum.outdim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.SineLogSum.outdim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.SineLogSum.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#SineLogSum.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.SineLogSum.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.CosineSum">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.bench1d.</span></span><span class="sig-name descname"><span class="pre">CosineSum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'CosineSum'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#CosineSum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.CosineSum" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>Simple sum of cosines</p>
+<p>Problem 08 [<a class="reference external" href="https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem08">https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem08</a>]</p>
+<div class="math notranslate nohighlight">
+\[f(x)=-\sum_{k=1}^{c_1}k\cos((k+1)x+k)\]</div>
+<p>Default constant value is <span class="math notranslate nohighlight">\(c = 6\)</span>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.CosineSum.c1">
+<span class="sig-name descname"><span class="pre">c1</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">6</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#CosineSum.c1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.CosineSum.c1" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.CosineSum.dim">
+<span class="sig-name descname"><span class="pre">dim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#CosineSum.dim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.CosineSum.dim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.CosineSum.outdim">
+<span class="sig-name descname"><span class="pre">outdim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#CosineSum.outdim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.CosineSum.outdim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.CosineSum.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#CosineSum.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.CosineSum.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.Sinex">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.bench1d.</span></span><span class="sig-name descname"><span class="pre">Sinex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Sinex'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#Sinex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.Sinex" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>Product of x and sine function</p>
+<p>Problem10 [<a class="reference external" href="https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem10">https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem10</a>]</p>
+<div class="math notranslate nohighlight">
+\[f(x)=-x\sin(x)\]</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.Sinex.dim">
+<span class="sig-name descname"><span class="pre">dim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#Sinex.dim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.Sinex.dim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.Sinex.outdim">
+<span class="sig-name descname"><span class="pre">outdim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#Sinex.outdim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.Sinex.outdim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.Sinex.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#Sinex.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.Sinex.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.CosineSum2">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.bench1d.</span></span><span class="sig-name descname"><span class="pre">CosineSum2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'CosineSum2'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#CosineSum2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.CosineSum2" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>Simple sum of cosines</p>
+<p>Problem11 [<a class="reference external" href="https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem11">https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem11</a>]</p>
+<div class="math notranslate nohighlight">
+\[f(x)=c_1\cos(x) + \cos(c_2x)\]</div>
+<p>Default constant values are <span class="math notranslate nohighlight">\(c = (2., 2.)\)</span>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.CosineSum2.dim">
+<span class="sig-name descname"><span class="pre">dim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#CosineSum2.dim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.CosineSum2.dim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.CosineSum2.outdim">
+<span class="sig-name descname"><span class="pre">outdim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#CosineSum2.outdim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.CosineSum2.outdim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.CosineSum2.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#CosineSum2.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.CosineSum2.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.Sinusoidal">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.bench1d.</span></span><span class="sig-name descname"><span class="pre">Sinusoidal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Sinusoidal'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#Sinusoidal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.Sinusoidal" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>Simple 1d sine function</p>
+<p>Sinusoidal [<a class="reference external" href="https://www.sfu.ca/~ssurjano/curretal88sin.html">https://www.sfu.ca/~ssurjano/curretal88sin.html</a>]</p>
+<div class="math notranslate nohighlight">
+\[f(x)=\sin(c_1\pi(x-c_2))\]</div>
+<p>Default constant values are <span class="math notranslate nohighlight">\(c = (2., 0.1)\)</span>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.Sinusoidal.dim">
+<span class="sig-name descname"><span class="pre">dim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#Sinusoidal.dim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.Sinusoidal.dim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.Sinusoidal.outdim">
+<span class="sig-name descname"><span class="pre">outdim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#Sinusoidal.outdim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.Sinusoidal.outdim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.Sinusoidal.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#Sinusoidal.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.Sinusoidal.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.Forrester">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.bench1d.</span></span><span class="sig-name descname"><span class="pre">Forrester</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c3</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">12.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c4</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Forrester'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#Forrester"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.Forrester" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>Forrester function</p>
+<p>Forrester [<a class="reference external" href="https://www.sfu.ca/~ssurjano/forretal08.html">https://www.sfu.ca/~ssurjano/forretal08.html</a>]</p>
+<div class="math notranslate nohighlight">
+\[f(x)=(c_1x-c_2)^2\sin(c_3x-c_4)\]</div>
+<p>Default constant values are <span class="math notranslate nohighlight">\(c = (6., 2., 12., 4)\)</span>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.Forrester.dim">
+<span class="sig-name descname"><span class="pre">dim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#Forrester.dim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.Forrester.dim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.Forrester.outdim">
+<span class="sig-name descname"><span class="pre">outdim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#Forrester.outdim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.Forrester.outdim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.Forrester.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#Forrester.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.Forrester.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.GramacyLee2">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.bench1d.</span></span><span class="sig-name descname"><span class="pre">GramacyLee2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c3</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c4</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'GramacyLee2'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#GramacyLee2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.GramacyLee2" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>Complicated oscillatory 1d function</p>
+<p>Gramacy and Lee (2012) [<a class="reference external" href="https://www.sfu.ca/~ssurjano/grlee12.html">https://www.sfu.ca/~ssurjano/grlee12.html</a>]</p>
+<div class="math notranslate nohighlight">
+\[f(x)=\frac{\sin(c_1\pi x)}{c_2x}+(x-c_3)^{c_4}\]</div>
+<p>Default constant values are <span class="math notranslate nohighlight">\(c = (10., 2., 1., 4.)\)</span>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.GramacyLee2.dim">
+<span class="sig-name descname"><span class="pre">dim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#GramacyLee2.dim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.GramacyLee2.dim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.GramacyLee2.outdim">
+<span class="sig-name descname"><span class="pre">outdim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#GramacyLee2.outdim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.GramacyLee2.outdim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.GramacyLee2.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#GramacyLee2.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.GramacyLee2.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.Higdon">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.bench1d.</span></span><span class="sig-name descname"><span class="pre">Higdon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c3</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Higdon'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#Higdon"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.Higdon" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>Higdon function</p>
+<p>Higdon (2002) [<a class="reference external" href="https://www.sfu.ca/~ssurjano/hig02.html">https://www.sfu.ca/~ssurjano/hig02.html</a>]</p>
+<div class="math notranslate nohighlight">
+\[f(x)=\sin(2\pi x/c_1) + c_2\sin(2\pi x/c_3)\]</div>
+<p>Default constant values are <span class="math notranslate nohighlight">\(c = (10., 0.2, 2.5)\)</span>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.Higdon.dim">
+<span class="sig-name descname"><span class="pre">dim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#Higdon.dim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.Higdon.dim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.Higdon.outdim">
+<span class="sig-name descname"><span class="pre">outdim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#Higdon.outdim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.Higdon.outdim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.Higdon.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#Higdon.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.Higdon.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.Holsclaw">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.bench1d.</span></span><span class="sig-name descname"><span class="pre">Holsclaw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Holsclaw'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#Holsclaw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.Holsclaw" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>Holsclaw function</p>
+<p>Holsclaw et al. [<a class="reference external" href="https://www.sfu.ca/~ssurjano/holsetal13sin.html">https://www.sfu.ca/~ssurjano/holsetal13sin.html</a>]</p>
+<div class="math notranslate nohighlight">
+\[f(x)=\frac{x\sin(x)}{c_1}\]</div>
+<p>Default constant value is <span class="math notranslate nohighlight">\(c = 10.0\)</span>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.Holsclaw.c1">
+<span class="sig-name descname"><span class="pre">c1</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10.0</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#Holsclaw.c1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.Holsclaw.c1" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.Holsclaw.dim">
+<span class="sig-name descname"><span class="pre">dim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#Holsclaw.dim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.Holsclaw.dim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.Holsclaw.outdim">
+<span class="sig-name descname"><span class="pre">outdim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#Holsclaw.outdim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.Holsclaw.outdim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.Holsclaw.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#Holsclaw.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.Holsclaw.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.DampedCosine">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.bench1d.</span></span><span class="sig-name descname"><span class="pre">DampedCosine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1.4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'DampedCosine'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#DampedCosine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.DampedCosine" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>A simple 1d cosine function</p>
+<p>Damped Cosine [<a class="reference external" href="https://www.sfu.ca/~ssurjano/santetal03dc.html">https://www.sfu.ca/~ssurjano/santetal03dc.html</a>]</p>
+<div class="math notranslate nohighlight">
+\[f(x)=e^{c_1x}\cos(c_2\pi x)\]</div>
+<p>Default constant values are <span class="math notranslate nohighlight">\(c = (-1.4, 3.5)\)</span>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.DampedCosine.dim">
+<span class="sig-name descname"><span class="pre">dim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#DampedCosine.dim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.DampedCosine.dim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.DampedCosine.outdim">
+<span class="sig-name descname"><span class="pre">outdim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#DampedCosine.outdim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.DampedCosine.outdim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.DampedCosine.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#DampedCosine.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.DampedCosine.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../bench/index.html" class="btn btn-neutral float-left" title="pytuq.func.bench" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../bench2d/index.html" class="btn btn-neutral float-right" title="pytuq.func.bench2d" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,414 @@
+pytuq.minf.infer
+================
+
+.. py:module:: pytuq.minf.infer
+
+.. autoapi-nested-parse::
+
+   Inference module including embedded model error.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.minf.infer.Infer
+
+
+Module Contents
+---------------
+
+.. py:class:: Infer(verbose=1)
+
+   Bases: :py:obj:`object`
+
+
+   Inference class holding all necessary information of model parameter inference problem.
+
+   .. attribute:: chainInit
+
+      An array of size `p`, the initial condition of the MCMC.
+
+      :type: np.ndarray
+
+   .. attribute:: chdim
+
+      Dimensionality of chain `p`.
+
+      :type: int
+
+   .. attribute:: chind
+
+      List of pairs (parameter index, coefficient index) for chain elements.
+
+      :type: list
+
+   .. attribute:: datavar
+
+      Data variance in the inference problem, an array of size `N`.
+
+      :type: np.ndarray
+
+   .. attribute:: dvparams
+
+      Parameter list relevant to data variance computation.
+
+      :type: list or tuple
+
+   .. attribute:: dvtype
+
+      Data variance type. Options are 'var_fixed', 'std_infer', 'std_infer_log', 'std_prop_fixed', 'var_fromdata_fixed', 'log_var_fromdata_fixed', 'var_fromdata_infer', 'log_var_fromdata_infer', 'scale_var'.
+
+      :type: str
+
+   .. attribute:: extrainferparams
+
+      Number of extra (hyper-)parameters to infer.
+
+      :type: int
+
+   .. attribute:: fixindnom
+
+      An array of size `(K,2)`, where first column indicates indices of parameters that are fixed (i.e. not part of the inference), and the second column is their nominal, fixed values.
+
+      :type: np.ndarray
+
+   .. attribute:: ind_calib
+
+      Model output indices that are used for calibration.
+
+      :type: list
+
+   .. attribute:: inpcrv
+
+      Input PC object.
+
+      :type: rv.mrv.PCRV
+
+   .. attribute:: inpdf_type
+
+      Embedded PDF type. Options are 'pci' and 'pct'.
+
+      :type: str
+
+   .. attribute:: Likelihood
+
+      Likelihood object.
+
+      :type: likelihoods.Likelihood
+
+   .. attribute:: md_transform
+
+      Potentially, a transform to be applied to model and data before the likelihood computation starts.
+
+      :type: callable
+
+   .. attribute:: model
+
+      Model with signature `f(p, q)`, where `p` are model parameters of interest, and `q` are other helpful model parameters.
+
+      :type: callable
+
+   .. attribute:: model_params
+
+      Model parameters `q`.
+
+      :type: tuple or list
+
+   .. attribute:: ndata
+
+      Number of data points (design locations) `N`.
+
+      :type: int
+
+   .. attribute:: neachs
+
+      List of size `N` including the number of data samples per location.
+
+      :type: list[int]
+
+   .. attribute:: nqd
+
+      Number of quadrature points per dimension required for the output PC evaluation.
+
+      :type: int
+
+   .. attribute:: outord
+
+      Order for the output PC in the likelihood computation.
+
+      :type: int
+
+   .. attribute:: pc_type
+
+      Embedded PC type. Can be 'LU' or 'HG'.
+
+      :type: str
+
+   .. attribute:: pcflat
+
+      List of flattened PC coefficients. The ones to be inferred are None, to be populated in prior and likelihood computation.
+
+      :type: list
+
+   .. attribute:: Prior
+
+      Prior object.
+
+      :type: priors.Prior
+
+   .. attribute:: prior_is_set
+
+      Boolean flag indicating that the prior is set.
+
+      :type: bool
+
+   .. attribute:: verbose
+
+      Verbosity level.
+
+      :type: int
+
+   .. attribute:: ydata
+
+      List of `N` 1d arrays corresponding to data for each design location.
+
+      :type: list[np.ndarray]
+
+   .. attribute:: ydata_var
+
+      An array of size `N` holding data variance for each data location.
+
+      :type: np.ndarray
+
+
+   .. py:attribute:: extrainferparams
+      :value: 0
+
+
+
+   .. py:attribute:: verbose
+      :value: 1
+
+
+
+   .. py:attribute:: data_is_set
+      :value: False
+
+
+
+   .. py:attribute:: datavar_is_set
+      :value: False
+
+
+
+   .. py:attribute:: model_is_set
+      :value: False
+
+
+
+   .. py:attribute:: modelinput_is_set
+      :value: False
+
+
+
+   .. py:attribute:: modeloutput_is_set
+      :value: False
+
+
+
+   .. py:attribute:: prior_is_set
+      :value: False
+
+
+
+   .. py:attribute:: lik_is_set
+      :value: False
+
+
+
+   .. py:method:: setData(ydata, datamode=None)
+
+      Set the data.
+
+      :param ydata: List of `N` 1d arrays corresponding to data for each design location, or a 2d array of size `(N,e)`, or an 1d array of size `N`.
+      :type ydata: list or np.ndarray
+      :param datamode: If 'mean', work with data means per location.
+      :type datamode: str, optional
+
+
+
+   .. py:method:: getDataStats()
+
+      Get the first two moments of the data set.
+
+      :returns: Mean and variance arrays of length `N`.
+      :rtype: tuple
+
+
+
+   .. py:method:: setDataVar(dvtype, dvparams)
+
+      Set data variance for the inference.
+
+      :param dvtype: Data variance type. Options are 'var_fixed', 'std_infer', 'std_infer_log', 'std_prop_fixed', 'var_fromdata_fixed', 'log_var_fromdata_fixed', 'var_fromdata_infer', 'log_var_fromdata_infer', 'scale_var'.
+      :type dvtype: str
+      :param dvparams: Parameter list relevant to data variance computation.
+      :type dvparams: list or tuple
+
+
+
+   .. py:method:: setModelRVoutput(outord, nqd=None)
+
+      Set the model output PC settings.
+
+      :param outord: Order for the output PC in the likelihood computation.
+      :type outord: int
+      :param nqd: Number of quadrature points per dimension required for the output PC evaluation. If None, sets to 2*outord+1.
+      :type nqd: int, optional
+
+
+
+   .. py:method:: setModelRVinput(inpdf_type, pc_type, pdim, rndind)
+
+      Set the model input parameters PC.
+
+      :param inpdf_type: Embedded PDF type. Options are 'pci' and 'pct'.
+      :type inpdf_type: str
+      :param pc_type: Embedded PC type. Can be 'LU' or 'HG'.
+      :type pc_type: str
+      :param pdim: Parameter dimensionality, i.e. number of model parameters.
+      :type pdim: int
+      :param rndind: List of indices of parameters to be embedded. If None, embeds in all parameters.
+      :type rndind: list[ind]
+
+
+
+   .. py:method:: setModel(model, model_params, md_transform=None, fixindnom=[], ind_calib=None)
+
+      Set the model evaluation necessities.
+
+      :param model: Model with signature `f(p, q)`, where `p` are model parameters of interest, and `q` are other helpful model parameters.
+      :type model: callable
+      :param model_params: Model parameters `q`.
+      :type model_params: tuple or list
+      :param md_transform: Potentially, a transform to be applied to model and data before the likelihood computation starts. Default is None, i.e. identity function.
+      :type md_transform: callable, optional
+      :param fixindnom: An array of size `(K,2)`, where first column indicates indices of parameters that are fixed (i.e. not part of the inference), and the second column is their nominal, fixed values. Defaults to an empty list, i.e. all parameters are inferred, none are fixed.
+      :type fixindnom: list, optional
+      :param ind_calib: Model output indices that are used for calibration. Default is None, i.e. all outputs being used for calibration.
+      :type ind_calib: list, optional
+
+
+
+   .. py:method:: setChain(default_init=0.1)
+
+      Setting the necessities for the chain.
+
+      :param default_init: Default value for initialization of all chain dimensions. It is used for non-constant PC coefficients, and for constant terms if domain is not given. Defaults to. 0.1.
+      :type default_init: float, optional
+
+
+
+   .. py:method:: setLikelihood(likelihood)
+
+      Setting the likelihood object.
+
+      :param likelihood: Likelihood object.
+      :type likelihood: likelihoods.Likelihood
+
+
+
+   .. py:method:: setPrior(prior)
+
+      Setting the prior object.
+
+      :param prior: Prior object.
+      :type prior: priors.Prior
+
+
+
+   .. py:method:: evalLogPost(pp)
+
+      Evaluating log-posterior.
+
+      :param pp: Input array of the size `p`, the dimensionality of the chain.
+      :type pp: np.ndarray
+
+      :returns: Value of the log-posterior.
+      :rtype: float
+
+
+
+   .. py:method:: getIOSamples(pp, nxi=1, fmode=None)
+
+      Get input and output samples.
+
+      :param pp: Input array of the size `p`, the dimensionality of the chain.
+      :type pp: np.ndarray
+      :param nxi: Number of samples requested. It can be integer number of samples, or a presampled array. Defaults to 1.
+      :type nxi: int or np.ndarray, optional
+      :param fmode: Mode of evaluation a tuple of [model, model_parameters, index of calibrated outputs, final transform]. Defaults to None, which means get this objects internal model features.
+      :type fmode: tuple, optional
+
+      :returns: Tuple of two arrays, one for input samples and one for the output samples.
+      :rtype: tuple[np.ndarray]
+
+
+
+   .. py:method:: getInSamples(pp, nxi=1)
+
+      Get input parameter samples.
+
+      :param pp: Input array of the size `p`, the dimensionality of the chain.
+      :type pp: np.ndarray
+      :param nxi: Number of samples requested. It can be integer number of samples, or a presampled array. Defaults to 1.
+      :type nxi: int or np.ndarray, optional
+
+      :returns: Array of parameter samples.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: getOutSamples(psample, fmode=None)
+
+      Get model output parameter samples.
+
+      :param psample: Input parameter array.
+      :type psample: np.ndarray
+      :param fmode: Mode of evaluation a tuple of [model, model_parameters, index of calibrated outputs, final transform]. Defaults to None, which means get this objects internal model features.
+      :type fmode: tuple, optional
+
+      :returns: Array of model output samples.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: getModelMoments_NISP(pp, fmode=None)
+
+      Get model output moments using non-intrusive spectral projection.
+
+      :param pp: Input array of the size `p`, the dimensionality of the chain.
+      :type pp: np.ndarray
+      :param fmode: Mode of evaluation a tuple of [model, model_parameters, index of calibrated outputs, final transform]. Defaults to None, which means get this objects internal model features.
+      :type fmode: tuple, optional
+
+      :returns: Tuple of two elements, means and variances of model outputs.
+      :rtype: tuple
+
+
+
+   .. py:method:: getDataVar(pp)
+
+      Get data variance depending on the model of data variance treatment.
+
+      :param pp: Input array of the size `p`, the dimensionality of the chain.
+      :type pp: np.ndarray
+
+      :returns: An array of size `N` for data variance per data location.
+      :rtype: np.ndarray
+
+
+

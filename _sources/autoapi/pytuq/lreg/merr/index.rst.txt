@@ -1,0 +1,186 @@
+pytuq.lreg.merr
+===============
+
+.. py:module:: pytuq.lreg.merr
+
+.. autoapi-nested-parse::
+
+   Module for linear regression with embedded model error.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.lreg.merr.lreg_merr
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   pytuq.lreg.merr.map_flat_to_tri
+   pytuq.lreg.merr.logpost_emb
+
+
+Module Contents
+---------------
+
+.. py:function:: map_flat_to_tri(ij, n, embedding)
+
+   Mapping a flattened index of embedded parameters into a pair of indices.
+
+   :param ij: Flattened parameter index.
+   :type ij: int
+   :param n: Number of physical parameters.
+   :type n: int
+   :param embedding: Embedding type.
+   :type embedding: string
+
+   :returns: A tuple of indices :math:`(i,j)`, to fill a triangular matrix of lower-Cholesky factor of the covariance.
+   :rtype: tuple(int, int)
+
+
+.. py:function:: logpost_emb(x, aw=None, bw=None, ind_embed=None, dvinfo=None, multiplicative=False, merr_method='abc', embedding='iid', mean_fixed=False, cfs_mean=None, flag=1.0)
+
+   Log-posterior of embedded model.
+
+   :param x: An 1d array input to log-posterior, i.e. the dimensionality is the chain dimensionality.
+   :type x: np.ndarray
+   :param aw: The A-matrix of size :math:`(N,K)` of basis evaluations at training points. Default None should not be used, and is made keyword out of convenience.
+   :type aw: None, optional
+   :param bw: An 1d array of data if size :math:`N`. Default None should not be used, and is made keyword out of convenience.
+   :type bw: None, optional
+   :param ind_embed: Indices of parameters/coefficients/bases to embed model error in. Defaults to None, which means embed in all.
+   :type ind_embed: None, optional
+   :param dvinfo: Dictionary of parameters controlling data variance. Keys are 'npar' (number of parameters), 'fcn' (callable to return data variance vector given the last part of the chain, and auxiliary paraemters), 'aux' (auxiliary parameters of the data variance function). Default is None, but should not be used.
+   :type dvinfo: dict, optional
+   :param multiplicative: Indicates whether the embedding is multiplicative. Defaults to False.
+   :type multiplicative: bool, optional
+   :param merr_method: Model error embedding method. Options are 'full', 'iid', 'abc' (default).
+   :type merr_method: str, optional
+   :param embedding: Model error embedding type. Options are 'iid' (default) and 'mvn'.
+   :type embedding: str, optional
+   :param mean_fixed: Whether the mean fit parameters are fixed or it is being inferred together with the model error parameters. Defaults to False.
+   :type mean_fixed: bool, optional
+   :param cfs_mean: Mean coefficient vector. Part (or the whole, depending on ind_embed) of this will be overwritten if mean_fixed is False. Default is None, but it should never be used.
+   :type cfs_mean: None, optional
+   :param flag: A multiplicative flag to the log-posterior value. Defaults to 1.0.
+   :type flag: float, optional
+
+   :returns: Log-posterior value.
+   :rtype: float
+
+
+.. py:class:: lreg_merr(ind_embed=None, dvinfo=None, multiplicative=False, merr_method='abc', opt_method='bfgs', mean_fixed=False, embedding='iid')
+
+   Bases: :py:obj:`pytuq.lreg.lreg.lreg`
+
+
+   A class for model error embedded linear regression.
+
+   .. attribute:: cf
+
+      An 1d array of coefficients, of size :math:`K`.
+
+      :type: np.ndarray
+
+   .. attribute:: cf_cov
+
+      A 2d array of coefficient covariance of size :math:`(K,K)`.
+
+      :type: np.ndarray
+
+   .. attribute:: dvinfo
+
+      Dictionary of parameters controlling data variance. Keys are 'npar' (number of parameters), 'fcn' (callable to return data variance vector given the last part of the chain, and auxiliary paraemters), 'aux' (auxiliary parameters of the data variance function).
+
+      :type: dict
+
+   .. attribute:: embedding
+
+      Model error embedding type. Options are 'iid' and 'mvn'.
+
+      :type: str
+
+   .. attribute:: fitted
+
+      Indicates whether the fit is already performed or not.
+
+      :type: bool
+
+   .. attribute:: ind_embed
+
+      Indices of parameters/coefficients/bases to embed model error in.
+
+      :type: np.ndarray
+
+   .. attribute:: mean_fixed
+
+      Whether the mean fit parameters are fixed or it is being inferred together with the model error parameters.
+
+      :type: bool
+
+   .. attribute:: merr_method
+
+      Model error embedding method. Options are 'full', 'iid', 'abc'.
+
+      :type: str
+
+   .. attribute:: multiplicative
+
+      Indicates whether the embedding is multiplicative.
+
+      :type: bool
+
+   .. attribute:: opt_method
+
+      Optimization methods. Options are 'bfgs' or 'mcmc'.
+
+      :type: str
+
+
+   .. py:attribute:: ind_embed
+      :value: None
+
+
+
+   .. py:attribute:: multiplicative
+      :value: False
+
+
+
+   .. py:attribute:: merr_method
+      :value: 'abc'
+
+
+
+   .. py:attribute:: opt_method
+      :value: 'bfgs'
+
+
+
+   .. py:attribute:: mean_fixed
+      :value: False
+
+
+
+   .. py:attribute:: embedding
+      :value: 'iid'
+
+
+
+   .. py:method:: fita(A, y)
+
+      Fit given A-matrix of basis evaluations and data array.
+
+      :param A: A 2d array of size :math:`(N, K)` each row holding basis evaluations at a training point.
+      :type A: np.ndarray
+      :param y: An 1d array of size :math:`N` holding the data.
+      :type y: np.ndarray
+
+
+

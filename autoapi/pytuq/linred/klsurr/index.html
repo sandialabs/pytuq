@@ -1,0 +1,461 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytuq.linred.klsurr &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="pytuq.linred.linred" href="../linred/index.html" />
+    <link rel="prev" title="pytuq.linred.klnn" href="../klnn/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../auto_examples/index.html">Software Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../auto_examples/index.html#surrogates">Surrogates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_pce.html">Polynomial Chaos Expansion Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Section Navigation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">pytuq</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../ftools/index.html">pytuq.ftools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../func/index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rv/index.html">pytuq.rv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../surrogates/index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Section Navigation</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">pytuq</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">pytuq.linred</a></li>
+      <li class="breadcrumb-item active">pytuq.linred.klsurr</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/autoapi/pytuq/linred/klsurr/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-pytuq.linred.klsurr">
+<span id="pytuq-linred-klsurr"></span><h1>pytuq.linred.klsurr<a class="headerlink" href="#module-pytuq.linred.klsurr" title="Link to this heading"></a></h1>
+<p>Module for KL+Surrogate construction.</p>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.linred.klsurr.KLSurr" title="pytuq.linred.klsurr.KLSurr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KLSurr</span></code></a></p></td>
+<td><p>KL+Surrogate Class.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.linred.klsurr.KLSurr">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.linred.klsurr.</span></span><span class="sig-name descname"><span class="pre">KLSurr</span></span><a class="reference internal" href="../../../../_modules/pytuq/linred/klsurr.html#KLSurr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.linred.klsurr.KLSurr" title="Link to this definition"></a></dt>
+<dd><p>KL+Surrogate Class.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.linred.klsurr.KLSurr.built">
+<span class="sig-name descname"><span class="pre">built</span></span><a class="reference internal" href="../../../../_modules/pytuq/linred/klsurr.html#KLSurr.built"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.linred.klsurr.KLSurr.built" title="Link to this definition"></a></dt>
+<dd><p>Indicates whether KLSurr is built or not.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.linred.klsurr.KLSurr.function">
+<span class="sig-name descname"><span class="pre">function</span></span><a class="reference internal" href="../../../../_modules/pytuq/linred/klsurr.html#KLSurr.function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.linred.klsurr.KLSurr.function" title="Link to this definition"></a></dt>
+<dd><p>A callable function that is the KLSurr evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>callable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.linred.klsurr.KLSurr.kl">
+<span class="sig-name descname"><span class="pre">kl</span></span><a class="headerlink" href="#pytuq.linred.klsurr.KLSurr.kl" title="Link to this definition"></a></dt>
+<dd><p>The underlying KLE object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../kle/index.html#pytuq.linred.kle.KLE" title="pytuq.linred.kle.KLE">KLE</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.linred.klsurr.KLSurr.ndim">
+<span class="sig-name descname"><span class="pre">ndim</span></span><a class="reference internal" href="../../../../_modules/pytuq/linred/klsurr.html#KLSurr.ndim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.linred.klsurr.KLSurr.ndim" title="Link to this definition"></a></dt>
+<dd><p>The input dimensionality.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.linred.klsurr.KLSurr.neig">
+<span class="sig-name descname"><span class="pre">neig</span></span><a class="reference internal" href="../../../../_modules/pytuq/linred/klsurr.html#KLSurr.neig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.linred.klsurr.KLSurr.neig" title="Link to this definition"></a></dt>
+<dd><p>The number of retained eigenvalues in the KLE.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.linred.klsurr.KLSurr.smodel">
+<span class="sig-name descname"><span class="pre">smodel</span></span><a class="reference internal" href="../../../../_modules/pytuq/linred/klsurr.html#KLSurr.smodel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.linred.klsurr.KLSurr.smodel" title="Link to this definition"></a></dt>
+<dd><p>Surrogate model object, either NN or PC.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.nn or <a class="reference internal" href="../../rv/pcrv/index.html#pytuq.rv.pcrv.PCRV" title="pytuq.rv.pcrv.PCRV">PCRV</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.linred.klsurr.KLSurr.xisurr">
+<span class="sig-name descname"><span class="pre">xisurr</span></span><a class="reference internal" href="../../../../_modules/pytuq/linred/klsurr.html#KLSurr.xisurr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.linred.klsurr.KLSurr.xisurr" title="Link to this definition"></a></dt>
+<dd><p>Surrogate evaluator of the latent features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>callable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.linred.klsurr.KLSurr.xitrain_kl">
+<span class="sig-name descname"><span class="pre">xitrain_kl</span></span><a class="headerlink" href="#pytuq.linred.klsurr.KLSurr.xitrain_kl" title="Link to this definition"></a></dt>
+<dd><p>KL latent features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.linred.klsurr.KLSurr.ytrain_kl">
+<span class="sig-name descname"><span class="pre">ytrain_kl</span></span><a class="headerlink" href="#pytuq.linred.klsurr.KLSurr.ytrain_kl" title="Link to this definition"></a></dt>
+<dd><p>KL-compressed training data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.linred.klsurr.KLSurr.ytrain_klsurr">
+<span class="sig-name descname"><span class="pre">ytrain_klsurr</span></span><a class="headerlink" href="#pytuq.linred.klsurr.KLSurr.ytrain_klsurr" title="Link to this definition"></a></dt>
+<dd><p>KL+Surrogate approximation of the training data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">ndim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="reference internal" href="../../../../_modules/pytuq/linred/klsurr.html#KLSurr.ndim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">built</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="reference internal" href="../../../../_modules/pytuq/linred/klsurr.html#KLSurr.built"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id1" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">xisurr</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="reference internal" href="../../../../_modules/pytuq/linred/klsurr.html#KLSurr.xisurr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id2" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">smodel</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="reference internal" href="../../../../_modules/pytuq/linred/klsurr.html#KLSurr.smodel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id3" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id4">
+<span class="sig-name descname"><span class="pre">function</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="reference internal" href="../../../../_modules/pytuq/linred/klsurr.html#KLSurr.function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id4" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id5">
+<span class="sig-name descname"><span class="pre">neig</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="reference internal" href="../../../../_modules/pytuq/linred/klsurr.html#KLSurr.neig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id5" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.linred.klsurr.KLSurr.setDim">
+<span class="sig-name descname"><span class="pre">setDim</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ndim</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/linred/klsurr.html#KLSurr.setDim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.linred.klsurr.KLSurr.setDim" title="Link to this definition"></a></dt>
+<dd><p>Set the input dimensionality.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ndim</strong> (<em>int</em>) – Input dimensionality, <cite>d</cite>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.linred.klsurr.KLSurr.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ptrain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ytrain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">surr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'PC'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tr_frac</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pc_order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bcs_eta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-08</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/linred/klsurr.html#KLSurr.build"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.linred.klsurr.KLSurr.build" title="Link to this definition"></a></dt>
+<dd><p>Build the KL+Surrogate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ptrain</strong> (<em>np.ndarray</em>) – An input array of size <cite>(M,d)</cite>.</p></li>
+<li><p><strong>ytrain</strong> (<em>np.ndarray</em>) – Output training data array of size <cite>(M,N)</cite>.</p></li>
+<li><p><strong>neig</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of eigenvalues. Defaults to None, which means all eigenvalues are retained.</p></li>
+<li><p><strong>surr</strong> (<em>str</em><em>, </em><em>optional</em>) – Surrogate type, PC or NN. Defaults to PC.</p></li>
+<li><p><strong>tr_frac</strong> (<em>float</em><em>, </em><em>optional</em>) – Fraction of samples used for training. Defaults to 0.9.</p></li>
+<li><p><strong>pc_order</strong> (<em>int</em><em>, </em><em>optional</em>) – PC order. Defaults to 3.</p></li>
+<li><p><strong>bcs_eta</strong> (<em>float</em><em>, </em><em>optional</em>) – BCS tolerance. Defaults to 1.e-8.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.linred.klsurr.KLSurr.setFunction">
+<span class="sig-name descname"><span class="pre">setFunction</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/linred/klsurr.html#KLSurr.setFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.linred.klsurr.KLSurr.setFunction" title="Link to this definition"></a></dt>
+<dd><p>Creates the function evaluator corresponding to the surrogate.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.linred.klsurr.KLSurr.evalxi">
+<span class="sig-name descname"><span class="pre">evalxi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ptrain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">otherpars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/linred/klsurr.html#KLSurr.evalxi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.linred.klsurr.KLSurr.evalxi" title="Link to this definition"></a></dt>
+<dd><p>Evaluates new latent features at given inputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ptrain</strong> (<em>np.ndarray</em>) – Input array of size <cite>(M, d)</cite>.</p></li>
+<li><p><strong>otherpars</strong> (<em>None</em><em>, </em><em>optional</em>) – Optional parameters (unused currently).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Predictions of latent features, an array of size <cite>(M, K)</cite>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.linred.klsurr.KLSurr.eval">
+<span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ptrain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/linred/klsurr.html#KLSurr.eval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.linred.klsurr.KLSurr.eval" title="Link to this definition"></a></dt>
+<dd><p>Evaluate the KL+Surrogate at given inputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ptrain</strong> (<em>np.ndarray</em>) – Input array of size <cite>(M, d)</cite>.</p></li>
+<li><p><strong>neig</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of eigenvalues. Defaults to None, which means all eigenvalues are retained.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output array of size <cite>(M,N)</cite>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.linred.klsurr.KLSurr.plot_parity_xi">
+<span class="sig-name descname"><span class="pre">plot_parity_xi</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/linred/klsurr.html#KLSurr.plot_parity_xi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.linred.klsurr.KLSurr.plot_parity_xi" title="Link to this definition"></a></dt>
+<dd><p>Plots diagonal parity plots for each latent feature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.linred.klsurr.KLSurr.compute_sens">
+<span class="sig-name descname"><span class="pre">compute_sens</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">npar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pnames</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">totmain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'main'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/linred/klsurr.html#KLSurr.compute_sens"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.linred.klsurr.KLSurr.compute_sens" title="Link to this definition"></a></dt>
+<dd><p>Computes and plots Sobol sensitivities via sampling.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>domain</strong> (<em>np.ndarray</em>) – Domain of input, array of size <cite>(d,2)</cite>.</p></li>
+<li><p><strong>npar</strong> (<em>int</em>) – Number of parameters.</p></li>
+<li><p><strong>colors</strong> (<em>None</em><em>, </em><em>optional</em>) – Optional list of colors for plotting.</p></li>
+<li><p><strong>pnames</strong> (<em>None</em><em>, </em><em>optional</em>) – Optional list of names for plotting.</p></li>
+<li><p><strong>totmain</strong> (<em>str</em><em>, </em><em>optional</em>) – Total or main sensitivity. Defaults to main.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns Sobol sensitivities, an array of size <cite>(N,d)</cite>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.linred.klsurr.KLSurr.compute_sens_pc">
+<span class="sig-name descname"><span class="pre">compute_sens_pc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">colors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pnames</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">totmain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'main'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/linred/klsurr.html#KLSurr.compute_sens_pc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.linred.klsurr.KLSurr.compute_sens_pc" title="Link to this definition"></a></dt>
+<dd><p>Computes PC-based sensitivities if PC surrogate is used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>colors</strong> (<em>None</em><em>, </em><em>optional</em>) – Optional list of colors for plotting.</p></li>
+<li><p><strong>pnames</strong> (<em>None</em><em>, </em><em>optional</em>) – Optional list of names for plotting.</p></li>
+<li><p><strong>totmain</strong> (<em>str</em><em>, </em><em>optional</em>) – Total or main sensitivity. Defaults to main.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns Sobol sensitivities, an array of size <cite>(N,d)</cite>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../klnn/index.html" class="btn btn-neutral float-left" title="pytuq.linred.klnn" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../linred/index.html" class="btn btn-neutral float-right" title="pytuq.linred.linred" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

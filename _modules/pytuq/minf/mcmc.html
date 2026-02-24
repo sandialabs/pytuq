@@ -1,0 +1,380 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytuq.minf.mcmc &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">Software Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/index.html#surrogates">Surrogates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_pce.html">Polynomial Chaos Expansion Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../autoapi/index.html">Section Navigation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../autoapi/pytuq/index.html">pytuq</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/pytuq/index.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/ftools/index.html">pytuq.ftools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/func/index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/minf/index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/rv/index.html">pytuq.rv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/surrogates/index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/utils/index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pytuq.minf.mcmc</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pytuq.minf.mcmc</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="sd">&quot;&quot;&quot;Module for various MCMC flavors.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.calib</span><span class="w"> </span><span class="kn">import</span> <span class="n">MCMCBase</span>
+
+<div class="viewcode-block" id="AMCMC">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/mcmc/index.html#pytuq.minf.mcmc.AMCMC">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">AMCMC</span><span class="p">(</span><span class="n">MCMCBase</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Adaptive MCMC class. Based on :cite:t:`Haario:2001`.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        cov_ini (np.ndarray): Initial covariance array of size `(p,p)`.</span>
+<span class="sd">        gamma (float): Proposal jump size factor :math:`\gamma`.</span>
+<span class="sd">        propcov (np.ndarray): Proposal covariance, working array.</span>
+<span class="sd">        t0 (int): Step where adaptivity begins.</span>
+<span class="sd">        tadapt (int): Adapt/update covariance every `tadapt` steps.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cov_ini</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">t0</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">tadapt</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Initialization.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            cov_ini (None, optional): Initial covariance. Defaults to None, in which case it is set to be proportional to the current state.</span>
+<span class="sd">            gamma (float, optional): $\gamma$ parameter, effectively step size. Defaults to 0.1.</span>
+<span class="sd">            t0 (int, optional): When adaptivity starts. Defaults to 100.</span>
+<span class="sd">            tadapt (int, optional): Adapting frequency. Defaults to 1000.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="AMCMC.cov_ini">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/mcmc/index.html#pytuq.minf.mcmc.AMCMC.cov_ini">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cov_ini</span> <span class="o">=</span> <span class="n">cov_ini</span></div>
+
+<div class="viewcode-block" id="AMCMC.t0">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/mcmc/index.html#pytuq.minf.mcmc.AMCMC.t0">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">t0</span> <span class="o">=</span> <span class="n">t0</span></div>
+
+<div class="viewcode-block" id="AMCMC.tadapt">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/mcmc/index.html#pytuq.minf.mcmc.AMCMC.tadapt">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tadapt</span> <span class="o">=</span> <span class="n">tadapt</span></div>
+
+<div class="viewcode-block" id="AMCMC.gamma">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/mcmc/index.html#pytuq.minf.mcmc.AMCMC.gamma">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="n">gamma</span></div>
+
+
+<div class="viewcode-block" id="AMCMC.sampler">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/mcmc/index.html#pytuq.minf.mcmc.AMCMC.sampler">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sampler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">current</span><span class="p">,</span> <span class="n">imcmc</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sampler function of a single step.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            current (np.ndarray): The current chain state.</span>
+<span class="sd">            imcmc (int): Current step.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple(float, float, float): Current proposal, and two auxiliary ratios.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">current_proposal</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">cdim</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
+
+        <span class="c1"># Compute covariance matrix</span>
+        <span class="k">if</span> <span class="n">imcmc</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_Xm</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">cdim</span><span class="p">,</span> <span class="n">cdim</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_Xm</span> <span class="o">=</span> <span class="p">(</span><span class="n">imcmc</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Xm</span> <span class="o">+</span> <span class="n">current</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">imcmc</span> <span class="o">+</span> <span class="mf">1.0</span><span class="p">)</span>
+            <span class="n">rt</span> <span class="o">=</span> <span class="p">(</span><span class="n">imcmc</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">/</span> <span class="n">imcmc</span>
+            <span class="n">st</span> <span class="o">=</span> <span class="p">(</span><span class="n">imcmc</span> <span class="o">+</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">/</span> <span class="n">imcmc</span><span class="o">**</span><span class="mi">2</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cov</span> <span class="o">=</span> <span class="n">rt</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cov</span> <span class="o">+</span> <span class="n">st</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">current</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Xm</span><span class="p">,</span> <span class="p">(</span><span class="n">cdim</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">current</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Xm</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">cdim</span><span class="p">)))</span>
+
+        <span class="k">if</span> <span class="n">imcmc</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cov_ini</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">propcov</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cov_ini</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">propcov</span> <span class="o">=</span> <span class="mf">0.01</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="mf">0.09</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">current</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">imcmc</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">t0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">imcmc</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">tadapt</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">propcov</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">*</span> <span class="mf">2.4</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">cdim</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cov</span> <span class="o">+</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">8</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">cdim</span><span class="p">))</span>
+
+        <span class="c1"># Generate proposal candidate</span>
+        <span class="n">current_proposal</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">cdim</span><span class="p">,),</span> <span class="bp">self</span><span class="o">.</span><span class="n">propcov</span><span class="p">)</span>
+        <span class="n">proposed_K</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">current_K</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+        <span class="k">return</span> <span class="n">current_proposal</span><span class="p">,</span> <span class="n">current_K</span><span class="p">,</span> <span class="n">proposed_K</span></div>
+</div>
+
+
+
+
+<span class="c1">###############################################################</span>
+<span class="c1">###############################################################</span>
+<span class="c1">###############################################################</span>
+
+
+<div class="viewcode-block" id="HMC">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/mcmc/index.html#pytuq.minf.mcmc.HMC">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">HMC</span><span class="p">(</span><span class="n">MCMCBase</span><span class="p">):</span>
+    <span class="c1"># Implementation based on Neal, 2011. https://arxiv.org/pdf/1206.1901.pdf</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Initialization.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            epsilon (float, optional): $\epsilon$ discretization time-step.</span>
+<span class="sd">            L (int, optional): L, step count.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+<div class="viewcode-block" id="HMC.epsilon">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/mcmc/index.html#pytuq.minf.mcmc.HMC.epsilon">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span> <span class="o">=</span> <span class="n">epsilon</span></div>
+
+<div class="viewcode-block" id="HMC.L">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/mcmc/index.html#pytuq.minf.mcmc.HMC.L">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">L</span> <span class="o">=</span> <span class="n">L</span></div>
+
+
+<div class="viewcode-block" id="HMC.sampler">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/mcmc/index.html#pytuq.minf.mcmc.HMC.sampler">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sampler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">current</span><span class="p">,</span> <span class="n">imcmc</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sampler function of a single step.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            current (np.ndarray): The current chain state.</span>
+<span class="sd">            imcmc (int): Current step.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple(float, float, float): Current proposal, and two auxiliary ratios.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logPostGrad</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="n">current_proposal</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">cdim</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
+
+
+        <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">cdim</span><span class="p">)</span>
+        <span class="n">current_K</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">p</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span>
+
+        <span class="c1"># Make a half step for momentum at the beginning (Leapfrog Method step starts here)</span>
+
+        <span class="n">p</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">logPostGrad</span><span class="p">(</span><span class="n">current_proposal</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">postInfo</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+
+        <span class="k">for</span> <span class="n">jj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="p">):</span>
+            <span class="c1"># Make a full step for the position</span>
+            <span class="n">current_proposal</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span> <span class="o">*</span> <span class="n">p</span>
+
+            <span class="c1"># Make a full step for the momentum, expecpt at the end of the trajectory</span>
+
+            <span class="k">if</span> <span class="n">jj</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">p</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">logPostGrad</span><span class="p">(</span><span class="n">current_proposal</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">postInfo</span><span class="p">)</span>
+
+        <span class="c1"># Make a half step for momentum at the end (Leapfrog Method step ends here)</span>
+        <span class="n">p</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span><span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">logPostGrad</span><span class="p">(</span><span class="n">current_proposal</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">postInfo</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+
+
+        <span class="c1"># Negate momentum to make proposal symmetric</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="o">-</span><span class="n">p</span> <span class="c1"># This isn&#39;t really necessary but implemented per original paper</span>
+
+        <span class="c1"># Evaluate kinetic and potential energies</span>
+        <span class="n">proposed_K</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">p</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span>
+
+        <span class="k">return</span> <span class="n">current_proposal</span><span class="p">,</span> <span class="n">current_K</span><span class="p">,</span> <span class="n">proposed_K</span></div>
+</div>
+
+
+
+
+
+<div class="viewcode-block" id="MALA">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/mcmc/index.html#pytuq.minf.mcmc.MALA">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MALA</span><span class="p">(</span><span class="n">MCMCBase</span><span class="p">):</span>
+    <span class="c1"># Note: MALA is actually exactly HMC with L=1.</span>
+    <span class="c1"># See Girolami paper https://statmodeling.stat.columbia.edu/wp-content/uploads/2010/04/RMHMC_MG_BC_SC_REV_08_04_10.pdf</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Initialization.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            epsilon (float, optional): $\epsilon$ discretization time-step.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+<div class="viewcode-block" id="MALA.epsilon">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/mcmc/index.html#pytuq.minf.mcmc.MALA.epsilon">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span> <span class="o">=</span> <span class="n">epsilon</span></div>
+
+
+<div class="viewcode-block" id="MALA.sampler">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/mcmc/index.html#pytuq.minf.mcmc.MALA.sampler">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sampler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">current</span><span class="p">,</span> <span class="n">imcmc</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sampler function of a single step.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            current (np.ndarray): The current chain state.</span>
+<span class="sd">            imcmc (int): Current step.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple(float, float, float): Current proposal, and two auxiliary ratios.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logPostGrad</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="n">current_proposal</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">cdim</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
+
+
+        <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">cdim</span><span class="p">)</span>
+
+        <span class="n">grad_current</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">logPostGrad</span><span class="p">(</span><span class="n">current</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">postInfo</span><span class="p">)</span>
+        <span class="n">current_proposal</span> <span class="o">+=</span> <span class="mf">0.5</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">grad_current</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span> <span class="o">*</span> <span class="n">p</span>
+
+        <span class="n">grad_prop</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">logPostGrad</span><span class="p">(</span><span class="n">current_proposal</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">postInfo</span><span class="p">)</span>
+        <span class="n">current_K</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">p</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span>
+
+        <span class="n">p</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span> <span class="o">*</span> <span class="p">(</span><span class="n">grad_current</span><span class="o">+</span><span class="n">grad_prop</span><span class="p">)</span><span class="o">/</span> <span class="mi">2</span>
+        <span class="n">proposed_K</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">p</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span>
+
+        <span class="k">return</span> <span class="n">current_proposal</span><span class="p">,</span> <span class="n">current_K</span><span class="p">,</span> <span class="n">proposed_K</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

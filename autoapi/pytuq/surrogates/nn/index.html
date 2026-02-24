@@ -1,0 +1,458 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytuq.surrogates.nn &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="pytuq.surrogates.pce" href="../pce/index.html" />
+    <link rel="prev" title="pytuq.surrogates" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../auto_examples/index.html">Software Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../auto_examples/index.html#surrogates">Surrogates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_pce.html">Polynomial Chaos Expansion Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Section Navigation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">pytuq</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../ftools/index.html">pytuq.ftools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../func/index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rv/index.html">pytuq.rv</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Section Navigation</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">pytuq</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">pytuq.surrogates</a></li>
+      <li class="breadcrumb-item active">pytuq.surrogates.nn</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/autoapi/pytuq/surrogates/nn/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-pytuq.surrogates.nn">
+<span id="pytuq-surrogates-nn"></span><h1>pytuq.surrogates.nn<a class="headerlink" href="#module-pytuq.surrogates.nn" title="Link to this heading"></a></h1>
+<p>This module provides a QUiNN (Quantification of Uncertainties in Neural Networks) wrapper class to facilitate
+the universal coupling of FASTMath UQ tools and libraries. This class focuses on the use case
+of a Residual Neural Network fitted with variational inference, keeping in mind
+flexibility to implement additional UQ functionalities in the future.</p>
+<p>The NN class supports a minimal API, with methods to construct the model, build it with training data,
+evaluate it with input data, and offer samples of predictions with variance and covariance.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The current implementation focuses on providing a general foundation for Neural Network surrogate model creation.
+While not all construct and build options are currently supported, the class was developed with future growth in mind.</p>
+</div>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.surrogates.nn.NN" title="pytuq.surrogates.nn.NN"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NN</span></code></a></p></td>
+<td><p>A wrapper class to access QUiNN functionalities for Neural Network surrogate models.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.surrogates.nn.NN">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.surrogates.nn.</span></span><span class="sig-name descname"><span class="pre">NN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_layers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_nodes</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/nn.html#NN"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.surrogates.nn.NN" title="Link to this definition"></a></dt>
+<dd><p>A wrapper class to access QUiNN functionalities for Neural Network surrogate models.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.surrogates.nn.NN.nnet">
+<span class="sig-name descname"><span class="pre">nnet</span></span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/nn.html#NN.nnet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.surrogates.nn.NN.nnet" title="Link to this definition"></a></dt>
+<dd><p>Neural network, defaults to Residual Neural Network object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>RNet object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.surrogates.nn.NN.type">
+<span class="sig-name descname"><span class="pre">type</span></span><a class="headerlink" href="#pytuq.surrogates.nn.NN.type" title="Link to this definition"></a></dt>
+<dd><p>Type of neural network, defaults to ‘RNet’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.surrogates.nn.NN.n_layers">
+<span class="sig-name descname"><span class="pre">n_layers</span></span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/nn.html#NN.n_layers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.surrogates.nn.NN.n_layers" title="Link to this definition"></a></dt>
+<dd><p>Layers in neural network.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.surrogates.nn.NN.n_nodes">
+<span class="sig-name descname"><span class="pre">n_nodes</span></span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/nn.html#NN.n_nodes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.surrogates.nn.NN.n_nodes" title="Link to this definition"></a></dt>
+<dd><p>Nodes per layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.surrogates.nn.NN.uqnet">
+<span class="sig-name descname"><span class="pre">uqnet</span></span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/nn.html#NN.uqnet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.surrogates.nn.NN.uqnet" title="Link to this definition"></a></dt>
+<dd><p>UQ method, defaults to variational inference object and method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>NN_VI object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.surrogates.nn.NN.options">
+<span class="sig-name descname"><span class="pre">options</span></span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/nn.html#NN.options"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.surrogates.nn.NN.options" title="Link to this definition"></a></dt>
+<dd><p>Dictionary with user-specified options for instantiation of Neural Network, building, and evaluating.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.surrogates.nn.NN._x_trn">
+<span class="sig-name descname"><span class="pre">_x_trn</span></span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/nn.html#NN._x_trn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.surrogates.nn.NN._x_trn" title="Link to this definition"></a></dt>
+<dd><p>Input training data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.surrogates.nn.NN._y_trn">
+<span class="sig-name descname"><span class="pre">_y_trn</span></span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/nn.html#NN._y_trn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.surrogates.nn.NN._y_trn" title="Link to this definition"></a></dt>
+<dd><p>Output training data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.surrogates.nn.NN._x_val">
+<span class="sig-name descname"><span class="pre">_x_val</span></span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/nn.html#NN._x_val"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.surrogates.nn.NN._x_val" title="Link to this definition"></a></dt>
+<dd><p>Input validation data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.surrogates.nn.NN._y_val">
+<span class="sig-name descname"><span class="pre">_y_val</span></span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/nn.html#NN._y_val"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.surrogates.nn.NN._y_val" title="Link to this definition"></a></dt>
+<dd><p>Output validation data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">n_layers</span></span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/nn.html#NN.n_layers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">n_nodes</span></span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/nn.html#NN.n_nodes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id1" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">options</span></span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/nn.html#NN.options"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id2" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.surrogates.nn.NN.options_valid">
+<span class="sig-name descname"><span class="pre">options_valid</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="reference internal" href="../../../../_modules/pytuq/surrogates/nn.html#NN.options_valid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.surrogates.nn.NN.options_valid" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">uqnet</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="reference internal" href="../../../../_modules/pytuq/surrogates/nn.html#NN.uqnet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id3" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id4">
+<span class="sig-name descname"><span class="pre">nnet</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="reference internal" href="../../../../_modules/pytuq/surrogates/nn.html#NN.nnet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id4" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.surrogates.nn.NN.read_options_from_file">
+<span class="sig-name descname"><span class="pre">read_options_from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/nn.html#NN.read_options_from_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.surrogates.nn.NN.read_options_from_file" title="Link to this definition"></a></dt>
+<dd><p>Read in options from given json file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.surrogates.nn.NN.check_options">
+<span class="sig-name descname"><span class="pre">check_options</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/nn.html#NN.check_options"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.surrogates.nn.NN.check_options" title="Link to this definition"></a></dt>
+<dd><p>Sanity check on current set of options, including instantiation of neural network, building,
+and evaluating. Throws error if invalid option.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.surrogates.nn.NN.get_options">
+<span class="sig-name descname"><span class="pre">get_options</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_print</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/nn.html#NN.get_options"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.surrogates.nn.NN.get_options" title="Link to this definition"></a></dt>
+<dd><p>Return options in a dictionary and, if provided, write options to a json file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.surrogates.nn.NN.set_validation_data">
+<span class="sig-name descname"><span class="pre">set_validation_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_val</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_val</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/nn.html#NN.set_validation_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.surrogates.nn.NN.set_validation_data" title="Link to this definition"></a></dt>
+<dd><p>Sets the validation data with input validation (optional). If not implemented,
+the fitting method will default to using the training set for validation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_val</strong> (<em>np.ndarray</em>) – Validation input array.</p></li>
+<li><p><strong>y_val</strong> (<em>np.ndarray</em>) – Validation output array.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If x_val or y_val do not meet the required dimensions.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.surrogates.nn.NN.set_training_data">
+<span class="sig-name descname"><span class="pre">set_training_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_trn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_trn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/nn.html#NN.set_training_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.surrogates.nn.NN.set_training_data" title="Link to this definition"></a></dt>
+<dd><p>Sets the training data with input validation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_trn</strong> (<em>np.ndarray</em>) – Training input array of size (N,d).</p></li>
+<li><p><strong>y_trn</strong> (<em>np.ndarray</em>) – Training output array of size (N,o).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If x_trn or y_trn do not meet the required dimensions.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.surrogates.nn.NN.instantiate_network">
+<span class="sig-name descname"><span class="pre">instantiate_network</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/nn.html#NN.instantiate_network"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.surrogates.nn.NN.instantiate_network" title="Link to this definition"></a></dt>
+<dd><p>Instantiate neural network with validated options.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.surrogates.nn.NN.update_options">
+<span class="sig-name descname"><span class="pre">update_options</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_options</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/nn.html#NN.update_options"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.surrogates.nn.NN.update_options" title="Link to this definition"></a></dt>
+<dd><p>Update only the options for building/fitting and evaluating of neural network.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.surrogates.nn.NN.nn_vi">
+<span class="sig-name descname"><span class="pre">nn_vi</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/nn.html#NN.nn_vi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.surrogates.nn.NN.nn_vi" title="Link to this definition"></a></dt>
+<dd><p>Performs variational inference fitting and training of the neural network using the NN_VI wrapper class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>val</strong> (<em>tuple</em>) – x,y tuple of validation points. Default uses the training set for validation.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.surrogates.nn.NN.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/nn.html#NN.build"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.surrogates.nn.NN.build" title="Link to this definition"></a></dt>
+<dd><p>Builds the model with training data by calling the correct fitting method for model training.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>fit_options</strong> (<em>dict</em><em>, </em><em>optional</em>) – Options/training parameters for model fitting.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.surrogates.nn.NN.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_eval</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/surrogates/nn.html#NN.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.surrogates.nn.NN.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Generates samples of predictions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_eval</strong> (<em>np.ndarray</em>) – 2d array of size <cite>(N,d)</cite> as input data for evaluation. Can also be a single sample as input.</p></li>
+<li><p><strong>nens</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of samples requested, M.</p></li>
+<li><p><strong>msc</strong> (<em>int</em><em>, </em><em>optional</em>) – Prediction mode: 0 (mean-only), 1 (mean and variance), or 2 (mean, variance and covariance). Defaults to 0.</p></li>
+<li><p><strong>nsam</strong> (<em>nens =</em>) – Number of samples requested, <cite>M</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary with samples of predictions.
+tuple(np.ndarray, np.ndarray, np.ndarray): triple of Mean (array of size <cite>(N, o)</cite>),
+Variance (array of size <cite>(N, o)</cite> or None),
+Covariance (array of size <cite>(N, N, o)</cite> or None).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dictionary</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="pytuq.surrogates" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../pce/index.html" class="btn btn-neutral float-right" title="pytuq.surrogates.pce" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

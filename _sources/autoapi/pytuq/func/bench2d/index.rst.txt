@@ -1,0 +1,2623 @@
+pytuq.func.bench2d
+==================
+
+.. py:module:: pytuq.func.bench2d
+
+.. autoapi-nested-parse::
+
+   2d benchmark functions module.
+
+   Most of the functions are taken from https://github.com/Vahanosi4ek/pytuq_funcs that autogenerates the codes given function's latex strings.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.func.bench2d.Adjiman
+   pytuq.func.bench2d.BartelsConn
+   pytuq.func.bench2d.Bird
+   pytuq.func.bench2d.Branin
+   pytuq.func.bench2d.Branin01
+   pytuq.func.bench2d.Branin02
+   pytuq.func.bench2d.Brent
+   pytuq.func.bench2d.Bukin02
+   pytuq.func.bench2d.Bukin04
+   pytuq.func.bench2d.Bukin6
+   pytuq.func.bench2d.CarromTable
+   pytuq.func.bench2d.ChengSandu
+   pytuq.func.bench2d.Chichinadze
+   pytuq.func.bench2d.CrossInTray
+   pytuq.func.bench2d.Damavandi
+   pytuq.func.bench2d.DeckkersAarts
+   pytuq.func.bench2d.EggCrate
+   pytuq.func.bench2d.EggHolder
+   pytuq.func.bench2d.ElAttarVidyasagarDutta
+   pytuq.func.bench2d.FreudensteinRoth
+   pytuq.func.bench2d.Franke
+   pytuq.func.bench2d.GoldsteinPrice
+   pytuq.func.bench2d.HimmelBlau
+   pytuq.func.bench2d.Hosaki
+   pytuq.func.bench2d.Keane
+   pytuq.func.bench2d.Leon
+   pytuq.func.bench2d.Levy13
+   pytuq.func.bench2d.Lim
+   pytuq.func.bench2d.Matyas
+   pytuq.func.bench2d.Mishra03
+   pytuq.func.bench2d.Mishra04
+   pytuq.func.bench2d.Mishra05
+   pytuq.func.bench2d.Mishra06
+   pytuq.func.bench2d.McCormick
+   pytuq.func.bench2d.NewFunction03
+   pytuq.func.bench2d.Parsopoulos
+   pytuq.func.bench2d.Price01
+   pytuq.func.bench2d.Price02
+   pytuq.func.bench2d.Price03
+   pytuq.func.bench2d.Price04
+   pytuq.func.bench2d.Quadratic
+   pytuq.func.bench2d.Quadratic2d
+   pytuq.func.bench2d.RosenbrockModified
+   pytuq.func.bench2d.RotatedEllipse01
+   pytuq.func.bench2d.RotatedEllipse02
+   pytuq.func.bench2d.Schaffer01
+   pytuq.func.bench2d.Schaffer02
+   pytuq.func.bench2d.Schaffer04
+   pytuq.func.bench2d.Schwefel36
+   pytuq.func.bench2d.SixHumpCamel
+   pytuq.func.bench2d.ThreeHumpCamel
+   pytuq.func.bench2d.Treccani
+   pytuq.func.bench2d.Trefethen
+   pytuq.func.bench2d.Ursem01
+   pytuq.func.bench2d.Ursem03
+   pytuq.func.bench2d.Ursem04
+   pytuq.func.bench2d.UrsemWaves
+   pytuq.func.bench2d.VenterSobiezcczanskiSobieski
+   pytuq.func.bench2d.WayburnSeader01
+   pytuq.func.bench2d.WayburnSeader02
+   pytuq.func.bench2d.Zettl
+   pytuq.func.bench2d.Zirilli
+   pytuq.func.bench2d.DropWave
+
+
+Module Contents
+---------------
+
+.. py:class:: Adjiman(c1=1.0, name='Adjiman')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Adjiman function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_A.html#go_benchmark.Adjiman]
+
+   .. math::
+       f(x)=\cos(x_1)\sin(x_2)-\frac{x_1}{x_2^2+c_1}
+
+   Default constant value is :math:`c_1 = (1.0)`.
+
+
+
+   .. py:attribute:: c1
+      :value: 1.0
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: BartelsConn(name='BartelsConn')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   BartelsConn function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_B.html#go_benchmark.BartelsConn]
+
+   .. math::
+       f(x)=|x_1^2+x_2^2+x_1x_2|+|\sin(x_1)|+|\cos(x_2)|
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Bird(c1=1.0, c2=1.0, name='Bird')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Bird function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_B.html#go_benchmark.Bird]
+
+   .. math::
+       f(x)=(x_1-x_2)^2+e^{(c_1-\sin(x_1))^2}\cos(x_2)+e^{(c_2-\cos(x_2))^2}\sin(x_1)
+
+   Default constant values are :math:`c = (1., 1.)`.
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Branin(name='Branin')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Branin function
+
+   Reference: [https://www.sfu.ca/~ssurjano/branin.html]
+
+
+
+   .. py:attribute:: name
+      :value: 'Branin'
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:attribute:: a_
+      :value: 1.0
+
+
+
+   .. py:attribute:: b_
+
+
+   .. py:attribute:: c_
+
+
+   .. py:attribute:: r_
+      :value: 6.0
+
+
+
+   .. py:attribute:: s_
+      :value: 10.0
+
+
+
+   .. py:attribute:: t_
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Branin01(c1=1.275, c2=5.0, c3=6.0, c4=10.0, c5=5.0, c6=4.0, c7=10.0, name='Branin01')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Branin01 function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_B.html#go_benchmark.Branin01]
+
+   .. math::
+       f(x)=\left(-c_1 \frac{x_1^{2}}{\pi^{2}} + c_2 \frac{x_1}{\pi} + x_2 - c_3\right)^{2} + \left(c_4 - \frac{c_5}{c_6 \pi} \right) \cos\left(x_1\right) + c_7
+
+   Default constant values are :math:`c = (1.275, 5., 6., 10., 5., 4., 10.)`.
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Branin02(c1=1.275, c2=5.0, c3=6.0, c4=10.0, c5=5.0, c6=4.0, c7=1.0, c8=10.0, name='Branin02')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Branin02 function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_B.html#go_benchmark.Branin02]
+
+       .. math::
+           f(x)=\left(- c_1 \frac{x_1^{2}}{\pi^{2}} + c_2 \frac{x_1}{\pi} + x_2 -c_3\right)^{2} + \left(c_4 - \frac{c_5}{c_6 \pi} \right) \cos\left(x_1\right) \cos\left(x_2\right) + \log(x_1^2+x_2^2 +c_7) + c_8
+
+
+       Default constant values are :math:`c = (1.275, 5., 6., 10., 5., 4., 1., 10.)`.
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Brent(c1=10.0, c2=10.0, name='Brent')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Brent function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_A.html#go_benchmark.Brent]
+
+       .. math::
+           f(x)=(x_1 + 10)^2 + (x_2 + 10)^2 + e^{(-x_1^2-x_2^2)}
+
+
+       Default constant values are :math:`c = (10., 10.)`.
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Bukin02(c1=100.0, c2=0.01, c3=1.0, c4=0.01, c5=10.0, name='Bukin02')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Bukin02 function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_B.html#go_benchmark.Bukin02]
+
+       .. math::
+           f(x)=c_1 (x_2 - c_2 x_1^2 + c_3) + c_4 (x_1 + c_5)^2
+
+
+       Default constant values are :math:`c = (100.0, 0.01, 1.0, 0.01, 10.0)`
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Bukin04(c1=100.0, c2=0.01, c3=10.0, name='Bukin04')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Bukin04 function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_B.html#go_benchmark.Bukin04]
+
+       .. math::
+           f(x)=c_1 x_2^{2} + c_2 |x_1 + c_3|
+
+
+       Default constant values are :math:`c = (100.0, 0.01, 10.0)`
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Bukin6(c1=100.0, c2=0.01, c3=0.01, c4=10.0, name='Bukin6')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Bukin6 function
+
+   .. math::
+       f(x)=c_1\sqrt{|x_2-c_2 x_1^2|}+c_3|x_1+c_4|
+
+
+   Default constant values are :math:`c = (100.0, 0.01, 0.01, 10.0)`
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: CarromTable(c1=1 / 30, c2=2.0, c3=1.0, name='CarromTable')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   CarromTable function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_C.html#go_benchmark.CarromTable]
+
+       .. math::
+           f(x)=- c_1 \exp(c_2 |c_3 - \frac{\sqrt{x_1^{2} + x_2^{2}}}{\pi}|) \cos(x_1)^2 \cos(x_2)^2
+
+
+       Default constant values are :math:`c = (1/30, 2.0, 1.0)`
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: ChengSandu(name='ChengSandu')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Cheng and Sandu 2d function
+
+   .. math::
+       f(x)=\cos(x_1+x_2)e^{x_1x_2}
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Chichinadze(c1=12.0, c2=8.0, c3=2.5, c4=10.0, c5=0.5, c6=11.0, c7=0.2 * np.sqrt(5), c8=0.5, c9=0.5, name='Chichinadze')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Chichinadze function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_C.html#go_benchmark.Chichinadze]
+
+       .. math::
+           f(x)= x_1^{2} - c_1 x_1 + c_2 \sin(c_3 \pi x_1) + c_4 \cos(c_5 \pi x_1) + c_6 - \frac{c_7}{\exp(c_8 (x_2 -c_9)^{2})}
+
+
+       Default constant values are :math:`c = (12.0, 8.0, 2.5, 10.0, 0.5, 11.0, 0.2 * \sqrt{5}, 0.5, 0.5)`
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: CrossInTray(c1=0.0001, c2=100.0, c3=1.0, c4=0.1, name='CrossInTray')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Cross-In-Tray function
+
+   .. math::
+       f(x)=-c_1(|\sin(x_1)\sin(x_2)|e^{|c_2-\frac{\sqrt{x_1^2+x_2^2}}{\pi}|}+c_3)^{c_4}
+
+
+   Default constant values are :math:`c = (0.0001, 100., 1., 0.1)`.
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Damavandi(c1=1.0, c2=2.0, c3=2.0, c4=2.0, c5=2.0, c6=5.0, c7=2.0, c8=7.0, c9=2.0, c10=7.0, name='Damavandi')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Damavandi function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_D.html#go_benchmark.Damavandi]
+
+       .. math::
+           f(x)=\left[ c_1 - |\frac{\sin[\pi(x_1-c_2)]\sin[\pi(x_2-c_3)]}{\pi^2(x_1-c_4)(x_2-c_5)}|^{c_6} \right] \left[c_7 + (x_1-c_8)^2 + c_9(x_2-c_{10})^2 \right]
+
+
+       Default constant values are :math:`c = (1.0, 2.0, 2.0, 2.0, 2.0, 5.0, 2.0, 7.0, 2.0, 7.0)`.
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: DeckkersAarts(c1=1000, c2=0.001, name='DeckkersAarts')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   DeckkersAarts function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_D.html#go_benchmark.DeckkersAarts]
+
+       .. math::
+           f(x)=c_1x_1^2 + x_2^2 - (x_1^2 + x_2^2)^2 + c_2(x_1^2 + x_2^2)^4
+
+
+       Default constant values are :math:`c = (1000, 0.001)`.
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: EggCrate(c1=25.0, name='EggCrate')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   EggCrate function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_E.html#go_benchmark.EggCrate]
+
+       .. math::
+           f(x)=x_1^2 + x_2^2 + c_1 \left[ \sin^2(x_1) + \sin^2(x_2) \right]
+
+
+       Default constant values are :math:`c = 25.0`.
+
+
+
+
+   .. py:attribute:: c1
+      :value: 25.0
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: EggHolder(c1=47.0, c2=47.0, c3=47.0, name='EggHolder')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Egg Holder function
+
+   Reference: [https://www.sfu.ca/~ssurjano/egg.html]
+
+   .. math::
+       f(x)=-(x_2+c_1)\sin(\sqrt{|x_2+\frac{x_1}{2}+c_2|})-x_1\sin(x_1-(x_2+c_3))
+
+
+   Default constant values are :math:`c = (47., 47., 47.)`.
+
+   Note: this is a modified version: the original's last term has square-root and absolute value in sine argument.
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: ElAttarVidyasagarDutta(c1=10.0, c2=7.0, c3=1.0, name='ElAttarVidyasagarDutta')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   ElAttarVidyasagarDutta function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_E.html#go_benchmark.ElAttarVidyasagarDutta]
+
+       .. math::
+           f(x)=(x_1^2 + x_2 - c_1)^2 + (x_1 + x_2^2 - c_2)^2 + (x_1^2 + x_2^3 - c_3)^2
+
+
+       Default constant values are :math:`c = (10.0, 7.0, 1.0)`.
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: FreudensteinRoth(c1=13.0, c2=5.0, c3=2.0, c4=29.0, c5=1.0, c6=14.0, name='FreudensteinRoth')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   FreudensteinRoth function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_F.html#go_benchmark.FreudensteinRoth]
+
+       .. math::
+           f(x)=\left(x_1 - c_1 + \left[(c_2 - x_2)x_2 - c_3 \right] x_2 \right)^2 + \left (x_1 - c_4 + \left[(x_2 + c_5)x_2 - c_6 \right] x_2 \right)^2
+
+
+       Default constant values are :math:`c = (13.0, 5.0, 2.0, 29.0, 1.0, 14.0)`.
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Franke(name='Franke')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Franke function
+
+   .. math::
+       f(x) = 0.75 e^{-\frac{(9x_1-2)^2 + (9x_2-2)^2}{4}} + 0.75 e^{-\frac{(9x_1+1)^2}{49} - \frac{9x_2+1}{10}} + 0.5 e^{-\frac{(9x_1-7)^2 + (9x_2-3)^2}{4}} - 0.2 e^{-(9x_1-4)^2 - (9x_2-7)^2}
+
+
+
+   .. py:attribute:: name
+      :value: 'Franke'
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: GoldsteinPrice(name='GoldsteinPrice')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   GoldsteinPrice function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_G.html#go_benchmark.GoldsteinPrice]
+
+       .. math::
+           f(x)=\left[ 1+(x_1+x_2+1)^2(19-14x_1+3x_1^2-14x_2+6x_1x_2+3x_2^2) \right] \left[ 30+(2x_1-3x_2)^2(18-32x_1+12x_1^2+48x_2-36x_1x_2+27x_2^2) \right]
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: HimmelBlau(c1=11.0, c2=7.0, name='HimmelBlau')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   HimmelBlau function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_H.html#go_benchmark.HimmelBlau]
+
+       .. math::
+           f(x)=(x_1^2 + x_2 - c_1)^2 + (x_1 + x_2^2 - c_2)^2
+
+
+       Default constant values are :math:`c = (11.0, 7.0)`.
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Hosaki(c1=1.0, c2=8.0, c3=7.0, c4=8.0 / 3.0, c5=0.25, name='Hosaki')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Hosaki function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_H.html#go_benchmark.Hosaki]
+
+       .. math::
+           f(x)=\left ( c_1 - c_2x_1 + c_3x_1^2 - c_4x_1^3 + c_5x_1^4 \right )x_2^2e^{-x_1}
+
+
+       Default constant values are :math:`c = (1.0, 8.0, 7.0, 8./3., 0.25)`.
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Keane(name='Keane')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Keane function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_K.html#go_benchmark.Keane]
+
+   A multimodal minimization function
+
+   .. math::
+       f(x)=\frac{\sin^2(x_1 - x_2)\sin^2(x_1 + x_2)}{\sqrt{x_1^2 + x_2^2}}
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Leon(c1=100, name='Leon')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Leon function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_L.html#go_benchmark.Leon]
+
+       .. math::
+           f(x)= \left(1 - x_{1}\right)^{2} + c_1 \left(x_{2} - x_{1}^{2} \right)^{2}
+
+
+       Default constant values are :math:`c = 100`.
+
+
+
+
+   .. py:attribute:: c1
+      :value: 100
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Levy13(c1=1.0, c2=3.0, c3=1.0, c4=1.0, c5=2.0, c6=1.0, c7=3.0, name='Levy13')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Levy13 function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_L.html#go_benchmark.Levy13]
+
+       .. math::
+           f(x)=\left(x_{1} -c_1\right)^{2} \left[\sin^{2}\left(c_2 \pi x_{2}\right) + c_3\right] + \left(x_{2} -c_4\right)^{2} \left[\sin^{2}\left(c_5 \pi x_{2}\right) + c_6\right] + \sin^{2}\left(c_7 \pi x_{1}\right)
+
+
+       Default constant values are :math:`c = (1.0, 3.0, 1.0, 1.0, 2.0, 1.0, 3.0)`.
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Lim(c1=1 / 6, c2=30.0, c3=5.0, c4=5.0, c5=4.0, c6=-5.0, c7=-100.0, name='Lim')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Lim function
+
+   Generalized nonpolynomial trigonometric 2d function
+
+   .. math::
+       f(x)=a((b+cx_1\sin(dx_1))(f+e^{gx_2})+h)
+
+
+   Default constant values are :math:`c = (1/6, 30., 5., 5., 4., -5., -100.)`.
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Matyas(c1=0.26, c2=0.48, name='Matyas')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Matyas function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_M.html#go_benchmark.Matyas]
+
+       .. math::
+           f(x)=c_1(x_1^2 + x_2^2) - c_2x_1x_2
+
+
+       Default constant values are :math:`c = (0.26, 0.48)`.
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Mishra03(c1=0.01, name='Mishra03')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Mishra03 function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_M.html#go_benchmark.Mishra03]
+
+   A multimodal minimization function
+
+   .. math::
+       f(x)=\sqrt{|\cos{\sqrt{x_1^2 + x_2^2}}|} + c_1(x_1 + x_2)
+
+
+   Default constant value is :math:`c = 0.01`.
+
+
+   .. py:attribute:: c1
+      :value: 0.01
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Mishra04(c1=0.01, name='Mishra04')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Mishra04 function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_M.html#go_benchmark.Mishra04]
+
+   A multimodal minimization function
+
+   .. math::
+       f(x)=\sqrt{|\sin{\sqrt{x_1^2 + x_2^2}}|} + c_1(x_1 + x_2)
+
+
+   Default constant value is :math:`c = 0.01`.
+
+
+   .. py:attribute:: c1
+      :value: 0.01
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Mishra05(c1=0.01, name='Mishra05')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Mishra05 function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_M.html#go_benchmark.Mishra05]
+
+   A multimodal minimization function
+
+   .. math::
+       f(x)=\left [ \sin^2 ((\cos(x_1) + \cos(x_2))^2) + \cos^2 ((\sin(x_1) + \sin(x_2))^2) + x_1 \right ]^2 + c_1(x_1 + x_2)
+
+
+   Default constant value is :math:`c = 0.01`.
+
+
+
+   .. py:attribute:: c1
+      :value: 0.01
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Mishra06(c1=0.01, c2=1.0, c3=1.0, name='Mishra06')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Mishra06 function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_M.html#go_benchmark.Mishra06]
+
+   A multimodal minimization function
+
+   .. math::
+       f(x)=-\log{\left [ \sin^2 ((\cos(x_1) + \cos(x_2))^2) - \cos^2 ((\sin(x_1) + \sin(x_2))^2) + x_1 \right ]^2} + c_1 \left[(x_1 -c_2)^2 + (x_2 - c_3)^2 \right]
+
+
+   Default constant values are :math:`c = (0.01, 1.0, 1.0)`.
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: McCormick(c1=2.0, c2=1.0, name='McCormick')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   McCormick function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_M.html#go_benchmark.McCormick]
+
+       .. math::
+           f(x)=- x_{1} + c_1 x_{2} + \left(x_{1} - x_{2}\right)^{2} + \sin\left(x_{1} + x_{2}\right) + c_2
+
+
+       Default constant values are :math:`c = (2.0, 1.0)`.
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: NewFunction03(c1=0.01, c2=0.1, name='NewFunction03')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   NewFunction03 function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_N.html#go_benchmark.NewFunction03]
+
+       .. math::
+           f(x)=c_1 x_{1} + c_2 x_{2} + \left[x_{1} + \sin^{2}\left[\left(\cos\left(x_{1}\right) + \cos\left(x_{2}\right)\right)^{2}\right] + \cos^{2}\left[\left(\sin\left(x_{1}\right) + \sin\left(x_{2}\right)\right)^{2}\right]\right]^{2}
+
+
+       Default constant values are :math:`c = (0.01, 0.1)`.
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Parsopoulos(name='Parsopoulos')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Parsopoulos function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_P.html#go_benchmark.Parsopoulos]
+
+       .. math::
+           f(x)=\cos(x_1)^2 + \sin(x_2)^2
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Price01(c1=5, c2=5, name='Price01')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Price01 function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_P.html#go_benchmark.Price01]
+
+       .. math::
+           f(x)=(\abs{ x_1 } - c_1)^2 + (\abs{ x_2 } - c_2)^2
+
+
+       Default constant values are :math:`c = (5, 5)`.
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Price02(c1=1.0, c2=0.1, name='Price02')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Price02 function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_P.html#go_benchmark.Price02]
+
+       .. math::
+           f(x)=c_1 + \sin^2(x_1) + \sin^2(x_2) - c_2e^{(-x_1^2 - x_2^2)}
+
+
+       Default constant values are :math:`c = (1.0, 0.1)`.
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Price03(c1=100, c2=6.4, c3=0.5, c4=0.6, name='Price03')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Price03 function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_P.html#go_benchmark.Price03]
+
+       .. math::
+           f(x)=c_1(x_2 - x_1^2)^2 + \left[c_2(x_2 - c_3)^2 - x_1 - c_4 \right]^2
+
+
+       Default constant values are :math:`c = (100, 6.4, 0.5, 0.6)`.
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Price04(c1=2, c2=6, name='Price04')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Price04 function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_P.html#go_benchmark.Price04]
+
+       .. math::
+           f(x)=(c_1x_1^3x_2 - x_2^3)^2 + (c_2x_1 - x_2^2 + x_2)^2
+
+
+       Default constant values are :math:`c = (2, 6)`.
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Quadratic(name='Quadratic')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Quadratic function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_Q.html#go_benchmark.Quadratic]
+
+       .. math::
+           f(x)=-3803.84 - 138.08x_1 - 232.92x_2 + 128.08x_1^2 + 203.64x_2^2 + 182.25x_1x_2
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Quadratic2d(center=[0.0, 0.0], hess=[[1.0, 0.0], [0.0, 1.0]], name='Quadratic2d')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   2d Quadratic function
+
+   .. math::
+       f(x)=0.5 (x - c)^T H (x - c)
+
+   where :math:`H` is the Hessian matrix, and :math:`c` is the center.
+
+
+
+   .. py:attribute:: center
+
+
+   .. py:attribute:: hess
+
+      Hessian evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 4d array of size :math:`(N,o,d,d)`.
+      :rtype: np.ndarray
+
+
+   .. py:attribute:: cov
+
+
+   .. py:attribute:: name
+      :value: 'Quadratic2d'
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: RosenbrockModified(c1=74, c2=100, c3=1, c4=400, c5=0.1, name='RosenbrockModified')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   RosenbrockModified function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_R.html#go_benchmark.RosenbrockModified]
+
+       .. math::
+           f(x)=c_1 + c_2(x_2 - x_1^2)^2 + (c_3 - x_1)^2 - c_4 e^{-\frac{(x_1+1)^2 + (x_2 + 1)^2}{c_5}}
+
+
+       Default constant values are :math:`c = (74, 100, 1, 400, 0.1)`.
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: RotatedEllipse01(c1=7, c2=10.392304845413264, c3=13, name='RotatedEllipse01')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   RotatedEllipse01 function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_R.html#go_benchmark.RotatedEllipse01]
+
+       .. math::
+           f(x)=c_1x_1^2 - c_2 x_1x_2 + c_3x_2^2
+
+
+       Default constant values are :math:`c = (7, 10.392304845413264, 13)`.
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: RotatedEllipse02(name='RotatedEllipse02')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   RotatedEllipse02 function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_R.html#go_benchmark.RotatedEllipse02]
+
+       .. math::
+           f(x)=x_1^2 - x_1x_2 + x_2^2
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Schaffer01(c1=0.5, c2=0.5, c3=1, c4=0.001, name='Schaffer01')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Schaffer01 function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_S.html#go_benchmark.Schaffer01]
+
+       .. math::
+           f(x)=c_1 + \frac{\sin^2 (x_1^2 + x_2^2)^2 - c_2}{c_3 + c_4(x_1^2 + x_2^2)^2}
+
+
+       Default constant values are :math:`c = (0.5, 0.5, 1, 0.001)`.
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Schaffer02(c1=0.5, c2=0.5, c3=1, c4=0.001, name='Schaffer02')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Schaffer02 function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_S.html#go_benchmark.Schaffer02]
+
+       .. math::
+           f(x)=c_1 + \frac{\sin^2 (x_1^2 - x_2^2)^2 - c_2}{c_3 + c_4(x_1^2 + x_2^2)^2}
+
+
+       Default constant values are :math:`c = (0.5, 0.5, 1, 0.001)`.
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Schaffer04(c1=0.5, c2=0.5, c3=1, c4=0.001, name='Schaffer04')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Schaffer04 function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_S.html#go_benchmark.Schaffer04]
+
+       .. math::
+           f(x)=c_1 + \frac{\cos^2 \left( \sin(x_1^2 - x_2^2) \right ) - c_2}{c_3 + c_4(x_1^2 + x_2^2)^2}
+
+
+       Default constant values are :math:`c = (0.5, 0.5, 1, 0.001)`.
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Schwefel36(c1=72, c2=2, c3=2, name='Schwefel36')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Schwefel36 function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_S.html#go_benchmark.Schwefel36]
+
+       .. math::
+           f(x)=-x_1x_2(c_1 - c_2x_1 - c_3x_2)
+
+
+       Default constant values are :math:`c = (72, 2, 2)`.
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: SixHumpCamel(c1=4, c2=4, c3=2.1, c4=4, c5=1.0 / 3.0, name='SixHumpCamel')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   SixHumpCamel function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_S.html#go_benchmark.SixHumpCamel]
+
+       .. math::
+           f(x)=c_1x_1^2+x_1x_2-c_2x_2^2-c_3x_1^4+c_4x_2^4+c_5x_1^6
+
+
+       Default constant values are :math:`c = (4, 4, 2.1, 4, 1./3.)`.
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: ThreeHumpCamel(c1=2, c2=1.05, c3=6, name='ThreeHumpCamel')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   ThreeHumpCamel function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_T.html#go_benchmark.ThreeHumpCamel]
+
+       .. math::
+           f(x)=c_1x_1^2 - c_2x_1^4 + \frac{x_1^6}{c_3} + x_1x_2 + x_2^2
+
+
+       Default constant values are :math:`c = (2, 1.05, 6)`.
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Treccani(c1=4, c2=4, name='Treccani')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Treccani function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_T.html#go_benchmark.Treccani]
+
+       .. math::
+           f(x)=x_1^4 + c_1x_1^3 + c_2x_1^2 + x_2^2
+
+
+       Default constant values are :math:`c = (4, 4)`.
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Trefethen(name='Trefethen')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Trefethen function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_T.html#go_benchmark.Trefethen]
+
+       .. math::
+           f(x)=0.25 x_{1}^{2} + 0.25 x_{2}^{2} + e^{\sin\left(50 x_{1}\right)} - \sin\left(10 x_{1} + 10 x_{2}\right) + \sin\left(60 e^{x_{2}}\right) + \sin\left[70 \sin\left(x_{1}\right)\right] + \sin\left[\sin\left(80 x_{2}\right)\right]
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Ursem01(c1=2, c2=0.5, c3=3, c4=0.5, name='Ursem01')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Ursem01 function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_U.html#go_benchmark.Ursem01]
+
+       .. math::
+           f(x)=- \sin(c_1x_1 - c_2 \pi) - c_3 \cos(x_2) - c_4x_1
+
+
+       Default constant values are :math:`c = (2, 0.5, 3, 0.5)`.
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Ursem03(c1=2.2, c2=0.5, c3=2, c4=2, c5=3, c6=2, c7=2.2, c8=0.5, c9=2, c10=2, c11=3, c12=2, name='Ursem03')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Ursem03 function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_U.html#go_benchmark.Ursem03]
+
+       .. math::
+           f(x)=- \sin(c_1 \pi x_1 + c_2 \pi) \frac{c_3 - |x_1|}{c_4} \frac{c_5 - |x_1|}{c_6} - \sin(c_7 \pi x_2 + c_8 \pi) \frac{c_9 - |x_2|}{c_{10}} \frac{c_{11} - |x_2|}{c_{12}}
+
+
+       Default constant values are :math:`c = (2.2, 0.5, 2, 2, 3, 2, 2.2, 0.5, 2, 2, 3, 2)`.
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Ursem04(c1=3, c2=0.5, c3=0.5, c4=2, c5=4, name='Ursem04')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Ursem04 function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_U.html#go_benchmark.Ursem04]
+
+   A multimodal minimization function
+
+   .. math::
+       f(x)=-c_1 \sin(c_2 \pi x_1 + c_3 \pi) \frac{c_4 - \sqrt{x_1^2 + x_2^2}}{c_5}
+
+   Default constant values are :math:`c = (3.0, 0.5, 0.5, 2.0, 4.0)`.
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: UrsemWaves(c1=0.9, c2=4.5, c3=4.7, c4=2, c5=2, c6=2.5, name='UrsemWaves')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   UrsemWaves function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_U.html#go_benchmark.UrsemWaves]
+
+       .. math::
+           f(x)=-c_1x_1^2 + (x_2^2 - c_2x_2^2)x_1x_2 + c_3 \cos \left[ c_4x_1 - x_2^2(c_5 + x_1) \right ] \sin(c_6 \pi x_1)
+
+
+       Default constant values are :math:`c = (0.9, 4.5, 4.7, 2, 2, 2.5)`.
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: VenterSobiezcczanskiSobieski(c1=100, c2=100, c3=30, c4=100, c5=100, c6=30, name='VenterSobiezcczanskiSobieski')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   VenterSobiezcczanskiSobieski function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_V.html#go_benchmark.VenterSobiezcczanskiSobieski]
+
+       .. math::
+           f(x)=x_1^2 - c_1 \cos^2(x_1) - c_2 \cos(x_1^2/c_3) + x_2^2 - c_4 \cos^2(x_2) - c_5 \cos(x_2^2/c_6)
+
+
+       Default constant values are :math:`c = (100, 100, 30, 100, 100, 30)`.
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: WayburnSeader01(c1=17, c2=2, c3=4, name='WayburnSeader01')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   WayburnSeader01 function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_W.html#go_benchmark.WayburnSeader01]
+
+       .. math::
+           f(x)=(x_1^6 + x_2^4 - c_1)^2 + (c_2x_1 + x_2 - c_3)^2
+
+
+       Default constant values are :math:`c = (17, 2, 4)`.
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: WayburnSeader02(c1=1.613, c2=4, c3=0.3125, c4=4, c5=1.625, c6=1, name='WayburnSeader02')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   WayburnSeader02 function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_W.html#go_benchmark.WayburnSeader02]
+
+       .. math::
+           f(x)=\left[ c_1 - c_2(x_1 - c_3)^2 - c_4(x_2 - c_5)^2 \right]^2 + (x_2 - c_6)^2
+
+
+       Default constant values are :math:`c = (1.613, 4, 0.3125, 4, 1.625, 1)`.
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Zettl(c1=0.25, c2=2, name='Zettl')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Zettl function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_Z.html#go_benchmark.Zettl]
+
+       .. math::
+           f(x)=c_1 x_{1} + \left(x_{1}^{2} - c_2 x_{1} + x_{2}^{2}\right)^{2}
+
+
+       Default constant values are :math:`c = (0.25, 2)`.
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Zirilli(c1=0.25, c2=0.5, c3=0.1, c4=0.5, name='Zirilli')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Zirilli function
+
+   Reference: [https://infinity77.net/global_optimization/test_functions_nd_Z.html#go_benchmark.Zirilli]
+
+       .. math::
+           f(x)=c_1x_1^4 - c_2x_1^2 + c_3x_1 + c_4x_2^2
+
+
+       Default constant values are :math:`c = (0.25, 0.5, 0.1, 0.5)`.
+
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: DropWave(c1=1.0, c2=12.0, c3=0.5, c4=2.0, name='DropWave')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   DropWave function
+
+   .. math::
+       f(x)=-\frac{c_1+\cos(c_2\sqrt{x_1^2+x_2^2})}{c_3(x_1^2+x_2^2)+c_4}
+
+
+   Default constant values are :math:`c = (1., 12., 0.5, 2.)`.
+
+
+
+   .. py:attribute:: dim
+      :value: 2
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+

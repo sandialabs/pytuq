@@ -1,0 +1,1175 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytuq.rv.pcrv &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">Software Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/index.html#surrogates">Surrogates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_pce.html">Polynomial Chaos Expansion Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../autoapi/index.html">Section Navigation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../autoapi/pytuq/index.html">pytuq</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/pytuq/index.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/ftools/index.html">pytuq.ftools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/func/index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/minf/index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/rv/index.html">pytuq.rv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/surrogates/index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/utils/index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pytuq.rv.pcrv</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pytuq.rv.pcrv</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="sd">&quot;&quot;&quot;Classes for various multivariate random variables.&quot;&quot;&quot;</span>
+
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">functools</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.special</span><span class="w"> </span><span class="kn">import</span> <span class="n">erf</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">multivariate_normal</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.mrv</span><span class="w"> </span><span class="kn">import</span> <span class="n">MRV</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..func.func</span><span class="w"> </span><span class="kn">import</span> <span class="n">Function</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..utils.xutils</span><span class="w"> </span><span class="kn">import</span> <span class="n">cartes_list</span><span class="p">,</span> <span class="n">safe_cholesky</span>
+
+
+<div class="viewcode-block" id="PCRV">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PCRV</span><span class="p">(</span><span class="n">MRV</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A class for a multivariate PC random variable.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        sdim (int): Stochastic dimension :math:`s`, i.e. germ dimensionality.</span>
+<span class="sd">        mindices (list[np.ndarray]): List of :math:`d` multiindex arrays, each of size :math:`(K_i,s)`.</span>
+<span class="sd">        coefs (list[np.ndarray]): List of :math:`d` coefficient arrays, each of size :math:`K_i` for :math:`i=1,\dots,d`.</span>
+<span class="sd">        maxOrd (np.ndarray): A 1d array of size :math:`s` indicating maximal order across all physical dimensions.</span>
+<span class="sd">        pind (list[tuple]): List of tuples :math:`(i,k)` accounting for all coefficients: the first element is the physical dimension :math:`i` (between :math:`0` and :math:`d-1`), and the second element is the coefficient index :math:`k` (between :math:`0` and :math:`K_i`).</span>
+<span class="sd">        rndind (list[int]): Indices of random physical dimensions, each entry is between :math:`0` and :math:`d-1`.</span>
+<span class="sd">        detind (list[int]): Indices of deterministic physical dimensions, each entry is between :math:`0` and :math:`d-1`.</span>
+<span class="sd">        function (callable): PC evaluator function, :math:`(N,s)\rightarrow N`.</span>
+<span class="sd">        pctypes (list[str]): List of :math:`s` PC types, one for each stochastic dimension.</span>
+<span class="sd">        PC1ds (list[PC1d]): List of :math:`s` 1d PC objects that comprise this multivariate PC random variable.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdim</span><span class="p">,</span> <span class="n">sdim</span><span class="p">,</span> <span class="n">pctype</span><span class="p">,</span> <span class="n">mi</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cfs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Initialization.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            pdim (int): Physical dimensionality :math:`d` of the PC random variable/vector.</span>
+<span class="sd">            sdim (int): Stochastic dimensionality :math:`s` of the PC random variable/vector.</span>
+<span class="sd">            pctype (str or list): PC type. Either a list of :math:`s` strings (one per stochastic dimension), or a single string for all dimensions.</span>
+<span class="sd">            mi (list or np.ndarray, optional): List of :math:`d` multiindex arrays, each of size :math:`(K_i,s)` for :math:`i=1, \dots, d`. Or a single multiindex array of size :math:`(K,s)`, meaning all dimensions get the same multiindex. Defaults to None, which is a single 1d constant random variable i.e. a multiindex of all zeros.</span>
+<span class="sd">            cfs (list or np.ndarray, optional): List of :math:`d` coefficient arrays, each of size :math:`K_i` for :math:`i=1, \dots, d`. Or a single coefficient array of size :math:`K`, meaning all dimensions get the same coefficient array. Or a 2d array of size :math:`(K,d)`. Defaults to None, which is populating coefficients with all zeros.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">pdim</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">pdim</span><span class="p">)</span>
+<div class="viewcode-block" id="PCRV.function">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV.function">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">function</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+
+        <span class="k">assert</span><span class="p">(</span><span class="n">sdim</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">mi</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">mi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">sdim</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setMiCfs</span><span class="p">(</span><span class="n">mi</span><span class="p">,</span> <span class="n">cfs</span><span class="o">=</span><span class="n">cfs</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pctype</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pctypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">pctype</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sdim</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pctype</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pctypes</span> <span class="o">=</span> <span class="n">pctype</span>
+            <span class="c1"># if len(self.indz)&gt;0:</span>
+            <span class="c1">#     del self.pctypes[self.indz]</span>
+            <span class="c1">#     self.indz=[]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;PC type </span><span class="si">{</span><span class="n">pctype</span><span class="si">}</span><span class="s2"> type is not recognized. Exiting.&quot;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+        <span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pctypes</span><span class="p">)</span><span class="o">==</span><span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">getParamIndices</span><span class="p">()</span> <span class="c1"># TODO: will we ever need the inverse of getParamIndices()? if so, either do list search or better write a special function</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">getMaxOrders</span><span class="p">()</span>
+
+<div class="viewcode-block" id="PCRV.PC1ds">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV.PC1ds">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">PC1ds</span> <span class="o">=</span> <span class="p">[</span><span class="n">PC1d</span><span class="p">(</span><span class="n">pt</span><span class="p">)</span> <span class="k">for</span> <span class="n">pt</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">pctypes</span><span class="p">]</span></div>
+
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pctypes</span><span class="si">}</span><span class="s2"> PC Random Variable(pdim=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="si">}</span><span class="s2">, sdim=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+<div class="viewcode-block" id="PCRV.setMiCfs">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV.setMiCfs">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setMiCfs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mi</span><span class="p">,</span> <span class="n">cfs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sets the multiindex and coefficients together.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            mi (list or np.ndarray): List of :math:`d` multiindex arrays, each of size :math:`(K_i,s)` for :math:`i=1, \dots, d`. Or a single multiindex array of size :math:`(K,s)`, meaning all dimensions get the same multiindex.</span>
+<span class="sd">            cfs (list or np.ndarray, optional): List of :math:`d` coefficient arrays, each of size :math:`K_i` for :math:`i=1, \dots, d`. Or a single coefficient array of size :math:`K`, meaning all dimensions get the same coefficient array. Or a 2d array of size :math:`(d, K)`. Defaults to None, which is populating coefficients with all zeros.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setMi</span><span class="p">(</span><span class="n">mi</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setCfs</span><span class="p">(</span><span class="n">cfs</span><span class="o">=</span><span class="n">cfs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">checkMiCfsizes</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="PCRV.setMi">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV.setMi">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setMi</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mi</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sets the multiindex.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            mi (list or np.ndarray): List of :math:`d` multiindex arrays, each of size :math:`(K_i,s)` for :math:`i=1, \dots, d`. Or a single multiindex array of size :math:`(K,s)`, meaning all dimensions get the same multiindex.</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            Dangerous to use externally, as it may conflict with other attributes/sizes. Prefer to use setMiCfs() externally.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mi</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mindices</span> <span class="o">=</span> <span class="p">[</span><span class="n">mi</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdim</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mi</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mi</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mindices</span> <span class="o">=</span> <span class="n">mi</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Multiindex </span><span class="si">{</span><span class="n">mi</span><span class="si">}</span><span class="s2"> type is not recognized. Exiting.&quot;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">sdim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mindices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">detind</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rndind</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">ss</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">):</span>
+            <span class="n">morders</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mindices</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">ss</span> <span class="o">+=</span> <span class="n">morders</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">morders</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">detind</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">rndind</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="PCRV.setCfs">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV.setCfs">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setCfs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cfs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sets the coefficients. Dangerous to use externally, as it may conflict with other attributes/sizes. Prefer to use setMiCfs() externally.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            cfs (list or np.ndarray): List of :math:`d` coefficient arrays, each of size :math:`K_i` for :math:`i=1, \dots, d`. Or a single coefficient array of size :math:`K`, meaning all dimensions get the same coefficient array. Or a 2d array of size :math:`(d, K)`. Defaults to None, which is populating coefficients with all zeros.</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">           Dangerous to use externally, as it may conflict with other attributes. Prefer to use setMiCfs() externally.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">cfs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">coefs</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">mind</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],))</span> <span class="k">for</span> <span class="n">mind</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mindices</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cfs</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cfs</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">coefs</span> <span class="o">=</span> <span class="p">[</span><span class="n">cfs</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdim</span>
+            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">cfs</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
+                <span class="k">assert</span><span class="p">(</span><span class="n">cfs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">coefs</span> <span class="o">=</span> <span class="p">[</span><span class="n">cfs</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="p">:]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">)]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Wrong shape </span><span class="si">{</span><span class="n">cfs</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2"> of coefs array. Exiting.&quot;</span><span class="p">)</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cfs</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cfs</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">coefs</span> <span class="o">=</span> <span class="n">cfs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Coefs </span><span class="si">{</span><span class="n">cfs</span><span class="si">}</span><span class="s2"> type is not recognized. Exiting.&quot;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="PCRV.checkMiCfsizes">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV.checkMiCfsizes">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">checkMiCfsizes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks the multiindex and coeffient list for any size incompatibility.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mindices</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coefs</span><span class="p">))</span>
+        <span class="c1"># Size checks</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">):</span>
+            <span class="k">assert</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mindices</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">))</span>
+            <span class="k">assert</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coefs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">))</span>
+            <span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mindices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coefs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+
+            <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mindices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="p">)</span>
+            <span class="c1">#print(i, self.mindices[i].shape, self.coefs[i].shape)</span>
+            <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mindices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">coefs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="k">return</span></div>
+
+
+
+<div class="viewcode-block" id="PCRV.setRandomCfs">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV.setRandomCfs">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setRandomCfs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sets coefficients randomly, sampling unniformly in :math:`[0,1]`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfs_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">):</span>
+            <span class="n">cfs_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mindices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setCfs</span><span class="p">(</span><span class="n">cfs</span><span class="o">=</span><span class="n">cfs_list</span><span class="p">)</span>
+
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="PCRV.getMaxOrders">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV.getMaxOrders">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">getMaxOrders</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Computes and populates an internal array maxOrd storing maximal order per physical dimension.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">maxorders</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">):</span>
+            <span class="n">maxorders</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mindices</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maxOrd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">maxorders</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="PCRV.getParamIndices">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV.getParamIndices">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">getParamIndices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Populates the bookkeeping list of index pairs pind.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pind</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">ipc</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coefs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">pind</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">ipc</span><span class="p">))</span>
+
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="PCRV.printInfo">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV.printInfo">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">printInfo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Core dump of multiindices and coefficients.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">mindices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">coefs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PCRV.computeMean">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV.computeMean">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">computeMean</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Computes the mean of the random variable.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: A 1d array of size :math:`d` for means per physical dimension.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">):</span>
+            <span class="n">totords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mindices</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">indOfZeroMI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">totords</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">jj</span> <span class="ow">in</span> <span class="n">indOfZeroMI</span><span class="p">:</span>
+                <span class="n">mean</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">coefs</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">jj</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">mean</span></div>
+
+
+<div class="viewcode-block" id="PCRV.computeVar">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV.computeVar">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">computeVar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Computes the variance of the random variable.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: A 1d array of size :math:`d` for variance per physical dimension.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">):</span>
+            <span class="n">normsq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evalBasesNormsSq</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">totords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mindices</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">indOfNonZeroMI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">totords</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">jj</span> <span class="ow">in</span> <span class="n">indOfNonZeroMI</span><span class="p">:</span>
+                <span class="n">var</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">coefs</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">jj</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">normsq</span><span class="p">[</span><span class="n">jj</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">var</span></div>
+
+
+<div class="viewcode-block" id="PCRV.computeSens">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV.computeSens">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">computeSens</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Computes main Sobol sensitivity indices of the PC with respect to stochastic dimensions.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: A 2d array of main sensitivities of size :math:`(d,s)`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">var</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeVar</span><span class="p">()</span>
+
+        <span class="n">mainsens</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">var</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
+                <span class="n">var</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">1.e-12</span>
+
+            <span class="n">normsq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evalBasesNormsSq</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="p">):</span>
+                <span class="n">indOfOnlyj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mindices</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">j</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+                <span class="k">for</span> <span class="n">jj</span> <span class="ow">in</span> <span class="n">indOfOnlyj</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mindices</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">jj</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+                        <span class="n">mainsens</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">coefs</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">jj</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">normsq</span><span class="p">[</span><span class="n">jj</span><span class="p">]</span>
+
+                <span class="n">mainsens</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">/=</span> <span class="n">var</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">mainsens</span></div>
+
+
+<div class="viewcode-block" id="PCRV.computeTotSens">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV.computeTotSens">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">computeTotSens</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Computes total Sobol sensitivity indices of the PC with respect to stochastic dimensions.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: A 2d array of total sensitivities of size :math:`(d,s)`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">var</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeVar</span><span class="p">()</span>
+
+        <span class="n">totsens</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">var</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
+                <span class="n">var</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">1.e-12</span>
+
+            <span class="n">normsq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evalBasesNormsSq</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">jj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mindices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mindices</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">jj</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+                        <span class="n">totsens</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">coefs</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">jj</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">normsq</span><span class="p">[</span><span class="n">jj</span><span class="p">]</span>
+
+                <span class="n">totsens</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">/=</span> <span class="n">var</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+
+        <span class="k">return</span> <span class="n">totsens</span></div>
+
+
+<div class="viewcode-block" id="PCRV.computeJointSens">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV.computeJointSens">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">computeJointSens</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Computes joint Sobol sensitivity indices of the PC with respect to stochastic dimension pairs.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: A 3d array of joint sensitivities of size :math:`(d,s,s)`.</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            This is joint in the &#39;total&#39; sense, i.e. any term involving both dimensions are counted.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">var</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeVar</span><span class="p">()</span>
+
+        <span class="n">jointsens</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">var</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
+                <span class="n">var</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">1.e-12</span>
+
+            <span class="n">normsq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evalBasesNormsSq</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="p">):</span>
+                    <span class="k">for</span> <span class="n">jj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mindices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mindices</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">jj</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">mindices</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">jj</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+                            <span class="n">jointsens</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">coefs</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">jj</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">normsq</span><span class="p">[</span><span class="n">jj</span><span class="p">]</span>
+
+                    <span class="n">jointsens</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">/=</span> <span class="n">var</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                    <span class="n">jointsens</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">jointsens</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">]</span><span class="o">+</span><span class="mf">0.0</span>
+
+
+        <span class="k">return</span> <span class="n">jointsens</span></div>
+
+
+<div class="viewcode-block" id="PCRV.computeGroupSens">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV.computeGroupSens">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">computeGroupSens</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">paramIndices</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Computes group sensitivities of a subset of parameters.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            paramIndices (list): List of indices to group. Each element should be between :math:`0` and :math:`s-1`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: An 1d array of size `d` for sensitivities of this group for all :math:`d` dimensions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">var</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeVar</span><span class="p">()</span>
+        <span class="n">nind</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">paramIndices</span><span class="p">)</span>
+        <span class="n">groupsens</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">,</span> <span class="p">))</span>
+
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">var</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
+                <span class="n">var</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">1.e-12</span>
+
+            <span class="n">normsq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evalBasesNormsSq</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+            <span class="n">indOfOnlyGroup</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mindices</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">paramIndices</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">jj</span> <span class="ow">in</span> <span class="n">indOfOnlyGroup</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mindices</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">jj</span><span class="p">,</span> <span class="p">:])</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+                    <span class="n">groupsens</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">coefs</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">jj</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">normsq</span><span class="p">[</span><span class="n">jj</span><span class="p">]</span>
+
+            <span class="n">groupsens</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/=</span> <span class="n">var</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">groupsens</span></div>
+
+
+<div class="viewcode-block" id="PCRV.slice_1d">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV.slice_1d">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">slice_1d</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">jdim</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Extracts a 1d PC random variable along a given stochastic dimension.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            jdim (int): The index :math:`j` of the stochastic dimension. Should be between :math:`0` and :math:`s-1`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            PCRV: A 1d PC random variable object along the given stochastic dimension.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">jdim</span><span class="o">&gt;=</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">jdim</span><span class="o">&lt;</span><span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="p">)</span>
+
+        <span class="n">mindices_new</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">cfs_new</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">):</span>
+            <span class="n">indOfOnlyj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mindices</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">jdim</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">mindices_new</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mindices</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">indOfOnlyj</span><span class="p">,</span> <span class="p">:][:,</span> <span class="n">jdim</span><span class="p">][:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">])</span>
+            <span class="n">cfs_new</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coefs</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">indOfOnlyj</span><span class="p">])</span>
+
+        <span class="n">PC1dslice</span> <span class="o">=</span> <span class="n">PCRV</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pctypes</span><span class="p">[</span><span class="n">jdim</span><span class="p">],</span> <span class="n">mi</span><span class="o">=</span><span class="n">mindices_new</span><span class="p">,</span> <span class="n">cfs</span><span class="o">=</span><span class="n">cfs_new</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">PC1dslice</span></div>
+
+    
+<div class="viewcode-block" id="PCRV.sampleGerm">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV.sampleGerm">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sampleGerm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nsam</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sample PC germ vector.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            nsam (int, optional): Number of samples requested. Defaults to :math:`M=1`.</span>
+<span class="sd">            seed (None, optional): Seed for the random generation. Default is None, which does not set any seed.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: A 2d array of size :math:`(M,s)`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">seed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+
+        <span class="n">germSam</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">nsam</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="p">):</span>
+            <span class="n">germSam</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">PC1ds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">nsam</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">germSam</span></div>
+
+
+<div class="viewcode-block" id="PCRV.quadGerm">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV.quadGerm">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">quadGerm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pts</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Generates quadrature samples of PC germ vector.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            pts (np.ndarray, optional): An integer 1d array of size :math:`s` indicating how many points per each stochastic dimension, :math:`q_i` for :math:`i=1, \dots, s`. Default is None, which means 2 points per stochastic dimension.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple[np.ndarray, np.ndarray]: A pair of arrays: a 2d array of quadrature points of size :math:`(Q,s)` and corresponding 1d array of weights of size :math:`Q`, where :math:`Q=q_1 q_2 \cdots q_s` is the total number of points.</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            This is full tensor product quadrature. Sparse quadrature is not implemented.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">pts</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">pts</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sdim</span>
+
+        <span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pts</span><span class="p">)</span><span class="o">==</span><span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="p">)</span>
+
+        <span class="n">quad1ds</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">wght1ds</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="p">):</span>
+            <span class="n">qdpts</span><span class="p">,</span> <span class="n">wghts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">PC1ds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">pts</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">quad1ds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qdpts</span><span class="p">)</span>
+            <span class="n">wght1ds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">wghts</span><span class="p">)</span>
+
+        <span class="n">wQuad</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">,</span> <span class="n">wght1ds</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+
+        <span class="n">germQuad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">cartes_list</span><span class="p">(</span><span class="n">quad1ds</span><span class="p">))</span>
+        <span class="c1"># if self.sdim==1:</span>
+        <span class="c1">#     # somehow cartes_list needs a transpose for 1d</span>
+        <span class="c1">#     germQuad = germQuad.T</span>
+
+        <span class="k">return</span> <span class="n">germQuad</span><span class="p">,</span> <span class="n">wQuad</span></div>
+
+
+
+<div class="viewcode-block" id="PCRV.evalBases">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV.evalBases">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">evalBases</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xi</span><span class="p">,</span> <span class="n">jdim</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Evaluation of PC bases at given input germ values for a given physical dimension.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            xi (np.ndarray): A 2d array of size :math:`(M,s)` for the input.</span>
+<span class="sd">            jdim (int): The index :math:`i` of the PC random variable/vector. Should be between :math:`0` and :math:`d-1`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: A 2d output array of size :math:`(M, K_i)` where :math:`K_i` is the number of PC bases for the :math:`i`-th dimension.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">nxi</span><span class="p">,</span> <span class="n">xidim</span> <span class="o">=</span> <span class="n">xi</span><span class="o">.</span><span class="n">shape</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">xidim</span><span class="o">==</span><span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="p">)</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">jdim</span><span class="o">&gt;=</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">jdim</span><span class="o">&lt;</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">)</span>
+        <span class="n">mindex</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mindices</span><span class="p">[</span><span class="n">jdim</span><span class="p">]</span>
+        <span class="n">npc</span><span class="p">,</span> <span class="n">sdim_</span> <span class="o">=</span> <span class="n">mindex</span><span class="o">.</span><span class="n">shape</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">sdim_</span><span class="o">==</span><span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="p">)</span>
+        <span class="n">ybases</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">nxi</span><span class="p">,</span> <span class="n">npc</span><span class="p">))</span>
+        <span class="c1"># prerun and save</span>
+        <span class="n">pcs_list</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="p">):</span>
+            <span class="n">pcs_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">PC1ds</span><span class="p">[</span><span class="n">i</span><span class="p">](</span><span class="n">xi</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">maxOrd</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">npc</span><span class="p">):</span>
+            <span class="n">prd</span> <span class="o">=</span> <span class="mf">1.0</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="p">):</span>
+                <span class="n">prd</span> <span class="o">*=</span> <span class="n">pcs_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">mindex</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">i</span><span class="p">]]</span>
+
+            <span class="n">ybases</span><span class="p">[:,</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">prd</span>
+
+        <span class="k">return</span> <span class="n">ybases</span></div>
+
+
+<div class="viewcode-block" id="PCRV.evalBasesNormsSq">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV.evalBasesNormsSq">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">evalBasesNormsSq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">jdim</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Evaluates bases norms-squared for a given physical dimension.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            jdim (int): The index of :math:`i` of the PC random variable/vector. Should be between :math:`0` and :math:`d-1`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: An 1d array of size :math:`K_i`, the number of bases for the :math:`i`-th dimension.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">jdim</span><span class="o">&gt;=</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">jdim</span><span class="o">&lt;</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">)</span>
+        <span class="n">mindex</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mindices</span><span class="p">[</span><span class="n">jdim</span><span class="p">]</span>
+        <span class="n">npc</span><span class="p">,</span> <span class="n">sdim_</span> <span class="o">=</span> <span class="n">mindex</span><span class="o">.</span><span class="n">shape</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">sdim_</span><span class="o">==</span><span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="p">)</span>
+
+        <span class="n">norms</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">npc</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">npc</span><span class="p">):</span>
+            <span class="n">prd</span> <span class="o">=</span> <span class="mf">1.0</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="p">):</span>
+                <span class="n">prd</span> <span class="o">*=</span> <span class="bp">self</span><span class="o">.</span><span class="n">PC1ds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">normsq</span><span class="p">(</span><span class="n">mindex</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">i</span><span class="p">])</span>
+
+            <span class="n">norms</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">prd</span>
+
+        <span class="k">return</span> <span class="n">norms</span></div>
+
+
+
+<div class="viewcode-block" id="PCRV.evalPC">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV.evalPC">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">evalPC</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Evaluate PC expansion for a given set of inputs.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (np.ndarray): A 2d array of size :math:`(M,s)` for the input.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: A 2d array of size :math:`(M,d)` for the output.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="o">==</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">nsam</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nsam</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">))</span>
+        <span class="c1"># prerun and save</span>
+        <span class="n">pcs_list</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="p">):</span>
+            <span class="n">pcs_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">PC1ds</span><span class="p">[</span><span class="n">i</span><span class="p">](</span><span class="n">x</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">maxOrd</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">):</span>
+            <span class="n">mi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mindices</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">cf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">coefs</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">npc</span> <span class="o">=</span> <span class="n">mi</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nsam</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">npc</span><span class="p">):</span>
+                <span class="n">prd</span> <span class="o">=</span> <span class="n">cf</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="p">):</span>
+                    <span class="n">prd</span> <span class="o">*=</span> <span class="n">pcs_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">mi</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">i</span><span class="p">]]</span>
+                <span class="n">val</span> <span class="o">+=</span> <span class="n">prd</span>
+
+            <span class="n">y</span><span class="p">[:,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span>  <span class="n">val</span>
+        <span class="k">return</span> <span class="n">y</span></div>
+
+
+<div class="viewcode-block" id="PCRV.setFunction">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV.setFunction">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setFunction</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the PC evaluator as an internal function, an object of a class Function, with all the useful features of the class.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">function</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;PC Function&#39;</span><span class="p">)</span>
+        <span class="n">domain</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="p">):</span>
+            <span class="n">domain</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">PC1ds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">domain</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="o">.</span><span class="n">setDimDom</span><span class="p">(</span><span class="n">domain</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="o">.</span><span class="n">setCall</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">evalPC</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="o">.</span><span class="n">outdim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdim</span></div>
+
+
+<div class="viewcode-block" id="PCRV.sample">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV.sample">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nsam</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sample from the PC random variable. Basically chaining sampling the germ and evaluating the PC.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            nsam (int): Number of samples requested, :math:`M`.</span>
+<span class="sd">            seed (None, optional): Seed for the random generation. Default is None, which does not set any seed.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: A 2d array of size :math:`(M,d)` for the output.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">seed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sampleGerm</span><span class="p">(</span><span class="n">nsam</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">evalPC</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PCRV.cfsFlatten">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV.cfsFlatten">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cfsFlatten</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Flatten all the PC coefficients.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: An 1d array of size :math:`K_1+\dots +K_d`, the total number of PC coefficients for all dimensions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfs_flat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coefs</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">cfs_flat</span></div>
+
+
+<div class="viewcode-block" id="PCRV.cfsUnflatten">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV.cfsUnflatten">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cfsUnflatten</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cfs_flat</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Reverse the flattening operation, given a long flat array, this sets the coefficient array list appropriately.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            cfs_flat (np.ndarray):  An 1d array of size :math:`K_1+\cdots +K_d`, the total number of PC coefficients for all dimensions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">coefs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">):</span>
+            <span class="n">npc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mindices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">coefs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cfs_flat</span><span class="p">[</span><span class="n">k</span><span class="p">:</span><span class="n">k</span><span class="o">+</span><span class="n">npc</span><span class="p">])</span>
+            <span class="n">k</span> <span class="o">+=</span> <span class="n">npc</span>
+
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="PCRV.compressPC">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV.compressPC">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compressPC</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;A method to produce a new, compressed PCRV object in case some stochastic dimensions are irrelevant (i.e. 0 order across all physical dimensions)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            PCRV: New PCRV object that has fewer stochastic dimensions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">indz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">maxOrd</span><span class="o">==</span><span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="c1">#indices to remove</span>
+
+        <span class="n">mindices_new</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">):</span>
+            <span class="n">mm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mindices</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">indz</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">mindices_new</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mm</span><span class="p">)</span>
+
+        <span class="n">pctype_new</span> <span class="o">=</span> <span class="p">[</span><span class="n">j</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pctypes</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">indz</span><span class="p">]</span>
+        <span class="n">pcrv_new</span> <span class="o">=</span> <span class="n">PCRV</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">indz</span><span class="p">),</span> <span class="n">pctype_new</span><span class="p">,</span> <span class="n">mi</span><span class="o">=</span><span class="n">mindices_new</span><span class="p">,</span> <span class="n">cfs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">coefs</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">pcrv_new</span></div>
+
+
+<div class="viewcode-block" id="PCRV.compressMI">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV.compressMI">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compressMI</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;A method to compress potentially identical multiindex rows, by adding their corresponding coefficients.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">):</span>
+            <span class="n">mi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mindices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="c1">#np.unique(mi, )</span>
+
+            <span class="n">mm</span><span class="p">,</span> <span class="n">inds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">mi</span><span class="p">,</span> <span class="n">return_inverse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">newnpc</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">cc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">newnpc</span><span class="p">,))</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">mi</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                <span class="n">cc</span><span class="p">[</span><span class="n">inds</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">coefs</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">mindices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">coefs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">cc</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="k">return</span></div>
+
+
+
+<div class="viewcode-block" id="PCRV.slicePC">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV.slicePC">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">slicePC</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fixind</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">nominal</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">nominal</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">nominal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">fixind</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">fixind</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1">#[i for i in range(self.sdim)]</span>
+        <span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">fixind</span><span class="p">)</span><span class="o">&lt;</span><span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="p">)</span>
+
+        <span class="n">newdims</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="p">))</span><span class="o">-</span><span class="nb">set</span><span class="p">(</span><span class="n">fixind</span><span class="p">))</span>
+        <span class="n">fixdim</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">fixind</span><span class="p">)</span>
+        <span class="n">sdim_new</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="o">-</span><span class="n">fixdim</span>
+        <span class="n">pctypes_new</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">pctypes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">newdims</span><span class="p">]</span>
+        <span class="n">mi_new</span> <span class="o">=</span> <span class="p">[</span><span class="n">mi</span><span class="p">[:,</span><span class="n">newdims</span><span class="p">]</span> <span class="k">for</span> <span class="n">mi</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mindices</span><span class="p">]</span>
+
+        <span class="n">pcs_list</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">fixind</span><span class="p">:</span>
+            <span class="k">assert</span><span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="p">)</span>
+            <span class="n">pcs_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">PC1ds</span><span class="p">[</span><span class="n">i</span><span class="p">](</span><span class="n">nominal</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">maxOrd</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+
+        <span class="n">cfs_new</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">):</span>
+            <span class="n">mi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mindices</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">cf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">coefs</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">npc</span> <span class="o">=</span> <span class="n">mi</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">cf_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">npc</span><span class="p">,))</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">npc</span><span class="p">):</span>
+                <span class="n">prd</span> <span class="o">=</span> <span class="n">cf</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">ifix</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">fixdim</span><span class="p">):</span>
+                    <span class="n">prd</span> <span class="o">*=</span> <span class="n">pcs_list</span><span class="p">[</span><span class="n">ifix</span><span class="p">][</span><span class="n">mi</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">fixind</span><span class="p">[</span><span class="n">ifix</span><span class="p">]]]</span>
+                <span class="n">cf_new</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">=</span><span class="n">prd</span>
+
+            <span class="n">cfs_new</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cf_new</span><span class="p">)</span>
+
+        <span class="n">pcrv_new</span> <span class="o">=</span> <span class="n">PCRV</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">,</span> <span class="n">sdim_new</span><span class="p">,</span> <span class="n">pctypes_new</span><span class="p">,</span> <span class="n">mi</span><span class="o">=</span><span class="n">mi_new</span><span class="p">,</span> <span class="n">cfs</span><span class="o">=</span><span class="n">cfs_new</span><span class="p">)</span>
+
+        <span class="n">pcrv_new</span><span class="o">.</span><span class="n">compressMI</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">pcrv_new</span></div>
+</div>
+
+
+<span class="c1">############################################################</span>
+<span class="c1">############################################################</span>
+<span class="c1">############################################################</span>
+
+<div class="viewcode-block" id="PCRV_iid">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV_iid">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PCRV_iid</span><span class="p">(</span><span class="n">PCRV</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A PC random variable/vector with a special structure of one germ per dimension. As a consequence, the number of stochastic and physical dimensions coincide. It inherits all the attributes of the parent PCRV class.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdim</span><span class="p">,</span> <span class="n">pctype</span><span class="p">,</span> <span class="n">orders</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cfs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Initialization of the IID PC random variable.</span>
+
+<span class="sd">        Args:</span>
+
+<span class="sd">            pdim (int): The number of dimensions, :math:`d`. Same as stochastic dimensions, `s`.</span>
+<span class="sd">            pctype (str or list): PC type. Either a list of :math:`s` strings (one per stochastic dimension), or a single string for all dimensions.</span>
+<span class="sd">            orders (np.ndarray, optional): An integer array of size :math:`d` indicating the PC order :math:`p_i` for each physical dimension for :math:`i=1,\dots,d`. Defaults to None, which sets order :math:`p_i=1` for all dimensions.</span>
+<span class="sd">            cfs (list or np.ndarray, optional): List of :math:`d` coefficient arrays, each of size :math:`p_i+1` for :math:`i=1,\dots,d`. Or a single coefficient array of size :math:`p+1`, meaning all dimensions get the same coefficient array (assuming all orders are the same). Or a 2d array of size :math:`(p+1,d)` (again, assuming all orders are the same). Defaults to None, which is populating coefficients with all zeros.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">orders</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">orders</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">pdim</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+
+        <span class="n">mindices</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">pdim</span><span class="p">):</span>
+            <span class="n">mindex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">orders</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">pdim</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+            <span class="n">mindex</span><span class="p">[:,</span> <span class="n">ii</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">orders</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">mindices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mindex</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PCRV_iid</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">pdim</span><span class="p">,</span> <span class="n">pdim</span><span class="p">,</span> <span class="n">pctype</span><span class="p">,</span> <span class="n">mi</span><span class="o">=</span><span class="n">mindices</span><span class="p">,</span> <span class="n">cfs</span><span class="o">=</span><span class="n">cfs</span><span class="p">)</span>
+
+        <span class="k">return</span></div>
+
+
+<span class="c1">############################################################</span>
+<span class="c1">############################################################</span>
+<span class="c1">############################################################</span>
+
+<div class="viewcode-block" id="PCRV_mvn">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV_mvn">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PCRV_mvn</span><span class="p">(</span><span class="n">PCRV</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A PC random variable/vector that is a multivariate normal. As a consequence, the number of stochastic and physical dimensions coincide and PC type is Gauss-Hermite for all dimensions. It inherits all the attributes of the parent PCRV class.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        cov (np.ndarray): Covariance array.</span>
+<span class="sd">        mean (np.ndarray): Mean array.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdim</span><span class="p">,</span> <span class="n">rndind</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cov</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Initialization of MVN PC random variable.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            pdim (int): The number of dimensions, :math:`d`. Same as stochastic dimensions, :math:`s`.</span>
+<span class="sd">            rndind (None, optional): List of :math:`r` indices indicating the ones that are random. Each element must be between :math:`0` and :math:`d-1`. Defaults to None, which means all dimensions are random.</span>
+<span class="sd">            mean (np.ndarray, optional): An array for the mean of size :math:`d`. Defaults to None, which means all zeros.</span>
+<span class="sd">            cov (np.ndarray, optional): A 2d array of size :math:`(r, r)`. Defaults to None, which is means identity covariance.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">rndind</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">rndind</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">pdim</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">rndind</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+            <span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rndind</span><span class="p">)</span><span class="o">==</span><span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">rndind</span><span class="p">)))</span>
+            <span class="k">assert</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">rndind</span><span class="p">)</span><span class="o">&lt;</span><span class="n">pdim</span><span class="p">)</span>
+            <span class="k">assert</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">rndind</span><span class="p">)</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
+            <span class="k">assert</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">rndind</span><span class="p">)</span><span class="o">&lt;</span><span class="n">pdim</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
+            <span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rndind</span><span class="p">)</span><span class="o">&lt;=</span><span class="n">pdim</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">mean</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">pdim</span><span class="p">,)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mean</span> <span class="o">=</span> <span class="n">mean</span>
+
+        <span class="k">if</span> <span class="n">cov</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rndind</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cov</span> <span class="o">=</span> <span class="n">cov</span>
+
+        <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mean</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="n">pdim</span><span class="p">)</span>
+        <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cov</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="nb">len</span><span class="p">(</span><span class="n">rndind</span><span class="p">))</span>
+        <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cov</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="bp">self</span><span class="o">.</span><span class="n">cov</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+
+        <span class="n">lower</span> <span class="o">=</span> <span class="n">safe_cholesky</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cov</span><span class="p">)</span>
+
+        <span class="n">mindices</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">cfs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">i</span><span class="o">=</span><span class="mi">0</span>
+        <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">pdim</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">ii</span> <span class="ow">in</span> <span class="n">rndind</span><span class="p">:</span>
+                <span class="n">mindex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="n">pdim</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+                <span class="n">mindex</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">cf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">,))</span>
+                <span class="n">cf</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mean</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span>
+                <span class="n">cf</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">lower</span><span class="p">[</span><span class="n">i</span><span class="p">,:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">i</span><span class="o">+=</span><span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">mindex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">pdim</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+                <span class="n">cf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mean</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,))</span>
+            <span class="n">mindices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mindex</span><span class="p">)</span>
+            <span class="n">cfs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cf</span><span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">PCRV_mvn</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">pdim</span><span class="p">,</span> <span class="n">pdim</span><span class="p">,</span> <span class="s2">&quot;HG&quot;</span><span class="p">,</span> <span class="n">mi</span><span class="o">=</span><span class="n">mindices</span><span class="p">,</span> <span class="n">cfs</span><span class="o">=</span><span class="n">cfs</span><span class="p">)</span>
+
+        <span class="k">return</span>
+
+<div class="viewcode-block" id="PCRV_mvn.pdf">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV_mvn.pdf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">multivariate_normal</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="n">cov</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cov</span><span class="p">)</span></div>
+</div>
+
+
+<span class="c1">############################################################</span>
+<span class="c1">############################################################</span>
+<span class="c1">############################################################</span>
+
+<div class="viewcode-block" id="PC1d">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PC1d">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PC1d</span><span class="p">():</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;1-dimensional PC random variable.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        a (callable): int-&gt;float function :math:`a_n` in the recurrent relation</span>
+<span class="sd">        b (callable): int-&gt;float function :math:`b_n` in the recurrent relation</span>
+<span class="sd">        domain (np.ndarray): A 1d array of size :math:`2` indicating the domain of definition.</span>
+<span class="sd">        p0 (callable): The 0th order basis evaluator from 1d np.ndarray to 1d np.ndarray.</span>
+<span class="sd">        p1 (callable): The 1rd order basis evaluator from 1d np.ndarray to 1d np.ndarray.</span>
+<span class="sd">        pctype (str): The PC type. Only &#39;LU&#39;, &#39;nLU&#39;, &#39;HG&#39; and &#39;nHG&#39; are implemented.</span>
+<span class="sd">        sample (callable): int-&gt;float sampling function, where the input is a number of samples requested, and the output is an 1d array of the corresponding size.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pctype</span><span class="o">=</span><span class="s1">&#39;LU&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialization.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            pctype (str): The PC type. Only &#39;LU&#39;, &#39;nLU&#39;, &#39;HG&#39; and &#39;nHG&#39;are implemented. Defaults to &#39;LU&#39;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="PC1d.pctype">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PC1d.pctype">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pctype</span> <span class="o">=</span> <span class="n">pctype</span></div>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pctype</span> <span class="o">==</span> <span class="s1">&#39;LU&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">p0</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">p1</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="p">(</span><span class="mf">2.</span> <span class="o">*</span> <span class="n">n</span> <span class="o">+</span> <span class="mf">1.</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mf">1.</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="o">-</span><span class="n">n</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mf">1.</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sample</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">m</span><span class="p">:</span> <span class="mf">2.</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">-</span><span class="mf">1.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">domain</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">pctype</span> <span class="o">==</span> <span class="s1">&#39;nLU&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">p0</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">p1</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">3.</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="mf">2.</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mf">3.</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mf">2.</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mf">1.</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="mf">2.</span> <span class="o">*</span> <span class="n">n</span> <span class="o">+</span> <span class="mf">1.</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mf">1.</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="mf">2.</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mf">3.</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mf">2.</span><span class="o">*</span><span class="n">n</span><span class="o">-</span><span class="mf">1.</span><span class="p">))</span> <span class="o">*</span> <span class="n">n</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mf">1.</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sample</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">m</span><span class="p">:</span> <span class="mf">2.</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">-</span><span class="mf">1.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">domain</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">pctype</span> <span class="o">==</span> <span class="s1">&#39;HG&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">p0</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">p1</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="mf">1.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="o">-</span><span class="n">n</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sample</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">m</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">domain</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">pctype</span> <span class="o">==</span> <span class="s1">&#39;nHG&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">p0</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">p1</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="mf">1.</span><span class="o">/</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mf">1.</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.</span><span class="o">/</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mf">1.</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sample</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">m</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">domain</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;PC1d type </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pctype</span><span class="si">}</span><span class="s1"> is not recognized. Exiting.&#39;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The function call of the 1d PC object.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (np.ndarray): A size :math:`M` 1d array of inputs at which PC is evaluated.</span>
+<span class="sd">            order (int): The requested order :math:`p`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list[np.ndarray]: A list of size :math:`p+1` containing 1d arrays of the PC bases evaluated at the requested points.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">order</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">p0</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span>
+        <span class="k">elif</span> <span class="n">order</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">p0</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">p1</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">pcvals</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">p0</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">p1</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span>
+            <span class="k">for</span> <span class="n">iord</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">order</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">pcval</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">iord</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="n">pcvals</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">(</span><span class="n">iord</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">pcvals</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+                <span class="n">pcvals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pcval</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">pcvals</span>
+
+
+<div class="viewcode-block" id="PC1d.germCdf">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PC1d.germCdf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">germCdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Evaluate the germ cumulative distribution functions (CDFs).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (np.ndarray): A size :math:`M` 1d array of inputs at which CDF is evaluated.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: A size :math:`M` 1d array of outputs containing CDF evaluations.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pctype</span> <span class="o">==</span> <span class="s1">&#39;LU&#39;</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">pctype</span> <span class="o">==</span> <span class="s1">&#39;nLU&#39;</span><span class="p">:</span>
+            <span class="n">cdf</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mf">1.</span><span class="p">)</span><span class="o">/</span><span class="mf">2.</span>
+            <span class="n">cdf</span><span class="p">[</span><span class="n">cdf</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="mf">1.0</span>
+            <span class="n">cdf</span><span class="p">[</span><span class="n">cdf</span><span class="o">&lt;=-</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="mf">0.0</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">pctype</span> <span class="o">==</span> <span class="s1">&#39;HG&#39;</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">pctype</span> <span class="o">==</span> <span class="s1">&#39;nHG&#39;</span><span class="p">:</span>
+            <span class="n">cdf</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">erf</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)))</span> <span class="o">/</span> <span class="mf">2.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;PC1d type </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pctype</span><span class="si">}</span><span class="s1"> is not recognized. Exiting.&#39;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">cdf</span></div>
+
+
+<div class="viewcode-block" id="PC1d.germSample">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PC1d.germSample">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">germSample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nsam</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Samples the germ.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            nsam (int): Input number of samples requested, :math:`M`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: A 1d array of size :math:`M` containing the germ samples.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pctype</span> <span class="o">==</span> <span class="s1">&#39;LU&#39;</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">pctype</span> <span class="o">==</span> <span class="s1">&#39;nLU&#39;</span><span class="p">:</span>
+            <span class="n">germ_sam</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">nsam</span><span class="p">)</span><span class="o">*</span><span class="mf">2.0</span><span class="o">-</span><span class="mf">1.0</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">pctype</span> <span class="o">==</span> <span class="s1">&#39;HG&#39;</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">pctype</span> <span class="o">==</span> <span class="s1">&#39;nHG&#39;</span><span class="p">:</span>
+            <span class="n">germ_sam</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">nsam</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;PC1d type </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pctype</span><span class="si">}</span><span class="s1"> is not recognized. Exiting.&#39;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">germ_sam</span></div>
+
+
+<div class="viewcode-block" id="PC1d.normsq">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PC1d.normsq">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">normsq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">ord</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Computes norm-squared of a basis with a given order.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ord (int): Requested order :math:`p`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: The norm-squared of the basis of order :math:`p`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pctype</span> <span class="o">==</span> <span class="s1">&#39;LU&#39;</span><span class="p">:</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="p">(</span><span class="mf">2.</span><span class="o">*</span><span class="nb">float</span><span class="p">(</span><span class="nb">ord</span><span class="p">)</span><span class="o">+</span><span class="mf">1.</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">pctype</span> <span class="o">==</span> <span class="s1">&#39;nLU&#39;</span><span class="p">:</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">pctype</span> <span class="o">==</span> <span class="s1">&#39;HG&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">ord</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">val</span> <span class="o">=</span> <span class="mf">1.0</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">val</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">ord</span><span class="o">+</span><span class="mi">1</span><span class="p">)))</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">pctype</span> <span class="o">==</span> <span class="s1">&#39;nHG&#39;</span><span class="p">:</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;PC1d type </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pctype</span><span class="si">}</span><span class="s1"> is not recognized. Exiting.&#39;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">val</span></div>
+
+
+<div class="viewcode-block" id="PC1d.quad">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PC1d.quad">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">quad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;One-dimensional quadrature point/weight generation.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            k (int): The level of the quadrature.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple: A pair of 1d arrays of the same size, one for the quadrature points, and the other for the corresponding weights.</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            Utilizes the Golub-Welsch method, see :cite:t:`Golub:1969` or https://www.ams.org/journals/mcom/1969-23-106/S0025-5718-69-99647-1/S0025-5718-69-99647-1.pdf.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">gw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">k</span><span class="p">,</span> <span class="n">k</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">gw</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)))</span>
+
+        <span class="n">eig</span><span class="p">,</span> <span class="n">evec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">gw</span><span class="p">)</span>
+
+        <span class="n">qdpts</span> <span class="o">=</span> <span class="n">eig</span>
+        <span class="n">wghts</span> <span class="o">=</span> <span class="n">evec</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span><span class="o">**</span><span class="mi">2</span>
+
+        <span class="k">return</span> <span class="n">qdpts</span><span class="p">,</span> <span class="n">wghts</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

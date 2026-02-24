@@ -1,0 +1,369 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytuq.func.genz &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="pytuq.func.oper" href="../oper/index.html" />
+    <link rel="prev" title="pytuq.func.func" href="../func/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../auto_examples/index.html">Software Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../auto_examples/index.html#surrogates">Surrogates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_pce.html">Polynomial Chaos Expansion Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Section Navigation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">pytuq</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../ftools/index.html">pytuq.ftools</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rv/index.html">pytuq.rv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../surrogates/index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Section Navigation</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">pytuq</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">pytuq.func</a></li>
+      <li class="breadcrumb-item active">pytuq.func.genz</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/autoapi/pytuq/func/genz/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-pytuq.func.genz">
+<span id="pytuq-func-genz"></span><h1>pytuq.func.genz<a class="headerlink" href="#module-pytuq.func.genz" title="Link to this heading"></a></h1>
+<p>Genz function family module.</p>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.func.genz.GenzBase" title="pytuq.func.genz.GenzBase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GenzBase</span></code></a></p></td>
+<td><p>Base class for Genz function family</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.func.genz.GenzOscillatory" title="pytuq.func.genz.GenzOscillatory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GenzOscillatory</span></code></a></p></td>
+<td><p>Genz Oscillatory function</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.func.genz.GenzQuadOscillatory" title="pytuq.func.genz.GenzQuadOscillatory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GenzQuadOscillatory</span></code></a></p></td>
+<td><p>Genz Quadratic Oscillatory function</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.func.genz.GenzSum" title="pytuq.func.genz.GenzSum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GenzSum</span></code></a></p></td>
+<td><p>Genz Summation function</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.func.genz.GenzCornerPeak" title="pytuq.func.genz.GenzCornerPeak"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GenzCornerPeak</span></code></a></p></td>
+<td><p>Genz Corner Peak function</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.genz.GenzBase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.genz.</span></span><span class="sig-name descname"><span class="pre">GenzBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[1.0]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'GenzBase'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/genz.html#GenzBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.genz.GenzBase" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>Base class for Genz function family</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.genz.GenzBase.weights">
+<span class="sig-name descname"><span class="pre">weights</span></span><a class="reference internal" href="../../../../_modules/pytuq/func/genz.html#GenzBase.weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.genz.GenzBase.weights" title="Link to this definition"></a></dt>
+<dd><p>Dimensional weights.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">weights</span></span><a class="reference internal" href="../../../../_modules/pytuq/func/genz.html#GenzBase.weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.genz.GenzBase.dim">
+<span class="sig-name descname"><span class="pre">dim</span></span><a class="reference internal" href="../../../../_modules/pytuq/func/genz.html#GenzBase.dim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.genz.GenzBase.dim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.genz.GenzBase.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'GenzBase'</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/genz.html#GenzBase.name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.genz.GenzBase.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.genz.GenzBase.outdim">
+<span class="sig-name descname"><span class="pre">outdim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/genz.html#GenzBase.outdim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.genz.GenzBase.outdim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.genz.GenzOscillatory">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.genz.</span></span><span class="sig-name descname"><span class="pre">GenzOscillatory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[1.0]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'GenzOscillatory'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/genz.html#GenzOscillatory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.genz.GenzOscillatory" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pytuq.func.genz.GenzBase" title="pytuq.func.genz.GenzBase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GenzBase</span></code></a></p>
+<p>Genz Oscillatory function</p>
+<p>Reference: [<a class="reference external" href="https://www.sfu.ca/~ssurjano/oscil.html">https://www.sfu.ca/~ssurjano/oscil.html</a>]</p>
+<div class="math notranslate nohighlight">
+\[f(x) = \cos\left(2 \pi s + w^T x \right)\]</div>
+<p>Default values are <span class="math notranslate nohighlight">\(s = 0\)</span> and <span class="math notranslate nohighlight">\(w = [1.0]\)</span>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.genz.GenzOscillatory.shift">
+<span class="sig-name descname"><span class="pre">shift</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.0</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/genz.html#GenzOscillatory.shift"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.genz.GenzOscillatory.shift" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.genz.GenzOscillatory.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/genz.html#GenzOscillatory.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.genz.GenzOscillatory.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.genz.GenzOscillatory.intgl">
+<span class="sig-name descname"><span class="pre">intgl</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/genz.html#GenzOscillatory.intgl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.genz.GenzOscillatory.intgl" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.genz.GenzQuadOscillatory">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.genz.</span></span><span class="sig-name descname"><span class="pre">GenzQuadOscillatory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[1.0]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'GenzQuadOscillatory'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/genz.html#GenzQuadOscillatory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.genz.GenzQuadOscillatory" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pytuq.func.genz.GenzBase" title="pytuq.func.genz.GenzBase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GenzBase</span></code></a></p>
+<p>Genz Quadratic Oscillatory function</p>
+<div class="math notranslate nohighlight">
+\[f(x) = \cos\left(2 \pi s + w^T x^2 \right)\]</div>
+<p>Default values are <span class="math notranslate nohighlight">\(s = 0\)</span> and <span class="math notranslate nohighlight">\(w = [1.0]\)</span>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.genz.GenzQuadOscillatory.shift">
+<span class="sig-name descname"><span class="pre">shift</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.0</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/genz.html#GenzQuadOscillatory.shift"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.genz.GenzQuadOscillatory.shift" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.genz.GenzQuadOscillatory.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/genz.html#GenzQuadOscillatory.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.genz.GenzQuadOscillatory.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.genz.GenzSum">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.genz.</span></span><span class="sig-name descname"><span class="pre">GenzSum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[1.0]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'GenzSummation'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/genz.html#GenzSum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.genz.GenzSum" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pytuq.func.genz.GenzBase" title="pytuq.func.genz.GenzBase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GenzBase</span></code></a></p>
+<p>Genz Summation function</p>
+<div class="math notranslate nohighlight">
+\[f(x) = s + w^T x\]</div>
+<p>Default values are <span class="math notranslate nohighlight">\(s = 0\)</span> and <span class="math notranslate nohighlight">\(w = [1.0]\)</span>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.func.genz.GenzSum.shift">
+<span class="sig-name descname"><span class="pre">shift</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.0</span></em><a class="reference internal" href="../../../../_modules/pytuq/func/genz.html#GenzSum.shift"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.genz.GenzSum.shift" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.genz.GenzSum.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/genz.html#GenzSum.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.genz.GenzSum.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.genz.GenzCornerPeak">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.genz.</span></span><span class="sig-name descname"><span class="pre">GenzCornerPeak</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[1.0]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'GenzCornerPeak'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/genz.html#GenzCornerPeak"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.genz.GenzCornerPeak" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pytuq.func.genz.GenzBase" title="pytuq.func.genz.GenzBase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GenzBase</span></code></a></p>
+<p>Genz Corner Peak function</p>
+<p>Reference: [<a class="reference external" href="https://www.sfu.ca/~ssurjano/copeak.html">https://www.sfu.ca/~ssurjano/copeak.html</a>]</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}f(x) = \frac{1}{(1 + w^T x)^{d+1}}\\Default values are :math:`w = [1.0]`.\end{aligned}\end{align} \]</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.genz.GenzCornerPeak.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/genz.html#GenzCornerPeak.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.genz.GenzCornerPeak.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../func/index.html" class="btn btn-neutral float-left" title="pytuq.func.func" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../oper/index.html" class="btn btn-neutral float-right" title="pytuq.func.oper" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

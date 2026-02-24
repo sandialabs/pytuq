@@ -1,0 +1,1019 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytuq.utils.plotting &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="pytuq.utils.stats" href="../stats/index.html" />
+    <link rel="prev" title="pytuq.utils.mindex" href="../mindex/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../auto_examples/index.html">Software Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../auto_examples/index.html#surrogates">Surrogates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_pce.html">Polynomial Chaos Expansion Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Section Navigation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">pytuq</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../ftools/index.html">pytuq.ftools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../func/index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rv/index.html">pytuq.rv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../surrogates/index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Section Navigation</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">pytuq</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">pytuq.utils</a></li>
+      <li class="breadcrumb-item active">pytuq.utils.plotting</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/autoapi/pytuq/utils/plotting/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-pytuq.utils.plotting">
+<span id="pytuq-utils-plotting"></span><h1>pytuq.utils.plotting<a class="headerlink" href="#module-pytuq.utils.plotting" title="Link to this heading"></a></h1>
+<p>Module for various plotting functions.</p>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.utils.plotting.myrc" title="pytuq.utils.plotting.myrc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">myrc</span></code></a>()</p></td>
+<td><p>Configure matplotlib common look and feel.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.utils.plotting.saveplot" title="pytuq.utils.plotting.saveplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">saveplot</span></code></a>(figname)</p></td>
+<td><p>Save a figure with warnings ignored.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.utils.plotting.set_colors" title="pytuq.utils.plotting.set_colors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_colors</span></code></a>(npar)</p></td>
+<td><p>Sets a list of different colors of requested length, as rgb triples.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.utils.plotting.lighten_color" title="pytuq.utils.plotting.lighten_color"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lighten_color</span></code></a>(color[, amount])</p></td>
+<td><p>Lightens the given color by multiplying (1-luminosity) by the given amount.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.utils.plotting.plot_dm" title="pytuq.utils.plotting.plot_dm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_dm</span></code></a>(datas, models[, errorbars, labels, colors, ...])</p></td>
+<td><p>Plots data-vs-model and overlays <cite>y=x</cite>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.utils.plotting.plot_xrv" title="pytuq.utils.plotting.plot_xrv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_xrv</span></code></a>(xsam[, prefix])</p></td>
+<td><p>Plotting samples one at a time, and one dimension vs the other.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.utils.plotting.parallel_coordinates" title="pytuq.utils.plotting.parallel_coordinates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parallel_coordinates</span></code></a>(parnames, values, labels[, savefig])</p></td>
+<td><p>Plots parallel coordinates.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.utils.plotting.plot_yx" title="pytuq.utils.plotting.plot_yx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_yx</span></code></a>(x, y[, rowcols, ylabel, xlabels, log, ...])</p></td>
+<td><p>Plots an output vs one input at a time in a matrix of figures.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.utils.plotting.plot_sens" title="pytuq.utils.plotting.plot_sens"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_sens</span></code></a>(sensdata, pars, cases[, vis, reverse, ...])</p></td>
+<td><p>Plots sensitivities for multiple observables with respect to multiple parameters.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.utils.plotting.plot_jsens" title="pytuq.utils.plotting.plot_jsens"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_jsens</span></code></a>(msens, jsens[, varname, inpar_names, figname])</p></td>
+<td><p>Plotting circular joint sensitivities.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.utils.plotting.plot_tri" title="pytuq.utils.plotting.plot_tri"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_tri</span></code></a>(xi[, names, msize, axarr, clr, yy, lsize, ...])</p></td>
+<td><p>Plots multidimensional samples in a triangular way, i.e. 1d and 2d cuts.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.utils.plotting.plot_pdf1d" title="pytuq.utils.plotting.plot_pdf1d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_pdf1d</span></code></a>(sams[, pltype, color, lstyle, lw, ...])</p></td>
+<td><p>Plotting 1d PDFs of samples.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.utils.plotting.plot_pdf2d" title="pytuq.utils.plotting.plot_pdf2d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_pdf2d</span></code></a>(samsx, samsy[, pltype, ncont, color, ...])</p></td>
+<td><p>Plot 2d contour plot of a PDF given two sets of samples.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.utils.plotting.plot_pdfs" title="pytuq.utils.plotting.plot_pdfs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_pdfs</span></code></a>([ind_show, plot_type, pdf_type, samples_, ...])</p></td>
+<td><p>Computing and plotting set of 1d and/or 2d PDFs given a sample set.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.utils.plotting.plot_ens" title="pytuq.utils.plotting.plot_ens"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_ens</span></code></a>(xdata, ydata[, color, lw, ms, grid_show, ...])</p></td>
+<td><p>Plotting an ensemble of <cite>y</cite> values versus input <cite>x</cite>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.utils.plotting.plot_vars" title="pytuq.utils.plotting.plot_vars"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_vars</span></code></a>(xdata, ydata[, variances, ysam, stdfactor, ...])</p></td>
+<td><p>Plotting mean predictions with multicolor variances as error bars.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.utils.plotting.plot_shade" title="pytuq.utils.plotting.plot_shade"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_shade</span></code></a>(xdata, ydata[, nq, cmap, bounds_show, ...])</p></td>
+<td><p>Plotting quantile-shaded predictions given dataset.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.utils.plotting.plot_1d_anchored_single" title="pytuq.utils.plotting.plot_1d_anchored_single"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_1d_anchored_single</span></code></a>(models, modelpars, anchor1[, ...])</p></td>
+<td><p>Plots 1d slices of a list of models going through one or two anchor points.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.utils.plotting.plot_1d_anchored" title="pytuq.utils.plotting.plot_1d_anchored"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_1d_anchored</span></code></a>(models, modelpars, anchor1[, pad, ...])</p></td>
+<td><p>Plot multiple 1d slices of models all going through a given anchor point.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.utils.plotting.plot_2d_anchored_single" title="pytuq.utils.plotting.plot_2d_anchored_single"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_2d_anchored_single</span></code></a>(models, modelpars, anchor1[, ...])</p></td>
+<td><p>Plots 2d slices of a list of models going through one or two anchor points.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.utils.plotting.plot_2d_anchored" title="pytuq.utils.plotting.plot_2d_anchored"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_2d_anchored</span></code></a>(models, modelpars, anchor1[, ...])</p></td>
+<td><p>Plot multiple 1d slices of models all going through a given anchor point or given two anchor points.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.utils.plotting.plot_fcn_1d_slice" title="pytuq.utils.plotting.plot_fcn_1d_slice"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_fcn_1d_slice</span></code></a>(fcn, domain[, idim, nom, ngr, ...])</p></td>
+<td><p>Plotting 1d slice of a function, keeping the rest of the inputs at a given nominal.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.utils.plotting.plot_fcn_2d_slice" title="pytuq.utils.plotting.plot_fcn_2d_slice"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_fcn_2d_slice</span></code></a>(fcn, domain[, idim, jdim, nom, ngr, ax])</p></td>
+<td><p>Plotting 2d slice of a function, keeping the rest of the inputs at a given nominal.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.utils.plotting.plot_uc_sample" title="pytuq.utils.plotting.plot_uc_sample"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_uc_sample</span></code></a>(pred_sam, data[, nqt, label, ax])</p></td>
+<td><p>Plotting uncertainty calibration figure given samples.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.utils.plotting.plot_uc_exact" title="pytuq.utils.plotting.plot_uc_exact"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_uc_exact</span></code></a>(pred_mean, pred_std, data[, nqt, label, ax])</p></td>
+<td><p>Plotting uncertainty calibration figure given mean and standard deviation of predictions.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.utils.plotting.plot_samples_pdfs" title="pytuq.utils.plotting.plot_samples_pdfs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_samples_pdfs</span></code></a>(xx_list[, legends, colors, ...])</p></td>
+<td><p>Plots multiple pdfs given list of samples</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.utils.plotting.plot_1d" title="pytuq.utils.plotting.plot_1d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_1d</span></code></a>(func, domain[, ax, idim, odim, nom, ngr, ...])</p></td>
+<td><p>Plotting 1d slice of a function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.utils.plotting.plot_2d" title="pytuq.utils.plotting.plot_2d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_2d</span></code></a>(func, domain[, ax, idim, jdim, odim, nom, ...])</p></td>
+<td><p>Plotting 2d slice of a function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.utils.plotting.plot_parity" title="pytuq.utils.plotting.plot_parity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_parity</span></code></a>(y1, y2[, labels, filename])</p></td>
+<td><p>A minimal parity plot.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.utils.plotting.plot_cov" title="pytuq.utils.plotting.plot_cov"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_cov</span></code></a>(mm, cc[, ngr, f, pnames, ax, savefig])</p></td>
+<td><p>Plotting covariance contour given mean and covariance matrix.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.utils.plotting.plot_cov_tri" title="pytuq.utils.plotting.plot_cov_tri"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_cov_tri</span></code></a>(mean, cov[, names, figname])</p></td>
+<td><p>Plots covariance in a triangular pairwise way.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.utils.plotting.plot_sensmat" title="pytuq.utils.plotting.plot_sensmat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_sensmat</span></code></a>(sensdata, pars, cases[, par_labels, ...])</p></td>
+<td><p>Plot sensitivity matrix as a heatmap or bar plot.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.utils.plotting.plot_joy" title="pytuq.utils.plotting.plot_joy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_joy</span></code></a>(sams_list, xcond, outnames, color_list[, ...])</p></td>
+<td><p>Plots a joyplot of multiple sample sets along given output conditions.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.plotting.myrc">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.plotting.</span></span><span class="sig-name descname"><span class="pre">myrc</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/plotting.html#myrc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.plotting.myrc" title="Link to this definition"></a></dt>
+<dd><p>Configure matplotlib common look and feel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dictionary of matplotlib parameter config, not really used</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.plotting.saveplot">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.plotting.</span></span><span class="sig-name descname"><span class="pre">saveplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">figname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/plotting.html#saveplot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.plotting.saveplot" title="Link to this definition"></a></dt>
+<dd><p>Save a figure with warnings ignored.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>figname</strong> (<em>mpl.Figure</em>) – Figure handle.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.plotting.set_colors">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.plotting.</span></span><span class="sig-name descname"><span class="pre">set_colors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">npar</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/plotting.html#set_colors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.plotting.set_colors" title="Link to this definition"></a></dt>
+<dd><p>Sets a list of different colors of requested length, as rgb triples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>npar</strong> (<em>int</em>) – Number of parameters.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of rgb triples.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[tuple]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.plotting.lighten_color">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.plotting.</span></span><span class="sig-name descname"><span class="pre">lighten_color</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">color</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/plotting.html#lighten_color"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.plotting.lighten_color" title="Link to this definition"></a></dt>
+<dd><p>Lightens the given color by multiplying (1-luminosity) by the given amount.
+Input can be matplotlib color string, hex string, or RGB tuple.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>color</strong> (<em>str</em><em> or </em><em>tuple</em>) – Initial color.</p></li>
+<li><p><strong>amount</strong> (<em>float</em>) – How much to lighten: should be between 0 and 1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>lightened color.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+<div class="admonition-examples admonition">
+<p class="admonition-title">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lighten_color</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lighten_color</span><span class="p">(</span><span class="s1">&#39;#F034A3&#39;</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lighten_color</span><span class="p">((</span><span class="mf">.3</span><span class="p">,</span><span class="mf">.55</span><span class="p">,</span><span class="mf">.1</span><span class="p">),</span> <span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.plotting.plot_dm">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.plotting.</span></span><span class="sig-name descname"><span class="pre">plot_dm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">datas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">models</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errorbars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axes_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['Model',</span> <span class="pre">'Apprx']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dm.png'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">legendpos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'in'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/plotting.html#plot_dm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.plotting.plot_dm" title="Link to this definition"></a></dt>
+<dd><p>Plots data-vs-model and overlays <cite>y=x</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>datas</strong> (<em>list</em><em>[</em><em>np.ndarray</em><em>]</em>) – List of <cite>K</cite> 1d data arrays.</p></li>
+<li><p><strong>models</strong> (<em>list</em><em>[</em><em>np.ndarray</em><em>]</em>) – List of <cite>K</cite> 1d model arrays with matching sizes to data arrays.</p></li>
+<li><p><strong>errorbars</strong> (<em>list</em><em>[</em><em>(</em><em>np.ndarray</em><em>, </em><em>np.ndarray</em><em>)</em><em>]</em><em>, </em><em>optional</em>) – List of <cite>K</cite> (lower,upper) tuples as errorbars for each model array. Can be None.</p></li>
+<li><p><strong>labels</strong> (<em>list</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – List of <cite>K</cite> labels. If None, the code uses something generic.</p></li>
+<li><p><strong>colors</strong> (<em>list</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – List of <cite>K</cite> colors. If None, the code chooses internally.</p></li>
+<li><p><strong>axes_labels</strong> (<em>list</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – List of two strings, x- and y-axis labels.</p></li>
+<li><p><strong>figname</strong> (<em>str</em><em>, </em><em>optional</em>) – Figure file name.</p></li>
+<li><p><strong>legendpos</strong> (<em>str</em><em>, </em><em>optional</em>) – Legend position, ‘in’ or ‘out’</p></li>
+<li><p><strong>msize</strong> (<em>int</em><em>, </em><em>optional</em>) – Marker size.</p></li>
+<li><p><strong>alpha</strong> (<em>float</em><em>, </em><em>optional</em>) – Marker opacity, between <cite>0</cite> and <cite>1</cite>. Defaults to 1.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.plotting.plot_xrv">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.plotting.</span></span><span class="sig-name descname"><span class="pre">plot_xrv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xsam</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'xsam'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/plotting.html#plot_xrv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.plotting.plot_xrv" title="Link to this definition"></a></dt>
+<dd><p>Plotting samples one at a time, and one dimension vs the other.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xsam</strong> (<em>np.ndarray</em>) – A <cite>(N,d)</cite> numpy array of samples</p></li>
+<li><p><strong>prefix</strong> (<em>str</em><em>, </em><em>optional</em>) – Prefix for filenames of the figures.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.plotting.parallel_coordinates">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.plotting.</span></span><span class="sig-name descname"><span class="pre">parallel_coordinates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parnames</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pcoord'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/plotting.html#parallel_coordinates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.plotting.parallel_coordinates" title="Link to this definition"></a></dt>
+<dd><p>Plots parallel coordinates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parnames</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – list of <cite>d</cite> parameter names</p></li>
+<li><p><strong>values</strong> (<em>np.ndarray</em>) – <cite>(d, N)</cite> array of <cite>N</cite> data points with <cite>d</cite> parameters</p></li>
+<li><p><strong>labels</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – list of <cite>N</cite> labels/categories, one per point</p></li>
+<li><p><strong>savefig</strong> (<em>str</em><em>, </em><em>optional</em>) – figure name to save</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.plotting.plot_yx">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.plotting.</span></span><span class="sig-name descname"><span class="pre">plot_yx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rowcols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylabel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlabels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'eda.png'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xpad</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ypad</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gridshow</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labelsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">18</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/plotting.html#plot_yx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.plotting.plot_yx" title="Link to this definition"></a></dt>
+<dd><p>Plots an output vs one input at a time in a matrix of figures.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>np.ndarray</em>) – An <cite>(N,d)</cite> input array.</p></li>
+<li><p><strong>y</strong> (<em>np.ndarray</em>) – An <cite>(N,)</cite> output array.</p></li>
+<li><p><strong>rowcols</strong> (<em>tuple</em><em>[</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – A pair of integers, rows and columns.</p></li>
+<li><p><strong>ylabel</strong> (<em>str</em><em>, </em><em>optional</em>) – Y-axis label.</p></li>
+<li><p><strong>xlabels</strong> (<em>list</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – List of X-axis labels.</p></li>
+<li><p><strong>log</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to have log-<cite>y</cite> values or not.</p></li>
+<li><p><strong>filename</strong> (<em>str</em><em>, </em><em>optional</em>) – Figure filename to save.</p></li>
+<li><p><strong>xpad</strong> (<em>float</em><em>, </em><em>optional</em>) – Padding size between columns.</p></li>
+<li><p><strong>ypad</strong> (<em>float</em><em>, </em><em>optional</em>) – Padding size between rows.</p></li>
+<li><p><strong>gridshow</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to show grid or not.</p></li>
+<li><p><strong>ms</strong> (<em>int</em><em>, </em><em>optional</em>) – Marker size.</p></li>
+<li><p><strong>labelsize</strong> (<em>int</em><em>, </em><em>optional</em>) – Axes label sizes.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.plotting.plot_sens">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.plotting.</span></span><span class="sig-name descname"><span class="pre">plot_sens</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sensdata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cases</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bar'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reverse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topsens</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">par_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">case_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlbl</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid_show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">legend_show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">legend_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ncol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lbl_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">22</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yoffset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xdatatick</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xticklabel_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xticklabel_rotation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sens.png'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/plotting.html#plot_sens"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.plotting.plot_sens" title="Link to this definition"></a></dt>
+<dd><p>Plots sensitivities for multiple observables with respect to multiple parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sensdata</strong> (<em>np.ndarray</em>) – An array of sensitivities of size <cite>(o,d)</cite>.</p></li>
+<li><p><strong>pars</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) – List of parameter indices to use. All should be less than <cite>d</cite>.</p></li>
+<li><p><strong>cases</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) – List of output indices to use. All should be less than <cite>o</cite>.</p></li>
+<li><p><strong>vis</strong> (<em>str</em><em>, </em><em>optional</em>) – Plot type ‘bar’ or ‘graph’ (the latter is not used/tested often).</p></li>
+<li><p><strong>reverse</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to flip the input data (i.e. parameters and outputs).</p></li>
+<li><p><strong>topsens</strong> (<em>int</em><em>, </em><em>optional</em>) – Show only some number of top parameters (default: show all).</p></li>
+<li><p><strong>par_labels</strong> (<em>list</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Parameter labels.</p></li>
+<li><p><strong>case_labels</strong> (<em>list</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Output labels.</p></li>
+<li><p><strong>colors</strong> (<em>None</em><em>, </em><em>optional</em>) – Parameter bar colors.</p></li>
+<li><p><strong>xlbl</strong> (<em>str</em><em>, </em><em>optional</em>) – X-label.</p></li>
+<li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – Title.</p></li>
+<li><p><strong>grid_show</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to show the grid.</p></li>
+<li><p><strong>legend_show</strong> (<em>int</em><em>, </em><em>optional</em>) – Type of legend location, <cite>1</cite> is inside, <cite>2</cite> is below, <cite>3</cite> is above the graph.</p></li>
+<li><p><strong>legend_size</strong> (<em>int</em><em>, </em><em>optional</em>) – Legend fontsize.</p></li>
+<li><p><strong>ncol</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of columns in legend.</p></li>
+<li><p><strong>lbl_size</strong> (<em>int</em><em>, </em><em>optional</em>) – Axes label size.</p></li>
+<li><p><strong>yoffset</strong> (<em>float</em><em>, </em><em>optional</em>) – Vertical offset, white space below the figure.</p></li>
+<li><p><strong>xdatatick</strong> (<em>list</em><em>[</em><em>float</em><em>]</em><em>, </em><em>optional</em>) – X-tick locations. By default, <cite>1, …, o</cite>.</p></li>
+<li><p><strong>xticklabel_size</strong> (<em>int</em><em>, </em><em>optional</em>) – X-tick label size.</p></li>
+<li><p><strong>xticklabel_rotation</strong> (<em>int</em><em>, </em><em>optional</em>) – X-tick label rotation angle.</p></li>
+<li><p><strong>figname</strong> (<em>str</em><em>, </em><em>optional</em>) – Figure file name.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.plotting.plot_jsens">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.plotting.</span></span><span class="sig-name descname"><span class="pre">plot_jsens</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msens</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jsens</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">varname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inpar_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'senscirc.png'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/plotting.html#plot_jsens"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.plotting.plot_jsens" title="Link to this definition"></a></dt>
+<dd><p>Plotting circular joint sensitivities.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msens</strong> (<em>np.ndarray</em>) – Main sensitivities, a 1d array.</p></li>
+<li><p><strong>jsens</strong> (<em>np.ndarray</em>) – Joint sensitivities. A 2d square array.</p></li>
+<li><p><strong>varname</strong> (<em>str</em><em>, </em><em>optional</em>) – Variable name.</p></li>
+<li><p><strong>inpar_names</strong> (<em>list</em><em>, </em><em>optional</em>) – List of names for input parameters. Defaults to something generic.</p></li>
+<li><p><strong>figname</strong> (<em>str</em><em>, </em><em>optional</em>) – Saving figure file name.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.plotting.plot_tri">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.plotting.</span></span><span class="sig-name descname"><span class="pre">plot_tri</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axarr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'b'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">12</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zorder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/plotting.html#plot_tri"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.plotting.plot_tri" title="Link to this definition"></a></dt>
+<dd><p>Plots multidimensional samples in a triangular way, i.e. 1d and 2d cuts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xi</strong> (<em>np.ndarray</em>) – <cite>(N,d)</cite> array to plot.</p></li>
+<li><p><strong>names</strong> (<em>list</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – List of <cite>d</cite> names.</p></li>
+<li><p><strong>msize</strong> (<em>int</em><em>, </em><em>optional</em>) – Markersize of the 2d plots.</p></li>
+<li><p><strong>axarr</strong> (<em>None</em><em>, </em><em>optional</em>) – Optional array of axes.</p></li>
+<li><p><strong>clr</strong> (<em>str</em><em>, </em><em>optional</em>) – Optional color.</p></li>
+<li><p><strong>yy</strong> (<em>None</em><em>, </em><em>optional</em>) – Optional if we want to color-code by value. Overwrites clr.</p></li>
+<li><p><strong>zorder</strong> (<em>None</em><em>, </em><em>optional</em>) – Order of plotting.</p></li>
+<li><p><strong>lsize</strong> (<em>int</em><em>, </em><em>optional</em>) – Label size. Defaults to 12.</p></li>
+<li><p><strong>figname</strong> (<em>str</em><em>, </em><em>optional</em>) – Figure file name.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.plotting.plot_pdf1d">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.plotting.</span></span><span class="sig-name descname"><span class="pre">plot_pdf1d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sams</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pltype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hist'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'b'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lstyle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'--'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nom_height_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">histalpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/plotting.html#plot_pdf1d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.plotting.plot_pdf1d" title="Link to this definition"></a></dt>
+<dd><p>Plotting 1d PDFs of samples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sams</strong> (<em>np.ndarray</em>) – The <cite>(N,)</cite> samples of interest.</p></li>
+<li><p><strong>pltype</strong> (<em>str</em><em>, </em><em>optional</em>) – Plot type. Options are ‘kde’ (Kernel Density Estimation), ‘hist’ (Histogram), ‘sam’ (plot samples as dots on x-axis), ‘nom’ (plot a nominal vertical line)</p></li>
+<li><p><strong>color</strong> (<em>str</em><em>, </em><em>optional</em>) – Color.</p></li>
+<li><p><strong>lstyle</strong> (<em>str</em><em>, </em><em>optional</em>) – Line style.</p></li>
+<li><p><strong>lw</strong> (<em>float</em><em>, </em><em>optional</em>) – Line width, when relevant.</p></li>
+<li><p><strong>nom_height_factor</strong> (<em>float</em><em>, </em><em>optional</em>) – Controls the height of the nominal vertical bar.</p></li>
+<li><p><strong>histalpha</strong> (<em>float</em><em>, </em><em>optional</em>) – Opacity of histogram, between <cite>0</cite> and <cite>1</cite>.</p></li>
+<li><p><strong>label</strong> (<em>str</em><em>, </em><em>optional</em>) – Label for legend.</p></li>
+<li><p><strong>ax</strong> (<em>plt.Axes</em><em>, </em><em>optional</em>) – Axis handle. If None, use the current axis.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>ax is changed as a result of this function. Further beautification and figure saving should be done outside this function.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.plotting.plot_pdf2d">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.plotting.</span></span><span class="sig-name descname"><span class="pre">plot_pdf2d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">samsx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samsy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pltype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'kde'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ncont</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lwidth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mstyle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'o'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/plotting.html#plot_pdf2d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.plotting.plot_pdf2d" title="Link to this definition"></a></dt>
+<dd><p>Plot 2d contour plot of a PDF given two sets of samples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>samsx</strong> (<em>np.ndarray</em>) – First <cite>(N,)</cite> samples of interest.</p></li>
+<li><p><strong>samsy</strong> (<em>np.ndarray</em>) – Second <cite>(N,)</cite> samples of interest.</p></li>
+<li><p><strong>pltype</strong> (<em>str</em><em>, </em><em>optional</em>) – Plot type. Options are Options are ‘kde’ (Kernel Density Estimation), ‘sam’ (plot samples only).</p></li>
+<li><p><strong>ncont</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of contours.</p></li>
+<li><p><strong>color</strong> (<em>str</em><em>, </em><em>optional</em>) – Color. If None, uses the multicolor default of matplotlib.</p></li>
+<li><p><strong>lwidth</strong> (<em>float</em><em>, </em><em>optional</em>) – Line width.</p></li>
+<li><p><strong>mstyle</strong> (<em>str</em><em>, </em><em>optional</em>) – Marker stile.</p></li>
+<li><p><strong>ax</strong> (<em>plt.Axes</em><em>, </em><em>optional</em>) – Axis handle. If None, use the current axis.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>ax is changed as a result of this function. Further beautification and figure saving should be done outside this function.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.plotting.plot_pdfs">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.plotting.</span></span><span class="sig-name descname"><span class="pre">plot_pdfs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ind_show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tri'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdf_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hist'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samples_</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'chain.txt'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">burnin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">every</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names_</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nominal_</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prange_</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_2dsamples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">13</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">13</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xpad</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ypad</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/plotting.html#plot_pdfs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.plotting.plot_pdfs" title="Link to this definition"></a></dt>
+<dd><p>Computing and plotting set of 1d and/or 2d PDFs given a sample set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ind_show</strong> (<em>list</em><em>[</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – Indices of dimensions (columns of samples) to show.</p></li>
+<li><p><strong>plot_type</strong> (<em>str</em><em>, </em><em>optional</em>) – Plot type. Options are ‘tri’ (trianguar plot of 1d/2d marginals), ‘inds’ (1d marginals in a single figure), ‘ind’ (individual files for 1d and 2d marginal PDFs)</p></li>
+<li><p><strong>pdf_type</strong> (<em>str</em><em>, </em><em>optional</em>) – 1d PDF type. Options are ‘hist’ (histogram) or ‘kde’ (Kernel Density Estimation)</p></li>
+<li><p><strong>samples</strong> (<em>str</em><em> or </em><em>np.ndarray</em><em>, </em><em>optional</em>) – Filename or <cite>(N,d)</cite> numpy array of samples.</p></li>
+<li><p><strong>burnin</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of samples to throw away from the beginning of samples.</p></li>
+<li><p><strong>every</strong> (<em>int</em><em>, </em><em>optional</em>) – Stratification: use every <cite>k</cite>-th sample.</p></li>
+<li><p><strong>names</strong> (<em>str</em><em> or </em><em>list</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Filename containing the names of dimensions or list of names. Default is None, that leads to generic names.</p></li>
+<li><p><strong>nominal</strong> (<em>str</em><em> or </em><em>np.ndarray</em><em>, </em><em>optional</em>) – Filename or <cite>(d,)</cite> numpy array of nominals to be shown as vertical bars on top of 1d PDFs, and dots on top of 2d PDFs.</p></li>
+<li><p><strong>prange</strong> (<em>str</em><em> or </em><em>np.ndarray</em><em>, </em><em>optional</em>) – Filename or <cite>(d,2)</cite> numpy array of dimensional ranges to be shown as ‘box’ priors.</p></li>
+<li><p><strong>show_2dsamples</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether or not to display the samples on top of 2d contour plots.</p></li>
+<li><p><strong>lsize</strong> (<em>int</em><em> or </em><em>float</em><em>, </em><em>optional</em>) – Title size and X- and Y- label size.</p></li>
+<li><p><strong>zsize</strong> (<em>int</em><em> or </em><em>float</em><em>, </em><em>optional</em>) – X- and Y- tick label size.</p></li>
+<li><p><strong>xpad</strong> (<em>float</em><em>, </em><em>optional</em>) – Horizontal padding for multiplot figures (‘tri’ and ‘inds’).</p></li>
+<li><p><strong>ypad</strong> (<em>float</em><em>, </em><em>optional</em>) – Vertical padding for multiplot figures (‘tri’ and ‘inds’).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Figure and axes array handles for further edits if needed.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.plotting.plot_ens">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.plotting.</span></span><span class="sig-name descname"><span class="pre">plot_ens</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xdata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ydata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'b'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid_show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mec</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'k'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connected</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(None,</span> <span class="pre">None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/plotting.html#plot_ens"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.plotting.plot_ens" title="Link to this definition"></a></dt>
+<dd><p>Plotting an ensemble of <cite>y</cite> values versus input <cite>x</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xdata</strong> (<em>np.ndarray</em>) – Input values, an 1d array of size <cite>(N,)</cite>.</p></li>
+<li><p><strong>ydata</strong> (<em>np.ndarray</em>) – Output values, a 2d array of size <cite>(N,M)</cite>.</p></li>
+<li><p><strong>color</strong> (<em>str</em><em>, </em><em>optional</em>) – Plot color.</p></li>
+<li><p><strong>lw</strong> (<em>int</em><em> or </em><em>float</em><em>, </em><em>optional</em>) – Linewidth.</p></li>
+<li><p><strong>ms</strong> (<em>int</em><em> or </em><em>float</em><em>, </em><em>optional</em>) – Markersize.</p></li>
+<li><p><strong>grid_show</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to show the grid or not.</p></li>
+<li><p><strong>label</strong> (<em>str</em><em>, </em><em>optional</em>) – Label for legends down the road.</p></li>
+<li><p><strong>mec</strong> (<em>str</em><em>, </em><em>optional</em>) – Marker edge color</p></li>
+<li><p><strong>connected</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to connect the data dots or not.</p></li>
+<li><p><strong>interp</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to have smooth interpolation or not.</p></li>
+<li><p><strong>offset</strong> (<em>tuple</em><em>, </em><em>optional</em>) – Tuple of (shift, scale) to preprocess y-data, if needed, both shift and scale are either None or 1d arrays of size <cite>(d,)</cite>.</p></li>
+<li><p><strong>ax</strong> (<em>plt.Axes</em><em>, </em><em>optional</em>) – Axis handle. If None, use the current axis.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>ax is changed as a result of this function. Further beautification and figure saving should be done outside this function.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.plotting.plot_vars">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.plotting.</span></span><span class="sig-name descname"><span class="pre">plot_vars</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xdata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ydata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variances</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ysam</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stdfactor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">varlabels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">varcolors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid_show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connected</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(None,</span> <span class="pre">None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/plotting.html#plot_vars"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.plotting.plot_vars" title="Link to this definition"></a></dt>
+<dd><p>Plotting mean predictions with multicolor variances as error bars.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xdata</strong> (<em>np.ndarray</em>) – Input values, an 1d array of size <cite>(N,)</cite>.</p></li>
+<li><p><strong>ydata</strong> (<em>np.ndarray</em>) – Output values, a 1d array of size <cite>(N,)</cite>.</p></li>
+<li><p><strong>variances</strong> (<em>None</em><em>, </em><em>optional</em>) – Variances, a 2d array of size <cite>(N,K)</cite>.</p></li>
+<li><p><strong>ysam</strong> (<em>None</em><em>, </em><em>optional</em>) – True samples, a 2d array of size <cite>(N,M)</cite>.</p></li>
+<li><p><strong>stdfactor</strong> (<em>float</em><em>, </em><em>optional</em>) – Factor in front of st.dev. for plotting (e.g. <cite>1.0</cite> or <cite>3.0</cite>).</p></li>
+<li><p><strong>varlabels</strong> (<em>list</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – List of <cite>K</cite> labels for each variance. If None, the code comes up with generic names.</p></li>
+<li><p><strong>varcolors</strong> (<em>list</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – List of <cite>K</cite> variance colors. If None, the code uses shades of grey (not fifty).</p></li>
+<li><p><strong>grid_show</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether or not to show the grid.</p></li>
+<li><p><strong>connected</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to connect the data dots or not.</p></li>
+<li><p><strong>interp</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to have smooth interpolation or not.</p></li>
+<li><p><strong>offset</strong> (<em>tuple</em><em>, </em><em>optional</em>) – Tuple of (shift, scale) to preprocess y-data, if needed, both shift and scale are either None or 1d arrays of size <cite>(d,)</cite>.</p></li>
+<li><p><strong>ax</strong> (<em>plt.Axes</em><em>, </em><em>optional</em>) – Axis handle. If None, use the current axis.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>ax is changed as a result of this function. Further beautification and figure saving should be done outside this function.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.plotting.plot_shade">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.plotting.</span></span><span class="sig-name descname"><span class="pre">plot_shade</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xdata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ydata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">51</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">mpl.cm.BuGn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds_show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid_show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/plotting.html#plot_shade"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.plotting.plot_shade" title="Link to this definition"></a></dt>
+<dd><p>Plotting quantile-shaded predictions given dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xdata</strong> (<em>np.ndarray</em>) – Input values, an 1d array of size <cite>(N,)</cite>.</p></li>
+<li><p><strong>ydata</strong> (<em>np.ndarray</em>) – Output values, a 2d array of size <cite>(N,M)</cite>.</p></li>
+<li><p><strong>nq</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of quantiles.</p></li>
+<li><p><strong>cmap</strong> (<em>mpl.Cm</em><em>, </em><em>optional</em>) – Colormap. Defaults to BuGn.</p></li>
+<li><p><strong>bounds_show</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to highlight the bounds.</p></li>
+<li><p><strong>grid_show</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to show the grid or not.</p></li>
+<li><p><strong>ax</strong> (<em>plt.Axes</em><em>, </em><em>optional</em>) – Axis handle. If None, use the current axis.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>ax is changed as a result of this function. Further beautification and figure saving should be done outside this function.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.plotting.plot_1d_anchored_single">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.plotting.</span></span><span class="sig-name descname"><span class="pre">plot_1d_anchored_single</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">models</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modelpars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">anchor1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">anchor2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ngr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">111</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modellabels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clearax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">legend_show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/plotting.html#plot_1d_anchored_single"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.plotting.plot_1d_anchored_single" title="Link to this definition"></a></dt>
+<dd><p>Plots 1d slices of a list of models going through one or two anchor points.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>models</strong> (<em>list</em><em>[</em><em>callable</em><em>]</em>) – List of model evaluators.</p></li>
+<li><p><strong>modelpars</strong> (<em>list</em><em>[</em><em>tuple</em><em>]</em>) – List of model parameter tuples, one for each.</p></li>
+<li><p><strong>anchor1</strong> (<em>np.ndarray</em>) – 1d array of the first anchor point.</p></li>
+<li><p><strong>anchor2</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – 1d array of the second anchor point. Defaults to None, which means a randomly selected second anchor a given distance away from the first.</p></li>
+<li><p><strong>pad</strong> (<em>float</em><em>, </em><em>optional</em>) – Padding on both sides of the interval, so the slice goes beyond the anchors.</p></li>
+<li><p><strong>scale</strong> (<em>float</em><em>, </em><em>optional</em>) – The distance of the second anchor from the first, if randomly selected.</p></li>
+<li><p><strong>ngr</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of grid points for plotting.</p></li>
+<li><p><strong>modellabels</strong> (<em>None</em><em>, </em><em>optional</em>) – Labels/names of the models for legend.</p></li>
+<li><p><strong>clearax</strong> (<em>bool</em><em>, </em><em>optional</em>) – Clear axes ticks and labels for less busy plotting.</p></li>
+<li><p><strong>verbose_labels</strong> (<em>bool</em><em>, </em><em>optional</em>) – Optionally, annotates the points showing their coordinates. Makes sense for low-dim cases.</p></li>
+<li><p><strong>legend_show</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to show the legend or not.</p></li>
+<li><p><strong>ax</strong> (<em>None</em><em>, </em><em>optional</em>) – Axis handle. Default to None, i.e. current axis.</p></li>
+<li><p><strong>figname</strong> (<em>None</em><em>, </em><em>optional</em>) – Optionally, save to a figure with a given name.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.plotting.plot_1d_anchored">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.plotting.</span></span><span class="sig-name descname"><span class="pre">plot_1d_anchored</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">models</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modelpars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">anchor1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ngr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">111</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modellabels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">legend_show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clearax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ncolrow</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(3,</span> <span class="pre">5)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/plotting.html#plot_1d_anchored"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.plotting.plot_1d_anchored" title="Link to this definition"></a></dt>
+<dd><p>Plot multiple 1d slices of models all going through a given anchor point.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>models</strong> (<em>list</em><em>[</em><em>callable</em><em>]</em>) – List of model evaluators.</p></li>
+<li><p><strong>modelpars</strong> (<em>list</em><em>[</em><em>tuple</em><em>]</em>) – List of model parameter tuples, one for each.</p></li>
+<li><p><strong>anchor1</strong> (<em>np.ndarray</em>) – The anchor point, 1d array.</p></li>
+<li><p><strong>pad</strong> (<em>float</em><em>, </em><em>optional</em>) – Padding on both sides of the interval, so the slice goes beyond the anchors.</p></li>
+<li><p><strong>scale</strong> (<em>float</em><em>, </em><em>optional</em>) – The distance of the second anchor from the first, if randomly selected.</p></li>
+<li><p><strong>ngr</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of grid points for plotting.</p></li>
+<li><p><strong>modellabels</strong> (<em>None</em><em>, </em><em>optional</em>) – Labels/names of the models for legend.</p></li>
+<li><p><strong>legend_show</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to show the legend or not.</p></li>
+<li><p><strong>clearax</strong> (<em>bool</em><em>, </em><em>optional</em>) – Clear axes ticks and labels for less busy plotting.</p></li>
+<li><p><strong>verbose_labels</strong> (<em>bool</em><em>, </em><em>optional</em>) – Optionally, annotates the points showing their coordinates. Makes sense for low-dim cases.</p></li>
+<li><p><strong>ncolrow</strong> (<em>tuple</em><em>, </em><em>optional</em>) – Number of columns and rows in a tuple. Defaults to (3, 5).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.plotting.plot_2d_anchored_single">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.plotting.</span></span><span class="sig-name descname"><span class="pre">plot_2d_anchored_single</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">models</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modelpars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">anchor1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">anchor2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">anchor3</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">squished</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ngr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">111</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modellabels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorful</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clearax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">legend_show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modelcolors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/plotting.html#plot_2d_anchored_single"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.plotting.plot_2d_anchored_single" title="Link to this definition"></a></dt>
+<dd><p>Plots 2d slices of a list of models going through one or two anchor points.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>models</strong> (<em>list</em><em>[</em><em>callable</em><em>]</em>) – List of model evaluators.</p></li>
+<li><p><strong>modelpars</strong> (<em>list</em><em>[</em><em>tuple</em><em>]</em>) – List of model parameter tuples, one for each.</p></li>
+<li><p><strong>anchor1</strong> (<em>np.ndarray</em>) – 1d array of the first anchor point.</p></li>
+<li><p><strong>anchor2</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – 1d array of the second anchor point. Defaults to None, which means a randomly selected second anchor a given distance away from the first.</p></li>
+<li><p><strong>anchor3</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – 1d array of the third anchor point. Defaults to None, which means a randomly selected second anchor a given distance away from the first.</p></li>
+<li><p><strong>squished</strong> (<em>bool</em><em>, </em><em>optional</em>) – If squished, the bases in the plane are not orthogonal.</p></li>
+<li><p><strong>pad</strong> (<em>float</em><em>, </em><em>optional</em>) – Padding on both sides of the domain, so the slice goes beyond the anchors.</p></li>
+<li><p><strong>scale</strong> (<em>float</em><em>, </em><em>optional</em>) – The distance of the second anchor from the first, if randomly selected.</p></li>
+<li><p><strong>ngr</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of grid points for plotting.</p></li>
+<li><p><strong>modellabels</strong> (<em>None</em><em>, </em><em>optional</em>) – Labels/names of the models for legend.</p></li>
+<li><p><strong>colorful</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether printing with colored surface or simply contours.</p></li>
+<li><p><strong>clearax</strong> (<em>bool</em><em>, </em><em>optional</em>) – Clear axes ticks and labels for less busy plotting.</p></li>
+<li><p><strong>legend_show</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to show the legend or not.</p></li>
+<li><p><strong>modelcolors</strong> (<em>list</em><em>, </em><em>optional</em>) – List of model colors.</p></li>
+<li><p><strong>ax</strong> (<em>None</em><em>, </em><em>optional</em>) – Axis handle. Default to None, i.e. current axis.</p></li>
+<li><p><strong>figname</strong> (<em>None</em><em>, </em><em>optional</em>) – Optionally, save to a figure with a given name.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.plotting.plot_2d_anchored">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.plotting.</span></span><span class="sig-name descname"><span class="pre">plot_2d_anchored</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">models</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modelpars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">anchor1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">anchor2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ngr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">111</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modellabels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">squished</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorful</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">legend_show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modelcolors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clearax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ncolrow</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(3,</span> <span class="pre">5)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/plotting.html#plot_2d_anchored"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.plotting.plot_2d_anchored" title="Link to this definition"></a></dt>
+<dd><p>Plot multiple 1d slices of models all going through a given anchor point or given two anchor points.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>models</strong> (<em>list</em><em>[</em><em>callable</em><em>]</em>) – List of model evaluators.</p></li>
+<li><p><strong>modelpars</strong> (<em>list</em><em>[</em><em>tuple</em><em>]</em>) – List of model parameter tuples, one for each.</p></li>
+<li><p><strong>anchor1</strong> (<em>np.ndarray</em>) – The first anchor point, 1d array.</p></li>
+<li><p><strong>anchor2</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – The second anchor point. Defaults to None, in which case it is selected randomly.</p></li>
+<li><p><strong>pad</strong> (<em>float</em><em>, </em><em>optional</em>) – Padding on both sides of the interval, so the slice goes beyond the anchors.</p></li>
+<li><p><strong>scale</strong> (<em>float</em><em>, </em><em>optional</em>) – The distance of the second anchor from the first, if randomly selected.</p></li>
+<li><p><strong>ngr</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of grid points for plotting.</p></li>
+<li><p><strong>modellabels</strong> (<em>None</em><em>, </em><em>optional</em>) – Labels/names of the models for legend.</p></li>
+<li><p><strong>squished</strong> (<em>bool</em><em>, </em><em>optional</em>) – If squished, the bases in the plane are not orthogonal.</p></li>
+<li><p><strong>colorful</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether printing with colored surface or simply contours.</p></li>
+<li><p><strong>legend_show</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to show the legend or not.</p></li>
+<li><p><strong>modelcolors</strong> (<em>list</em><em>, </em><em>optional</em>) – List of model colors.</p></li>
+<li><p><strong>clearax</strong> (<em>bool</em><em>, </em><em>optional</em>) – Clear axes ticks and labels for less busy plotting.</p></li>
+<li><p><strong>ncolrow</strong> (<em>tuple</em><em>, </em><em>optional</em>) – Number of columns and rows in a tuple. Defaults to (3, 5).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.plotting.plot_fcn_1d_slice">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.plotting.</span></span><span class="sig-name descname"><span class="pre">plot_fcn_1d_slice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fcn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ngr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">133</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'b'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/plotting.html#plot_fcn_1d_slice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.plotting.plot_fcn_1d_slice" title="Link to this definition"></a></dt>
+<dd><p>Plotting 1d slice of a function, keeping the rest of the inputs at a given nominal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fcn</strong> (<em>callable</em>) – Function evaluator.</p></li>
+<li><p><strong>domain</strong> (<em>np.ndarray</em>) – Domain of evaluation, a 2d array of size <cite>(d, 2)</cite>.</p></li>
+<li><p><strong>idim</strong> (<em>int</em><em>, </em><em>optional</em>) – Dimension, with respect to which the slice is plotted.</p></li>
+<li><p><strong>nom</strong> (<em>None</em><em>, </em><em>optional</em>) – Nominal values, an 1d array of size <cite>(d,)</cite>.</p></li>
+<li><p><strong>ngr</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of grid points, i.e. resolution.</p></li>
+<li><p><strong>color</strong> (<em>str</em><em>, </em><em>optional</em>) – Color of the plot.</p></li>
+<li><p><strong>lw</strong> (<em>int</em><em>, </em><em>optional</em>) – Line width.</p></li>
+<li><p><strong>ax</strong> (<em>plt.Axes</em><em>, </em><em>optional</em>) – Axis handle. If None, use the current axis.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>ax is changed as a result of this function. Further beautification and figure saving should be done outside this function.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.plotting.plot_fcn_2d_slice">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.plotting.</span></span><span class="sig-name descname"><span class="pre">plot_fcn_2d_slice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fcn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jdim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ngr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">33</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/plotting.html#plot_fcn_2d_slice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.plotting.plot_fcn_2d_slice" title="Link to this definition"></a></dt>
+<dd><p>Plotting 2d slice of a function, keeping the rest of the inputs at a given nominal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fcn</strong> (<em>callable</em>) – Function evaluator.</p></li>
+<li><p><strong>domain</strong> (<em>np.ndarray</em>) – Domain of evaluation, a 2d array of size <cite>(d, 2)</cite>.</p></li>
+<li><p><strong>idim</strong> (<em>int</em><em>, </em><em>optional</em>) – First dimension, with respect to which the slice is plotted.</p></li>
+<li><p><strong>jdim</strong> (<em>int</em><em>, </em><em>optional</em>) – Second dimension, with respect to which the slice is plotted.</p></li>
+<li><p><strong>nom</strong> (<em>None</em><em>, </em><em>optional</em>) – Nominal values, an 1d array of size <cite>(d,)</cite>.</p></li>
+<li><p><strong>ngr</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of grid points per dimension, i.e. resolution.</p></li>
+<li><p><strong>color</strong> (<em>str</em><em>, </em><em>optional</em>) – Color of the plot.</p></li>
+<li><p><strong>ax</strong> (<em>plt.Axes</em><em>, </em><em>optional</em>) – Axis handle. If None, use the current axis.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>ax is changed as a result of this function. Further beautification and figure saving should be done outside this function.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.plotting.plot_uc_sample">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.plotting.</span></span><span class="sig-name descname"><span class="pre">plot_uc_sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pred_sam</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nqt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">111</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/plotting.html#plot_uc_sample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.plotting.plot_uc_sample" title="Link to this definition"></a></dt>
+<dd><p>Plotting uncertainty calibration figure given samples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pred_sam</strong> (<em>np.ndarray</em>) – Samples, in a 2d array of size <cite>(M,N)</cite>.</p></li>
+<li><p><strong>data</strong> (<em>np.ndarray</em>) – Data, in a 1d array of size <cite>(N,)</cite>.</p></li>
+<li><p><strong>nqt</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of quantiles used. Essentially, the resolution.</p></li>
+<li><p><strong>label</strong> (<em>str</em><em>, </em><em>optional</em>) – Custom label.</p></li>
+<li><p><strong>ax</strong> (<em>plt.Axes</em><em>, </em><em>optional</em>) – Axis handle. If None, use the current axis.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Data fractions and quantile values corresponding to these fractions.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>ax is changed as a result of this function. Further beautification and figure saving should be done outside this function.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.plotting.plot_uc_exact">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.plotting.</span></span><span class="sig-name descname"><span class="pre">plot_uc_exact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pred_mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pred_std</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nqt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">111</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/plotting.html#plot_uc_exact"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.plotting.plot_uc_exact" title="Link to this definition"></a></dt>
+<dd><p>Plotting uncertainty calibration figure given mean and standard deviation of predictions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pred_mean</strong> (<em>np.ndarray</em>) – Prediction mean, in a 1d array of size <cite>(N,)</cite>.</p></li>
+<li><p><strong>pred_std</strong> (<em>np.ndarray</em>) – Prediction standard deviation, in a 1d array of size <cite>(N,)</cite>.</p></li>
+<li><p><strong>data</strong> (<em>np.ndarray</em>) – Data, in a 1d array of size <cite>(N,)</cite>.</p></li>
+<li><p><strong>nqt</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of quantiles used. Essentially, the resolution.</p></li>
+<li><p><strong>label</strong> (<em>str</em><em>, </em><em>optional</em>) – Custom label.</p></li>
+<li><p><strong>ax</strong> (<em>plt.Axes</em><em>, </em><em>optional</em>) – Axis handle. If None, use the current axis.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Data fractions and quantile values corresponding to these fractions.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>ax is changed as a result of this function. Further beautification and figure saving should be done outside this function.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.plotting.plot_samples_pdfs">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.plotting.</span></span><span class="sig-name descname"><span class="pre">plot_samples_pdfs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xx_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">legends</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'x'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/plotting.html#plot_samples_pdfs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.plotting.plot_samples_pdfs" title="Link to this definition"></a></dt>
+<dd><p>Plots multiple pdfs given list of samples</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xx_list</strong> (<em>list</em><em>[</em><em>np.ndarray</em><em>]</em>) – List of samples.</p></li>
+<li><p><strong>legends</strong> (<em>list</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – List of legends. Defaults to generic text.</p></li>
+<li><p><strong>colors</strong> (<em>list</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – List of colors. Defaults to generic color cycle.</p></li>
+<li><p><strong>file_prefix</strong> (<em>str</em><em>, </em><em>optional</em>) – Figure file prefix.</p></li>
+<li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – Figure title. Default is no title.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.plotting.plot_1d">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.plotting.</span></span><span class="sig-name descname"><span class="pre">plot_1d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">odim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ngr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'orange'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lstyle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'-'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/plotting.html#plot_1d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.plotting.plot_1d" title="Link to this definition"></a></dt>
+<dd><p>Plotting 1d slice of a function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func</strong> (<em>callable</em>) – The callable function of interest.</p></li>
+<li><p><strong>domain</strong> (<em>np.ndarray</em>) – A dx2 array indicating the domain of the function.</p></li>
+<li><p><strong>ax</strong> (<em>None</em><em>, </em><em>optional</em>) – Axis object to plot on. If None, plots on current axis.</p></li>
+<li><p><strong>idim</strong> (<em>int</em><em>, </em><em>optional</em>) – Input dimension to plot against.</p></li>
+<li><p><strong>odim</strong> (<em>int</em><em>, </em><em>optional</em>) – Output QoI to plot against. Useful for multioutput funtions.</p></li>
+<li><p><strong>nom</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – Nominal value to fix non-plotted dimensions at. An array of size d. If None, uses the domain center.</p></li>
+<li><p><strong>ngr</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of grid points.</p></li>
+<li><p><strong>color</strong> (<em>str</em><em>, </em><em>optional</em>) – Color of the graph.</p></li>
+<li><p><strong>label</strong> (<em>str</em><em>, </em><em>optional</em>) – Label of the graph.</p></li>
+<li><p><strong>lstyle</strong> (<em>str</em><em>, </em><em>optional</em>) – Linestyle of the graph.</p></li>
+<li><p><strong>figname</strong> (<em>str</em><em>, </em><em>optional</em>) – Figure name to save.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.plotting.plot_2d">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.plotting.</span></span><span class="sig-name descname"><span class="pre">plot_2d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jdim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">odim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ngr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">33</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/plotting.html#plot_2d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.plotting.plot_2d" title="Link to this definition"></a></dt>
+<dd><p>Plotting 2d slice of a function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func</strong> (<em>callable</em>) – The callable function of interest.</p></li>
+<li><p><strong>domain</strong> (<em>np.ndarray</em>) – A dx2 array indicating the domain of the function.</p></li>
+<li><p><strong>ax</strong> (<em>None</em><em>, </em><em>optional</em>) – Axis object to plot on. If None, plots on current axis.</p></li>
+<li><p><strong>idim</strong> (<em>int</em><em>, </em><em>optional</em>) – First input dimension to plot against.</p></li>
+<li><p><strong>jdim</strong> (<em>int</em><em>, </em><em>optional</em>) – Second input dimension to plot against.</p></li>
+<li><p><strong>odim</strong> (<em>int</em><em>, </em><em>optional</em>) – Output QoI to plot against. Useful for multioutput funtions.</p></li>
+<li><p><strong>nom</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – Nominal value to fix non-plotted dimensions at. An array of size d. If None, uses the domain center.</p></li>
+<li><p><strong>ngr</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of grid points.</p></li>
+<li><p><strong>figname</strong> (<em>str</em><em>, </em><em>optional</em>) – Figure name to save.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.plotting.plot_parity">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.plotting.</span></span><span class="sig-name descname"><span class="pre">plot_parity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['y1',</span> <span class="pre">'y2']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'parity.png'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/plotting.html#plot_parity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.plotting.plot_parity" title="Link to this definition"></a></dt>
+<dd><p>A minimal parity plot.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y1</strong> (<em>np.ndarray</em>) – The 1d array on the x-axis.</p></li>
+<li><p><strong>y2</strong> (<em>np.ndarray</em>) – The 1d array on the y-axis.</p></li>
+<li><p><strong>labels</strong> (<em>list</em><em>, </em><em>optional</em>) – List of length two for the axes labels.</p></li>
+<li><p><strong>filename</strong> (<em>str</em><em>, </em><em>optional</em>) – Figure filename to save.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.plotting.plot_cov">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.plotting.</span></span><span class="sig-name descname"><span class="pre">plot_cov</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ngr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pnames</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/plotting.html#plot_cov"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.plotting.plot_cov" title="Link to this definition"></a></dt>
+<dd><p>Plotting covariance contour given mean and covariance matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mm</strong> (<em>np.ndarray</em>) – Mean, an 1d array of size <cite>(2,)</cite>.</p></li>
+<li><p><strong>cc</strong> (<em>np.ndarray</em>) – Covariance matrix, a 2d array of size <cite>(2,2)</cite>.</p></li>
+<li><p><strong>ngr</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of grid points per dimension, i.e. resolution.</p></li>
+<li><p><strong>f</strong> (<em>float</em><em>, </em><em>optional</em>) – Factor for the plotting range in terms of standard deviations.</p></li>
+<li><p><strong>pnames</strong> (<em>list</em><em>, </em><em>optional</em>) – List of parameter names. If None, generic names are used.</p></li>
+<li><p><strong>ax</strong> (<em>plt.Axes</em><em>, </em><em>optional</em>) – Axis handle. If None, use the current axis.</p></li>
+<li><p><strong>savefig</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to save the figure or not.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.plotting.plot_cov_tri">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.plotting.</span></span><span class="sig-name descname"><span class="pre">plot_cov_tri</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cov</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cov_tri.png'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/plotting.html#plot_cov_tri"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.plotting.plot_cov_tri" title="Link to this definition"></a></dt>
+<dd><p>Plots covariance in a triangular pairwise way.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mean</strong> (<em>np.ndarray</em>) – Mean, an 1d array of size <cite>(npar,)</cite>.</p></li>
+<li><p><strong>cov</strong> (<em>np.ndarray</em>) – Covariance matrix, a 2d array of size <cite>(npar,npar)</cite>.</p></li>
+<li><p><strong>names</strong> (<em>list</em><em>, </em><em>optional</em>) – List of parameter names. If None, generic names are used.</p></li>
+<li><p><strong>figname</strong> (<em>str</em><em>, </em><em>optional</em>) – Figure filename to save.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.plotting.plot_sensmat">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.plotting.</span></span><span class="sig-name descname"><span class="pre">plot_sensmat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sensdata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cases</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">par_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">case_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cutoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sensmat.png'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/plotting.html#plot_sensmat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.plotting.plot_sensmat" title="Link to this definition"></a></dt>
+<dd><p>Plot sensitivity matrix as a heatmap or bar plot.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sensdata</strong> (<em>np.ndarray</em>) – 2d array of sensitivity data, size (ncases, npars).</p></li>
+<li><p><strong>pars</strong> (<em>list</em>) – List of parameter names.</p></li>
+<li><p><strong>cases</strong> (<em>list</em>) – List of case names.</p></li>
+<li><p><strong>par_labels</strong> (<em>list</em><em>, </em><em>optional</em>) – List of parameter labels for plotting. Defaults to None, which uses generic names.</p></li>
+<li><p><strong>case_labels</strong> (<em>list</em><em>, </em><em>optional</em>) – List of case labels for plotting. Defaults to None, which uses generic names.</p></li>
+<li><p><strong>cutoff</strong> (<em>float</em><em>, </em><em>optional</em>) – Cutoff value for sensitivity inclusion. Defaults to -1000.</p></li>
+<li><p><strong>figname</strong> (<em>str</em><em>, </em><em>optional</em>) – Figure filename to save. Defaults to ‘sensmat.png’.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.plotting.plot_joy">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.plotting.</span></span><span class="sig-name descname"><span class="pre">plot_joy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sams_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xcond</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outnames</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nominal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/plotting.html#plot_joy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.plotting.plot_joy" title="Link to this definition"></a></dt>
+<dd><p>Plots a joyplot of multiple sample sets along given output conditions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sams_list</strong> (<em>list</em><em>[</em><em>np.ndarray</em><em>]</em>) – List of sample sets, each in a 2d array of size <cite>(M,N)</cite>.</p></li>
+<li><p><strong>xcond</strong> (<em>list</em><em>[</em><em>float</em><em>]</em>) – List of output condition values, length N.</p></li>
+<li><p><strong>outnames</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – List of output condition names, length N.</p></li>
+<li><p><strong>color_list</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – List of colors for each sample set.</p></li>
+<li><p><strong>nominal</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – Nominal values for each output condition, an 1d array of size <cite>(N,)</cite>. Defaults to None.</p></li>
+<li><p><strong>offset_factor</strong> (<em>float</em><em>, </em><em>optional</em>) – Factor to scale the pdf heights. Defaults to 1.0.</p></li>
+<li><p><strong>ax</strong> (<em>plt.Axes</em><em>, </em><em>optional</em>) – Axis handle. If None, use the current axis.</p></li>
+<li><p><strong>figname</strong> (<em>str</em><em>, </em><em>optional</em>) – Figure filename to save.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../mindex/index.html" class="btn btn-neutral float-left" title="pytuq.utils.mindex" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../stats/index.html" class="btn btn-neutral float-right" title="pytuq.utils.stats" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

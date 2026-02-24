@@ -1,0 +1,184 @@
+pytuq.func.genz
+===============
+
+.. py:module:: pytuq.func.genz
+
+.. autoapi-nested-parse::
+
+   Genz function family module.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.func.genz.GenzBase
+   pytuq.func.genz.GenzOscillatory
+   pytuq.func.genz.GenzQuadOscillatory
+   pytuq.func.genz.GenzSum
+   pytuq.func.genz.GenzCornerPeak
+
+
+Module Contents
+---------------
+
+.. py:class:: GenzBase(weights=[1.0], domain=None, name='GenzBase')
+
+   Bases: :py:obj:`pytuq.func.func.Function`
+
+
+   Base class for Genz function family
+
+   .. attribute:: weights
+
+      Dimensional weights.
+
+      :type: np.ndarray
+
+
+   .. py:attribute:: weights
+
+
+   .. py:attribute:: dim
+
+
+   .. py:attribute:: name
+      :value: 'GenzBase'
+
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+
+.. py:class:: GenzOscillatory(shift=0.0, weights=[1.0], domain=None, name='GenzOscillatory')
+
+   Bases: :py:obj:`GenzBase`
+
+
+   Genz Oscillatory function
+
+   Reference: [https://www.sfu.ca/~ssurjano/oscil.html]
+
+   .. math::
+       f(x) = \cos\left(2 \pi s + w^T x \right)
+
+   Default values are :math:`s = 0` and :math:`w = [1.0]`.
+
+
+
+   .. py:attribute:: shift
+      :value: 0.0
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: intgl()
+
+
+.. py:class:: GenzQuadOscillatory(shift=0.0, weights=[1.0], domain=None, name='GenzQuadOscillatory')
+
+   Bases: :py:obj:`GenzBase`
+
+
+   Genz Quadratic Oscillatory function
+
+   .. math::
+       f(x) = \cos\left(2 \pi s + w^T x^2 \right)
+
+   Default values are :math:`s = 0` and :math:`w = [1.0]`.
+
+
+
+   .. py:attribute:: shift
+      :value: 0.0
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: GenzSum(shift=0.0, weights=[1.0], domain=None, name='GenzSummation')
+
+   Bases: :py:obj:`GenzBase`
+
+
+   Genz Summation function
+
+   .. math::
+       f(x) = s + w^T x
+
+   Default values are :math:`s = 0` and :math:`w = [1.0]`.
+
+
+
+
+   .. py:attribute:: shift
+      :value: 0.0
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: GenzCornerPeak(weights=[1.0], domain=None, name='GenzCornerPeak')
+
+   Bases: :py:obj:`GenzBase`
+
+
+   Genz Corner Peak function
+
+   Reference: [https://www.sfu.ca/~ssurjano/copeak.html]
+
+   .. math::
+       f(x) = \frac{1}{(1 + w^T x)^{d+1}}
+
+    Default values are :math:`w = [1.0]`.
+
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+

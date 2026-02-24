@@ -1,0 +1,195 @@
+pytuq.minf.vi
+=============
+
+.. py:module:: pytuq.minf.vi
+
+.. autoapi-nested-parse::
+
+   Variational Inference module.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.minf.vi.MFVI
+
+
+Module Contents
+---------------
+
+.. py:class:: MFVI(model, y_data, pdim, lossinfo, reparam=None, priors=None)
+
+   .. py:attribute:: model
+
+
+   .. py:attribute:: pdim
+
+
+   .. py:attribute:: y_data
+
+
+   .. py:attribute:: reparam
+      :value: None
+
+
+
+   .. py:attribute:: priors
+      :value: None
+
+
+
+   .. py:attribute:: nmc
+
+
+   .. py:method:: sigma_exp(rho)
+
+      Exponential reparameterization for standard deviation.
+
+      :param rho: Input parameter.
+      :type rho: float
+
+      :returns: Standard deviation.
+      :rtype: float
+
+
+
+   .. py:method:: sigma_logexp(rho)
+
+      Log1-Exponential reparameterization for standard deviation.
+
+      :param rho: Input parameter.
+      :type rho: float
+
+      :returns: Standard deviation.
+      :rtype: float
+
+
+
+   .. py:method:: sigma_idt(rho)
+
+      Identity reparameterization for standard deviation.
+
+      :param rho: Input parameter.
+      :type rho: float
+
+      :returns: Standard deviation.
+      :rtype: float
+
+
+
+   .. py:method:: get_posteriors(var_params)
+
+      Get the posterior distributions based on variational parameters.
+
+      :param var_params: Variational parameters array of shape (2d,).
+      :type var_params: np.ndarray
+
+      :returns: List of posterior distributions for each parameter.
+      :rtype: list[pytuq.rv.mrv.MRV]
+
+
+
+   .. py:method:: eval_loss_gmarg(var_params, ps=None)
+
+      Evaluate the negative log posterior with gauss-marginal approximation.
+
+      :param var_params: Variational parameters array of shape (2d,).
+      :type var_params: np.ndarray
+      :param ps: Previous parameter samples of shape (nmc, pdim). Defaults to None.
+      :type ps: np.ndarray, optional
+
+      :returns: Negative log posterior value.
+      :rtype: float
+
+
+
+   .. py:method:: eval_loss_abc(var_params, ps=None, eps=0.01, alpha=1.0)
+
+      Evaluate the negative log posterior with ABC approximation.
+
+      :param var_params: Variational parameters array of shape (2d,).
+      :type var_params: np.ndarray
+      :param ps: Previous parameter samples of shape (nmc, pdim). Defaults to None.
+      :type ps: np.ndarray, optional
+      :param eps: ABC tolerance. Defaults to 1.e-2.
+      :type eps: float, optional
+      :param alpha: Weighting factor for the ABC term. Defaults to 1.0.
+      :type alpha: float, optional
+
+      :returns: Negative log posterior value.
+      :rtype: float
+
+
+
+   .. py:method:: eval_loss_elbo(var_params, ps=None)
+
+      Evaluate the ELBO.
+
+      :param var_params: Variational parameters array of shape (2d,).
+      :type var_params: np.ndarray
+      :param ps: Previous parameter samples of shape (nmc, pdim). Defaults to None.
+      :type ps: np.ndarray, optional
+
+      :returns: Negative log posterior value.
+      :rtype: float
+
+
+
+   .. py:method:: eval_loss_elbo_grad_(x, eps=0.001)
+
+      Evaluate the gradient of the ELBO using finite differences.
+
+      :param x: Variational parameters array of shape (2d,).
+      :type x: np.ndarray
+      :param eps: Finite difference step size. Defaults to 1.e-3.
+      :type eps: float, optional
+
+      :returns: Gradient of the ELBO.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: plot_parpdf(var_params, ax=None)
+
+      Plot the variational posterior PDFs.
+
+      :param var_params: Variational parameters array of shape (2d,).
+      :type var_params: np.ndarray
+      :param ax: Axes object to plot on. Defaults to None which plots on the current axis.
+      :type ax: matplotlib.axes.Axes, optional
+
+
+
+   .. py:method:: compute_pred(var_params, nsam, model=None)
+
+      Compute model predictions based on variational parameters.
+
+      :param var_params: Variational parameters array of shape (2d,).
+      :type var_params: np.ndarray
+      :param nsam: Number of samples to draw.
+      :type nsam: int
+      :param model: Forward model. Defaults to None, which uses self.model.
+      :type model: callable, optional
+
+      :returns: Model prediction samples of shape (nsam, ndata).
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: sample_posterior(var_params, nsam)
+
+      Sample from the variational posterior.
+
+      :param var_params: Variational parameters array of shape (2d,).
+      :type var_params: np.ndarray
+      :param nsam: Number of samples to draw.
+      :type nsam: int
+
+      :returns: Samples from the variational posterior of shape (nsam, pdim).
+      :rtype: np.ndarray
+
+
+

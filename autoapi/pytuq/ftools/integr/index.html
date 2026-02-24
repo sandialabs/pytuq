@@ -1,0 +1,441 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytuq.ftools.integr &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="pytuq.ftools.orf" href="../orf/index.html" />
+    <link rel="prev" title="pytuq.ftools" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../auto_examples/index.html">Software Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../auto_examples/index.html#surrogates">Surrogates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_pce.html">Polynomial Chaos Expansion Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Section Navigation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">pytuq</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">pytuq.ftools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../func/index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rv/index.html">pytuq.rv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../surrogates/index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Section Navigation</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">pytuq</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">pytuq.ftools</a></li>
+      <li class="breadcrumb-item active">pytuq.ftools.integr</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/autoapi/pytuq/ftools/integr/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-pytuq.ftools.integr">
+<span id="pytuq-ftools-integr"></span><h1>pytuq.ftools.integr<a class="headerlink" href="#module-pytuq.ftools.integr" title="Link to this heading"></a></h1>
+<p>Module for integration classes.</p>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.ftools.integr.Integrator" title="pytuq.ftools.integr.Integrator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Integrator</span></code></a></p></td>
+<td><p>Base class for integration objects.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.ftools.integr.IntegratorScipy" title="pytuq.ftools.integr.IntegratorScipy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IntegratorScipy</span></code></a></p></td>
+<td><p>Integrator that uses SciPy.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.ftools.integr.IntegratorMCMC" title="pytuq.ftools.integr.IntegratorMCMC"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IntegratorMCMC</span></code></a></p></td>
+<td><p>Integration via MCMC sampling.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.ftools.integr.IntegratorMC" title="pytuq.ftools.integr.IntegratorMC"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IntegratorMC</span></code></a></p></td>
+<td><p>Integrator via Monte-Carlo sampling.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.ftools.integr.IntegratorWMC" title="pytuq.ftools.integr.IntegratorWMC"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IntegratorWMC</span></code></a></p></td>
+<td><p>Integrator via weighted Monte-Carlo.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.ftools.integr.IntegratorGMM" title="pytuq.ftools.integr.IntegratorGMM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IntegratorGMM</span></code></a></p></td>
+<td><p>Integrator via Gaussian mixture models.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.ftools.integr.IntegratorGMMT" title="pytuq.ftools.integr.IntegratorGMMT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IntegratorGMMT</span></code></a></p></td>
+<td><p>Integrator via truncated Gaussian mixture models.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.ftools.integr.Integrator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.ftools.integr.</span></span><span class="sig-name descname"><span class="pre">Integrator</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/integr.html#Integrator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.integr.Integrator" title="Link to this definition"></a></dt>
+<dd><p>Base class for integration objects.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.ftools.integr.Integrator.integrate">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">integrate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xdata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw_args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/ftools/integr.html#Integrator.integrate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.integr.Integrator.integrate" title="Link to this definition"></a></dt>
+<dd><p>Dummy method to be implemented by children classes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>function</strong> (<em>callable</em>) – The function to integrate f(x, <a href="#id1"><span class="problematic" id="id2">**</span></a>func_args), where the first argument should be a 2d array of size <cite>(N, d)</cite>.</p></li>
+<li><p><strong>domain</strong> (<em>None</em><em>, </em><em>optional</em>) – Optionally provide a domain of integration, <cite>(d, 2)</cite>.</p></li>
+<li><p><strong>func_args</strong> (<em>None</em><em>, </em><em>optional</em>) – Optional keyword arguments of the function.</p></li>
+<li><p><strong>xdata</strong> (<em>None</em><em>, </em><em>optional</em>) – Provide input samples, if needed by the integrator.</p></li>
+<li><p><strong>**kw_args</strong> – Other keyword arguments necessary for the integrator at hand.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – This needs to be implemented by children classes.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.ftools.integr.Integrator.integrate_multiple">
+<span class="sig-name descname"><span class="pre">integrate_multiple</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f_arg_list</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/ftools/integr.html#Integrator.integrate_multiple"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.integr.Integrator.integrate_multiple" title="Link to this definition"></a></dt>
+<dd><p>Integrate multiple functions at once with the same input samples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f_arg_list</strong> (<em>list</em><em>[</em><em>tuple</em><em>]</em>) – List of pairs (function, argument).</p></li>
+<li><p><strong>**kwargs</strong> – Keyword arguments for the function.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of integral values.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[float]</p>
+</dd>
+</dl>
+<p>TODO: assumes all functions take the same keyword arguments.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.ftools.integr.IntegratorScipy">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.ftools.integr.</span></span><span class="sig-name descname"><span class="pre">IntegratorScipy</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/integr.html#IntegratorScipy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.integr.IntegratorScipy" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pytuq.ftools.integr.Integrator" title="pytuq.ftools.integr.Integrator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Integrator</span></code></a></p>
+<p>Integrator that uses SciPy.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.ftools.integr.IntegratorScipy.integrate">
+<span class="sig-name descname"><span class="pre">integrate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xdata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsrel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-05</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/ftools/integr.html#IntegratorScipy.integrate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.integr.IntegratorScipy.integrate" title="Link to this definition"></a></dt>
+<dd><p>Integration via SciPy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>function</strong> (<em>callable</em>) – The function to integrate f(x, <a href="#id3"><span class="problematic" id="id4">**</span></a>func_args), where the first argument should be a 2d array of size <cite>(N, d)</cite>.</p></li>
+<li><p><strong>domain</strong> (<em>None</em><em>, </em><em>optional</em>) – Optionally provide a domain of integration, <cite>(d, 2)</cite>.</p></li>
+<li><p><strong>func_args</strong> (<em>None</em><em>, </em><em>optional</em>) – Optional keyword arguments of the function.</p></li>
+<li><p><strong>xdata</strong> (<em>None</em><em>, </em><em>optional</em>) – Provide input samples, if needed by the integrator.</p></li>
+<li><p><strong>epsrel</strong> (<em>float</em><em>, </em><em>optional</em>) – Integration tolerance. Defaults to 1.e-5.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple of integral value and dictionary containing error.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(float, dict)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.ftools.integr.IntegratorMCMC">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.ftools.integr.</span></span><span class="sig-name descname"><span class="pre">IntegratorMCMC</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/integr.html#IntegratorMCMC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.integr.IntegratorMCMC" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pytuq.ftools.integr.Integrator" title="pytuq.ftools.integr.Integrator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Integrator</span></code></a></p>
+<p>Integration via MCMC sampling.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.ftools.integr.IntegratorMCMC.integrate">
+<span class="sig-name descname"><span class="pre">integrate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xdata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nmc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/ftools/integr.html#IntegratorMCMC.integrate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.integr.IntegratorMCMC.integrate" title="Link to this definition"></a></dt>
+<dd><p>Integrate via MCMC sampling.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>function</strong> (<em>callable</em>) – The function to integrate f(x, <a href="#id5"><span class="problematic" id="id6">**</span></a>func_args), where the first argument should be a 2d array of size <cite>(N, d)</cite>.</p></li>
+<li><p><strong>domain</strong> (<em>None</em><em>, </em><em>optional</em>) – Optionally provide a domain of integration, <cite>(d, 2)</cite>.</p></li>
+<li><p><strong>func_args</strong> (<em>None</em><em>, </em><em>optional</em>) – Optional keyword arguments of the function.</p></li>
+<li><p><strong>xdata</strong> (<em>None</em><em>, </em><em>optional</em>) – Provide input samples, if needed by the integrator.</p></li>
+<li><p><strong>nmc</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of requested samples. Defaults to 100.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple of integral value and dictionary containing useful info.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(float, dict)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.ftools.integr.IntegratorMC">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.ftools.integr.</span></span><span class="sig-name descname"><span class="pre">IntegratorMC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/ftools/integr.html#IntegratorMC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.integr.IntegratorMC" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pytuq.ftools.integr.Integrator" title="pytuq.ftools.integr.Integrator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Integrator</span></code></a></p>
+<p>Integrator via Monte-Carlo sampling.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.ftools.integr.IntegratorMC.integrate">
+<span class="sig-name descname"><span class="pre">integrate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xdata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nmc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/ftools/integr.html#IntegratorMC.integrate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.integr.IntegratorMC.integrate" title="Link to this definition"></a></dt>
+<dd><p>Integration via Monte-Carlo.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Args:</dt><dd><p>function (callable): The function to integrate f(x, <a href="#id7"><span class="problematic" id="id8">**</span></a>func_args), where the first argument should be a 2d array of size <cite>(N, d)</cite>.
+domain (None, optional): Optionally provide a domain of integration, <cite>(d, 2)</cite>.
+func_args (None, optional): Optional keyword arguments of the function.
+xdata (None, optional): Provide input samples, if needed by the integrator.
+nmc (int, optional): Number of requested samples. Defaults to 100.</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple of integral value and dictionary containing useful info.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>(float, dict)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.ftools.integr.IntegratorWMC">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.ftools.integr.</span></span><span class="sig-name descname"><span class="pre">IntegratorWMC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/ftools/integr.html#IntegratorWMC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.integr.IntegratorWMC" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pytuq.ftools.integr.Integrator" title="pytuq.ftools.integr.Integrator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Integrator</span></code></a></p>
+<p>Integrator via weighted Monte-Carlo.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.ftools.integr.IntegratorWMC.integrate">
+<span class="sig-name descname"><span class="pre">integrate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xdata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cov</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nmc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/ftools/integr.html#IntegratorWMC.integrate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.integr.IntegratorWMC.integrate" title="Link to this definition"></a></dt>
+<dd><p>Integration by weighted single Gaussian.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>function</strong> (<em>callable</em>) – The function to integrate f(x, <a href="#id9"><span class="problematic" id="id10">**</span></a>func_args), where the first argument should be a 2d array of size <cite>(N, d)</cite>.</p></li>
+<li><p><strong>func_args</strong> (<em>None</em><em>, </em><em>optional</em>) – Optional keyword arguments of the function.</p></li>
+<li><p><strong>xdata</strong> (<em>None</em><em>, </em><em>optional</em>) – Provide input samples, if needed by the integrator.</p></li>
+<li><p><strong>mean</strong> (<em>None</em><em>, </em><em>optional</em>) – Mean array of size <cite>d</cite> of the associated gaussian weight. This argument is not optional.</p></li>
+<li><p><strong>cov</strong> (<em>None</em><em>, </em><em>optional</em>) – Covariance matrix of size <cite>(d,d)</cite> of the associated gaussian weight. Defaults to identity matrix.</p></li>
+<li><p><strong>nmc</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of requested samples. Defaults to 100.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple of integral value and dictionary containing useful info.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(float, dict)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.ftools.integr.IntegratorGMM">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.ftools.integr.</span></span><span class="sig-name descname"><span class="pre">IntegratorGMM</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/integr.html#IntegratorGMM"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.integr.IntegratorGMM" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pytuq.ftools.integr.Integrator" title="pytuq.ftools.integr.Integrator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Integrator</span></code></a></p>
+<p>Integrator via Gaussian mixture models.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.ftools.integr.IntegratorGMM.integrate">
+<span class="sig-name descname"><span class="pre">integrate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xdata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">means</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nmc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/ftools/integr.html#IntegratorGMM.integrate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.integr.IntegratorGMM.integrate" title="Link to this definition"></a></dt>
+<dd><p>Integration by Gaussian mixtures.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>function</strong> (<em>callable</em>) – The function to integrate f(x, <a href="#id11"><span class="problematic" id="id12">**</span></a>func_args), where the first argument should be a 2d array of size <cite>(N, d)</cite>.</p></li>
+<li><p><strong>func_args</strong> (<em>None</em><em>, </em><em>optional</em>) – Optional keyword arguments of the function.</p></li>
+<li><p><strong>xdata</strong> (<em>None</em><em>, </em><em>optional</em>) – Provide input samples, if needed by the integrator.</p></li>
+<li><p><strong>weights</strong> (<em>list</em><em>[</em><em>float</em><em>]</em><em>, </em><em>optional</em>) – Weights of associated mixtures. Defaults to None, which automatically picks the weights based on function values and its width at the peaks.</p></li>
+<li><p><strong>means</strong> (<em>list</em><em>[</em><em>np.ndarray</em><em>]</em><em>, </em><em>optional</em>) – List of mean arrays. This is not optional.</p></li>
+<li><p><strong>covs</strong> (<em>list</em><em>[</em><em>np.ndarray</em><em>]</em><em>, </em><em>optional</em>) – List of covariance matrices.</p></li>
+<li><p><strong>nmc</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of requested samples. Defaults to 100.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple of integral value and dictionary containing useful info.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(float, dict)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.ftools.integr.IntegratorGMMT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.ftools.integr.</span></span><span class="sig-name descname"><span class="pre">IntegratorGMMT</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/integr.html#IntegratorGMMT"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.integr.IntegratorGMMT" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pytuq.ftools.integr.Integrator" title="pytuq.ftools.integr.Integrator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Integrator</span></code></a></p>
+<p>Integrator via truncated Gaussian mixture models.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.ftools.integr.IntegratorGMMT.integrate">
+<span class="sig-name descname"><span class="pre">integrate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xdata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">means</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nmc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/ftools/integr.html#IntegratorGMMT.integrate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.integr.IntegratorGMMT.integrate" title="Link to this definition"></a></dt>
+<dd><p>Integration by truncated Gaussian mixtures.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>function</strong> (<em>callable</em>) – The function to integrate f(x, <a href="#id13"><span class="problematic" id="id14">**</span></a>func_args), where the first argument should be a 2d array of size <cite>(N, d)</cite>.</p></li>
+<li><p><strong>domain</strong> (<em>None</em><em>, </em><em>optional</em>) – Provide a domain of integration/truncation, <cite>(d, 2)</cite>.</p></li>
+<li><p><strong>func_args</strong> (<em>None</em><em>, </em><em>optional</em>) – Optional keyword arguments of the function.</p></li>
+<li><p><strong>xdata</strong> (<em>None</em><em>, </em><em>optional</em>) – Provide input samples, if needed by the integrator.</p></li>
+<li><p><strong>weights</strong> (<em>list</em><em>[</em><em>float</em><em>]</em><em>, </em><em>optional</em>) – Weights of associated mixtures. Defaults to None, which automatically picks the weights based on function values and its width at the peaks.</p></li>
+<li><p><strong>means</strong> (<em>list</em><em>[</em><em>np.ndarray</em><em>]</em><em>, </em><em>optional</em>) – List of mean arrays. This is not optional.</p></li>
+<li><p><strong>covs</strong> (<em>list</em><em>[</em><em>np.ndarray</em><em>]</em><em>, </em><em>optional</em>) – List of covariance matrices.</p></li>
+<li><p><strong>nmc</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of requested samples. Defaults to 100.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple of integral value and dictionary containing useful info.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(float, dict)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="pytuq.ftools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../orf/index.html" class="btn btn-neutral float-right" title="pytuq.ftools.orf" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

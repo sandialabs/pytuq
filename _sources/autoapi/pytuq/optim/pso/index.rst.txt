@@ -1,0 +1,54 @@
+pytuq.optim.pso
+===============
+
+.. py:module:: pytuq.optim.pso
+
+.. autoapi-nested-parse::
+
+   Particle Swarm Optimization module. Relies on pyswarms library.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.optim.pso.PSO
+
+
+Module Contents
+---------------
+
+.. py:class:: PSO(dim)
+
+   Bases: :py:obj:`pytuq.optim.optim.OptBase`
+
+
+   "Particle swarm optimization class.
+
+
+
+   .. py:attribute:: dim
+
+
+   .. py:method:: run(nsteps, param_ini, nparticles=100, bounds=None, psoptions=None)
+
+      A PSO optimization run.
+
+      :param nsteps: Number of optimization steps.
+      :type nsteps: int
+      :param param_ini: Is irrelevant, and only given to match the signature of the parent.
+      :type param_ini: None
+      :param nparticles: Number of particles. Defaults to 100.
+      :type nparticles: int, optional
+      :param bounds: Optimization bounds array.
+      :type bounds: np.ndarray, optional
+      :param psoptions: Optional keyword arguments to pass to pyswarms.
+      :type psoptions: None, optional
+
+      :returns: Dictionary of results. Keys are 'samples' (history array of parameters), 'objvalues' (history of objective values), 'best' (best parameters array), 'bestobj' (best objective value).
+      :rtype: dict
+
+
+

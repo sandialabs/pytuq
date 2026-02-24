@@ -1,0 +1,414 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytuq.lreg.merr &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="pytuq.lreg.opt" href="../opt/index.html" />
+    <link rel="prev" title="pytuq.lreg.lreg" href="../lreg/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../auto_examples/index.html">Software Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../auto_examples/index.html#surrogates">Surrogates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_pce.html">Polynomial Chaos Expansion Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Section Navigation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">pytuq</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../ftools/index.html">pytuq.ftools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../func/index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">pytuq.lreg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rv/index.html">pytuq.rv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../surrogates/index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Section Navigation</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">pytuq</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">pytuq.lreg</a></li>
+      <li class="breadcrumb-item active">pytuq.lreg.merr</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/autoapi/pytuq/lreg/merr/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-pytuq.lreg.merr">
+<span id="pytuq-lreg-merr"></span><h1>pytuq.lreg.merr<a class="headerlink" href="#module-pytuq.lreg.merr" title="Link to this heading"></a></h1>
+<p>Module for linear regression with embedded model error.</p>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.lreg.merr.lreg_merr" title="pytuq.lreg.merr.lreg_merr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lreg_merr</span></code></a></p></td>
+<td><p>A class for model error embedded linear regression.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.lreg.merr.map_flat_to_tri" title="pytuq.lreg.merr.map_flat_to_tri"><code class="xref py py-obj docutils literal notranslate"><span class="pre">map_flat_to_tri</span></code></a>(ij, n, embedding)</p></td>
+<td><p>Mapping a flattened index of embedded parameters into a pair of indices.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.lreg.merr.logpost_emb" title="pytuq.lreg.merr.logpost_emb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logpost_emb</span></code></a>(x[, aw, bw, ind_embed, dvinfo, ...])</p></td>
+<td><p>Log-posterior of embedded model.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.lreg.merr.map_flat_to_tri">
+<span class="sig-prename descclassname"><span class="pre">pytuq.lreg.merr.</span></span><span class="sig-name descname"><span class="pre">map_flat_to_tri</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ij</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embedding</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/lreg/merr.html#map_flat_to_tri"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.lreg.merr.map_flat_to_tri" title="Link to this definition"></a></dt>
+<dd><p>Mapping a flattened index of embedded parameters into a pair of indices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ij</strong> (<em>int</em>) – Flattened parameter index.</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – Number of physical parameters.</p></li>
+<li><p><strong>embedding</strong> (<em>string</em>) – Embedding type.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple of indices <span class="math notranslate nohighlight">\((i,j)\)</span>, to fill a triangular matrix of lower-Cholesky factor of the covariance.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple(int, int)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.lreg.merr.logpost_emb">
+<span class="sig-prename descclassname"><span class="pre">pytuq.lreg.merr.</span></span><span class="sig-name descname"><span class="pre">logpost_emb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ind_embed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dvinfo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiplicative</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merr_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'abc'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embedding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'iid'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean_fixed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfs_mean</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/lreg/merr.html#logpost_emb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.lreg.merr.logpost_emb" title="Link to this definition"></a></dt>
+<dd><p>Log-posterior of embedded model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>np.ndarray</em>) – An 1d array input to log-posterior, i.e. the dimensionality is the chain dimensionality.</p></li>
+<li><p><strong>aw</strong> (<em>None</em><em>, </em><em>optional</em>) – The A-matrix of size <span class="math notranslate nohighlight">\((N,K)\)</span> of basis evaluations at training points. Default None should not be used, and is made keyword out of convenience.</p></li>
+<li><p><strong>bw</strong> (<em>None</em><em>, </em><em>optional</em>) – An 1d array of data if size <span class="math notranslate nohighlight">\(N\)</span>. Default None should not be used, and is made keyword out of convenience.</p></li>
+<li><p><strong>ind_embed</strong> (<em>None</em><em>, </em><em>optional</em>) – Indices of parameters/coefficients/bases to embed model error in. Defaults to None, which means embed in all.</p></li>
+<li><p><strong>dvinfo</strong> (<em>dict</em><em>, </em><em>optional</em>) – Dictionary of parameters controlling data variance. Keys are ‘npar’ (number of parameters), ‘fcn’ (callable to return data variance vector given the last part of the chain, and auxiliary paraemters), ‘aux’ (auxiliary parameters of the data variance function). Default is None, but should not be used.</p></li>
+<li><p><strong>multiplicative</strong> (<em>bool</em><em>, </em><em>optional</em>) – Indicates whether the embedding is multiplicative. Defaults to False.</p></li>
+<li><p><strong>merr_method</strong> (<em>str</em><em>, </em><em>optional</em>) – Model error embedding method. Options are ‘full’, ‘iid’, ‘abc’ (default).</p></li>
+<li><p><strong>embedding</strong> (<em>str</em><em>, </em><em>optional</em>) – Model error embedding type. Options are ‘iid’ (default) and ‘mvn’.</p></li>
+<li><p><strong>mean_fixed</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether the mean fit parameters are fixed or it is being inferred together with the model error parameters. Defaults to False.</p></li>
+<li><p><strong>cfs_mean</strong> (<em>None</em><em>, </em><em>optional</em>) – Mean coefficient vector. Part (or the whole, depending on ind_embed) of this will be overwritten if mean_fixed is False. Default is None, but it should never be used.</p></li>
+<li><p><strong>flag</strong> (<em>float</em><em>, </em><em>optional</em>) – A multiplicative flag to the log-posterior value. Defaults to 1.0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Log-posterior value.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.lreg.merr.lreg_merr">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.lreg.merr.</span></span><span class="sig-name descname"><span class="pre">lreg_merr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ind_embed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dvinfo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiplicative</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merr_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'abc'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bfgs'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean_fixed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embedding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'iid'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/lreg/merr.html#lreg_merr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.lreg.merr.lreg_merr" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../lreg/index.html#pytuq.lreg.lreg.lreg" title="pytuq.lreg.lreg.lreg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.lreg.lreg.lreg</span></code></a></p>
+<p>A class for model error embedded linear regression.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.lreg.merr.lreg_merr.cf">
+<span class="sig-name descname"><span class="pre">cf</span></span><a class="reference internal" href="../../../../_modules/pytuq/lreg/merr.html#lreg_merr.cf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.lreg.merr.lreg_merr.cf" title="Link to this definition"></a></dt>
+<dd><p>An 1d array of coefficients, of size <span class="math notranslate nohighlight">\(K\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.lreg.merr.lreg_merr.cf_cov">
+<span class="sig-name descname"><span class="pre">cf_cov</span></span><a class="reference internal" href="../../../../_modules/pytuq/lreg/merr.html#lreg_merr.cf_cov"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.lreg.merr.lreg_merr.cf_cov" title="Link to this definition"></a></dt>
+<dd><p>A 2d array of coefficient covariance of size <span class="math notranslate nohighlight">\((K,K)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.lreg.merr.lreg_merr.dvinfo">
+<span class="sig-name descname"><span class="pre">dvinfo</span></span><a class="headerlink" href="#pytuq.lreg.merr.lreg_merr.dvinfo" title="Link to this definition"></a></dt>
+<dd><p>Dictionary of parameters controlling data variance. Keys are ‘npar’ (number of parameters), ‘fcn’ (callable to return data variance vector given the last part of the chain, and auxiliary paraemters), ‘aux’ (auxiliary parameters of the data variance function).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.lreg.merr.lreg_merr.embedding">
+<span class="sig-name descname"><span class="pre">embedding</span></span><a class="reference internal" href="../../../../_modules/pytuq/lreg/merr.html#lreg_merr.embedding"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.lreg.merr.lreg_merr.embedding" title="Link to this definition"></a></dt>
+<dd><p>Model error embedding type. Options are ‘iid’ and ‘mvn’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.lreg.merr.lreg_merr.fitted">
+<span class="sig-name descname"><span class="pre">fitted</span></span><a class="reference internal" href="../../../../_modules/pytuq/lreg/merr.html#lreg_merr.fitted"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.lreg.merr.lreg_merr.fitted" title="Link to this definition"></a></dt>
+<dd><p>Indicates whether the fit is already performed or not.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.lreg.merr.lreg_merr.ind_embed">
+<span class="sig-name descname"><span class="pre">ind_embed</span></span><a class="reference internal" href="../../../../_modules/pytuq/lreg/merr.html#lreg_merr.ind_embed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.lreg.merr.lreg_merr.ind_embed" title="Link to this definition"></a></dt>
+<dd><p>Indices of parameters/coefficients/bases to embed model error in.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.lreg.merr.lreg_merr.mean_fixed">
+<span class="sig-name descname"><span class="pre">mean_fixed</span></span><a class="reference internal" href="../../../../_modules/pytuq/lreg/merr.html#lreg_merr.mean_fixed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.lreg.merr.lreg_merr.mean_fixed" title="Link to this definition"></a></dt>
+<dd><p>Whether the mean fit parameters are fixed or it is being inferred together with the model error parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.lreg.merr.lreg_merr.merr_method">
+<span class="sig-name descname"><span class="pre">merr_method</span></span><a class="reference internal" href="../../../../_modules/pytuq/lreg/merr.html#lreg_merr.merr_method"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.lreg.merr.lreg_merr.merr_method" title="Link to this definition"></a></dt>
+<dd><p>Model error embedding method. Options are ‘full’, ‘iid’, ‘abc’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.lreg.merr.lreg_merr.multiplicative">
+<span class="sig-name descname"><span class="pre">multiplicative</span></span><a class="reference internal" href="../../../../_modules/pytuq/lreg/merr.html#lreg_merr.multiplicative"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.lreg.merr.lreg_merr.multiplicative" title="Link to this definition"></a></dt>
+<dd><p>Indicates whether the embedding is multiplicative.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.lreg.merr.lreg_merr.opt_method">
+<span class="sig-name descname"><span class="pre">opt_method</span></span><a class="reference internal" href="../../../../_modules/pytuq/lreg/merr.html#lreg_merr.opt_method"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.lreg.merr.lreg_merr.opt_method" title="Link to this definition"></a></dt>
+<dd><p>Optimization methods. Options are ‘bfgs’ or ‘mcmc’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">ind_embed</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="reference internal" href="../../../../_modules/pytuq/lreg/merr.html#lreg_merr.ind_embed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">multiplicative</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="reference internal" href="../../../../_modules/pytuq/lreg/merr.html#lreg_merr.multiplicative"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id1" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">merr_method</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'abc'</span></em><a class="reference internal" href="../../../../_modules/pytuq/lreg/merr.html#lreg_merr.merr_method"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id2" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">opt_method</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'bfgs'</span></em><a class="reference internal" href="../../../../_modules/pytuq/lreg/merr.html#lreg_merr.opt_method"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id3" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id4">
+<span class="sig-name descname"><span class="pre">mean_fixed</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="reference internal" href="../../../../_modules/pytuq/lreg/merr.html#lreg_merr.mean_fixed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id4" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id5">
+<span class="sig-name descname"><span class="pre">embedding</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'iid'</span></em><a class="reference internal" href="../../../../_modules/pytuq/lreg/merr.html#lreg_merr.embedding"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id5" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.lreg.merr.lreg_merr.fita">
+<span class="sig-name descname"><span class="pre">fita</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/lreg/merr.html#lreg_merr.fita"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.lreg.merr.lreg_merr.fita" title="Link to this definition"></a></dt>
+<dd><p>Fit given A-matrix of basis evaluations and data array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> (<em>np.ndarray</em>) – A 2d array of size <span class="math notranslate nohighlight">\((N, K)\)</span> each row holding basis evaluations at a training point.</p></li>
+<li><p><strong>y</strong> (<em>np.ndarray</em>) – An 1d array of size <span class="math notranslate nohighlight">\(N\)</span> holding the data.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../lreg/index.html" class="btn btn-neutral float-left" title="pytuq.lreg.lreg" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../opt/index.html" class="btn btn-neutral float-right" title="pytuq.lreg.opt" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

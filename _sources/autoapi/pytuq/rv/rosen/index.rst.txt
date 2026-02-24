@@ -1,0 +1,88 @@
+pytuq.rv.rosen
+==============
+
+.. py:module:: pytuq.rv.rosen
+
+.. autoapi-nested-parse::
+
+   Class for Rosenblatt transformation.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.rv.rosen.Rosenblatt
+
+
+Module Contents
+---------------
+
+.. py:class:: Rosenblatt(xsam, sigmas=None, bwfactor=1.0)
+
+   Rosenblatt transformation class. KDE-based computations follow :cite:t:`Sargsyan:2010`.
+
+   .. attribute:: sigmas
+
+      Per-dimension bandwidths.
+
+      :type: np.ndarray
+
+   .. attribute:: xsam
+
+      The data based on which Rosenblatt map is built. A 2d array of size :math:`(N, d)`.
+
+      :type: np.ndarray
+
+
+   .. py:attribute:: xsam
+
+
+   .. py:method:: inv_bfgs(u, f=0.05)
+
+      Inverse Rosenblatt evaluator, where minimization is done with LBFGS.
+
+      :param u: An input array of size :math:`d`, all elements of which should in :math:`[0,1]`.
+      :type u: np.ndarray
+      :param f: Cushion factor for the root search.
+      :type f: float, optional
+
+      :returns: Output array of size :math:`d`.
+      :rtype: np.ndarray
+
+      .. note:: This is not being used, since for monotone function we can use hand-made bisection method, see inv().
+
+
+
+   .. py:method:: residual(x, u, idim)
+
+      Residual function to help the inversion.
+
+      :param x: Input 2d array of size :math:`(N,d)`
+      :type x: np.ndarray
+      :param u: The 'uniform' sample, an array of size :math:`d`.
+      :type u: np.ndarray
+      :param idim: Which dimension we are computing the residual for.
+      :type idim: int
+
+      :returns: Single residual value.
+      :rtype: float
+
+
+
+   .. py:method:: inv(u, f=1.5)
+
+      Inverse Rosenblatt evaluator, where minimization is done with bisection.
+
+      :param u: An input array of size :math:`d`, all elements of which should in :math:`[0,1]`.
+      :type u: np.ndarray
+      :param f: Cushion factor for the root search.
+      :type f: float, optional
+
+      :returns: Output array of size :math:`d`.
+      :rtype: np.ndarray
+
+
+

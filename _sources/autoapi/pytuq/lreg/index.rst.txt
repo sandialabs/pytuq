@@ -1,0 +1,19 @@
+pytuq.lreg
+==========
+
+.. py:module:: pytuq.lreg
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/pytuq/lreg/anl/index
+   /autoapi/pytuq/lreg/bcs/index
+   /autoapi/pytuq/lreg/lreg/index
+   /autoapi/pytuq/lreg/merr/index
+   /autoapi/pytuq/lreg/opt/index
+
+

@@ -1,0 +1,16 @@
+pytuq.surrogates
+================
+
+.. py:module:: pytuq.surrogates
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/pytuq/surrogates/nn/index
+   /autoapi/pytuq/surrogates/pce/index
+
+

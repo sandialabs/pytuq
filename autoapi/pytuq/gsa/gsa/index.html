@@ -1,0 +1,785 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytuq.gsa.gsa &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="pytuq.linred" href="../../linred/index.html" />
+    <link rel="prev" title="pytuq.gsa" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../auto_examples/index.html">Software Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../auto_examples/index.html#surrogates">Surrogates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_pce.html">Polynomial Chaos Expansion Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Section Navigation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">pytuq</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../ftools/index.html">pytuq.ftools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../func/index.html">pytuq.func</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rv/index.html">pytuq.rv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../surrogates/index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Section Navigation</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">pytuq</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">pytuq.gsa</a></li>
+      <li class="breadcrumb-item active">pytuq.gsa.gsa</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/autoapi/pytuq/gsa/gsa/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-pytuq.gsa.gsa">
+<span id="pytuq-gsa-gsa"></span><h1>pytuq.gsa.gsa<a class="headerlink" href="#module-pytuq.gsa.gsa" title="Link to this heading"></a></h1>
+<p>Various utilities and classes for global sensitivity analysis.</p>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.gsa.gsa.SensMethod" title="pytuq.gsa.gsa.SensMethod"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SensMethod</span></code></a></p></td>
+<td><p>Base class for various sensitivity methods implementation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.gsa.gsa.Linreg" title="pytuq.gsa.gsa.Linreg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Linreg</span></code></a></p></td>
+<td><p>Sensitivities computed via linear regression.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.gsa.gsa.Moat" title="pytuq.gsa.gsa.Moat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Moat</span></code></a></p></td>
+<td><p>Class for MOAT (Morris One At a Time) sensitivities.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.gsa.gsa.SamSobol" title="pytuq.gsa.gsa.SamSobol"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SamSobol</span></code></a></p></td>
+<td><p>Computing of sampling based main and total sensitivities, see Saltelli 2010.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.gsa.gsa.PCSobol" title="pytuq.gsa.gsa.PCSobol"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PCSobol</span></code></a></p></td>
+<td><p>PC-based Sobol senitivity computation.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.gsa.gsa.model_sens" title="pytuq.gsa.gsa.model_sens"><code class="xref py py-obj docutils literal notranslate"><span class="pre">model_sens</span></code></a>(model, model_params, domain[, method, ...])</p></td>
+<td><p>Sensitivities of a multioutput model.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.model_sens">
+<span class="sig-prename descclassname"><span class="pre">pytuq.gsa.gsa.</span></span><span class="sig-name descname"><span class="pre">model_sens</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'SamSobol'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nsam</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#model_sens"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.gsa.gsa.model_sens" title="Link to this definition"></a></dt>
+<dd><p>Sensitivities of a multioutput model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<em>callable</em>) – Model of a form <span class="math notranslate nohighlight">\(M(x, p)\)</span> where we are interesting in sensitivities with respect to <span class="math notranslate nohighlight">\(x\)</span>, and <span class="math notranslate nohighlight">\(p\)</span> are auxiliary parameters. The model is multioutput, taking <span class="math notranslate nohighlight">\((N,d)\)</span>-sized array, and returning a <span class="math notranslate nohighlight">\((N,o)\)</span>-sized array.</p></li>
+<li><p><strong>model_params</strong> (<em>list</em>) – List of model’s auxiliary parameters <span class="math notranslate nohighlight">\(p\)</span>.</p></li>
+<li><p><strong>domain</strong> (<em>np.ndarray</em>) – Domain of input, a 2d array of size <span class="math notranslate nohighlight">\((d,2)\)</span>.</p></li>
+<li><p><strong>method</strong> (<em>str</em><em>, </em><em>optional</em>) – Sensitivity method. Default is SamSobol. Other options are PCSobol, LinReg or Moat.</p></li>
+<li><p><strong>nsam</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of samples. Note that for some methods this is not the number of model evaluations needed.</p></li>
+<li><p><strong>plot</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to plot or not.</p></li>
+<li><p><strong>**kwargs</strong> – Other keyword arguments for initializing sensitivity objects.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Main and total sensitivities arrays, each of size <span class="math notranslate nohighlight">\((o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple(np.ndarray, np.ndarray)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.SensMethod">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.gsa.gsa.</span></span><span class="sig-name descname"><span class="pre">SensMethod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sens_names</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#SensMethod"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.gsa.gsa.SensMethod" title="Link to this definition"></a></dt>
+<dd><p>Base class for various sensitivity methods implementation.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.SensMethod.dim">
+<span class="sig-name descname"><span class="pre">dim</span></span><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#SensMethod.dim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.gsa.gsa.SensMethod.dim" title="Link to this definition"></a></dt>
+<dd><p>Dimensionality of the input.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.SensMethod.dom">
+<span class="sig-name descname"><span class="pre">dom</span></span><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#SensMethod.dom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.gsa.gsa.SensMethod.dom" title="Link to this definition"></a></dt>
+<dd><p>Domain of input, a 2d array of size <span class="math notranslate nohighlight">\((d,2)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.SensMethod.sens_names">
+<span class="sig-name descname"><span class="pre">sens_names</span></span><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#SensMethod.sens_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.gsa.gsa.SensMethod.sens_names" title="Link to this definition"></a></dt>
+<dd><p>List of names that are keys to dictionary sens.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.SensMethod.sens">
+<span class="sig-name descname"><span class="pre">sens</span></span><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#SensMethod.sens"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.gsa.gsa.SensMethod.sens" title="Link to this definition"></a></dt>
+<dd><p>Dictionary of sensitivities under a given method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">dom</span></span><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#SensMethod.dom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">dim</span></span><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#SensMethod.dim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id1" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">sens_names</span></span><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#SensMethod.sens_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id2" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">sens</span></span><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#SensMethod.sens"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id3" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.SensMethod.sample">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nsam</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#SensMethod.sample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.gsa.gsa.SensMethod.sample" title="Link to this definition"></a></dt>
+<dd><p>Sampling routine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>nsam</strong> (<em>int</em>) – Number of requested samples, <span class="math notranslate nohighlight">\(N\)</span>. Note that for some methods this is not the number of model evaluations needed.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – Should be implemented in children classes.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.SensMethod.compute">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ysam</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#SensMethod.compute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.gsa.gsa.SensMethod.compute" title="Link to this definition"></a></dt>
+<dd><p>Computing sensitivities, given model evaluations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ysam</strong> (<em>np.ndarray</em>) – A 2d array of model evaluations of size <span class="math notranslate nohighlight">\((M,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – Should be implemented in children classes.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.Linreg">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.gsa.gsa.</span></span><span class="sig-name descname"><span class="pre">Linreg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dom</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#Linreg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.gsa.gsa.Linreg" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pytuq.gsa.gsa.SensMethod" title="pytuq.gsa.gsa.SensMethod"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SensMethod</span></code></a></p>
+<p>Sensitivities computed via linear regression.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.Linreg.nsam">
+<span class="sig-name descname"><span class="pre">nsam</span></span><a class="headerlink" href="#pytuq.gsa.gsa.Linreg.nsam" title="Link to this definition"></a></dt>
+<dd><p>Number of samples requested, <span class="math notranslate nohighlight">\(N\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.Linreg.sens">
+<span class="sig-name descname"><span class="pre">sens</span></span><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#Linreg.sens"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.gsa.gsa.Linreg.sens" title="Link to this definition"></a></dt>
+<dd><p>Dictionary of sensitivities.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.Linreg.sens_names">
+<span class="sig-name descname"><span class="pre">sens_names</span></span><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#Linreg.sens_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.gsa.gsa.Linreg.sens_names" title="Link to this definition"></a></dt>
+<dd><p>Names of sensitivities: ‘src’ (scaled regression coefficient) or ‘pear’ (pearson).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.Linreg.xsam">
+<span class="sig-name descname"><span class="pre">xsam</span></span><a class="headerlink" href="#pytuq.gsa.gsa.Linreg.xsam" title="Link to this definition"></a></dt>
+<dd><p>Model evaluation input samples, a 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id4">
+<span class="sig-name descname"><span class="pre">sens_names</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['src',</span> <span class="pre">'pear']</span></em><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#Linreg.sens_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id4" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.Linreg.sample">
+<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nsam</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#Linreg.sample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.gsa.gsa.Linreg.sample" title="Link to this definition"></a></dt>
+<dd><p>Sampling routine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>nsam</strong> (<em>int</em>) – Number of requested samples, <span class="math notranslate nohighlight">\(N\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Model evaluation input samples, a 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.Linreg.compute">
+<span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ysam</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#Linreg.compute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.gsa.gsa.Linreg.compute" title="Link to this definition"></a></dt>
+<dd><p>Computing sensitivities, given model evaluations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ysam</strong> (<em>np.ndarray</em>) – A 2d array of model evaluations of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary with keys src (scaled regression coefficient) and pear (Pearson)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.Moat">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.gsa.gsa.</span></span><span class="sig-name descname"><span class="pre">Moat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nlev</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#Moat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.gsa.gsa.Moat" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pytuq.gsa.gsa.SensMethod" title="pytuq.gsa.gsa.SensMethod"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SensMethod</span></code></a></p>
+<p>Class for MOAT (Morris One At a Time) sensitivities.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.Moat.delta">
+<span class="sig-name descname"><span class="pre">delta</span></span><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#Moat.delta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.gsa.gsa.Moat.delta" title="Link to this definition"></a></dt>
+<dd><p>Delta-parameter of the method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.Moat.indmap">
+<span class="sig-name descname"><span class="pre">indmap</span></span><a class="headerlink" href="#pytuq.gsa.gsa.Moat.indmap" title="Link to this definition"></a></dt>
+<dd><p>Working 2d array of size <span class="math notranslate nohighlight">\((d,2)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.Moat.nlev">
+<span class="sig-name descname"><span class="pre">nlev</span></span><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#Moat.nlev"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.gsa.gsa.Moat.nlev" title="Link to this definition"></a></dt>
+<dd><p>Number of levels parameter of the method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.Moat.nsam">
+<span class="sig-name descname"><span class="pre">nsam</span></span><a class="headerlink" href="#pytuq.gsa.gsa.Moat.nsam" title="Link to this definition"></a></dt>
+<dd><p>Number of model evaluations <span class="math notranslate nohighlight">\(M=R(d+1)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.Moat.repl">
+<span class="sig-name descname"><span class="pre">repl</span></span><a class="headerlink" href="#pytuq.gsa.gsa.Moat.repl" title="Link to this definition"></a></dt>
+<dd><p>Number of replicas, <span class="math notranslate nohighlight">\(R\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.Moat.sens">
+<span class="sig-name descname"><span class="pre">sens</span></span><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#Moat.sens"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.gsa.gsa.Moat.sens" title="Link to this definition"></a></dt>
+<dd><p>Dictionary of sensitivities.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.Moat.sens_names">
+<span class="sig-name descname"><span class="pre">sens_names</span></span><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#Moat.sens_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.gsa.gsa.Moat.sens_names" title="Link to this definition"></a></dt>
+<dd><p>Sensitivity names: mu, amu or sig.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id5">
+<span class="sig-name descname"><span class="pre">sens_names</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['mu',</span> <span class="pre">'amu',</span> <span class="pre">'sig']</span></em><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#Moat.sens_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id5" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id6">
+<span class="sig-name descname"><span class="pre">delta</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#Moat.delta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id6" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id7">
+<span class="sig-name descname"><span class="pre">nlev</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#Moat.nlev"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id7" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.Moat.sample">
+<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#Moat.sample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.gsa.gsa.Moat.sample" title="Link to this definition"></a></dt>
+<dd><p>Sampling routine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>repl</strong> (<em>int</em>) – Number of replicas, <span class="math notranslate nohighlight">\(R\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Model evaluation input samples, a 2d array of size <span class="math notranslate nohighlight">\((M,d)\)</span>, where <span class="math notranslate nohighlight">\(M=R(d+1)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.Moat.compute">
+<span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ysam</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#Moat.compute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.gsa.gsa.Moat.compute" title="Link to this definition"></a></dt>
+<dd><p>Computation of MOAT sensitivities.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ysam</strong> (<em>np.ndarray</em>) – A 2d array of size <span class="math notranslate nohighlight">\((M, d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary with keys mu, amu and sig.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.SamSobol">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.gsa.gsa.</span></span><span class="sig-name descname"><span class="pre">SamSobol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dom</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#SamSobol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.gsa.gsa.SamSobol" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pytuq.gsa.gsa.SensMethod" title="pytuq.gsa.gsa.SensMethod"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SensMethod</span></code></a></p>
+<p>Computing of sampling based main and total sensitivities, see Saltelli 2010.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.SamSobol.nsam">
+<span class="sig-name descname"><span class="pre">nsam</span></span><a class="headerlink" href="#pytuq.gsa.gsa.SamSobol.nsam" title="Link to this definition"></a></dt>
+<dd><p>Number of model evaluations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.SamSobol.sens">
+<span class="sig-name descname"><span class="pre">sens</span></span><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#SamSobol.sens"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.gsa.gsa.SamSobol.sens" title="Link to this definition"></a></dt>
+<dd><p>Dictionary of sensitivities.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.SamSobol.sens_names">
+<span class="sig-name descname"><span class="pre">sens_names</span></span><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#SamSobol.sens_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.gsa.gsa.SamSobol.sens_names" title="Link to this definition"></a></dt>
+<dd><p>List of sensitivity names, main, total and jointt.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It computes joint in the total sense!</p>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id8">
+<span class="sig-name descname"><span class="pre">sens_names</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['main',</span> <span class="pre">'total',</span> <span class="pre">'jointt']</span></em><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#SamSobol.sens_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id8" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.SamSobol.sample">
+<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ninit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#SamSobol.sample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.gsa.gsa.SamSobol.sample" title="Link to this definition"></a></dt>
+<dd><p>Sampling routine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ninit</strong> (<em>int</em>) – Initial number of samples, <span class="math notranslate nohighlight">\(N\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Model evaluation input samples, a 2d array of size <span class="math notranslate nohighlight">\((M,d)\)</span>, where <span class="math notranslate nohighlight">\(M=N(d+2)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.SamSobol.compute">
+<span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ysam</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#SamSobol.compute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.gsa.gsa.SamSobol.compute" title="Link to this definition"></a></dt>
+<dd><p>Computing sensitivities.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ysam</strong> (<em>np.ndarray</em>) – A 2d array of size <span class="math notranslate nohighlight">\((M, d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary with keys main, total and jointt.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.PCSobol">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.gsa.gsa.</span></span><span class="sig-name descname"><span class="pre">PCSobol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pctype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LU'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#PCSobol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.gsa.gsa.PCSobol" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pytuq.gsa.gsa.SensMethod" title="pytuq.gsa.gsa.SensMethod"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SensMethod</span></code></a></p>
+<p>PC-based Sobol senitivity computation.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.PCSobol.nsam">
+<span class="sig-name descname"><span class="pre">nsam</span></span><a class="headerlink" href="#pytuq.gsa.gsa.PCSobol.nsam" title="Link to this definition"></a></dt>
+<dd><p>Number of model evaluations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.PCSobol.sens">
+<span class="sig-name descname"><span class="pre">sens</span></span><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#PCSobol.sens"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.gsa.gsa.PCSobol.sens" title="Link to this definition"></a></dt>
+<dd><p>Dictionary of sensitivities.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.PCSobol.sens_names">
+<span class="sig-name descname"><span class="pre">sens_names</span></span><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#PCSobol.sens_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.gsa.gsa.PCSobol.sens_names" title="Link to this definition"></a></dt>
+<dd><p>List of sensitivity names, main, total and jointt.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.PCSobol.pcrv">
+<span class="sig-name descname"><span class="pre">pcrv</span></span><a class="headerlink" href="#pytuq.gsa.gsa.PCSobol.pcrv" title="Link to this definition"></a></dt>
+<dd><p>Working PCRV object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../rv/pcrv/index.html#pytuq.rv.pcrv.PCRV" title="pytuq.rv.pcrv.PCRV">PCRV</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.PCSobol.pctype">
+<span class="sig-name descname"><span class="pre">pctype</span></span><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#PCSobol.pctype"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.gsa.gsa.PCSobol.pctype" title="Link to this definition"></a></dt>
+<dd><p>PC type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.PCSobol.order">
+<span class="sig-name descname"><span class="pre">order</span></span><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#PCSobol.order"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.gsa.gsa.PCSobol.order" title="Link to this definition"></a></dt>
+<dd><p>PC order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.PCSobol.xsam">
+<span class="sig-name descname"><span class="pre">xsam</span></span><a class="headerlink" href="#pytuq.gsa.gsa.PCSobol.xsam" title="Link to this definition"></a></dt>
+<dd><p>Model evaluation input samples, a 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.PCSobol.germ_sam">
+<span class="sig-name descname"><span class="pre">germ_sam</span></span><a class="headerlink" href="#pytuq.gsa.gsa.PCSobol.germ_sam" title="Link to this definition"></a></dt>
+<dd><p>Corresponding PC germ samples, a 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id9">
+<span class="sig-name descname"><span class="pre">sens_names</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['main',</span> <span class="pre">'total',</span> <span class="pre">'jointt']</span></em><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#PCSobol.sens_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id9" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id10">
+<span class="sig-name descname"><span class="pre">pctype</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'LU'</span></em><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#PCSobol.pctype"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id10" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id11">
+<span class="sig-name descname"><span class="pre">order</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#PCSobol.order"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id11" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.PCSobol.sample">
+<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nsam</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#PCSobol.sample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.gsa.gsa.PCSobol.sample" title="Link to this definition"></a></dt>
+<dd><p>Sampling routine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>nsam</strong> (<em>int</em>) – Number of requested samples, <span class="math notranslate nohighlight">\(N\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Model evaluation input samples, a 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.gsa.gsa.PCSobol.compute">
+<span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ysam</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/gsa/gsa.html#PCSobol.compute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.gsa.gsa.PCSobol.compute" title="Link to this definition"></a></dt>
+<dd><p>Computing sensitivities.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ysam</strong> (<em>np.ndarray</em>) – A 2d array of size <span class="math notranslate nohighlight">\((N, d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary with keys main, total and jointt.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="pytuq.gsa" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../linred/index.html" class="btn btn-neutral float-right" title="pytuq.linred" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

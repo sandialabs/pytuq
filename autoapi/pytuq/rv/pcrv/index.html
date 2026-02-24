@@ -1,0 +1,879 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytuq.rv.pcrv &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="pytuq.rv.rosen" href="../rosen/index.html" />
+    <link rel="prev" title="pytuq.rv.mrv" href="../mrv/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../auto_examples/index.html">Software Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../auto_examples/index.html#surrogates">Surrogates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_pce.html">Polynomial Chaos Expansion Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Section Navigation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">pytuq</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../ftools/index.html">pytuq.ftools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../func/index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">pytuq.rv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../surrogates/index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Section Navigation</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">pytuq</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">pytuq.rv</a></li>
+      <li class="breadcrumb-item active">pytuq.rv.pcrv</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/autoapi/pytuq/rv/pcrv/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-pytuq.rv.pcrv">
+<span id="pytuq-rv-pcrv"></span><h1>pytuq.rv.pcrv<a class="headerlink" href="#module-pytuq.rv.pcrv" title="Link to this heading"></a></h1>
+<p>Classes for various multivariate random variables.</p>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.rv.pcrv.PCRV" title="pytuq.rv.pcrv.PCRV"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PCRV</span></code></a></p></td>
+<td><p>A class for a multivariate PC random variable.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.rv.pcrv.PCRV_iid" title="pytuq.rv.pcrv.PCRV_iid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PCRV_iid</span></code></a></p></td>
+<td><p>A PC random variable/vector with a special structure of one germ per dimension. As a consequence, the number of stochastic and physical dimensions coincide. It inherits all the attributes of the parent PCRV class.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.rv.pcrv.PCRV_mvn" title="pytuq.rv.pcrv.PCRV_mvn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PCRV_mvn</span></code></a></p></td>
+<td><p>A PC random variable/vector that is a multivariate normal. As a consequence, the number of stochastic and physical dimensions coincide and PC type is Gauss-Hermite for all dimensions. It inherits all the attributes of the parent PCRV class.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.rv.pcrv.PC1d" title="pytuq.rv.pcrv.PC1d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PC1d</span></code></a></p></td>
+<td><p>1-dimensional PC random variable.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.rv.pcrv.</span></span><span class="sig-name descname"><span class="pre">PCRV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pdim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sdim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pctype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PCRV"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PCRV" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../mrv/index.html#pytuq.rv.mrv.MRV" title="pytuq.rv.mrv.MRV"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.rv.mrv.MRV</span></code></a></p>
+<p>A class for a multivariate PC random variable.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV.sdim">
+<span class="sig-name descname"><span class="pre">sdim</span></span><a class="headerlink" href="#pytuq.rv.pcrv.PCRV.sdim" title="Link to this definition"></a></dt>
+<dd><p>Stochastic dimension <span class="math notranslate nohighlight">\(s\)</span>, i.e. germ dimensionality.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV.mindices">
+<span class="sig-name descname"><span class="pre">mindices</span></span><a class="headerlink" href="#pytuq.rv.pcrv.PCRV.mindices" title="Link to this definition"></a></dt>
+<dd><p>List of <span class="math notranslate nohighlight">\(d\)</span> multiindex arrays, each of size <span class="math notranslate nohighlight">\((K_i,s)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[np.ndarray]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV.coefs">
+<span class="sig-name descname"><span class="pre">coefs</span></span><a class="headerlink" href="#pytuq.rv.pcrv.PCRV.coefs" title="Link to this definition"></a></dt>
+<dd><p>List of <span class="math notranslate nohighlight">\(d\)</span> coefficient arrays, each of size <span class="math notranslate nohighlight">\(K_i\)</span> for <span class="math notranslate nohighlight">\(i=1,\dots,d\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[np.ndarray]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV.maxOrd">
+<span class="sig-name descname"><span class="pre">maxOrd</span></span><a class="headerlink" href="#pytuq.rv.pcrv.PCRV.maxOrd" title="Link to this definition"></a></dt>
+<dd><p>A 1d array of size <span class="math notranslate nohighlight">\(s\)</span> indicating maximal order across all physical dimensions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV.pind">
+<span class="sig-name descname"><span class="pre">pind</span></span><a class="headerlink" href="#pytuq.rv.pcrv.PCRV.pind" title="Link to this definition"></a></dt>
+<dd><p>List of tuples <span class="math notranslate nohighlight">\((i,k)\)</span> accounting for all coefficients: the first element is the physical dimension <span class="math notranslate nohighlight">\(i\)</span> (between <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(d-1\)</span>), and the second element is the coefficient index <span class="math notranslate nohighlight">\(k\)</span> (between <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(K_i\)</span>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[tuple]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV.rndind">
+<span class="sig-name descname"><span class="pre">rndind</span></span><a class="headerlink" href="#pytuq.rv.pcrv.PCRV.rndind" title="Link to this definition"></a></dt>
+<dd><p>Indices of random physical dimensions, each entry is between <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(d-1\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV.detind">
+<span class="sig-name descname"><span class="pre">detind</span></span><a class="headerlink" href="#pytuq.rv.pcrv.PCRV.detind" title="Link to this definition"></a></dt>
+<dd><p>Indices of deterministic physical dimensions, each entry is between <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(d-1\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV.function">
+<span class="sig-name descname"><span class="pre">function</span></span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PCRV.function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PCRV.function" title="Link to this definition"></a></dt>
+<dd><p>PC evaluator function, <span class="math notranslate nohighlight">\((N,s)\rightarrow N\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>callable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV.pctypes">
+<span class="sig-name descname"><span class="pre">pctypes</span></span><a class="headerlink" href="#pytuq.rv.pcrv.PCRV.pctypes" title="Link to this definition"></a></dt>
+<dd><p>List of <span class="math notranslate nohighlight">\(s\)</span> PC types, one for each stochastic dimension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV.PC1ds">
+<span class="sig-name descname"><span class="pre">PC1ds</span></span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PCRV.PC1ds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PCRV.PC1ds" title="Link to this definition"></a></dt>
+<dd><p>List of <span class="math notranslate nohighlight">\(s\)</span> 1d PC objects that comprise this multivariate PC random variable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="#pytuq.rv.pcrv.PC1d" title="pytuq.rv.pcrv.PC1d">PC1d</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">function</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PCRV.function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">PC1ds</span></span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PCRV.PC1ds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id1" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV.setMiCfs">
+<span class="sig-name descname"><span class="pre">setMiCfs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PCRV.setMiCfs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PCRV.setMiCfs" title="Link to this definition"></a></dt>
+<dd><p>Sets the multiindex and coefficients together.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mi</strong> (<em>list</em><em> or </em><em>np.ndarray</em>) – List of <span class="math notranslate nohighlight">\(d\)</span> multiindex arrays, each of size <span class="math notranslate nohighlight">\((K_i,s)\)</span> for <span class="math notranslate nohighlight">\(i=1, \dots, d\)</span>. Or a single multiindex array of size <span class="math notranslate nohighlight">\((K,s)\)</span>, meaning all dimensions get the same multiindex.</p></li>
+<li><p><strong>cfs</strong> (<em>list</em><em> or </em><em>np.ndarray</em><em>, </em><em>optional</em>) – List of <span class="math notranslate nohighlight">\(d\)</span> coefficient arrays, each of size <span class="math notranslate nohighlight">\(K_i\)</span> for <span class="math notranslate nohighlight">\(i=1, \dots, d\)</span>. Or a single coefficient array of size <span class="math notranslate nohighlight">\(K\)</span>, meaning all dimensions get the same coefficient array. Or a 2d array of size <span class="math notranslate nohighlight">\((d, K)\)</span>. Defaults to None, which is populating coefficients with all zeros.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV.setMi">
+<span class="sig-name descname"><span class="pre">setMi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mi</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PCRV.setMi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PCRV.setMi" title="Link to this definition"></a></dt>
+<dd><p>Sets the multiindex.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mi</strong> (<em>list</em><em> or </em><em>np.ndarray</em>) – List of <span class="math notranslate nohighlight">\(d\)</span> multiindex arrays, each of size <span class="math notranslate nohighlight">\((K_i,s)\)</span> for <span class="math notranslate nohighlight">\(i=1, \dots, d\)</span>. Or a single multiindex array of size <span class="math notranslate nohighlight">\((K,s)\)</span>, meaning all dimensions get the same multiindex.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Dangerous to use externally, as it may conflict with other attributes/sizes. Prefer to use setMiCfs() externally.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV.setCfs">
+<span class="sig-name descname"><span class="pre">setCfs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cfs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PCRV.setCfs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PCRV.setCfs" title="Link to this definition"></a></dt>
+<dd><p>Sets the coefficients. Dangerous to use externally, as it may conflict with other attributes/sizes. Prefer to use setMiCfs() externally.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cfs</strong> (<em>list</em><em> or </em><em>np.ndarray</em>) – List of <span class="math notranslate nohighlight">\(d\)</span> coefficient arrays, each of size <span class="math notranslate nohighlight">\(K_i\)</span> for <span class="math notranslate nohighlight">\(i=1, \dots, d\)</span>. Or a single coefficient array of size <span class="math notranslate nohighlight">\(K\)</span>, meaning all dimensions get the same coefficient array. Or a 2d array of size <span class="math notranslate nohighlight">\((d, K)\)</span>. Defaults to None, which is populating coefficients with all zeros.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Dangerous to use externally, as it may conflict with other attributes. Prefer to use setMiCfs() externally.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV.checkMiCfsizes">
+<span class="sig-name descname"><span class="pre">checkMiCfsizes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PCRV.checkMiCfsizes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PCRV.checkMiCfsizes" title="Link to this definition"></a></dt>
+<dd><p>Checks the multiindex and coeffient list for any size incompatibility.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV.setRandomCfs">
+<span class="sig-name descname"><span class="pre">setRandomCfs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PCRV.setRandomCfs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PCRV.setRandomCfs" title="Link to this definition"></a></dt>
+<dd><p>Sets coefficients randomly, sampling unniformly in <span class="math notranslate nohighlight">\([0,1]\)</span>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV.getMaxOrders">
+<span class="sig-name descname"><span class="pre">getMaxOrders</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PCRV.getMaxOrders"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PCRV.getMaxOrders" title="Link to this definition"></a></dt>
+<dd><p>Computes and populates an internal array maxOrd storing maximal order per physical dimension.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV.getParamIndices">
+<span class="sig-name descname"><span class="pre">getParamIndices</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PCRV.getParamIndices"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PCRV.getParamIndices" title="Link to this definition"></a></dt>
+<dd><p>Populates the bookkeeping list of index pairs pind.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV.printInfo">
+<span class="sig-name descname"><span class="pre">printInfo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PCRV.printInfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PCRV.printInfo" title="Link to this definition"></a></dt>
+<dd><p>Core dump of multiindices and coefficients.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV.computeMean">
+<span class="sig-name descname"><span class="pre">computeMean</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PCRV.computeMean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PCRV.computeMean" title="Link to this definition"></a></dt>
+<dd><p>Computes the mean of the random variable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A 1d array of size <span class="math notranslate nohighlight">\(d\)</span> for means per physical dimension.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV.computeVar">
+<span class="sig-name descname"><span class="pre">computeVar</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PCRV.computeVar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PCRV.computeVar" title="Link to this definition"></a></dt>
+<dd><p>Computes the variance of the random variable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A 1d array of size <span class="math notranslate nohighlight">\(d\)</span> for variance per physical dimension.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV.computeSens">
+<span class="sig-name descname"><span class="pre">computeSens</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PCRV.computeSens"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PCRV.computeSens" title="Link to this definition"></a></dt>
+<dd><p>Computes main Sobol sensitivity indices of the PC with respect to stochastic dimensions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A 2d array of main sensitivities of size <span class="math notranslate nohighlight">\((d,s)\)</span>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV.computeTotSens">
+<span class="sig-name descname"><span class="pre">computeTotSens</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PCRV.computeTotSens"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PCRV.computeTotSens" title="Link to this definition"></a></dt>
+<dd><p>Computes total Sobol sensitivity indices of the PC with respect to stochastic dimensions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A 2d array of total sensitivities of size <span class="math notranslate nohighlight">\((d,s)\)</span>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV.computeJointSens">
+<span class="sig-name descname"><span class="pre">computeJointSens</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PCRV.computeJointSens"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PCRV.computeJointSens" title="Link to this definition"></a></dt>
+<dd><p>Computes joint Sobol sensitivity indices of the PC with respect to stochastic dimension pairs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A 3d array of joint sensitivities of size <span class="math notranslate nohighlight">\((d,s,s)\)</span>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.ndarray</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is joint in the ‘total’ sense, i.e. any term involving both dimensions are counted.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV.computeGroupSens">
+<span class="sig-name descname"><span class="pre">computeGroupSens</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paramIndices</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PCRV.computeGroupSens"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PCRV.computeGroupSens" title="Link to this definition"></a></dt>
+<dd><p>Computes group sensitivities of a subset of parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>paramIndices</strong> (<em>list</em>) – List of indices to group. Each element should be between <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(s-1\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An 1d array of size <cite>d</cite> for sensitivities of this group for all <span class="math notranslate nohighlight">\(d\)</span> dimensions.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV.slice_1d">
+<span class="sig-name descname"><span class="pre">slice_1d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jdim</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PCRV.slice_1d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PCRV.slice_1d" title="Link to this definition"></a></dt>
+<dd><p>Extracts a 1d PC random variable along a given stochastic dimension.
+:param jdim: The index <span class="math notranslate nohighlight">\(j\)</span> of the stochastic dimension. Should be between <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(s-1\)</span>.
+:type jdim: int</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A 1d PC random variable object along the given stochastic dimension.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#pytuq.rv.pcrv.PCRV" title="pytuq.rv.pcrv.PCRV">PCRV</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV.sampleGerm">
+<span class="sig-name descname"><span class="pre">sampleGerm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nsam</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PCRV.sampleGerm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PCRV.sampleGerm" title="Link to this definition"></a></dt>
+<dd><p>Sample PC germ vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nsam</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of samples requested. Defaults to <span class="math notranslate nohighlight">\(M=1\)</span>.</p></li>
+<li><p><strong>seed</strong> (<em>None</em><em>, </em><em>optional</em>) – Seed for the random generation. Default is None, which does not set any seed.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A 2d array of size <span class="math notranslate nohighlight">\((M,s)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV.quadGerm">
+<span class="sig-name descname"><span class="pre">quadGerm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PCRV.quadGerm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PCRV.quadGerm" title="Link to this definition"></a></dt>
+<dd><p>Generates quadrature samples of PC germ vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>pts</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – An integer 1d array of size <span class="math notranslate nohighlight">\(s\)</span> indicating how many points per each stochastic dimension, <span class="math notranslate nohighlight">\(q_i\)</span> for <span class="math notranslate nohighlight">\(i=1, \dots, s\)</span>. Default is None, which means 2 points per stochastic dimension.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A pair of arrays: a 2d array of quadrature points of size <span class="math notranslate nohighlight">\((Q,s)\)</span> and corresponding 1d array of weights of size <span class="math notranslate nohighlight">\(Q\)</span>, where <span class="math notranslate nohighlight">\(Q=q_1 q_2 \cdots q_s\)</span> is the total number of points.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[np.ndarray, np.ndarray]</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is full tensor product quadrature. Sparse quadrature is not implemented.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV.evalBases">
+<span class="sig-name descname"><span class="pre">evalBases</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jdim</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PCRV.evalBases"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PCRV.evalBases" title="Link to this definition"></a></dt>
+<dd><p>Evaluation of PC bases at given input germ values for a given physical dimension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xi</strong> (<em>np.ndarray</em>) – A 2d array of size <span class="math notranslate nohighlight">\((M,s)\)</span> for the input.</p></li>
+<li><p><strong>jdim</strong> (<em>int</em>) – The index <span class="math notranslate nohighlight">\(i\)</span> of the PC random variable/vector. Should be between <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(d-1\)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A 2d output array of size <span class="math notranslate nohighlight">\((M, K_i)\)</span> where <span class="math notranslate nohighlight">\(K_i\)</span> is the number of PC bases for the <span class="math notranslate nohighlight">\(i\)</span>-th dimension.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV.evalBasesNormsSq">
+<span class="sig-name descname"><span class="pre">evalBasesNormsSq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jdim</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PCRV.evalBasesNormsSq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PCRV.evalBasesNormsSq" title="Link to this definition"></a></dt>
+<dd><p>Evaluates bases norms-squared for a given physical dimension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>jdim</strong> (<em>int</em>) – The index of <span class="math notranslate nohighlight">\(i\)</span> of the PC random variable/vector. Should be between <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(d-1\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An 1d array of size <span class="math notranslate nohighlight">\(K_i\)</span>, the number of bases for the <span class="math notranslate nohighlight">\(i\)</span>-th dimension.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV.evalPC">
+<span class="sig-name descname"><span class="pre">evalPC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PCRV.evalPC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PCRV.evalPC" title="Link to this definition"></a></dt>
+<dd><p>Evaluate PC expansion for a given set of inputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – A 2d array of size <span class="math notranslate nohighlight">\((M,s)\)</span> for the input.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A 2d array of size <span class="math notranslate nohighlight">\((M,d)\)</span> for the output.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV.setFunction">
+<span class="sig-name descname"><span class="pre">setFunction</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PCRV.setFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PCRV.setFunction" title="Link to this definition"></a></dt>
+<dd><p>Set the PC evaluator as an internal function, an object of a class Function, with all the useful features of the class.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV.sample">
+<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nsam</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PCRV.sample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PCRV.sample" title="Link to this definition"></a></dt>
+<dd><p>Sample from the PC random variable. Basically chaining sampling the germ and evaluating the PC.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nsam</strong> (<em>int</em>) – Number of samples requested, <span class="math notranslate nohighlight">\(M\)</span>.</p></li>
+<li><p><strong>seed</strong> (<em>None</em><em>, </em><em>optional</em>) – Seed for the random generation. Default is None, which does not set any seed.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A 2d array of size <span class="math notranslate nohighlight">\((M,d)\)</span> for the output.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV.cfsFlatten">
+<span class="sig-name descname"><span class="pre">cfsFlatten</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PCRV.cfsFlatten"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PCRV.cfsFlatten" title="Link to this definition"></a></dt>
+<dd><p>Flatten all the PC coefficients.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>An 1d array of size <span class="math notranslate nohighlight">\(K_1+\dots +K_d\)</span>, the total number of PC coefficients for all dimensions.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV.cfsUnflatten">
+<span class="sig-name descname"><span class="pre">cfsUnflatten</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cfs_flat</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PCRV.cfsUnflatten"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PCRV.cfsUnflatten" title="Link to this definition"></a></dt>
+<dd><p>Reverse the flattening operation, given a long flat array, this sets the coefficient array list appropriately.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cfs_flat</strong> (<em>np.ndarray</em>) – An 1d array of size <span class="math notranslate nohighlight">\(K_1+\cdots +K_d\)</span>, the total number of PC coefficients for all dimensions.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV.compressPC">
+<span class="sig-name descname"><span class="pre">compressPC</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PCRV.compressPC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PCRV.compressPC" title="Link to this definition"></a></dt>
+<dd><p>A method to produce a new, compressed PCRV object in case some stochastic dimensions are irrelevant (i.e. 0 order across all physical dimensions)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>New PCRV object that has fewer stochastic dimensions.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#pytuq.rv.pcrv.PCRV" title="pytuq.rv.pcrv.PCRV">PCRV</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV.compressMI">
+<span class="sig-name descname"><span class="pre">compressMI</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PCRV.compressMI"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PCRV.compressMI" title="Link to this definition"></a></dt>
+<dd><p>A method to compress potentially identical multiindex rows, by adding their corresponding coefficients.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV.slicePC">
+<span class="sig-name descname"><span class="pre">slicePC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fixind</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nominal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PCRV.slicePC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PCRV.slicePC" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV_iid">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.rv.pcrv.</span></span><span class="sig-name descname"><span class="pre">PCRV_iid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pdim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pctype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orders</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PCRV_iid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PCRV_iid" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pytuq.rv.pcrv.PCRV" title="pytuq.rv.pcrv.PCRV"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PCRV</span></code></a></p>
+<p>A PC random variable/vector with a special structure of one germ per dimension. As a consequence, the number of stochastic and physical dimensions coincide. It inherits all the attributes of the parent PCRV class.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV_mvn">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.rv.pcrv.</span></span><span class="sig-name descname"><span class="pre">PCRV_mvn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pdim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rndind</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cov</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PCRV_mvn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PCRV_mvn" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pytuq.rv.pcrv.PCRV" title="pytuq.rv.pcrv.PCRV"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PCRV</span></code></a></p>
+<p>A PC random variable/vector that is a multivariate normal. As a consequence, the number of stochastic and physical dimensions coincide and PC type is Gauss-Hermite for all dimensions. It inherits all the attributes of the parent PCRV class.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV_mvn.cov">
+<span class="sig-name descname"><span class="pre">cov</span></span><a class="headerlink" href="#pytuq.rv.pcrv.PCRV_mvn.cov" title="Link to this definition"></a></dt>
+<dd><p>Covariance array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV_mvn.mean">
+<span class="sig-name descname"><span class="pre">mean</span></span><a class="headerlink" href="#pytuq.rv.pcrv.PCRV_mvn.mean" title="Link to this definition"></a></dt>
+<dd><p>Mean array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PCRV_mvn.pdf">
+<span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PCRV_mvn.pdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PCRV_mvn.pdf" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PC1d">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.rv.pcrv.</span></span><span class="sig-name descname"><span class="pre">PC1d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pctype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LU'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PC1d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PC1d" title="Link to this definition"></a></dt>
+<dd><p>1-dimensional PC random variable.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PC1d.a">
+<span class="sig-name descname"><span class="pre">a</span></span><a class="headerlink" href="#pytuq.rv.pcrv.PC1d.a" title="Link to this definition"></a></dt>
+<dd><p>int-&gt;float function <span class="math notranslate nohighlight">\(a_n\)</span> in the recurrent relation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>callable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PC1d.b">
+<span class="sig-name descname"><span class="pre">b</span></span><a class="headerlink" href="#pytuq.rv.pcrv.PC1d.b" title="Link to this definition"></a></dt>
+<dd><p>int-&gt;float function <span class="math notranslate nohighlight">\(b_n\)</span> in the recurrent relation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>callable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PC1d.domain">
+<span class="sig-name descname"><span class="pre">domain</span></span><a class="headerlink" href="#pytuq.rv.pcrv.PC1d.domain" title="Link to this definition"></a></dt>
+<dd><p>A 1d array of size <span class="math notranslate nohighlight">\(2\)</span> indicating the domain of definition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PC1d.p0">
+<span class="sig-name descname"><span class="pre">p0</span></span><a class="headerlink" href="#pytuq.rv.pcrv.PC1d.p0" title="Link to this definition"></a></dt>
+<dd><p>The 0th order basis evaluator from 1d np.ndarray to 1d np.ndarray.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>callable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PC1d.p1">
+<span class="sig-name descname"><span class="pre">p1</span></span><a class="headerlink" href="#pytuq.rv.pcrv.PC1d.p1" title="Link to this definition"></a></dt>
+<dd><p>The 1rd order basis evaluator from 1d np.ndarray to 1d np.ndarray.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>callable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PC1d.pctype">
+<span class="sig-name descname"><span class="pre">pctype</span></span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PC1d.pctype"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PC1d.pctype" title="Link to this definition"></a></dt>
+<dd><p>The PC type. Only ‘LU’, ‘nLU’, ‘HG’ and ‘nHG’ are implemented.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PC1d.sample">
+<span class="sig-name descname"><span class="pre">sample</span></span><a class="headerlink" href="#pytuq.rv.pcrv.PC1d.sample" title="Link to this definition"></a></dt>
+<dd><p>int-&gt;float sampling function, where the input is a number of samples requested, and the output is an 1d array of the corresponding size.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>callable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">pctype</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'LU'</span></em><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PC1d.pctype"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id2" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PC1d.germCdf">
+<span class="sig-name descname"><span class="pre">germCdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PC1d.germCdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PC1d.germCdf" title="Link to this definition"></a></dt>
+<dd><p>Evaluate the germ cumulative distribution functions (CDFs).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – A size <span class="math notranslate nohighlight">\(M\)</span> 1d array of inputs at which CDF is evaluated.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A size <span class="math notranslate nohighlight">\(M\)</span> 1d array of outputs containing CDF evaluations.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PC1d.germSample">
+<span class="sig-name descname"><span class="pre">germSample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nsam</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PC1d.germSample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PC1d.germSample" title="Link to this definition"></a></dt>
+<dd><p>Samples the germ.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>nsam</strong> (<em>int</em>) – Input number of samples requested, <span class="math notranslate nohighlight">\(M\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A 1d array of size <span class="math notranslate nohighlight">\(M\)</span> containing the germ samples.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PC1d.normsq">
+<span class="sig-name descname"><span class="pre">normsq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ord</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PC1d.normsq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PC1d.normsq" title="Link to this definition"></a></dt>
+<dd><p>Computes norm-squared of a basis with a given order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ord</strong> (<em>int</em>) – Requested order <span class="math notranslate nohighlight">\(p\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The norm-squared of the basis of order <span class="math notranslate nohighlight">\(p\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.pcrv.PC1d.quad">
+<span class="sig-name descname"><span class="pre">quad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/pcrv.html#PC1d.quad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.pcrv.PC1d.quad" title="Link to this definition"></a></dt>
+<dd><p>One-dimensional quadrature point/weight generation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>k</strong> (<em>int</em>) – The level of the quadrature.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A pair of 1d arrays of the same size, one for the quadrature points, and the other for the corresponding weights.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Utilizes the Golub-Welsch method, see <a href="#id3"><span class="problematic" id="id4">:cite:t:`Golub:1969`</span></a> or <a class="reference external" href="https://www.ams.org/journals/mcom/1969-23-106/S0025-5718-69-99647-1/S0025-5718-69-99647-1.pdf">https://www.ams.org/journals/mcom/1969-23-106/S0025-5718-69-99647-1/S0025-5718-69-99647-1.pdf</a>.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../mrv/index.html" class="btn btn-neutral float-left" title="pytuq.rv.mrv" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../rosen/index.html" class="btn btn-neutral float-right" title="pytuq.rv.rosen" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

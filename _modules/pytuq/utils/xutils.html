@@ -1,0 +1,517 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytuq.utils.xutils &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">Software Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/index.html#surrogates">Surrogates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_pce.html">Polynomial Chaos Expansion Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../autoapi/index.html">Section Navigation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../autoapi/pytuq/index.html">pytuq</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/pytuq/index.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/ftools/index.html">pytuq.ftools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/func/index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/minf/index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/rv/index.html">pytuq.rv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/surrogates/index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/utils/index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pytuq.utils.xutils</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pytuq.utils.xutils</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="sd">&quot;&quot;&quot;Collection of various useful utilities.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">inspect</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">itertools</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">importlib.util</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">dill</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pk</span>
+<span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pk</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats.mstats</span><span class="w"> </span><span class="kn">import</span> <span class="n">mquantiles</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.interpolate</span><span class="w"> </span><span class="kn">import</span> <span class="n">interp1d</span>
+
+<div class="viewcode-block" id="idt">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/xutils/index.html#pytuq.utils.xutils.idt">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">idt</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Identity function.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x (any type): input</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        any type: output</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">x</span></div>
+
+
+<span class="c1">####################################################################</span>
+<span class="c1">####################################################################</span>
+
+<div class="viewcode-block" id="savepk">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/xutils/index.html#pytuq.utils.xutils.savepk">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">savepk</span><span class="p">(</span><span class="n">sobj</span><span class="p">,</span> <span class="n">nameprefix</span><span class="o">=</span><span class="s1">&#39;savestate&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Pickle a python object.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        sobj (any type): Object to be pickled.</span>
+<span class="sd">        nameprefix (str, optional): Name prefix.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">pk</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">sobj</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">nameprefix</span> <span class="o">+</span> <span class="s1">&#39;.pk&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">),</span> <span class="n">protocol</span><span class="o">=</span><span class="n">pk</span><span class="o">.</span><span class="n">HIGHEST_PROTOCOL</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="loadpk">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/xutils/index.html#pytuq.utils.xutils.loadpk">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">loadpk</span><span class="p">(</span><span class="n">nameprefix</span><span class="o">=</span><span class="s1">&#39;savestate&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Unpickle a python object from a pickle file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        nameprefix (str, optional): Filename prefix</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        any type: Unpickled object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">pk</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">nameprefix</span> <span class="o">+</span> <span class="s1">&#39;.pk&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">))</span></div>
+
+
+<span class="c1">####################################################################</span>
+<span class="c1">####################################################################</span>
+
+<div class="viewcode-block" id="cartes_list">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/xutils/index.html#pytuq.utils.xutils.cartes_list">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">cartes_list</span><span class="p">(</span><span class="n">somelists</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate a list of all combination of elements in given lists.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        somelists (list): List of lists</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        list[tuple]: List of all combinations of elements in lists that make up somelists</span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; cartes_list([[&#39;a&#39;, &#39;b&#39;], [3, 4, 2]])</span>
+<span class="sd">        [(&#39;a&#39;, 3), (&#39;a&#39;, 4), (&#39;a&#39;, 2), (&#39;b&#39;, 3), (&#39;b&#39;, 4), (&#39;b&#39;, 2)]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># final_list = []</span>
+    <span class="c1"># for element in itertools.product(*somelists):</span>
+    <span class="c1">#     final_list.append(element)</span>
+
+    <span class="n">final_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="n">somelists</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">final_list</span></div>
+
+
+<span class="c1">####################################################################</span>
+<span class="c1">####################################################################</span>
+
+<div class="viewcode-block" id="read_textlist">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/xutils/index.html#pytuq.utils.xutils.read_textlist">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">read_textlist</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">nsize</span><span class="p">,</span> <span class="n">names_prefix</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Read a textfile into a list containing the rows.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename (str): File name</span>
+<span class="sd">        nsize (int): Number of rows in the file</span>
+<span class="sd">        names_prefix (str, optional): Prefix of a dummy list entry names if the file is not present.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list[str]: List of elements that are rows of the file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">names</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+            <span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">names</span><span class="p">)</span> <span class="o">==</span> <span class="n">nsize</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">names_prefix</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">nsize</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+
+    <span class="k">return</span> <span class="n">names</span></div>
+
+
+<span class="c1">####################################################################</span>
+<span class="c1">####################################################################</span>
+
+<div class="viewcode-block" id="sample_sphere">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/xutils/index.html#pytuq.utils.xutils.sample_sphere">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">sample_sphere</span><span class="p">(</span><span class="n">center</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rad</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">nsam</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sample on a hypersphere of a given radius.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        center (np.ndarray, optional): Center of the sphere. Defaults to origin.</span>
+<span class="sd">        rad (float, optional): Radius of the sphere. Defaults to 1.0.</span>
+<span class="sd">        nsam (int, optional): Number of samples requested. Defaults to 100.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        np.ndarray: Array of size `(N,d)`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">center</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">center</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,))</span>
+    <span class="n">dim</span> <span class="o">=</span> <span class="n">center</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">nsam</span><span class="p">,</span> <span class="n">dim</span><span class="p">)</span>
+    <span class="n">samples</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">samples</span> <span class="o">*=</span> <span class="n">rad</span>
+    <span class="n">samples</span> <span class="o">+=</span> <span class="n">center</span>
+
+    <span class="k">return</span> <span class="n">samples</span></div>
+
+
+<span class="c1">####################################################################</span>
+<span class="c1">####################################################################</span>
+
+<span class="c1">####################################################################</span>
+<span class="c1">####################################################################</span>
+
+<div class="viewcode-block" id="get_opt_bw">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/xutils/index.html#pytuq.utils.xutils.get_opt_bw">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_opt_bw</span><span class="p">(</span><span class="n">xsam</span><span class="p">,</span> <span class="n">bwf</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the rule-of-thumb optimal bandwidth for kernel density estimation.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        xsam (np.ndarray): Data array, `(N,d)`</span>
+<span class="sd">        bwf (float): Factor behind the scaling optimal rule</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        np.ndarray: Array of length `d`, the optimal per-dimension bandwidth</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">nsam</span><span class="p">,</span> <span class="n">ndim</span> <span class="o">=</span> <span class="n">xsam</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">xstd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">xsam</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">bw</span><span class="o">=</span><span class="n">xstd</span>
+    <span class="n">bw</span> <span class="o">*=</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="mf">4.</span><span class="o">/</span><span class="p">(</span><span class="n">ndim</span><span class="o">+</span><span class="mi">2</span><span class="p">),</span><span class="mf">1.</span><span class="o">/</span><span class="p">(</span><span class="n">ndim</span><span class="o">+</span><span class="mf">4.</span><span class="p">))</span>
+    <span class="n">bw</span> <span class="o">*=</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">nsam</span><span class="p">,</span><span class="o">-</span><span class="mf">1.</span><span class="o">/</span><span class="p">(</span><span class="n">ndim</span><span class="o">+</span><span class="mf">4.</span><span class="p">))</span>
+
+    <span class="n">bw</span> <span class="o">*=</span> <span class="n">bwf</span>
+
+    <span class="c1">#xmin, xmax = np.min(xsam, axis=0), np.max(xsam, axis=0)</span>
+
+    <span class="c1"># in case standard deviation is 0</span>
+    <span class="n">bw</span><span class="p">[</span><span class="n">bw</span><span class="o">&lt;</span><span class="mf">1.e-16</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="k">return</span> <span class="n">bw</span></div>
+
+
+<span class="c1">####################################################################</span>
+<span class="c1">####################################################################</span>
+
+<div class="viewcode-block" id="get_pdf">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/xutils/index.html#pytuq.utils.xutils.get_pdf">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_pdf</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute PDF given data at target points.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (np.ndarray): an `(N,d)` array of `N` samples in `d` dimensions</span>
+<span class="sd">        target np.ndarray): an `(M,d)` array of target points</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        np.ndarray: PDF values at target</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span><span class="o">&gt;</span><span class="mf">0.0</span><span class="p">)</span>
+
+    <span class="c1"># Python Scipy built-in method of KDE</span>
+    <span class="n">kde_py</span><span class="o">=</span><span class="n">stats</span><span class="o">.</span><span class="n">kde</span><span class="o">.</span><span class="n">gaussian_kde</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">dens</span><span class="o">=</span><span class="n">kde_py</span><span class="p">(</span><span class="n">target</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+
+    <span class="c1"># Return the target points and the probability density</span>
+    <span class="k">return</span> <span class="n">dens</span></div>
+
+
+<span class="c1">####################################################################</span>
+<span class="c1">####################################################################</span>
+
+<div class="viewcode-block" id="strarr">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/xutils/index.html#pytuq.utils.xutils.strarr">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">strarr</span><span class="p">(</span><span class="n">array</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Turn an array into a neatly formatted one for annotating figures.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        array (np.ndarray): 1d array</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: list of floats with two decimal digits</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:0.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">array</span><span class="p">]</span></div>
+
+
+
+<span class="c1">####################################################################</span>
+<span class="c1">####################################################################</span>
+
+<div class="viewcode-block" id="project">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/xutils/index.html#pytuq.utils.xutils.project">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">project</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Project a vector onto another vector in high-d space.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        a (np.ndarray): The 1d array to be projected.</span>
+<span class="sd">        b (np.ndarray): The array to project onto.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple(np.ndarray, np.ndarray): tuple (projection, residual) where projection+residual=a, and projection is orthogonal to residual, and colinear with b.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">proj</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span><span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span><span class="o">*</span><span class="n">b</span>
+    <span class="n">resid</span> <span class="o">=</span> <span class="n">a</span> <span class="o">-</span> <span class="n">proj</span>
+    <span class="k">return</span> <span class="n">proj</span><span class="p">,</span> <span class="n">resid</span></div>
+
+
+<span class="c1">####################################################################</span>
+<span class="c1">####################################################################</span>
+
+<div class="viewcode-block" id="pick_basis">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/xutils/index.html#pytuq.utils.xutils.pick_basis">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">pick_basis</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">random_direction_in_plane</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Given three points in a high-d space, picks a basis in a plane that goes through these points.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x1 (np.ndarray): 1d array, the first point</span>
+<span class="sd">        x2 (np.ndarray): 1d array, the second point</span>
+<span class="sd">        x3 (np.ndarray): 1d array, the third point</span>
+<span class="sd">        x0 (np.ndarray, optional): 1d array, the central point of basis. Defaults to None, in which case the center-of-mass is selected.</span>
+<span class="sd">        random_direction_in_plane (np.ndarray, optional): Direction aligned with the first basis. Has to be in the plane already. Defaults to None, in which case a random direction is selected.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple(np.ndarray, np.ndarray, np.ndarray): tuple(origin, e1, e2) of the origin and two basis directions.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">x1</span><span class="o">.</span><span class="n">shape</span><span class="o">==</span><span class="n">x2</span><span class="o">.</span><span class="n">shape</span> <span class="ow">and</span> <span class="n">x1</span><span class="o">.</span><span class="n">shape</span><span class="o">==</span><span class="n">x3</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">x0</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">x0</span> <span class="o">=</span> <span class="p">(</span><span class="n">x1</span><span class="o">+</span><span class="n">x2</span><span class="o">+</span><span class="n">x3</span><span class="p">)</span><span class="o">/</span><span class="mf">3.</span>
+
+    <span class="k">assert</span><span class="p">(</span><span class="n">x0</span><span class="o">.</span><span class="n">shape</span><span class="o">==</span><span class="n">x1</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+
+    <span class="c1"># random direction in that plane</span>
+    <span class="n">x1230</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">x1</span><span class="o">-</span><span class="n">x0</span><span class="p">,</span> <span class="n">x2</span><span class="o">-</span><span class="n">x0</span><span class="p">,</span> <span class="n">x3</span><span class="o">-</span><span class="n">x0</span><span class="p">))</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">x1230</span><span class="p">)</span><span class="o">==</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">random_direction_in_plane</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">random_direction_in_plane</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">x1230</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">random_direction_in_plane</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">random_direction_in_plane</span><span class="p">)</span>
+    <span class="c1"># TODO: this assertion occasionally fails, e.g. when running all examples in bulk</span>
+    <span class="c1">#assert(np.linalg.matrix_rank(np.vstack((x1230, random_direction_in_plane)))==2)</span>
+
+    <span class="n">proj_norms</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">3</span><span class="p">,)</span>
+    <span class="n">resid_norms</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">3</span><span class="p">,)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="n">proj</span><span class="p">,</span> <span class="n">resid</span> <span class="o">=</span> <span class="n">project</span><span class="p">(</span><span class="n">x1230</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">random_direction_in_plane</span><span class="p">)</span>
+        <span class="n">proj_norms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">proj</span><span class="p">)</span>
+        <span class="n">resid_norms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">resid</span><span class="p">)</span>
+
+    <span class="n">pm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">proj_norms</span><span class="p">)</span>
+    <span class="n">rm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">resid_norms</span><span class="p">)</span>
+
+    <span class="n">origin</span> <span class="o">=</span> <span class="n">x0</span>
+    <span class="n">e1</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">project</span><span class="p">(</span><span class="n">x1230</span><span class="p">[</span><span class="n">pm</span><span class="p">],</span> <span class="n">random_direction_in_plane</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">e2</span> <span class="o">=</span> <span class="n">project</span><span class="p">(</span><span class="n">x1230</span><span class="p">[</span><span class="n">rm</span><span class="p">],</span> <span class="n">random_direction_in_plane</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">origin</span><span class="p">,</span> <span class="n">e1</span><span class="p">,</span> <span class="n">e2</span></div>
+
+
+<span class="c1">####################################################################</span>
+<span class="c1">####################################################################</span>
+
+<div class="viewcode-block" id="safe_cholesky">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/xutils/index.html#pytuq.utils.xutils.safe_cholesky">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">safe_cholesky</span><span class="p">(</span><span class="n">cov</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Cholesky decomposition with some error handlers, and using SVD+QR trick in case the covariance is degenerate.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        cov (np.ndarray): Positive-definite or zero-determinant symmetric matrix `C`.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        np.ndarray: Lower-triangular factor `L` such that `C=L L^T`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">dim</span><span class="p">,</span> <span class="n">dim_</span> <span class="o">=</span> <span class="n">cov</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">dim_</span><span class="o">==</span><span class="n">dim</span><span class="p">)</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">cov</span><span class="o">-</span><span class="n">cov</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">&lt;</span><span class="mf">1.e-14</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvals</span><span class="p">(</span><span class="n">cov</span><span class="p">))</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The matrix is not a covariance matrix (negative eigenvalues). Exiting.&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvals</span><span class="p">(</span><span class="n">cov</span><span class="p">))</span><span class="o">&lt;</span><span class="mf">1e-14</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Small/near-zero eigenvalue: replacing Cholesky with SVD+QR.&quot;</span><span class="p">)</span>
+        <span class="n">u</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">vd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">cov</span><span class="p">,</span> <span class="n">hermitian</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">lower</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">qr</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">s</span><span class="p">)),</span><span class="n">vd</span><span class="p">))[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">signs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">lower</span><span class="p">))</span>
+        <span class="n">lower</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">lower</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">signs</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">lower</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">cov</span><span class="p">)</span>
+
+    <span class="k">assert</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">cov</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">lower</span><span class="p">,</span> <span class="n">lower</span><span class="o">.</span><span class="n">T</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mf">1.e-12</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">lower</span></div>
+
+
+<span class="c1">####################################################################</span>
+<span class="c1">####################################################################</span>
+
+<div class="viewcode-block" id="instantiate_classes_from_module">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/xutils/index.html#pytuq.utils.xutils.instantiate_classes_from_module">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">instantiate_classes_from_module</span><span class="p">(</span><span class="n">module_name</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Imports a module and returns a list of instantiated objects for every class in it.</span>
+<span class="sd">    Only classes defined inside the module are included (not imported ones).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">module_name</span><span class="p">)</span>
+    <span class="n">objects</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getmembers</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">inspect</span><span class="o">.</span><span class="n">isclass</span><span class="p">):</span>
+        <span class="c1"># Only include classes actually defined in this module</span>
+        <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="vm">__module__</span> <span class="o">==</span> <span class="n">module_name</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">instance</span> <span class="o">=</span> <span class="n">obj</span><span class="p">()</span>  <span class="c1"># Try to instantiate without arguments</span>
+                <span class="n">objects</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">instance</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not instantiate </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">objects</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

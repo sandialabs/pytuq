@@ -1,0 +1,293 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Residual Neural Network Construction &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Function Approximation with Sparse Regression" href="ex_genz_bcs.html" />
+    <link rel="prev" title="Polynomial Chaos Expansion Construction" href="ex_pce.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Software Tutorials</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#surrogates">Surrogates</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ex_pce.html">Polynomial Chaos Expansion Construction</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../autoapi/index.html">Section Navigation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/index.html">pytuq</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/index.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/ftools/index.html">pytuq.ftools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/minf/index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/rv/index.html">pytuq.rv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/surrogates/index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Software Tutorials</a></li>
+      <li class="breadcrumb-item active">Residual Neural Network Construction</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/auto_examples/ex_nn.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-auto-examples-ex-nn-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code.</p>
+</div>
+<section class="sphx-glr-example-title" id="residual-neural-network-construction">
+<span id="sphx-glr-auto-examples-ex-nn-py"></span><h1>Residual Neural Network Construction<a class="headerlink" href="#residual-neural-network-construction" title="Link to this heading"></a></h1>
+<p>This example demonstrates how to use the Neural Network wrapper class, <code class="docutils literal notranslate"><span class="pre">pytuq.surrogates.nn</span></code> with scalar valued functions.
+The constructor of the NN class accepts in an optional dictionary, <code class="docutils literal notranslate"><span class="pre">net_options</span></code>, to specify additional hyperparameters.
+The <code class="docutils literal notranslate"><span class="pre">build()</span></code> and <code class="docutils literal notranslate"><span class="pre">evaluate()</span></code> functions similarly accept dictionaries and explicit keyword arguments during their respective function calls.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pytuq.surrogates.nn</span><span class="w"> </span><span class="kn">import</span> <span class="n">NN</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">quinn.nns.rnet</span><span class="w"> </span><span class="kn">import</span> <span class="n">Poly</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">quinn.utils.plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">myrc</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">quinn.utils.maps</span><span class="w"> </span><span class="kn">import</span> <span class="n">scale01ToDom</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">quinn.func.funcs</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sine</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Main function.&quot;&quot;&quot;</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">set_default_dtype</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">double</span><span class="p">)</span>
+    <span class="n">myrc</span><span class="p">()</span>
+
+    <span class="c1">#################################################################################</span>
+    <span class="c1">#################################################################################</span>
+
+    <span class="c1"># defaults to cuda:0 if available</span>
+    <span class="n">device_id</span><span class="o">=</span><span class="s1">&#39;cuda:0&#39;</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="n">device_id</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;cpu&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Using device&quot;</span><span class="p">,</span><span class="n">device</span><span class="p">)</span>
+
+    <span class="n">nall</span> <span class="o">=</span> <span class="mi">15</span> <span class="c1"># total number of points</span>
+    <span class="n">trn_factor</span> <span class="o">=</span> <span class="mf">0.9</span> <span class="c1"># which fraction of nall goes to training</span>
+    <span class="n">ntst</span> <span class="o">=</span> <span class="mi">13</span> <span class="c1"># separate test set</span>
+    <span class="n">ndim</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># input dimensionality</span>
+    <span class="n">datanoise</span> <span class="o">=</span> <span class="mf">0.02</span> <span class="c1"># Noise in the generated data</span>
+    <span class="n">true_model</span><span class="p">,</span> <span class="n">nout</span> <span class="o">=</span> <span class="n">Sine</span><span class="p">,</span> <span class="mi">1</span>  <span class="c1"># Scalar valued output example</span>
+
+    <span class="c1">#################################################################################</span>
+    <span class="c1">#################################################################################</span>
+
+    <span class="c1"># Domain: defining range of input variable</span>
+    <span class="n">domain</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">]),</span> <span class="p">(</span><span class="n">ndim</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+
+    <span class="c1"># Generating x-y training, validation, and testing data</span>
+    <span class="n">xall</span> <span class="o">=</span> <span class="n">scale01ToDom</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">nall</span><span class="p">,</span> <span class="n">ndim</span><span class="p">),</span> <span class="n">domain</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">true_model</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">yall</span> <span class="o">=</span> <span class="n">true_model</span><span class="p">(</span><span class="n">xall</span><span class="p">,</span> <span class="n">datanoise</span><span class="o">=</span><span class="n">datanoise</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">ntst</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+        <span class="n">xtst</span> <span class="o">=</span> <span class="n">scale01ToDom</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">ntst</span><span class="p">,</span> <span class="n">ndim</span><span class="p">),</span> <span class="n">domain</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">true_model</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">ytst</span> <span class="o">=</span> <span class="n">true_model</span><span class="p">(</span><span class="n">xtst</span><span class="p">,</span> <span class="n">datanoise</span><span class="o">=</span><span class="n">datanoise</span><span class="p">)</span>
+
+    <span class="c1"># (1) Initialize neural network with optional parameters for object instantiation</span>
+    <span class="n">net_options</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;wp_function&#39;</span><span class="p">:</span> <span class="n">Poly</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+                   <span class="s1">&#39;indim&#39;</span><span class="p">:</span> <span class="n">ndim</span><span class="p">,</span>
+                   <span class="s1">&#39;outdim&#39;</span><span class="p">:</span> <span class="n">nout</span><span class="p">,</span>
+                   <span class="s1">&#39;layer_pre&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                   <span class="s1">&#39;layer_post&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                   <span class="s1">&#39;biasorno&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                   <span class="s1">&#39;nonlin&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                   <span class="s1">&#39;mlp&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                   <span class="s1">&#39;final_layer&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                   <span class="s1">&#39;device&#39;</span><span class="p">:</span> <span class="n">device</span><span class="p">,</span>
+                   <span class="p">}</span>
+
+    <span class="c1"># Pass in unpacked net_options dict to constructor through kwargs</span>
+    <span class="n">nnet</span> <span class="o">=</span> <span class="n">NN</span><span class="p">(</span><span class="s1">&#39;RNet&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">**</span><span class="n">net_options</span><span class="p">)</span>
+
+    <span class="c1"># (1.5) Split data into training and validation, assign through member functions</span>
+    <span class="n">ntrn</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">trn_factor</span> <span class="o">*</span> <span class="n">nall</span><span class="p">)</span>
+    <span class="n">indperm</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">nall</span><span class="p">)</span> <span class="c1"># np.random.permutation(range(nall))</span>
+    <span class="n">indtrn</span> <span class="o">=</span> <span class="n">indperm</span><span class="p">[:</span><span class="n">ntrn</span><span class="p">]</span>
+    <span class="n">indval</span> <span class="o">=</span> <span class="n">indperm</span><span class="p">[</span><span class="n">ntrn</span><span class="p">:]</span>
+    <span class="n">xtrn</span><span class="p">,</span> <span class="n">xval</span> <span class="o">=</span> <span class="n">xall</span><span class="p">[</span><span class="n">indtrn</span><span class="p">,</span> <span class="p">:],</span> <span class="n">xall</span><span class="p">[</span><span class="n">indval</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">ytrn</span><span class="p">,</span> <span class="n">yval</span> <span class="o">=</span> <span class="n">yall</span><span class="p">[</span><span class="n">indtrn</span><span class="p">,</span> <span class="p">:],</span> <span class="n">yall</span><span class="p">[</span><span class="n">indval</span><span class="p">,</span> <span class="p">:]</span>
+
+    <span class="n">nnet</span><span class="o">.</span><span class="n">set_validation_data</span><span class="p">(</span><span class="n">xval</span><span class="p">,</span> <span class="n">yval</span><span class="p">)</span> <span class="c1"># optional</span>
+    <span class="n">nnet</span><span class="o">.</span><span class="n">set_training_data</span><span class="p">(</span><span class="n">xtrn</span><span class="p">,</span> <span class="n">ytrn</span><span class="p">)</span>
+
+    <span class="c1"># (2) 1st build: Call build function (defaults to UQ method of variational inference) with optional parameters for fitting</span>
+    <span class="n">nnet</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">datanoise</span><span class="o">=</span><span class="n">datanoise</span><span class="p">,</span> <span class="n">lrate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">nsam</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nepochs</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">results</span> <span class="o">=</span> <span class="n">nnet</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">xtst</span><span class="p">,</span> <span class="n">nsam</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">msc</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># Return samples of predictions with variance + covariance</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Y_eval:&quot;</span><span class="p">,</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;Y_eval&#39;</span><span class="p">],</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span> <span class="c1"># Printing only samples of predictions</span>
+
+    <span class="c1"># (3) 2nd build: Example of throwing an exception when passing in a network option through build()</span>
+    <span class="c1"># fit_options = {&#39;datanoise&#39;: 0.05,</span>
+    <span class="c1">#                &#39;outdim&#39;: 3,</span>
+    <span class="c1">#                &#39;lrate&#39;: 0.01,</span>
+    <span class="c1">#                &#39;batch_size&#39;: None,</span>
+    <span class="c1">#                &#39;nsam&#39;: 1,</span>
+    <span class="c1">#                &#39;nepochs&#39;: 300,</span>
+    <span class="c1">#                &#39;verbose&#39;: False</span>
+    <span class="c1">#                }</span>
+
+    <span class="c1"># nnet.build(**fit_options)</span>
+    <span class="c1"># results = nnet.evaluate(xtst, nsam = 100, msc = 2)</span>
+    <span class="c1"># print(results)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-ex-nn-py">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/e477f5b46fb343f3cad50e6de56e0998/ex_nn.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">ex_nn.ipynb</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/8f101093ea5041106a46b5c4984ca790/ex_nn.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">ex_nn.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-zip docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/6c9848018c87d37d9e8d6586d628afa6/ex_nn.zip"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">zipped:</span> <span class="pre">ex_nn.zip</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ex_pce.html" class="btn btn-neutral float-left" title="Polynomial Chaos Expansion Construction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ex_genz_bcs.html" class="btn btn-neutral float-right" title="Function Approximation with Sparse Regression" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

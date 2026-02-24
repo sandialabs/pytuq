@@ -1,0 +1,563 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytuq.ftools.integr &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">Software Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/index.html#surrogates">Surrogates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_pce.html">Polynomial Chaos Expansion Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../autoapi/index.html">Section Navigation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../autoapi/pytuq/index.html">pytuq</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/pytuq/index.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/ftools/index.html">pytuq.ftools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/func/index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/minf/index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/rv/index.html">pytuq.rv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/surrogates/index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/utils/index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pytuq.ftools.integr</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pytuq.ftools.integr</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="sd">&quot;&quot;&quot;Module for integration classes.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">multivariate_normal</span><span class="p">,</span> <span class="n">kde</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">nquad</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">..utils.maps</span><span class="w"> </span><span class="kn">import</span> <span class="n">Domainizer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..rv.mrv</span><span class="w"> </span><span class="kn">import</span> <span class="n">MCMCRV</span><span class="p">,</span> <span class="n">GMM</span>
+
+
+
+<div class="viewcode-block" id="Integrator">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/integr/index.html#pytuq.ftools.integr.Integrator">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Integrator</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for integration objects.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Integrator.integrate">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/integr/index.html#pytuq.ftools.integr.Integrator.integrate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">func_args</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xdata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kw_args</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Dummy method to be implemented by children classes.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            function (callable): The function to integrate f(x, **func_args), where the first argument should be a 2d array of size `(N, d)`.</span>
+<span class="sd">            domain (None, optional): Optionally provide a domain of integration, `(d, 2)`.</span>
+<span class="sd">            func_args (None, optional): Optional keyword arguments of the function.</span>
+<span class="sd">            xdata (None, optional): Provide input samples, if needed by the integrator.</span>
+<span class="sd">            **kw_args: Other keyword arguments necessary for the integrator at hand.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            NotImplementedError: This needs to be implemented by children classes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">kk</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Copying a given key from one dictionary into another.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            a (dict): Initial dictionary.</span>
+<span class="sd">            b (dict): Dictionary to copy to.</span>
+<span class="sd">            kk (str): The given key.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">kk</span> <span class="ow">in</span> <span class="n">a</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">b</span><span class="p">[</span><span class="n">kk</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">kk</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+
+<div class="viewcode-block" id="Integrator.integrate_multiple">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/integr/index.html#pytuq.ftools.integr.Integrator.integrate_multiple">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">integrate_multiple</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f_arg_list</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Integrate multiple functions at once with the same input samples.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            f_arg_list (list[tuple]): List of pairs (function, argument).</span>
+<span class="sd">            **kwargs: Keyword arguments for the function.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list[float]: List of integral values.</span>
+
+<span class="sd">        TODO: assumes all functions take the same keyword arguments.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">integrals</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">f_args</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">f_arg_list</span><span class="p">):</span>
+            <span class="n">function</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="n">f_args</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_save</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="s1">&#39;saved&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_save</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="s1">&#39;xdata&#39;</span><span class="p">)</span>
+
+                <span class="c1">#print(i, np.max(args[&#39;saved&#39;]), np.max(kwargs[&#39;xdata&#39;]))</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;func_args&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">args</span>
+            <span class="n">integral</span><span class="p">,</span> <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="c1">#print(i, np.max(results[&#39;ydata&#39;]), np.min(results[&#39;ydata&#39;]))</span>
+            <span class="n">integrals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">integral</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">integrals</span></div>
+</div>
+
+
+
+<span class="c1">#  ___    ___  (_)  _ __    _   _</span>
+<span class="c1"># / __|  / __| | | | &#39;_ \  | | | |</span>
+<span class="c1"># \__ \ | (__  | | | |_) | | |_| |</span>
+<span class="c1"># |___/  \___| |_| | .__/   \__, |</span>
+<span class="c1">#                  |_|      |___/</span>
+
+<div class="viewcode-block" id="IntegratorScipy">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/integr/index.html#pytuq.ftools.integr.IntegratorScipy">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">IntegratorScipy</span><span class="p">(</span><span class="n">Integrator</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Integrator that uses SciPy.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="IntegratorScipy.integrate">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/integr/index.html#pytuq.ftools.integr.IntegratorScipy.integrate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">func_args</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xdata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">epsrel</span><span class="o">=</span><span class="mf">1.e-5</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Integration via SciPy.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            function (callable): The function to integrate f(x, **func_args), where the first argument should be a 2d array of size `(N, d)`.</span>
+<span class="sd">            domain (None, optional): Optionally provide a domain of integration, `(d, 2)`.</span>
+<span class="sd">            func_args (None, optional): Optional keyword arguments of the function.</span>
+<span class="sd">            xdata (None, optional): Provide input samples, if needed by the integrator.</span>
+<span class="sd">            epsrel (float, optional): Integration tolerance. Defaults to 1.e-5.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            (float, dict): tuple of integral value and dictionary containing error.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+            <span class="n">func</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">func_pars</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]</span>
+            <span class="n">func_input</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">args</span><span class="p">[:</span><span class="n">dim</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">dim</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">func_input</span><span class="p">,</span> <span class="o">**</span><span class="n">func_pars</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">xdata</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">domain</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">dim</span><span class="p">,</span> <span class="n">two</span> <span class="o">=</span> <span class="n">domain</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">integral</span><span class="p">,</span> <span class="n">err</span><span class="p">,</span> <span class="n">results</span> <span class="o">=</span> <span class="n">nquad</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span>
+                                       <span class="n">domain</span><span class="p">,</span>
+                                       <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">func_args</span><span class="p">),</span>
+                                       <span class="n">opts</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;epsrel&#39;</span><span class="p">:</span> <span class="n">epsrel</span><span class="p">},</span>
+                                       <span class="n">full_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">results</span><span class="p">[</span><span class="s1">&#39;err&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">err</span>
+
+        <span class="k">return</span> <span class="n">integral</span><span class="p">,</span> <span class="n">results</span></div>
+</div>
+
+
+
+<span class="c1">#  _ __ ___     ___   _ __ ___     ___</span>
+<span class="c1"># | &#39;_ ` _ \   / __| | &#39;_ ` _ \   / __|</span>
+<span class="c1"># | | | | | | | (__  | | | | | | | (__</span>
+<span class="c1"># |_| |_| |_|  \___| |_| |_| |_|  \___|</span>
+
+<div class="viewcode-block" id="IntegratorMCMC">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/integr/index.html#pytuq.ftools.integr.IntegratorMCMC">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">IntegratorMCMC</span><span class="p">(</span><span class="n">Integrator</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Integration via MCMC sampling.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="IntegratorMCMC.integrate">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/integr/index.html#pytuq.ftools.integr.IntegratorMCMC.integrate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">func_args</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xdata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">nmc</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Integrate via MCMC sampling.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            function (callable): The function to integrate f(x, **func_args), where the first argument should be a 2d array of size `(N, d)`.</span>
+<span class="sd">            domain (None, optional): Optionally provide a domain of integration, `(d, 2)`.</span>
+<span class="sd">            func_args (None, optional): Optional keyword arguments of the function.</span>
+<span class="sd">            xdata (None, optional): Provide input samples, if needed by the integrator.</span>
+<span class="sd">            nmc (int, optional): Number of requested samples. Defaults to 100.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            (float, dict): tuple of integral value and dictionary containing useful info.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">logfunction</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
+            <span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">function</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="o">**</span><span class="n">args</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">domain</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">dim</span><span class="p">,</span> <span class="n">two</span> <span class="o">=</span> <span class="n">domain</span><span class="o">.</span><span class="n">shape</span>
+
+        <span class="k">if</span> <span class="n">xdata</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">rv</span> <span class="o">=</span> <span class="n">MCMCRV</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">logfunction</span><span class="p">,</span> <span class="n">param_ini</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">dim</span><span class="p">,)),</span> <span class="n">nmcmc</span><span class="o">=</span><span class="mi">10</span> <span class="o">*</span> <span class="n">nmc</span><span class="p">)</span>
+            <span class="n">xdata</span> <span class="o">=</span> <span class="n">rv</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">nmc</span><span class="p">,</span> <span class="o">**</span><span class="n">func_args</span><span class="p">)</span>
+        <span class="n">ydata</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="o">**</span><span class="n">func_args</span><span class="p">)</span>
+
+        <span class="n">kde_py</span> <span class="o">=</span> <span class="n">kde</span><span class="o">.</span><span class="n">gaussian_kde</span><span class="p">(</span><span class="n">xdata</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+        <span class="n">kde_weight</span> <span class="o">=</span> <span class="n">kde_py</span><span class="p">(</span><span class="n">xdata</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+
+        <span class="n">integral</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">ydata</span> <span class="o">/</span> <span class="n">kde_weight</span><span class="p">)</span>
+
+        <span class="n">results</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;err&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;neval&#39;</span><span class="p">:</span> <span class="n">nmc</span><span class="p">,</span> <span class="s1">&#39;xdata&#39;</span><span class="p">:</span> <span class="n">xdata</span><span class="p">,</span> <span class="s1">&#39;ydata&#39;</span><span class="p">:</span> <span class="n">ydata</span><span class="p">,</span> <span class="s1">&#39;icw&#39;</span><span class="p">:</span> <span class="n">kde_weight</span><span class="p">}</span>
+        <span class="k">return</span> <span class="n">integral</span><span class="p">,</span> <span class="n">results</span></div>
+</div>
+
+
+
+<span class="c1">#  _ __ ___     ___</span>
+<span class="c1"># | &#39;_ ` _ \   / __|</span>
+<span class="c1"># | | | | | | | (__</span>
+<span class="c1"># |_| |_| |_|  \___|</span>
+
+<div class="viewcode-block" id="IntegratorMC">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/integr/index.html#pytuq.ftools.integr.IntegratorMC">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">IntegratorMC</span><span class="p">(</span><span class="n">Integrator</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Integrator via Monte-Carlo sampling.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+
+<div class="viewcode-block" id="IntegratorMC.integrate">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/integr/index.html#pytuq.ftools.integr.IntegratorMC.integrate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">func_args</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xdata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">nmc</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Integration via Monte-Carlo.</span>
+
+<span class="sd">         Args:</span>
+<span class="sd">            function (callable): The function to integrate f(x, **func_args), where the first argument should be a 2d array of size `(N, d)`.</span>
+<span class="sd">            domain (None, optional): Optionally provide a domain of integration, `(d, 2)`.</span>
+<span class="sd">            func_args (None, optional): Optional keyword arguments of the function.</span>
+<span class="sd">            xdata (None, optional): Provide input samples, if needed by the integrator.</span>
+<span class="sd">            nmc (int, optional): Number of requested samples. Defaults to 100.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            (float, dict): tuple of integral value and dictionary containing useful info.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">domain</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">dim</span><span class="p">,</span> <span class="n">two</span> <span class="o">=</span> <span class="n">domain</span><span class="o">.</span><span class="n">shape</span>
+
+        <span class="k">if</span> <span class="n">xdata</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">sc</span> <span class="o">=</span> <span class="n">Domainizer</span><span class="p">(</span><span class="n">domain</span><span class="p">)</span>
+            <span class="n">xdata</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">nmc</span><span class="p">,</span> <span class="n">dim</span><span class="p">))</span>
+        <span class="n">ydata</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="o">**</span><span class="n">func_args</span><span class="p">)</span>
+
+        <span class="n">volume</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">domain</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">domain</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+        <span class="n">integral</span> <span class="o">=</span> <span class="n">volume</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">ydata</span><span class="p">)</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;err&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;neval&#39;</span><span class="p">:</span> <span class="n">nmc</span><span class="p">,</span> <span class="s1">&#39;xdata&#39;</span><span class="p">:</span> <span class="n">xdata</span><span class="p">,</span> <span class="s1">&#39;ydata&#39;</span><span class="p">:</span> <span class="n">ydata</span><span class="p">}</span>
+        <span class="k">return</span> <span class="n">integral</span><span class="p">,</span> <span class="n">results</span></div>
+</div>
+
+
+<span class="c1"># __      __  _ __ ___     ___</span>
+<span class="c1"># \ \ /\ / / | &#39;_ ` _ \   / __|</span>
+<span class="c1">#  \ V  V /  | | | | | | | (__</span>
+<span class="c1">#   \_/\_/   |_| |_| |_|  \___|</span>
+
+<div class="viewcode-block" id="IntegratorWMC">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/integr/index.html#pytuq.ftools.integr.IntegratorWMC">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">IntegratorWMC</span><span class="p">(</span><span class="n">Integrator</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Integrator via weighted Monte-Carlo.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+
+<div class="viewcode-block" id="IntegratorWMC.integrate">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/integr/index.html#pytuq.ftools.integr.IntegratorWMC.integrate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">func_args</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xdata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cov</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                  <span class="n">nmc</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Integration by weighted single Gaussian.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            function (callable): The function to integrate f(x, **func_args), where the first argument should be a 2d array of size `(N, d)`.</span>
+<span class="sd">            func_args (None, optional): Optional keyword arguments of the function.</span>
+<span class="sd">            xdata (None, optional): Provide input samples, if needed by the integrator.</span>
+<span class="sd">            mean (None, optional): Mean array of size `d` of the associated gaussian weight. This argument is not optional.</span>
+<span class="sd">            cov (None, optional): Covariance matrix of size `(d,d)` of the associated gaussian weight. Defaults to identity matrix.</span>
+<span class="sd">            nmc (int, optional): Number of requested samples. Defaults to 100.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            (float, dict): tuple of integral value and dictionary containing useful info.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">mean</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">cov</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">mean</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">xdata</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">xdata</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span>
+                                              <span class="n">cov</span><span class="p">,</span>
+                                              <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">nmc</span><span class="p">,</span> <span class="p">))</span>
+        <span class="n">ydata</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="o">**</span><span class="n">func_args</span><span class="p">)</span>
+
+        <span class="n">gaussian_weight</span> <span class="o">=</span> <span class="n">multivariate_normal</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span>
+                                                  <span class="n">mean</span><span class="o">=</span><span class="n">mean</span><span class="p">,</span>
+                                                  <span class="n">cov</span><span class="o">=</span><span class="n">cov</span><span class="p">)</span>
+
+        <span class="n">integral</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">ydata</span> <span class="o">/</span> <span class="n">gaussian_weight</span><span class="p">)</span>
+
+        <span class="n">results</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;err&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;neval&#39;</span><span class="p">:</span> <span class="n">nmc</span><span class="p">,</span> <span class="s1">&#39;xdata&#39;</span><span class="p">:</span> <span class="n">xdata</span><span class="p">,</span> <span class="s1">&#39;ydata&#39;</span><span class="p">:</span> <span class="n">ydata</span><span class="p">,</span> <span class="s1">&#39;icw&#39;</span><span class="p">:</span> <span class="n">gaussian_weight</span><span class="p">}</span>
+        <span class="k">return</span> <span class="n">integral</span><span class="p">,</span> <span class="n">results</span></div>
+</div>
+
+
+<span class="c1">#   __ _   _ __ ___    _ __ ___</span>
+<span class="c1">#  / _` | | &#39;_ ` _ \  | &#39;_ ` _ \</span>
+<span class="c1"># | (_| | | | | | | | | | | | | |</span>
+<span class="c1">#  \__, | |_| |_| |_| |_| |_| |_|</span>
+<span class="c1">#  |___/</span>
+
+<div class="viewcode-block" id="IntegratorGMM">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/integr/index.html#pytuq.ftools.integr.IntegratorGMM">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">IntegratorGMM</span><span class="p">(</span><span class="n">Integrator</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Integrator via Gaussian mixture models.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="IntegratorGMM.integrate">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/integr/index.html#pytuq.ftools.integr.IntegratorGMM.integrate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span>
+                  <span class="n">func_args</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xdata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                  <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">means</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">covs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                  <span class="n">nmc</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Integration by Gaussian mixtures.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            function (callable): The function to integrate f(x, **func_args), where the first argument should be a 2d array of size `(N, d)`.</span>
+<span class="sd">            func_args (None, optional): Optional keyword arguments of the function.</span>
+<span class="sd">            xdata (None, optional): Provide input samples, if needed by the integrator.</span>
+<span class="sd">            weights (list[float], optional): Weights of associated mixtures. Defaults to None, which automatically picks the weights based on function values and its width at the peaks.</span>
+<span class="sd">            means (list[np.ndarray], optional): List of mean arrays. This is not optional.</span>
+<span class="sd">            covs (list[np.ndarray], optional): List of covariance matrices.</span>
+<span class="sd">            nmc (int, optional): Number of requested samples. Defaults to 100.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            (float, dict): tuple of integral value and dictionary containing useful info.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">means</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="n">function</span><span class="p">(</span><span class="n">mean</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="o">**</span><span class="n">func_args</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">cov</span><span class="p">))</span> <span class="k">for</span> <span class="n">mean</span><span class="p">,</span> <span class="n">cov</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">means</span><span class="p">,</span> <span class="n">covs</span><span class="p">)]</span>
+
+        <span class="n">mygmm</span> <span class="o">=</span> <span class="n">GMM</span><span class="p">(</span><span class="n">means</span><span class="p">,</span> <span class="n">covs</span><span class="o">=</span><span class="n">covs</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">xdata</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">xdata</span> <span class="o">=</span> <span class="n">mygmm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">nmc</span><span class="p">)</span>
+        <span class="n">ydata</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="o">**</span><span class="n">func_args</span><span class="p">)</span>
+
+        <span class="n">gmm_pdf</span> <span class="o">=</span> <span class="n">mygmm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">xdata</span><span class="p">)</span>
+
+        <span class="n">integral</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">ydata</span> <span class="o">/</span> <span class="n">gmm_pdf</span><span class="p">)</span>
+
+        <span class="n">results</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;err&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;neval&#39;</span><span class="p">:</span> <span class="n">nmc</span><span class="p">,</span> <span class="s1">&#39;xdata&#39;</span><span class="p">:</span> <span class="n">xdata</span><span class="p">,</span> <span class="s1">&#39;ydata&#39;</span><span class="p">:</span> <span class="n">ydata</span><span class="p">,</span> <span class="s1">&#39;icw&#39;</span><span class="p">:</span> <span class="n">gmm_pdf</span><span class="p">}</span>
+        <span class="k">return</span> <span class="n">integral</span><span class="p">,</span> <span class="n">results</span></div>
+</div>
+
+
+<span class="c1">#                                  _</span>
+<span class="c1">#   __ _   _ __ ___    _ __ ___   | |_</span>
+<span class="c1">#  / _` | | &#39;_ ` _ \  | &#39;_ ` _ \  | __|</span>
+<span class="c1"># | (_| | | | | | | | | | | | | | | |_</span>
+<span class="c1">#  \__, | |_| |_| |_| |_| |_| |_|  \__|</span>
+<span class="c1">#  |___/</span>
+
+<div class="viewcode-block" id="IntegratorGMMT">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/integr/index.html#pytuq.ftools.integr.IntegratorGMMT">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">IntegratorGMMT</span><span class="p">(</span><span class="n">Integrator</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Integrator via truncated Gaussian mixture models.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="IntegratorGMMT.integrate">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/integr/index.html#pytuq.ftools.integr.IntegratorGMMT.integrate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                  <span class="n">func_args</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xdata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">means</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">covs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                  <span class="n">nmc</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Integration by truncated Gaussian mixtures.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            function (callable): The function to integrate f(x, **func_args), where the first argument should be a 2d array of size `(N, d)`.</span>
+<span class="sd">            domain (None, optional): Provide a domain of integration/truncation, `(d, 2)`.</span>
+<span class="sd">            func_args (None, optional): Optional keyword arguments of the function.</span>
+<span class="sd">            xdata (None, optional): Provide input samples, if needed by the integrator.</span>
+<span class="sd">            weights (list[float], optional): Weights of associated mixtures. Defaults to None, which automatically picks the weights based on function values and its width at the peaks.</span>
+<span class="sd">            means (list[np.ndarray], optional): List of mean arrays. This is not optional.</span>
+<span class="sd">            covs (list[np.ndarray], optional): List of covariance matrices.</span>
+<span class="sd">            nmc (int, optional): Number of requested samples. Defaults to 100.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            (float, dict): tuple of integral value and dictionary containing useful info.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">assert</span><span class="p">(</span><span class="n">means</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># TODO: this won&#39;t work well if wrapped in integrate_multiple()</span>
+            <span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="n">function</span><span class="p">(</span><span class="n">mean</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="o">**</span><span class="n">func_args</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">cov</span><span class="p">))</span> <span class="k">for</span> <span class="n">mean</span><span class="p">,</span> <span class="n">cov</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">means</span><span class="p">,</span> <span class="n">covs</span><span class="p">)]</span>
+
+        <span class="c1">#print(weights)</span>
+        <span class="n">mygmm</span> <span class="o">=</span> <span class="n">GMM</span><span class="p">(</span><span class="n">means</span><span class="p">,</span> <span class="n">covs</span><span class="o">=</span><span class="n">covs</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">)</span>
+        <span class="c1">#print(mygmm.weights)</span>
+
+        <span class="k">if</span> <span class="n">xdata</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">xdata</span> <span class="o">=</span> <span class="n">mygmm</span><span class="o">.</span><span class="n">sample_indomain</span><span class="p">(</span><span class="n">nmc</span><span class="p">,</span> <span class="n">domain</span><span class="p">)</span>
+        <span class="n">ydata</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="o">**</span><span class="n">func_args</span><span class="p">)</span>
+
+        <span class="n">gmm_pdf</span> <span class="o">=</span> <span class="n">mygmm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">xdata</span><span class="p">)</span>
+        <span class="n">volume</span> <span class="o">=</span> <span class="n">mygmm</span><span class="o">.</span><span class="n">volume_indomain</span><span class="p">(</span><span class="n">domain</span><span class="p">)</span>
+        <span class="n">integral</span> <span class="o">=</span> <span class="n">volume</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">ydata</span> <span class="o">/</span> <span class="n">gmm_pdf</span><span class="p">)</span>
+        <span class="c1">#print(&quot;AAA &quot;, gmm_pdf)</span>
+
+        <span class="n">results</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;err&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;neval&#39;</span><span class="p">:</span> <span class="n">nmc</span><span class="p">,</span> <span class="s1">&#39;xdata&#39;</span><span class="p">:</span> <span class="n">xdata</span><span class="p">,</span> <span class="s1">&#39;ydata&#39;</span><span class="p">:</span> <span class="n">ydata</span><span class="p">,</span> <span class="s1">&#39;icw&#39;</span><span class="p">:</span> <span class="n">gmm_pdf</span><span class="o">/</span><span class="n">volume</span><span class="p">}</span>
+        <span class="k">return</span> <span class="n">integral</span><span class="p">,</span> <span class="n">results</span></div>
+</div>
+
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

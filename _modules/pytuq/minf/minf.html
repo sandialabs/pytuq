@@ -1,0 +1,605 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytuq.minf.minf &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">Software Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/index.html#surrogates">Surrogates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_pce.html">Polynomial Chaos Expansion Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../autoapi/index.html">Section Navigation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../autoapi/pytuq/index.html">pytuq</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/pytuq/index.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/ftools/index.html">pytuq.ftools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/func/index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/minf/index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/rv/index.html">pytuq.rv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/surrogates/index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/utils/index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pytuq.minf.minf</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pytuq.minf.minf</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="sd">&quot;&quot;&quot;Various utilities for model parameter inference and postprocessing.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">minimize</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.infer</span><span class="w"> </span><span class="kn">import</span> <span class="n">Infer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.mcmc</span><span class="w"> </span><span class="kn">import</span> <span class="n">AMCMC</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.calib</span><span class="w"> </span><span class="kn">import</span> <span class="n">MCMCBase</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.likelihoods</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.priors</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">..utils.maps</span><span class="w"> </span><span class="kn">import</span> <span class="n">scale01ToDom</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..utils.plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">lighten_color</span><span class="p">,</span> <span class="n">plot_vars</span><span class="p">,</span> <span class="n">plot_shade</span>
+
+<div class="viewcode-block" id="model_infer">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/minf/index.html#pytuq.minf.minf.model_infer">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">model_infer</span><span class="p">(</span><span class="n">ydata</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">model_params</span><span class="p">,</span> <span class="n">model_pdim</span><span class="p">,</span>
+                <span class="n">inpdf_type</span><span class="o">=</span><span class="s1">&#39;pci&#39;</span><span class="p">,</span> <span class="n">pc_type</span><span class="o">=</span><span class="s1">&#39;LU&#39;</span><span class="p">,</span> <span class="n">outord</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                <span class="n">rndind</span><span class="o">=</span><span class="p">[],</span> <span class="n">fixindnom</span><span class="o">=</span><span class="p">[],</span> <span class="n">ind_calib</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">calib_type</span><span class="o">=</span><span class="s1">&#39;amcmc&#39;</span><span class="p">,</span> <span class="n">calib_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">md_transform</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">datamode</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">lik_type</span><span class="o">=</span><span class="s1">&#39;classical&#39;</span><span class="p">,</span> <span class="n">lik_params</span><span class="o">=</span><span class="p">{},</span>
+                <span class="n">pr_type</span><span class="o">=</span><span class="s1">&#39;uniform&#39;</span><span class="p">,</span> <span class="n">pr_params</span><span class="o">=</span><span class="p">{},</span>
+                <span class="n">dv_type</span><span class="o">=</span><span class="s1">&#39;var_fixed&#39;</span><span class="p">,</span> <span class="n">dv_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">zflag</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Main function that performs model parameter inference, with or without embedded model error.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        ydata (list or np.ndarray): List of `N` 1d arrays corresponding to data for each design location, or a 2d array of size `(N,e)`, or an 1d array of size `N`.</span>
+<span class="sd">        model (callable): Model with signature `f(p, q)`, where `p` are model parameters of interest, and `q` are other helpful model parameters.</span>
+<span class="sd">        model_params (tuple or list): Model parameters `q`.</span>
+<span class="sd">        model_pdim (int): Parameter dimensionality, i.e. number of model parameters.</span>
+<span class="sd">        inpdf_type (str): Embedded PDF type. Options are &#39;pci&#39; (default) and &#39;pct&#39;.</span>
+<span class="sd">        pc_type (str): Embedded PC type. Can be &#39;LU&#39; (default) or &#39;HG&#39;.</span>
+<span class="sd">        outord (int, optional): Order for the output PC in the likelihood computation. Defaults to 0.</span>
+<span class="sd">        rndind (list[ind], optional): List of indices of parameters to be embedded. If None, embeds in all parameters. Default is empty list, i.e. no embedding.</span>
+<span class="sd">        fixindnom (list, optional): An array of size `(K,2)`, where first column indicates indices of parameters that are fixed (i.e. not part of the inference), and the second column is their nominal, fixed values. Defaults to an empty list, i.e. all parameters are inferred, none are fixed.</span>
+<span class="sd">        ind_calib (list, optional): Model output indices that are used for calibration. Default is None, i.e. all outputs being used for calibration.</span>
+<span class="sd">        calib_type (str or calib.Calib, optional): Calibration type. Only &#39;amcmc&#39; (default) is implemented. Can also be a user-defined Calib object.</span>
+<span class="sd">        calib_params (dict, optional): Dictionary of calibration parameters.</span>
+<span class="sd">        md_transform (callable, optional): Potentially, a transform to be applied to model and data before the likelihood computation starts. Default is None, i.e. identity function.</span>
+<span class="sd">        datamode (str, optional): If &#39;mean&#39;, work with data means per location.</span>
+<span class="sd">        lik_type (str, optional): Likelihood type: options are &#39;classical&#39;, &#39;logclassical&#39;, &#39;abc&#39;, &#39;gausmarg&#39;, &#39;dummy&#39;.</span>
+<span class="sd">        lik_params (dict, optional): Parameters of likelihood.</span>
+<span class="sd">        pr_type (str, optional): Prior type: the options are &#39;uniform&#39; and &#39;normal&#39;.</span>
+<span class="sd">        pr_params (dict, optional): Parameters of prior.</span>
+<span class="sd">        dv_type (str, optional): Data variance treatment type. Options are &#39;var_fixed&#39;, &#39;std_infer&#39;, &#39;std_infer_log&#39;, &#39;std_prop_fixed&#39;, &#39;var_fromdata_fixed&#39;, &#39;log_var_fromdata_fixed&#39;, &#39;var_fromdata_infer&#39;, &#39;log_var_fromdata_infer&#39;, &#39;scale_var&#39;.</span>
+<span class="sd">        dv_params (list, optional): Parameter list relevant to data variance computation. Defaults to None.</span>
+<span class="sd">        zflag (bool, optional): Controls whether we want to precondition the inference with a deterministic optimization to find a better starting point for the chain.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: Dictionary of results. Keys are &#39;chain&#39; (chain samples array), &#39;mapparams&#39; (MAP parameters array), &#39;maxpost&#39; (maximal log-post value), &#39;accrate&#39; (acceptance rate), &#39;logpost&#39; (log-post values throughout the chain), &#39;alphas&#39; (acceptance probabilities throughout the chain), &#39;post&#39; (Inference object).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">lik_type</span><span class="o">==</span><span class="s1">&#39;classical&#39;</span> <span class="ow">or</span> <span class="n">lik_type</span><span class="o">==</span><span class="s1">&#39;log_classical&#39;</span><span class="p">:</span>
+        <span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rndind</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span>
+
+
+    <span class="n">inference</span> <span class="o">=</span> <span class="n">Infer</span><span class="p">()</span>
+
+    <span class="n">inference</span><span class="o">.</span><span class="n">setData</span><span class="p">(</span><span class="n">ydata</span><span class="p">,</span> <span class="n">datamode</span><span class="o">=</span><span class="n">datamode</span><span class="p">)</span>
+    <span class="n">inference</span><span class="o">.</span><span class="n">setDataVar</span><span class="p">(</span><span class="n">dv_type</span><span class="p">,</span> <span class="n">dv_params</span><span class="p">)</span>
+
+
+
+    <span class="k">assert</span><span class="p">(</span><span class="n">model_pdim</span><span class="o">&gt;=</span><span class="nb">len</span><span class="p">(</span><span class="n">fixindnom</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">fixind</span> <span class="ow">in</span> <span class="n">fixindnom</span><span class="p">:</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">fixind</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">fixind</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;</span><span class="n">model_pdim</span><span class="p">)</span>
+
+    <span class="n">inference</span><span class="o">.</span><span class="n">setModelRVinput</span><span class="p">(</span><span class="n">inpdf_type</span><span class="p">,</span> <span class="n">pc_type</span><span class="p">,</span> <span class="n">model_pdim</span><span class="p">,</span> <span class="n">rndind</span><span class="p">)</span>
+    <span class="n">inference</span><span class="o">.</span><span class="n">setModelRVoutput</span><span class="p">(</span><span class="n">outord</span><span class="p">)</span>
+    <span class="n">inference</span><span class="o">.</span><span class="n">setModel</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">model_params</span><span class="p">,</span>
+                       <span class="n">md_transform</span><span class="o">=</span><span class="n">md_transform</span><span class="p">,</span>
+                       <span class="n">fixindnom</span><span class="o">=</span><span class="n">fixindnom</span><span class="p">,</span> <span class="n">ind_calib</span><span class="o">=</span><span class="n">ind_calib</span><span class="p">)</span>
+
+
+    <span class="c1"># likelihoods = {&#39;classical&#39;: Likelihood_classical(inference),</span>
+    <span class="c1">#                &#39;logclassical&#39;: Likelihood_logclassical(inference),</span>
+    <span class="c1">#                &#39;abc&#39;: Likelihood_abc(inference, **lik_params),</span>
+    <span class="c1">#                &#39;gausmarg&#39;: Likelihood_gausmarg(inference),</span>
+    <span class="c1">#                &#39;dummy&#39;: Likelihood_dummy(inference)}</span>
+
+    <span class="k">if</span> <span class="n">lik_type</span> <span class="o">==</span> <span class="s1">&#39;classical&#39;</span><span class="p">:</span>
+        <span class="n">inference</span><span class="o">.</span><span class="n">setLikelihood</span><span class="p">(</span><span class="n">Likelihood_classical</span><span class="p">(</span><span class="n">inference</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">lik_type</span> <span class="o">==</span> <span class="s1">&#39;logclassical&#39;</span><span class="p">:</span>
+        <span class="n">inference</span><span class="o">.</span><span class="n">setLikelihood</span><span class="p">(</span><span class="n">Likelihood_logclassical</span><span class="p">(</span><span class="n">inference</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">lik_type</span> <span class="o">==</span> <span class="s1">&#39;abc&#39;</span><span class="p">:</span>
+        <span class="n">inference</span><span class="o">.</span><span class="n">setLikelihood</span><span class="p">(</span><span class="n">Likelihood_abc</span><span class="p">(</span><span class="n">inference</span><span class="p">,</span> <span class="o">**</span><span class="n">lik_params</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">lik_type</span> <span class="o">==</span> <span class="s1">&#39;gausmarg&#39;</span><span class="p">:</span>
+        <span class="n">inference</span><span class="o">.</span><span class="n">setLikelihood</span><span class="p">(</span><span class="n">Likelihood_gausmarg</span><span class="p">(</span><span class="n">inference</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">lik_type</span> <span class="o">==</span> <span class="s1">&#39;dummy&#39;</span><span class="p">:</span>
+        <span class="n">inference</span><span class="o">.</span><span class="n">setLikelihood</span><span class="p">(</span><span class="n">Likelihood_dummy</span><span class="p">(</span><span class="n">inference</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Likelihood type </span><span class="si">{</span><span class="n">lik_type</span><span class="si">}</span><span class="s2"> unknown. Exiting.&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">pr_type</span><span class="o">==</span><span class="s1">&#39;uniform&#39;</span><span class="p">:</span>
+        <span class="n">inference</span><span class="o">.</span><span class="n">setPrior</span><span class="p">(</span><span class="n">Prior_uniform</span><span class="p">(</span><span class="n">inference</span><span class="p">,</span> <span class="o">**</span><span class="n">pr_params</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">pr_type</span><span class="o">==</span><span class="s1">&#39;normal&#39;</span><span class="p">:</span>
+        <span class="n">inference</span><span class="o">.</span><span class="n">setPrior</span><span class="p">(</span><span class="n">Prior_normal</span><span class="p">(</span><span class="n">inference</span><span class="p">,</span> <span class="o">**</span><span class="n">pr_params</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Prior type </span><span class="si">{</span><span class="n">pr_type</span><span class="si">}</span><span class="s2"> unknown. Exiting.&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+
+    <span class="n">inference</span><span class="o">.</span><span class="n">setChain</span><span class="p">(</span><span class="n">default_init</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">calib_type</span><span class="p">,</span> <span class="n">MCMCBase</span><span class="p">):</span>
+        <span class="n">calib</span> <span class="o">=</span> <span class="n">calib_type</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">calib_type</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">calib_type</span> <span class="o">==</span> <span class="s1">&#39;amcmc&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">calib_params</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">calib_params</span> <span class="o">=</span> <span class="p">{}</span>
+
+            <span class="k">if</span> <span class="n">calib_params</span><span class="p">[</span><span class="s1">&#39;param_ini&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">param_ini</span> <span class="o">=</span> <span class="n">inference</span><span class="o">.</span><span class="n">chainInit</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">param_ini</span> <span class="o">=</span> <span class="n">calib_params</span><span class="p">[</span><span class="s1">&#39;param_ini&#39;</span><span class="p">]</span>
+                <span class="k">assert</span><span class="p">(</span><span class="n">param_ini</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="n">inference</span><span class="o">.</span><span class="n">chdim</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">zflag</span><span class="p">:</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">((</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">fcn</span><span class="p">:</span> <span class="o">-</span><span class="n">fcn</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span>
+                               <span class="n">param_ini</span><span class="p">,</span>
+                               <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">inference</span><span class="o">.</span><span class="n">evalLogPost</span><span class="p">,),</span>
+                               <span class="n">method</span><span class="o">=</span><span class="s1">&#39;BFGS&#39;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;gtol&#39;</span><span class="p">:</span> <span class="mf">1e-13</span><span class="p">})</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Optimal values via BFGS:&#39;</span><span class="p">,</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+                <span class="n">param_ini</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span>
+
+
+
+            <span class="n">nmcmc</span> <span class="o">=</span> <span class="n">calib_params</span><span class="p">[</span><span class="s1">&#39;nmcmc&#39;</span><span class="p">]</span>
+            <span class="k">del</span> <span class="n">calib_params</span><span class="p">[</span><span class="s1">&#39;nmcmc&#39;</span><span class="p">]</span>
+            <span class="k">del</span> <span class="n">calib_params</span><span class="p">[</span><span class="s1">&#39;param_ini&#39;</span><span class="p">]</span>
+
+            <span class="n">calib</span> <span class="o">=</span> <span class="n">AMCMC</span><span class="p">(</span><span class="o">**</span><span class="n">calib_params</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Calib_type </span><span class="si">{</span><span class="n">calib_type</span><span class="si">}</span><span class="s1"> not recognized. Exiting.&#39;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Calib_type type </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">calib_type</span><span class="p">)</span><span class="si">}</span><span class="s1"> not recognized. Exiting.&#39;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+    <span class="c1"># Run the inference</span>
+    <span class="n">calib</span><span class="o">.</span><span class="n">setLogPost</span><span class="p">(</span><span class="n">inference</span><span class="o">.</span><span class="n">evalLogPost</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">calib_results</span> <span class="o">=</span> <span class="n">calib</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">nmcmc</span><span class="p">,</span> <span class="n">param_ini</span><span class="p">)</span>
+    <span class="n">calib_results</span><span class="p">[</span><span class="s1">&#39;post&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inference</span>
+
+
+    <span class="k">return</span> <span class="n">calib_results</span></div>
+
+
+
+<div class="viewcode-block" id="model_infer_postp">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/minf/index.html#pytuq.minf.minf.model_infer_postp">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">model_infer_postp</span><span class="p">(</span><span class="n">calib_results</span><span class="p">,</span>
+                      <span class="n">checkmode</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">nburn</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nevery</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nxi</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Postprocessing calibration results.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        calib_results (dict): Result dictionary, the output of model_infer(...) function.</span>
+<span class="sd">        checkmode (tuple, optional): Mode of evaluation a tuple of [model, model_parameters, index of calibrated outputs, final transform]. Defaults to None, which means get the inference object&#39;s internal model features.</span>
+<span class="sd">        nburn (int, optional): Number of burned samples from the beginning of the chain. Default is 0, i.e. no burn-in.</span>
+<span class="sd">        nevery (int, optional): Thinning of the chain. Default is 1, i.e. no thinning.</span>
+<span class="sd">        nxi (int, optional): Number of samples per chain sample.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: ycheck (dictionary of various prediction means and variances), psamples (3d array of parameter samples of size Npost x nxi x pdim), fsamples (3d array of model output samples Npost x nxi x outdim)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">inference</span> <span class="o">=</span> <span class="n">calib_results</span><span class="p">[</span><span class="s1">&#39;post&#39;</span><span class="p">]</span>
+    <span class="n">nmcmc</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">calib_results</span><span class="p">[</span><span class="s1">&#39;chain&#39;</span><span class="p">])</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">nburn</span><span class="o">&lt;</span><span class="n">nmcmc</span><span class="p">)</span>
+    <span class="n">ycheck</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="c1"># Get MAP sample</span>
+    <span class="n">ycheck</span><span class="p">[</span><span class="s1">&#39;map_mean&#39;</span><span class="p">],</span> <span class="n">ycheck</span><span class="p">[</span><span class="s1">&#39;map_var&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inference</span><span class="o">.</span><span class="n">getModelMoments_NISP</span><span class="p">(</span><span class="n">calib_results</span><span class="p">[</span><span class="s1">&#39;mapparams&#39;</span><span class="p">],</span> <span class="n">fmode</span><span class="o">=</span><span class="n">checkmode</span><span class="p">)</span>
+    <span class="n">nmout</span> <span class="o">=</span> <span class="n">ycheck</span><span class="p">[</span><span class="s1">&#39;map_mean&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">psample_map</span><span class="p">,</span> <span class="n">fsample_map</span> <span class="o">=</span> <span class="n">inference</span><span class="o">.</span><span class="n">getIOSamples</span><span class="p">(</span><span class="n">calib_results</span><span class="p">[</span><span class="s1">&#39;mapparams&#39;</span><span class="p">],</span> <span class="n">nxi</span><span class="o">=</span><span class="n">nxi</span><span class="p">,</span> <span class="n">fmode</span><span class="o">=</span><span class="n">checkmode</span><span class="p">)</span>
+    <span class="n">nxi_</span><span class="p">,</span> <span class="n">npar</span> <span class="o">=</span> <span class="n">psample_map</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">nxi__</span><span class="p">,</span> <span class="n">nout</span> <span class="o">=</span> <span class="n">fsample_map</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">nxi_</span><span class="o">==</span><span class="n">nxi</span> <span class="ow">and</span> <span class="n">nxi__</span><span class="o">==</span><span class="n">nxi</span><span class="p">)</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">nmout</span><span class="o">==</span><span class="n">nout</span><span class="p">)</span>
+
+    <span class="n">npost</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">calib_results</span><span class="p">[</span><span class="s1">&#39;chain&#39;</span><span class="p">][</span><span class="n">nburn</span><span class="p">::</span><span class="n">nevery</span><span class="p">])</span>
+    <span class="n">psamples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">npost</span><span class="p">,</span> <span class="n">nxi</span><span class="p">,</span> <span class="n">npar</span><span class="p">))</span>
+    <span class="n">fsamples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">npost</span><span class="p">,</span> <span class="n">nxi</span><span class="p">,</span> <span class="n">nout</span><span class="p">))</span>
+    <span class="c1"># Get MCMC prediction samples</span>
+    <span class="c1">#xi = inference.inpcrv.sampleGerm(nxi)</span>
+
+    <span class="n">ycheck</span><span class="p">[</span><span class="s1">&#39;mcmc_mean&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">npost</span><span class="p">,</span> <span class="n">nmout</span><span class="p">))</span>
+    <span class="n">ycheck</span><span class="p">[</span><span class="s1">&#39;mcmc_var&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">npost</span><span class="p">,</span> <span class="n">nmout</span><span class="p">))</span>
+
+    <span class="n">chain_thinned</span> <span class="o">=</span> <span class="n">calib_results</span><span class="p">[</span><span class="s1">&#39;chain&#39;</span><span class="p">][</span><span class="n">nburn</span><span class="p">::</span><span class="n">nevery</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">npost</span><span class="p">):</span>
+        <span class="n">sam</span> <span class="o">=</span> <span class="n">chain_thinned</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">psamples</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">fsamples</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">inference</span><span class="o">.</span><span class="n">getIOSamples</span><span class="p">(</span><span class="n">sam</span><span class="p">,</span> <span class="n">nxi</span><span class="o">=</span><span class="n">nxi</span><span class="p">,</span> <span class="n">fmode</span><span class="o">=</span><span class="n">checkmode</span><span class="p">)</span>
+        <span class="n">ycheck</span><span class="p">[</span><span class="s1">&#39;mcmc_mean&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">,</span> <span class="p">:],</span> <span class="n">ycheck</span><span class="p">[</span><span class="s1">&#39;mcmc_var&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">inference</span><span class="o">.</span><span class="n">getModelMoments_NISP</span><span class="p">(</span><span class="n">sam</span><span class="p">,</span> <span class="n">fmode</span><span class="o">=</span><span class="n">checkmode</span><span class="p">)</span>
+    <span class="n">ycheck</span><span class="p">[</span><span class="s1">&#39;mean_mean&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">ycheck</span><span class="p">[</span><span class="s1">&#39;mcmc_mean&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">ycheck</span><span class="p">[</span><span class="s1">&#39;var_mean&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">ycheck</span><span class="p">[</span><span class="s1">&#39;mcmc_mean&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1">#Perr</span>
+    <span class="n">ycheck</span><span class="p">[</span><span class="s1">&#39;mean_var&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">ycheck</span><span class="p">[</span><span class="s1">&#39;mcmc_var&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1">#Merr</span>
+    <span class="n">ycheck</span><span class="p">[</span><span class="s1">&#39;var_var&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">ycheck</span><span class="p">[</span><span class="s1">&#39;mcmc_var&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="s1">&#39;var_mean.txt&#39;</span><span class="p">,</span>  <span class="n">ycheck</span><span class="p">[</span><span class="s1">&#39;var_mean&#39;</span><span class="p">])</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="s1">&#39;mean_var.txt&#39;</span><span class="p">,</span>  <span class="n">ycheck</span><span class="p">[</span><span class="s1">&#39;mean_var&#39;</span><span class="p">])</span>
+
+    <span class="n">samples</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">samples</span><span class="p">[</span><span class="s1">&#39;pmcmc&#39;</span><span class="p">],</span> <span class="n">samples</span><span class="p">[</span><span class="s1">&#39;fmcmc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">psamples</span><span class="p">,</span> <span class="n">fsamples</span>
+    <span class="n">samples</span><span class="p">[</span><span class="s1">&#39;pmap&#39;</span><span class="p">],</span> <span class="n">samples</span><span class="p">[</span><span class="s1">&#39;fmap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">psample_map</span><span class="p">,</span> <span class="n">fsample_map</span>
+    <span class="k">return</span> <span class="n">ycheck</span><span class="p">,</span> <span class="n">samples</span></div>
+
+
+<div class="viewcode-block" id="plot_1d_data">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/minf/index.html#pytuq.minf.minf.plot_1d_data">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_1d_data</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="n">ydata</span><span class="p">,</span> <span class="n">xygrid_true</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plotting 1d data.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        xdata (np.ndarray): An 1d array of x-data.</span>
+<span class="sd">        ydata (np.ndarray): An 1d array of y-data.</span>
+<span class="sd">        xygrid_true (tuple, optional): A tuple of gridded x- and y-values, if one wants to plot the true model as well.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+    <span class="n">npt</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">xdata</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="n">ydata</span><span class="p">,</span> <span class="s1">&#39;ko&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data, N = &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">npt</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+    <span class="c1"># plt.xlim([np.min(xgrid), np.max(xgrid)])</span>
+    <span class="c1"># ymin, ymax = np.min(ydata), np.max(ydata)</span>
+    <span class="c1"># ymin, ymax = ymin - 0.25* (ymax-ymin), ymax + 0.25* (ymax-ymin)</span>
+    <span class="c1"># plt.ylim([ymin, ymax])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;data_only_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">npt</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.png&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">xygrid_true</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">xgrid</span><span class="p">,</span> <span class="n">ygrid_true</span> <span class="o">=</span> <span class="n">xygrid_true</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xgrid</span><span class="p">,</span> <span class="n">ygrid_true</span><span class="p">,</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Truth&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;data_model_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">npt</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.png&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="plot_1d_samples">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/minf/index.html#pytuq.minf.minf.plot_1d_samples">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_1d_samples</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="n">ydata</span><span class="p">,</span> <span class="n">xygrid_samples</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plotting 1d data.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        xdata (np.ndarray): An 1d array of x-data.</span>
+<span class="sd">        ydata (np.ndarray): An 1d array of y-data.</span>
+<span class="sd">        xygrid_samples (tuple, optional): A tuple of gridded x- and y-values (can be a 2d array to plot many samples of the true model), if one wants to plot the true model as well.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        This is very similar to plot_1d_data() and could be merged with it.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+    <span class="n">npt</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">xdata</span><span class="p">)</span>
+
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="n">ydata</span><span class="p">,</span> <span class="s1">&#39;ko&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data, N = &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">npt</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+    <span class="c1"># plt.xlim([np.min(xgrid), np.max(xgrid)])</span>
+    <span class="c1"># ymin, ymax = np.min(ydata), np.max(ydata)</span>
+    <span class="c1"># ymin, ymax = ymin - 0.25* (ymax-ymin), ymax + 0.25* (ymax-ymin)</span>
+    <span class="c1"># plt.ylim([ymin, ymax])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">xygrid_samples</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">xgrid</span><span class="p">,</span> <span class="n">ygrid_samples</span> <span class="o">=</span> <span class="n">xygrid_samples</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xgrid</span><span class="p">,</span> <span class="n">ygrid_samples</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;samples_model.png&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="plot_1dfit">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/minf/index.html#pytuq.minf.minf.plot_1dfit">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_1dfit</span><span class="p">(</span><span class="n">xgrid</span><span class="p">,</span> <span class="n">ygrid_pred</span><span class="p">,</span> <span class="n">ygrid_true</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xydata</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plotting 1d fit with total and MAP standard deviation.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        xgrid (np.ndarray): An 1d array of x-grid</span>
+<span class="sd">        ygrid_pred (dict): Dictionary containing moments of predictions.</span>
+<span class="sd">        ygrid_true (np.ndarray, optional): If not None, this is the true model values at the x-grid.</span>
+<span class="sd">        xydata (tuple, optional): If not None, this is the x- and y-data tuple and plots on top of the fits.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">9</span><span class="p">))</span>
+    <span class="n">p</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xgrid</span><span class="p">,</span> <span class="n">ygrid_pred</span><span class="p">[</span><span class="s1">&#39;mean_mean&#39;</span><span class="p">],</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Mean&#39;</span><span class="p">)</span>
+    <span class="n">lc</span> <span class="o">=</span> <span class="n">lighten_color</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">get_color</span><span class="p">(),</span> <span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">xgrid</span><span class="p">,</span>
+                     <span class="n">ygrid_pred</span><span class="p">[</span><span class="s1">&#39;mean_mean&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">ygrid_pred</span><span class="p">[</span><span class="s1">&#39;mean_var&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">ygrid_pred</span><span class="p">[</span><span class="s1">&#39;var_mean&#39;</span><span class="p">]),</span>
+                     <span class="n">ygrid_pred</span><span class="p">[</span><span class="s1">&#39;mean_mean&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">ygrid_pred</span><span class="p">[</span><span class="s1">&#39;mean_var&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">ygrid_pred</span><span class="p">[</span><span class="s1">&#39;var_mean&#39;</span><span class="p">]),</span>
+                     <span class="n">color</span><span class="o">=</span><span class="n">lc</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Total StDev&#39;</span><span class="p">)</span>
+
+    <span class="n">q</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xgrid</span><span class="p">,</span> <span class="n">ygrid_pred</span><span class="p">[</span><span class="s1">&#39;map_mean&#39;</span><span class="p">],</span> <span class="s1">&#39;g-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;MAP&#39;</span><span class="p">)</span>
+    <span class="n">lc</span> <span class="o">=</span> <span class="n">lighten_color</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">get_color</span><span class="p">(),</span> <span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">xgrid</span><span class="p">,</span>
+                     <span class="n">ygrid_pred</span><span class="p">[</span><span class="s1">&#39;map_mean&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">ygrid_pred</span><span class="p">[</span><span class="s1">&#39;map_var&#39;</span><span class="p">]),</span>
+                     <span class="n">ygrid_pred</span><span class="p">[</span><span class="s1">&#39;map_mean&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">ygrid_pred</span><span class="p">[</span><span class="s1">&#39;map_var&#39;</span><span class="p">]),</span>
+                     <span class="n">color</span><span class="o">=</span><span class="n">lc</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;MAP StDev&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ygrid_true</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xgrid</span><span class="p">,</span> <span class="n">ygrid_true</span><span class="p">,</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Truth&#39;</span><span class="p">)</span>
+    <span class="n">ymind</span><span class="p">,</span> <span class="n">ymaxd</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+    <span class="n">idata</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="n">xydata</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">idata</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">xdata</span><span class="p">,</span> <span class="n">ydata</span> <span class="o">=</span> <span class="n">xydata</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="n">ydata</span><span class="p">,</span> <span class="s1">&#39;ko&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+                 <span class="n">markeredgecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data&#39;</span><span class="p">)</span>
+        <span class="n">ymind</span><span class="p">,</span> <span class="n">ymaxd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">ydata</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">ydata</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+    <span class="c1">#plt.xlim([np.min(xgrid), np.max(xgrid)])</span>
+    <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">ygrid_pred</span><span class="p">[</span><span class="s1">&#39;mean_mean&#39;</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">ygrid_pred</span><span class="p">[</span><span class="s1">&#39;mean_mean&#39;</span><span class="p">])</span>
+    <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymind</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">ymax</span><span class="p">,</span> <span class="n">ymaxd</span><span class="p">)</span>
+    <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">ymin</span> <span class="o">-</span> <span class="mf">0.15</span><span class="o">*</span> <span class="p">(</span><span class="n">ymax</span><span class="o">-</span><span class="n">ymin</span><span class="p">),</span> <span class="n">ymax</span> <span class="o">+</span> <span class="mf">0.15</span><span class="o">*</span> <span class="p">(</span><span class="n">ymax</span><span class="o">-</span><span class="n">ymin</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">])</span>
+    <span class="n">h</span><span class="p">,</span> <span class="n">l</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">get_legend_handles_labels</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">h</span><span class="p">[:</span><span class="mi">4</span><span class="o">+</span><span class="n">idata</span><span class="p">],</span> <span class="n">l</span><span class="p">[:</span><span class="mi">4</span><span class="o">+</span><span class="n">idata</span><span class="p">])</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;fit_1d.png&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="plot_1dfit_vars">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/minf/index.html#pytuq.minf.minf.plot_1dfit_vars">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_1dfit_vars</span><span class="p">(</span><span class="n">xgrid</span><span class="p">,</span> <span class="n">ygrid_pred</span><span class="p">,</span> <span class="n">xydata</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plotting 1d fit with variance decomposed into posterior uncertainty and model error.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        xgrid (np.ndarray): An 1d array of x-grid</span>
+<span class="sd">        ygrid_pred (dict): Dictionary containing moments of predictions.</span>
+<span class="sd">        xydata (tuple, optional): If not None, this is the x- and y-data tuple and plots on top of the fits.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+    <span class="n">thisax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+    <span class="n">variances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">ygrid_pred</span><span class="p">[</span><span class="s1">&#39;var_mean&#39;</span><span class="p">],</span> <span class="n">ygrid_pred</span><span class="p">[</span><span class="s1">&#39;mean_var&#39;</span><span class="p">]))</span><span class="o">.</span><span class="n">T</span>
+    <span class="c1"># np.savetxt(&#39;fvars.txt&#39;, variances)</span>
+    <span class="n">varlabels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Posterior uncertainty&#39;</span><span class="p">,</span> <span class="s1">&#39;Model error&#39;</span><span class="p">]</span>
+    <span class="n">varcolors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;lightblue&#39;</span><span class="p">]</span>
+    <span class="n">plot_vars</span><span class="p">(</span><span class="n">xgrid</span><span class="p">,</span> <span class="n">ygrid_pred</span><span class="p">[</span><span class="s1">&#39;mean_mean&#39;</span><span class="p">],</span> <span class="n">variances</span><span class="o">=</span><span class="n">variances</span><span class="p">,</span> <span class="n">ysam</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">stdfactor</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">varlabels</span><span class="o">=</span><span class="n">varlabels</span><span class="p">,</span> <span class="n">varcolors</span><span class="o">=</span><span class="n">varcolors</span><span class="p">,</span>
+                 <span class="n">interp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">connected</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">thisax</span><span class="p">)</span>
+
+    <span class="n">ymind</span><span class="p">,</span> <span class="n">ymaxd</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+    <span class="n">idata</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="n">xydata</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">idata</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">xdata</span><span class="p">,</span> <span class="n">ydata</span> <span class="o">=</span> <span class="n">xydata</span>
+        <span class="n">thisax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="n">ydata</span><span class="p">,</span> <span class="s1">&#39;ko&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+                    <span class="n">markeredgecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data&#39;</span><span class="p">)</span>
+        <span class="n">ymind</span><span class="p">,</span> <span class="n">ymaxd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">ydata</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">ydata</span><span class="p">)</span>
+
+    <span class="n">thisax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="n">thisax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+    <span class="c1">#thisax.set_xlim([np.min(xgrid), np.max(xgrid)])</span>
+    <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">ygrid_pred</span><span class="p">[</span><span class="s1">&#39;mean_mean&#39;</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">ygrid_pred</span><span class="p">[</span><span class="s1">&#39;mean_mean&#39;</span><span class="p">])</span>
+    <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymind</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">ymax</span><span class="p">,</span> <span class="n">ymaxd</span><span class="p">)</span>
+    <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">ymin</span> <span class="o">-</span> <span class="mf">0.15</span><span class="o">*</span> <span class="p">(</span><span class="n">ymax</span><span class="o">-</span><span class="n">ymin</span><span class="p">),</span> <span class="n">ymax</span> <span class="o">+</span> <span class="mf">0.15</span><span class="o">*</span> <span class="p">(</span><span class="n">ymax</span><span class="o">-</span><span class="n">ymin</span><span class="p">)</span>
+    <span class="n">thisax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">])</span>
+    <span class="n">h</span><span class="p">,</span> <span class="n">l</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">get_legend_handles_labels</span><span class="p">()</span>
+    <span class="n">thisax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">h</span><span class="p">[:</span><span class="mi">3</span><span class="o">+</span><span class="n">idata</span><span class="p">],</span> <span class="n">l</span><span class="p">[:</span><span class="mi">3</span><span class="o">+</span><span class="n">idata</span><span class="p">],</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1">#thisax.grid(False)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;fit_1d_vars.png&#39;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="plot_1dfit_shade">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/minf/index.html#pytuq.minf.minf.plot_1dfit_shade">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_1dfit_shade</span><span class="p">(</span><span class="n">xgrid</span><span class="p">,</span> <span class="n">ygrid_samples</span><span class="p">,</span> <span class="n">xydata</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plotting 1d fit with predictive variance shaded by quantiles.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        xgrid (np.ndarray): An 1d array of x-grid</span>
+<span class="sd">        ygrid_samples (np.ndarray): A 2d array of prediction samples.</span>
+<span class="sd">        xydata (tuple, optional): If not None, this is the x- and y-data tuple and plots on top of the fits.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+    <span class="n">thisax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+    <span class="n">plot_shade</span><span class="p">(</span><span class="n">xgrid</span><span class="p">,</span> <span class="n">ygrid_samples</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">thisax</span><span class="p">)</span>
+
+    <span class="n">ymind</span><span class="p">,</span> <span class="n">ymaxd</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+    <span class="n">idata</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="n">xydata</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">idata</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">xdata</span><span class="p">,</span> <span class="n">ydata</span> <span class="o">=</span> <span class="n">xydata</span>
+        <span class="n">thisax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="n">ydata</span><span class="p">,</span> <span class="s1">&#39;ko&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+                    <span class="n">markeredgecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data&#39;</span><span class="p">)</span>
+        <span class="n">ymind</span><span class="p">,</span> <span class="n">ymaxd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">ydata</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">ydata</span><span class="p">)</span>
+
+    <span class="n">thisax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="n">thisax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+    <span class="c1">#thisax.set_xlim([np.min(xgrid), np.max(xgrid)])</span>
+    <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">ygrid_samples</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">ygrid_samples</span><span class="p">)</span>
+    <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymind</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">ymax</span><span class="p">,</span> <span class="n">ymaxd</span><span class="p">)</span>
+    <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">ymin</span> <span class="o">-</span> <span class="mf">0.15</span><span class="o">*</span> <span class="p">(</span><span class="n">ymax</span><span class="o">-</span><span class="n">ymin</span><span class="p">),</span> <span class="n">ymax</span> <span class="o">+</span> <span class="mf">0.15</span><span class="o">*</span> <span class="p">(</span><span class="n">ymax</span><span class="o">-</span><span class="n">ymin</span><span class="p">)</span>
+    <span class="n">thisax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">])</span>
+    <span class="n">handles</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">thisax</span><span class="o">.</span><span class="n">get_legend_handles_labels</span><span class="p">()</span>
+    <span class="n">handles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">))</span>
+    <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Posterior PDF&#39;</span><span class="p">)</span>
+    <span class="n">thisax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">idata</span><span class="p">:],</span> <span class="n">labels</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">idata</span><span class="p">:],</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1">#thisax.grid(False)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;fit_1d_shade.png&#39;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="plot_ndfit_vars">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/minf/index.html#pytuq.minf.minf.plot_ndfit_vars">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_ndfit_vars</span><span class="p">(</span><span class="n">ycheck</span><span class="p">,</span> <span class="n">ycheck_pred</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plots a diagonal plot of model (x-axis) and fit (y-axis)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        ycheck (np.ndarray): An 1d array containing the model values.</span>
+<span class="sd">        ycheck_pred (dict): Dictionary containing moments of predictions.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+    <span class="n">thisax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+    <span class="n">variances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">ycheck_pred</span><span class="p">[</span><span class="s1">&#39;var_mean&#39;</span><span class="p">],</span> <span class="n">ycheck_pred</span><span class="p">[</span><span class="s1">&#39;mean_var&#39;</span><span class="p">]))</span><span class="o">.</span><span class="n">T</span>
+    <span class="c1"># np.savetxt(&#39;fvars.txt&#39;, variances)</span>
+    <span class="n">varlabels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Posterior uncertainty&#39;</span><span class="p">,</span> <span class="s1">&#39;Model error&#39;</span><span class="p">]</span>
+    <span class="n">varcolors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;lightblue&#39;</span><span class="p">]</span>
+    <span class="n">plot_vars</span><span class="p">(</span><span class="n">ycheck</span><span class="p">,</span> <span class="n">ycheck_pred</span><span class="p">[</span><span class="s1">&#39;mean_mean&#39;</span><span class="p">],</span> <span class="n">variances</span><span class="o">=</span><span class="n">variances</span><span class="p">,</span> <span class="n">ysam</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">stdfactor</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">varlabels</span><span class="o">=</span><span class="n">varlabels</span><span class="p">,</span> <span class="n">varcolors</span><span class="o">=</span><span class="n">varcolors</span><span class="p">,</span>
+                 <span class="n">interp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">connected</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">thisax</span><span class="p">)</span>
+    <span class="n">thisax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Model&#39;</span><span class="p">)</span>
+    <span class="n">thisax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Fit&#39;</span><span class="p">)</span>
+    <span class="n">ymin1</span><span class="p">,</span> <span class="n">ymax1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">ycheck_pred</span><span class="p">[</span><span class="s1">&#39;mean_mean&#39;</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">ycheck_pred</span><span class="p">[</span><span class="s1">&#39;mean_mean&#39;</span><span class="p">])</span>
+    <span class="n">ymin2</span><span class="p">,</span> <span class="n">ymax2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">ycheck</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">ycheck</span><span class="p">)</span>
+    <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">ymin1</span><span class="p">,</span><span class="n">ymin2</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">ymax1</span><span class="p">,</span><span class="n">ymax2</span><span class="p">)</span>
+    <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">ymin</span> <span class="o">-</span> <span class="mf">0.05</span><span class="o">*</span> <span class="p">(</span><span class="n">ymax</span><span class="o">-</span><span class="n">ymin</span><span class="p">),</span> <span class="n">ymax</span> <span class="o">+</span> <span class="mf">0.05</span><span class="o">*</span> <span class="p">(</span><span class="n">ymax</span><span class="o">-</span><span class="n">ymin</span><span class="p">)</span>
+    <span class="n">thisax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">],</span> <span class="p">[</span><span class="n">ymin</span> <span class="p">,</span><span class="n">ymax</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">)</span>
+    <span class="n">thisax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">])</span>
+    <span class="n">thisax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">])</span>
+    <span class="n">thisax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1">#thisax.grid(False)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;fit_nd_vars.png&#39;</span><span class="p">)</span></div>
+
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

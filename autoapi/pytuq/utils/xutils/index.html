@@ -1,0 +1,463 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytuq.utils.xutils &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="pytuq.workflows" href="../../workflows/index.html" />
+    <link rel="prev" title="pytuq.utils.uqtk_utils" href="../uqtk_utils/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../auto_examples/index.html">Software Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../auto_examples/index.html#surrogates">Surrogates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_pce.html">Polynomial Chaos Expansion Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Section Navigation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">pytuq</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../ftools/index.html">pytuq.ftools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../func/index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rv/index.html">pytuq.rv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../surrogates/index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Section Navigation</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">pytuq</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">pytuq.utils</a></li>
+      <li class="breadcrumb-item active">pytuq.utils.xutils</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/autoapi/pytuq/utils/xutils/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-pytuq.utils.xutils">
+<span id="pytuq-utils-xutils"></span><h1>pytuq.utils.xutils<a class="headerlink" href="#module-pytuq.utils.xutils" title="Link to this heading"></a></h1>
+<p>Collection of various useful utilities.</p>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.utils.xutils.idt" title="pytuq.utils.xutils.idt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">idt</span></code></a>(x)</p></td>
+<td><p>Identity function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.utils.xutils.savepk" title="pytuq.utils.xutils.savepk"><code class="xref py py-obj docutils literal notranslate"><span class="pre">savepk</span></code></a>(sobj[, nameprefix])</p></td>
+<td><p>Pickle a python object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.utils.xutils.loadpk" title="pytuq.utils.xutils.loadpk"><code class="xref py py-obj docutils literal notranslate"><span class="pre">loadpk</span></code></a>([nameprefix])</p></td>
+<td><p>Unpickle a python object from a pickle file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.utils.xutils.cartes_list" title="pytuq.utils.xutils.cartes_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cartes_list</span></code></a>(somelists)</p></td>
+<td><p>Generate a list of all combination of elements in given lists.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.utils.xutils.read_textlist" title="pytuq.utils.xutils.read_textlist"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_textlist</span></code></a>(filename, nsize[, names_prefix])</p></td>
+<td><p>Read a textfile into a list containing the rows.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.utils.xutils.sample_sphere" title="pytuq.utils.xutils.sample_sphere"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sample_sphere</span></code></a>([center, rad, nsam])</p></td>
+<td><p>Sample on a hypersphere of a given radius.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.utils.xutils.get_opt_bw" title="pytuq.utils.xutils.get_opt_bw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_opt_bw</span></code></a>(xsam[, bwf])</p></td>
+<td><p>Get the rule-of-thumb optimal bandwidth for kernel density estimation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.utils.xutils.get_pdf" title="pytuq.utils.xutils.get_pdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_pdf</span></code></a>(data, target)</p></td>
+<td><p>Compute PDF given data at target points.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.utils.xutils.strarr" title="pytuq.utils.xutils.strarr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">strarr</span></code></a>(array)</p></td>
+<td><p>Turn an array into a neatly formatted one for annotating figures.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.utils.xutils.project" title="pytuq.utils.xutils.project"><code class="xref py py-obj docutils literal notranslate"><span class="pre">project</span></code></a>(a, b)</p></td>
+<td><p>Project a vector onto another vector in high-d space.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.utils.xutils.pick_basis" title="pytuq.utils.xutils.pick_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pick_basis</span></code></a>(x1, x2, x3[, x0, random_direction_in_plane])</p></td>
+<td><p>Given three points in a high-d space, picks a basis in a plane that goes through these points.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.utils.xutils.safe_cholesky" title="pytuq.utils.xutils.safe_cholesky"><code class="xref py py-obj docutils literal notranslate"><span class="pre">safe_cholesky</span></code></a>(cov)</p></td>
+<td><p>Cholesky decomposition with some error handlers, and using SVD+QR trick in case the covariance is degenerate.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.utils.xutils.instantiate_classes_from_module" title="pytuq.utils.xutils.instantiate_classes_from_module"><code class="xref py py-obj docutils literal notranslate"><span class="pre">instantiate_classes_from_module</span></code></a>(module_name)</p></td>
+<td><p>Imports a module and returns a list of instantiated objects for every class in it.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.xutils.idt">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.xutils.</span></span><span class="sig-name descname"><span class="pre">idt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/xutils.html#idt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.xutils.idt" title="Link to this definition"></a></dt>
+<dd><p>Identity function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>any type</em>) – input</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>output</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>any type</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.xutils.savepk">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.xutils.</span></span><span class="sig-name descname"><span class="pre">savepk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sobj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nameprefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'savestate'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/xutils.html#savepk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.xutils.savepk" title="Link to this definition"></a></dt>
+<dd><p>Pickle a python object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sobj</strong> (<em>any type</em>) – Object to be pickled.</p></li>
+<li><p><strong>nameprefix</strong> (<em>str</em><em>, </em><em>optional</em>) – Name prefix.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.xutils.loadpk">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.xutils.</span></span><span class="sig-name descname"><span class="pre">loadpk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nameprefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'savestate'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/xutils.html#loadpk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.xutils.loadpk" title="Link to this definition"></a></dt>
+<dd><p>Unpickle a python object from a pickle file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>nameprefix</strong> (<em>str</em><em>, </em><em>optional</em>) – Filename prefix</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Unpickled object</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>any type</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.xutils.cartes_list">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.xutils.</span></span><span class="sig-name descname"><span class="pre">cartes_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">somelists</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/xutils.html#cartes_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.xutils.cartes_list" title="Link to this definition"></a></dt>
+<dd><p>Generate a list of all combination of elements in given lists.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>somelists</strong> (<em>list</em>) – List of lists</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of all combinations of elements in lists that make up somelists</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[tuple]</p>
+</dd>
+</dl>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cartes_list</span><span class="p">([[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+<span class="go">[(&#39;a&#39;, 3), (&#39;a&#39;, 4), (&#39;a&#39;, 2), (&#39;b&#39;, 3), (&#39;b&#39;, 4), (&#39;b&#39;, 2)]</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.xutils.read_textlist">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.xutils.</span></span><span class="sig-name descname"><span class="pre">read_textlist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nsize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/xutils.html#read_textlist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.xutils.read_textlist" title="Link to this definition"></a></dt>
+<dd><p>Read a textfile into a list containing the rows.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – File name</p></li>
+<li><p><strong>nsize</strong> (<em>int</em>) – Number of rows in the file</p></li>
+<li><p><strong>names_prefix</strong> (<em>str</em><em>, </em><em>optional</em>) – Prefix of a dummy list entry names if the file is not present.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of elements that are rows of the file</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.xutils.sample_sphere">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.xutils.</span></span><span class="sig-name descname"><span class="pre">sample_sphere</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">center</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rad</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nsam</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/xutils.html#sample_sphere"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.xutils.sample_sphere" title="Link to this definition"></a></dt>
+<dd><p>Sample on a hypersphere of a given radius.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>center</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – Center of the sphere. Defaults to origin.</p></li>
+<li><p><strong>rad</strong> (<em>float</em><em>, </em><em>optional</em>) – Radius of the sphere. Defaults to 1.0.</p></li>
+<li><p><strong>nsam</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of samples requested. Defaults to 100.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of size <cite>(N,d)</cite></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.xutils.get_opt_bw">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.xutils.</span></span><span class="sig-name descname"><span class="pre">get_opt_bw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xsam</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bwf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/xutils.html#get_opt_bw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.xutils.get_opt_bw" title="Link to this definition"></a></dt>
+<dd><p>Get the rule-of-thumb optimal bandwidth for kernel density estimation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xsam</strong> (<em>np.ndarray</em>) – Data array, <cite>(N,d)</cite></p></li>
+<li><p><strong>bwf</strong> (<em>float</em>) – Factor behind the scaling optimal rule</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of length <cite>d</cite>, the optimal per-dimension bandwidth</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.xutils.get_pdf">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.xutils.</span></span><span class="sig-name descname"><span class="pre">get_pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/xutils.html#get_pdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.xutils.get_pdf" title="Link to this definition"></a></dt>
+<dd><p>Compute PDF given data at target points.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>np.ndarray</em>) – an <cite>(N,d)</cite> array of <cite>N</cite> samples in <cite>d</cite> dimensions</p></li>
+<li><p><strong>np.ndarray</strong><strong>)</strong> (<em>target</em>) – an <cite>(M,d)</cite> array of target points</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>PDF values at target</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.xutils.strarr">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.xutils.</span></span><span class="sig-name descname"><span class="pre">strarr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/xutils.html#strarr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.xutils.strarr" title="Link to this definition"></a></dt>
+<dd><p>Turn an array into a neatly formatted one for annotating figures.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>array</strong> (<em>np.ndarray</em>) – 1d array</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of floats with two decimal digits</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.xutils.project">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.xutils.</span></span><span class="sig-name descname"><span class="pre">project</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/xutils.html#project"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.xutils.project" title="Link to this definition"></a></dt>
+<dd><p>Project a vector onto another vector in high-d space.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<em>np.ndarray</em>) – The 1d array to be projected.</p></li>
+<li><p><strong>b</strong> (<em>np.ndarray</em>) – The array to project onto.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple (projection, residual) where projection+residual=a, and projection is orthogonal to residual, and colinear with b.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple(np.ndarray, np.ndarray)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.xutils.pick_basis">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.xutils.</span></span><span class="sig-name descname"><span class="pre">pick_basis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_direction_in_plane</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/xutils.html#pick_basis"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.xutils.pick_basis" title="Link to this definition"></a></dt>
+<dd><p>Given three points in a high-d space, picks a basis in a plane that goes through these points.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x1</strong> (<em>np.ndarray</em>) – 1d array, the first point</p></li>
+<li><p><strong>x2</strong> (<em>np.ndarray</em>) – 1d array, the second point</p></li>
+<li><p><strong>x3</strong> (<em>np.ndarray</em>) – 1d array, the third point</p></li>
+<li><p><strong>x0</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – 1d array, the central point of basis. Defaults to None, in which case the center-of-mass is selected.</p></li>
+<li><p><strong>random_direction_in_plane</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – Direction aligned with the first basis. Has to be in the plane already. Defaults to None, in which case a random direction is selected.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple(origin, e1, e2) of the origin and two basis directions.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple(np.ndarray, np.ndarray, np.ndarray)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.xutils.safe_cholesky">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.xutils.</span></span><span class="sig-name descname"><span class="pre">safe_cholesky</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cov</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/xutils.html#safe_cholesky"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.xutils.safe_cholesky" title="Link to this definition"></a></dt>
+<dd><p>Cholesky decomposition with some error handlers, and using SVD+QR trick in case the covariance is degenerate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cov</strong> (<em>np.ndarray</em>) – Positive-definite or zero-determinant symmetric matrix <cite>C</cite>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Lower-triangular factor <cite>L</cite> such that <cite>C=L L^T</cite>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.xutils.instantiate_classes_from_module">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.xutils.</span></span><span class="sig-name descname"><span class="pre">instantiate_classes_from_module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/xutils.html#instantiate_classes_from_module"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.xutils.instantiate_classes_from_module" title="Link to this definition"></a></dt>
+<dd><p>Imports a module and returns a list of instantiated objects for every class in it.
+Only classes defined inside the module are included (not imported ones).</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../uqtk_utils/index.html" class="btn btn-neutral float-left" title="pytuq.utils.uqtk_utils" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../workflows/index.html" class="btn btn-neutral float-right" title="pytuq.workflows" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

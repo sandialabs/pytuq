@@ -1,0 +1,1230 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytuq.ftools.orf &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="pytuq.func" href="../../func/index.html" />
+    <link rel="prev" title="pytuq.ftools.integr" href="../integr/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../auto_examples/index.html">Software Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../auto_examples/index.html#surrogates">Surrogates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_pce.html">Polynomial Chaos Expansion Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Section Navigation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">pytuq</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">pytuq.ftools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../func/index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rv/index.html">pytuq.rv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../surrogates/index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Section Navigation</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">pytuq</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">pytuq.ftools</a></li>
+      <li class="breadcrumb-item active">pytuq.ftools.orf</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/autoapi/pytuq/ftools/orf/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-pytuq.ftools.orf">
+<span id="pytuq-ftools-orf"></span><h1>pytuq.ftools.orf<a class="headerlink" href="#module-pytuq.ftools.orf" title="Link to this heading"></a></h1>
+<p>Module for orthonormalization of functions using Gram-Schmidt or QR decomposition.</p>
+<p>Written by Habib N. Najm (2025).</p>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.ftools.orf.GLMAP" title="pytuq.ftools.orf.GLMAP"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GLMAP</span></code></a></p></td>
+<td><p>General linear map and data class</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.ftools.orf.HMAT" title="pytuq.ftools.orf.HMAT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">HMAT</span></code></a></p></td>
+<td><p>Utilities class for H matrix construction.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.ftools.orf.MGSV" title="pytuq.ftools.orf.MGSV"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MGSV</span></code></a></p></td>
+<td><p>Utilities class for <span class="math notranslate nohighlight">\(V\)</span> matrix construction.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.ftools.orf.MGS" title="pytuq.ftools.orf.MGS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MGS</span></code></a></p></td>
+<td><p>Modified Gram-Schmidt (MGS) class. Builds MGS object for functions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.ftools.orf.MMGS" title="pytuq.ftools.orf.MMGS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MMGS</span></code></a></p></td>
+<td><p>Multistage Modified Gram-Schmidt (MMGS) class.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.ftools.orf.QR" title="pytuq.ftools.orf.QR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">QR</span></code></a></p></td>
+<td><p>QR decomposition class. Builds QR object for functions.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.GLMAP">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.ftools.orf.</span></span><span class="sig-name descname"><span class="pre">GLMAP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#GLMAP"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.GLMAP" title="Link to this definition"></a></dt>
+<dd><p>General linear map and data class</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.GLMAP.npt">
+<span class="sig-name descname"><span class="pre">npt</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#GLMAP.npt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.GLMAP.npt" title="Link to this definition"></a></dt>
+<dd><p>number of data points</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.GLMAP.x">
+<span class="sig-name descname"><span class="pre">x</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#GLMAP.x"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.GLMAP.x" title="Link to this definition"></a></dt>
+<dd><p>2d float data array of shape <span class="math notranslate nohighlight">\((npt,n)\)</span>, i.e. <span class="math notranslate nohighlight">\(npt\)</span> points each in <span class="math notranslate nohighlight">\(R^n\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.GLMAP.L">
+<span class="sig-name descname"><span class="pre">L</span></span><a class="headerlink" href="#pytuq.ftools.orf.GLMAP.L" title="Link to this definition"></a></dt>
+<dd><p>2d float array of shape <span class="math notranslate nohighlight">\((M,npt)\)</span> or a callable user-provided function or None</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray or callable or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Notes</p>
+<p>Builds linear map and data object, presumed to underly a regression problem of the form
+<span class="math notranslate nohighlight">\(y = L(x,f(x;w))\)</span>, given data <span class="math notranslate nohighlight">\(\{(x_1,y_1),...,(x_{npt},y_{npt})\}\)</span> where <span class="math notranslate nohighlight">\(x_i \in R^n\)</span>, <span class="math notranslate nohighlight">\(x \in R^{npt \times n}\)</span>, and <span class="math notranslate nohighlight">\(y_i\in R\)</span>.
+and where <span class="math notranslate nohighlight">\(w \in R^m\)</span> is a vector of parameters to be estimated.</p>
+<p>L needs to be linear in <span class="math notranslate nohighlight">\(f()\)</span>, with separate L dependence on <span class="math notranslate nohighlight">\(x\)</span> being an arbitrary function, so that, with <span class="math notranslate nohighlight">\(u = f(x,w) = \sum_k w_k f_k(x)\)</span>, we have <span class="math notranslate nohighlight">\(y = L(x, \sum_k w_k f_k(x) ) = \sum_k w_k L(x,f_k(x))\)</span> or <span class="math notranslate nohighlight">\(y = A w\)</span> with <span class="math notranslate nohighlight">\(A \in R^{npt \times m}\)</span> where <span class="math notranslate nohighlight">\(A[i,j] = L(x_i,f_j(x_i))\)</span>.</p>
+<dl class="simple">
+<dt>This class can take specs of different linear maps L on functions <span class="math notranslate nohighlight">\(f(x): x \rightarrow u\)</span>, with <span class="math notranslate nohighlight">\(u \in R^{npt}\)</span>. We list here multiple options for illustration. The specification of the linear map <code class="docutils literal notranslate"><span class="pre">lmap=gso.GLMAP(x,L)</span></code> can be done with L given as either no spec, a function, or an array</dt><dd><ul class="simple">
+<li><p>if L is a user-defined callable L (function), then <cite>lmap.eval(f)</cite> returns <span class="math notranslate nohighlight">\(L(x,u)\)</span> as specified by the user. If want a map, e.g.: <span class="math notranslate nohighlight">\(L(x,f(x)) = e^x + x^3 f(x)\)</span>, one can use e.g. <code class="docutils literal notranslate"><span class="pre">lmap</span> <span class="pre">=</span> <span class="pre">gso.GLMAP(x,</span> <span class="pre">lambda</span> <span class="pre">x,</span> <span class="pre">u:</span> <span class="pre">np.exp(x)</span> <span class="pre">+</span> <span class="pre">x**3</span> <span class="pre">*</span> <span class="pre">u)</span></code>.</p></li>
+<li><p>if L is a user-defined array L, i.e. <span class="math notranslate nohighlight">\(L(x,u):=Lu\)</span>, (L shape needs to be <span class="math notranslate nohighlight">\((M,npt)\)</span>) then <code class="docutils literal notranslate"><span class="pre">lmap.eval(f)</span></code> returns <span class="math notranslate nohighlight">\(Lu\)</span>. If we want a linear matrix map, say <span class="math notranslate nohighlight">\(L = B\)</span> (shape <span class="math notranslate nohighlight">\((m,npt)\)</span> ), then can use either <code class="docutils literal notranslate"><span class="pre">lmap</span> <span class="pre">=</span> <span class="pre">gso.GLMAP(x,</span> <span class="pre">B)</span></code> or <code class="docutils literal notranslate"><span class="pre">lmap</span> <span class="pre">=</span> <span class="pre">gso.GLMAP(x,</span> <span class="pre">lambda</span> <span class="pre">x,</span> <span class="pre">u:</span> <span class="pre">B&#64;u)</span></code>.</p></li>
+<li><dl class="simple">
+<dt>if L is None or not specified, then an identiy map is implied, and <code class="docutils literal notranslate"><span class="pre">lmap.eval(f)</span></code> returns <span class="math notranslate nohighlight">\(L(x,u) = u\)</span>; Thus, the following are all equivalent specs of the None option for L</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">lmap</span> <span class="pre">=</span> <span class="pre">gso.GLMAP(x)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lmap</span> <span class="pre">=</span> <span class="pre">gso.GLMAP(x,</span> <span class="pre">np.eye(npt))</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lmap</span> <span class="pre">=</span> <span class="pre">gso.GLMAP(x,</span> <span class="pre">lambda</span> <span class="pre">x,</span> <span class="pre">u:</span> <span class="pre">u)</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">x</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#GLMAP.x"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">npt</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#GLMAP.npt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id1" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.GLMAP.eval">
+<span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#GLMAP.eval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.GLMAP.eval" title="Link to this definition"></a></dt>
+<dd><p>Evaluate the map on function f.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.HMAT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.ftools.orf.</span></span><span class="sig-name descname"><span class="pre">HMAT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mgs_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#HMAT"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.HMAT" title="Link to this definition"></a></dt>
+<dd><p>Utilities class for H matrix construction.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.HMAT.mgs">
+<span class="sig-name descname"><span class="pre">mgs</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#HMAT.mgs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.HMAT.mgs" title="Link to this definition"></a></dt>
+<dd><p>MGS class object handle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.HMAT.m">
+<span class="sig-name descname"><span class="pre">m</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#HMAT.m"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.HMAT.m" title="Link to this definition"></a></dt>
+<dd><p>number of basis functions in expansion.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.HMAT.mat">
+<span class="sig-name descname"><span class="pre">mat</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#HMAT.mat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.HMAT.mat" title="Link to this definition"></a></dt>
+<dd><p>3D array where <cite>H</cite> matrix is constructed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.HMAT.level">
+<span class="sig-name descname"><span class="pre">level</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#HMAT.level"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.HMAT.level" title="Link to this definition"></a></dt>
+<dd><p>recursion level counter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.HMAT.verbose">
+<span class="sig-name descname"><span class="pre">verbose</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#HMAT.verbose"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.HMAT.verbose" title="Link to this definition"></a></dt>
+<dd><p>controls verbosity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.HMAT.Fthmap">
+<span class="sig-name descname"><span class="pre">Fthmap</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#HMAT.Fthmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.HMAT.Fthmap" title="Link to this definition"></a></dt>
+<dd><p>2d int array, <span class="math notranslate nohighlight">\((i,j)\)</span> entry <cite>0/1</cite> =&gt; corresponding <span class="math notranslate nohighlight">\((\theta_i,\theta_j)\)</span> inner product has-not/has been evaluated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.HMAT.Fmap">
+<span class="sig-name descname"><span class="pre">Fmap</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#HMAT.Fmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.HMAT.Fmap" title="Link to this definition"></a></dt>
+<dd><p>2d int array, <span class="math notranslate nohighlight">\((i,j)\)</span> entry <cite>0/1</cite> =&gt; corresponding <span class="math notranslate nohighlight">\((\phi_i,\theta_j)\)</span> inner product has-not/has been evaluated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.HMAT.Fthval">
+<span class="sig-name descname"><span class="pre">Fthval</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#HMAT.Fthval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.HMAT.Fthval" title="Link to this definition"></a></dt>
+<dd><p>2d array of <span class="math notranslate nohighlight">\((\theta,\theta)\)</span> inner products.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.HMAT.Fval">
+<span class="sig-name descname"><span class="pre">Fval</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#HMAT.Fval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.HMAT.Fval" title="Link to this definition"></a></dt>
+<dd><p>2d array of <span class="math notranslate nohighlight">\((\phi,\theta)\)</span> inner products.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">mgs</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#HMAT.mgs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id2" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">m</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#HMAT.m"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id3" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id4">
+<span class="sig-name descname"><span class="pre">mat</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#HMAT.mat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id4" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id5">
+<span class="sig-name descname"><span class="pre">level</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#HMAT.level"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id5" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id6">
+<span class="sig-name descname"><span class="pre">verbose</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#HMAT.verbose"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id6" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id7">
+<span class="sig-name descname"><span class="pre">Fthmap</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#HMAT.Fthmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id7" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id8">
+<span class="sig-name descname"><span class="pre">Fmap</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#HMAT.Fmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id8" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id9">
+<span class="sig-name descname"><span class="pre">Fthval</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#HMAT.Fthval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id9" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id10">
+<span class="sig-name descname"><span class="pre">Fval</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#HMAT.Fval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id10" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.HMAT.Fth">
+<span class="sig-name descname"><span class="pre">Fth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#HMAT.Fth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.HMAT.Fth" title="Link to this definition"></a></dt>
+<dd><p>Evaluate <span class="math notranslate nohighlight">\((\theta_i,\theta_j)\)</span> inner product.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>i</strong> (<em>int</em>) – <span class="math notranslate nohighlight">\(0 &lt;= i &lt; m\)</span> index for <span class="math notranslate nohighlight">\(\theta_i\)</span></p></li>
+<li><p><strong>j</strong> (<em>int</em>) – <span class="math notranslate nohighlight">\(0 &lt;= j &lt; m\)</span> index for <span class="math notranslate nohighlight">\(\theta_j\)</span></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.HMAT.F">
+<span class="sig-name descname"><span class="pre">F</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#HMAT.F"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.HMAT.F" title="Link to this definition"></a></dt>
+<dd><p>Evaluate <span class="math notranslate nohighlight">\((\phi_i,\theta_j)\)</span> inner product.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>i</strong> (<em>int</em>) – <span class="math notranslate nohighlight">\(0 &lt;= i &lt; m\)</span> index for <span class="math notranslate nohighlight">\(\phi_i\)</span></p></li>
+<li><p><strong>j</strong> (<em>int</em>) – <span class="math notranslate nohighlight">\(0 &lt;= j &lt; m\)</span> index for <span class="math notranslate nohighlight">\(\theta_j\)</span></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.HMAT.Heval">
+<span class="sig-name descname"><span class="pre">Heval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ilom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ihim</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#HMAT.Heval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.HMAT.Heval" title="Link to this definition"></a></dt>
+<dd><p>Evaluate <span class="math notranslate nohighlight">\(H\)</span> matrix recursively.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<em>int</em>) – summation index limit</p></li>
+<li><p><strong>r</strong> (<em>int</em>) – summation index limit</p></li>
+<li><p><strong>ilom</strong> (<em>int</em>) – initial summation index in previous sum</p></li>
+<li><p><strong>ihim</strong> (<em>int</em>) – final summation index in previous sum</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.HMAT.fill">
+<span class="sig-name descname"><span class="pre">fill</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#HMAT.fill"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.HMAT.fill" title="Link to this definition"></a></dt>
+<dd><p>Fill in <span class="math notranslate nohighlight">\(H\)</span> matrix recursively.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<em>int</em>) – summation index limit</p></li>
+<li><p><strong>r</strong> (<em>int</em>) – summation index limit</p></li>
+<li><p><strong>i1</strong> (<em>int</em>) – initial summation index</p></li>
+<li><p><strong>i</strong> (<em>int</em>) – relevant i index</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.MGSV">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.ftools.orf.</span></span><span class="sig-name descname"><span class="pre">MGSV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mgs_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#MGSV"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.MGSV" title="Link to this definition"></a></dt>
+<dd><p>Utilities class for <span class="math notranslate nohighlight">\(V\)</span> matrix construction.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.MGSV.m">
+<span class="sig-name descname"><span class="pre">m</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#MGSV.m"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.MGSV.m" title="Link to this definition"></a></dt>
+<dd><p>number of basis functions in expansion.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.MGSV.mat">
+<span class="sig-name descname"><span class="pre">mat</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#MGSV.mat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.MGSV.mat" title="Link to this definition"></a></dt>
+<dd><p>2D <span class="math notranslate nohighlight">\((m, m)\)</span> array where the <span class="math notranslate nohighlight">\(V\)</span> matrix is constructed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.MGSV.verbose">
+<span class="sig-name descname"><span class="pre">verbose</span></span><a class="headerlink" href="#pytuq.ftools.orf.MGSV.verbose" title="Link to this definition"></a></dt>
+<dd><p>controls verbosity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.MGSV.Smat">
+<span class="sig-name descname"><span class="pre">Smat</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#MGSV.Smat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.MGSV.Smat" title="Link to this definition"></a></dt>
+<dd><p>3D <span class="math notranslate nohighlight">\((m, m, m)\)</span> array where the <span class="math notranslate nohighlight">\(S\)</span> matrix is constructed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.MGSV.H">
+<span class="sig-name descname"><span class="pre">H</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#MGSV.H"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.MGSV.H" title="Link to this definition"></a></dt>
+<dd><p>pointer to HMAT object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id11">
+<span class="sig-name descname"><span class="pre">m</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#MGSV.m"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id11" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id12">
+<span class="sig-name descname"><span class="pre">mat</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#MGSV.mat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id12" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id13">
+<span class="sig-name descname"><span class="pre">Smat</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#MGSV.Smat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id13" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id14">
+<span class="sig-name descname"><span class="pre">H</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#MGSV.H"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id14" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.MGSV.fill_row">
+<span class="sig-name descname"><span class="pre">fill_row</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#MGSV.fill_row"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.MGSV.fill_row" title="Link to this definition"></a></dt>
+<dd><p>Fill in <span class="math notranslate nohighlight">\(V\)</span> matrix row.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>i</strong> (<em>int</em>) – row index</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.MGS">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.ftools.orf.</span></span><span class="sig-name descname"><span class="pre">MGS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phi_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lmap</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#MGS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.MGS" title="Link to this definition"></a></dt>
+<dd><p>Modified Gram-Schmidt (MGS) class. Builds MGS object for functions.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.MGS.m">
+<span class="sig-name descname"><span class="pre">m</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#MGS.m"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.MGS.m" title="Link to this definition"></a></dt>
+<dd><p>number of basis functions in expansion.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.MGS.phi">
+<span class="sig-name descname"><span class="pre">phi</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#MGS.phi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.MGS.phi" title="Link to this definition"></a></dt>
+<dd><p>1d numpy array (size <span class="math notranslate nohighlight">\(m\)</span>) of starting functions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.MGS.psi">
+<span class="sig-name descname"><span class="pre">psi</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#MGS.psi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.MGS.psi" title="Link to this definition"></a></dt>
+<dd><p>1d numpy array (size <span class="math notranslate nohighlight">\(m\)</span>) of to-be-constructed orthogonal functions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.MGS.tht">
+<span class="sig-name descname"><span class="pre">tht</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#MGS.tht"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.MGS.tht" title="Link to this definition"></a></dt>
+<dd><p>1d numpy array (size <span class="math notranslate nohighlight">\(m\)</span>) of to-be-constructed orthonormal functions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.MGS.Lmap">
+<span class="sig-name descname"><span class="pre">Lmap</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#MGS.Lmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.MGS.Lmap" title="Link to this definition"></a></dt>
+<dd><p>pointer to local copy of Linear map and data object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.MGS.modified">
+<span class="sig-name descname"><span class="pre">modified</span></span><a class="headerlink" href="#pytuq.ftools.orf.MGS.modified" title="Link to this definition"></a></dt>
+<dd><p>True/False for modified/original GS orthogonalization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.MGS.V">
+<span class="sig-name descname"><span class="pre">V</span></span><a class="headerlink" href="#pytuq.ftools.orf.MGS.V" title="Link to this definition"></a></dt>
+<dd><p>2d <span class="math notranslate nohighlight">\((m, m)\)</span> numpy array … the V matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.MGS.Z">
+<span class="sig-name descname"><span class="pre">Z</span></span><a class="headerlink" href="#pytuq.ftools.orf.MGS.Z" title="Link to this definition"></a></dt>
+<dd><p>2d <span class="math notranslate nohighlight">\((m, m)\)</span> numpy array … the Z matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.MGS.Pmat">
+<span class="sig-name descname"><span class="pre">Pmat</span></span><a class="headerlink" href="#pytuq.ftools.orf.MGS.Pmat" title="Link to this definition"></a></dt>
+<dd><p>2d <span class="math notranslate nohighlight">\((m, m)\)</span> numpy array … the P projection matrix</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.MGS.lam">
+<span class="sig-name descname"><span class="pre">lam</span></span><a class="headerlink" href="#pytuq.ftools.orf.MGS.lam" title="Link to this definition"></a></dt>
+<dd><p>1d numpy array of size <span class="math notranslate nohighlight">\(m\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id15">
+<span class="sig-name descname"><span class="pre">phi</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#MGS.phi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id15" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id16">
+<span class="sig-name descname"><span class="pre">psi</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#MGS.psi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id16" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id17">
+<span class="sig-name descname"><span class="pre">tht</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#MGS.tht"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id17" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id18">
+<span class="sig-name descname"><span class="pre">m</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#MGS.m"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id18" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id19">
+<span class="sig-name descname"><span class="pre">Lmap</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#MGS.Lmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id19" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.MGS.iprod">
+<span class="sig-name descname"><span class="pre">iprod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pl</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#MGS.iprod"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.MGS.iprod" title="Link to this definition"></a></dt>
+<dd><p>Pairwise inner product between (lists of) functions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pk</strong> – a list|tuple|numpy array of function pointers, or otherwise a function pointer</p></li>
+<li><p><strong>pl</strong> – a list|tuple|numpy array of function pointers, or otherwise a function pointer</p></li>
+<li><p><strong>kwargs</strong> – <p>optional keyword arguments:</p>
+<ul>
+<li><p>k    (int)  : starting index in <cite>pk</cite>. Required iff <cite>pk</cite> is a list|tuple|array</p></li>
+<li><p>l    (int)  : starting index in <cite>pl</cite>. Required iff <cite>pl</cite> is a list|tuple|array</p></li>
+<li><p>kmxp (int)  : (default: k+1) max-k plus 1, so that range(k,kmxp) goes over <cite>pk[k], …, pk[kmxp-1]</cite></p></li>
+<li><p>lmxp (int)  : (default: l+1) max-l plus 1, so that range(l,lmxp) goes over <cite>pl[l], …, pl[lmxp-1]</cite></p></li>
+<li><p>verbose_warning (bool) : controls verbosity of warnings.</p></li>
+</ul>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>2d float numpy array with <cite>kmxp-k</cite> rows and <cite>lmxp-l</cite> columns</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>fklT (np.ndarray)</p>
+</dd>
+</dl>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>Say, we have <cite>pk</cite> list and <cite>pl</cite> single function</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pk</span> <span class="pre">=</span> <span class="pre">[lambda</span> <span class="pre">x</span> <span class="pre">:</span> <span class="pre">2*x,</span> <span class="pre">lambda</span> <span class="pre">x</span> <span class="pre">:</span> <span class="pre">x**2,</span> <span class="pre">lambda</span> <span class="pre">x</span> <span class="pre">:</span> <span class="pre">x**3]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pl</span> <span class="pre">=</span> <span class="pre">lambda</span> <span class="pre">x</span> <span class="pre">:</span> <span class="pre">10*x</span></code></p></li>
+</ul>
+</div></blockquote>
+<p>then</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">iprod(pk[3],pl)</span></code> returns: <code class="docutils literal notranslate"><span class="pre">[[&lt;Lmap.eval(pk[3]),Lmap.eval(pl)&gt;]]</span></code>, a 2d <cite>(1, 1)</cite> numpy array and</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">iprod(pk,pl,k=1,kmxp=3)</span></code> returns <code class="docutils literal notranslate"><span class="pre">[[&lt;Lmap.eval(pk[1]),Lmap.eval(pl)&gt;,</span> <span class="pre">&lt;Lmap.eval(pk[2]),Lmap.eval(pl)&gt;]]</span></code>, a 2d <cite>(1, 2)</cite> numpy array.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">iprod(pk,pl,k=0,kmxp=3,l=0,lmxp=2)</span></code> returns  <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">[&lt;Lmap.eval(pk[0]),Lmap.eval(pl[0])&gt;,</span> <span class="pre">&lt;Lmap.eval(pk[0]),Lmap.eval(pl[1])&gt;],</span> <span class="pre">[&lt;Lmap.eval(pk[1]),Lmap.eval(pl[0])&gt;,</span> <span class="pre">&lt;Lmap.eval(pk[1]),Lmap.eval(pl[1])&gt;],</span> <span class="pre">[&lt;Lmap.eval(pk[2]),Lmap.eval(pl[0])&gt;,</span> <span class="pre">&lt;Lmap.eval(pk[2]),Lmap.eval(pl[1])&gt;]]</span></code>  a 2d <cite>(3, 2)</cite> numpy array.</p></li>
+</ul>
+</div></blockquote>
+<p>NB. if x is an <cite>npt</cite>-long vector of data points, then for any of the above functions, say <code class="docutils literal notranslate"><span class="pre">pk[2]</span></code>, <code class="docutils literal notranslate"><span class="pre">Lmap.eval(pk[2])</span></code> will return a 2d <cite>(1, npt)</cite> numpy array.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.MGS.bld_psi">
+<span class="sig-name descname"><span class="pre">bld_psi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rinv</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#MGS.bld_psi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.MGS.bld_psi" title="Link to this definition"></a></dt>
+<dd><p>Build and return psi function for index <cite>i</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>i</strong> (<em>int</em>) – row index</p></li>
+<li><p><strong>Rinv</strong> (<em>np.ndarray</em>) – 2d float matrix</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="math notranslate nohighlight">\(\psi\)</span> function for index <cite>i</cite></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>lfnc (function)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.MGS.bld_tht">
+<span class="sig-name descname"><span class="pre">bld_tht</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">laml</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#MGS.bld_tht"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.MGS.bld_tht" title="Link to this definition"></a></dt>
+<dd><p>Build and return tht (<span class="math notranslate nohighlight">\(\theta\)</span>) function for index <cite>i</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>i</strong> (<em>int</em>) – row index</p></li>
+<li><p><strong>laml</strong> (<em>float</em>) – float specified scale factor to normalize <span class="math notranslate nohighlight">\(\psi[i]\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>tht function for index <cite>i</cite></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>lfnc (function)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.MGS.ortho">
+<span class="sig-name descname"><span class="pre">ortho</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modified</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#MGS.ortho"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.MGS.ortho" title="Link to this definition"></a></dt>
+<dd><p>Orthonormalize phi functions to provide the tht functions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>modified</strong> (<em>bool</em>) – controls whether using modified Gram-Schmidt, or unmodified</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – controls verbosity</p></li>
+<li><p><strong>stage</strong> (<em>int</em>) – stage index within multistage Gram-Schmidt</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>2d float projection matrix
+tht (np.ndarray)    : 1d array of tht function pointers</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Pmat (np.ndarray)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.MGS.ortho_check_phi">
+<span class="sig-name descname"><span class="pre">ortho_check_phi</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#MGS.ortho_check_phi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.MGS.ortho_check_phi" title="Link to this definition"></a></dt>
+<dd><p>Check orthonormality of phi functions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float 2d array containing orthonormality check matrix output</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>ipmat (np.ndarray)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.MGS.ortho_check">
+<span class="sig-name descname"><span class="pre">ortho_check</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#MGS.ortho_check"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.MGS.ortho_check" title="Link to this definition"></a></dt>
+<dd><p>Check orthogonality of tht functions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float 2d array containing orthonormality check matrix output</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>ipmat (np.ndarray)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.MMGS">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.ftools.orf.</span></span><span class="sig-name descname"><span class="pre">MMGS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phi_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lmap</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#MMGS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.MMGS" title="Link to this definition"></a></dt>
+<dd><p>Multistage Modified Gram-Schmidt (MMGS) class.
+Builds MMGS object for functions.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.MMGS.m">
+<span class="sig-name descname"><span class="pre">m</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#MMGS.m"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.MMGS.m" title="Link to this definition"></a></dt>
+<dd><p>number of functions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.MMGS.phi">
+<span class="sig-name descname"><span class="pre">phi</span></span><a class="headerlink" href="#pytuq.ftools.orf.MMGS.phi" title="Link to this definition"></a></dt>
+<dd><p>1d numpy array of starting functions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.MMGS.phi_">
+<span class="sig-name descname"><span class="pre">phi_</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#MMGS.phi_"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.MMGS.phi_" title="Link to this definition"></a></dt>
+<dd><p>1d numpy array of starting functions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.MMGS.Lmap">
+<span class="sig-name descname"><span class="pre">Lmap</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#MMGS.Lmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.MMGS.Lmap" title="Link to this definition"></a></dt>
+<dd><p>Linear map and data object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.MMGS.Pmat">
+<span class="sig-name descname"><span class="pre">Pmat</span></span><a class="headerlink" href="#pytuq.ftools.orf.MMGS.Pmat" title="Link to this definition"></a></dt>
+<dd><p>2d <cite>(m, m)</cite> numpy array, the projection matrix <cite>P</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.MMGS.mgs">
+<span class="sig-name descname"><span class="pre">mgs</span></span><a class="headerlink" href="#pytuq.ftools.orf.MMGS.mgs" title="Link to this definition"></a></dt>
+<dd><p>1d <cite>(nstage,)</cite> array of MGS objects</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.MMGS.phia">
+<span class="sig-name descname"><span class="pre">phia</span></span><a class="headerlink" href="#pytuq.ftools.orf.MMGS.phia" title="Link to this definition"></a></dt>
+<dd><p>2d <cite>(nstage, m)</cite> numpy array of starting functions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.MMGS.thta">
+<span class="sig-name descname"><span class="pre">thta</span></span><a class="headerlink" href="#pytuq.ftools.orf.MMGS.thta" title="Link to this definition"></a></dt>
+<dd><p>2d <cite>(nstage, m)</cite> numpy array of orthonormalized functions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.MMGS.Parr">
+<span class="sig-name descname"><span class="pre">Parr</span></span><a class="headerlink" href="#pytuq.ftools.orf.MMGS.Parr" title="Link to this definition"></a></dt>
+<dd><p>3d <cite>(nstage, m, m)</cite> matrix, holds nstage P matrices</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id20">
+<span class="sig-name descname"><span class="pre">phi_</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#MMGS.phi_"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id20" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id21">
+<span class="sig-name descname"><span class="pre">m</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#MMGS.m"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id21" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id22">
+<span class="sig-name descname"><span class="pre">Lmap</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#MMGS.Lmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id22" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.MMGS.ortho">
+<span class="sig-name descname"><span class="pre">ortho</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modified</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nstage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#MMGS.ortho"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.MMGS.ortho" title="Link to this definition"></a></dt>
+<dd><p>Multiscale Modified Gram-Schmidt class orthonormalization
+Runs multistage and/or Modified GS for functions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float <cite>(m,m)</cite> aggregated projection matrix
+thta[-1]            : 1d array of final tht functions</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Pmat (np.ndarray)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.MMGS.ortho_check">
+<span class="sig-name descname"><span class="pre">ortho_check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#MMGS.ortho_check"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.MMGS.ortho_check" title="Link to this definition"></a></dt>
+<dd><p>Check orthonormality of tht functions at given stage</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>stage</strong> (<em>int</em>) – stage within multistage MGS</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>float 2d array containing orthonormality check matrix output for this stage</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ipmat (np.ndarray)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.MMGS.ortho_check_phi">
+<span class="sig-name descname"><span class="pre">ortho_check_phi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#MMGS.ortho_check_phi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.MMGS.ortho_check_phi" title="Link to this definition"></a></dt>
+<dd><p>Check orthonormality of phi functions at given stage</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>stage</strong> (<em>int</em>) – stage within multistage MGS</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>float 2d array containing orthonormality check matrix output for this stage</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ipmat (np.ndarray)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.QR">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.ftools.orf.</span></span><span class="sig-name descname"><span class="pre">QR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phi_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lmap</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#QR"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.QR" title="Link to this definition"></a></dt>
+<dd><p>QR decomposition class. Builds QR object for functions.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.QR.m">
+<span class="sig-name descname"><span class="pre">m</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#QR.m"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.QR.m" title="Link to this definition"></a></dt>
+<dd><p>number of basis functions in expansion.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.QR.phi">
+<span class="sig-name descname"><span class="pre">phi</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#QR.phi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.QR.phi" title="Link to this definition"></a></dt>
+<dd><p>1d numpy array (size <span class="math notranslate nohighlight">\(m\)</span>) of starting functions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.QR.tht">
+<span class="sig-name descname"><span class="pre">tht</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#QR.tht"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.QR.tht" title="Link to this definition"></a></dt>
+<dd><p>1d numpy array (size <span class="math notranslate nohighlight">\(m\)</span>) of to-be-constructed orthonormal functions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.QR.Lmap">
+<span class="sig-name descname"><span class="pre">Lmap</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#QR.Lmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.QR.Lmap" title="Link to this definition"></a></dt>
+<dd><p>pointer to local copy of Linear map and data object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.QR.Pmat">
+<span class="sig-name descname"><span class="pre">Pmat</span></span><a class="headerlink" href="#pytuq.ftools.orf.QR.Pmat" title="Link to this definition"></a></dt>
+<dd><p>2d <span class="math notranslate nohighlight">\((m, m)\)</span> numpy array … the P projection matrix</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id23">
+<span class="sig-name descname"><span class="pre">phi</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#QR.phi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id23" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id24">
+<span class="sig-name descname"><span class="pre">tht</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#QR.tht"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id24" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id25">
+<span class="sig-name descname"><span class="pre">m</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#QR.m"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id25" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id26">
+<span class="sig-name descname"><span class="pre">Lmap</span></span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#QR.Lmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id26" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.QR.iprod">
+<span class="sig-name descname"><span class="pre">iprod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pl</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#QR.iprod"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.QR.iprod" title="Link to this definition"></a></dt>
+<dd><p>Pairwise inner product between (lists of) functions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pk</strong> – a list|tuple|numpy array of function pointers, or otherwise a function pointer</p></li>
+<li><p><strong>pl</strong> – a list|tuple|numpy array of function pointers, or otherwise a function pointer</p></li>
+<li><p><strong>kwargs</strong> – <p>optional keyword arguments:</p>
+<ul>
+<li><p>k    (int)  : starting index in <cite>pk</cite>. Required iff <cite>pk</cite> is a list|tuple|array</p></li>
+<li><p>l    (int)  : starting index in <cite>pl</cite>. Required iff <cite>pl</cite> is a list|tuple|array</p></li>
+<li><p>kmxp (int)  : (default: k+1) max-k plus 1, so that range(k,kmxp) goes over <cite>pk[k], …, pk[kmxp-1]</cite></p></li>
+<li><p>lmxp (int)  : (default: l+1) max-l plus 1, so that range(l,lmxp) goes over <cite>pl[l], …, pl[lmxp-1]</cite></p></li>
+<li><p>verbose_warning (bool) : controls verbosity of warnings.</p></li>
+</ul>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>2d float numpy array with <cite>kmxp-k</cite> rows and <cite>lmxp-l</cite> columns</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>fklT (np.ndarray)</p>
+</dd>
+</dl>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>Say, we have <cite>pk</cite> list and <cite>pl</cite> single function</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pk</span> <span class="pre">=</span> <span class="pre">[lambda</span> <span class="pre">x</span> <span class="pre">:</span> <span class="pre">2*x,</span> <span class="pre">lambda</span> <span class="pre">x</span> <span class="pre">:</span> <span class="pre">x**2,</span> <span class="pre">lambda</span> <span class="pre">x</span> <span class="pre">:</span> <span class="pre">x**3]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pl</span> <span class="pre">=</span> <span class="pre">lambda</span> <span class="pre">x</span> <span class="pre">:</span> <span class="pre">10*x</span></code></p></li>
+</ul>
+</div></blockquote>
+<p>then</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">iprod(pk[3],pl)</span></code> returns: <code class="docutils literal notranslate"><span class="pre">[[&lt;Lmap.eval(pk[3]),Lmap.eval(pl)&gt;]]</span></code>, a 2d <cite>(1, 1)</cite> numpy array and</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">iprod(pk,pl,k=1,kmxp=3)</span></code> returns <code class="docutils literal notranslate"><span class="pre">[[&lt;Lmap.eval(pk[1]),Lmap.eval(pl)&gt;,</span> <span class="pre">&lt;Lmap.eval(pk[2]),Lmap.eval(pl)&gt;]]</span></code>, a 2d <cite>(1, 2)</cite> numpy array.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">iprod(pk,pl,k=0,kmxp=3,l=0,lmxp=2)</span></code> returns  <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">[&lt;Lmap.eval(pk[0]),Lmap.eval(pl[0])&gt;,</span> <span class="pre">&lt;Lmap.eval(pk[0]),Lmap.eval(pl[1])&gt;],</span> <span class="pre">[&lt;Lmap.eval(pk[1]),Lmap.eval(pl[0])&gt;,</span> <span class="pre">&lt;Lmap.eval(pk[1]),Lmap.eval(pl[1])&gt;],</span> <span class="pre">[&lt;Lmap.eval(pk[2]),Lmap.eval(pl[0])&gt;,</span> <span class="pre">&lt;Lmap.eval(pk[2]),Lmap.eval(pl[1])&gt;]]</span></code>  a 2d <cite>(3, 2)</cite> numpy array.</p></li>
+</ul>
+</div></blockquote>
+<p>NB. if x is an <cite>npt</cite>-long vector of data points, then for any of the above functions, say <code class="docutils literal notranslate"><span class="pre">pk[2]</span></code>, <code class="docutils literal notranslate"><span class="pre">Lmap.eval(pk[2])</span></code> will return a 2d <cite>(1, npt)</cite> numpy array.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.QR.bld_tht">
+<span class="sig-name descname"><span class="pre">bld_tht</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">P</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phiv</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#QR.bld_tht"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.QR.bld_tht" title="Link to this definition"></a></dt>
+<dd><p>Build and return tht (<span class="math notranslate nohighlight">\(\theta\)</span>) function for index <cite>i</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>i</strong> (<em>int</em>) – row index</p></li>
+<li><p><strong>P</strong> (<em>p.ndarray</em>) – 2d float projection matrix</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>tht function for index <cite>i</cite></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>lfnc (function)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.QR.ortho">
+<span class="sig-name descname"><span class="pre">ortho</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#QR.ortho"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.QR.ortho" title="Link to this definition"></a></dt>
+<dd><p>Orthonormalize phi functions to provide the tht functions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>verbose</strong> (<em>bool</em>) – controls verbosity</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>2d float projection matrix
+tht (np.ndarray)    : 1d array of tht function pointers</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Pmat (np.ndarray)</p>
+</dd>
+</dl>
+<p>Uses QR factorization to find Pmat</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.QR.ortho_check_phi">
+<span class="sig-name descname"><span class="pre">ortho_check_phi</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#QR.ortho_check_phi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.QR.ortho_check_phi" title="Link to this definition"></a></dt>
+<dd><p>Check orthonormality of phi functions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float 2d array containing orthonormality check matrix output</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>ipmat (np.ndarray)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.ftools.orf.QR.ortho_check">
+<span class="sig-name descname"><span class="pre">ortho_check</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/ftools/orf.html#QR.ortho_check"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.ftools.orf.QR.ortho_check" title="Link to this definition"></a></dt>
+<dd><p>Check orthogonality of tht functions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float 2d array containing orthonormality check matrix output</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>ipmat (np.ndarray)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../integr/index.html" class="btn btn-neutral float-left" title="pytuq.ftools.integr" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../func/index.html" class="btn btn-neutral float-right" title="pytuq.func" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

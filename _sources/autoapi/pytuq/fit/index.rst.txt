@@ -1,0 +1,16 @@
+pytuq.fit
+=========
+
+.. py:module:: pytuq.fit
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/pytuq/fit/fit/index
+   /autoapi/pytuq/fit/gp/index
+
+

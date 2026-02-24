@@ -1,0 +1,256 @@
+pytuq.surrogates.pce
+====================
+
+.. py:module:: pytuq.surrogates.pce
+
+.. autoapi-nested-parse::
+
+   This module provides a Polynomial Chaos Expansion (PCE) wrapper class to facilitate
+   the universal coupling of FASTMath UQ tools and libraries. This class focuses on the use case
+   of PC surrogate models built with linear regression, keeping in mind
+   flexibility to implement additional UQ functionalities in the future.
+
+   The PCE class supports a minimal API, with methods to construct the model, build it with training data,
+   evaluate it with input data, and offer predictions with covariance, variance, and standard deviation.
+   It is capable of handling multidimensional inputs and is optimized for scalar-valued function outputs.
+
+   .. note::
+
+      The current implementation focuses on providing a general foundation for polynomial chaos
+      expansions with simple least squares regression or advanced analytical regression. While not all
+      construct and build options are currently supported, the class was developed with future growth in mind.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.surrogates.pce.PCE
+
+
+Module Contents
+---------------
+
+.. py:class:: PCE(pce_dim, pce_order, pce_type, verbose=0, **kwargs)
+
+   A wrapper class to access PyTUQ functionalities for PCE surrogate models.
+
+   .. attribute:: pcrv
+
+      Polynomial Chaos random variable object, encapsulates details for polynomial chaos expansion.
+
+      :type: PCRV object
+
+   .. attribute:: sdim
+
+      Stochastic dimensionality, i.e. # of stochastic inputs.
+
+      :type: int
+
+   .. attribute:: order
+
+      Order of polynomial chaos expansion.
+
+      :type: int
+
+   .. attribute:: pctype
+
+      Type of PC polynomial used.
+
+      :type: list[str]
+
+   .. attribute:: outdim
+
+      Physical dimensionality, i.e. # of output variables.
+
+      :type: int
+
+   .. attribute:: lreg
+
+      Linear regression object used for fitting the model.
+
+      :type: lreg object
+
+   .. attribute:: mindex
+
+      Multiindex array carrying the powers to which the basis functions will be raised to within the PC terms. Reset when build() is called again.
+
+      :type: int np.ndarray
+
+   .. attribute:: regression_method
+
+      Method used for linear regression. ex] anl, opt, lsq
+
+      :type: str
+
+   .. attribute:: _x_train
+
+      Input training data
+
+      :type: np.ndarray
+
+   .. attribute:: _y_train
+
+      Output training data, corresponding to x_train
+
+      :type: np.ndarray
+
+
+   .. py:attribute:: sdim
+
+
+   .. py:attribute:: order
+
+
+   .. py:attribute:: pctype
+
+
+   .. py:attribute:: outdim
+
+
+   .. py:attribute:: verbose
+      :value: 0
+
+
+
+   .. py:attribute:: lreg
+      :value: None
+
+
+
+   .. py:attribute:: regression_method
+      :value: None
+
+
+
+   .. py:attribute:: mindex
+
+
+   .. py:attribute:: pcrv
+
+
+   .. py:method:: set_training_data(x_train, y_train)
+
+      Sets the training data with validation.
+
+      :param x_train: 2d array of size `(N, d)` representing training input data,
+                      where `N` is the number of samples and `d` is the dimensionality (sdim) of each sample.
+      :type x_train: np.ndarray
+      :param y_train: 1d array of size `N` representing the training output data,
+                      where each element corresponds to the output value for each input sample in `x_train`.
+      :type y_train: np.ndarray
+
+      :raises ValueError: If x_train or y_train do not meet the required dimensions.
+
+
+
+   .. py:method:: get_pc_terms()
+
+      Returns a list where each element represents the number of PC terms
+      in the corresponding dimension of the PCE.
+
+      :returns: list[int]
+
+
+
+   .. py:method:: kfold_split(nsamples, nfolds, seed=13)
+
+      Return dictionary of training and testing pairs using k-fold cross-validation.
+
+      :param nsamples: Total number of training samples.
+      :type nsamples: int
+      :param nfolds: Number of folds to use for k-fold cross-validation.
+      :type nfolds: int
+      :param seed: Random seed for reproducibility. Defaults to 13.
+      :type seed: int, optional
+
+      :returns: A dictionary where each key is the fold number (0 to nfolds-1)
+                and each value is a dictionary with:
+                    - "train index" (np.ndarray): Indices of training samples.
+                    - "val index" (np.ndarray): Indices of validation samples.
+      :rtype: dict
+
+
+
+   .. py:method:: kfold_cv(x, y, nfolds=3, seed=13)
+
+      Splits data into training/testing pairs for kfold cross-val
+      x is a data matrix of size n x d1, d1 is dim of input
+      y is a data matrix of size n x d2, d2 is dim of output
+
+      :param x: Input matrix with shape (n, d1) or 1D array with shape (n,). Each row is a sample; columns are input features.
+      :type x: np.ndarray
+      :param y: Target array with shape (n,) for single-output, or (n, d2) for multi-output. If 1D, it is internally reshaped to (n, 1) before slicing; outputs are `np.squeeze`d per fold.
+      :type y: np.ndarray
+      :param nfolds: Number of folds for cross-validation. Defaults to 3.
+      :type nfolds: int, optional
+      :param seed: Random seed for reproducible shuffling in `kfold_split`. Defaults to 13.
+      :type seed: int, optional
+
+
+
+   .. py:method:: optimize_eta(etas, verbose=0, nfolds=3, plot=False)
+
+      Choose the optimum eta for Bayesian compressive sensing. Calculates the RMSE for each eta for a specified number of folds.
+      Selects the eta with the lowest RMSE after averaging the RMSEs over the folds.
+
+      Arg:
+          y: 1D numpy array (vector) with function, evaluated at the sample points [#samples,]
+          x: N-dimensional NumPy array with sample points [#samples, #dimensions]
+          etas: NumPy array or list with the threshold for stopping the algorithm. Smaller values retain more nonzero coefficients.
+          plot: Flag for whether to generate a plot for eta optimization
+          verbose: Flag for print statements during cross-validation
+
+      :returns: Optimum eta value to be used in BCS build
+      :rtype: eta_opt
+
+
+
+   .. py:method:: build(**kwargs)
+
+      Builds and initializes the linear regression model for the pcrv object with training data.
+      Returns coefficients for evaluated Polynomial Chaos Expansion.
+
+      :param \*\*kwargs: Optional keyword arguments for configuring the regression model, including:
+
+                         - regression (str): Type of regression to be used.
+                             Options are:
+                                 + 'anl': Advanced regression analysis.
+                                 + 'lsq': Least squares regression.
+
+                             The default is 'lsq'. Future regression methods to implement include 'opt' and 'lreg_merr'.
+
+                         - method (str): Method to be used when 'regression' is set to 'anl'.
+                             Options are:
+                                 + 'vi': Variational inference.
+                                 + 'full': Full analytical solution, the default for anl().
+
+                             The default is 'vi' when 'regression' is 'anl'.
+
+                         - datavar (float): Available for regression type 'anl'.
+                         - cov_nugget (float): Available for regression type 'anl'.
+                         - prior_var (float): Available for regression type 'anl', method 'full'.
+      :type \*\*kwargs: dict
+
+      :returns: PC coefficients
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: evaluate(x_eval, **kwargs)
+
+      Generates predictions and related uncertainty calculations for given input data.
+      Returns predicted y-values, along with standard deviation, covariance, and variance of predictions if applicable.
+
+      :param x_eval: 2d array of size `(N,d)` as input data for evaluation. Can also be a single sample as input.
+      :type x_eval: np.ndarray
+      :param data_variance: Whether to compute posterior-predictive (i.e. add data variance) or not.
+      :type data_variance: bool, optional
+
+      :returns: Values for predicted y-values, standard deviation, covariance, and variance of predictions (if applicable) as np.ndarrays.
+      :rtype: dict
+
+
+

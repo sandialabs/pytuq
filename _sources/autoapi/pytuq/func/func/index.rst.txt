@@ -1,0 +1,590 @@
+pytuq.func.func
+===============
+
+.. py:module:: pytuq.func.func
+
+.. autoapi-nested-parse::
+
+   Module for a general multioutput function class and some basic operations.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.func.func.Function
+   pytuq.func.func.AddFcn
+   pytuq.func.func.SubFcn
+   pytuq.func.func.MultFcn
+   pytuq.func.func.DivFcn
+   pytuq.func.func.PowFcn
+   pytuq.func.func.ModelWrapperFcn
+
+
+Module Contents
+---------------
+
+.. py:class:: Function(name='Base')
+
+   Base class for a function.
+
+   .. attribute:: dim
+
+      Input dimensionality, :math:`d`.
+
+      :type: int
+
+   .. attribute:: dmax
+
+      Default domain half-size. That is, default domain is :math:`[-d_{max}, + d_{max}]`.
+
+      :type: float
+
+   .. attribute:: domain
+
+      A 2d array of size :math:`(d,2)` indicating the input domain of the function.
+
+      :type: np.ndarray
+
+   .. attribute:: eval
+
+      Callable evaluator of the function.
+
+      :type: callable
+
+   .. attribute:: name
+
+      Name of the function.
+
+      :type: str
+
+   .. attribute:: outdim
+
+      Output dimensionality, :math:`o`.
+
+      :type: int
+
+
+   .. py:attribute:: dim
+      :value: None
+
+
+
+   .. py:attribute:: outdim
+      :value: None
+
+
+
+   .. py:attribute:: domain
+      :value: None
+
+
+
+   .. py:attribute:: name
+      :value: 'Base'
+
+
+
+   .. py:attribute:: eval
+      :value: None
+
+
+
+   .. py:attribute:: dmax
+      :value: 10.0
+
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: hess(x)
+
+      Hessian evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 4d array of size :math:`(N,o,d,d)`.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: setCall(eval)
+
+      Setting the evaluator function.
+
+      :param eval: Callable function from :math:`(N,d)` to :math:`(N,o)`.
+      :type eval: callable
+
+
+
+   .. py:method:: call1d(odim=0)
+
+      Wrapper function for single output evaluation.
+
+      :param odim: Output dimension index. Defaults to 0.
+      :type odim: int, optional
+
+      :returns: A callable function from :math:`(N,d)` to :math:`(N,)`.
+      :rtype: callable
+
+
+
+   .. py:method:: setDimDom(domain=None, dimension=None)
+
+
+   .. py:method:: inDomain(x)
+
+
+   .. py:method:: checkDomain(x)
+
+
+   .. py:method:: checkDim(x)
+
+
+   .. py:method:: sample_uniform(nsam)
+
+
+   .. py:method:: plot_1d(nom=None, ngr=133)
+
+
+   .. py:method:: plot_2d(nom=None, ngr=33)
+
+
+   .. py:method:: grad_(x, eps=1e-05)
+
+
+   .. py:method:: hess_(x, eps=1e-05)
+
+
+   .. py:method:: minimize(odim=0, return_res=False)
+
+
+   .. py:method:: eval_slice(x, ind=[0], nom=None)
+
+
+   .. py:method:: evalgrad_slice(x, ind=[0], nom=None)
+
+
+.. py:class:: AddFcn(fcn1, fcn2, name='Sum')
+
+   Bases: :py:obj:`Function`
+
+
+   Base class for a function.
+
+   .. attribute:: dim
+
+      Input dimensionality, :math:`d`.
+
+      :type: int
+
+   .. attribute:: dmax
+
+      Default domain half-size. That is, default domain is :math:`[-d_{max}, + d_{max}]`.
+
+      :type: float
+
+   .. attribute:: domain
+
+      A 2d array of size :math:`(d,2)` indicating the input domain of the function.
+
+      :type: np.ndarray
+
+   .. attribute:: eval
+
+      Callable evaluator of the function.
+
+      :type: callable
+
+   .. attribute:: name
+
+      Name of the function.
+
+      :type: str
+
+   .. attribute:: outdim
+
+      Output dimensionality, :math:`o`.
+
+      :type: int
+
+
+   .. py:attribute:: fcn1
+
+
+   .. py:attribute:: fcn2
+
+
+   .. py:attribute:: name
+      :value: 'Sum'
+
+
+
+   .. py:attribute:: outdim
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: SubFcn(fcn1, fcn2, name='Subtraction')
+
+   Bases: :py:obj:`Function`
+
+
+   Base class for a function.
+
+   .. attribute:: dim
+
+      Input dimensionality, :math:`d`.
+
+      :type: int
+
+   .. attribute:: dmax
+
+      Default domain half-size. That is, default domain is :math:`[-d_{max}, + d_{max}]`.
+
+      :type: float
+
+   .. attribute:: domain
+
+      A 2d array of size :math:`(d,2)` indicating the input domain of the function.
+
+      :type: np.ndarray
+
+   .. attribute:: eval
+
+      Callable evaluator of the function.
+
+      :type: callable
+
+   .. attribute:: name
+
+      Name of the function.
+
+      :type: str
+
+   .. attribute:: outdim
+
+      Output dimensionality, :math:`o`.
+
+      :type: int
+
+
+   .. py:attribute:: fcn1
+
+
+   .. py:attribute:: fcn2
+
+
+   .. py:attribute:: name
+      :value: 'Subtraction'
+
+
+
+   .. py:attribute:: outdim
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: MultFcn(fcn1, fcn2, name='Product')
+
+   Bases: :py:obj:`Function`
+
+
+   Base class for a function.
+
+   .. attribute:: dim
+
+      Input dimensionality, :math:`d`.
+
+      :type: int
+
+   .. attribute:: dmax
+
+      Default domain half-size. That is, default domain is :math:`[-d_{max}, + d_{max}]`.
+
+      :type: float
+
+   .. attribute:: domain
+
+      A 2d array of size :math:`(d,2)` indicating the input domain of the function.
+
+      :type: np.ndarray
+
+   .. attribute:: eval
+
+      Callable evaluator of the function.
+
+      :type: callable
+
+   .. attribute:: name
+
+      Name of the function.
+
+      :type: str
+
+   .. attribute:: outdim
+
+      Output dimensionality, :math:`o`.
+
+      :type: int
+
+
+   .. py:attribute:: fcn1
+
+
+   .. py:attribute:: fcn2
+
+
+   .. py:attribute:: name
+      :value: 'Product'
+
+
+
+   .. py:attribute:: outdim
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: DivFcn(fcn1, fcn2, name='Quotient')
+
+   Bases: :py:obj:`Function`
+
+
+   Base class for a function.
+
+   .. attribute:: dim
+
+      Input dimensionality, :math:`d`.
+
+      :type: int
+
+   .. attribute:: dmax
+
+      Default domain half-size. That is, default domain is :math:`[-d_{max}, + d_{max}]`.
+
+      :type: float
+
+   .. attribute:: domain
+
+      A 2d array of size :math:`(d,2)` indicating the input domain of the function.
+
+      :type: np.ndarray
+
+   .. attribute:: eval
+
+      Callable evaluator of the function.
+
+      :type: callable
+
+   .. attribute:: name
+
+      Name of the function.
+
+      :type: str
+
+   .. attribute:: outdim
+
+      Output dimensionality, :math:`o`.
+
+      :type: int
+
+
+   .. py:attribute:: fcn1
+
+
+   .. py:attribute:: fcn2
+
+
+   .. py:attribute:: name
+      :value: 'Quotient'
+
+
+
+   .. py:attribute:: outdim
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: PowFcn(fcn, power, name='Power')
+
+   Bases: :py:obj:`Function`
+
+
+   Base class for a function.
+
+   .. attribute:: dim
+
+      Input dimensionality, :math:`d`.
+
+      :type: int
+
+   .. attribute:: dmax
+
+      Default domain half-size. That is, default domain is :math:`[-d_{max}, + d_{max}]`.
+
+      :type: float
+
+   .. attribute:: domain
+
+      A 2d array of size :math:`(d,2)` indicating the input domain of the function.
+
+      :type: np.ndarray
+
+   .. attribute:: eval
+
+      Callable evaluator of the function.
+
+      :type: callable
+
+   .. attribute:: name
+
+      Name of the function.
+
+      :type: str
+
+   .. attribute:: outdim
+
+      Output dimensionality, :math:`o`.
+
+      :type: int
+
+
+   .. py:attribute:: fcn
+
+
+   .. py:attribute:: name
+      :value: 'Power'
+
+
+
+   .. py:attribute:: power
+
+
+   .. py:attribute:: outdim
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: ModelWrapperFcn(model, ndim, modelpar=None, name='ModelWrapper')
+
+   Bases: :py:obj:`Function`
+
+
+   Base class for a function.
+
+   .. attribute:: dim
+
+      Input dimensionality, :math:`d`.
+
+      :type: int
+
+   .. attribute:: dmax
+
+      Default domain half-size. That is, default domain is :math:`[-d_{max}, + d_{max}]`.
+
+      :type: float
+
+   .. attribute:: domain
+
+      A 2d array of size :math:`(d,2)` indicating the input domain of the function.
+
+      :type: np.ndarray
+
+   .. attribute:: eval
+
+      Callable evaluator of the function.
+
+      :type: callable
+
+   .. attribute:: name
+
+      Name of the function.
+
+      :type: str
+
+   .. attribute:: outdim
+
+      Output dimensionality, :math:`o`.
+
+      :type: int
+
+
+   .. py:attribute:: model
+
+
+   .. py:attribute:: modelpar
+      :value: None
+
+
+
+   .. py:attribute:: ndim
+
+
+   .. py:attribute:: outdim
+      :value: 1
+
+
+

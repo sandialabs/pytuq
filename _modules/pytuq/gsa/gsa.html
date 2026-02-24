@@ -1,0 +1,717 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytuq.gsa.gsa &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">Software Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/index.html#surrogates">Surrogates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_pce.html">Polynomial Chaos Expansion Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../autoapi/index.html">Section Navigation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../autoapi/pytuq/index.html">pytuq</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/pytuq/index.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/ftools/index.html">pytuq.ftools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/func/index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/minf/index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/rv/index.html">pytuq.rv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/surrogates/index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/utils/index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pytuq.gsa.gsa</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pytuq.gsa.gsa</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="sd">&quot;&quot;&quot;Various utilities and classes for global sensitivity analysis.&quot;&quot;&quot;</span>
+
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pk</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">..lreg.lreg</span><span class="w"> </span><span class="kn">import</span> <span class="n">lsq</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..rv.pcrv</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCRV</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..utils.mindex</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_mi</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..utils.plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_sens</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..utils.maps</span><span class="w"> </span><span class="kn">import</span> <span class="n">scale01ToDom</span>
+
+<span class="c1">###################################################################</span>
+<span class="c1">###################################################################</span>
+<span class="c1">###################################################################</span>
+
+<span class="c1"># Sensitivity of a multioutput model</span>
+<div class="viewcode-block" id="model_sens">
+<a class="viewcode-back" href="../../../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.model_sens">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">model_sens</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">model_params</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;SamSobol&#39;</span><span class="p">,</span> <span class="n">nsam</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sensitivities of a multioutput model.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        model (callable): Model of a form :math:`M(x, p)` where we are interesting in sensitivities with respect to :math:`x`, and :math:`p` are auxiliary parameters. The model is multioutput, taking :math:`(N,d)`-sized array, and returning a :math:`(N,o)`-sized array.</span>
+<span class="sd">        model_params (list): List of model&#39;s auxiliary parameters :math:`p`.</span>
+<span class="sd">        domain (np.ndarray): Domain of input, a 2d array of size :math:`(d,2)`.</span>
+<span class="sd">        method (str, optional): Sensitivity method. Default is SamSobol. Other options are PCSobol, LinReg or Moat.</span>
+<span class="sd">        nsam (int, optional): Number of samples. Note that for some methods this is not the number of model evaluations needed.</span>
+<span class="sd">        plot (bool, optional): Whether to plot or not.</span>
+<span class="sd">        **kwargs: Other keyword arguments for initializing sensitivity objects.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple(np.ndarray, np.ndarray): Main and total sensitivities arrays, each of size :math:`(o,d)`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;SamSobol&quot;</span><span class="p">:</span>
+        <span class="n">sMethod</span> <span class="o">=</span> <span class="n">SamSobol</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;PCSobol&quot;</span><span class="p">:</span>
+        <span class="n">sMethod</span> <span class="o">=</span> <span class="n">PCSobol</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;LinReg&quot;</span><span class="p">:</span>
+        <span class="n">sMethod</span> <span class="o">=</span> <span class="n">Linreg</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;Moat&quot;</span><span class="p">:</span>
+        <span class="n">sMethod</span> <span class="o">=</span> <span class="n">Moat</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Sensitivity method </span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s1"> is unknown. Exiting.&#39;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+    <span class="n">xsam</span> <span class="o">=</span> <span class="n">sMethod</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">nsam</span><span class="p">)</span>
+
+    <span class="n">ysam</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">xsam</span><span class="p">,</span> <span class="n">model_params</span><span class="p">)</span>
+
+    <span class="n">ndim</span> <span class="o">=</span> <span class="n">xsam</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1">#=domain.shape[0]</span>
+    <span class="n">nout</span> <span class="o">=</span> <span class="n">ysam</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># what if 1d??</span>
+    <span class="n">sens_main</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">nout</span><span class="p">,</span> <span class="n">ndim</span><span class="p">))</span>
+    <span class="n">sens_tot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">nout</span><span class="p">,</span> <span class="n">ndim</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nout</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Output # </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">sens</span> <span class="o">=</span> <span class="n">sMethod</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">ysam</span><span class="p">[:,</span> <span class="n">i</span><span class="p">])</span>
+        <span class="n">sens_main</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">sens</span><span class="p">[</span><span class="s1">&#39;main&#39;</span><span class="p">]</span>
+        <span class="n">sens_tot</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">sens</span><span class="p">[</span><span class="s1">&#39;total&#39;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
+        <span class="n">plot_sens</span><span class="p">(</span><span class="n">sens_main</span><span class="p">,</span><span class="nb">range</span><span class="p">(</span><span class="n">ndim</span><span class="p">),</span><span class="nb">range</span><span class="p">(</span><span class="n">nout</span><span class="p">),</span><span class="n">xticklabel_size</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">figname</span><span class="o">=</span><span class="s1">&#39;sens_main.png&#39;</span><span class="p">)</span>
+        <span class="n">plot_sens</span><span class="p">(</span><span class="n">sens_tot</span><span class="p">,</span><span class="nb">range</span><span class="p">(</span><span class="n">ndim</span><span class="p">),</span><span class="nb">range</span><span class="p">(</span><span class="n">nout</span><span class="p">),</span><span class="n">xticklabel_size</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">figname</span><span class="o">=</span><span class="s1">&#39;sens_tot.png&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">sens_main</span><span class="p">,</span> <span class="n">sens_tot</span></div>
+
+
+<span class="c1">####################################################################</span>
+<span class="c1">####################################################################</span>
+<span class="c1">####################################################################</span>
+
+<div class="viewcode-block" id="SensMethod">
+<a class="viewcode-back" href="../../../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.SensMethod">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SensMethod</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for various sensitivity methods implementation.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        dim (int): Dimensionality of the input.</span>
+<span class="sd">        dom (np.ndarray): Domain of input, a 2d array of size :math:`(d,2)`.</span>
+<span class="sd">        sens_names (list): List of names that are keys to dictionary sens.</span>
+<span class="sd">        sens (dict): Dictionary of sensitivities under a given method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dom</span><span class="p">,</span> <span class="n">sens_names</span><span class="p">):</span>
+<div class="viewcode-block" id="SensMethod.dom">
+<a class="viewcode-back" href="../../../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.SensMethod.dom">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dom</span><span class="o">=</span><span class="n">dom</span></div>
+
+<div class="viewcode-block" id="SensMethod.dim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.SensMethod.dim">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="o">=</span><span class="n">dom</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="SensMethod.sens_names">
+<a class="viewcode-back" href="../../../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.SensMethod.sens_names">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sens_names</span> <span class="o">=</span> <span class="n">sens_names</span></div>
+
+<div class="viewcode-block" id="PCSobol.sens">
+<a class="viewcode-back" href="../../../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.PCSobol.sens">[docs]</a>
+<div class="viewcode-block" id="SamSobol.sens">
+<a class="viewcode-back" href="../../../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.SamSobol.sens">[docs]</a>
+<div class="viewcode-block" id="Moat.sens">
+<a class="viewcode-back" href="../../../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.Moat.sens">[docs]</a>
+<div class="viewcode-block" id="Linreg.sens">
+<a class="viewcode-back" href="../../../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.Linreg.sens">[docs]</a>
+<div class="viewcode-block" id="SensMethod.sens">
+<a class="viewcode-back" href="../../../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.SensMethod.sens">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sens</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">k</span><span class="p">,</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sens_names</span><span class="p">)</span></div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div class="viewcode-block" id="SensMethod.sample">
+<a class="viewcode-back" href="../../../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.SensMethod.sample">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">nsam</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sampling routine.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            nsam (int): Number of requested samples, :math:`N`. Note that for some methods this is not the number of model evaluations needed.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            NotImplementedError: Should be implemented in children classes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Sampling for sensitivity is not implemented in the base class.&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="SensMethod.compute">
+<a class="viewcode-back" href="../../../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.SensMethod.compute">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ysam</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Computing sensitivities, given model evaluations.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ysam (np.ndarray): A 2d array of model evaluations of size :math:`(M,d)`.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            NotImplementedError: Should be implemented in children classes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Computing sensitivity is not implemented in the base class.&quot;</span><span class="p">)</span></div>
+</div>
+
+
+<span class="c1">###################################################################</span>
+<span class="c1">###################################################################</span>
+<span class="c1">###################################################################</span>
+
+<div class="viewcode-block" id="Linreg">
+<a class="viewcode-back" href="../../../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.Linreg">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Linreg</span><span class="p">(</span><span class="n">SensMethod</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sensitivities computed via linear regression.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        nsam (int): Number of samples requested, :math:`N`.</span>
+<span class="sd">        sens (dict): Dictionary of sensitivities.</span>
+<span class="sd">        sens_names (list): Names of sensitivities: &#39;src&#39; (scaled regression coefficient) or &#39;pear&#39; (pearson).</span>
+<span class="sd">        xsam (np.ndarray): Model evaluation input samples, a 2d array of size :math:`(N,d)`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dom</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Initialization.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dom (np.ndarray): Domain of input, a 2d array of size :math:`(d,2)`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Initializing LINREG Sensitivity Method&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="Linreg.sens_names">
+<a class="viewcode-back" href="../../../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.Linreg.sens_names">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sens_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;src&#39;</span><span class="p">,</span> <span class="s1">&#39;pear&#39;</span><span class="p">]</span></div>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">dom</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sens_names</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Linreg.sample">
+<a class="viewcode-back" href="../../../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.Linreg.sample">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nsam</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sampling routine.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            nsam (int): Number of requested samples, :math:`N`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: Model evaluation input samples, a 2d array of size :math:`(N,d)`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sampling LINREG Sensitivity Method&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nsam</span> <span class="o">=</span> <span class="n">nsam</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xsam</span> <span class="o">=</span> <span class="n">scale01ToDom</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nsam</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">dom</span><span class="p">)</span>
+
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">xsam</span></div>
+
+
+<div class="viewcode-block" id="Linreg.compute">
+<a class="viewcode-back" href="../../../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.Linreg.compute">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ysam</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Computing sensitivities, given model evaluations.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ysam (np.ndarray): A 2d array of model evaluations of size :math:`(N,d)`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: Dictionary with keys src (scaled regression coefficient) and pear (Pearson)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">ysam</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="bp">self</span><span class="o">.</span><span class="n">nsam</span><span class="p">)</span>
+
+        <span class="n">A</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">nsam</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">A</span><span class="p">[:,</span><span class="mi">1</span><span class="p">:]</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">xsam</span>
+        <span class="n">coeff</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">ysam</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">sy</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ysam</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">sxs</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xsam</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">sens</span><span class="p">[</span><span class="s1">&#39;src&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">coeff</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span><span class="n">sxs</span><span class="p">)</span><span class="o">/</span><span class="n">sy</span>
+
+        <span class="n">pcor</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">,))</span>
+        <span class="n">yx</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">nsam</span><span class="p">))</span>
+        <span class="k">for</span> <span class="nb">id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">):</span>
+            <span class="n">yx</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span><span class="o">=</span><span class="n">ysam</span>
+            <span class="n">yx</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">xsam</span><span class="p">[:,</span><span class="nb">id</span><span class="p">]</span>
+            <span class="n">cc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">yx</span><span class="p">)</span>
+            <span class="n">pcor</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span><span class="o">=</span><span class="n">cc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">sens</span><span class="p">[</span><span class="s1">&#39;pear&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">pcor</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sens</span></div>
+</div>
+
+
+<span class="c1">###################################################################</span>
+<span class="c1">###################################################################</span>
+<span class="c1">###################################################################</span>
+
+<div class="viewcode-block" id="Moat">
+<a class="viewcode-back" href="../../../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.Moat">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Moat</span><span class="p">(</span><span class="n">SensMethod</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class for MOAT (Morris One At a Time) sensitivities.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        delta (int): Delta-parameter of the method.</span>
+<span class="sd">        indmap (np.ndarray): Working 2d array of size :math:`(d,2)`.</span>
+<span class="sd">        nlev (int): Number of levels parameter of the method.</span>
+<span class="sd">        nsam (int): Number of model evaluations :math:`M=R(d+1)`.</span>
+<span class="sd">        repl (int): Number of replicas, :math:`R`.</span>
+<span class="sd">        sens (dict): Dictionary of sensitivities.</span>
+<span class="sd">        sens_names (list): Sensitivity names: mu, amu or sig.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dom</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">nlev</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Initialization</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dom (np.ndarray): Domain of input, a 2d array of size :math:`(d,2)`.</span>
+<span class="sd">            delta (int, optional): Delta-parameter of the method. Defaults to 2.</span>
+<span class="sd">            nlev (int, optional): Number of levels parameter of the method. Defaults to 4.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Initializing MOAT Sensitivity Method&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="Moat.sens_names">
+<a class="viewcode-back" href="../../../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.Moat.sens_names">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sens_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;mu&#39;</span><span class="p">,</span> <span class="s1">&#39;amu&#39;</span><span class="p">,</span> <span class="s1">&#39;sig&#39;</span><span class="p">]</span></div>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">dom</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sens_names</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Moat.delta">
+<a class="viewcode-back" href="../../../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.Moat.delta">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delta</span> <span class="o">=</span> <span class="n">delta</span></div>
+
+<div class="viewcode-block" id="Moat.nlev">
+<a class="viewcode-back" href="../../../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.Moat.nlev">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nlev</span> <span class="o">=</span> <span class="n">nlev</span></div>
+
+
+<div class="viewcode-block" id="Moat.sample">
+<a class="viewcode-back" href="../../../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.Moat.sample">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">repl</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sampling routine.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            repl (int): Number of replicas, :math:`R`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: Model evaluation input samples, a 2d array of size :math:`(M,d)`, where :math:`M=R(d+1)`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sampling MOAT Sensitivity Method&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">indmap</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">nsam</span> <span class="o">=</span> <span class="n">repl</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">repl</span> <span class="o">=</span> <span class="n">repl</span>
+
+
+        <span class="n">J</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+        <span class="n">B</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tril</span><span class="p">(</span><span class="n">J</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">Dst</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">Perm</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">)</span>
+        <span class="n">Pst</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)[:,</span> <span class="n">Perm</span><span class="p">]</span> <span class="c1">#np.random.permutation(np.eye(self.dim,dtype=int))</span>
+
+        <span class="k">for</span> <span class="nb">id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">indmap</span><span class="p">[</span><span class="nb">id</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">Perm</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">indmap</span><span class="p">[</span><span class="nb">id</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">Dst</span><span class="p">[</span><span class="n">Perm</span><span class="p">[</span><span class="nb">id</span><span class="p">],</span> <span class="n">Perm</span><span class="p">[</span><span class="nb">id</span><span class="p">]]</span>
+
+
+        <span class="n">Bst</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">repl</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">ir</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">repl</span><span class="p">):</span>
+            <span class="n">xind</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nlev</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">delta</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">,))</span>
+            <span class="c1">#Bprime=np.dot(J,np.diag(xind))+delta*B</span>
+            <span class="n">Bst</span><span class="p">[</span><span class="n">ir</span><span class="p">,:,:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">J</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">xind</span><span class="p">))</span><span class="o">+</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">delta</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">B</span><span class="o">-</span><span class="n">J</span><span class="p">,</span><span class="n">Dst</span><span class="p">)</span><span class="o">+</span><span class="n">J</span><span class="p">),</span><span class="n">Pst</span><span class="p">)</span>
+            <span class="c1">#print Bst[ir,:,:]</span>
+
+        <span class="n">xsam</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">repl</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">ir</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">repl</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">jd</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+                <span class="n">ind</span><span class="o">=</span><span class="n">Bst</span><span class="p">[</span><span class="n">ir</span><span class="p">,</span><span class="n">jd</span><span class="p">,:]</span>
+                <span class="n">xsam</span><span class="p">[</span><span class="n">ir</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">jd</span><span class="p">,:]</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dom</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dom</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">dom</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ind</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nlev</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">xsam</span></div>
+
+
+<div class="viewcode-block" id="Moat.compute">
+<a class="viewcode-back" href="../../../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.Moat.compute">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ysam</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Computation of MOAT sensitivities.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ysam (np.ndarray): A 2d array of size :math:`(M, d)`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: Dictionary with keys mu, amu and sig.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">ysam</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="bp">self</span><span class="o">.</span><span class="n">nsam</span><span class="p">)</span>
+
+        <span class="n">repl</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">nsam</span><span class="o">/</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">ee</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">,</span><span class="n">repl</span><span class="p">))</span>
+        <span class="k">for</span> <span class="nb">id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">):</span>
+            <span class="n">jd</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">indmap</span><span class="p">[</span><span class="nb">id</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">flag</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">indmap</span><span class="p">[</span><span class="nb">id</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">ir</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">repl</span><span class="p">):</span>
+            <span class="c1">#for jd in range(self.dim+1):</span>
+                <span class="n">ee</span><span class="p">[</span><span class="nb">id</span><span class="p">,</span><span class="n">ir</span><span class="p">]</span><span class="o">=</span><span class="n">ysam</span><span class="p">[</span><span class="n">ir</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">jd</span><span class="p">]</span><span class="o">-</span><span class="n">ysam</span><span class="p">[</span><span class="n">ir</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">jd</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">ee</span><span class="p">[</span><span class="nb">id</span><span class="p">,</span><span class="n">ir</span><span class="p">]</span><span class="o">/=</span> <span class="nb">float</span><span class="p">(</span><span class="n">flag</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">delta</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dom</span><span class="p">[</span><span class="nb">id</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">dom</span><span class="p">[</span><span class="nb">id</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nlev</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">sens</span><span class="p">[</span><span class="s1">&#39;mu&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">ee</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sens</span><span class="p">[</span><span class="s1">&#39;amu&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">ee</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sens</span><span class="p">[</span><span class="s1">&#39;sig&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ee</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sens</span></div>
+</div>
+
+
+
+<span class="c1">###################################################################</span>
+<span class="c1">###################################################################</span>
+<span class="c1">###################################################################</span>
+
+<div class="viewcode-block" id="SamSobol">
+<a class="viewcode-back" href="../../../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.SamSobol">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SamSobol</span><span class="p">(</span><span class="n">SensMethod</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computing of sampling based main and total sensitivities, see Saltelli 2010.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        nsam (int): Number of model evaluations.</span>
+<span class="sd">        sens (dict): Dictionary of sensitivities.</span>
+<span class="sd">        sens_names (list): List of sensitivity names, main, total and jointt.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        It computes joint in the total sense!</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">##</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dom</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialization.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dom (np.ndarray): Domain of input, a 2d array of size :math:`(d,2)`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Initializing SamSOBOL Sensitivity Method&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="SamSobol.sens_names">
+<a class="viewcode-back" href="../../../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.SamSobol.sens_names">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sens_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;main&#39;</span><span class="p">,</span> <span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="s1">&#39;jointt&#39;</span><span class="p">]</span></div>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">dom</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sens_names</span><span class="p">)</span>
+
+<div class="viewcode-block" id="SamSobol.sample">
+<a class="viewcode-back" href="../../../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.SamSobol.sample">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ninit</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sampling routine.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ninit (int): Initial number of samples, :math:`N`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: Model evaluation input samples, a 2d array of size :math:`(M,d)`, where :math:`M=N(d+2)`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sampling SamSOBOL Sensitivity Method&quot;</span><span class="p">)</span>
+
+        <span class="n">sam1</span><span class="o">=</span><span class="n">scale01ToDom</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">ninit</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">dom</span><span class="p">)</span>
+        <span class="n">sam2</span><span class="o">=</span><span class="n">scale01ToDom</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">ninit</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">dom</span><span class="p">)</span>
+
+        <span class="n">xsam</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">sam1</span><span class="p">,</span><span class="n">sam2</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="nb">id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">):</span>
+            <span class="n">samid</span><span class="o">=</span><span class="n">sam1</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">samid</span><span class="p">[:,</span><span class="nb">id</span><span class="p">]</span><span class="o">=</span><span class="n">sam2</span><span class="p">[:,</span><span class="nb">id</span><span class="p">]</span>
+            <span class="n">xsam</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">xsam</span><span class="p">,</span><span class="n">samid</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">nsam</span><span class="o">=</span><span class="n">xsam</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+
+        <span class="k">return</span> <span class="n">xsam</span></div>
+
+
+<div class="viewcode-block" id="SamSobol.compute">
+<a class="viewcode-back" href="../../../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.SamSobol.compute">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ysam</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Computing sensitivities.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ysam (np.ndarray): A 2d array of size :math:`(M, d)`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: Dictionary with keys main, total and jointt.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ninit</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">nsam</span><span class="o">//</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">y1</span><span class="o">=</span><span class="n">ysam</span><span class="p">[</span><span class="n">ninit</span><span class="p">:</span><span class="mi">2</span><span class="o">*</span><span class="n">ninit</span><span class="p">]</span>
+        <span class="n">var</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">ysam</span><span class="p">[:</span><span class="mi">2</span><span class="o">*</span><span class="n">ninit</span><span class="p">])</span>
+        <span class="n">si</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">,))</span>
+        <span class="n">ti</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">,))</span>
+        <span class="n">jtij</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">var</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sens</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;main&#39;</span> <span class="p">:</span> <span class="n">si</span><span class="p">,</span> <span class="s1">&#39;total&#39;</span> <span class="p">:</span> <span class="n">ti</span><span class="p">,</span> <span class="s1">&#39;jointt&#39;</span> <span class="p">:</span> <span class="n">jtij</span><span class="o">.</span><span class="n">T</span><span class="p">}</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sens</span>
+
+        <span class="k">for</span> <span class="nb">id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">):</span>
+            <span class="n">y2</span><span class="o">=</span><span class="n">ysam</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">ninit</span><span class="o">+</span><span class="nb">id</span><span class="o">*</span><span class="n">ninit</span><span class="p">:</span><span class="mi">2</span><span class="o">*</span><span class="n">ninit</span><span class="o">+</span><span class="p">(</span><span class="nb">id</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">ninit</span><span class="p">]</span><span class="o">-</span><span class="n">ysam</span><span class="p">[:</span><span class="n">ninit</span><span class="p">]</span>
+            <span class="n">si</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y1</span><span class="o">*</span><span class="n">y2</span><span class="p">)</span><span class="o">/</span><span class="n">var</span>
+            <span class="n">ti</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span><span class="o">=</span><span class="mf">0.5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y2</span><span class="o">*</span><span class="n">y2</span><span class="p">)</span><span class="o">/</span><span class="n">var</span>
+            <span class="k">for</span> <span class="n">jd</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">id</span><span class="p">):</span>
+                <span class="n">y3</span><span class="o">=</span><span class="n">ysam</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">ninit</span><span class="o">+</span><span class="nb">id</span><span class="o">*</span><span class="n">ninit</span><span class="p">:</span><span class="mi">2</span><span class="o">*</span><span class="n">ninit</span><span class="o">+</span><span class="p">(</span><span class="nb">id</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">ninit</span><span class="p">]</span><span class="o">-</span><span class="n">ysam</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">ninit</span><span class="o">+</span><span class="n">jd</span><span class="o">*</span><span class="n">ninit</span><span class="p">:</span><span class="mi">2</span><span class="o">*</span><span class="n">ninit</span><span class="o">+</span><span class="p">(</span><span class="n">jd</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">ninit</span><span class="p">]</span>
+                <span class="n">jtij</span><span class="p">[</span><span class="nb">id</span><span class="p">,</span><span class="n">jd</span><span class="p">]</span><span class="o">=</span><span class="n">ti</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span><span class="o">+</span><span class="n">ti</span><span class="p">[</span><span class="n">jd</span><span class="p">]</span><span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y3</span><span class="o">*</span><span class="n">y3</span><span class="p">)</span><span class="o">/</span><span class="n">var</span>
+                <span class="n">jtij</span><span class="p">[</span><span class="n">jd</span><span class="p">,</span><span class="nb">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">jtij</span><span class="p">[</span><span class="nb">id</span><span class="p">,</span><span class="n">jd</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">sens</span><span class="p">[</span><span class="s1">&#39;main&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">si</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sens</span><span class="p">[</span><span class="s1">&#39;total&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">ti</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sens</span><span class="p">[</span><span class="s1">&#39;jointt&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">jtij</span><span class="o">.</span><span class="n">T</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sens</span></div>
+</div>
+
+
+<span class="c1">###################################################################</span>
+<span class="c1">###################################################################</span>
+<span class="c1">###################################################################</span>
+
+<div class="viewcode-block" id="PCSobol">
+<a class="viewcode-back" href="../../../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.PCSobol">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PCSobol</span><span class="p">(</span><span class="n">SensMethod</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;PC-based Sobol senitivity computation.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        nsam (int): Number of model evaluations.</span>
+<span class="sd">        sens (dict): Dictionary of sensitivities.</span>
+<span class="sd">        sens_names (list): List of sensitivity names, main, total and jointt.</span>
+<span class="sd">        pcrv (PCRV): Working PCRV object</span>
+<span class="sd">        pctype (str): PC type.</span>
+<span class="sd">        order (int): PC order.</span>
+<span class="sd">        xsam (np.ndarray): Model evaluation input samples, a 2d array of size :math:`(N,d)`.</span>
+<span class="sd">        germ_sam (np.ndarray): Corresponding PC germ samples, a 2d array of size :math:`(N,d)`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dom</span><span class="p">,</span> <span class="n">pctype</span><span class="o">=</span><span class="s1">&#39;LU&#39;</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Initialization.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dom (np.ndarray): Domain of input, a 2d array of size :math:`(d,2)`.</span>
+<span class="sd">            pctype (str, optional): PC type. Defaults to LU.</span>
+<span class="sd">            order (int, optional): PC order. Defaults to :math:`3`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Initializing PCSobol Sensitivity Method&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="PCSobol.sens_names">
+<a class="viewcode-back" href="../../../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.PCSobol.sens_names">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sens_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;main&#39;</span><span class="p">,</span> <span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="s1">&#39;jointt&#39;</span><span class="p">]</span></div>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">dom</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">sens_names</span><span class="p">)</span>
+
+<div class="viewcode-block" id="PCSobol.pctype">
+<a class="viewcode-back" href="../../../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.PCSobol.pctype">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pctype</span> <span class="o">=</span> <span class="n">pctype</span></div>
+
+<div class="viewcode-block" id="PCSobol.order">
+<a class="viewcode-back" href="../../../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.PCSobol.order">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">order</span></div>
+
+
+<div class="viewcode-block" id="PCSobol.sample">
+<a class="viewcode-back" href="../../../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.PCSobol.sample">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">nsam</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sampling routine.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            nsam (int): Number of requested samples, :math:`N`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: Model evaluation input samples, a 2d array of size :math:`(N,d)`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sampling PCSobol Sensitivity Method&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pcrv</span> <span class="o">=</span> <span class="n">PCRV</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pctype</span><span class="p">,</span> <span class="n">mi</span><span class="o">=</span><span class="n">get_mi</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nsam</span><span class="o">=</span><span class="n">nsam</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">germ_sam</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">pcrv</span><span class="o">.</span><span class="n">sampleGerm</span><span class="p">(</span><span class="n">nsam</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">nsam</span><span class="p">)</span>
+
+        <span class="n">unif_sam</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">nsam</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">idim</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">):</span>
+            <span class="n">unif_sam</span><span class="p">[:,</span> <span class="n">idim</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pcrv</span><span class="o">.</span><span class="n">PC1ds</span><span class="p">[</span><span class="n">idim</span><span class="p">]</span><span class="o">.</span><span class="n">germCdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">germ_sam</span><span class="p">[:,</span> <span class="n">idim</span><span class="p">])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">xsam</span> <span class="o">=</span> <span class="n">scale01ToDom</span><span class="p">(</span><span class="n">unif_sam</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">dom</span><span class="p">)</span>
+
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">xsam</span></div>
+
+
+<div class="viewcode-block" id="PCSobol.compute">
+<a class="viewcode-back" href="../../../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.PCSobol.compute">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ysam</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Computing sensitivities.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ysam (np.ndarray): A 2d array of size :math:`(N, d)`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: Dictionary with keys main, total and jointt.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">ysam</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="bp">self</span><span class="o">.</span><span class="n">nsam</span><span class="p">)</span>
+
+        <span class="n">Amat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pcrv</span><span class="o">.</span><span class="n">evalBases</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">germ_sam</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">lreg</span> <span class="o">=</span> <span class="n">lsq</span><span class="p">()</span>
+        <span class="n">lreg</span><span class="o">.</span><span class="n">fita</span><span class="p">(</span><span class="n">Amat</span><span class="p">,</span> <span class="n">ysam</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pcrv</span><span class="o">.</span><span class="n">setCfs</span><span class="p">([</span><span class="n">lreg</span><span class="o">.</span><span class="n">cf</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sens</span><span class="p">[</span><span class="s1">&#39;main&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pcrv</span><span class="o">.</span><span class="n">computeSens</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sens</span><span class="p">[</span><span class="s1">&#39;total&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pcrv</span><span class="o">.</span><span class="n">computeTotSens</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sens</span><span class="p">[</span><span class="s1">&#39;jointt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pcrv</span><span class="o">.</span><span class="n">computeJointSens</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sens</span></div>
+</div>
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

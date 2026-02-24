@@ -1,0 +1,650 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytuq.surrogates.pce &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">Software Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/index.html#surrogates">Surrogates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_pce.html">Polynomial Chaos Expansion Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../autoapi/index.html">Section Navigation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../autoapi/pytuq/index.html">pytuq</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/pytuq/index.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/ftools/index.html">pytuq.ftools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/func/index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/minf/index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/rv/index.html">pytuq.rv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/surrogates/index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/utils/index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pytuq.surrogates.pce</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pytuq.surrogates.pce</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+
+<span class="sd">&quot;&quot;&quot;This module provides a Polynomial Chaos Expansion (PCE) wrapper class to facilitate </span>
+<span class="sd">    the universal coupling of FASTMath UQ tools and libraries. This class focuses on the use case </span>
+<span class="sd">    of PC surrogate models built with linear regression, keeping in mind </span>
+<span class="sd">    flexibility to implement additional UQ functionalities in the future.</span>
+
+<span class="sd">    The PCE class supports a minimal API, with methods to construct the model, build it with training data,</span>
+<span class="sd">    evaluate it with input data, and offer predictions with covariance, variance, and standard deviation.</span>
+<span class="sd">    It is capable of handling multidimensional inputs and is optimized for scalar-valued function outputs.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        The current implementation focuses on providing a general foundation for polynomial chaos </span>
+<span class="sd">        expansions with simple least squares regression or advanced analytical regression. While not all </span>
+<span class="sd">        construct and build options are currently supported, the class was developed with future growth in mind.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pytuq.rv.pcrv</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCRV</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pytuq.utils.mindex</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_mi</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pytuq.lreg.lreg</span><span class="w"> </span><span class="kn">import</span> <span class="n">lsq</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pytuq.lreg.anl</span><span class="w"> </span><span class="kn">import</span> <span class="n">anl</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pytuq.lreg.bcs</span><span class="w"> </span><span class="kn">import</span> <span class="n">bcs</span>
+
+
+<div class="viewcode-block" id="PCE">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/pce/index.html#pytuq.surrogates.pce.PCE">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PCE</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A wrapper class to access PyTUQ functionalities for PCE surrogate models. </span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        pcrv (PCRV object): Polynomial Chaos random variable object, encapsulates details for polynomial chaos expansion.</span>
+<span class="sd">        sdim (int): Stochastic dimensionality, i.e. # of stochastic inputs.</span>
+<span class="sd">        order (int): Order of polynomial chaos expansion.</span>
+<span class="sd">        pctype (list[str]): Type of PC polynomial used.</span>
+<span class="sd">        outdim (int): Physical dimensionality, i.e. # of output variables.</span>
+<span class="sd">        lreg (lreg object): Linear regression object used for fitting the model.</span>
+<span class="sd">        mindex (int np.ndarray): Multiindex array carrying the powers to which the basis functions will be raised to within the PC terms. Reset when build() is called again.</span>
+<span class="sd">        regression_method (str): Method used for linear regression. ex] anl, opt, lsq</span>
+<span class="sd">        _x_train (np.ndarray): Input training data</span>
+<span class="sd">        _y_train (np.ndarray): Output training data, corresponding to x_train</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pce_dim</span><span class="p">,</span> <span class="n">pce_order</span><span class="p">,</span> <span class="n">pce_type</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Initializes a Polynomial Chaos Random Variable (PCRV) with, at minimum:</span>
+<span class="sd">        stochastic dimensionality, order, and polynomial chaos (PC) type. </span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            pce_dim (int): Stochastic dimensionality :math:`d` of the PC random variable/vector. </span>
+<span class="sd">                The number of sources of uncertainty (sdim).</span>
+<span class="sd">            pce_order (int): Order of the PC expansion.</span>
+<span class="sd">            pce_type (str or list): PC type. Either a list of :math:`s` strings (one per stochastic dimension), </span>
+<span class="sd">                or a single string for all dimensions. Supported types include &#39;LU&#39; (Legendre) and &#39;HG&#39; (Hermite-Gaussian).</span>
+<span class="sd">            verbose (int): Output verbosity. Higher values print out more information. Default of 0</span>
+<span class="sd">            pce_outdim (int, optional): Physical dimensionality :math:`s` of the PC random variable/vector.</span>
+<span class="sd">                Default of 1 indicates a scalar-valued output.</span>
+<span class="sd">            mi (list or np.ndarray, optional): List of :math:`d` multiindex arrays, each of size :math:`(K_i,s)` for :math:`i=1, \dots, d`. </span>
+<span class="sd">                Or a single multiindex array of size :math:`(K,s)`, meaning all dimensions get the same multiindex. </span>
+<span class="sd">                Defaults to None, which is a single 1d constant random variable i.e. a multiindex of all zeros.</span>
+<span class="sd">            cfs (list or np.ndarray, optional): List of :math:`d` coefficient arrays, each of size :math:`K_i` for :math:`i=1, \dots, d`. </span>
+<span class="sd">                Or a single coefficient array of size :math:`K`, meaning all dimensions get the same coefficient array. </span>
+<span class="sd">                Or a 2d array of size :math:`(K,d)`. Defaults to None, which is populating coefficients with all zeros.</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            Future Implementations:</span>
+<span class="sd">            - Support for automatically generated random coefficients (`setRandomCfs` method).</span>
+<span class="sd">            - Initialization with different PCRV operations/related classes (`PCRV_mvn` class).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="PCE.sdim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/pce/index.html#pytuq.surrogates.pce.PCE.sdim">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sdim</span> <span class="o">=</span> <span class="n">pce_dim</span></div>
+
+<div class="viewcode-block" id="PCE.order">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/pce/index.html#pytuq.surrogates.pce.PCE.order">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">pce_order</span></div>
+
+<div class="viewcode-block" id="PCE.pctype">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/pce/index.html#pytuq.surrogates.pce.PCE.pctype">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pctype</span> <span class="o">=</span> <span class="n">pce_type</span>   <span class="c1"># Choose from options: &#39;LU&#39;, &#39;HG&#39;, or mix of [&#39;HG&#39;, &#39;LU&#39;]</span></div>
+
+<div class="viewcode-block" id="PCE.outdim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/pce/index.html#pytuq.surrogates.pce.PCE.outdim">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outdim</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;pce_outdim&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># Scalar valued output</span></div>
+
+<div class="viewcode-block" id="PCE.verbose">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/pce/index.html#pytuq.surrogates.pce.PCE.verbose">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span></div>
+
+
+<div class="viewcode-block" id="PCE.lreg">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/pce/index.html#pytuq.surrogates.pce.PCE.lreg">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lreg</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="PCE._x_train">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/pce/index.html#pytuq.surrogates.pce.PCE._x_train">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_x_train</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="PCE._y_train">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/pce/index.html#pytuq.surrogates.pce.PCE._y_train">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_y_train</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="PCE.regression_method">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/pce/index.html#pytuq.surrogates.pce.PCE.regression_method">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">regression_method</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+
+        <span class="c1"># Get the original multiindex, before possible modification in build</span>
+<div class="viewcode-block" id="PCE.mindex">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/pce/index.html#pytuq.surrogates.pce.PCE.mindex">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mindex</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mi&#39;</span><span class="p">,</span> <span class="n">get_mi</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="PCE.pcrv">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/pce/index.html#pytuq.surrogates.pce.PCE.pcrv">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pcrv</span> <span class="o">=</span> <span class="n">PCRV</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outdim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pctype</span><span class="p">,</span> 
+                    <span class="n">mi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mindex</span><span class="p">,</span> 
+                    <span class="n">cfs</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cfs&#39;</span><span class="p">))</span></div>
+
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Constructed PC Surrogate with the following attributes:&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pcrv</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="c1"># self.pcrv.printInfo()</span>
+
+<div class="viewcode-block" id="PCE.set_training_data">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/pce/index.html#pytuq.surrogates.pce.PCE.set_training_data">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_training_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sets the training data with validation.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x_train (np.ndarray): 2d array of size `(N, d)` representing training input data,</span>
+<span class="sd">                where `N` is the number of samples and `d` is the dimensionality (sdim) of each sample.</span>
+<span class="sd">            y_train (np.ndarray): 1d array of size `N` representing the training output data,</span>
+<span class="sd">                where each element corresponds to the output value for each input sample in `x_train`.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If x_train or y_train do not meet the required dimensions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">and</span> <span class="n">x_train</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;x_train must be a 2D numpy array.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">and</span> <span class="n">y_train</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;y_train must be a 1D numpy array.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">x_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The number of samples in x and y must be the same.&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_x_train</span> <span class="o">=</span> <span class="n">x_train</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_y_train</span> <span class="o">=</span> <span class="n">y_train</span></div>
+
+
+
+<div class="viewcode-block" id="PCE.get_pc_terms">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/pce/index.html#pytuq.surrogates.pce.PCE.get_pc_terms">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_pc_terms</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a list where each element represents the number of PC terms</span>
+<span class="sd">        in the corresponding dimension of the PCE.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list[int]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="p">[</span><span class="n">mi</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">mi</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">pcrv</span><span class="o">.</span><span class="n">mindices</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="PCE.kfold_split">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/pce/index.html#pytuq.surrogates.pce.PCE.kfold_split">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">kfold_split</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nsamples</span><span class="p">,</span> <span class="n">nfolds</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">13</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return dictionary of training and testing pairs using k-fold cross-validation.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            nsamples (int): Total number of training samples.</span>
+<span class="sd">            nfolds (int): Number of folds to use for k-fold cross-validation.</span>
+<span class="sd">            seed (int, optional): Random seed for reproducibility. Defaults to 13.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: A dictionary where each key is the fold number (0 to nfolds-1) </span>
+<span class="sd">            and each value is a dictionary with:</span>
+<span class="sd">                - &quot;train index&quot; (np.ndarray): Indices of training samples.</span>
+<span class="sd">                - &quot;val index&quot; (np.ndarray): Indices of validation samples.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Returns split data where each data is one fold left out</span>
+        <span class="n">KK</span> <span class="o">=</span> <span class="n">nfolds</span>
+        <span class="n">rn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+
+        <span class="c1"># Creating a random permutation of the samples indices list</span>
+        <span class="n">indp</span><span class="o">=</span><span class="n">rn</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">nsamples</span><span class="p">)</span>
+
+        <span class="c1"># Split the permuted indices into KK (or # folds) equal-sized chunks </span>
+        <span class="n">split_index</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array_split</span><span class="p">(</span><span class="n">indp</span><span class="p">,</span><span class="n">KK</span><span class="p">)</span>
+
+        <span class="c1"># Dictionary to hold the indices of the training and validation samples</span>
+        <span class="n">cvindices</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="c1"># create testing and training folds</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">KK</span><span class="p">):</span>
+            <span class="c1"># Iterating through the number of folds</span>
+            <span class="n">fold</span> <span class="o">=</span> <span class="n">j</span>
+            <span class="c1"># Iterate through # folds, if i != fold number, </span>
+            <span class="n">newindex</span> <span class="o">=</span> <span class="p">[</span><span class="n">split_index</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">split_index</span><span class="p">))</span> <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="p">(</span><span class="n">fold</span><span class="p">)]</span>
+            <span class="n">train_ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([],</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int64&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">newindex</span><span class="p">)):</span> <span class="n">train_ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">train_ind</span><span class="p">,</span><span class="n">newindex</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+            <span class="n">test_ind</span> <span class="o">=</span> <span class="n">split_index</span><span class="p">[</span><span class="n">fold</span><span class="p">]</span>
+            <span class="n">cvindices</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;train index&#39;</span><span class="p">:</span> <span class="n">train_ind</span><span class="p">,</span> <span class="s1">&#39;val index&#39;</span><span class="p">:</span> <span class="n">test_ind</span><span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">cvindices</span></div>
+
+    
+
+<div class="viewcode-block" id="PCE.kfold_cv">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/pce/index.html#pytuq.surrogates.pce.PCE.kfold_cv">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">kfold_cv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">nfolds</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">13</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Splits data into training/testing pairs for kfold cross-val</span>
+<span class="sd">        x is a data matrix of size n x d1, d1 is dim of input</span>
+<span class="sd">        y is a data matrix of size n x d2, d2 is dim of output</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (np.ndarray): Input matrix with shape (n, d1) or 1D array with shape (n,). Each row is a sample; columns are input features.</span>
+<span class="sd">            y (np.ndarray): Target array with shape (n,) for single-output, or (n, d2) for multi-output. If 1D, it is internally reshaped to (n, 1) before slicing; outputs are `np.squeeze`d per fold.</span>
+<span class="sd">            nfolds (int, optional): Number of folds for cross-validation. Defaults to 3.</span>
+<span class="sd">            seed (int, optional): Random seed for reproducible shuffling in `kfold_split`. Defaults to 13.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">n</span><span class="p">,</span><span class="n">d1</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">n</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">ynew</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ynew</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="n">ynew</span> <span class="o">=</span> <span class="n">ynew</span><span class="o">.</span><span class="n">T</span> <span class="c1"># change to shape (n,1)</span>
+        <span class="n">_</span><span class="p">,</span><span class="n">d2</span> <span class="o">=</span> <span class="n">ynew</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">cv_idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kfold_split</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">nfolds</span><span class="p">,</span><span class="n">seed</span><span class="p">)</span>
+
+        <span class="n">kfold_data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">cv_idx</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">kfold_data</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;xtrain&#39;</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="n">cv_idx</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="s1">&#39;train index&#39;</span><span class="p">]],</span>
+            <span class="s1">&#39;xval&#39;</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="n">cv_idx</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="s1">&#39;val index&#39;</span><span class="p">]],</span>
+            <span class="s1">&#39;ytrain&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">ynew</span><span class="p">[</span><span class="n">cv_idx</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="s1">&#39;train index&#39;</span><span class="p">]]),</span>
+            <span class="s1">&#39;yval&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">ynew</span><span class="p">[</span><span class="n">cv_idx</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="s1">&#39;val index&#39;</span><span class="p">]])</span>
+            <span class="p">}</span> <span class="c1"># use squeeze to return 1d array</span>
+
+            <span class="c1"># set train and test to the same if 1 fold</span>
+            <span class="k">if</span> <span class="n">nfolds</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">kfold_data</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="s1">&#39;xtrain&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kfold_data</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="s1">&#39;xval&#39;</span><span class="p">]</span>
+                <span class="n">kfold_data</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="s1">&#39;ytrain&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kfold_data</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="s1">&#39;yval&#39;</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">kfold_data</span></div>
+
+
+    
+<div class="viewcode-block" id="PCE.optimize_eta">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/pce/index.html#pytuq.surrogates.pce.PCE.optimize_eta">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">optimize_eta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">etas</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nfolds</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Choose the optimum eta for Bayesian compressive sensing. Calculates the RMSE for each eta for a specified number of folds. </span>
+<span class="sd">        Selects the eta with the lowest RMSE after averaging the RMSEs over the folds.</span>
+
+<span class="sd">        Arg:</span>
+<span class="sd">            y: 1D numpy array (vector) with function, evaluated at the sample points [#samples,]</span>
+<span class="sd">            x: N-dimensional NumPy array with sample points [#samples, #dimensions]</span>
+<span class="sd">            etas: NumPy array or list with the threshold for stopping the algorithm. Smaller values retain more nonzero coefficients.</span>
+<span class="sd">            plot: Flag for whether to generate a plot for eta optimization</span>
+<span class="sd">            verbose: Flag for print statements during cross-validation </span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            eta_opt: Optimum eta value to be used in BCS build</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Split data in k folds -&gt; Get dictionary of data split in training + testing folds</span>
+        <span class="n">kfold_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kfold_cv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_x_train</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y_train</span><span class="p">,</span> <span class="n">nfolds</span><span class="p">)</span>
+
+        <span class="c1"># Each value has data for 1 fold. Each value is a list of the RMSEs for each possible eta in the fold. </span>
+        <span class="n">RMSE_list_per_fold_tr</span> <span class="o">=</span> <span class="p">[]</span> 
+
+        <span class="c1"># Same but for testing data</span>
+        <span class="n">RMSE_list_per_fold_test</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Make a copy of the PCE object to run the cross-validation algorithm on</span>
+        <span class="n">pce_copy</span> <span class="o">=</span> <span class="n">PCE</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sdim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pctype</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">pce_copy</span><span class="o">.</span><span class="n">pcrv</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pcrv</span><span class="p">)</span> <span class="c1"># copying over self attributes</span>
+
+        <span class="c1"># Loop through each fold</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nfolds</span><span class="p">):</span>
+
+            <span class="c1"># Get the training and validation data</span>
+            <span class="n">x_tr</span> <span class="o">=</span> <span class="n">kfold_data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;xtrain&#39;</span><span class="p">]</span>
+            <span class="n">y_tr</span> <span class="o">=</span> <span class="n">kfold_data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;ytrain&#39;</span><span class="p">]</span>
+            <span class="n">x_test</span> <span class="o">=</span> <span class="n">kfold_data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;xval&#39;</span><span class="p">]</span>
+            <span class="n">y_test</span> <span class="o">=</span> <span class="n">kfold_data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;yval&#39;</span><span class="p">]</span>
+            
+            <span class="c1"># As we conduct BCS for this fold with each separate eta, the RMSEs will be added to these lists</span>
+            <span class="n">RMSE_per_eta_tr</span> <span class="o">=</span> <span class="p">[]</span> 
+            <span class="n">RMSE_per_eta_test</span> <span class="o">=</span> <span class="p">[]</span> 
+
+            <span class="c1"># Set the x and y training data for the copied PCE object</span>
+            <span class="n">pce_copy</span><span class="o">.</span><span class="n">set_training_data</span><span class="p">(</span><span class="n">x_tr</span><span class="p">,</span> <span class="n">y_tr</span><span class="p">)</span>
+
+            <span class="c1"># Loop through each eta</span>
+            <span class="k">for</span> <span class="n">eta</span> <span class="ow">in</span> <span class="n">etas</span><span class="p">:</span>
+
+                <span class="c1"># Conduct the BCS fitting. The object is automatically updated with new multiindex and coefficients received from the fitting.</span>
+                <span class="n">cfs</span> <span class="o">=</span> <span class="n">pce_copy</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">regression</span> <span class="o">=</span> <span class="s1">&#39;bcs&#39;</span><span class="p">,</span> <span class="n">eta</span><span class="o">=</span><span class="n">eta</span><span class="p">)</span>
+
+                <span class="c1"># Evaluate the PCE object at the training and validation points </span>
+                <span class="n">y_tr_eval</span> <span class="o">=</span> <span class="p">(</span><span class="n">pce_copy</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x_tr</span><span class="p">))[</span><span class="s1">&#39;Y_eval&#39;</span><span class="p">]</span>
+                <span class="n">y_test_eval</span> <span class="o">=</span> <span class="p">(</span><span class="n">pce_copy</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x_test</span><span class="p">))[</span><span class="s1">&#39;Y_eval&#39;</span><span class="p">]</span>
+
+                <span class="c1"># Print statement for verbose flag</span>
+                <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fold &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;, eta &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">eta</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;, &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cfs</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot; terms retained out of a full basis of size &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pce_copy</span><span class="o">.</span><span class="n">pcrv</span><span class="o">.</span><span class="n">mindices</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+                
+                <span class="c1"># Calculate the RMSEs for the training and validation points.</span>
+                <span class="c1"># Append the values into the list of etas per fold.</span>
+                <span class="n">MSE</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">y_tr</span><span class="p">,</span> <span class="n">y_tr_eval</span><span class="p">))</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+                <span class="n">RMSE</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">MSE</span><span class="p">)</span>
+                <span class="n">RMSE_per_eta_tr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RMSE</span><span class="p">)</span>
+
+                <span class="n">MSE</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_test_eval</span><span class="p">))</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+                <span class="n">RMSE</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">MSE</span><span class="p">)</span>
+                <span class="n">RMSE_per_eta_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RMSE</span><span class="p">)</span>
+
+            <span class="c1"># Now, append the fold&#39;s list of RMSEs for each eta into the list carrying the lists for all folds </span>
+            <span class="n">RMSE_list_per_fold_tr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RMSE_per_eta_tr</span><span class="p">)</span>
+            <span class="n">RMSE_list_per_fold_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RMSE_per_eta_test</span><span class="p">)</span>
+
+        <span class="c1"># After compiling the RMSE data for each eta from all the folds, we find the eta with the lowest validation RMSE to be our optimal eta.</span>
+        <span class="c1"># Compute the average and standard deviation of the training and testing RMSEs over the folds</span>
+        <span class="n">avg_RMSE_tr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">RMSE_list_per_fold_tr</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">avg_RMSE_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">RMSE_list_per_fold_test</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">std_RMSE_tr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">RMSE_list_per_fold_tr</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">std_RMSE_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">RMSE_list_per_fold_test</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="c1"># Choose the eta with lowest RMSE across all folds&#39; testing data</span>
+        <span class="n">eta_opt</span> <span class="o">=</span> <span class="n">etas</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">avg_RMSE_test</span><span class="p">)]</span>
+
+        <span class="c1"># Plot RMSE vs. eta for training and testing RMSE</span>
+        <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
+
+            <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+
+            <span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">etas</span><span class="p">,</span> <span class="n">avg_RMSE_tr</span><span class="p">,</span> <span class="n">xerr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">std_RMSE_tr</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Training&#39;</span><span class="p">))</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">etas</span><span class="p">,</span> <span class="n">avg_RMSE_test</span><span class="p">,</span> <span class="n">xerr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">std_RMSE_test</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Validation&#39;</span><span class="p">))</span>
+
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">eta_opt</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">avg_RMSE_test</span><span class="p">),</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Optimum&quot;</span><span class="p">))</span>
+
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Eta&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;RMSE&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+            <span class="c1"># Change size of tick labels</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+
+            <span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+
+            <span class="c1"># Create legend</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+
+            <span class="c1"># Save</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;eta_opt.pdf&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;pdf&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">1200</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">eta_opt</span></div>
+
+
+
+<div class="viewcode-block" id="PCE.build">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/pce/index.html#pytuq.surrogates.pce.PCE.build">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> 
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Builds and initializes the linear regression model for the pcrv object with training data.</span>
+<span class="sd">        Returns coefficients for evaluated Polynomial Chaos Expansion.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            **kwargs (dict): Optional keyword arguments for configuring the regression model, including:</span>
+
+<span class="sd">                - regression (str): Type of regression to be used. </span>
+<span class="sd">                    Options are:</span>
+<span class="sd">                        + &#39;anl&#39;: Advanced regression analysis.</span>
+<span class="sd">                        + &#39;lsq&#39;: Least squares regression.</span>
+
+<span class="sd">                    The default is &#39;lsq&#39;. Future regression methods to implement include &#39;opt&#39; and &#39;lreg_merr&#39;.</span>
+
+<span class="sd">                - method (str): Method to be used when &#39;regression&#39; is set to &#39;anl&#39;. </span>
+<span class="sd">                    Options are:</span>
+<span class="sd">                        + &#39;vi&#39;: Variational inference.</span>
+<span class="sd">                        + &#39;full&#39;: Full analytical solution, the default for anl().</span>
+<span class="sd">                        </span>
+<span class="sd">                    The default is &#39;vi&#39; when &#39;regression&#39; is &#39;anl&#39;.</span>
+<span class="sd">                    </span>
+<span class="sd">                - datavar (float): Available for regression type &#39;anl&#39;.</span>
+<span class="sd">                - cov_nugget (float): Available for regression type &#39;anl&#39;.</span>
+<span class="sd">                - prior_var (float): Available for regression type &#39;anl&#39;, method &#39;full&#39;.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: PC coefficients  </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x_train</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y_train</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Training data must be set using set_training_data() before calling build().&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Reset the multiindex and coefficients</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pcrv</span><span class="o">.</span><span class="n">setMiCfs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mindex</span><span class="p">,</span> <span class="n">cfs</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+        <span class="n">regression</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;regression&#39;</span><span class="p">,</span> <span class="s1">&#39;lsq&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">regression</span> <span class="o">==</span> <span class="s1">&#39;lsq&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lreg</span> <span class="o">=</span> <span class="n">lsq</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">regression</span> <span class="o">==</span> <span class="s1">&#39;anl&#39;</span><span class="p">:</span>
+            <span class="n">method</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;method&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;vi&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">lreg</span> <span class="o">=</span> <span class="n">anl</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;vi&#39;</span><span class="p">,</span> <span class="n">datavar</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;datavar&#39;</span><span class="p">),</span> <span class="n">cov_nugget</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cov_nugget&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">lreg</span> <span class="o">=</span> <span class="n">anl</span><span class="p">(</span><span class="n">datavar</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;datavar&#39;</span><span class="p">),</span> <span class="n">prior_var</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;prior_var&#39;</span><span class="p">),</span> <span class="n">cov_nugget</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cov_nugget&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">regression</span> <span class="o">==</span> <span class="s1">&#39;bcs&#39;</span><span class="p">:</span>
+            <span class="n">eta</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;eta&#39;</span><span class="p">,</span> <span class="mf">1.e-8</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">eta</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">eta</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">eta</span><span class="p">))</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">eta</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">and</span> <span class="n">eta</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">opt_eta</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">optimize_eta</span><span class="p">(</span><span class="n">eta</span><span class="p">,</span> <span class="n">nfolds</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;nfolds&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">verbose</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;eta_verbose&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span> <span class="n">plot</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;eta_plot&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">lreg</span> <span class="o">=</span> <span class="n">bcs</span><span class="p">(</span><span class="n">eta</span><span class="o">=</span><span class="n">opt_eta</span><span class="p">,</span> <span class="n">datavar_init</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;datavar_init&#39;</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">eta</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="ow">and</span> <span class="n">eta</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">lreg</span> <span class="o">=</span> <span class="n">bcs</span><span class="p">(</span><span class="n">eta</span><span class="o">=</span><span class="n">eta</span><span class="p">,</span> <span class="n">datavar_init</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;datavar_init&#39;</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You may provide either a positive float (defaulting to 1.e-8) or 1D list/numpy array for the value of eta. If a list/numpy array is provided, the most optimal eta from the array will be chosen.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Regression method &#39;</span><span class="si">{</span><span class="n">regression</span><span class="si">}</span><span class="s2">&#39; is not recognized and/or supported yet.&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">regression_method</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lreg</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Regression method:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">regression_method</span><span class="p">)</span>
+                
+        <span class="k">def</span><span class="w"> </span><span class="nf">basisevaluator</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pars</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pcrv</span><span class="p">,</span> <span class="o">=</span> <span class="n">pars</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pcrv</span><span class="o">.</span><span class="n">evalBases</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">lreg</span><span class="o">.</span><span class="n">setBasisEvaluator</span><span class="p">(</span><span class="n">basisevaluator</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pcrv</span><span class="p">,))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lreg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_x_train</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y_train</span><span class="p">)</span>  
+
+        <span class="c1"># Update the multi-index and coefficients retained by BCS as attributes of pcrv object</span>
+        <span class="k">if</span> <span class="n">regression</span> <span class="o">==</span> <span class="s1">&#39;bcs&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pcrv</span><span class="o">.</span><span class="n">setMiCfs</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">mindex</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">lreg</span><span class="o">.</span><span class="n">used</span><span class="p">,:]],</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">lreg</span><span class="o">.</span><span class="n">cf</span><span class="p">])</span>
+    
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">lreg</span><span class="o">.</span><span class="n">cf</span></div>
+
+
+<div class="viewcode-block" id="PCE.evaluate">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/pce/index.html#pytuq.surrogates.pce.PCE.evaluate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_eval</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Generates predictions and related uncertainty calculations for given input data. </span>
+<span class="sd">        Returns predicted y-values, along with standard deviation, covariance, and variance of predictions if applicable. </span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x_eval (np.ndarray): 2d array of size `(N,d)` as input data for evaluation. Can also be a single sample as input.</span>
+<span class="sd">            data_variance (bool, optional): Whether to compute posterior-predictive (i.e. add data variance) or not.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: Values for predicted y-values, standard deviation, covariance, and variance of predictions (if applicable) as np.ndarrays.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># If single output (scalar-valued function), standard deviation and variance are calculated,</span>
+        <span class="c1"># but not covariance.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">outdim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">y_eval</span><span class="p">,</span> <span class="n">y_eval_var</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lreg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_eval</span><span class="p">,</span> <span class="n">msc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">pp</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;data_variance&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">))</span>
+            <span class="n">y_eval_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">y_eval_var</span><span class="p">)</span>
+            <span class="n">y_eval_cov</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># If multiple outputs (vector-valued function), all three are calculated.</span>
+        <span class="k">else</span><span class="p">:</span> 
+            <span class="n">y_eval</span><span class="p">,</span> <span class="n">y_eval_var</span><span class="p">,</span> <span class="n">y_eval_cov</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lreg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_eval</span><span class="p">,</span> <span class="n">msc</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">y_eval_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">y_eval_cov</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">regression_method</span> <span class="o">==</span> <span class="s1">&#39;lsq&#39;</span><span class="p">:</span>
+            <span class="n">y_eval_std</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">y_eval_var</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">y_eval_cov</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Output dictionary</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;Y_eval&#39;</span><span class="p">:</span> <span class="n">y_eval</span><span class="p">,</span>
+            <span class="s1">&#39;Y_eval_std&#39;</span><span class="p">:</span> <span class="n">y_eval_std</span><span class="p">,</span> 
+            <span class="s1">&#39;Y_eval_cov&#39;</span><span class="p">:</span> <span class="n">y_eval_cov</span><span class="p">,</span> 
+            <span class="s1">&#39;Y_eval_var&#39;</span><span class="p">:</span> <span class="n">y_eval_var</span><span class="p">,</span> 
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">results</span></div>
+</div>
+
+    
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

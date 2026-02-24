@@ -1,0 +1,740 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytuq.minf.infer &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">Software Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/index.html#surrogates">Surrogates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_pce.html">Polynomial Chaos Expansion Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../autoapi/index.html">Section Navigation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../autoapi/pytuq/index.html">pytuq</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/pytuq/index.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/ftools/index.html">pytuq.ftools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/func/index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/minf/index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/rv/index.html">pytuq.rv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/surrogates/index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/utils/index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pytuq.minf.infer</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pytuq.minf.infer</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="sd">&quot;&quot;&quot;Inference module including embedded model error.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">..rv.pcrv</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCRV</span><span class="p">,</span> <span class="n">PCRV_iid</span><span class="p">,</span> <span class="n">PCRV_mvn</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..utils.xutils</span><span class="w"> </span><span class="kn">import</span> <span class="n">idt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..utils.mindex</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_mi</span>
+
+<div class="viewcode-block" id="Infer">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/infer/index.html#pytuq.minf.infer.Infer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Infer</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Inference class holding all necessary information of model parameter inference problem.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        chainInit (np.ndarray): An array of size `p`, the initial condition of the MCMC.</span>
+<span class="sd">        chdim (int): Dimensionality of chain `p`.</span>
+<span class="sd">        chind (list): List of pairs (parameter index, coefficient index) for chain elements.</span>
+<span class="sd">        datavar (np.ndarray): Data variance in the inference problem, an array of size `N`.</span>
+<span class="sd">        dvparams (list or tuple): Parameter list relevant to data variance computation.</span>
+<span class="sd">        dvtype (str): Data variance type. Options are &#39;var_fixed&#39;, &#39;std_infer&#39;, &#39;std_infer_log&#39;, &#39;std_prop_fixed&#39;, &#39;var_fromdata_fixed&#39;, &#39;log_var_fromdata_fixed&#39;, &#39;var_fromdata_infer&#39;, &#39;log_var_fromdata_infer&#39;, &#39;scale_var&#39;.</span>
+<span class="sd">        extrainferparams (int): Number of extra (hyper-)parameters to infer.</span>
+<span class="sd">        fixindnom (np.ndarray): An array of size `(K,2)`, where first column indicates indices of parameters that are fixed (i.e. not part of the inference), and the second column is their nominal, fixed values.</span>
+<span class="sd">        ind_calib (list): Model output indices that are used for calibration.</span>
+<span class="sd">        inpcrv (rv.mrv.PCRV): Input PC object.</span>
+<span class="sd">        inpdf_type (str): Embedded PDF type. Options are &#39;pci&#39; and &#39;pct&#39;.</span>
+<span class="sd">        Likelihood (likelihoods.Likelihood): Likelihood object.</span>
+<span class="sd">        md_transform (callable): Potentially, a transform to be applied to model and data before the likelihood computation starts.</span>
+<span class="sd">        model (callable): Model with signature `f(p, q)`, where `p` are model parameters of interest, and `q` are other helpful model parameters.</span>
+<span class="sd">        model_params (tuple or list): Model parameters `q`.</span>
+<span class="sd">        ndata (int): Number of data points (design locations) `N`.</span>
+<span class="sd">        neachs (list[int]): List of size `N` including the number of data samples per location.</span>
+<span class="sd">        nqd (int): Number of quadrature points per dimension required for the output PC evaluation.</span>
+<span class="sd">        outord (int): Order for the output PC in the likelihood computation.</span>
+<span class="sd">        pc_type (str): Embedded PC type. Can be &#39;LU&#39; or &#39;HG&#39;.</span>
+<span class="sd">        pcflat (list): List of flattened PC coefficients. The ones to be inferred are None, to be populated in prior and likelihood computation.</span>
+<span class="sd">        Prior (priors.Prior): Prior object.</span>
+<span class="sd">        prior_is_set (bool): Boolean flag indicating that the prior is set.</span>
+<span class="sd">        verbose (int): Verbosity level.</span>
+<span class="sd">        ydata (list[np.ndarray]): List of `N` 1d arrays corresponding to data for each design location.</span>
+<span class="sd">        ydata_var (np.ndarray): An array of size `N` holding data variance for each data location.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Instantiation of an inference object.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            verbose (int, optional): Verbosity level.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Infer.extrainferparams">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/infer/index.html#pytuq.minf.infer.Infer.extrainferparams">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">extrainferparams</span> <span class="o">=</span> <span class="mi">0</span></div>
+
+<div class="viewcode-block" id="Infer.verbose">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/infer/index.html#pytuq.minf.infer.Infer.verbose">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span></div>
+
+
+<div class="viewcode-block" id="Infer.data_is_set">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/infer/index.html#pytuq.minf.infer.Infer.data_is_set">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_is_set</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="Infer.datavar_is_set">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/infer/index.html#pytuq.minf.infer.Infer.datavar_is_set">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">datavar_is_set</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="Infer.model_is_set">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/infer/index.html#pytuq.minf.infer.Infer.model_is_set">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_is_set</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="Infer.modelinput_is_set">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/infer/index.html#pytuq.minf.infer.Infer.modelinput_is_set">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">modelinput_is_set</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="Infer.modeloutput_is_set">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/infer/index.html#pytuq.minf.infer.Infer.modeloutput_is_set">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">modeloutput_is_set</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="Infer.prior_is_set">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/infer/index.html#pytuq.minf.infer.Infer.prior_is_set">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prior_is_set</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="Infer.lik_is_set">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/infer/index.html#pytuq.minf.infer.Infer.lik_is_set">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lik_is_set</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+
+
+
+<div class="viewcode-block" id="Infer.setData">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/infer/index.html#pytuq.minf.infer.Infer.setData">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ydata</span><span class="p">,</span> <span class="n">datamode</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the data.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ydata (list or np.ndarray): List of `N` 1d arrays corresponding to data for each design location, or a 2d array of size `(N,e)`, or an 1d array of size `N`.</span>
+<span class="sd">            datamode (str, optional): If &#39;mean&#39;, work with data means per location.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ydata</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ydata</span> <span class="o">=</span> <span class="n">ydata</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ydata</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ydata</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ydata</span> <span class="o">=</span> <span class="p">[</span><span class="n">ydata</span><span class="p">[</span><span class="n">j</span><span class="p">,:]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ydata</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
+            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">ydata</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ydata</span> <span class="o">=</span> <span class="p">[[</span><span class="n">ydata</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ydata</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ydata has a wrong shape </span><span class="si">{</span><span class="n">ydata</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">. Exiting.&quot;</span><span class="p">)</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ydata has a wrong type </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">ydata</span><span class="p">)</span><span class="si">}</span><span class="s2">. </span><span class="se">\</span>
+<span class="s2">                  Can be a list or an array. Exiting.&quot;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ndata</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ydata</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ydata_var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">ndata</span><span class="p">,))</span>
+
+        <span class="k">if</span> <span class="n">datamode</span> <span class="o">==</span> <span class="s1">&#39;mean&#39;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Taking data mean as data.&quot;</span><span class="p">)</span>
+            <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getDataStats</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ydata</span> <span class="o">=</span> <span class="nb">list</span><span class="p">([[</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">a</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ydata_var</span> <span class="o">=</span> <span class="n">b</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">neachs</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">yy</span><span class="p">)</span> <span class="k">for</span> <span class="n">yy</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ydata</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Set: Number of data  points : </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">ndata</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_is_set</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="Infer.getDataStats">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/infer/index.html#pytuq.minf.infer.Infer.getDataStats">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">getDataStats</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the first two moments of the data set.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple: Mean and variance arrays of length `N`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ydata_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">yy</span><span class="p">)</span> <span class="k">for</span> <span class="n">yy</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ydata</span><span class="p">])</span>
+        <span class="n">ydata_var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">yy</span><span class="p">)</span> <span class="k">for</span> <span class="n">yy</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ydata</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">ydata_mean</span><span class="p">,</span> <span class="n">ydata_var</span></div>
+
+
+<div class="viewcode-block" id="Infer.setDataVar">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/infer/index.html#pytuq.minf.infer.Infer.setDataVar">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setDataVar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dvtype</span><span class="p">,</span> <span class="n">dvparams</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set data variance for the inference.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dvtype (str): Data variance type. Options are &#39;var_fixed&#39;, &#39;std_infer&#39;, &#39;std_infer_log&#39;, &#39;std_prop_fixed&#39;, &#39;var_fromdata_fixed&#39;, &#39;log_var_fromdata_fixed&#39;, &#39;var_fromdata_infer&#39;, &#39;log_var_fromdata_infer&#39;, &#39;scale_var&#39;.</span>
+<span class="sd">            dvparams (list or tuple): Parameter list relevant to data variance computation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_is_set</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">dvtype</span> <span class="o">=</span> <span class="n">dvtype</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dvparams</span> <span class="o">=</span> <span class="n">dvparams</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dvtype</span> <span class="o">==</span> <span class="s1">&#39;var_fixed&#39;</span><span class="p">:</span>
+            <span class="n">datavar</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dvparams</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">datavar</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">datavar</span> <span class="o">=</span> <span class="n">datavar</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">datavar</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">datavar</span><span class="o">=</span><span class="n">datavar</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ndata</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">datavar</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">datavar</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">datavar</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;XError: datavar type not recognized. Exiting&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">datavar</span><span class="p">))</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">dvtype</span> <span class="o">==</span> <span class="s1">&#39;std_infer&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">extrainferparams</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">dvtype</span> <span class="o">==</span> <span class="s1">&#39;std_infer_log&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">extrainferparams</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">dvtype</span> <span class="o">==</span> <span class="s1">&#39;std_prop_fixed&#39;</span><span class="p">:</span>
+            <span class="n">stdfactor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dvparams</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">datastd</span> <span class="o">=</span> <span class="n">stdfactor</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">yy</span><span class="p">)</span> <span class="k">for</span> <span class="n">yy</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ydata</span><span class="p">]))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">datavar</span> <span class="o">=</span> <span class="n">datastd</span><span class="o">**</span><span class="mi">2</span>
+
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">dvtype</span> <span class="o">==</span> <span class="s1">&#39;var_fromdata_fixed&#39;</span><span class="p">:</span>
+            <span class="n">varfactor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dvparams</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">datavar</span> <span class="o">=</span> <span class="n">varfactor</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">yy</span><span class="p">)</span> <span class="k">for</span> <span class="n">yy</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ydata</span><span class="p">]))</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">dvtype</span> <span class="o">==</span> <span class="s1">&#39;log_var_fromdata_fixed&#39;</span><span class="p">:</span>
+            <span class="n">varfactor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dvparams</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">datavar</span> <span class="o">=</span> <span class="n">varfactor</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">yy</span><span class="p">))</span> <span class="k">for</span> <span class="n">yy</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ydata</span><span class="p">]))</span>
+
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">dvtype</span> <span class="o">==</span> <span class="s1">&#39;var_fromdata_infer&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">extrainferparams</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">dvtype</span> <span class="o">==</span> <span class="s1">&#39;log_var_fromdata_infer&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">extrainferparams</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">dvtype</span> <span class="o">==</span> <span class="s1">&#39;scale_var&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">datavar</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dvparams</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">extrainferparams</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: data variance type </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dvtype</span><span class="si">}</span><span class="s2"> is unknown. Exiting.&quot;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Set: Data variance type : </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dvtype</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="c1"># Need to make this more informative</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">datavar_is_set</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+
+
+<div class="viewcode-block" id="Infer.setModelRVoutput">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/infer/index.html#pytuq.minf.infer.Infer.setModelRVoutput">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setModelRVoutput</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outord</span><span class="p">,</span> <span class="n">nqd</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the model output PC settings.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            outord (int): Order for the output PC in the likelihood computation.</span>
+<span class="sd">            nqd (int, optional): Number of quadrature points per dimension required for the output PC evaluation. If None, sets to 2*outord+1.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outord</span> <span class="o">=</span> <span class="n">outord</span>
+        <span class="k">if</span> <span class="n">nqd</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nqd</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">outord</span><span class="o">+</span><span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nqd</span> <span class="o">=</span> <span class="n">nqd</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Set: Order of embedded output PC : </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">outord</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Set: Number of quadrature points for embedded output PC : </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">nqd</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">modeloutput_is_set</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="Infer.setModelRVinput">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/infer/index.html#pytuq.minf.infer.Infer.setModelRVinput">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setModelRVinput</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inpdf_type</span><span class="p">,</span> <span class="n">pc_type</span><span class="p">,</span> <span class="n">pdim</span><span class="p">,</span> <span class="n">rndind</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the model input parameters PC.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            inpdf_type (str): Embedded PDF type. Options are &#39;pci&#39; and &#39;pct&#39;.</span>
+<span class="sd">            pc_type (str): Embedded PC type. Can be &#39;LU&#39; or &#39;HG&#39;.</span>
+<span class="sd">            pdim (int): Parameter dimensionality, i.e. number of model parameters.</span>
+<span class="sd">            rndind (list[ind]): List of indices of parameters to be embedded. If None, embeds in all parameters.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inpdf_type</span> <span class="o">=</span> <span class="n">inpdf_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pc_type</span> <span class="o">=</span> <span class="n">pc_type</span>
+
+        <span class="k">if</span> <span class="n">rndind</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">rndind</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">pdim</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">rndind</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+            <span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rndind</span><span class="p">)</span><span class="o">==</span><span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">rndind</span><span class="p">)))</span>
+            <span class="k">assert</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">rndind</span><span class="p">)</span><span class="o">&lt;</span><span class="n">pdim</span><span class="p">)</span>
+            <span class="k">assert</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">rndind</span><span class="p">)</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
+            <span class="k">assert</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">rndind</span><span class="p">)</span><span class="o">&lt;</span><span class="n">pdim</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
+            <span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rndind</span><span class="p">)</span><span class="o">&lt;=</span><span class="n">pdim</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">inpdf_type</span><span class="o">==</span><span class="s1">&#39;pci&#39;</span><span class="p">:</span>
+            <span class="n">orders</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">pdim</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+            <span class="n">orders</span><span class="p">[</span><span class="n">rndind</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">inpcrv</span> <span class="o">=</span> <span class="n">PCRV_iid</span><span class="p">(</span><span class="n">pdim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pc_type</span><span class="p">,</span> <span class="n">orders</span><span class="o">=</span><span class="n">orders</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">inpdf_type</span><span class="o">==</span><span class="s1">&#39;pct&#39;</span><span class="p">:</span>
+            <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pc_type</span><span class="o">==</span><span class="s1">&#39;HG&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">inpcrv</span> <span class="o">=</span> <span class="n">PCRV_mvn</span><span class="p">(</span><span class="n">pdim</span><span class="p">,</span> <span class="n">rndind</span><span class="o">=</span><span class="n">rndind</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Input PDF type </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">inpdf_type</span><span class="si">}</span><span class="s2"> is unknown&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Set: Embedded PC type : </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pc_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Set: Embedding type : </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">inpdf_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Set: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">inpcrv</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">modelinput_is_set</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+
+
+<div class="viewcode-block" id="Infer.setModel">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/infer/index.html#pytuq.minf.infer.Infer.setModel">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setModel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">model_params</span><span class="p">,</span> <span class="n">md_transform</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fixindnom</span><span class="o">=</span><span class="p">[],</span> <span class="n">ind_calib</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the model evaluation necessities.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            model (callable): Model with signature `f(p, q)`, where `p` are model parameters of interest, and `q` are other helpful model parameters.</span>
+<span class="sd">            model_params (tuple or list): Model parameters `q`.</span>
+<span class="sd">            md_transform (callable, optional): Potentially, a transform to be applied to model and data before the likelihood computation starts. Default is None, i.e. identity function.</span>
+<span class="sd">            fixindnom (list, optional): An array of size `(K,2)`, where first column indicates indices of parameters that are fixed (i.e. not part of the inference), and the second column is their nominal, fixed values. Defaults to an empty list, i.e. all parameters are inferred, none are fixed.</span>
+<span class="sd">            ind_calib (list, optional): Model output indices that are used for calibration. Default is None, i.e. all outputs being used for calibration.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_is_set</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_params</span> <span class="o">=</span> <span class="n">model_params</span>
+        <span class="k">if</span> <span class="n">md_transform</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">md_transform</span> <span class="o">=</span> <span class="n">idt</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">md_transform</span> <span class="o">=</span> <span class="n">md_transform</span>
+
+        <span class="n">ff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">fixindnom</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">fixindnom</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fixindnom</span> <span class="o">=</span> <span class="n">ff</span><span class="p">[</span><span class="n">ff</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">argsort</span><span class="p">()]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fixindnom</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fixindnom</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]))</span><span class="o">==</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fixindnom</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]),</span> <span class="s2">&quot;Fixindnom has duplicates&quot;</span>
+        <span class="k">assert</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fixindnom</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">(),</span> <span class="s2">&quot;Fixindnom indices have to be non-negative.&quot;</span>
+
+        <span class="k">if</span> <span class="n">ind_calib</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ind_calib</span> <span class="o">=</span> <span class="n">ind_calib</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ind_calib</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ndata</span><span class="p">)</span>
+
+        <span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ind_calib</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">ndata</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Set: Calibrating outputs : </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">ind_calib</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">fixind</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fixindnom</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Set: Fixing Parameter </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">fixind</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="si">}</span><span class="s2"> at value </span><span class="si">{</span><span class="n">fixind</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_is_set</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="Infer.setChain">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/infer/index.html#pytuq.minf.infer.Infer.setChain">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setChain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">default_init</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Setting the necessities for the chain.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            default_init (float, optional): Default value for initialization of all chain dimensions. It is used for non-constant PC coefficients, and for constant terms if domain is not given. Defaults to. 0.1.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prior_is_set</span><span class="p">)</span>
+        <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_is_set</span><span class="p">)</span>
+        <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">datavar_is_set</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">chainInit</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pcflat</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">chind</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">suffix</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">pind</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">inpcrv</span><span class="o">.</span><span class="n">pind</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">pind</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">pind</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fixindnom</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">chainInit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Prior</span><span class="o">.</span><span class="n">mean</span><span class="p">[</span><span class="n">pind</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">pcflat</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">chind</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pind</span><span class="p">)</span>
+                    <span class="n">suffix</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">pcflat</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fixindnom</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fixindnom</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="n">pind</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="n">suffix</span> <span class="o">=</span> <span class="s2">&quot;: fixed&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">chainInit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">default_init</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">pcflat</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">chind</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pind</span><span class="p">)</span>
+                <span class="n">suffix</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;     Parameter </span><span class="si">{</span><span class="n">pind</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">, PC coef </span><span class="si">{</span><span class="n">pind</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">suffix</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">extrainferparams</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">chainInit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">default_init</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;     Data variance parameter </span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">chainInit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">chainInit</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">chdim</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">chainInit</span><span class="p">)</span>
+        <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">chdim</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span>
+
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Set: Initial chain value : </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">chainInit</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Set: Chain dimensionality : </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">chdim</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">chain_is_set</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="Infer.setLikelihood">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/infer/index.html#pytuq.minf.infer.Infer.setLikelihood">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setLikelihood</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">likelihood</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Setting the likelihood object.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            likelihood (likelihoods.Likelihood): Likelihood object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Likelihood</span> <span class="o">=</span> <span class="n">likelihood</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Set: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">Likelihood</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">lik_is_set</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="Infer.setPrior">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/infer/index.html#pytuq.minf.infer.Infer.setPrior">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setPrior</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prior</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Setting the prior object.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            prior (priors.Prior): Prior object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Prior</span> <span class="o">=</span> <span class="n">prior</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Set: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">Prior</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">prior_is_set</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="Infer.evalLogPost">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/infer/index.html#pytuq.minf.infer.Infer.evalLogPost">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">evalLogPost</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pp</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluating log-posterior.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            pp (np.ndarray): Input array of the size `p`, the dimensionality of the chain.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: Value of the log-posterior.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prior_is_set</span><span class="p">)</span>
+        <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lik_is_set</span><span class="p">)</span>
+
+        <span class="n">logprior</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Prior</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">pp</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">logprior</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mf">1.e+79</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">logprior</span>
+
+        <span class="n">loglik</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Likelihood</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">pp</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">logprior</span> <span class="o">+</span> <span class="n">loglik</span></div>
+
+
+<div class="viewcode-block" id="Infer.getIOSamples">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/infer/index.html#pytuq.minf.infer.Infer.getIOSamples">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">getIOSamples</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pp</span><span class="p">,</span> <span class="n">nxi</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">fmode</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get input and output samples.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            pp (np.ndarray): Input array of the size `p`, the dimensionality of the chain.</span>
+<span class="sd">            nxi (int or np.ndarray, optional): Number of samples requested. It can be integer number of samples, or a presampled array. Defaults to 1.</span>
+<span class="sd">            fmode (tuple, optional): Mode of evaluation a tuple of [model, model_parameters, index of calibrated outputs, final transform]. Defaults to None, which means get this objects internal model features.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple[np.ndarray]: Tuple of two arrays, one for input samples and one for the output samples.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">psample</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getInSamples</span><span class="p">(</span><span class="n">pp</span><span class="p">,</span> <span class="n">nxi</span><span class="o">=</span><span class="n">nxi</span><span class="p">)</span>
+        <span class="n">fsample</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getOutSamples</span><span class="p">(</span><span class="n">psample</span><span class="p">,</span> <span class="n">fmode</span><span class="o">=</span><span class="n">fmode</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">psample</span><span class="p">,</span> <span class="n">fsample</span></div>
+
+
+<div class="viewcode-block" id="Infer.getInSamples">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/infer/index.html#pytuq.minf.infer.Infer.getInSamples">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">getInSamples</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pp</span><span class="p">,</span> <span class="n">nxi</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get input parameter samples.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            pp (np.ndarray): Input array of the size `p`, the dimensionality of the chain.</span>
+<span class="sd">            nxi (int or np.ndarray, optional): Number of samples requested. It can be integer number of samples, or a presampled array. Defaults to 1.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: Array of parameter samples.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">chain_is_set</span><span class="p">)</span>
+        <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modelinput_is_set</span><span class="p">)</span>
+
+        <span class="n">pcf_flat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pcflat</span><span class="p">)</span>
+        <span class="n">pcf_flat</span><span class="p">[</span><span class="n">pcf_flat</span><span class="o">==</span><span class="kc">None</span><span class="p">]</span><span class="o">=</span><span class="n">pp</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">pp</span><span class="p">)</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">extrainferparams</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inpcrv</span><span class="o">.</span><span class="n">cfsUnflatten</span><span class="p">(</span><span class="n">pcf_flat</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">nxi</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">psample</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inpcrv</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">nxi</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">psample</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inpcrv</span><span class="o">.</span><span class="n">evalPC</span><span class="p">(</span><span class="n">nxi</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">psample</span></div>
+
+
+<div class="viewcode-block" id="Infer.getOutSamples">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/infer/index.html#pytuq.minf.infer.Infer.getOutSamples">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">getOutSamples</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">psample</span><span class="p">,</span> <span class="n">fmode</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get model output parameter samples.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            psample (np.ndarray): Input parameter array.</span>
+<span class="sd">            fmode (tuple, optional): Mode of evaluation a tuple of [model, model_parameters, index of calibrated outputs, final transform]. Defaults to None, which means get this objects internal model features.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: Array of model output samples.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_is_set</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">fmode</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span>
+            <span class="n">model_params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_params</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ind_calib</span>
+            <span class="n">md_transform</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">md_transform</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">model</span><span class="p">,</span> <span class="n">model_params</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">md_transform</span> <span class="o">=</span> <span class="n">fmode</span>
+            <span class="k">if</span> <span class="n">md_transform</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">md_transform</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">md_transform</span>
+
+        <span class="n">fsample</span> <span class="o">=</span> <span class="n">md_transform</span><span class="p">(</span><span class="n">model</span><span class="p">(</span><span class="n">psample</span><span class="p">,</span> <span class="n">model_params</span><span class="p">))[:,</span> <span class="n">idx</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">fsample</span></div>
+
+
+<div class="viewcode-block" id="Infer.getModelMoments_NISP">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/infer/index.html#pytuq.minf.infer.Infer.getModelMoments_NISP">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">getModelMoments_NISP</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pp</span><span class="p">,</span> <span class="n">fmode</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get model output moments using non-intrusive spectral projection.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            pp (np.ndarray): Input array of the size `p`, the dimensionality of the chain.</span>
+<span class="sd">            fmode (tuple, optional): Mode of evaluation a tuple of [model, model_parameters, index of calibrated outputs, final transform]. Defaults to None, which means get this objects internal model features.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple: Tuple of two elements, means and variances of model outputs.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_is_set</span><span class="p">)</span>
+        <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modelinput_is_set</span><span class="p">)</span>
+        <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modeloutput_is_set</span><span class="p">)</span>
+        <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">chain_is_set</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">fmode</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ind_calib</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">fmode</span>
+
+
+        <span class="n">mindex</span> <span class="o">=</span> <span class="n">get_mi</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outord</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">inpcrv</span><span class="o">.</span><span class="n">sdim</span><span class="p">)</span>
+        <span class="n">outpc</span> <span class="o">=</span> <span class="n">PCRV</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">idx</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">inpcrv</span><span class="o">.</span><span class="n">sdim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pc_type</span><span class="p">,</span> <span class="n">mi</span><span class="o">=</span><span class="n">mindex</span><span class="p">)</span>
+
+        <span class="n">xx</span><span class="p">,</span> <span class="n">ww</span> <span class="o">=</span> <span class="n">outpc</span><span class="o">.</span><span class="n">quadGerm</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">nqd</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">inpcrv</span><span class="o">.</span><span class="n">sdim</span><span class="p">)</span>
+
+        <span class="n">model_input</span><span class="p">,</span> <span class="n">yy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getIOSamples</span><span class="p">(</span><span class="n">pp</span><span class="p">,</span> <span class="n">nxi</span><span class="o">=</span><span class="n">xx</span><span class="p">,</span> <span class="n">fmode</span><span class="o">=</span><span class="n">fmode</span><span class="p">)</span>
+
+        <span class="n">cfs_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">iout</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">yy</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="n">outnorms</span> <span class="o">=</span> <span class="n">outpc</span><span class="o">.</span><span class="n">evalBasesNormsSq</span><span class="p">(</span><span class="n">iout</span><span class="p">)</span>
+            <span class="n">Amat</span> <span class="o">=</span> <span class="n">outpc</span><span class="o">.</span><span class="n">evalBases</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">iout</span><span class="p">)</span>
+            <span class="n">cfs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Amat</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">ww</span> <span class="o">*</span> <span class="n">yy</span><span class="p">[:,</span> <span class="n">iout</span><span class="p">])</span> <span class="o">/</span> <span class="n">outnorms</span>
+            <span class="n">cfs_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cfs</span><span class="p">)</span>
+        <span class="n">outpc</span><span class="o">.</span><span class="n">setCfs</span><span class="p">(</span><span class="n">cfs_list</span><span class="p">)</span>
+        <span class="n">means</span> <span class="o">=</span> <span class="n">outpc</span><span class="o">.</span><span class="n">computeMean</span><span class="p">()</span>
+        <span class="n">variances</span> <span class="o">=</span> <span class="n">outpc</span><span class="o">.</span><span class="n">computeVar</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">means</span><span class="p">,</span> <span class="n">variances</span></div>
+
+
+
+<div class="viewcode-block" id="Infer.getDataVar">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/infer/index.html#pytuq.minf.infer.Infer.getDataVar">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">getDataVar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pp</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get data variance depending on the model of data variance treatment.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            pp (np.ndarray): Input array of the size `p`, the dimensionality of the chain.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: An array of size `N` for data variance per data location.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">datavar_is_set</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dvtype</span> <span class="o">==</span> <span class="s1">&#39;std_infer&#39;</span><span class="p">:</span>
+            <span class="n">datavar</span> <span class="o">=</span> <span class="p">(</span> <span class="n">pp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ndata</span><span class="p">,)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">dvtype</span> <span class="o">==</span> <span class="s1">&#39;std_infer_log&#39;</span><span class="p">:</span>
+            <span class="n">datavar</span> <span class="o">=</span> <span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">pp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span> <span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ndata</span><span class="p">,)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">dvtype</span> <span class="o">==</span> <span class="s1">&#39;var_fromdata_infer&#39;</span><span class="p">:</span>
+            <span class="n">datavar</span> <span class="o">=</span>  <span class="n">pp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">yy</span><span class="p">)</span> <span class="k">for</span> <span class="n">yy</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ydata</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">dvtype</span> <span class="o">==</span> <span class="s1">&#39;log_var_fromdata_infer&#39;</span><span class="p">:</span>
+            <span class="n">datavar</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">pp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>  <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">yy</span><span class="p">))</span> <span class="k">for</span> <span class="n">yy</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ydata</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">dvtype</span> <span class="o">==</span> <span class="s1">&#39;scale_var&#39;</span><span class="p">:</span>
+            <span class="n">datavar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">pp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">datavar</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">datavar</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">datavar</span>
+
+        <span class="k">return</span> <span class="n">datavar</span></div>
+</div>
+
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

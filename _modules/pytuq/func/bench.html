@@ -1,0 +1,624 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytuq.func.bench &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">Software Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/index.html#surrogates">Surrogates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_pce.html">Polynomial Chaos Expansion Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../autoapi/index.html">Section Navigation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../autoapi/pytuq/index.html">pytuq</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/pytuq/index.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/ftools/index.html">pytuq.ftools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/func/index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/minf/index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/rv/index.html">pytuq.rv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/surrogates/index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/utils/index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pytuq.func.bench</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pytuq.func.bench</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Benchmark functions module that are not 1d, 2d, or Nd.</span>
+
+<span class="sd">Most of the functions are taken from https://github.com/Vahanosi4ek/pytuq_funcs that autogenerates the codes given function&#39;s latex strings.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">multivariate_normal</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.func</span><span class="w"> </span><span class="kn">import</span> <span class="n">Function</span>
+
+
+<span class="c1">################################################################################</span>
+<span class="c1">################################################################################</span>
+<span class="c1">################################################################################</span>
+
+
+<div class="viewcode-block" id="Ishigami">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.Ishigami">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Ishigami</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Ishigami function</span>
+
+<span class="sd">    Reference: [https://www.sfu.ca/~ssurjano/ishigami.html]</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        f(x) = \sin(x_1) + a \sin^2(x_2) + b x_3^4 \sin(x_1)</span>
+
+<span class="sd">    Default constant values are :math:`a = 7` and :math:`b = 0.1`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Ishigami&#39;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+<div class="viewcode-block" id="Ishigami.name">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.Ishigami.name">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span></div>
+
+<div class="viewcode-block" id="Ishigami.dim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.Ishigami.dim">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">=</span> <span class="mi">3</span></div>
+
+<div class="viewcode-block" id="Ishigami.outdim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.Ishigami.outdim">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outdim</span> <span class="o">=</span> <span class="mi">1</span></div>
+
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setDimDom</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">]))</span>
+<div class="viewcode-block" id="Ishigami.a">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.Ishigami.a">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">7</span></div>
+
+<div class="viewcode-block" id="Ishigami.b">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.Ishigami.b">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="mf">0.1</span></div>
+
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">sam</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">checkDim</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="n">ydata</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">sam</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">outdim</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sam</span><span class="p">):</span>
+            <span class="n">ydata</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">**</span><span class="mi">4</span>
+
+        <span class="k">return</span> <span class="n">ydata</span>
+
+<div class="viewcode-block" id="Ishigami.grad">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.Ishigami.grad">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">grad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">grad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">outdim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">))</span>
+
+        <span class="n">grad</span><span class="p">[:,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span><span class="o">**</span><span class="mi">4</span>
+        <span class="n">grad</span><span class="p">[:,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">2.</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">grad</span><span class="p">[:,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mf">4.</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span><span class="o">**</span><span class="mi">3</span>
+
+        <span class="k">return</span> <span class="n">grad</span></div>
+</div>
+
+
+
+<span class="c1">################################################################################</span>
+<span class="c1">################################################################################</span>
+<span class="c1">################################################################################</span>
+
+
+<div class="viewcode-block" id="Wolfe">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.Wolfe">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Wolfe</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Wolfe function</span>
+
+<span class="sd">    Reference: [https://infinity77.net/global_optimization/test_functions_nd_W.html#go_benchmark.Wolfe]</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        f(x)=c_1(x_1^2 + x_2^2 - x_1x_2)^{c_2} + x_3</span>
+
+
+<span class="sd">    Default constant values are :math:`c = (4/3, 0.75)`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c1</span><span class="o">=</span><span class="mf">4.</span><span class="o">/</span><span class="mf">3.</span><span class="p">,</span> <span class="n">c2</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Wolfe&quot;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">c1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c2</span> <span class="o">=</span> <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span>
+<div class="viewcode-block" id="Wolfe.dim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.Wolfe.dim">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">=</span> <span class="mi">3</span></div>
+
+<div class="viewcode-block" id="Wolfe.outdim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.Wolfe.outdim">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outdim</span> <span class="o">=</span> <span class="mi">1</span></div>
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setDimDom</span><span class="p">(</span><span class="n">domain</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">c1</span><span class="o">*</span><span class="p">((</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]))</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">c2</span><span class="p">)</span><span class="o">+</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Wolfe.grad">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.Wolfe.grad">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">grad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">grad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">outdim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">))</span>
+        <span class="n">grad</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">c1</span><span class="o">*</span><span class="p">(((</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]))</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">c2</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c2</span><span class="o">*</span><span class="p">((</span><span class="mi">1</span><span class="o">/</span><span class="p">((</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])))</span><span class="o">*</span><span class="p">((</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])))</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]))))</span>
+        <span class="n">grad</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">c1</span><span class="o">*</span><span class="p">(((</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]))</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">c2</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c2</span><span class="o">*</span><span class="p">((</span><span class="mi">1</span><span class="o">/</span><span class="p">((</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])))</span><span class="o">*</span><span class="p">((</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])))</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]))))</span>
+        <span class="n">grad</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="k">return</span> <span class="n">grad</span></div>
+</div>
+
+
+<span class="c1">################################################################################</span>
+<span class="c1">################################################################################</span>
+<span class="c1">################################################################################</span>
+
+<div class="viewcode-block" id="Colville">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.Colville">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Colville</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Colville function</span>
+
+<span class="sd">    Reference: [https://infinity77.net/global_optimization/test_functions_nd_C.html#go_benchmark.Colville]</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        f(x)=(x_1 - c_1)^{2} + c_2 (x_1^{2} - x_2)^{2} + c_3 (x_2 - c_4)^{2} + (x_3 - c_5)^{2} + c_6 (x_3^{2} - x_4)^{2} + c_7 (x_4 - c_8)^{2} + c_9 \frac{x_4 - c_{10}}{x_2}</span>
+
+
+<span class="sd">    Default constant values are :math:`c = (1.0, 100.0, 10.1, 1.0, 1.0, 90.0, 10.1, 1.0, 19.8, 1.0)`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c1</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">c2</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">c3</span><span class="o">=</span><span class="mf">10.1</span><span class="p">,</span> <span class="n">c4</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">c5</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">c6</span><span class="o">=</span><span class="mf">90.0</span><span class="p">,</span> <span class="n">c7</span><span class="o">=</span><span class="mf">10.1</span><span class="p">,</span> <span class="n">c8</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">c9</span><span class="o">=</span><span class="mf">19.8</span><span class="p">,</span> <span class="n">c10</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Colville&quot;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">c1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c3</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c4</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c5</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c6</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c7</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c8</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c9</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c10</span> <span class="o">=</span> <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">c3</span><span class="p">,</span> <span class="n">c4</span><span class="p">,</span> <span class="n">c5</span><span class="p">,</span> <span class="n">c6</span><span class="p">,</span> <span class="n">c7</span><span class="p">,</span> <span class="n">c8</span><span class="p">,</span> <span class="n">c9</span><span class="p">,</span> <span class="n">c10</span>
+<div class="viewcode-block" id="Colville.dim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.Colville.dim">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">=</span> <span class="mi">4</span></div>
+
+<div class="viewcode-block" id="Colville.outdim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.Colville.outdim">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outdim</span> <span class="o">=</span> <span class="mi">1</span></div>
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setDimDom</span><span class="p">(</span><span class="n">domain</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">]]))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">((</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">c1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">c2</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">c3</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">c4</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">c5</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">c6</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span><span class="o">**</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])</span><span class="o">**</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">c7</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">c8</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">c9</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">c10</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]))</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Colville.grad">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.Colville.grad">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">grad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">grad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">outdim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">))</span>
+        <span class="n">grad</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">2.0</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">c1</span><span class="p">)</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">c2</span><span class="o">*</span><span class="mf">2.0</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mf">2.0</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="mf">2.0</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">grad</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">2.0</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">c2</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mf">2.0</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span><span class="o">+</span><span class="mf">2.0</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">c3</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">c4</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c9</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">c10</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mf">2.0</span><span class="p">)</span>
+        <span class="n">grad</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mf">2.0</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">c5</span><span class="p">)</span><span class="o">+</span><span class="mf">2.0</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">c6</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span><span class="o">**</span><span class="mf">2.0</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])</span><span class="o">*</span><span class="mf">2.0</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span>
+        <span class="n">grad</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">2.0</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">c6</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span><span class="o">**</span><span class="mf">2.0</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">c7</span><span class="o">*</span><span class="mf">2.0</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">c8</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c9</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">grad</span></div>
+</div>
+
+
+
+
+<span class="c1">################################################################################</span>
+<span class="c1">################################################################################</span>
+<span class="c1">################################################################################</span>
+
+
+<div class="viewcode-block" id="MieleCantrell">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.MieleCantrell">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MieleCantrell</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    MieleCantrell function</span>
+
+<span class="sd">    Reference: [https://infinity77.net/global_optimization/test_functions_nd_M.html#go_benchmark.MieleCantrell]</span>
+
+<span class="sd">    A multimodal minimization function</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        f(x)=(e^{-x_1} - x_2)^4 + c_1(x_2 - x_3)^6 + \tan^4(x_3 - x_4) + x_1^8</span>
+
+
+<span class="sd">    Default constant values are :math:`c_1 = 100.0`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c1</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;MieleCantrell&quot;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+
+<div class="viewcode-block" id="MieleCantrell.c1">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.MieleCantrell.c1">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">c1</span> <span class="o">=</span> <span class="n">c1</span></div>
+
+<div class="viewcode-block" id="MieleCantrell.dim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.MieleCantrell.dim">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">=</span> <span class="mi">4</span></div>
+
+<div class="viewcode-block" id="MieleCantrell.outdim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.MieleCantrell.outdim">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outdim</span> <span class="o">=</span> <span class="mi">1</span></div>
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setDimDom</span><span class="p">(</span><span class="n">domain</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="mi">4</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">c1</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])</span><span class="o">**</span><span class="mi">6</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])</span><span class="o">**</span><span class="mi">4</span><span class="o">+</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">8</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<div class="viewcode-block" id="MieleCantrell.grad">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.MieleCantrell.grad">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">grad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">grad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">outdim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">))</span>
+        <span class="n">grad</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span> <span class="mf">4.0</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="mi">3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="mf">8.0</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">7</span>
+
+        <span class="n">grad</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span> <span class="mf">4.0</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="mi">3</span>  <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">c1</span><span class="o">*</span><span class="mi">6</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])</span><span class="o">**</span><span class="mi">5</span>
+
+        <span class="n">grad</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">c1</span><span class="o">*</span><span class="mf">6.0</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])</span><span class="o">**</span><span class="mi">5</span> <span class="o">+</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])</span><span class="o">**</span><span class="mi">3</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])</span><span class="o">**</span><span class="mi">5</span>
+
+        <span class="n">grad</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])</span><span class="o">**</span><span class="mi">3</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])</span><span class="o">**</span><span class="mi">5</span>
+
+        <span class="k">return</span> <span class="n">grad</span></div>
+</div>
+
+
+<span class="c1">################################################################################</span>
+<span class="c1">################################################################################</span>
+<span class="c1">################################################################################</span>
+
+<div class="viewcode-block" id="Powell">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.Powell">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Powell</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Powell function</span>
+
+<span class="sd">    Reference: [https://infinity77.net/global_optimization/test_functions_nd_P.html#go_benchmark.Powell]</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        f(x)=(x_3+c_1x_1)^2+c_2(x_2-x_4)^2+(x_1-c_3x_2)^4+c_4(x_3-x_4)^4</span>
+
+
+<span class="sd">    Default constant values are :math:`c = (10.0, 5.0, 2.0, 10.0)`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c1</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">c2</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">c3</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">c4</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Powell&quot;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">c1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c3</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c4</span> <span class="o">=</span> <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">c3</span><span class="p">,</span> <span class="n">c4</span>
+<div class="viewcode-block" id="Powell.dim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.Powell.dim">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">=</span> <span class="mi">4</span></div>
+
+<div class="viewcode-block" id="Powell.outdim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.Powell.outdim">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outdim</span> <span class="o">=</span> <span class="mi">1</span></div>
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setDimDom</span><span class="p">(</span><span class="n">domain</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]]))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">((((</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c1</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]))</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c2</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span><span class="o">+</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c3</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]))</span><span class="o">**</span><span class="mi">4</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c4</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])</span><span class="o">**</span><span class="mi">4</span><span class="p">))</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Powell.grad">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.Powell.grad">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">grad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">grad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">outdim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">))</span>
+        <span class="n">grad</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c1</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]))</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">((</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c1</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])))</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">c1</span><span class="p">)))</span><span class="o">+</span><span class="p">((</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c3</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]))</span><span class="o">**</span><span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c3</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])))))</span>
+        <span class="n">grad</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c2</span><span class="o">*</span><span class="p">((</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])))))</span><span class="o">+</span><span class="p">((</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c3</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]))</span><span class="o">**</span><span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="p">((</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c3</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])))</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">c3</span><span class="p">))))</span>
+        <span class="n">grad</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c1</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]))</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c1</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])))))</span><span class="o">+</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c4</span><span class="o">*</span><span class="p">((</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])</span><span class="o">**</span><span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])))))</span>
+        <span class="n">grad</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c2</span><span class="o">*</span><span class="p">((</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]))))))</span><span class="o">+</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c4</span><span class="o">*</span><span class="p">((</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])</span><span class="o">**</span><span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]))))))</span>
+
+        <span class="k">return</span> <span class="n">grad</span></div>
+</div>
+
+
+
+<span class="c1">################################################################################</span>
+<span class="c1">################################################################################</span>
+<span class="c1">################################################################################</span>
+
+<div class="viewcode-block" id="Dolan">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.Dolan">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Dolan</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dolan function</span>
+
+<span class="sd">    Reference: [https://infinity77.net/global_optimization/test_functions_nd_D.html#go_benchmark.Dolan]</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        f(x)=|(x_1 + c_1x_2)\sin(x_1) - c_2x_3 - c_3x_4\cos(x_5 + x_5 - x_1) + c_4x_5^2 - x_2 - c_5|</span>
+
+
+<span class="sd">    Default constant values are :math:`c = (1.7, 1.5, 0.1, 0.2, 1)`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c1</span><span class="o">=</span><span class="mf">1.7</span><span class="p">,</span> <span class="n">c2</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">c3</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">c4</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">c5</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Dolan&quot;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">c1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c3</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c4</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c5</span> <span class="o">=</span> <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">c3</span><span class="p">,</span> <span class="n">c4</span><span class="p">,</span> <span class="n">c5</span>
+<div class="viewcode-block" id="Dolan.dim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.Dolan.dim">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">=</span> <span class="mi">5</span></div>
+
+<div class="viewcode-block" id="Dolan.outdim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.Dolan.outdim">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outdim</span> <span class="o">=</span> <span class="mi">1</span></div>
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setDimDom</span><span class="p">(</span><span class="n">domain</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">]]))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(((((((</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c1</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]))</span><span class="o">-</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c2</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]))</span><span class="o">-</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">c3</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">((</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span><span class="o">+</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">])</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])))</span><span class="o">+</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c4</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">c5</span><span class="p">))</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Dolan.grad">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.Dolan.grad">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">grad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">grad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">outdim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">))</span>
+        <span class="n">grad</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(((((((</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c1</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]))</span><span class="o">-</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c2</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]))</span><span class="o">-</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">c3</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">((</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span><span class="o">+</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">])</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])))</span><span class="o">+</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c4</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">c5</span><span class="p">)</span><span class="o">*</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="p">((</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c1</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])))</span><span class="o">-</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">c3</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">((</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span><span class="o">+</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">])</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])))))</span>
+        <span class="n">grad</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(((((((</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c1</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]))</span><span class="o">-</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c2</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]))</span><span class="o">-</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">c3</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">((</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span><span class="o">+</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">])</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])))</span><span class="o">+</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c4</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">c5</span><span class="p">)</span><span class="o">*</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">c1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]))</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">grad</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(((((((</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c1</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]))</span><span class="o">-</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c2</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]))</span><span class="o">-</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">c3</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">((</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span><span class="o">+</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">])</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])))</span><span class="o">+</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c4</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">c5</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">c2</span><span class="p">)</span>
+        <span class="n">grad</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(((((((</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c1</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]))</span><span class="o">-</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c2</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]))</span><span class="o">-</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">c3</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">((</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span><span class="o">+</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">])</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])))</span><span class="o">+</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c4</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">c5</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">((</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span><span class="o">+</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">])</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])))</span>
+        <span class="n">grad</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(((((((</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c1</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]))</span><span class="o">-</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c2</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]))</span><span class="o">-</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">c3</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">((</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span><span class="o">+</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">])</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])))</span><span class="o">+</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c4</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">c5</span><span class="p">)</span><span class="o">*</span><span class="p">((</span><span class="o">-</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">c3</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])</span><span class="o">*</span><span class="p">((</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">((</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span><span class="o">+</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">])</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]))</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="p">))))</span><span class="o">+</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c4</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">])))))</span>
+
+        <span class="k">return</span> <span class="n">grad</span></div>
+</div>
+
+
+
+<span class="c1">################################################################################</span>
+<span class="c1">################################################################################</span>
+<span class="c1">################################################################################</span>
+
+<div class="viewcode-block" id="Friedman">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.Friedman">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Friedman</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Friedman function</span>
+
+<span class="sd">    Reference: [https://www.sfu.ca/~ssurjano/fried.html]</span>
+
+<span class="sd">    A 5d trigonometric function, linear in :math:`x_4` and :math:`x_5`</span>
+
+
+<span class="sd">    Default constant values are :math:`c = (10., 20., 0.5, 2., 10., 5.)`</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        f(x)=c_1\sin(\pi x_1x_2)+c_2(x_3-c_3)^{c_4}+c_5x_4+c_6x_5</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c1</span><span class="o">=</span><span class="mf">10.</span><span class="p">,</span> <span class="n">c2</span><span class="o">=</span><span class="mf">20.</span><span class="p">,</span> <span class="n">c3</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">c4</span><span class="o">=</span><span class="mf">2.</span><span class="p">,</span> <span class="n">c5</span><span class="o">=</span><span class="mf">10.</span><span class="p">,</span> <span class="n">c6</span><span class="o">=</span><span class="mf">5.</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Friedman&quot;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">c1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c3</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c4</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c5</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c6</span> <span class="o">=</span> <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">c3</span><span class="p">,</span> <span class="n">c4</span><span class="p">,</span> <span class="n">c5</span><span class="p">,</span> <span class="n">c6</span>
+<div class="viewcode-block" id="Friedman.dim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.Friedman.dim">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">=</span> <span class="mi">5</span></div>
+
+<div class="viewcode-block" id="Friedman.outdim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.Friedman.outdim">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outdim</span> <span class="o">=</span> <span class="mi">1</span></div>
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setDimDom</span><span class="p">(</span><span class="n">domain</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span><span class="p">,</span> <span class="n">x4</span><span class="p">,</span> <span class="n">x5</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">*</span> <span class="n">x2</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">c2</span> <span class="o">*</span> <span class="p">(</span><span class="n">x3</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">c3</span><span class="p">)</span> <span class="o">**</span> <span class="bp">self</span><span class="o">.</span><span class="n">c4</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">c5</span> <span class="o">*</span> <span class="n">x4</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">c6</span> <span class="o">*</span> <span class="n">x5</span><span class="p">)[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+
+<div class="viewcode-block" id="Friedman.grad">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.Friedman.grad">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">grad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">grad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">outdim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">))</span>
+
+        <span class="n">grad</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">c1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="n">grad</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">c1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="n">grad</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">c2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">c4</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">c3</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c4</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">grad</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">c5</span>
+        <span class="n">grad</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">c6</span>
+
+        <span class="k">return</span> <span class="n">grad</span></div>
+</div>
+
+
+
+
+<span class="c1">################################################################################</span>
+<span class="c1">################################################################################</span>
+<span class="c1">################################################################################</span>
+
+<div class="viewcode-block" id="GramacyLee">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.GramacyLee">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">GramacyLee</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Gramacy and Lee function</span>
+
+<span class="sd">    Reference: [https://www.sfu.ca/~ssurjano/grlee09.html]</span>
+
+<span class="sd">    A 6d function, where :math:`x_5` and :math:`x_6` aren&#39;t active</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        f(x)=e^{sin((c_1(x_1+c_2))^{c_3})}+x_2x_3+x_4</span>
+
+<span class="sd">    Default constant values are :math:`c = (0.9, 0.48, 10.)`.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c1</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">c2</span><span class="o">=</span><span class="mf">0.48</span><span class="p">,</span> <span class="n">c3</span><span class="o">=</span><span class="mf">10.</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;GramacyLee&quot;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">c1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c3</span> <span class="o">=</span> <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">c3</span>
+<div class="viewcode-block" id="GramacyLee.dim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.GramacyLee.dim">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">=</span> <span class="mi">6</span></div>
+
+<div class="viewcode-block" id="GramacyLee.outdim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.GramacyLee.outdim">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outdim</span> <span class="o">=</span> <span class="mi">1</span></div>
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setDimDom</span><span class="p">(</span><span class="n">domain</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span><span class="p">,</span> <span class="n">x4</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">c1</span> <span class="o">*</span> <span class="p">(</span><span class="n">x1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">c2</span><span class="p">))</span> <span class="o">**</span> <span class="bp">self</span><span class="o">.</span><span class="n">c3</span><span class="p">))</span> <span class="o">+</span> <span class="n">x2</span> <span class="o">*</span> <span class="n">x3</span> <span class="o">+</span> <span class="n">x4</span><span class="p">)[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+
+<div class="viewcode-block" id="GramacyLee.grad">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.GramacyLee.grad">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">grad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span><span class="p">,</span> <span class="n">x4</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span>
+        <span class="n">grad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">outdim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">))</span>
+
+        <span class="n">grad</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">c1</span> <span class="o">*</span> <span class="p">(</span><span class="n">x1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">c2</span><span class="p">))</span> <span class="o">**</span> <span class="bp">self</span><span class="o">.</span><span class="n">c3</span><span class="p">)))</span> \
+                        <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">c1</span> <span class="o">*</span> <span class="p">(</span><span class="n">x1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">c2</span><span class="p">))</span> <span class="o">**</span> <span class="bp">self</span><span class="o">.</span><span class="n">c3</span><span class="p">)</span> \
+                        <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">c3</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c1</span> <span class="o">*</span> <span class="p">(</span><span class="n">x1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">c2</span><span class="p">))</span> <span class="o">**</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c3</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> \
+                        <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">c1</span>
+        <span class="n">grad</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x3</span>
+        <span class="n">grad</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">x2</span>
+        <span class="n">grad</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span>
+        <span class="n">grad</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">:]</span> <span class="o">=</span> <span class="mf">0.</span>
+
+        <span class="k">return</span> <span class="n">grad</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

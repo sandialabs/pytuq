@@ -1,0 +1,73 @@
+pytuq.linred.svd
+================
+
+.. py:module:: pytuq.linred.svd
+
+.. autoapi-nested-parse::
+
+   Module for SVD-based dimensionality reduction.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.linred.svd.SVD
+
+
+Module Contents
+---------------
+
+.. py:class:: SVD
+
+   Bases: :py:obj:`pytuq.linred.linred.LinRed`
+
+
+   Class for SVD-based dimensionality reduction.
+
+   .. attribute:: eigval
+
+      An array of size `K` storing eigenvalues.
+
+      :type: np.ndarray
+
+   .. attribute:: mean
+
+      An array of size `N` storing the mean.
+
+      :type: np.ndarray
+
+   .. attribute:: modes
+
+      A 2d array of size `(N,K)` consisting of all eigenvectors.
+
+      :type: np.ndarray
+
+   .. attribute:: xi
+
+      An array of size `(M,K)` for left eigenvectors of SVD.
+
+      :type: np.ndarray
+
+   .. attribute:: built
+
+      Flag to indicate if SVD is built or not.
+
+      :type: bool
+
+   .. note:: Unless truncation is done, `K=N`.
+
+
+   .. py:method:: build(data, plot=True)
+
+      Building SVD-based dimensionality reduction.
+
+      :param data: Data array of size `(N,M)`.
+      :type data: np.ndarray
+      :param plot: Flag indicating if auxilliary figures need to be made.
+      :type plot: bool, optional
+
+
+

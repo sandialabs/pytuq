@@ -1,0 +1,863 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytuq.func.func &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">Software Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/index.html#surrogates">Surrogates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_pce.html">Polynomial Chaos Expansion Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../autoapi/index.html">Section Navigation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../autoapi/pytuq/index.html">pytuq</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/pytuq/index.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/ftools/index.html">pytuq.ftools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/func/index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/minf/index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/rv/index.html">pytuq.rv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/surrogates/index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/utils/index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pytuq.func.func</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pytuq.func.func</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="sd">&quot;&quot;&quot;Module for a general multioutput function class and some basic operations.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">minimize</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">..utils.maps</span><span class="w"> </span><span class="kn">import</span> <span class="n">scale01ToDom</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..utils.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">intersect_domain</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..utils.plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_1d</span><span class="p">,</span> <span class="n">plot_2d</span>
+
+
+<div class="viewcode-block" id="Function">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.Function">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Function</span><span class="p">():</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Base class for a function.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        dim (int): Input dimensionality, :math:`d`.</span>
+<span class="sd">        dmax (float): Default domain half-size. That is, default domain is :math:`[-d_{max}, + d_{max}]`.</span>
+<span class="sd">        domain (np.ndarray): A 2d array of size :math:`(d,2)` indicating the input domain of the function.</span>
+<span class="sd">        eval (callable): Callable evaluator of the function.</span>
+<span class="sd">        name (str): Name of the function.</span>
+<span class="sd">        outdim (int): Output dimensionality, :math:`o`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Base&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialization.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name (str, optional): Function name. Defaults to &quot;Base&quot;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+<div class="viewcode-block" id="ModelWrapperFcn.dim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.ModelWrapperFcn.dim">[docs]</a>
+<div class="viewcode-block" id="PowFcn.dim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.PowFcn.dim">[docs]</a>
+<div class="viewcode-block" id="DivFcn.dim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.DivFcn.dim">[docs]</a>
+<div class="viewcode-block" id="MultFcn.dim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.MultFcn.dim">[docs]</a>
+<div class="viewcode-block" id="SubFcn.dim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.SubFcn.dim">[docs]</a>
+<div class="viewcode-block" id="AddFcn.dim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.AddFcn.dim">[docs]</a>
+<div class="viewcode-block" id="Function.dim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.Function.dim">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">=</span> <span class="kc">None</span></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="viewcode-block" id="Function.outdim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.Function.outdim">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outdim</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="ModelWrapperFcn.domain">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.ModelWrapperFcn.domain">[docs]</a>
+<div class="viewcode-block" id="PowFcn.domain">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.PowFcn.domain">[docs]</a>
+<div class="viewcode-block" id="DivFcn.domain">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.DivFcn.domain">[docs]</a>
+<div class="viewcode-block" id="MultFcn.domain">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.MultFcn.domain">[docs]</a>
+<div class="viewcode-block" id="SubFcn.domain">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.SubFcn.domain">[docs]</a>
+<div class="viewcode-block" id="AddFcn.domain">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.AddFcn.domain">[docs]</a>
+<div class="viewcode-block" id="Function.domain">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.Function.domain">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">domain</span> <span class="o">=</span> <span class="kc">None</span></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="viewcode-block" id="ModelWrapperFcn.name">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.ModelWrapperFcn.name">[docs]</a>
+<div class="viewcode-block" id="Function.name">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.Function.name">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span></div>
+</div>
+
+<div class="viewcode-block" id="ModelWrapperFcn.eval">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.ModelWrapperFcn.eval">[docs]</a>
+<div class="viewcode-block" id="PowFcn.eval">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.PowFcn.eval">[docs]</a>
+<div class="viewcode-block" id="DivFcn.eval">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.DivFcn.eval">[docs]</a>
+<div class="viewcode-block" id="MultFcn.eval">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.MultFcn.eval">[docs]</a>
+<div class="viewcode-block" id="SubFcn.eval">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.SubFcn.eval">[docs]</a>
+<div class="viewcode-block" id="AddFcn.eval">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.AddFcn.eval">[docs]</a>
+<div class="viewcode-block" id="Function.eval">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.Function.eval">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eval</span> <span class="o">=</span> <span class="kc">None</span></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="viewcode-block" id="ModelWrapperFcn.dmax">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.ModelWrapperFcn.dmax">[docs]</a>
+<div class="viewcode-block" id="PowFcn.dmax">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.PowFcn.dmax">[docs]</a>
+<div class="viewcode-block" id="DivFcn.dmax">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.DivFcn.dmax">[docs]</a>
+<div class="viewcode-block" id="MultFcn.dmax">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.MultFcn.dmax">[docs]</a>
+<div class="viewcode-block" id="SubFcn.dmax">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.SubFcn.dmax">[docs]</a>
+<div class="viewcode-block" id="AddFcn.dmax">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.AddFcn.dmax">[docs]</a>
+<div class="viewcode-block" id="Function.dmax">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.Function.dmax">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dmax</span> <span class="o">=</span> <span class="mf">10.0</span></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Call function.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (np.ndarray): Input 2d array of size :math:`(N,d)`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: Output 2d array of size :math:`(N,o)`.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            NotImplementedError: If eval function is not implemented.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Function evaluation is not implemented in the base class.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Function.grad">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.Function.grad">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">grad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Gradient evaluator.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (np.ndarray): Input 2d array of size :math:`(N,d)`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: Output 3d array of size :math:`(N,o,d)`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Analytical gradient not implemented. Fallback to numerical.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">grad_</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Function.hess">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.Function.hess">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">hess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Hessian evaluator.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (np.ndarray): Input 2d array of size :math:`(N,d)`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: Output 4d array of size :math:`(N,o,d,d)`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Analytical hessian not implemented. Fallback to numerical.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">hess_</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Function.setCall">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.Function.setCall">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setCall</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">eval</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Setting the evaluator function.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            eval (callable): Callable function from :math:`(N,d)` to :math:`(N,o)`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eval</span> <span class="o">=</span> <span class="nb">eval</span></div>
+
+
+<div class="viewcode-block" id="Function.call1d">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.Function.call1d">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">call1d</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">odim</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Wrapper function for single output evaluation.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            odim (int, optional): Output dimension index. Defaults to 0.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            callable: A callable function from :math:`(N,d)` to :math:`(N,)`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__call__</span><span class="p">(</span><span class="n">x</span><span class="p">)[:,</span> <span class="n">odim</span><span class="p">]</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Adding operation.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            other (Function): The Function to be added.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Function: The resulting Function.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Function</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">AddFcn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Subtracting operation.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            other (Function): The Function to be subtracted.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Function: The resulting Function.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Function</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">SubFcn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Multiplying operation.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            other (Function): The Function to be multiplied with.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Function: The resulting Function.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Function</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">MultFcn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__truediv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Dividing operation.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            other (Function): The Function to be divided on.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Function: The resulting Function.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Function</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">DivFcn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__pow__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">power</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Power operation.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            power (float): Power value.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Function: The resulting Function.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">PowFcn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">power</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_setDim</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dim</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Setting the input dimensionality of the function.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dim (int): Dimensionality, :math:`d`.</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            No need to use this function externally. Use :func:`setDimDom()` instead.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">=</span> <span class="n">dim</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_setDomain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Setting the input domain of the function.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            domain (np.ndarray): A 2d array of size :math:`(d,2)` indicating the domain of the function.</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            No need to use this function externally. Use :func:`setDimDom()` instead.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">domain</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">domain</span> <span class="o">=</span> <span class="n">domain</span>
+
+
+<div class="viewcode-block" id="Function.setDimDom">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.Function.setDimDom">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setDimDom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dimension</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="n">domain</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">assert</span><span class="p">(</span><span class="n">dimension</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="n">dim</span><span class="p">,</span> <span class="n">dom</span> <span class="o">=</span> <span class="n">dimension</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">dmax</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dmax</span><span class="p">]),</span> <span class="p">(</span><span class="n">dimension</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">assert</span><span class="p">(</span><span class="n">dimension</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="n">dim</span><span class="p">,</span> <span class="n">dom</span> <span class="o">=</span> <span class="n">domain</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">domain</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_setDim</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_setDomain</span><span class="p">(</span><span class="n">dom</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Function.inDomain">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.Function.inDomain">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inDomain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">x</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">*</span>
+                         <span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+                         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">)])</span><span class="o">.</span><span class="n">all</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Function.checkDomain">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.Function.checkDomain">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">checkDomain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">inDomain</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Function input is outside the domain. Exiting.&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Function.checkDim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.Function.checkDim">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">checkDim</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="o">==</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Function.sample_uniform">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.Function.sample_uniform">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sample_uniform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nsam</span><span class="p">):</span>
+
+        <span class="n">rsams</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">nsam</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">)</span>
+        <span class="n">sams</span> <span class="o">=</span> <span class="n">scale01ToDom</span><span class="p">(</span><span class="n">rsams</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">sams</span></div>
+
+
+
+<div class="viewcode-block" id="Function.plot_1d">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.Function.plot_1d">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">plot_1d</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ngr</span><span class="o">=</span><span class="mi">133</span><span class="p">):</span>
+
+        <span class="k">for</span> <span class="n">odim</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outdim</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">idim</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">):</span>
+                <span class="n">plot_1d</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="fm">__call__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">idim</span><span class="o">=</span><span class="n">idim</span><span class="p">,</span> <span class="n">odim</span><span class="o">=</span><span class="n">odim</span><span class="p">,</span>
+                            <span class="n">nom</span><span class="o">=</span><span class="n">nom</span><span class="p">,</span> <span class="n">ngr</span><span class="o">=</span><span class="n">ngr</span><span class="p">,</span> <span class="n">figname</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">+</span><span class="sa">f</span><span class="s1">&#39;_o</span><span class="si">{</span><span class="n">odim</span><span class="si">}</span><span class="s1">_d</span><span class="si">{</span><span class="n">idim</span><span class="si">}</span><span class="s1">.png&#39;</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
+
+        <span class="k">return</span></div>
+
+
+
+<div class="viewcode-block" id="Function.plot_2d">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.Function.plot_2d">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">plot_2d</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ngr</span><span class="o">=</span><span class="mi">33</span><span class="p">):</span>
+
+        <span class="k">for</span> <span class="n">odim</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outdim</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">idim</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">jdim</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">idim</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">):</span>
+                    <span class="n">plot_2d</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="fm">__call__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">idim</span><span class="o">=</span><span class="n">idim</span><span class="p">,</span> <span class="n">jdim</span><span class="o">=</span><span class="n">jdim</span><span class="p">,</span> <span class="n">odim</span><span class="o">=</span><span class="n">odim</span><span class="p">,</span>
+                            <span class="n">nom</span><span class="o">=</span><span class="n">nom</span><span class="p">,</span> <span class="n">ngr</span><span class="o">=</span><span class="n">ngr</span><span class="p">,</span> <span class="n">figname</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">+</span><span class="sa">f</span><span class="s1">&#39;_o</span><span class="si">{</span><span class="n">odim</span><span class="si">}</span><span class="s1">_d</span><span class="si">{</span><span class="n">idim</span><span class="si">}</span><span class="s1">_d</span><span class="si">{</span><span class="n">jdim</span><span class="si">}</span><span class="s1">.png&#39;</span><span class="p">)</span>
+                    <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
+
+        <span class="k">return</span></div>
+
+
+
+<div class="viewcode-block" id="Function.grad_">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.Function.grad_">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">grad_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1.e-5</span><span class="p">):</span>
+        <span class="n">grad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">outdim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">idim</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">):</span>
+            <span class="n">xx2</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">xx2</span><span class="p">[:,</span> <span class="n">idim</span><span class="p">]</span><span class="o">+=</span><span class="n">eps</span>
+            <span class="n">xx1</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">xx1</span><span class="p">[:,</span> <span class="n">idim</span><span class="p">]</span><span class="o">-=</span><span class="n">eps</span>
+            <span class="n">grad</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">idim</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="fm">__call__</span><span class="p">(</span><span class="n">xx2</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__call__</span><span class="p">(</span><span class="n">xx1</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mf">2.</span><span class="o">*</span><span class="n">eps</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">grad</span></div>
+
+
+<div class="viewcode-block" id="Function.hess_">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.Function.hess_">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">hess_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1.e-5</span><span class="p">):</span>
+        <span class="n">hess</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">outdim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">idim</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">jdim</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">idim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">):</span>
+                <span class="n">xx4</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                <span class="n">xx4</span><span class="p">[:,</span> <span class="n">idim</span><span class="p">]</span><span class="o">+=</span><span class="n">eps</span>
+                <span class="n">xx4</span><span class="p">[:,</span> <span class="n">jdim</span><span class="p">]</span><span class="o">+=</span><span class="n">eps</span>
+                <span class="n">xx3</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                <span class="n">xx3</span><span class="p">[:,</span> <span class="n">idim</span><span class="p">]</span><span class="o">+=</span><span class="n">eps</span>
+                <span class="n">xx3</span><span class="p">[:,</span> <span class="n">jdim</span><span class="p">]</span><span class="o">-=</span><span class="n">eps</span>
+                <span class="n">xx2</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                <span class="n">xx2</span><span class="p">[:,</span> <span class="n">idim</span><span class="p">]</span><span class="o">-=</span><span class="n">eps</span>
+                <span class="n">xx2</span><span class="p">[:,</span> <span class="n">jdim</span><span class="p">]</span><span class="o">+=</span><span class="n">eps</span>
+                <span class="n">xx1</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                <span class="n">xx1</span><span class="p">[:,</span> <span class="n">idim</span><span class="p">]</span><span class="o">-=</span><span class="n">eps</span>
+                <span class="n">xx1</span><span class="p">[:,</span> <span class="n">jdim</span><span class="p">]</span><span class="o">-=</span><span class="n">eps</span>
+                <span class="n">hess</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">idim</span><span class="p">,</span> <span class="n">jdim</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="fm">__call__</span><span class="p">(</span><span class="n">xx4</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__call__</span><span class="p">(</span><span class="n">xx1</span><span class="p">)</span>
+                 <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__call__</span><span class="p">(</span><span class="n">xx3</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__call__</span><span class="p">(</span><span class="n">xx2</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mf">4.</span><span class="o">*</span><span class="n">eps</span><span class="o">*</span><span class="n">eps</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">jdim</span><span class="o">&gt;</span><span class="n">idim</span><span class="p">:</span>
+                    <span class="n">hess</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">jdim</span><span class="p">,</span> <span class="n">idim</span><span class="p">]</span> <span class="o">=</span> <span class="n">hess</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">idim</span><span class="p">,</span> <span class="n">jdim</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">hess</span></div>
+
+
+<div class="viewcode-block" id="Function.minimize">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.Function.minimize">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">minimize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">odim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">return_res</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="c1"># Function wrapper for a single evaluation</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">ff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fcn</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">fcn</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">fcn</span><span class="o">.</span><span class="n">dim</span><span class="p">))[</span><span class="mi">0</span><span class="p">,</span> <span class="n">odim</span><span class="p">]</span>
+        <span class="c1"># Gradient wrapper for a single evaluation</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">gg</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fcn</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">fcn</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">fcn</span><span class="o">.</span><span class="n">dim</span><span class="p">))[</span><span class="mi">0</span><span class="p">,</span> <span class="n">odim</span><span class="p">]</span>
+
+        <span class="n">x0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample_uniform</span><span class="p">(</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">ff</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="p">,),</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;L-BFGS-B&#39;</span><span class="p">,</span> <span class="n">jac</span><span class="o">=</span><span class="n">gg</span><span class="p">,</span>
+               <span class="n">tol</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span>
+               <span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="c1"># print(res)</span>
+        <span class="k">if</span> <span class="n">return_res</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">res</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span></div>
+
+
+    <span class="c1"># def check_hess(self):</span>
+    <span class="c1">#     res = self.minimize(return_res=True)</span>
+    <span class="c1">#     print(res.hess_inv)</span>
+    <span class="c1">#     hess_min = np.linalg.inv(res.hess_inv.matmat(np.eye(self.dim)))</span>
+    <span class="c1">#     hess_ = self.hess_(res.x.reshape(1, -1), eps=1.e-7).reshape(-1,self.dim, self.dim)</span>
+    <span class="c1">#     print(hess_min)</span>
+    <span class="c1">#     print(hess_[0])</span>
+    <span class="c1">#     return np.allclose(hess_min, hess_[0])</span>
+
+<div class="viewcode-block" id="Function.eval_slice">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.Function.eval_slice">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval_slice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">ind</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">nom</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">nx</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="nb">len</span><span class="p">(</span><span class="n">ind</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">nom</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">nom</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">nom</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">)</span> <span class="c1"># full nominal, even if some entries won&#39;t be used</span>
+
+        <span class="n">xg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">nom</span><span class="p">,</span> <span class="p">(</span><span class="n">nx</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">xg</span><span class="p">[:,</span> <span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__call__</span><span class="p">(</span><span class="n">xg</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Function.evalgrad_slice">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.Function.evalgrad_slice">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">evalgrad_slice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">ind</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">nom</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">nx</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="nb">len</span><span class="p">(</span><span class="n">ind</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">nom</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">nom</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">nom</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">)</span> <span class="c1"># full nominal, even if some entries won&#39;t be used</span>
+
+        <span class="n">xg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">nom</span><span class="p">,</span> <span class="p">(</span><span class="n">nx</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">xg</span><span class="p">[:,</span> <span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">xg</span><span class="p">)[:,</span> <span class="p">:,</span> <span class="n">ind</span><span class="p">]</span></div>
+</div>
+
+
+
+
+<div class="viewcode-block" id="AddFcn">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.AddFcn">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">AddFcn</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fcn1</span><span class="p">,</span> <span class="n">fcn2</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Sum&#39;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">fcn1</span><span class="o">.</span><span class="n">dim</span><span class="o">==</span><span class="n">fcn2</span><span class="o">.</span><span class="n">dim</span><span class="p">)</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">fcn1</span><span class="o">.</span><span class="n">outdim</span><span class="o">==</span><span class="n">fcn2</span><span class="o">.</span><span class="n">outdim</span><span class="p">)</span>
+<div class="viewcode-block" id="AddFcn.fcn1">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.AddFcn.fcn1">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fcn1</span> <span class="o">=</span> <span class="n">fcn1</span></div>
+
+<div class="viewcode-block" id="AddFcn.fcn2">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.AddFcn.fcn2">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fcn2</span> <span class="o">=</span> <span class="n">fcn2</span></div>
+
+<div class="viewcode-block" id="AddFcn.name">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.AddFcn.name">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span></div>
+
+        <span class="n">domain</span> <span class="o">=</span> <span class="n">intersect_domain</span><span class="p">(</span><span class="n">fcn1</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">fcn2</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setDimDom</span><span class="p">(</span><span class="n">domain</span><span class="o">=</span><span class="n">domain</span><span class="p">)</span>
+<div class="viewcode-block" id="AddFcn.outdim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.AddFcn.outdim">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outdim</span> <span class="o">=</span> <span class="n">fcn1</span><span class="o">.</span><span class="n">outdim</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fcn1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">fcn2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<div class="viewcode-block" id="AddFcn.grad">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.AddFcn.grad">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">grad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fcn1</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">fcn2</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
+</div>
+
+
+
+
+<div class="viewcode-block" id="SubFcn">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.SubFcn">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SubFcn</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fcn1</span><span class="p">,</span> <span class="n">fcn2</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Subtraction&#39;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">fcn1</span><span class="o">.</span><span class="n">dim</span><span class="o">==</span><span class="n">fcn2</span><span class="o">.</span><span class="n">dim</span><span class="p">)</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">fcn1</span><span class="o">.</span><span class="n">outdim</span><span class="o">==</span><span class="n">fcn2</span><span class="o">.</span><span class="n">outdim</span><span class="p">)</span>
+
+<div class="viewcode-block" id="SubFcn.fcn1">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.SubFcn.fcn1">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fcn1</span> <span class="o">=</span> <span class="n">fcn1</span></div>
+
+<div class="viewcode-block" id="SubFcn.fcn2">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.SubFcn.fcn2">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fcn2</span> <span class="o">=</span> <span class="n">fcn2</span></div>
+
+<div class="viewcode-block" id="SubFcn.name">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.SubFcn.name">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span></div>
+
+
+        <span class="n">domain</span> <span class="o">=</span> <span class="n">intersect_domain</span><span class="p">(</span><span class="n">fcn1</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">fcn2</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setDimDom</span><span class="p">(</span><span class="n">domain</span><span class="o">=</span><span class="n">domain</span><span class="p">)</span>
+<div class="viewcode-block" id="SubFcn.outdim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.SubFcn.outdim">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outdim</span> <span class="o">=</span> <span class="n">fcn1</span><span class="o">.</span><span class="n">outdim</span></div>
+
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fcn1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">fcn2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<div class="viewcode-block" id="SubFcn.grad">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.SubFcn.grad">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">grad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fcn1</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">fcn2</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
+</div>
+
+
+
+
+
+<div class="viewcode-block" id="MultFcn">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.MultFcn">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MultFcn</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fcn1</span><span class="p">,</span> <span class="n">fcn2</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Product&#39;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">fcn1</span><span class="o">.</span><span class="n">dim</span><span class="o">==</span><span class="n">fcn2</span><span class="o">.</span><span class="n">dim</span><span class="p">)</span>
+<div class="viewcode-block" id="MultFcn.fcn1">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.MultFcn.fcn1">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fcn1</span> <span class="o">=</span> <span class="n">fcn1</span></div>
+
+<div class="viewcode-block" id="MultFcn.fcn2">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.MultFcn.fcn2">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fcn2</span> <span class="o">=</span> <span class="n">fcn2</span></div>
+
+<div class="viewcode-block" id="MultFcn.name">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.MultFcn.name">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span></div>
+
+        <span class="n">domain</span> <span class="o">=</span> <span class="n">intersect_domain</span><span class="p">(</span><span class="n">fcn1</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">fcn2</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setDimDom</span><span class="p">(</span><span class="n">domain</span><span class="o">=</span><span class="n">domain</span><span class="p">)</span>
+<div class="viewcode-block" id="MultFcn.outdim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.MultFcn.outdim">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outdim</span> <span class="o">=</span> <span class="n">fcn1</span><span class="o">.</span><span class="n">outdim</span></div>
+
+        <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outdim</span> <span class="o">==</span> <span class="n">fcn2</span><span class="o">.</span><span class="n">outdim</span><span class="p">)</span>
+
+        <span class="k">return</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fcn1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">fcn2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<div class="viewcode-block" id="MultFcn.grad">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.MultFcn.grad">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">grad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fcn1</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">fcn2</span><span class="p">(</span><span class="n">x</span><span class="p">)[:,</span> <span class="p">:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">fcn2</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">fcn1</span><span class="p">(</span><span class="n">x</span><span class="p">)[:,</span> <span class="p">:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="DivFcn">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.DivFcn">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DivFcn</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fcn1</span><span class="p">,</span> <span class="n">fcn2</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Quotient&#39;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">fcn1</span><span class="o">.</span><span class="n">dim</span><span class="o">==</span><span class="n">fcn2</span><span class="o">.</span><span class="n">dim</span><span class="p">)</span>
+<div class="viewcode-block" id="DivFcn.fcn1">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.DivFcn.fcn1">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fcn1</span> <span class="o">=</span> <span class="n">fcn1</span></div>
+
+<div class="viewcode-block" id="DivFcn.fcn2">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.DivFcn.fcn2">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fcn2</span> <span class="o">=</span> <span class="n">fcn2</span></div>
+
+<div class="viewcode-block" id="DivFcn.name">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.DivFcn.name">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span></div>
+
+        <span class="n">domain</span> <span class="o">=</span> <span class="n">intersect_domain</span><span class="p">(</span><span class="n">fcn1</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">fcn2</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setDimDom</span><span class="p">(</span><span class="n">domain</span><span class="o">=</span><span class="n">domain</span><span class="p">)</span>
+<div class="viewcode-block" id="DivFcn.outdim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.DivFcn.outdim">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outdim</span> <span class="o">=</span> <span class="n">fcn1</span><span class="o">.</span><span class="n">outdim</span></div>
+
+        <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outdim</span> <span class="o">==</span> <span class="n">fcn2</span><span class="o">.</span><span class="n">outdim</span><span class="p">)</span>
+
+        <span class="k">return</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fcn1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">fcn2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<div class="viewcode-block" id="DivFcn.grad">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.DivFcn.grad">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">grad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">fcn1</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">fcn2</span><span class="p">(</span><span class="n">x</span><span class="p">)[:,</span> <span class="p">:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">fcn2</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">fcn1</span><span class="p">(</span><span class="n">x</span><span class="p">)[:,</span> <span class="p">:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">fcn2</span><span class="p">(</span><span class="n">x</span><span class="p">)[:,</span> <span class="p">:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span></div>
+</div>
+
+
+<div class="viewcode-block" id="PowFcn">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.PowFcn">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PowFcn</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fcn</span><span class="p">,</span> <span class="n">power</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Power&#39;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+<div class="viewcode-block" id="PowFcn.fcn">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.PowFcn.fcn">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fcn</span> <span class="o">=</span> <span class="n">fcn</span></div>
+
+<div class="viewcode-block" id="PowFcn.name">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.PowFcn.name">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span></div>
+
+<div class="viewcode-block" id="PowFcn.power">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.PowFcn.power">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">power</span> <span class="o">=</span> <span class="n">power</span></div>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setDimDom</span><span class="p">(</span><span class="n">domain</span><span class="o">=</span><span class="n">fcn</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+<div class="viewcode-block" id="PowFcn.outdim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.PowFcn.outdim">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outdim</span> <span class="o">=</span> <span class="n">fcn</span><span class="o">.</span><span class="n">outdim</span></div>
+
+
+        <span class="k">return</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fcn</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">power</span><span class="p">)</span>
+
+<div class="viewcode-block" id="PowFcn.grad">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.PowFcn.grad">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">grad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">power</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">fcn</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fcn</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">power</span><span class="o">-</span><span class="mi">1</span><span class="p">)[:,</span> <span class="p">:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="ModelWrapperFcn">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.ModelWrapperFcn">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ModelWrapperFcn</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">ndim</span><span class="p">,</span> <span class="n">modelpar</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;ModelWrapper&#39;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+<div class="viewcode-block" id="ModelWrapperFcn.model">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.ModelWrapperFcn.model">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span></div>
+
+<div class="viewcode-block" id="ModelWrapperFcn.modelpar">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.ModelWrapperFcn.modelpar">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">modelpar</span> <span class="o">=</span> <span class="n">modelpar</span></div>
+
+<div class="viewcode-block" id="ModelWrapperFcn.ndim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.ModelWrapperFcn.ndim">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ndim</span> <span class="o">=</span> <span class="n">ndim</span></div>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setDimDom</span><span class="p">(</span><span class="n">dimension</span><span class="o">=</span><span class="n">ndim</span><span class="p">)</span>
+<div class="viewcode-block" id="ModelWrapperFcn.outdim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/func/func/index.html#pytuq.func.func.ModelWrapperFcn.outdim">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outdim</span> <span class="o">=</span> <span class="mi">1</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">checkDim</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelpar</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelpar</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+pytuq.linred.kle
+================
+
+.. py:module:: pytuq.linred.kle
+
+.. autoapi-nested-parse::
+
+   Module for SVD-based dimensionality reduction.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.linred.kle.KLE
+
+
+Module Contents
+---------------
+
+.. py:class:: KLE
+
+   Bases: :py:obj:`pytuq.linred.linred.LinRed`
+
+
+   Class for Karhunen-Loeve expansion.
+
+   .. attribute:: eigval
+
+      An array of size `K` storing eigenvalues.
+
+      :type: np.ndarray
+
+   .. attribute:: mean
+
+      An array of size `N` storing the mean.
+
+      :type: np.ndarray
+
+   .. attribute:: modes
+
+      A 2d array of size `(N,K)` consisting of all eigenvectors.
+
+      :type: np.ndarray
+
+   .. attribute:: weights2
+
+      Working array of integration weights.
+
+      :type: np.ndarray
+
+   .. attribute:: xi
+
+      An array of size `(M,K)` for latent features of KLE.
+
+      :type: np.ndarray
+
+   .. attribute:: built
+
+      Flag to indicate if KLE is built or not.
+
+      :type: bool
+
+   .. note:: Unless truncation is done, `K=N`.
+
+
+   .. py:attribute:: weights2
+      :value: None
+
+
+
+   .. py:method:: build(data, plot=True)
+
+      Building KLE dimensionality reduction.
+
+      :param data: Data array of size `(N,M)`.
+      :type data: np.ndarray
+      :param plot: Flag indicating if auxilliary figures need to be made.
+      :type plot: bool, optional
+
+
+
+   .. py:method:: project(data, subtract_mean=True)
+
+      Projecting data to the built bases.
+
+      :param data: Data array of size `(N,M)`.
+      :type data: np.ndarray
+      :param subtract_mean: Whether to subtract the mean before projection or not. Defaults to True. Useful without subtraction, e.g. if we are projecting perturbations or standard deviations.
+      :type subtract_mean: bool, optional
+
+      :returns: Array of latent features of size `(N,K)`.
+      :rtype: np.ndarray
+
+
+

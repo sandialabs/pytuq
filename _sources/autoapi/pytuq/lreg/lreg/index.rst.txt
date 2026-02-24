@@ -1,0 +1,274 @@
+pytuq.lreg.lreg
+===============
+
+.. py:module:: pytuq.lreg.lreg
+
+.. autoapi-nested-parse::
+
+   Module for the base linear regression class and a bare minimum least-squares implementation.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.lreg.lreg.lreg
+   pytuq.lreg.lreg.lsq
+
+
+Module Contents
+---------------
+
+.. py:class:: lreg
+
+   Bases: :py:obj:`pytuq.fit.fit.fitbase`
+
+
+   Base class for linear regression.
+
+   .. attribute:: cf
+
+      An 1d array of coefficients, of size :math:`K`.
+
+      :type: np.ndarray
+
+   .. attribute:: cf_cov
+
+      A 2d array of coefficient covariance of size :math:`(K,K)`.
+
+      :type: np.ndarray
+
+   .. attribute:: datavar
+
+      A single value for homogenous data variance.
+
+      :type: float
+
+   .. attribute:: basisEval
+
+      Basis evaluator function.
+
+      :type: callable
+
+   .. attribute:: basisEvalPars
+
+      Parameters of the basis evaluator function.
+
+      :type: tuple
+
+   .. attribute:: basisEvaluatorSet
+
+      Indicates whether basis evaluator function is set.
+
+      :type: bool
+
+   .. attribute:: used
+
+      Indicates the indices of the used bases (for sparse learning, such as BCS).
+
+      :type: np.ndarray
+
+
+   .. py:attribute:: cf
+      :value: None
+
+
+
+   .. py:attribute:: cf_cov
+      :value: None
+
+
+
+   .. py:attribute:: datavar
+      :value: 0.0
+
+
+
+   .. py:attribute:: basisEvaluatorSet
+      :value: False
+
+
+
+   .. py:attribute:: used
+      :value: None
+
+
+
+   .. py:method:: setBasisEvaluator(basiseval, basisevalpars)
+
+      Setting basis evaluator function.
+
+      Args:
+      basiseval (callable): Basis evaluator function.
+      basisevalpars (tuple): Parameters of the basis evaluator function.
+
+
+
+   .. py:method:: fita(Amat, y)
+      :abstractmethod:
+
+
+      Fitting function. Not implemented in the base class.
+
+      :param Amat: A 2d array of size :math:`(N, K)` each row holding basis evaluations at a training point.
+      :type Amat: np.ndarray
+      :param y: An 1d array of size :math:`N` holding the data.
+      :type y: np.ndarray
+
+      :raises NotImplementedError: Not implemented in the base class.
+
+
+
+   .. py:method:: fit(x, y)
+
+      Fitting with :math:`(x,y)` pairs, assuming basis evaluator is set.
+
+      :param x: A 2d array of inputs at which bases are evaluated.
+      :type x: np.ndarray
+      :param y: An 1d array of data.
+      :type y: np.ndarray
+
+
+
+   .. py:method:: print_coefs()
+
+      Prints coefficients, assuming fit is already performed.
+
+
+
+   .. py:method:: predict(x, msc=0, pp=False)
+
+      Predict function, given input :math:`x`, assuming the basis evaluator is set.
+
+      :param x: A 2d array of inputs of size :math:`(N,d)` at which bases are evaluated.
+      :type x: np.ndarray
+      :param msc: Prediction mode: 0 (mean-only), 1 (mean and variance), or 2 (mean, variance and covariance). Defaults to 0.
+      :type msc: int, optional
+      :param pp: Whether to compute posterior-predictive (i.e. add data variance) or not.
+      :type pp: bool, optional
+
+      :returns: triple of Mean (array of size `N`), Variance (array of size `N` or None), Covariance (array of size `(N, N)` or None).
+      :rtype: tuple(np.ndarray, np.ndarray, np.ndarray)
+
+
+
+   .. py:method:: predict_samples(x, nsamples=100)
+
+      Predict samples given input :math:`x`, assuming the basis evaluator is set.
+
+      :param x: A 2d array of inputs of size :math:`(N,d)` at which bases are evaluated.
+      :type x: np.ndarray
+      :param nsamples: Number of samples to draw. Defaults to 100.
+      :type nsamples: int, optional
+
+      :returns: A 2d array of size :math:`(N, R)` holding the prediction samples.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: predicta(Amat, msc=0, pp=False)
+
+      Predict given the A-matrix of basis evaluations.
+
+      :param Amat: A 2d array of size :math:`(N, K)` each row holding basis evaluations at a training point.
+      :type Amat: np.ndarray
+      :param msc: Prediction mode: 0 (mean-only), 1 (mean and variance), or 2 (mean, variance and covariance). Defaults to 0.
+      :type msc: int, optional
+      :param pp: Whether to compute posterior-predictive (i.e. add data variance) or not.
+      :type pp: bool, optional
+
+      :returns: triple of Mean (array of size `N`), Variance (array of size `N` or None), Covariance (array of size `(N, N)` or None).
+      :rtype: tuple(np.ndarray, np.ndarray, np.ndarray)
+
+
+
+   .. py:method:: predicta_samples(Amat, nsamples=100)
+
+      Predict samples given the A-matrix of basis evaluations.
+
+      :param Amat: A 2d array of size :math:`(N, K)` each row holding basis evaluations at a training point.
+      :type Amat: np.ndarray
+      :param nsamples: Number of samples to draw. Defaults to 100.
+      :type nsamples: int, optional
+
+      :returns: A 2d array of size :math:`(N, R)` holding the prediction samples.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: compute_stdev(Amat, method='chol')
+
+      Computation of pushed-forward standard deviation using a few different methods.
+
+      :param Amat: A 2d array of size :math:`(N, K)` each row holding basis evaluations at a training point.
+      :type Amat: np.ndarray
+      :param method: Method of computation. Options are 'chol' (cholesky), 'choleye' (cholesky with regularization), 'svd' (SVD), 'loop' (slow and painful), 'fullcov' (slow-ish and memory intensive).
+      :type method: str, optional
+
+      :returns: An 1d array of pushed-forward standard deviation, of size :math:`N`.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: predict_plot(aa_list, yy_list, labels=None, colors=None)
+
+      Ploting utility given a list of A-matrices and a list of data (typically, training/validation/testing).
+
+      :param aa_list: list of A-matrices of size :math:`(\cdot, d)`.
+      :type aa_list: list[np.ndarray]
+      :param yy_list: list of 1d data arrays
+      :type yy_list: list[np.ndarray]
+      :param labels: list of labels, of the same size as the lists above. Defaults to None, i.e. no labels.
+      :type labels: None, optional
+      :param colors: list of colors, of the same size as the lists above. Defaults to None, i.e. select standard colors.
+      :type colors: None, optional
+
+
+
+.. py:class:: lsq
+
+   Bases: :py:obj:`lreg`
+
+
+   Bare minimum least squares solution.
+
+   .. attribute:: cf
+
+      An 1d array of coefficients, of size :math:`K`.
+
+      :type: np.ndarray
+
+   .. attribute:: cf_cov
+
+      A 2d array of coefficient covariance of size :math:`(K,K)`.
+
+      :type: np.ndarray
+
+   .. attribute:: fitted
+
+      Flag to indicate whether fit is performed or not.
+
+      :type: bool
+
+   .. attribute:: used
+
+      An array of integers indicating the bases used (i.e. all basis in this case).
+
+      :type: np.ndarray
+
+   .. note:: scipy's lstsq uses SVD under the hood.
+
+
+   .. py:method:: fita(Amat, y)
+
+      Fit given A-matrix of basis evaluations and data array.
+
+      :param Amat: A 2d array of size :math:`(N, K)` each row holding basis evaluations at a training point.
+      :type Amat: np.ndarray
+      :param y: An 1d array of size :math:`N` holding the data.
+      :type y: np.ndarray
+
+
+

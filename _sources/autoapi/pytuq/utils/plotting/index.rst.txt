@@ -1,0 +1,824 @@
+pytuq.utils.plotting
+====================
+
+.. py:module:: pytuq.utils.plotting
+
+.. autoapi-nested-parse::
+
+   Module for various plotting functions.
+
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   pytuq.utils.plotting.myrc
+   pytuq.utils.plotting.saveplot
+   pytuq.utils.plotting.set_colors
+   pytuq.utils.plotting.lighten_color
+   pytuq.utils.plotting.plot_dm
+   pytuq.utils.plotting.plot_xrv
+   pytuq.utils.plotting.parallel_coordinates
+   pytuq.utils.plotting.plot_yx
+   pytuq.utils.plotting.plot_sens
+   pytuq.utils.plotting.plot_jsens
+   pytuq.utils.plotting.plot_tri
+   pytuq.utils.plotting.plot_pdf1d
+   pytuq.utils.plotting.plot_pdf2d
+   pytuq.utils.plotting.plot_pdfs
+   pytuq.utils.plotting.plot_ens
+   pytuq.utils.plotting.plot_vars
+   pytuq.utils.plotting.plot_shade
+   pytuq.utils.plotting.plot_1d_anchored_single
+   pytuq.utils.plotting.plot_1d_anchored
+   pytuq.utils.plotting.plot_2d_anchored_single
+   pytuq.utils.plotting.plot_2d_anchored
+   pytuq.utils.plotting.plot_fcn_1d_slice
+   pytuq.utils.plotting.plot_fcn_2d_slice
+   pytuq.utils.plotting.plot_uc_sample
+   pytuq.utils.plotting.plot_uc_exact
+   pytuq.utils.plotting.plot_samples_pdfs
+   pytuq.utils.plotting.plot_1d
+   pytuq.utils.plotting.plot_2d
+   pytuq.utils.plotting.plot_parity
+   pytuq.utils.plotting.plot_cov
+   pytuq.utils.plotting.plot_cov_tri
+   pytuq.utils.plotting.plot_sensmat
+   pytuq.utils.plotting.plot_joy
+
+
+Module Contents
+---------------
+
+.. py:function:: myrc()
+
+   Configure matplotlib common look and feel.
+
+   :returns: Dictionary of matplotlib parameter config, not really used
+   :rtype: dict
+
+
+.. py:function:: saveplot(figname)
+
+   Save a figure with warnings ignored.
+
+   :param figname: Figure handle.
+   :type figname: mpl.Figure
+
+
+.. py:function:: set_colors(npar)
+
+   Sets a list of different colors of requested length, as rgb triples.
+
+   :param npar: Number of parameters.
+   :type npar: int
+
+   :returns: List of rgb triples.
+   :rtype: list[tuple]
+
+
+.. py:function:: lighten_color(color, amount=0.5)
+
+   Lightens the given color by multiplying (1-luminosity) by the given amount.
+   Input can be matplotlib color string, hex string, or RGB tuple.
+
+   :param color: Initial color.
+   :type color: str or tuple
+   :param amount: How much to lighten: should be between 0 and 1.
+   :type amount: float
+
+   :returns: lightened color.
+   :rtype: str
+
+   .. admonition:: Examples
+
+      >>> lighten_color('g', 0.3)
+      >>> lighten_color('#F034A3', 0.6)
+      >>> lighten_color((.3,.55,.1), 0.5)
+
+
+.. py:function:: plot_dm(datas, models, errorbars=None, labels=None, colors=None, axes_labels=['Model', 'Apprx'], figname='dm.png', legendpos='in', msize=4, alpha=1.0)
+
+   Plots data-vs-model and overlays `y=x`.
+
+   :param datas: List of `K` 1d data arrays.
+   :type datas: list[np.ndarray]
+   :param models: List of `K` 1d model arrays with matching sizes to data arrays.
+   :type models: list[np.ndarray]
+   :param errorbars: List of `K` (lower,upper) tuples as errorbars for each model array. Can be None.
+   :type errorbars: list[(np.ndarray, np.ndarray)], optional
+   :param labels: List of `K` labels. If None, the code uses something generic.
+   :type labels: list[str], optional
+   :param colors: List of `K` colors. If None, the code chooses internally.
+   :type colors: list[str], optional
+   :param axes_labels: List of two strings, x- and y-axis labels.
+   :type axes_labels: list[str], optional
+   :param figname: Figure file name.
+   :type figname: str, optional
+   :param legendpos: Legend position, 'in' or 'out'
+   :type legendpos: str, optional
+   :param msize: Marker size.
+   :type msize: int, optional
+   :param alpha: Marker opacity, between `0` and `1`. Defaults to 1.
+   :type alpha: float, optional
+
+
+.. py:function:: plot_xrv(xsam, prefix='xsam')
+
+   Plotting samples one at a time, and one dimension vs the other.
+
+   :param xsam: A `(N,d)` numpy array of samples
+   :type xsam: np.ndarray
+   :param prefix: Prefix for filenames of the figures.
+   :type prefix: str, optional
+
+
+.. py:function:: parallel_coordinates(parnames, values, labels, savefig='pcoord')
+
+   Plots parallel coordinates.
+
+   :param parnames: list of `d` parameter names
+   :type parnames: list[str]
+   :param values: `(d, N)` array of `N` data points with `d` parameters
+   :type values: np.ndarray
+   :param labels: list of `N` labels/categories, one per point
+   :type labels: list[str]
+   :param savefig: figure name to save
+   :type savefig: str, optional
+
+
+.. py:function:: plot_yx(x, y, rowcols=None, ylabel='', xlabels=None, log=False, filename='eda.png', xpad=0.3, ypad=0.3, gridshow=True, ms=2, labelsize=18)
+
+   Plots an output vs one input at a time in a matrix of figures.
+
+   :param x: An `(N,d)` input array.
+   :type x: np.ndarray
+   :param y: An `(N,)` output array.
+   :type y: np.ndarray
+   :param rowcols: A pair of integers, rows and columns.
+   :type rowcols: tuple[int], optional
+   :param ylabel: Y-axis label.
+   :type ylabel: str, optional
+   :param xlabels: List of X-axis labels.
+   :type xlabels: list[str], optional
+   :param log: Whether to have log-`y` values or not.
+   :type log: bool, optional
+   :param filename: Figure filename to save.
+   :type filename: str, optional
+   :param xpad: Padding size between columns.
+   :type xpad: float, optional
+   :param ypad: Padding size between rows.
+   :type ypad: float, optional
+   :param gridshow: Whether to show grid or not.
+   :type gridshow: bool, optional
+   :param ms: Marker size.
+   :type ms: int, optional
+   :param labelsize: Axes label sizes.
+   :type labelsize: int, optional
+
+
+.. py:function:: plot_sens(sensdata, pars, cases, vis='bar', reverse=False, topsens=None, par_labels=None, case_labels=None, colors=None, xlbl='', title='', grid_show=True, legend_show=2, legend_size=10, ncol=4, lbl_size=22, yoffset=0.1, xdatatick=None, xticklabel_size=None, xticklabel_rotation=0, figname='sens.png')
+
+   Plots sensitivities for multiple observables with respect to multiple parameters.
+
+   :param sensdata: An array of sensitivities of size `(o,d)`.
+   :type sensdata: np.ndarray
+   :param pars: List of parameter indices to use. All should be less than `d`.
+   :type pars: list[int]
+   :param cases: List of output indices to use. All should be less than `o`.
+   :type cases: list[int]
+   :param vis: Plot type 'bar' or 'graph' (the latter is not used/tested often).
+   :type vis: str, optional
+   :param reverse: Whether to flip the input data (i.e. parameters and outputs).
+   :type reverse: bool, optional
+   :param topsens: Show only some number of top parameters (default: show all).
+   :type topsens: int, optional
+   :param par_labels: Parameter labels.
+   :type par_labels: list[str], optional
+   :param case_labels: Output labels.
+   :type case_labels: list[str], optional
+   :param colors: Parameter bar colors.
+   :type colors: None, optional
+   :param xlbl: X-label.
+   :type xlbl: str, optional
+   :param title: Title.
+   :type title: str, optional
+   :param grid_show: Whether to show the grid.
+   :type grid_show: bool, optional
+   :param legend_show: Type of legend location, `1` is inside, `2` is below, `3` is above the graph.
+   :type legend_show: int, optional
+   :param legend_size: Legend fontsize.
+   :type legend_size: int, optional
+   :param ncol: Number of columns in legend.
+   :type ncol: int, optional
+   :param lbl_size: Axes label size.
+   :type lbl_size: int, optional
+   :param yoffset: Vertical offset, white space below the figure.
+   :type yoffset: float, optional
+   :param xdatatick: X-tick locations. By default, `1, ..., o`.
+   :type xdatatick: list[float], optional
+   :param xticklabel_size: X-tick label size.
+   :type xticklabel_size: int, optional
+   :param xticklabel_rotation: X-tick label rotation angle.
+   :type xticklabel_rotation: int, optional
+   :param figname: Figure file name.
+   :type figname: str, optional
+
+
+.. py:function:: plot_jsens(msens, jsens, varname='', inpar_names=None, figname='senscirc.png')
+
+   Plotting circular joint sensitivities.
+
+   :param msens: Main sensitivities, a 1d array.
+   :type msens: np.ndarray
+   :param jsens: Joint sensitivities. A 2d square array.
+   :type jsens: np.ndarray
+   :param varname: Variable name.
+   :type varname: str, optional
+   :param inpar_names: List of names for input parameters. Defaults to something generic.
+   :type inpar_names: list, optional
+   :param figname: Saving figure file name.
+   :type figname: str, optional
+
+
+.. py:function:: plot_tri(xi, names=None, msize=3, axarr=None, clr='b', yy=None, lsize=12, zorder=None, figname=None)
+
+   Plots multidimensional samples in a triangular way, i.e. 1d and 2d cuts.
+
+   :param xi: `(N,d)` array to plot.
+   :type xi: np.ndarray
+   :param names: List of `d` names.
+   :type names: list[str], optional
+   :param msize: Markersize of the 2d plots.
+   :type msize: int, optional
+   :param axarr: Optional array of axes.
+   :type axarr: None, optional
+   :param clr: Optional color.
+   :type clr: str, optional
+   :param yy: Optional if we want to color-code by value. Overwrites clr.
+   :type yy: None, optional
+   :param zorder: Order of plotting.
+   :type zorder: None, optional
+   :param lsize: Label size. Defaults to 12.
+   :type lsize: int, optional
+   :param figname: Figure file name.
+   :type figname: str, optional
+
+
+.. py:function:: plot_pdf1d(sams, pltype='hist', color='b', lstyle='--', lw=1.0, nom_height_factor=10.0, histalpha=1.0, label='', ax=None)
+
+   Plotting 1d PDFs of samples.
+
+   :param sams: The `(N,)` samples of interest.
+   :type sams: np.ndarray
+   :param pltype: Plot type. Options are 'kde' (Kernel Density Estimation), 'hist' (Histogram), 'sam' (plot samples as dots on x-axis), 'nom' (plot a nominal vertical line)
+   :type pltype: str, optional
+   :param color: Color.
+   :type color: str, optional
+   :param lstyle: Line style.
+   :type lstyle: str, optional
+   :param lw: Line width, when relevant.
+   :type lw: float, optional
+   :param nom_height_factor: Controls the height of the nominal vertical bar.
+   :type nom_height_factor: float, optional
+   :param histalpha: Opacity of histogram, between `0` and `1`.
+   :type histalpha: float, optional
+   :param label: Label for legend.
+   :type label: str, optional
+   :param ax: Axis handle. If None, use the current axis.
+   :type ax: plt.Axes, optional
+
+   .. note:: ax is changed as a result of this function. Further beautification and figure saving should be done outside this function.
+
+
+.. py:function:: plot_pdf2d(samsx, samsy, pltype='kde', ncont=10, color=None, lwidth=1.0, mstyle='o', ax=None)
+
+   Plot 2d contour plot of a PDF given two sets of samples.
+
+   :param samsx: First `(N,)` samples of interest.
+   :type samsx: np.ndarray
+   :param samsy: Second `(N,)` samples of interest.
+   :type samsy: np.ndarray
+   :param pltype: Plot type. Options are Options are 'kde' (Kernel Density Estimation), 'sam' (plot samples only).
+   :type pltype: str, optional
+   :param ncont: Number of contours.
+   :type ncont: int, optional
+   :param color: Color. If None, uses the multicolor default of matplotlib.
+   :type color: str, optional
+   :param lwidth: Line width.
+   :type lwidth: float, optional
+   :param mstyle: Marker stile.
+   :type mstyle: str, optional
+   :param ax: Axis handle. If None, use the current axis.
+   :type ax: plt.Axes, optional
+
+   .. note:: ax is changed as a result of this function. Further beautification and figure saving should be done outside this function.
+
+
+.. py:function:: plot_pdfs(ind_show=None, plot_type='tri', pdf_type='hist', samples_='chain.txt', burnin=100, every=1, names_=None, nominal_=None, prange_=None, show_2dsamples=False, lsize=13, zsize=13, xpad=0.3, ypad=0.3)
+
+   Computing and plotting set of 1d and/or 2d PDFs given a sample set.
+
+   :param ind_show: Indices of dimensions (columns of samples) to show.
+   :type ind_show: list[int], optional
+   :param plot_type: Plot type. Options are 'tri' (trianguar plot of 1d/2d marginals), 'inds' (1d marginals in a single figure), 'ind' (individual files for 1d and 2d marginal PDFs)
+   :type plot_type: str, optional
+   :param pdf_type: 1d PDF type. Options are 'hist' (histogram) or 'kde' (Kernel Density Estimation)
+   :type pdf_type: str, optional
+   :param samples_: Filename or `(N,d)` numpy array of samples.
+   :type samples_: str or np.ndarray, optional
+   :param burnin: Number of samples to throw away from the beginning of samples.
+   :type burnin: int, optional
+   :param every: Stratification: use every `k`-th sample.
+   :type every: int, optional
+   :param names_: Filename containing the names of dimensions or list of names. Default is None, that leads to generic names.
+   :type names_: str or list[str], optional
+   :param nominal_: Filename or `(d,)` numpy array of nominals to be shown as vertical bars on top of 1d PDFs, and dots on top of 2d PDFs.
+   :type nominal_: str or np.ndarray, optional
+   :param prange_: Filename or `(d,2)` numpy array of dimensional ranges to be shown as 'box' priors.
+   :type prange_: str or np.ndarray, optional
+   :param show_2dsamples: Whether or not to display the samples on top of 2d contour plots.
+   :type show_2dsamples: bool, optional
+   :param lsize: Title size and X- and Y- label size.
+   :type lsize: int or float, optional
+   :param zsize: X- and Y- tick label size.
+   :type zsize: int or float, optional
+   :param xpad: Horizontal padding for multiplot figures ('tri' and 'inds').
+   :type xpad: float, optional
+   :param ypad: Vertical padding for multiplot figures ('tri' and 'inds').
+   :type ypad: float, optional
+
+   :returns: Figure and axes array handles for further edits if needed.
+   :rtype: tuple
+
+
+.. py:function:: plot_ens(xdata, ydata, color='b', lw=2.0, ms=1, grid_show=True, label='', mec='k', connected=True, interp=True, offset=(None, None), ax=None)
+
+   Plotting an ensemble of `y` values versus input `x`.
+
+   :param xdata: Input values, an 1d array of size `(N,)`.
+   :type xdata: np.ndarray
+   :param ydata: Output values, a 2d array of size `(N,M)`.
+   :type ydata: np.ndarray
+   :param color: Plot color.
+   :type color: str, optional
+   :param lw: Linewidth.
+   :type lw: int or float, optional
+   :param ms: Markersize.
+   :type ms: int or float, optional
+   :param grid_show: Whether to show the grid or not.
+   :type grid_show: bool, optional
+   :param label: Label for legends down the road.
+   :type label: str, optional
+   :param mec: Marker edge color
+   :type mec: str, optional
+   :param connected: Whether to connect the data dots or not.
+   :type connected: bool, optional
+   :param interp: Whether to have smooth interpolation or not.
+   :type interp: bool, optional
+   :param offset: Tuple of (shift, scale) to preprocess y-data, if needed, both shift and scale are either None or 1d arrays of size `(d,)`.
+   :type offset: tuple, optional
+   :param ax: Axis handle. If None, use the current axis.
+   :type ax: plt.Axes, optional
+
+   .. note:: ax is changed as a result of this function. Further beautification and figure saving should be done outside this function.
+
+
+.. py:function:: plot_vars(xdata, ydata, variances=None, ysam=None, stdfactor=1.0, varlabels=None, varcolors=None, grid_show=True, connected=True, interp=None, offset=(None, None), ax=None)
+
+   Plotting mean predictions with multicolor variances as error bars.
+
+   :param xdata: Input values, an 1d array of size `(N,)`.
+   :type xdata: np.ndarray
+   :param ydata: Output values, a 1d array of size `(N,)`.
+   :type ydata: np.ndarray
+   :param variances: Variances, a 2d array of size `(N,K)`.
+   :type variances: None, optional
+   :param ysam: True samples, a 2d array of size `(N,M)`.
+   :type ysam: None, optional
+   :param stdfactor: Factor in front of st.dev. for plotting (e.g. `1.0` or `3.0`).
+   :type stdfactor: float, optional
+   :param varlabels: List of `K` labels for each variance. If None, the code comes up with generic names.
+   :type varlabels: list[str], optional
+   :param varcolors: List of `K` variance colors. If None, the code uses shades of grey (not fifty).
+   :type varcolors: list[str], optional
+   :param grid_show: Whether or not to show the grid.
+   :type grid_show: bool, optional
+   :param connected: Whether to connect the data dots or not.
+   :type connected: bool, optional
+   :param interp: Whether to have smooth interpolation or not.
+   :type interp: bool, optional
+   :param offset: Tuple of (shift, scale) to preprocess y-data, if needed, both shift and scale are either None or 1d arrays of size `(d,)`.
+   :type offset: tuple, optional
+   :param ax: Axis handle. If None, use the current axis.
+   :type ax: plt.Axes, optional
+
+   .. note:: ax is changed as a result of this function. Further beautification and figure saving should be done outside this function.
+
+
+.. py:function:: plot_shade(xdata, ydata, nq=51, cmap=mpl.cm.BuGn, bounds_show=False, grid_show=True, ax=None)
+
+   Plotting quantile-shaded predictions given dataset.
+
+   :param xdata: Input values, an 1d array of size `(N,)`.
+   :type xdata: np.ndarray
+   :param ydata: Output values, a 2d array of size `(N,M)`.
+   :type ydata: np.ndarray
+   :param nq: Number of quantiles.
+   :type nq: int, optional
+   :param cmap: Colormap. Defaults to BuGn.
+   :type cmap: mpl.Cm, optional
+   :param bounds_show: Whether to highlight the bounds.
+   :type bounds_show: bool, optional
+   :param grid_show: Whether to show the grid or not.
+   :type grid_show: bool, optional
+   :param ax: Axis handle. If None, use the current axis.
+   :type ax: plt.Axes, optional
+
+   .. note:: ax is changed as a result of this function. Further beautification and figure saving should be done outside this function.
+
+
+.. py:function:: plot_1d_anchored_single(models, modelpars, anchor1, anchor2=None, pad=0.5, scale=1.0, ngr=111, modellabels=None, clearax=False, verbose_labels=False, legend_show=True, ax=None, figname=None)
+
+   Plots 1d slices of a list of models going through one or two anchor points.
+
+   :param models: List of model evaluators.
+   :type models: list[callable]
+   :param modelpars: List of model parameter tuples, one for each.
+   :type modelpars: list[tuple]
+   :param anchor1: 1d array of the first anchor point.
+   :type anchor1: np.ndarray
+   :param anchor2: 1d array of the second anchor point. Defaults to None, which means a randomly selected second anchor a given distance away from the first.
+   :type anchor2: np.ndarray, optional
+   :param pad: Padding on both sides of the interval, so the slice goes beyond the anchors.
+   :type pad: float, optional
+   :param scale: The distance of the second anchor from the first, if randomly selected.
+   :type scale: float, optional
+   :param ngr: Number of grid points for plotting.
+   :type ngr: int, optional
+   :param modellabels: Labels/names of the models for legend.
+   :type modellabels: None, optional
+   :param clearax: Clear axes ticks and labels for less busy plotting.
+   :type clearax: bool, optional
+   :param verbose_labels: Optionally, annotates the points showing their coordinates. Makes sense for low-dim cases.
+   :type verbose_labels: bool, optional
+   :param legend_show: Whether to show the legend or not.
+   :type legend_show: bool, optional
+   :param ax: Axis handle. Default to None, i.e. current axis.
+   :type ax: None, optional
+   :param figname: Optionally, save to a figure with a given name.
+   :type figname: None, optional
+
+
+.. py:function:: plot_1d_anchored(models, modelpars, anchor1, pad=0.5, scale=1.0, ngr=111, modellabels=None, legend_show=False, clearax=False, ncolrow=(3, 5))
+
+   Plot multiple 1d slices of models all going through a given anchor point.
+
+   :param models: List of model evaluators.
+   :type models: list[callable]
+   :param modelpars: List of model parameter tuples, one for each.
+   :type modelpars: list[tuple]
+   :param anchor1: The anchor point, 1d array.
+   :type anchor1: np.ndarray
+   :param pad: Padding on both sides of the interval, so the slice goes beyond the anchors.
+   :type pad: float, optional
+   :param scale: The distance of the second anchor from the first, if randomly selected.
+   :type scale: float, optional
+   :param ngr: Number of grid points for plotting.
+   :type ngr: int, optional
+   :param modellabels: Labels/names of the models for legend.
+   :type modellabels: None, optional
+   :param legend_show: Whether to show the legend or not.
+   :type legend_show: bool, optional
+   :param clearax: Clear axes ticks and labels for less busy plotting.
+   :type clearax: bool, optional
+   :param verbose_labels: Optionally, annotates the points showing their coordinates. Makes sense for low-dim cases.
+   :type verbose_labels: bool, optional
+   :param ncolrow: Number of columns and rows in a tuple. Defaults to (3, 5).
+   :type ncolrow: tuple, optional
+
+
+.. py:function:: plot_2d_anchored_single(models, modelpars, anchor1, anchor2=None, anchor3=None, squished=True, pad=0.5, scale=1.0, ngr=111, modellabels=None, colorful=False, clearax=False, legend_show=True, modelcolors=None, ax=None, figname=None)
+
+   Plots 2d slices of a list of models going through one or two anchor points.
+
+   :param models: List of model evaluators.
+   :type models: list[callable]
+   :param modelpars: List of model parameter tuples, one for each.
+   :type modelpars: list[tuple]
+   :param anchor1: 1d array of the first anchor point.
+   :type anchor1: np.ndarray
+   :param anchor2: 1d array of the second anchor point. Defaults to None, which means a randomly selected second anchor a given distance away from the first.
+   :type anchor2: np.ndarray, optional
+   :param anchor3: 1d array of the third anchor point. Defaults to None, which means a randomly selected second anchor a given distance away from the first.
+   :type anchor3: np.ndarray, optional
+   :param squished: If squished, the bases in the plane are not orthogonal.
+   :type squished: bool, optional
+   :param pad: Padding on both sides of the domain, so the slice goes beyond the anchors.
+   :type pad: float, optional
+   :param scale: The distance of the second anchor from the first, if randomly selected.
+   :type scale: float, optional
+   :param ngr: Number of grid points for plotting.
+   :type ngr: int, optional
+   :param modellabels: Labels/names of the models for legend.
+   :type modellabels: None, optional
+   :param colorful: Whether printing with colored surface or simply contours.
+   :type colorful: bool, optional
+   :param clearax: Clear axes ticks and labels for less busy plotting.
+   :type clearax: bool, optional
+   :param legend_show: Whether to show the legend or not.
+   :type legend_show: bool, optional
+   :param modelcolors: List of model colors.
+   :type modelcolors: list, optional
+   :param ax: Axis handle. Default to None, i.e. current axis.
+   :type ax: None, optional
+   :param figname: Optionally, save to a figure with a given name.
+   :type figname: None, optional
+
+
+.. py:function:: plot_2d_anchored(models, modelpars, anchor1, anchor2=None, pad=0.5, scale=1.0, ngr=111, modellabels=None, squished=False, colorful=False, legend_show=False, modelcolors=None, clearax=False, ncolrow=(3, 5))
+
+   Plot multiple 1d slices of models all going through a given anchor point or given two anchor points.
+
+   :param models: List of model evaluators.
+   :type models: list[callable]
+   :param modelpars: List of model parameter tuples, one for each.
+   :type modelpars: list[tuple]
+   :param anchor1: The first anchor point, 1d array.
+   :type anchor1: np.ndarray
+   :param anchor2: The second anchor point. Defaults to None, in which case it is selected randomly.
+   :type anchor2: np.ndarray, optional
+   :param pad: Padding on both sides of the interval, so the slice goes beyond the anchors.
+   :type pad: float, optional
+   :param scale: The distance of the second anchor from the first, if randomly selected.
+   :type scale: float, optional
+   :param ngr: Number of grid points for plotting.
+   :type ngr: int, optional
+   :param modellabels: Labels/names of the models for legend.
+   :type modellabels: None, optional
+   :param squished: If squished, the bases in the plane are not orthogonal.
+   :type squished: bool, optional
+   :param colorful: Whether printing with colored surface or simply contours.
+   :type colorful: bool, optional
+   :param legend_show: Whether to show the legend or not.
+   :type legend_show: bool, optional
+   :param modelcolors: List of model colors.
+   :type modelcolors: list, optional
+   :param clearax: Clear axes ticks and labels for less busy plotting.
+   :type clearax: bool, optional
+   :param ncolrow: Number of columns and rows in a tuple. Defaults to (3, 5).
+   :type ncolrow: tuple, optional
+
+
+.. py:function:: plot_fcn_1d_slice(fcn, domain, idim=0, nom=None, ngr=133, color='b', lw=2, ax=None)
+
+   Plotting 1d slice of a function, keeping the rest of the inputs at a given nominal.
+
+   :param fcn: Function evaluator.
+   :type fcn: callable
+   :param domain: Domain of evaluation, a 2d array of size `(d, 2)`.
+   :type domain: np.ndarray
+   :param idim: Dimension, with respect to which the slice is plotted.
+   :type idim: int, optional
+   :param nom: Nominal values, an 1d array of size `(d,)`.
+   :type nom: None, optional
+   :param ngr: Number of grid points, i.e. resolution.
+   :type ngr: int, optional
+   :param color: Color of the plot.
+   :type color: str, optional
+   :param lw: Line width.
+   :type lw: int, optional
+   :param ax: Axis handle. If None, use the current axis.
+   :type ax: plt.Axes, optional
+
+   .. note:: ax is changed as a result of this function. Further beautification and figure saving should be done outside this function.
+
+
+.. py:function:: plot_fcn_2d_slice(fcn, domain, idim=0, jdim=1, nom=None, ngr=33, ax=None)
+
+   Plotting 2d slice of a function, keeping the rest of the inputs at a given nominal.
+
+   :param fcn: Function evaluator.
+   :type fcn: callable
+   :param domain: Domain of evaluation, a 2d array of size `(d, 2)`.
+   :type domain: np.ndarray
+   :param idim: First dimension, with respect to which the slice is plotted.
+   :type idim: int, optional
+   :param jdim: Second dimension, with respect to which the slice is plotted.
+   :type jdim: int, optional
+   :param nom: Nominal values, an 1d array of size `(d,)`.
+   :type nom: None, optional
+   :param ngr: Number of grid points per dimension, i.e. resolution.
+   :type ngr: int, optional
+   :param color: Color of the plot.
+   :type color: str, optional
+   :param ax: Axis handle. If None, use the current axis.
+   :type ax: plt.Axes, optional
+
+   .. note:: ax is changed as a result of this function. Further beautification and figure saving should be done outside this function.
+
+
+.. py:function:: plot_uc_sample(pred_sam, data, nqt=111, label='', ax=None)
+
+   Plotting uncertainty calibration figure given samples.
+
+   :param pred_sam: Samples, in a 2d array of size `(M,N)`.
+   :type pred_sam: np.ndarray
+   :param data: Data, in a 1d array of size `(N,)`.
+   :type data: np.ndarray
+   :param nqt: Number of quantiles used. Essentially, the resolution.
+   :type nqt: int, optional
+   :param label: Custom label.
+   :type label: str, optional
+   :param ax: Axis handle. If None, use the current axis.
+   :type ax: plt.Axes, optional
+
+   :returns: Data fractions and quantile values corresponding to these fractions.
+   :rtype: tuple
+
+   .. note:: ax is changed as a result of this function. Further beautification and figure saving should be done outside this function.
+
+
+.. py:function:: plot_uc_exact(pred_mean, pred_std, data, nqt=111, label='', ax=None)
+
+   Plotting uncertainty calibration figure given mean and standard deviation of predictions.
+
+   :param pred_mean: Prediction mean, in a 1d array of size `(N,)`.
+   :type pred_mean: np.ndarray
+   :param pred_std: Prediction standard deviation, in a 1d array of size `(N,)`.
+   :type pred_std: np.ndarray
+   :param data: Data, in a 1d array of size `(N,)`.
+   :type data: np.ndarray
+   :param nqt: Number of quantiles used. Essentially, the resolution.
+   :type nqt: int, optional
+   :param label: Custom label.
+   :type label: str, optional
+   :param ax: Axis handle. If None, use the current axis.
+   :type ax: plt.Axes, optional
+
+   :returns: Data fractions and quantile values corresponding to these fractions.
+   :rtype: tuple
+
+   .. note:: ax is changed as a result of this function. Further beautification and figure saving should be done outside this function.
+
+
+.. py:function:: plot_samples_pdfs(xx_list, legends=None, colors=None, file_prefix='x', title='')
+
+   Plots multiple pdfs given list of samples
+
+   :param xx_list: List of samples.
+   :type xx_list: list[np.ndarray]
+   :param legends: List of legends. Defaults to generic text.
+   :type legends: list[str], optional
+   :param colors: List of colors. Defaults to generic color cycle.
+   :type colors: list[str], optional
+   :param file_prefix: Figure file prefix.
+   :type file_prefix: str, optional
+   :param title: Figure title. Default is no title.
+   :type title: str, optional
+
+
+.. py:function:: plot_1d(func, domain, ax=None, idim=0, odim=0, nom=None, ngr=100, color='orange', label='', lstyle='-', figname=None)
+
+   Plotting 1d slice of a function.
+
+   :param func: The callable function of interest.
+   :type func: callable
+   :param domain: A dx2 array indicating the domain of the function.
+   :type domain: np.ndarray
+   :param ax: Axis object to plot on. If None, plots on current axis.
+   :type ax: None, optional
+   :param idim: Input dimension to plot against.
+   :type idim: int, optional
+   :param odim: Output QoI to plot against. Useful for multioutput funtions.
+   :type odim: int, optional
+   :param nom: Nominal value to fix non-plotted dimensions at. An array of size d. If None, uses the domain center.
+   :type nom: np.ndarray, optional
+   :param ngr: Number of grid points.
+   :type ngr: int, optional
+   :param color: Color of the graph.
+   :type color: str, optional
+   :param label: Label of the graph.
+   :type label: str, optional
+   :param lstyle: Linestyle of the graph.
+   :type lstyle: str, optional
+   :param figname: Figure name to save.
+   :type figname: str, optional
+
+
+.. py:function:: plot_2d(func, domain, ax=None, idim=0, jdim=1, odim=0, nom=None, ngr=33, figname=None)
+
+   Plotting 2d slice of a function.
+
+   :param func: The callable function of interest.
+   :type func: callable
+   :param domain: A dx2 array indicating the domain of the function.
+   :type domain: np.ndarray
+   :param ax: Axis object to plot on. If None, plots on current axis.
+   :type ax: None, optional
+   :param idim: First input dimension to plot against.
+   :type idim: int, optional
+   :param jdim: Second input dimension to plot against.
+   :type jdim: int, optional
+   :param odim: Output QoI to plot against. Useful for multioutput funtions.
+   :type odim: int, optional
+   :param nom: Nominal value to fix non-plotted dimensions at. An array of size d. If None, uses the domain center.
+   :type nom: np.ndarray, optional
+   :param ngr: Number of grid points.
+   :type ngr: int, optional
+   :param figname: Figure name to save.
+   :type figname: str, optional
+
+
+.. py:function:: plot_parity(y1, y2, labels=['y1', 'y2'], filename='parity.png')
+
+   A minimal parity plot.
+
+   :param y1: The 1d array on the x-axis.
+   :type y1: np.ndarray
+   :param y2: The 1d array on the y-axis.
+   :type y2: np.ndarray
+   :param labels: List of length two for the axes labels.
+   :type labels: list, optional
+   :param filename: Figure filename to save.
+   :type filename: str, optional
+
+
+.. py:function:: plot_cov(mm, cc, ngr=100, f=3.0, pnames=None, ax=None, savefig=False)
+
+   Plotting covariance contour given mean and covariance matrix.
+
+   :param mm: Mean, an 1d array of size `(2,)`.
+   :type mm: np.ndarray
+   :param cc: Covariance matrix, a 2d array of size `(2,2)`.
+   :type cc: np.ndarray
+   :param ngr: Number of grid points per dimension, i.e. resolution.
+   :type ngr: int, optional
+   :param f: Factor for the plotting range in terms of standard deviations.
+   :type f: float, optional
+   :param pnames: List of parameter names. If None, generic names are used.
+   :type pnames: list, optional
+   :param ax: Axis handle. If None, use the current axis.
+   :type ax: plt.Axes, optional
+   :param savefig: Whether to save the figure or not.
+   :type savefig: bool, optional
+
+
+.. py:function:: plot_cov_tri(mean, cov, names=None, figname='cov_tri.png')
+
+   Plots covariance in a triangular pairwise way.
+
+   :param mean: Mean, an 1d array of size `(npar,)`.
+   :type mean: np.ndarray
+   :param cov: Covariance matrix, a 2d array of size `(npar,npar)`.
+   :type cov: np.ndarray
+   :param names: List of parameter names. If None, generic names are used.
+   :type names: list, optional
+   :param figname: Figure filename to save.
+   :type figname: str, optional
+
+
+.. py:function:: plot_sensmat(sensdata, pars, cases, par_labels=[], case_labels=[], cutoff=-1000.0, figname='sensmat.png')
+
+   Plot sensitivity matrix as a heatmap or bar plot.
+
+   :param sensdata: 2d array of sensitivity data, size (ncases, npars).
+   :type sensdata: np.ndarray
+   :param pars: List of parameter names.
+   :type pars: list
+   :param cases: List of case names.
+   :type cases: list
+   :param par_labels: List of parameter labels for plotting. Defaults to None, which uses generic names.
+   :type par_labels: list, optional
+   :param case_labels: List of case labels for plotting. Defaults to None, which uses generic names.
+   :type case_labels: list, optional
+   :param cutoff: Cutoff value for sensitivity inclusion. Defaults to -1000.
+   :type cutoff: float, optional
+   :param figname: Figure filename to save. Defaults to 'sensmat.png'.
+   :type figname: str, optional
+
+
+.. py:function:: plot_joy(sams_list, xcond, outnames, color_list, nominal=None, offset_factor=1.0, ax=None, figname=None)
+
+   Plots a joyplot of multiple sample sets along given output conditions.
+
+   :param sams_list: List of sample sets, each in a 2d array of size `(M,N)`.
+   :type sams_list: list[np.ndarray]
+   :param xcond: List of output condition values, length N.
+   :type xcond: list[float]
+   :param outnames: List of output condition names, length N.
+   :type outnames: list[str]
+   :param color_list: List of colors for each sample set.
+   :type color_list: list[str]
+   :param nominal: Nominal values for each output condition, an 1d array of size `(N,)`. Defaults to None.
+   :type nominal: np.ndarray, optional
+   :param offset_factor: Factor to scale the pdf heights. Defaults to 1.0.
+   :type offset_factor: float, optional
+   :param ax: Axis handle. If None, use the current axis.
+   :type ax: plt.Axes, optional
+   :param figname: Figure filename to save.
+   :type figname: str, optional
+
+

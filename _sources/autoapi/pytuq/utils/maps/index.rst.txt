@@ -1,0 +1,276 @@
+pytuq.utils.maps
+================
+
+.. py:module:: pytuq.utils.maps
+
+.. autoapi-nested-parse::
+
+   Module for various mapping functions.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.utils.maps.XMap
+   pytuq.utils.maps.Expon
+   pytuq.utils.maps.Logar
+   pytuq.utils.maps.ComposeMap
+   pytuq.utils.maps.LinearScaler
+   pytuq.utils.maps.Standardizer
+   pytuq.utils.maps.Normalizer
+   pytuq.utils.maps.Domainizer
+   pytuq.utils.maps.Affine
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   pytuq.utils.maps.scale01ToDom
+   pytuq.utils.maps.scaleDomTo01
+   pytuq.utils.maps.scaleTo01
+   pytuq.utils.maps.standardize
+
+
+Module Contents
+---------------
+
+.. py:function:: scale01ToDom(xx, dom)
+
+   Scaling an array to a given domain, assuming        the inputs are in [0,1]^d.
+
+   :param xx: Nxd input array.
+   :type xx: np.ndarray
+   :param dom: dx2 domain.
+   :type dom: np.ndarray
+
+   :returns: Nxd scaled array.
+   :rtype: np.ndarray
+
+   .. note:: If input is outside [0,1]^d, a warning is given, but the scaling will happen nevertheless.
+
+
+.. py:function:: scaleDomTo01(xx, dom)
+
+   Scaling an array from a given domain to [0,1]^d.
+
+   :param xx: Nxd input array.
+   :type xx: np.ndarray
+   :param dom: dx2 domain.
+   :type dom: np.ndarray
+
+   :returns: Nxd scaled array.
+   :rtype: np.ndarray
+
+   .. note:: If input is outside domain, a warning is given, but the scaling will happen nevertheless.
+
+
+.. py:function:: scaleTo01(xx)
+
+   Scale an array to [0,1], using dimension-wise min and max.
+
+   :param xx: Initial 2d array
+   :type xx: np.ndarray
+
+   :returns: Scaled array.
+   :rtype: np.ndarray
+
+
+.. py:function:: standardize(xx)
+
+   Normalize an array, i.e. map it to zero mean and unit variance.
+
+   :param xx: Initial 2d array
+   :type xx: np.ndarray
+
+   :returns: Normalized array.
+   :rtype: np.ndarray
+
+
+.. py:class:: XMap
+
+   Base class for a map.
+
+
+   .. py:method:: forw(x)
+
+      Forward map.
+
+      :param x: 2d numpy input array.
+      :type x: np.ndarray
+
+      :returns: 2d numpy output array.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: inv(xs)
+      :abstractmethod:
+
+
+      Inverse of the map.
+
+      :param xs: 2d numpy array.
+      :type xs: np.ndarray
+
+      :returns: if implemented, 2d numpy array.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Expon
+
+   Bases: :py:obj:`XMap`
+
+
+   Exponential map.
+
+
+   .. py:method:: inv(xs)
+
+      Inverse of the map.
+
+      :param xs: 2d numpy array.
+      :type xs: np.ndarray
+
+      :returns: if implemented, 2d numpy array.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Logar
+
+   Bases: :py:obj:`XMap`
+
+
+   Logarithmic map.
+
+
+   .. py:method:: inv(xs)
+
+      Inverse of the map.
+
+      :param xs: 2d numpy array.
+      :type xs: np.ndarray
+
+      :returns: if implemented, 2d numpy array.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: ComposeMap(map1, map2)
+
+   Bases: :py:obj:`XMap`
+
+
+   Composition of two maps.
+
+
+   .. py:attribute:: map1
+
+
+   .. py:attribute:: map2
+
+
+   .. py:method:: inv(xs)
+
+      Inverse of the map.
+
+      :param xs: 2d numpy array.
+      :type xs: np.ndarray
+
+      :returns: if implemented, 2d numpy array.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: LinearScaler(shift=None, scale=None)
+
+   Bases: :py:obj:`XMap`
+
+
+   Linear scaler map.
+
+
+   .. py:attribute:: shift
+      :value: None
+
+
+
+   .. py:attribute:: scale
+      :value: None
+
+
+
+   .. py:method:: inv(xs)
+
+      Inverse of the map.
+
+      :param xs: 2d numpy array.
+      :type xs: np.ndarray
+
+      :returns: if implemented, 2d numpy array.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: Standardizer(x)
+
+   Bases: :py:obj:`LinearScaler`
+
+
+   Standardizer map, linearly scaling data to zero mean and unit variance.
+
+
+.. py:class:: Normalizer(x, nugget=0.0)
+
+   Bases: :py:obj:`LinearScaler`
+
+
+   Normalizer map, linearly scaling data to [0,1].
+
+
+.. py:class:: Domainizer(dom)
+
+   Bases: :py:obj:`LinearScaler`
+
+
+   Domainizer map, linearly scaling data (assumed to be in [0,1]) to a given domain.
+
+   .. note:: This also can be accomplished by functions `scaleDomTo01` and its inverse `scale01ToDom`.
+
+
+.. py:class:: Affine(weight=None, bias=None)
+
+   Bases: :py:obj:`XMap`
+
+
+   Affine map.
+
+
+   .. py:attribute:: weight
+      :value: None
+
+
+
+   .. py:attribute:: bias
+      :value: None
+
+
+
+   .. py:method:: inv(xs)
+
+      Inverse of the map.
+
+      :param xs: 2d numpy array.
+      :type xs: np.ndarray
+
+      :returns: if implemented, 2d numpy array.
+      :rtype: np.ndarray
+
+
+

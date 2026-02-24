@@ -1,0 +1,516 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytuq.linred.klsurr &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">Software Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/index.html#surrogates">Surrogates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_pce.html">Polynomial Chaos Expansion Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../autoapi/index.html">Section Navigation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../autoapi/pytuq/index.html">pytuq</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/pytuq/index.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/ftools/index.html">pytuq.ftools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/func/index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/minf/index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/rv/index.html">pytuq.rv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/surrogates/index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/utils/index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pytuq.linred.klsurr</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pytuq.linred.klsurr</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="sd">&quot;&quot;&quot;Module for KL+Surrogate construction.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.kle</span><span class="w"> </span><span class="kn">import</span> <span class="n">KLE</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">..gsa.gsa</span><span class="w"> </span><span class="kn">import</span> <span class="n">SamSobol</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..workflows.fits</span><span class="w"> </span><span class="kn">import</span> <span class="n">pc_fit</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..func.func</span><span class="w"> </span><span class="kn">import</span> <span class="n">Function</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..utils.plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">myrc</span><span class="p">,</span> <span class="n">set_colors</span><span class="p">,</span> <span class="n">plot_sens</span><span class="p">,</span> <span class="n">plot_dm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..utils.mindex</span><span class="w"> </span><span class="kn">import</span> <span class="n">micf_join</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..rv.pcrv</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCRV</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">quinn.nns.mlp</span><span class="w"> </span><span class="kn">import</span> <span class="n">MLP</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">quinn.nns.rnet</span><span class="w"> </span><span class="kn">import</span> <span class="n">RNet</span><span class="p">,</span> <span class="n">NonPar</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: QUiNN not installed. NN functionality won&#39;t work.&quot;</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+
+<span class="n">myrc</span><span class="p">()</span>
+
+<span class="c1"># This should replace KLNN, and elm_glob should use this instead of KLNN?</span>
+<div class="viewcode-block" id="KLSurr">
+<a class="viewcode-back" href="../../../autoapi/pytuq/linred/klsurr/index.html#pytuq.linred.klsurr.KLSurr">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">KLSurr</span><span class="p">():</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;KL+Surrogate Class.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        built (bool): Indicates whether KLSurr is built or not.</span>
+<span class="sd">        function (callable): A callable function that is the KLSurr evaluator.</span>
+<span class="sd">        kl (KLE): The underlying KLE object.</span>
+<span class="sd">        ndim (int): The input dimensionality.</span>
+<span class="sd">        neig (int): The number of retained eigenvalues in the KLE.</span>
+<span class="sd">        smodel (torch.nn or PCRV): Surrogate model object, either NN or PC.</span>
+<span class="sd">        xisurr (callable): Surrogate evaluator of the latent features.</span>
+<span class="sd">        xitrain_kl (np.ndarray): KL latent features.</span>
+<span class="sd">        ytrain_kl (np.ndarray): KL-compressed training data.</span>
+<span class="sd">        ytrain_klsurr (np.ndarray): KL+Surrogate approximation of the training data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialization.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="KLSurr.ndim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/linred/klsurr/index.html#pytuq.linred.klsurr.KLSurr.ndim">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ndim</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="KLSurr.built">
+<a class="viewcode-back" href="../../../autoapi/pytuq/linred/klsurr/index.html#pytuq.linred.klsurr.KLSurr.built">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">built</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="KLSurr.xisurr">
+<a class="viewcode-back" href="../../../autoapi/pytuq/linred/klsurr/index.html#pytuq.linred.klsurr.KLSurr.xisurr">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xisurr</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="KLSurr.smodel">
+<a class="viewcode-back" href="../../../autoapi/pytuq/linred/klsurr/index.html#pytuq.linred.klsurr.KLSurr.smodel">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">smodel</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="KLSurr.function">
+<a class="viewcode-back" href="../../../autoapi/pytuq/linred/klsurr/index.html#pytuq.linred.klsurr.KLSurr.function">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">function</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="KLSurr.neig">
+<a class="viewcode-back" href="../../../autoapi/pytuq/linred/klsurr/index.html#pytuq.linred.klsurr.KLSurr.neig">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">neig</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="KLSurr.setDim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/linred/klsurr/index.html#pytuq.linred.klsurr.KLSurr.setDim">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setDim</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ndim</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Set the input dimensionality.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ndim (int): Input dimensionality, `d`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ndim</span> <span class="o">=</span> <span class="n">ndim</span></div>
+
+
+<div class="viewcode-block" id="KLSurr.build">
+<a class="viewcode-back" href="../../../autoapi/pytuq/linred/klsurr/index.html#pytuq.linred.klsurr.KLSurr.build">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ptrain</span><span class="p">,</span> <span class="n">ytrain</span><span class="p">,</span> <span class="n">neig</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">surr</span><span class="o">=</span><span class="s1">&#39;PC&#39;</span><span class="p">,</span> <span class="n">tr_frac</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">pc_order</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">bcs_eta</span><span class="o">=</span><span class="mf">1.e-8</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build the KL+Surrogate.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ptrain (np.ndarray): An input array of size `(M,d)`.</span>
+<span class="sd">            ytrain (np.ndarray): Output training data array of size `(M,N)`.</span>
+<span class="sd">            neig (int, optional): Number of eigenvalues. Defaults to None, which means all eigenvalues are retained.</span>
+<span class="sd">            surr (str, optional): Surrogate type, PC or NN. Defaults to PC.</span>
+<span class="sd">            tr_frac (float, optional): Fraction of samples used for training. Defaults to 0.9.</span>
+<span class="sd">            pc_order (int, optional): PC order. Defaults to 3.</span>
+<span class="sd">            bcs_eta (float, optional): BCS tolerance. Defaults to 1.e-8.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">nens</span><span class="p">,</span> <span class="n">ndim</span> <span class="o">=</span> <span class="n">ptrain</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">nens_</span><span class="p">,</span> <span class="n">nt</span> <span class="o">=</span> <span class="n">ytrain</span><span class="o">.</span><span class="n">shape</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">nens</span><span class="o">==</span><span class="n">nens_</span><span class="p">)</span>
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setDim</span><span class="p">(</span><span class="n">ndim</span><span class="o">=</span><span class="n">ndim</span><span class="p">)</span>
+
+        <span class="c1"># Build KL expansion</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kl</span> <span class="o">=</span> <span class="n">KLE</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kl</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">ytrain</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Pick the first neig eigenvalues that explain 99% of variance</span>
+        <span class="k">if</span> <span class="n">neig</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">neig</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kl</span><span class="o">.</span><span class="n">get_neig</span><span class="p">(</span><span class="mf">0.99</span><span class="p">)</span>
+
+
+        <span class="c1">######################################################################</span>
+        <span class="c1"># Construct surrogates for KL modes</span>
+        <span class="c1">######################################################################</span>
+
+        <span class="n">xitrain</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kl</span><span class="o">.</span><span class="n">xi</span><span class="p">[:,</span> <span class="p">:</span><span class="n">neig</span><span class="p">]</span>
+        <span class="n">nout</span> <span class="o">=</span> <span class="n">xitrain</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># number of outputs to build surrogates for is neig</span>
+
+        <span class="k">if</span> <span class="n">surr</span> <span class="o">==</span> <span class="s1">&#39;NN&#39;</span><span class="p">:</span>
+            <span class="c1"># mynn = MLP(ndim, nout, (100, 200, 200))</span>
+            <span class="n">mynn</span> <span class="o">=</span> <span class="n">RNet</span><span class="p">(</span><span class="mi">33</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">NonPar</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span>
+                <span class="n">indim</span><span class="o">=</span><span class="n">ndim</span><span class="p">,</span> <span class="n">outdim</span><span class="o">=</span><span class="n">nout</span><span class="p">,</span> <span class="n">layer_pre</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">layer_post</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">biasorno</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">nonlin</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">mlp</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+            <span class="n">indperm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">nens</span><span class="p">))</span>
+            <span class="n">ntrn</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">tr_frac</span><span class="o">*</span><span class="n">nens</span><span class="p">)</span>
+            <span class="n">nval</span> <span class="o">=</span> <span class="n">nens</span> <span class="o">-</span> <span class="n">ntrn</span>
+            <span class="n">indtrn</span> <span class="o">=</span> <span class="n">indperm</span><span class="p">[:</span><span class="n">ntrn</span><span class="p">]</span>
+            <span class="n">indval</span> <span class="o">=</span> <span class="n">indperm</span><span class="p">[</span><span class="o">-</span><span class="n">nval</span><span class="p">:]</span>
+            <span class="k">if</span> <span class="n">ntrn</span> <span class="o">==</span> <span class="n">nens</span><span class="p">:</span>
+                <span class="n">indval</span> <span class="o">=</span> <span class="n">indtrn</span>
+
+            <span class="n">nnmodel</span> <span class="o">=</span> <span class="n">mynn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">ptrain</span><span class="p">[</span><span class="n">indtrn</span><span class="p">],</span> <span class="n">xitrain</span><span class="p">[</span><span class="n">indtrn</span><span class="p">],</span>
+                         <span class="n">val</span><span class="o">=</span><span class="p">[</span><span class="n">ptrain</span><span class="p">[</span><span class="n">indval</span><span class="p">],</span> <span class="n">xitrain</span><span class="p">[</span><span class="n">indval</span><span class="p">]],</span>
+                         <span class="n">lrate</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">nepochs</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>
+                         <span class="n">gradcheck</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">freq_out</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">xisurr</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">mynn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">smodel</span> <span class="o">=</span> <span class="n">nnmodel</span>
+
+        <span class="k">elif</span> <span class="n">surr</span> <span class="o">==</span> <span class="s1">&#39;PC&#39;</span><span class="p">:</span>
+            <span class="n">pcrv</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">pc_fit</span><span class="p">(</span><span class="n">ptrain</span><span class="p">,</span> <span class="n">xitrain</span><span class="p">,</span>
+                             <span class="n">order</span><span class="o">=</span><span class="n">pc_order</span><span class="p">,</span> <span class="n">pctype</span><span class="o">=</span><span class="s1">&#39;LU&#39;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;bcs&#39;</span><span class="p">,</span> <span class="n">eta</span> <span class="o">=</span> <span class="n">bcs_eta</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">xisurr</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">pcrv</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">smodel</span> <span class="o">=</span> <span class="n">pcrv</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Surrogate type </span><span class="si">{</span><span class="n">surr</span><span class="si">}</span><span class="s2"> is unknown. Please use NN or PC. Exiting.&quot;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">built</span> <span class="o">=</span> <span class="kc">True</span>
+
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ytrain_kl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kl</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">neig</span><span class="o">=</span><span class="n">neig</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xitrain_kl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evalxi</span><span class="p">(</span><span class="n">ptrain</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ytrain_klsurr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kl</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">xi</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">xitrain_kl</span><span class="p">,</span> <span class="n">neig</span><span class="o">=</span><span class="n">neig</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">neig</span> <span class="o">=</span> <span class="n">neig</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setFunction</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="KLSurr.setFunction">
+<a class="viewcode-back" href="../../../autoapi/pytuq/linred/klsurr/index.html#pytuq.linred.klsurr.KLSurr.setFunction">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setFunction</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates the function evaluator corresponding to the surrogate.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">function</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;KLSurr Function&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="o">.</span><span class="n">setDimDom</span><span class="p">(</span><span class="n">dimension</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ndim</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="o">.</span><span class="n">setCall</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="KLSurr.evalxi">
+<a class="viewcode-back" href="../../../autoapi/pytuq/linred/klsurr/index.html#pytuq.linred.klsurr.KLSurr.evalxi">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">evalxi</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ptrain</span><span class="p">,</span> <span class="n">otherpars</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Evaluates new latent features at given inputs.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ptrain (np.ndarray): Input array of size `(M, d)`.</span>
+<span class="sd">            otherpars (None, optional): Optional parameters (unused currently).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: Predictions of latent features, an array of size `(M, K)`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">built</span><span class="p">)</span>
+        <span class="n">xi_pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xisurr</span><span class="p">(</span><span class="n">ptrain</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">xi_pred</span></div>
+
+
+<div class="viewcode-block" id="KLSurr.eval">
+<a class="viewcode-back" href="../../../autoapi/pytuq/linred/klsurr/index.html#pytuq.linred.klsurr.KLSurr.eval">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ptrain</span><span class="p">,</span> <span class="n">neig</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Evaluate the KL+Surrogate at given inputs.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ptrain (np.ndarray): Input array of size `(M, d)`.</span>
+<span class="sd">            neig (int, optional): Number of eigenvalues. Defaults to None, which means all eigenvalues are retained.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: Output array of size `(M,N)`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">built</span><span class="p">)</span>
+
+
+        <span class="n">xi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evalxi</span><span class="p">(</span><span class="n">ptrain</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">neig</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">neig</span> <span class="o">=</span> <span class="n">xi</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">ytrain_klsurr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kl</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">xi</span><span class="o">=</span><span class="n">xi</span><span class="p">,</span> <span class="n">neig</span><span class="o">=</span><span class="n">neig</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">ytrain_klsurr</span></div>
+
+
+
+<div class="viewcode-block" id="KLSurr.plot_parity_xi">
+<a class="viewcode-back" href="../../../autoapi/pytuq/linred/klsurr/index.html#pytuq.linred.klsurr.KLSurr.plot_parity_xi">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">plot_parity_xi</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Plots diagonal parity plots for each latent feature.&quot;&quot;&quot;</span>
+        <span class="n">neig</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xitrain_kl</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">neig</span><span class="p">):</span>
+            <span class="n">plot_dm</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">kl</span><span class="o">.</span><span class="n">xi</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]],</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">xitrain_kl</span><span class="p">[:,</span><span class="n">i</span><span class="p">]],</span>
+                    <span class="n">axes_labels</span><span class="o">=</span><span class="p">[</span><span class="sa">r</span><span class="s1">&#39;$\xi_{&#39;</span><span class="o">+</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="o">+</span><span class="s1">&#39;}$&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$\xi_{&#39;</span><span class="o">+</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="o">+</span><span class="s1">&#39;}^&#39;</span><span class="o">+</span><span class="s1">&#39;</span><span class="si">{surr}</span><span class="s1">$&#39;</span><span class="p">],</span>
+                    <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Training&#39;</span><span class="p">],</span> <span class="n">msize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
+                    <span class="n">figname</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;xi_dm_</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s1">.png&#39;</span><span class="p">)</span></div>
+
+            <span class="c1"># fig = plt.figure(figsize=(12,10))</span>
+            <span class="c1"># plt.plot(self.kl.xi[:, i], self.xitrain_kl[:,i], &#39;bo&#39;)</span>
+            <span class="c1"># plt.xlabel(&#39;ELM&#39;)</span>
+            <span class="c1"># plt.ylabel(&#39;Apprx.&#39;)</span>
+
+            <span class="c1"># plt.savefig(f&#39;xi_dm_{i}.png&#39;)</span>
+            <span class="c1"># plt.clf()</span>
+
+    <span class="c1"># TODO: this need cleanup, and perhaps there is no need for this here, as long as klsurr.function is set!</span>
+    <span class="c1"># TODO: plotting can really be done outside</span>
+<div class="viewcode-block" id="KLSurr.compute_sens">
+<a class="viewcode-back" href="../../../autoapi/pytuq/linred/klsurr/index.html#pytuq.linred.klsurr.KLSurr.compute_sens">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_sens</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="n">npar</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pnames</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">totmain</span><span class="o">=</span><span class="s1">&#39;main&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Computes and plots Sobol sensitivities via sampling.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            domain (np.ndarray): Domain of input, array of size `(d,2)`.</span>
+<span class="sd">            npar (int): Number of parameters.</span>
+<span class="sd">            colors (None, optional): Optional list of colors for plotting.</span>
+<span class="sd">            pnames (None, optional): Optional list of names for plotting.</span>
+<span class="sd">            totmain (str, optional): Total or main sensitivity. Defaults to main.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: Returns Sobol sensitivities, an array of size `(N,d)`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ndim</span><span class="p">,</span> <span class="n">two</span> <span class="o">=</span> <span class="n">domain</span><span class="o">.</span><span class="n">shape</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">two</span><span class="o">==</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">SensMethod</span> <span class="o">=</span> <span class="n">SamSobol</span><span class="p">(</span><span class="n">domain</span><span class="p">)</span>
+        <span class="n">qsam</span> <span class="o">=</span> <span class="n">SensMethod</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">npar</span><span class="p">)</span>
+        <span class="n">ysam_eig</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evalxi</span><span class="p">(</span><span class="n">qsam</span><span class="p">)</span>
+        <span class="n">neig</span> <span class="o">=</span> <span class="n">ysam_eig</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># Sensitivities for eigenmodes</span>
+        <span class="n">allsens_eig_sobol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">neig</span><span class="p">,</span> <span class="n">ndim</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">neig</span><span class="p">):</span>
+            <span class="n">sens</span> <span class="o">=</span> <span class="n">SensMethod</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">ysam_eig</span><span class="p">[:,</span> <span class="n">i</span><span class="p">])</span>
+            <span class="n">allsens_eig_sobol</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">sens</span><span class="p">[</span><span class="n">totmain</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">colors</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">colors</span> <span class="o">=</span> <span class="n">set_colors</span><span class="p">(</span><span class="n">ndim</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">pnames</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">pnames</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;p</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ndim</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+
+        <span class="n">plot_sens</span><span class="p">(</span><span class="n">allsens_eig_sobol</span><span class="p">,</span><span class="nb">range</span><span class="p">(</span><span class="n">ndim</span><span class="p">),</span><span class="nb">range</span><span class="p">(</span><span class="n">neig</span><span class="p">),</span><span class="n">vis</span><span class="o">=</span><span class="s2">&quot;bar&quot;</span><span class="p">,</span><span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                     <span class="n">par_labels</span><span class="o">=</span><span class="n">pnames</span><span class="p">,</span> <span class="n">case_labels</span><span class="o">=</span><span class="p">[</span><span class="sa">r</span><span class="s1">&#39;$\xi_{&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;}$&#39;</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">neig</span><span class="p">)],</span>
+                     <span class="n">colors</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span><span class="n">ncol</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">grid_show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                     <span class="n">xlbl</span><span class="o">=</span><span class="s1">&#39;Eigen-features&#39;</span><span class="p">,</span><span class="n">legend_show</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">legend_size</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span><span class="n">xdatatick</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                     <span class="n">figname</span><span class="o">=</span><span class="s1">&#39;sens_eig.png&#39;</span><span class="p">,</span> <span class="n">topsens</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lbl_size</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">yoffset</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+                     <span class="n">title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">xticklabel_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">xticklabel_rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="c1"># Sensitivities for the actual model</span>
+        <span class="n">ysam_model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">qsam</span><span class="p">,</span> <span class="n">neig</span><span class="o">=</span><span class="n">neig</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="c1"># same as klnn.kl.eval(xi=ysam_eig, neig=neig).T</span>
+        <span class="n">nx</span> <span class="o">=</span> <span class="n">ysam_model</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">allsens_sobol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">nx</span><span class="p">,</span> <span class="n">ndim</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nx</span><span class="p">):</span>
+            <span class="n">sens</span> <span class="o">=</span> <span class="n">SensMethod</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">ysam_model</span><span class="p">[:,</span> <span class="n">i</span><span class="p">])</span>
+            <span class="n">allsens_sobol</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">sens</span><span class="p">[</span><span class="n">totmain</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">allsens_sobol</span></div>
+
+
+    <span class="c1"># TODO: plotting can really be done outside</span>
+<div class="viewcode-block" id="KLSurr.compute_sens_pc">
+<a class="viewcode-back" href="../../../autoapi/pytuq/linred/klsurr/index.html#pytuq.linred.klsurr.KLSurr.compute_sens_pc">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_sens_pc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pnames</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">totmain</span><span class="o">=</span><span class="s1">&#39;main&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Computes PC-based sensitivities if PC surrogate is used.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            colors (None, optional): Optional list of colors for plotting.</span>
+<span class="sd">            pnames (None, optional): Optional list of names for plotting.</span>
+<span class="sd">            totmain (str, optional): Total or main sensitivity. Defaults to main.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: Returns Sobol sensitivities, an array of size `(N,d)`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">smodel</span><span class="p">,</span> <span class="n">PCRV</span><span class="p">))</span>
+        <span class="n">mindex_all</span><span class="p">,</span> <span class="n">cfs_all</span> <span class="o">=</span> <span class="n">micf_join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">smodel</span><span class="o">.</span><span class="n">mindices</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">smodel</span><span class="o">.</span><span class="n">coefs</span><span class="p">)</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">mindex_all</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">neig</span><span class="o">==</span><span class="n">cfs_all</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">smodel</span><span class="o">.</span><span class="n">pctypes</span><span class="p">))</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#assert all PCs are of the same type</span>
+
+        <span class="c1"># Sensitivities for eigenmodes</span>
+        <span class="n">pcrv_eig</span><span class="o">=</span><span class="n">PCRV</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">neig</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ndim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">smodel</span><span class="o">.</span><span class="n">pctypes</span><span class="p">,</span> <span class="n">mi</span><span class="o">=</span><span class="n">mindex_all</span><span class="p">,</span> <span class="n">cfs</span><span class="o">=</span><span class="n">cfs_all</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">totmain</span><span class="o">==</span><span class="s1">&#39;main&#39;</span><span class="p">:</span>
+            <span class="n">allsens_eig_sobol</span> <span class="o">=</span> <span class="n">pcrv_eig</span><span class="o">.</span><span class="n">computeSens</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">totmain</span><span class="o">==</span><span class="s1">&#39;total&#39;</span><span class="p">:</span>
+            <span class="n">allsens_eig_sobol</span> <span class="o">=</span> <span class="n">pcrv_eig</span><span class="o">.</span><span class="n">computeTotSens</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Please indicate main or total sensititvity. Exiting.&quot;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">colors</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">colors</span> <span class="o">=</span> <span class="n">set_colors</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ndim</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">pnames</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">pnames</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;p</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ndim</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+
+        <span class="n">plot_sens</span><span class="p">(</span><span class="n">allsens_eig_sobol</span><span class="p">,</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ndim</span><span class="p">),</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">neig</span><span class="p">),</span><span class="n">vis</span><span class="o">=</span><span class="s2">&quot;bar&quot;</span><span class="p">,</span><span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                     <span class="n">par_labels</span><span class="o">=</span><span class="n">pnames</span><span class="p">,</span> <span class="n">case_labels</span><span class="o">=</span><span class="p">[</span><span class="sa">r</span><span class="s1">&#39;$\xi_{&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;}$&#39;</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">neig</span><span class="p">)],</span>
+                     <span class="n">colors</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span><span class="n">ncol</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">grid_show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                     <span class="n">xlbl</span><span class="o">=</span><span class="s1">&#39;Eigen-features&#39;</span><span class="p">,</span><span class="n">legend_show</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">legend_size</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span><span class="n">xdatatick</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                     <span class="n">figname</span><span class="o">=</span><span class="s1">&#39;sens_eig.png&#39;</span><span class="p">,</span> <span class="n">topsens</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lbl_size</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">yoffset</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+                     <span class="n">title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">xticklabel_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">xticklabel_rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="c1"># Sensitivities for the actual model</span>
+        <span class="n">cfs_glob</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">cfs_all</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kl</span><span class="o">.</span><span class="n">eigval</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">neig</span><span class="p">]))),</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">kl</span><span class="o">.</span><span class="n">modes</span><span class="p">[:,</span> <span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">neig</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="c1">#npc, nx</span>
+
+        <span class="n">cfs_glob</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kl</span><span class="o">.</span><span class="n">mean</span>
+
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Multiindex shape :&quot;</span><span class="p">,</span> <span class="n">mindex_all</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;PC coefficients&#39; shape :&quot;</span><span class="p">,</span> <span class="n">cfs_glob</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="c1">#npc, nx</span>
+        <span class="n">nx</span> <span class="o">=</span> <span class="n">cfs_glob</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">pcrv_phys</span><span class="o">=</span><span class="n">PCRV</span><span class="p">(</span><span class="n">nx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ndim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">smodel</span><span class="o">.</span><span class="n">pctypes</span><span class="p">,</span> <span class="n">mi</span><span class="o">=</span><span class="n">mindex_all</span><span class="p">,</span> <span class="n">cfs</span><span class="o">=</span><span class="n">cfs_glob</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">totmain</span><span class="o">==</span><span class="s1">&#39;main&#39;</span><span class="p">:</span>
+            <span class="n">allsens_sobol</span> <span class="o">=</span> <span class="n">pcrv_phys</span><span class="o">.</span><span class="n">computeSens</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">totmain</span><span class="o">==</span><span class="s1">&#39;total&#39;</span><span class="p">:</span>
+            <span class="n">allsens_sobol</span> <span class="o">=</span> <span class="n">pcrv_phys</span><span class="o">.</span><span class="n">computeTotSens</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Please indicate main or total sensititvity. Exiting.&quot;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">allsens_sobol</span></div>
+</div>
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

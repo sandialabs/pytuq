@@ -1,0 +1,9 @@
+Section Navigation
+==================
+
+Below is an overview of the PyTUQ package structure and API reference documentation.
+
+.. toctree::
+   :titlesonly:
+
+   /autoapi/pytuq/index

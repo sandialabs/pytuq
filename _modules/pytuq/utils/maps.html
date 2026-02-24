@@ -1,0 +1,519 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytuq.utils.maps &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">Software Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/index.html#surrogates">Surrogates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_pce.html">Polynomial Chaos Expansion Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../autoapi/index.html">Section Navigation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../autoapi/pytuq/index.html">pytuq</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/pytuq/index.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/ftools/index.html">pytuq.ftools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/func/index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/minf/index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/rv/index.html">pytuq.rv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/surrogates/index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/utils/index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pytuq.utils.maps</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pytuq.utils.maps</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="sd">&quot;&quot;&quot;Module for various mapping functions.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+
+<div class="viewcode-block" id="scale01ToDom">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.scale01ToDom">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">scale01ToDom</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">dom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Scaling an array to a given domain, assuming \</span>
+<span class="sd">       the inputs are in [0,1]^d.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        xx (np.ndarray): Nxd input array.</span>
+<span class="sd">        dom (np.ndarray): dx2 domain.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        np.ndarray: Nxd scaled array.</span>
+<span class="sd">    Note:</span>
+<span class="sd">        If input is outside [0,1]^d, a warning is given, but the scaling will happen nevertheless.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">xx</span><span class="o">&lt;</span><span class="mf">0.0</span><span class="p">)</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">xx</span><span class="o">&gt;</span><span class="mf">1.0</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: some elements are outside the [0,1] range.&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">xx</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">dom</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">dom</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">dom</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="scaleDomTo01">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.scaleDomTo01">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">scaleDomTo01</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">dom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Scaling an array from a given domain to [0,1]^d.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        xx (np.ndarray): Nxd input array.</span>
+<span class="sd">        dom (np.ndarray): dx2 domain.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        np.ndarray: Nxd scaled array.</span>
+<span class="sd">    Note:</span>
+<span class="sd">        If input is outside domain, a warning is given, but the scaling will happen nevertheless.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">xxsc</span> <span class="o">=</span> <span class="p">(</span><span class="n">xx</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">dom</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">dom</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">dom</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">xxsc</span><span class="o">&lt;</span><span class="mf">0.0</span><span class="p">)</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">xxsc</span><span class="o">&gt;</span><span class="mf">1.0</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: some elements are outside the [0,1] range.&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">xxsc</span></div>
+
+
+<div class="viewcode-block" id="scaleTo01">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.scaleTo01">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">scaleTo01</span><span class="p">(</span><span class="n">xx</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Scale an array to [0,1], using dimension-wise min and max.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        xx (np.ndarray): Initial 2d array</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        np.ndarray: Scaled array.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">xx</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="standardize">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.standardize">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">standardize</span><span class="p">(</span><span class="n">xx</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Normalize an array, i.e. map it to zero mean and unit variance.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        xx (np.ndarray): Initial 2d array</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        np.ndarray: Normalized array.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">xx</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">xx</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">xx</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="XMap">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.XMap">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">XMap</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for a map.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialization.&quot;&quot;&quot;</span>
+        <span class="o">...</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Base XMap call is not implemented&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="XMap.forw">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.XMap.forw">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Forward map.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (np.ndarray): 2d numpy input array.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: 2d numpy output array.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__call__</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="XMap.inv">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.XMap.inv">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Inverse of the map.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            xs (np.ndarray): 2d numpy array.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: if implemented, 2d numpy array.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Base XMap inverse is not implemented&quot;</span><span class="p">)</span></div>
+</div>
+
+
+<div class="viewcode-block" id="Expon">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.Expon">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Expon</span><span class="p">(</span><span class="n">XMap</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Exponential map.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Expon.inv">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.Expon.inv">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span></div>
+</div>
+
+
+<div class="viewcode-block" id="Logar">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.Logar">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Logar</span><span class="p">(</span><span class="n">XMap</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Logarithmic map.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Logar.inv">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.Logar.inv">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span></div>
+</div>
+
+
+<div class="viewcode-block" id="ComposeMap">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.ComposeMap">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ComposeMap</span><span class="p">(</span><span class="n">XMap</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Composition of two maps.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">map1</span><span class="p">,</span> <span class="n">map2</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize with the two maps to be composed.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            map1 (XMap): Inner map</span>
+<span class="sd">            map2 (XMap): Outer map</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+<div class="viewcode-block" id="ComposeMap.map1">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.ComposeMap.map1">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">map1</span> <span class="o">=</span> <span class="n">map1</span></div>
+
+<div class="viewcode-block" id="ComposeMap.map2">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.ComposeMap.map2">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">map2</span> <span class="o">=</span> <span class="n">map2</span></div>
+
+
+    <span class="c1">#def __repr__(self):</span>
+    <span class="c1">#    return f&quot;ComposeMap({self.map1=}, {self.map2=}&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">map2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">map1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+<div class="viewcode-block" id="ComposeMap.inv">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.ComposeMap.inv">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">map1</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">map2</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">xs</span><span class="p">))</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="LinearScaler">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.LinearScaler">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">LinearScaler</span><span class="p">(</span><span class="n">XMap</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Linear scaler map.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize with shift and scale.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            shift (np.ndarray, optional): Shift array, broadcast-friendly</span>
+<span class="sd">            scale (np.ndarray, optional): Scale array, broadcast-friendly</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+<div class="viewcode-block" id="LinearScaler.shift">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.LinearScaler.shift">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shift</span> <span class="o">=</span> <span class="n">shift</span></div>
+
+<div class="viewcode-block" id="LinearScaler.scale">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.LinearScaler.scale">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scale</span> <span class="o">=</span> <span class="n">scale</span></div>
+
+        <span class="k">return</span>
+
+    <span class="c1">#def __repr__(self):</span>
+    <span class="c1">#    return f&quot;Scaler({self.shift=}, {self.scale=}&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">shift</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">xs</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="mf">0.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">xs</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">shift</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">xs</span> <span class="o">/=</span> <span class="mf">1.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">xs</span> <span class="o">/=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale</span>
+
+        <span class="k">return</span> <span class="n">xs</span>
+
+<div class="viewcode-block" id="LinearScaler.inv">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.LinearScaler.inv">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">xs</span> <span class="o">*</span> <span class="mf">1.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">xs</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="c1">#.reshape(1,-1)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">shift</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">+=</span> <span class="mf">0.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shift</span>
+
+        <span class="k">return</span> <span class="n">x</span></div>
+</div>
+
+
+<div class="viewcode-block" id="Standardizer">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.Standardizer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Standardizer</span><span class="p">(</span><span class="n">LinearScaler</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Standardizer map, linearly scaling data to zero mean and unit variance.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize with a given 2d array.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (np.ndarray): Data according to which the standardization happens.</span>
+<span class="sd">        Note:</span>
+<span class="sd">            This also can be accomplished by function `normalize`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">shift</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">scale</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="Normalizer">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.Normalizer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Normalizer</span><span class="p">(</span><span class="n">LinearScaler</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Normalizer map, linearly scaling data to [0,1].&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">nugget</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize with a given 2d array and a nugget to keep slightly above zero.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (np.ndarray): Data according to which the normalization happens.</span>
+<span class="sd">            nugget (float, optional): Small value to keep data above zero if needed.</span>
+<span class="sd">        Note:</span>
+<span class="sd">            When nugget is 0, this also can be accomplished by function `scaleTo01`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">shift</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">-</span><span class="n">nugget</span><span class="p">,</span>
+                         <span class="n">scale</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="Domainizer">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.Domainizer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Domainizer</span><span class="p">(</span><span class="n">LinearScaler</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Domainizer map, linearly scaling data (assumed to be in [0,1]) to a given domain.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        This also can be accomplished by functions `scaleDomTo01` and its inverse `scale01ToDom`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dom</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize with a given domain.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dom (np.ndarray): Domain of size `(d,2)` according to which the normalization happens.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">shift</span><span class="o">=</span><span class="n">dom</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">scale</span><span class="o">=</span><span class="n">dom</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">dom</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="Affine">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.Affine">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Affine</span><span class="p">(</span><span class="n">XMap</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Affine map.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes with weight and bias arrays.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            weight (np.ndarray, optional): 2d array</span>
+<span class="sd">            bias (np.ndarray, optional): 1d array</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+<div class="viewcode-block" id="Affine.weight">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.Affine.weight">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">weight</span></div>
+
+<div class="viewcode-block" id="Affine.bias">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.Affine.bias">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bias</span> <span class="o">=</span> <span class="n">bias</span></div>
+
+        <span class="k">return</span>
+
+    <span class="c1">#def __repr__(self):</span>
+    <span class="c1">#    return f&quot;Scaler({self.weight=}, {self.bias=}&quot;</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">xs</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mf">1.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">xs</span> <span class="o">=</span> <span class="n">x</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="o">.</span><span class="n">T</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bias</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">xs</span> <span class="o">+=</span> <span class="mf">0.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">xs</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bias</span>
+
+        <span class="k">return</span> <span class="n">xs</span>
+
+<div class="viewcode-block" id="Affine.inv">
+<a class="viewcode-back" href="../../../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.Affine.inv">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bias</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">xs</span> <span class="o">-</span> <span class="mf">0.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">xs</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">bias</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">*=</span> <span class="mf">1.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">x</span></div>
+</div>
+
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

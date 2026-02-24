@@ -1,0 +1,173 @@
+pytuq.minf.minf
+===============
+
+.. py:module:: pytuq.minf.minf
+
+.. autoapi-nested-parse::
+
+   Various utilities for model parameter inference and postprocessing.
+
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   pytuq.minf.minf.model_infer
+   pytuq.minf.minf.model_infer_postp
+   pytuq.minf.minf.plot_1d_data
+   pytuq.minf.minf.plot_1d_samples
+   pytuq.minf.minf.plot_1dfit
+   pytuq.minf.minf.plot_1dfit_vars
+   pytuq.minf.minf.plot_1dfit_shade
+   pytuq.minf.minf.plot_ndfit_vars
+
+
+Module Contents
+---------------
+
+.. py:function:: model_infer(ydata, model, model_params, model_pdim, inpdf_type='pci', pc_type='LU', outord=0, rndind=[], fixindnom=[], ind_calib=None, calib_type='amcmc', calib_params=None, md_transform=None, datamode=None, lik_type='classical', lik_params={}, pr_type='uniform', pr_params={}, dv_type='var_fixed', dv_params=None, zflag=True)
+
+   Main function that performs model parameter inference, with or without embedded model error.
+
+   :param ydata: List of `N` 1d arrays corresponding to data for each design location, or a 2d array of size `(N,e)`, or an 1d array of size `N`.
+   :type ydata: list or np.ndarray
+   :param model: Model with signature `f(p, q)`, where `p` are model parameters of interest, and `q` are other helpful model parameters.
+   :type model: callable
+   :param model_params: Model parameters `q`.
+   :type model_params: tuple or list
+   :param model_pdim: Parameter dimensionality, i.e. number of model parameters.
+   :type model_pdim: int
+   :param inpdf_type: Embedded PDF type. Options are 'pci' (default) and 'pct'.
+   :type inpdf_type: str
+   :param pc_type: Embedded PC type. Can be 'LU' (default) or 'HG'.
+   :type pc_type: str
+   :param outord: Order for the output PC in the likelihood computation. Defaults to 0.
+   :type outord: int, optional
+   :param rndind: List of indices of parameters to be embedded. If None, embeds in all parameters. Default is empty list, i.e. no embedding.
+   :type rndind: list[ind], optional
+   :param fixindnom: An array of size `(K,2)`, where first column indicates indices of parameters that are fixed (i.e. not part of the inference), and the second column is their nominal, fixed values. Defaults to an empty list, i.e. all parameters are inferred, none are fixed.
+   :type fixindnom: list, optional
+   :param ind_calib: Model output indices that are used for calibration. Default is None, i.e. all outputs being used for calibration.
+   :type ind_calib: list, optional
+   :param calib_type: Calibration type. Only 'amcmc' (default) is implemented. Can also be a user-defined Calib object.
+   :type calib_type: str or calib.Calib, optional
+   :param calib_params: Dictionary of calibration parameters.
+   :type calib_params: dict, optional
+   :param md_transform: Potentially, a transform to be applied to model and data before the likelihood computation starts. Default is None, i.e. identity function.
+   :type md_transform: callable, optional
+   :param datamode: If 'mean', work with data means per location.
+   :type datamode: str, optional
+   :param lik_type: Likelihood type: options are 'classical', 'logclassical', 'abc', 'gausmarg', 'dummy'.
+   :type lik_type: str, optional
+   :param lik_params: Parameters of likelihood.
+   :type lik_params: dict, optional
+   :param pr_type: Prior type: the options are 'uniform' and 'normal'.
+   :type pr_type: str, optional
+   :param pr_params: Parameters of prior.
+   :type pr_params: dict, optional
+   :param dv_type: Data variance treatment type. Options are 'var_fixed', 'std_infer', 'std_infer_log', 'std_prop_fixed', 'var_fromdata_fixed', 'log_var_fromdata_fixed', 'var_fromdata_infer', 'log_var_fromdata_infer', 'scale_var'.
+   :type dv_type: str, optional
+   :param dv_params: Parameter list relevant to data variance computation. Defaults to None.
+   :type dv_params: list, optional
+   :param zflag: Controls whether we want to precondition the inference with a deterministic optimization to find a better starting point for the chain.
+   :type zflag: bool, optional
+
+   :returns: Dictionary of results. Keys are 'chain' (chain samples array), 'mapparams' (MAP parameters array), 'maxpost' (maximal log-post value), 'accrate' (acceptance rate), 'logpost' (log-post values throughout the chain), 'alphas' (acceptance probabilities throughout the chain), 'post' (Inference object).
+   :rtype: dict
+
+
+.. py:function:: model_infer_postp(calib_results, checkmode=None, nburn=0, nevery=1, nxi=1)
+
+   Postprocessing calibration results.
+
+   :param calib_results: Result dictionary, the output of model_infer(...) function.
+   :type calib_results: dict
+   :param checkmode: Mode of evaluation a tuple of [model, model_parameters, index of calibrated outputs, final transform]. Defaults to None, which means get the inference object's internal model features.
+   :type checkmode: tuple, optional
+   :param nburn: Number of burned samples from the beginning of the chain. Default is 0, i.e. no burn-in.
+   :type nburn: int, optional
+   :param nevery: Thinning of the chain. Default is 1, i.e. no thinning.
+   :type nevery: int, optional
+   :param nxi: Number of samples per chain sample.
+   :type nxi: int, optional
+
+   :returns: ycheck (dictionary of various prediction means and variances), psamples (3d array of parameter samples of size Npost x nxi x pdim), fsamples (3d array of model output samples Npost x nxi x outdim)
+   :rtype: tuple
+
+
+.. py:function:: plot_1d_data(xdata, ydata, xygrid_true=None)
+
+   Plotting 1d data.
+
+   :param xdata: An 1d array of x-data.
+   :type xdata: np.ndarray
+   :param ydata: An 1d array of y-data.
+   :type ydata: np.ndarray
+   :param xygrid_true: A tuple of gridded x- and y-values, if one wants to plot the true model as well.
+   :type xygrid_true: tuple, optional
+
+
+.. py:function:: plot_1d_samples(xdata, ydata, xygrid_samples=None)
+
+   Plotting 1d data.
+
+   :param xdata: An 1d array of x-data.
+   :type xdata: np.ndarray
+   :param ydata: An 1d array of y-data.
+   :type ydata: np.ndarray
+   :param xygrid_samples: A tuple of gridded x- and y-values (can be a 2d array to plot many samples of the true model), if one wants to plot the true model as well.
+   :type xygrid_samples: tuple, optional
+
+   .. note:: This is very similar to plot_1d_data() and could be merged with it.
+
+
+.. py:function:: plot_1dfit(xgrid, ygrid_pred, ygrid_true=None, xydata=None)
+
+   Plotting 1d fit with total and MAP standard deviation.
+
+   :param xgrid: An 1d array of x-grid
+   :type xgrid: np.ndarray
+   :param ygrid_pred: Dictionary containing moments of predictions.
+   :type ygrid_pred: dict
+   :param ygrid_true: If not None, this is the true model values at the x-grid.
+   :type ygrid_true: np.ndarray, optional
+   :param xydata: If not None, this is the x- and y-data tuple and plots on top of the fits.
+   :type xydata: tuple, optional
+
+
+.. py:function:: plot_1dfit_vars(xgrid, ygrid_pred, xydata=None)
+
+   Plotting 1d fit with variance decomposed into posterior uncertainty and model error.
+
+   :param xgrid: An 1d array of x-grid
+   :type xgrid: np.ndarray
+   :param ygrid_pred: Dictionary containing moments of predictions.
+   :type ygrid_pred: dict
+   :param xydata: If not None, this is the x- and y-data tuple and plots on top of the fits.
+   :type xydata: tuple, optional
+
+
+.. py:function:: plot_1dfit_shade(xgrid, ygrid_samples, xydata=None)
+
+   Plotting 1d fit with predictive variance shaded by quantiles.
+
+   :param xgrid: An 1d array of x-grid
+   :type xgrid: np.ndarray
+   :param ygrid_samples: A 2d array of prediction samples.
+   :type ygrid_samples: np.ndarray
+   :param xydata: If not None, this is the x- and y-data tuple and plots on top of the fits.
+   :type xydata: tuple, optional
+
+
+.. py:function:: plot_ndfit_vars(ycheck, ycheck_pred)
+
+   Plots a diagonal plot of model (x-axis) and fit (y-axis)
+
+   :param ycheck: An 1d array containing the model values.
+   :type ycheck: np.ndarray
+   :param ycheck_pred: Dictionary containing moments of predictions.
+   :type ycheck_pred: dict
+
+

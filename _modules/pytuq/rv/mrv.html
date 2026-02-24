@@ -1,0 +1,1110 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytuq.rv.mrv &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">Software Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/index.html#surrogates">Surrogates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_pce.html">Polynomial Chaos Expansion Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../autoapi/index.html">Section Navigation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../autoapi/pytuq/index.html">pytuq</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/pytuq/index.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/ftools/index.html">pytuq.ftools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/func/index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/minf/index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/rv/index.html">pytuq.rv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/surrogates/index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/utils/index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pytuq.rv.mrv</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pytuq.rv.mrv</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="sd">&quot;&quot;&quot;Classes for various multivariate random variables.&quot;&quot;&quot;</span>
+
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">product</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">multivariate_normal</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.special</span><span class="w"> </span><span class="kn">import</span> <span class="n">erf</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">..minf.mcmc</span><span class="w"> </span><span class="kn">import</span> <span class="n">AMCMC</span>
+
+
+<span class="c1">############################################################</span>
+<span class="c1">############################################################</span>
+<span class="c1">############################################################</span>
+
+<div class="viewcode-block" id="MRV">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.MRV">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MRV</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for multivariate random variables.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        pdim (int): The dimensionality of the random variable.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdim</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Initializing function.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            pdim (int): The dimensionality :math:`d` of the multivariate random variable/vector.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="MRV.pdim">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.MRV.pdim">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pdim</span> <span class="o">=</span> <span class="n">pdim</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Multivariate Random Variable(dim=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+<div class="viewcode-block" id="MRV.sample">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.MRV.sample">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nsam</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Sampling is not implemented in the base class.&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MRV.pdf">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.MRV.pdf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;PDF function is not implemented in the base class.&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MRV.logpdf">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.MRV.logpdf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">logpdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="MRV.cdf">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.MRV.cdf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;CDF function is not implemented in the base class.&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MRV.sample_indomain">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.MRV.sample_indomain">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sample_indomain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nsam</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="n">itry_max</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sampling according to the distribution truncated within a given domain.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            nsam (int): Number of samples requested, :math:`N`.</span>
+<span class="sd">            domain (np.ndarray): A domain given as a 2d array of size :math:`(d,2)`.</span>
+<span class="sd">            itry_max (int): maximum number of chunks of :math:`N` sampled. Effectively this is the rejection ratio. If too high, end without having :math:`N` samples in the domain and provide a warning.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: A 2d array of samples of size `(N,d)`.</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            This is based on rejection sampling, and if the domain has small intersection with the volume of sampling, it may take long time.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">sam</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">))</span>
+        <span class="n">itry</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">sam</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;</span><span class="n">nsam</span><span class="p">:</span>
+            <span class="n">itry</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">sam_check</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">nsam</span><span class="p">)</span>
+            <span class="n">ind</span> <span class="o">=</span> <span class="p">(</span><span class="n">sam_check</span><span class="o">&gt;</span><span class="n">domain</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">sam_check</span><span class="o">&lt;</span><span class="n">domain</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">sam</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">sam</span><span class="p">,</span> <span class="n">sam_check</span><span class="p">[</span><span class="n">ind</span><span class="p">]))</span>
+            <span class="k">if</span> <span class="n">itry</span> <span class="o">&gt;</span> <span class="n">itry_max</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;WARNING: Rejection rate is too high, sampled only N=</span><span class="si">{</span><span class="n">sam</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> points instead of requested </span><span class="si">{</span><span class="n">nsam</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">sam</span>
+
+        <span class="k">return</span> <span class="n">sam</span><span class="p">[:</span><span class="n">nsam</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="MRV.volume_indomain">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.MRV.volume_indomain">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">volume_indomain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute volume of the PDF of this random variable truncated within a given domain.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            domain (np.ndarray): A domain given as a 2d array of size :math:`(d,2)`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: Volume of the PDF inside the given domain.</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            see :cite:t:`Kan:2017` or https://www.cesarerobotti.com/wp-content/uploads/2019/04/JCGS-KR.pdf for the math.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ii</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">repeat</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">)])</span>
+        <span class="n">volume</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ii</span><span class="p">:</span>
+            <span class="n">corner</span> <span class="o">=</span> <span class="n">domain</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">corner</span><span class="p">[</span><span class="n">i</span><span class="o">==</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">domain</span><span class="p">[</span><span class="n">i</span><span class="o">==</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="n">volume</span> <span class="o">+=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">corner</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">volume</span></div>
+</div>
+
+
+<span class="c1">##################################################################</span>
+<span class="c1">##################################################################</span>
+<span class="c1">##################################################################</span>
+
+<div class="viewcode-block" id="GMM">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.GMM">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">GMM</span><span class="p">(</span><span class="n">MRV</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Gaussian mixture model random variable.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        means (list[np.ndarray]): List of :math:`K` means, each a 1d array of size :math:`d`.</span>
+<span class="sd">        covs (list[np.ndarray]): List of :math:`K` covariances, each a 2d array of size :math:`(d, d)`.</span>
+<span class="sd">        weights (np.ndarray): An 1d array of size :math:`K` for the mixture weights.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">means</span><span class="p">,</span> <span class="n">covs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Initialization.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            means (list[np.ndarray]): List of :math:`K` means, each a 1d array of size :math:`d`.</span>
+<span class="sd">            covs (list[np.ndarray], optional): List of :math:`K` covariances, each a 2d array of size :math:`(d, d)`. Default is None, which means identity covariance for all mixtures.</span>
+<span class="sd">            weights (np.ndarray, optional): An 1d array of size :math:`K` for the mixture weights. Default is None, which means equal weights to all mixtures.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">means</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+<div class="viewcode-block" id="GMM.means">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.GMM.means">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">means</span> <span class="o">=</span> <span class="n">means</span></div>
+
+        <span class="n">ncl</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">means</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">covs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">covs</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">mean</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">for</span> <span class="n">mean</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">means</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">covs</span><span class="o">=</span><span class="n">covs</span>
+        <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span><span class="o">==</span><span class="mf">0.0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">ncl</span><span class="p">,))</span><span class="o">/</span><span class="n">ncl</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="n">weights</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size_checks</span><span class="p">()</span>
+
+<div class="viewcode-block" id="GMM.size_checks">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.GMM.size_checks">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">size_checks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Size checks to make sure everything is consistent.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">)</span><span class="o">==</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">means</span><span class="p">))</span>
+        <span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">)</span><span class="o">==</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">covs</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">mean</span><span class="p">,</span> <span class="n">cov</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">means</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">covs</span><span class="p">):</span>
+            <span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mean</span><span class="p">)</span><span class="o">==</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">means</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mean</span><span class="p">)</span><span class="o">==</span><span class="n">cov</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mean</span><span class="p">)</span><span class="o">==</span><span class="n">cov</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span></div>
+
+
+
+<div class="viewcode-block" id="GMM.sample">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.GMM.sample">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nsam</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sampling function for this random variable.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            nsam (int): Number of requested samples :math:`N`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: A 2d array of size :math:`(N,d)`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">nmcs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multinomial</span><span class="p">(</span><span class="n">nsam</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">nmcs</span><span class="p">)</span> <span class="o">==</span> <span class="n">nsam</span><span class="p">)</span>
+        <span class="n">sam</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">mean</span><span class="p">,</span> <span class="n">cov</span><span class="p">,</span> <span class="n">nmc_this</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">means</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">covs</span><span class="p">,</span> <span class="n">nmcs</span><span class="p">):</span>
+            <span class="n">sam_this</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span>
+                                                     <span class="n">cov</span><span class="p">,</span>
+                                                     <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">nmc_this</span><span class="p">),</span> <span class="p">))</span>
+            <span class="n">sam</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">sam</span><span class="p">,</span> <span class="n">sam_this</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">sam</span></div>
+
+
+<div class="viewcode-block" id="GMM.pdf">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.GMM.pdf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xdata</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;PDF evaluated at given points.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            xdata (np.ndarray): A 2d array of size :math:`(M,d)` for :math:`M` points at which PDF is evaluated.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: A 1d array of size :math:`M` for PDF evaluation at the given points.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">gmm_pdf</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">for</span> <span class="n">mean</span><span class="p">,</span> <span class="n">cov</span><span class="p">,</span> <span class="n">weight</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">means</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">covs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">):</span>
+            <span class="n">gmm_pdf</span> <span class="o">+=</span> <span class="n">weight</span> <span class="o">*</span> <span class="n">multivariate_normal</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="n">mean</span><span class="p">,</span> <span class="n">cov</span><span class="o">=</span><span class="n">cov</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">gmm_pdf</span></div>
+
+
+<div class="viewcode-block" id="GMM.cdf">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.GMM.cdf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xdata</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;CDF evaluated at given points.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            xdata (np.ndarray): A 2d array of size :math:`(M,d)` for :math:`M` points at which CDF is evaluated.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: A 1d array of size :math:`M` for CDF evaluation at the given points.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">gmm_cdf</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">for</span> <span class="n">mean</span><span class="p">,</span> <span class="n">cov</span><span class="p">,</span> <span class="n">weight</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">means</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">covs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">):</span>
+            <span class="n">dist</span> <span class="o">=</span> <span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="n">mean</span><span class="p">,</span> <span class="n">cov</span><span class="o">=</span><span class="n">cov</span><span class="p">)</span>
+            <span class="n">gmm_cdf</span> <span class="o">+=</span> <span class="n">weight</span> <span class="o">*</span> <span class="n">dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">xdata</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">gmm_cdf</span></div>
+</div>
+
+
+<span class="c1">############################################################</span>
+<span class="c1">############################################################</span>
+<span class="c1">############################################################</span>
+
+<div class="viewcode-block" id="Mixture">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Mixture">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mixture</span><span class="p">(</span><span class="n">MRV</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A class for a mixture of random variables.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        rv_list (list[rv.mrv.MRV]): List of Multivariate Random Variable objects.</span>
+<span class="sd">        weights (np.ndarray): Mixture weights, an 1d array.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rv_list</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Summary</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            rv_list (list[rv.mrv.MRV]): List of Multivariate Random Variable objects.</span>
+<span class="sd">            weights (None, optional): Weighte of the mixture. Defaults to None, meaning equal weights.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">rv_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">pdim</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">rv_</span> <span class="ow">in</span> <span class="n">rv_list</span><span class="p">:</span>
+            <span class="k">assert</span><span class="p">(</span><span class="n">rv_</span><span class="o">.</span><span class="n">pdim</span><span class="o">==</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Mixture.rv_list">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Mixture.rv_list">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rv_list</span> <span class="o">=</span> <span class="n">rv_list</span></div>
+
+
+        <span class="n">nmix</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rv_list</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">nmix</span><span class="p">,))</span><span class="o">/</span><span class="n">nmix</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+
+        <span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">)</span><span class="o">==</span><span class="n">nmix</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">),</span><span class="mf">1.0</span><span class="p">),</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Mixture of random variables </span><span class="si">{</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">rv_list</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<div class="viewcode-block" id="Mixture.sample">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Mixture.sample">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nsam</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sampling routine.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            nsam (int): Number of samples requested.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: A 1d array of samples.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">nmix</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rv_list</span><span class="p">)</span>
+        <span class="n">imix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">nmix</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="n">nsam</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">)</span>
+
+        <span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">nsam</span><span class="p">,))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nsam</span><span class="p">):</span>
+            <span class="n">samples</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rv_list</span><span class="p">[</span><span class="n">imix</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">samples</span></div>
+
+
+<div class="viewcode-block" id="Mixture.pdf">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Mixture.pdf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate the PDF.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (np.ndarray): 1d array at which PDF is evaluated.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: 1d array of PDF values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">rv</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rv_list</span><span class="p">):</span>
+            <span class="n">value</span><span class="o">+=</span><span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">rv</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">value</span></div>
+
+
+
+<div class="viewcode-block" id="Mixture.cdf">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Mixture.cdf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate the CDF.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (np.ndarray): 1d array at which CDF is evaluated.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: 1d array of CDF values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">rv</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rv_list</span><span class="p">):</span>
+            <span class="n">value</span><span class="o">+=</span><span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">rv</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">value</span></div>
+</div>
+
+
+<span class="c1">############################################################</span>
+<span class="c1">############################################################</span>
+<span class="c1">############################################################</span>
+
+<div class="viewcode-block" id="Inverse">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Inverse">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Inverse</span><span class="p">(</span><span class="n">MRV</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class for an inverse of a random variable.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        rv (rv.mrv.MRV): Underlying original Multivariate Random Variable object.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rv</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialization.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            rv (rv.mrv.MRV): Multivariate Random Variable object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">rv</span><span class="o">.</span><span class="n">pdim</span><span class="p">)</span>
+<div class="viewcode-block" id="Inverse.rv">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Inverse.rv">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rv</span> <span class="o">=</span> <span class="n">rv</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Inverse of random variable </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">rv</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<div class="viewcode-block" id="Inverse.sample">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Inverse.sample">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nsam</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sampling routine.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            nsam (int): Number of samples requested.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: A 1d array of samples.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mf">1.</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">rv</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">nsam</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Inverse.pdf">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Inverse.pdf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate the PDF.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (np.ndarray): 1d array at which PDF is evaluated.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: 1d array of PDF values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rv</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span></div>
+
+
+<div class="viewcode-block" id="Inverse.logpdf">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Inverse.logpdf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">logpdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate the log-PDF.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (np.ndarray): 1d array at which log-PDF is evaluated.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: 1d array of log-PDF values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rv</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mf">2.0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Inverse.cdf">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Inverse.cdf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate the CDF.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (np.ndarray): 1d array at which CDF is evaluated.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: 1d array of CDF values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mf">1.</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">rv</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mf">1.</span><span class="o">/</span><span class="n">x</span><span class="p">)</span></div>
+</div>
+
+
+
+<span class="c1">############################################################</span>
+
+<div class="viewcode-block" id="Pareto_1d">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Pareto_1d">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Pareto_1d</span><span class="p">(</span><span class="n">MRV</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A class for univariate Pareto distribution.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        b (float): Power parameter.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">xm</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialization.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            alpha (float): Power parameter.</span>
+<span class="sd">            xm (float): The domain minimum.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#univariate</span>
+        <span class="k">assert</span> <span class="n">alpha</span><span class="o">&gt;</span><span class="mf">0.0</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">alpha</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="k">assert</span> <span class="n">xm</span><span class="o">&gt;</span><span class="mf">0.0</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">xm</span><span class="si">}</span><span class="s1">&#39;</span>
+
+<div class="viewcode-block" id="Pareto_1d.alpha">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Pareto_1d.alpha">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="n">alpha</span></div>
+
+<div class="viewcode-block" id="Pareto_1d.xm">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Pareto_1d.xm">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xm</span> <span class="o">=</span> <span class="n">xm</span></div>
+
+<div class="viewcode-block" id="Pareto_1d.params">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Pareto_1d.params">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xm</span><span class="p">]</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Univariate Pareto Random Variable&quot;</span>
+
+<div class="viewcode-block" id="Pareto_1d.sample">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Pareto_1d.sample">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nsam</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sampling routine.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            nsam (int): Number of samples requested.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: A 1d array of samples.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">xm</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">nsam</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mf">1.</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Pareto_1d.pdf">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Pareto_1d.pdf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate the PDF.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (np.ndarray): 1d array at which PDF is evaluated.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: 1d array of PDF values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;</span><span class="bp">self</span><span class="o">.</span><span class="n">xm</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">xm</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">/</span> <span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="o">+</span><span class="mf">1.0</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Pareto_1d.logpdf">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Pareto_1d.logpdf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">logpdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate the log-PDF.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (np.ndarray): 1d array at which log-PDF is evaluated.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: 1d array of log-PDF values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;</span><span class="bp">self</span><span class="o">.</span><span class="n">xm</span><span class="p">):</span>
+            <span class="k">return</span> <span class="mf">0.0</span> <span class="c1"># actually should be -inf</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">)</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xm</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="o">+</span><span class="mf">1.0</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Pareto_1d.cdf">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Pareto_1d.cdf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate the CDF.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (np.ndarray): 1d array at which CDF is evaluated.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: 1d array of CDF values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cumdf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="n">cumdf</span><span class="p">[</span><span class="n">x</span><span class="o">&gt;</span><span class="bp">self</span><span class="o">.</span><span class="n">xm</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xm</span><span class="o">/</span><span class="n">x</span><span class="p">[</span><span class="n">x</span><span class="o">&gt;</span><span class="bp">self</span><span class="o">.</span><span class="n">xm</span><span class="p">])</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span>
+
+        <span class="k">return</span> <span class="n">cumdf</span></div>
+</div>
+
+
+
+
+<span class="c1">############################################################</span>
+
+<div class="viewcode-block" id="Normal_1d">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Normal_1d">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Normal_1d</span><span class="p">(</span><span class="n">MRV</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A class for univariate Normal distribution.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        mu (float): Location parameter.</span>
+<span class="sd">        sigma (float): Scale parameter.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialization.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            mu (float): Location parameter.</span>
+<span class="sd">            sigma (float): Scale parameter.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># univariate</span>
+        <span class="k">assert</span> <span class="n">sigma</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">sigma</span><span class="si">}</span><span class="s1">&#39;</span>
+<div class="viewcode-block" id="Normal_1d.mu">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Normal_1d.mu">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mu</span> <span class="o">=</span> <span class="n">mu</span></div>
+
+<div class="viewcode-block" id="Normal_1d.sigma">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Normal_1d.sigma">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span> <span class="o">=</span> <span class="n">sigma</span></div>
+
+
+<div class="viewcode-block" id="Normal_1d.params">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Normal_1d.params">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="p">]</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Univariate Normal Random Variable&quot;</span>
+
+<div class="viewcode-block" id="Normal_1d.sample">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Normal_1d.sample">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nsam</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sampling routine.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            nsam (int): Number of samples requested.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: A 1d array of samples.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">nsam</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">mu</span></div>
+
+
+<div class="viewcode-block" id="Normal_1d.pdf">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Normal_1d.pdf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate the PDF.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (np.ndarray): 1d array at which PDF is evaluated.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: 1d array of PDF values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="Normal_1d.logpdf">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Normal_1d.logpdf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">logpdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate the log-PDF.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (np.ndarray): 1d array at which log-PDF is evaluated.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: 1d array of log-PDF values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">2.</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span></div>
+
+
+<div class="viewcode-block" id="Normal_1d.cdf">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Normal_1d.cdf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate the CDF.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (np.ndarray): 1d array at which CDF is evaluated.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: 1d array of CDF values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cumdf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="n">cumdf</span><span class="p">[</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">erf</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">cumdf</span></div>
+</div>
+
+
+<span class="c1">############################################################</span>
+
+<div class="viewcode-block" id="Lognormal_1d">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Lognormal_1d">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Lognormal_1d</span><span class="p">(</span><span class="n">MRV</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A class for univariate Lognormal distribution.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        mu (float): Location parameter.</span>
+<span class="sd">        sigma (float): Scale parameter.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialization.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            mu (float): Location parameter.</span>
+<span class="sd">            sigma (float): Scale parameter.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#univariate</span>
+        <span class="k">assert</span> <span class="n">sigma</span><span class="o">&gt;</span><span class="mf">0.0</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">sigma</span><span class="si">}</span><span class="s1">&#39;</span>
+<div class="viewcode-block" id="Lognormal_1d.mu">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Lognormal_1d.mu">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mu</span> <span class="o">=</span> <span class="n">mu</span></div>
+
+<div class="viewcode-block" id="Lognormal_1d.sigma">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Lognormal_1d.sigma">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span> <span class="o">=</span> <span class="n">sigma</span></div>
+
+
+<div class="viewcode-block" id="Lognormal_1d.params">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Lognormal_1d.params">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="p">]</span></div>
+
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Univariate Lognormal Random Variable&quot;</span>
+
+<div class="viewcode-block" id="Lognormal_1d.sample">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Lognormal_1d.sample">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nsam</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sampling routine.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            nsam (int): Number of samples requested.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: A 1d array of samples.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">nsam</span><span class="p">)</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Lognormal_1d.pdf">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Lognormal_1d.pdf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate the PDF.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (np.ndarray): 1d array at which PDF is evaluated.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: 1d array of PDF values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;=</span><span class="mf">0.0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">)</span><span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="Lognormal_1d.logpdf">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Lognormal_1d.logpdf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">logpdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate the log-PDF.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (np.ndarray): 1d array at which log-PDF is evaluated.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: 1d array of log-PDF values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;=</span><span class="mf">0.0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="p">)</span><span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">2.</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">-</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">)</span><span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span></div>
+
+
+<div class="viewcode-block" id="Lognormal_1d.cdf">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Lognormal_1d.cdf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate the CDF.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (np.ndarray): 1d array at which CDF is evaluated.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: 1d array of CDF values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cumdf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="n">cumdf</span><span class="p">[</span><span class="n">x</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">+</span><span class="mf">0.5</span><span class="o">*</span><span class="n">erf</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">x</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">])</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">)</span><span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">cumdf</span></div>
+</div>
+
+
+
+<span class="c1">############################################################</span>
+
+<div class="viewcode-block" id="Weibull_1d">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Weibull_1d">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Weibull_1d</span><span class="p">(</span><span class="n">MRV</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A class for univariate Weibull distribution.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        k (float): Shape parameter.</span>
+<span class="sd">        lam (float): Scale parameter.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialization.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            lam (float): Scale parameter.</span>
+<span class="sd">            k (float): Shape parameter.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#univariate</span>
+        <span class="k">assert</span> <span class="n">lam</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">lam</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="k">assert</span> <span class="n">k</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1">&#39;</span>
+<div class="viewcode-block" id="Weibull_1d.lam">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Weibull_1d.lam">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lam</span> <span class="o">=</span> <span class="n">lam</span></div>
+
+<div class="viewcode-block" id="Weibull_1d.k">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Weibull_1d.k">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">=</span> <span class="n">k</span></div>
+
+
+<div class="viewcode-block" id="Weibull_1d.params">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Weibull_1d.params">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">lam</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="p">]</span></div>
+
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Univariate Weibull Random Variable&quot;</span>
+
+<div class="viewcode-block" id="Weibull_1d.sample">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Weibull_1d.sample">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nsam</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sampling routine.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            nsam (int): Number of samples requested.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: A 1d array of samples.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">lam</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">nsam</span><span class="p">)),</span> <span class="mf">1.</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Weibull_1d.pdf">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Weibull_1d.pdf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate the PDF.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (np.ndarray): 1d array at which PDF is evaluated.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: 1d array of PDF values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">xc</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">xc</span><span class="p">[</span><span class="n">xc</span><span class="o">&lt;=</span><span class="mf">0.0</span><span class="p">]</span><span class="o">=</span><span class="mf">0.0</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">lam</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">xc</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">lam</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">xc</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">lam</span><span class="p">)</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Weibull_1d.logpdf">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Weibull_1d.logpdf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">logpdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate the log-PDF.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (np.ndarray): 1d array at which log-PDF is evaluated.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: 1d array of log-PDF values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">xc</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">xc</span><span class="p">[</span><span class="n">xc</span><span class="o">&lt;=</span><span class="mf">0.0</span><span class="p">]</span><span class="o">=</span><span class="mf">0.0</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="p">)</span><span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lam</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">xc</span><span class="p">)</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lam</span><span class="p">))</span> <span class="o">-</span><span class="p">(</span><span class="n">xc</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">lam</span><span class="p">)</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">k</span></div>
+
+
+<div class="viewcode-block" id="Weibull_1d.cdf">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Weibull_1d.cdf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate the CDF.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (np.ndarray): 1d array at which PDF is evaluated.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: 1d array of PDF values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">xc</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">xc</span><span class="p">[</span><span class="n">xc</span><span class="o">&lt;=</span><span class="mf">0.0</span><span class="p">]</span><span class="o">=</span><span class="mf">0.0</span>
+        <span class="k">return</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">xc</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">lam</span><span class="p">)</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="p">)</span></div>
+</div>
+
+
+
+
+<span class="c1">##################################################################</span>
+<span class="c1">##################################################################</span>
+<span class="c1">##################################################################</span>
+
+<div class="viewcode-block" id="MCMCRV">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.MCMCRV">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MCMCRV</span><span class="p">(</span><span class="n">MRV</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A class for MCMC-based random variable.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        logpost (callable): Function evaluator np.ndarray-&gt;float for log-posterior. Can take optional keyword arguments as well.</span>
+<span class="sd">        nmcmc (int): Number of MCMC steps</span>
+<span class="sd">        param_ini (np.ndarray): Initial condition of the chain, a 1d array of size :math:`d`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdim</span><span class="p">,</span> <span class="n">logpost</span><span class="p">,</span> <span class="n">param_ini</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">nmcmc</span><span class="o">=</span><span class="mi">10000</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Initialization.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            pdim (int): The dimensionality of the random variable.</span>
+<span class="sd">            logpost (callable): Function evaluator :math:`(N,)`-&gt;scalar for log-posterior.</span>
+<span class="sd">            param_ini (None, optional): Initial condition of the chain, a 1d array of size :math:`d`. Defaults to None, which populates the array with hardwired 0.1 values.</span>
+<span class="sd">            nmcmc (int, optional): Number of MCMC steps, defaults to 10000.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">pdim</span><span class="p">)</span>
+<div class="viewcode-block" id="MCMCRV.logpost">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.MCMCRV.logpost">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logpost</span> <span class="o">=</span> <span class="n">logpost</span></div>
+
+        <span class="k">if</span> <span class="n">param_ini</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">param_ini</span> <span class="o">=</span> <span class="n">param_ini</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">param_ini</span> <span class="o">=</span> <span class="mf">0.1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">pdim</span><span class="p">))</span>
+<div class="viewcode-block" id="MCMCRV.nmcmc">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.MCMCRV.nmcmc">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nmcmc</span> <span class="o">=</span> <span class="n">nmcmc</span></div>
+
+
+
+<div class="viewcode-block" id="MCMCRV.sample">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.MCMCRV.sample">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nsam</span><span class="p">,</span> <span class="o">**</span><span class="n">post_info</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sampling function.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            nsam (int): Number of requested samples :math:`N`.</span>
+<span class="sd">            post_info (dict): Dictionary keyword arguments for the logpost function.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: A 2d array of size :math:`(N,d)`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">nsam</span><span class="o">&gt;</span><span class="bp">self</span><span class="o">.</span><span class="n">nmcmc</span><span class="o">//</span><span class="mi">2</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Can not sample more than half of the original chain. </span><span class="si">{</span><span class="n">nsam</span><span class="si">}</span><span class="s2">&gt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">nmcmc</span><span class="o">//</span><span class="mi">2</span><span class="si">}</span><span class="s2">. Exiting.&quot;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+        <span class="n">cov_ini</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="mf">0.1</span><span class="o">+</span><span class="mf">0.1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">param_ini</span><span class="p">))</span>
+
+        <span class="n">calib_params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;cov_ini&#39;</span><span class="p">:</span> <span class="n">cov_ini</span><span class="p">,</span>
+                      <span class="s1">&#39;t0&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;tadapt&#39;</span> <span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+                      <span class="s1">&#39;gamma&#39;</span> <span class="p">:</span> <span class="mf">0.1</span><span class="p">}</span>
+
+        <span class="n">calib</span> <span class="o">=</span> <span class="n">AMCMC</span><span class="p">(</span><span class="o">**</span><span class="n">calib_params</span><span class="p">)</span>
+
+        <span class="n">calib</span><span class="o">.</span><span class="n">setLogPost</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logpost</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">post_info</span><span class="p">)</span>
+        <span class="n">calib_results</span> <span class="o">=</span> <span class="n">calib</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nmcmc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">param_ini</span><span class="p">)</span>
+        <span class="c1">#calib_results = {&#39;chain&#39; : samples, &#39;mapparams&#39; : cmode,</span>
+        <span class="c1">#&#39;maxpost&#39; : pmode, &#39;accrate&#39; : acc_rate, &#39;logpost&#39; : logposts, &#39;alphas&#39; : alphas}</span>
+
+        <span class="n">every</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nmcmc</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span><span class="o">//</span><span class="n">nsam</span>
+        <span class="n">sam</span> <span class="o">=</span> <span class="n">calib_results</span><span class="p">[</span><span class="s1">&#39;chain&#39;</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">][:</span><span class="n">every</span><span class="o">*</span><span class="n">nsam</span><span class="p">][::</span><span class="n">every</span><span class="p">]</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">sam</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="n">nsam</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">sam</span></div>
+
+
+<div class="viewcode-block" id="MCMCRV.pdf_unscaled">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.MCMCRV.pdf_unscaled">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pdf_unscaled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;PDF evaluation without scaling.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (np.ndarray): 1d array of size :math:`M` where PDF is evaluated.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: PDF evaluated at requested points, an array of size :math:`M`.</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            PDF is unscaled, i.e. only evaluates exponential of the log-posterior.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">logpost</span><span class="p">(</span><span class="n">xx</span><span class="p">)</span> <span class="k">for</span> <span class="n">xx</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]))</span></div>
+
+
+<div class="viewcode-block" id="MCMCRV.pdf">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.MCMCRV.pdf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;CDF function is not implemented in this class.&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="MCMCRV.cdf">
+<a class="viewcode-back" href="../../../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.MCMCRV.cdf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;CDF function is not implemented in this class.&quot;</span><span class="p">)</span></div>
+</div>
+
+
+<span class="c1">##################################################################</span>
+<span class="c1">##################################################################</span>
+<span class="c1">##################################################################</span>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

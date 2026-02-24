@@ -1,0 +1,84 @@
+pytuq.minf.calib
+================
+
+.. py:module:: pytuq.minf.calib
+
+.. autoapi-nested-parse::
+
+   Metropolis-Hastings calibration module.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.minf.calib.MCMCBase
+
+
+Module Contents
+---------------
+
+.. py:class:: MCMCBase
+
+   Bases: :py:obj:`object`
+
+
+   Base class for calibration.
+
+
+   .. py:attribute:: logPost
+      :value: None
+
+
+
+   .. py:attribute:: logPostGrad
+      :value: None
+
+
+
+   .. py:attribute:: postInfo
+
+
+   .. py:method:: setLogPost(logPost, logPostGrad, **postInfo)
+
+      Setting LogPost and optionally its Gradient.
+
+      :param logPost: Log-posterior evaluator function.
+      :type logPost: callable
+      :param logPostGrad: Log-posterior gradient evaluator function. Can be None.
+      :type logPostGrad: callable
+      :param \*\*postInfo: Dictionary arguments for the log-Posterior and its gradient.
+
+
+
+   .. py:method:: sampler(current, imcmc)
+      :abstractmethod:
+
+
+      Sampler function of a single step.
+
+      :param current: The current chain state.
+      :type current: np.ndarray
+      :param imcmc: Current step.
+      :type imcmc: int
+
+      :raises NotImplementedError: Not Implemented in the parent class.
+
+
+
+   .. py:method:: run(nmcmc, param_ini)
+
+      Metropolis-Hastings run of Markov chain Monte Carlo.
+
+      :param nmcmc: Number of MCMC steps.
+      :type nmcmc: int
+      :param param_ini: Initial chain position, an 1d array.
+      :type param_ini: np.ndarray
+
+      :returns: Dictionary of results. Keys are 'chain' (chain samples array), 'mapparams' (MAP parameters array), 'maxpost' (maximal log-post value), 'accrate' (acceptance rate), 'logpost' (log-post values throughout the chain), 'alphas' (acceptance probabilities throughout the chain).
+      :rtype: dict
+
+
+

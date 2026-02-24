@@ -1,0 +1,425 @@
+pytuq.gsa.gsa
+=============
+
+.. py:module:: pytuq.gsa.gsa
+
+.. autoapi-nested-parse::
+
+   Various utilities and classes for global sensitivity analysis.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.gsa.gsa.SensMethod
+   pytuq.gsa.gsa.Linreg
+   pytuq.gsa.gsa.Moat
+   pytuq.gsa.gsa.SamSobol
+   pytuq.gsa.gsa.PCSobol
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   pytuq.gsa.gsa.model_sens
+
+
+Module Contents
+---------------
+
+.. py:function:: model_sens(model, model_params, domain, method='SamSobol', nsam=100, plot=True, **kwargs)
+
+   Sensitivities of a multioutput model.
+
+   :param model: Model of a form :math:`M(x, p)` where we are interesting in sensitivities with respect to :math:`x`, and :math:`p` are auxiliary parameters. The model is multioutput, taking :math:`(N,d)`-sized array, and returning a :math:`(N,o)`-sized array.
+   :type model: callable
+   :param model_params: List of model's auxiliary parameters :math:`p`.
+   :type model_params: list
+   :param domain: Domain of input, a 2d array of size :math:`(d,2)`.
+   :type domain: np.ndarray
+   :param method: Sensitivity method. Default is SamSobol. Other options are PCSobol, LinReg or Moat.
+   :type method: str, optional
+   :param nsam: Number of samples. Note that for some methods this is not the number of model evaluations needed.
+   :type nsam: int, optional
+   :param plot: Whether to plot or not.
+   :type plot: bool, optional
+   :param \*\*kwargs: Other keyword arguments for initializing sensitivity objects.
+
+   :returns: Main and total sensitivities arrays, each of size :math:`(o,d)`.
+   :rtype: tuple(np.ndarray, np.ndarray)
+
+
+.. py:class:: SensMethod(dom, sens_names)
+
+   Base class for various sensitivity methods implementation.
+
+   .. attribute:: dim
+
+      Dimensionality of the input.
+
+      :type: int
+
+   .. attribute:: dom
+
+      Domain of input, a 2d array of size :math:`(d,2)`.
+
+      :type: np.ndarray
+
+   .. attribute:: sens_names
+
+      List of names that are keys to dictionary sens.
+
+      :type: list
+
+   .. attribute:: sens
+
+      Dictionary of sensitivities under a given method.
+
+      :type: dict
+
+
+   .. py:attribute:: dom
+
+
+   .. py:attribute:: dim
+
+
+   .. py:attribute:: sens_names
+
+
+   .. py:attribute:: sens
+
+
+   .. py:method:: sample(nsam)
+      :abstractmethod:
+
+
+      Sampling routine.
+
+      :param nsam: Number of requested samples, :math:`N`. Note that for some methods this is not the number of model evaluations needed.
+      :type nsam: int
+
+      :raises NotImplementedError: Should be implemented in children classes.
+
+
+
+   .. py:method:: compute(ysam)
+      :abstractmethod:
+
+
+      Computing sensitivities, given model evaluations.
+
+      :param ysam: A 2d array of model evaluations of size :math:`(M,d)`.
+      :type ysam: np.ndarray
+
+      :raises NotImplementedError: Should be implemented in children classes.
+
+
+
+.. py:class:: Linreg(dom)
+
+   Bases: :py:obj:`SensMethod`
+
+
+   Sensitivities computed via linear regression.
+
+   .. attribute:: nsam
+
+      Number of samples requested, :math:`N`.
+
+      :type: int
+
+   .. attribute:: sens
+
+      Dictionary of sensitivities.
+
+      :type: dict
+
+   .. attribute:: sens_names
+
+      Names of sensitivities: 'src' (scaled regression coefficient) or 'pear' (pearson).
+
+      :type: list
+
+   .. attribute:: xsam
+
+      Model evaluation input samples, a 2d array of size :math:`(N,d)`.
+
+      :type: np.ndarray
+
+
+   .. py:attribute:: sens_names
+      :value: ['src', 'pear']
+
+
+
+   .. py:method:: sample(nsam)
+
+      Sampling routine.
+
+      :param nsam: Number of requested samples, :math:`N`.
+      :type nsam: int
+
+      :returns: Model evaluation input samples, a 2d array of size :math:`(N,d)`.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: compute(ysam)
+
+      Computing sensitivities, given model evaluations.
+
+      :param ysam: A 2d array of model evaluations of size :math:`(N,d)`.
+      :type ysam: np.ndarray
+
+      :returns: Dictionary with keys src (scaled regression coefficient) and pear (Pearson)
+      :rtype: dict
+
+
+
+.. py:class:: Moat(dom, delta=2, nlev=4)
+
+   Bases: :py:obj:`SensMethod`
+
+
+   Class for MOAT (Morris One At a Time) sensitivities.
+
+   .. attribute:: delta
+
+      Delta-parameter of the method.
+
+      :type: int
+
+   .. attribute:: indmap
+
+      Working 2d array of size :math:`(d,2)`.
+
+      :type: np.ndarray
+
+   .. attribute:: nlev
+
+      Number of levels parameter of the method.
+
+      :type: int
+
+   .. attribute:: nsam
+
+      Number of model evaluations :math:`M=R(d+1)`.
+
+      :type: int
+
+   .. attribute:: repl
+
+      Number of replicas, :math:`R`.
+
+      :type: int
+
+   .. attribute:: sens
+
+      Dictionary of sensitivities.
+
+      :type: dict
+
+   .. attribute:: sens_names
+
+      Sensitivity names: mu, amu or sig.
+
+      :type: list
+
+
+   .. py:attribute:: sens_names
+      :value: ['mu', 'amu', 'sig']
+
+
+
+   .. py:attribute:: delta
+      :value: 2
+
+
+
+   .. py:attribute:: nlev
+      :value: 4
+
+
+
+   .. py:method:: sample(repl)
+
+      Sampling routine.
+
+      :param repl: Number of replicas, :math:`R`.
+      :type repl: int
+
+      :returns: Model evaluation input samples, a 2d array of size :math:`(M,d)`, where :math:`M=R(d+1)`.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: compute(ysam)
+
+      Computation of MOAT sensitivities.
+
+      :param ysam: A 2d array of size :math:`(M, d)`.
+      :type ysam: np.ndarray
+
+      :returns: Dictionary with keys mu, amu and sig.
+      :rtype: dict
+
+
+
+.. py:class:: SamSobol(dom)
+
+   Bases: :py:obj:`SensMethod`
+
+
+   Computing of sampling based main and total sensitivities, see Saltelli 2010.
+
+   .. attribute:: nsam
+
+      Number of model evaluations.
+
+      :type: int
+
+   .. attribute:: sens
+
+      Dictionary of sensitivities.
+
+      :type: dict
+
+   .. attribute:: sens_names
+
+      List of sensitivity names, main, total and jointt.
+
+      :type: list
+
+   .. note:: It computes joint in the total sense!
+
+
+   .. py:attribute:: sens_names
+      :value: ['main', 'total', 'jointt']
+
+
+
+   .. py:method:: sample(ninit)
+
+      Sampling routine.
+
+      :param ninit: Initial number of samples, :math:`N`.
+      :type ninit: int
+
+      :returns: Model evaluation input samples, a 2d array of size :math:`(M,d)`, where :math:`M=N(d+2)`.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: compute(ysam)
+
+      Computing sensitivities.
+
+      :param ysam: A 2d array of size :math:`(M, d)`.
+      :type ysam: np.ndarray
+
+      :returns: Dictionary with keys main, total and jointt.
+      :rtype: dict
+
+
+
+.. py:class:: PCSobol(dom, pctype='LU', order=3)
+
+   Bases: :py:obj:`SensMethod`
+
+
+   PC-based Sobol senitivity computation.
+
+   .. attribute:: nsam
+
+      Number of model evaluations.
+
+      :type: int
+
+   .. attribute:: sens
+
+      Dictionary of sensitivities.
+
+      :type: dict
+
+   .. attribute:: sens_names
+
+      List of sensitivity names, main, total and jointt.
+
+      :type: list
+
+   .. attribute:: pcrv
+
+      Working PCRV object
+
+      :type: PCRV
+
+   .. attribute:: pctype
+
+      PC type.
+
+      :type: str
+
+   .. attribute:: order
+
+      PC order.
+
+      :type: int
+
+   .. attribute:: xsam
+
+      Model evaluation input samples, a 2d array of size :math:`(N,d)`.
+
+      :type: np.ndarray
+
+   .. attribute:: germ_sam
+
+      Corresponding PC germ samples, a 2d array of size :math:`(N,d)`.
+
+      :type: np.ndarray
+
+
+   .. py:attribute:: sens_names
+      :value: ['main', 'total', 'jointt']
+
+
+
+   .. py:attribute:: pctype
+      :value: 'LU'
+
+
+
+   .. py:attribute:: order
+      :value: 3
+
+
+
+   .. py:method:: sample(nsam)
+
+      Sampling routine.
+
+      :param nsam: Number of requested samples, :math:`N`.
+      :type nsam: int
+
+      :returns: Model evaluation input samples, a 2d array of size :math:`(N,d)`.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: compute(ysam)
+
+      Computing sensitivities.
+
+      :param ysam: A 2d array of size :math:`(N, d)`.
+      :type ysam: np.ndarray
+
+      :returns: Dictionary with keys main, total and jointt.
+      :rtype: dict
+
+
+

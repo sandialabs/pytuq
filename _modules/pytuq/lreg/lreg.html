@@ -1,0 +1,569 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytuq.lreg.lreg &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">Software Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/index.html#surrogates">Surrogates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_pce.html">Polynomial Chaos Expansion Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../autoapi/index.html">Section Navigation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../autoapi/pytuq/index.html">pytuq</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/pytuq/index.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/ftools/index.html">pytuq.ftools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/func/index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/minf/index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/rv/index.html">pytuq.rv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/surrogates/index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/utils/index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pytuq.lreg.lreg</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pytuq.lreg.lreg</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="sd">&quot;&quot;&quot;Module for the base linear regression class and a bare minimum least-squares implementation.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.linalg</span><span class="w"> </span><span class="kn">import</span> <span class="n">lstsq</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">..fit.fit</span><span class="w"> </span><span class="kn">import</span> <span class="n">fitbase</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..utils.plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_dm</span>
+
+
+<div class="viewcode-block" id="lreg">
+<a class="viewcode-back" href="../../../autoapi/pytuq/lreg/lreg/index.html#pytuq.lreg.lreg.lreg">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">lreg</span><span class="p">(</span><span class="n">fitbase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for linear regression.</span>
+
+<div class="viewcode-block" id="lsq.fitted">
+<a class="viewcode-back" href="../../../autoapi/pytuq/lreg/lreg/index.html#pytuq.lreg.lreg.lsq.fitted">[docs]</a>
+<span class="sd">    Attributes:</span></div>
+
+<span class="sd">        cf (np.ndarray): An 1d array of coefficients, of size :math:`K`.</span>
+<span class="sd">        cf_cov (np.ndarray): A 2d array of coefficient covariance of size :math:`(K,K)`.</span>
+<span class="sd">        datavar (float): A single value for homogenous data variance.</span>
+<span class="sd">        basisEval (callable): Basis evaluator function.</span>
+<span class="sd">        basisEvalPars (tuple): Parameters of the basis evaluator function.</span>
+<span class="sd">        basisEvaluatorSet (bool): Indicates whether basis evaluator function is set.</span>
+<span class="sd">        used (np.ndarray): Indicates the indices of the used bases (for sparse learning, such as BCS).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialization.&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="lsq.cf">
+<a class="viewcode-back" href="../../../autoapi/pytuq/lreg/lreg/index.html#pytuq.lreg.lreg.lsq.cf">[docs]</a>
+<div class="viewcode-block" id="lreg.cf">
+<a class="viewcode-back" href="../../../autoapi/pytuq/lreg/lreg/index.html#pytuq.lreg.lreg.lreg.cf">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cf</span> <span class="o">=</span> <span class="kc">None</span></div>
+</div>
+
+<div class="viewcode-block" id="lsq.cf_cov">
+<a class="viewcode-back" href="../../../autoapi/pytuq/lreg/lreg/index.html#pytuq.lreg.lreg.lsq.cf_cov">[docs]</a>
+<div class="viewcode-block" id="lreg.cf_cov">
+<a class="viewcode-back" href="../../../autoapi/pytuq/lreg/lreg/index.html#pytuq.lreg.lreg.lreg.cf_cov">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cf_cov</span> <span class="o">=</span> <span class="kc">None</span></div>
+</div>
+
+<div class="viewcode-block" id="lreg.datavar">
+<a class="viewcode-back" href="../../../autoapi/pytuq/lreg/lreg/index.html#pytuq.lreg.lreg.lreg.datavar">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">datavar</span><span class="o">=</span><span class="mf">0.0</span></div>
+
+<div class="viewcode-block" id="lreg.basisEvaluatorSet">
+<a class="viewcode-back" href="../../../autoapi/pytuq/lreg/lreg/index.html#pytuq.lreg.lreg.lreg.basisEvaluatorSet">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">basisEvaluatorSet</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="lsq.used">
+<a class="viewcode-back" href="../../../autoapi/pytuq/lreg/lreg/index.html#pytuq.lreg.lreg.lsq.used">[docs]</a>
+<div class="viewcode-block" id="lreg.used">
+<a class="viewcode-back" href="../../../autoapi/pytuq/lreg/lreg/index.html#pytuq.lreg.lreg.lreg.used">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">used</span> <span class="o">=</span> <span class="kc">None</span></div>
+</div>
+
+
+
+
+<div class="viewcode-block" id="lreg.setBasisEvaluator">
+<a class="viewcode-back" href="../../../autoapi/pytuq/lreg/lreg/index.html#pytuq.lreg.lreg.lreg.setBasisEvaluator">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setBasisEvaluator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">basiseval</span><span class="p">,</span> <span class="n">basisevalpars</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Setting basis evaluator function.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">        basiseval (callable): Basis evaluator function.</span>
+<span class="sd">        basisevalpars (tuple): Parameters of the basis evaluator function.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">basisEval</span> <span class="o">=</span> <span class="n">basiseval</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">basisEvalPars</span> <span class="o">=</span> <span class="n">basisevalpars</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">basisEvaluatorSet</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+
+
+<div class="viewcode-block" id="lreg.fita">
+<a class="viewcode-back" href="../../../autoapi/pytuq/lreg/lreg/index.html#pytuq.lreg.lreg.lreg.fita">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fita</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Amat</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Fitting function. Not implemented in the base class.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            Amat (np.ndarray): A 2d array of size :math:`(N, K)` each row holding basis evaluations at a training point.</span>
+<span class="sd">            y (np.ndarray): An 1d array of size :math:`N` holding the data.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            NotImplementedError: Not implemented in the base class.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Fitting not implemented in the base class.&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="lreg.fit">
+<a class="viewcode-back" href="../../../autoapi/pytuq/lreg/lreg/index.html#pytuq.lreg.lreg.lreg.fit">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Fitting with :math:`(x,y)` pairs, assuming basis evaluator is set.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (np.ndarray): A 2d array of inputs at which bases are evaluated.</span>
+<span class="sd">            y (np.ndarray): An 1d array of data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basisEvaluatorSet</span><span class="p">)</span>
+        <span class="n">Amat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">basisEval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">basisEvalPars</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fita</span><span class="p">(</span><span class="n">Amat</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="lreg.print_coefs">
+<a class="viewcode-back" href="../../../autoapi/pytuq/lreg/lreg/index.html#pytuq.lreg.lreg.lreg.print_coefs">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">print_coefs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Prints coefficients, assuming fit is already performed.&quot;&quot;&quot;</span>
+        <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fitted</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cf</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="lreg.predict">
+<a class="viewcode-back" href="../../../autoapi/pytuq/lreg/lreg/index.html#pytuq.lreg.lreg.lreg.predict">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">msc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">pp</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Predict function, given input :math:`x`, assuming the basis evaluator is set.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (np.ndarray): A 2d array of inputs of size :math:`(N,d)` at which bases are evaluated.</span>
+<span class="sd">            msc (int, optional): Prediction mode: 0 (mean-only), 1 (mean and variance), or 2 (mean, variance and covariance). Defaults to 0.</span>
+<span class="sd">            pp (bool, optional): Whether to compute posterior-predictive (i.e. add data variance) or not.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple(np.ndarray, np.ndarray, np.ndarray): triple of Mean (array of size `N`), Variance (array of size `N` or None), Covariance (array of size `(N, N)` or None).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basisEvaluatorSet</span><span class="p">)</span>
+        <span class="n">Amat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">basisEval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">basisEvalPars</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">predicta</span><span class="p">(</span><span class="n">Amat</span><span class="p">,</span> <span class="n">msc</span><span class="o">=</span><span class="n">msc</span><span class="p">,</span> <span class="n">pp</span><span class="o">=</span><span class="n">pp</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="lreg.predict_samples">
+<a class="viewcode-back" href="../../../autoapi/pytuq/lreg/lreg/index.html#pytuq.lreg.lreg.lreg.predict_samples">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">predict_samples</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">nsamples</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Predict samples given input :math:`x`, assuming the basis evaluator is set.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (np.ndarray): A 2d array of inputs of size :math:`(N,d)` at which bases are evaluated.</span>
+<span class="sd">            nsamples (int, optional): Number of samples to draw. Defaults to 100.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: A 2d array of size :math:`(N, R)` holding the prediction samples.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basisEvaluatorSet</span><span class="p">)</span>
+        <span class="n">Amat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">basisEval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">basisEvalPars</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">predicta_samples</span><span class="p">(</span><span class="n">Amat</span><span class="p">,</span> <span class="n">nsamples</span><span class="o">=</span><span class="n">nsamples</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="lreg.predicta">
+<a class="viewcode-back" href="../../../autoapi/pytuq/lreg/lreg/index.html#pytuq.lreg.lreg.lreg.predicta">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">predicta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Amat</span><span class="p">,</span> <span class="n">msc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">pp</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Predict given the A-matrix of basis evaluations.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            Amat (np.ndarray): A 2d array of size :math:`(N, K)` each row holding basis evaluations at a training point.</span>
+<span class="sd">            msc (int, optional): Prediction mode: 0 (mean-only), 1 (mean and variance), or 2 (mean, variance and covariance). Defaults to 0.</span>
+<span class="sd">            pp (bool, optional): Whether to compute posterior-predictive (i.e. add data variance) or not.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple(np.ndarray, np.ndarray, np.ndarray): triple of Mean (array of size `N`), Variance (array of size `N` or None), Covariance (array of size `(N, N)` or None).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fitted</span><span class="p">)</span>
+
+        <span class="n">ypred</span> <span class="o">=</span> <span class="n">Amat</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">cf</span>
+        <span class="k">if</span> <span class="n">msc</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
+            <span class="n">ypred_cov</span> <span class="o">=</span> <span class="p">(</span><span class="n">Amat</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">cf_cov</span><span class="p">)</span> <span class="o">@</span> <span class="n">Amat</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">pp</span><span class="p">)</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">datavar</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">Amat</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">ypred_var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">ypred_cov</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">msc</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">ypred_cov</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">ypred_var</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_stdev</span><span class="p">(</span><span class="n">Amat</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;chol&#39;</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+            <span class="k">except</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">:</span>
+                <span class="n">ypred_var</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_stdev</span><span class="p">(</span><span class="n">Amat</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;svd&#39;</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+            <span class="n">ypred_var</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">pp</span><span class="p">)</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">datavar</span>
+        <span class="k">elif</span> <span class="n">msc</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">ypred_cov</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1">#np.zeros((Amat.shape[1], Amat.shape[1]))</span>
+            <span class="n">ypred_var</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1">#np.zeros((Amat.shape[1],))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;msc=</span><span class="si">{</span><span class="n">msc</span><span class="si">}</span><span class="s2">, but needs to be 0,1, or 2. Exiting.&quot;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">ypred</span><span class="p">,</span> <span class="n">ypred_var</span><span class="p">,</span> <span class="n">ypred_cov</span></div>
+
+
+<div class="viewcode-block" id="lreg.predicta_samples">
+<a class="viewcode-back" href="../../../autoapi/pytuq/lreg/lreg/index.html#pytuq.lreg.lreg.lreg.predicta_samples">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">predicta_samples</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Amat</span><span class="p">,</span> <span class="n">nsamples</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Predict samples given the A-matrix of basis evaluations.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            Amat (np.ndarray): A 2d array of size :math:`(N, K)` each row holding basis evaluations at a training point.</span>
+<span class="sd">            nsamples (int, optional): Number of samples to draw. Defaults to 100.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: A 2d array of size :math:`(N, R)` holding the prediction samples.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fitted</span><span class="p">)</span>
+        <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cf_cov</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="n">cf_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cf</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cf_cov</span><span class="p">,</span> <span class="n">nsamples</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">ypred_samples</span> <span class="o">=</span> <span class="n">Amat</span> <span class="o">@</span> <span class="n">cf_samples</span>
+
+        <span class="k">return</span> <span class="n">ypred_samples</span></div>
+
+
+
+<div class="viewcode-block" id="lreg.compute_stdev">
+<a class="viewcode-back" href="../../../autoapi/pytuq/lreg/lreg/index.html#pytuq.lreg.lreg.lreg.compute_stdev">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_stdev</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Amat</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;chol&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Computation of pushed-forward standard deviation using a few different methods.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            Amat (np.ndarray): A 2d array of size :math:`(N, K)` each row holding basis evaluations at a training point.</span>
+<span class="sd">            method (str, optional): Method of computation. Options are &#39;chol&#39; (cholesky), &#39;choleye&#39; (cholesky with regularization), &#39;svd&#39; (SVD), &#39;loop&#39; (slow and painful), &#39;fullcov&#39; (slow-ish and memory intensive).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: An 1d array of pushed-forward standard deviation, of size :math:`N`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cf_cov</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;chol&quot;</span><span class="p">:</span>
+            <span class="n">chol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cf_cov</span><span class="p">)</span>
+            <span class="n">mat</span> <span class="o">=</span> <span class="n">Amat</span> <span class="o">@</span> <span class="n">chol</span>
+            <span class="n">pf_stdev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;choleye&quot;</span><span class="p">:</span>
+            <span class="n">eigvals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvalsh</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cf_cov</span><span class="p">)</span>
+            <span class="n">chol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cf_cov</span><span class="o">+</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">eigvals</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="mf">1e-14</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cf_cov</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="n">mat</span> <span class="o">=</span> <span class="n">Amat</span> <span class="o">@</span> <span class="n">chol</span>
+            <span class="n">pf_stdev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;svd&quot;</span><span class="p">:</span>
+            <span class="n">u</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">vh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cf_cov</span><span class="p">,</span> <span class="n">hermitian</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">mat</span> <span class="o">=</span> <span class="p">(</span><span class="n">Amat</span> <span class="o">@</span> <span class="n">u</span><span class="p">)</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+            <span class="n">pf_stdev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;loop&quot;</span><span class="p">:</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Amat</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cf_cov</span><span class="p">)</span>
+            <span class="n">pf_stdev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">Amat</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">ipt</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Amat</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                <span class="n">pf_stdev</span><span class="p">[</span><span class="n">ipt</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">tmp</span><span class="p">[</span><span class="n">ipt</span><span class="p">,</span> <span class="p">:],</span> <span class="n">Amat</span><span class="p">[</span><span class="n">ipt</span><span class="p">,</span> <span class="p">:]))</span>
+        <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;fullcov&quot;</span><span class="p">:</span>
+            <span class="n">pf_stdev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">((</span><span class="n">Amat</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">cf_cov</span><span class="p">)</span> <span class="o">@</span> <span class="n">Amat</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">pf_stdev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">Amat</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">pf_stdev</span></div>
+
+
+
+<div class="viewcode-block" id="lreg.predict_plot">
+<a class="viewcode-back" href="../../../autoapi/pytuq/lreg/lreg/index.html#pytuq.lreg.lreg.lreg.predict_plot">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">predict_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aa_list</span><span class="p">,</span> <span class="n">yy_list</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Ploting utility given a list of A-matrices and a list of data (typically, training/validation/testing).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            aa_list (list[np.ndarray]): list of A-matrices of size :math:`(\cdot, d)`.</span>
+<span class="sd">            yy_list (list[np.ndarray]): list of 1d data arrays</span>
+<span class="sd">            labels (None, optional): list of labels, of the same size as the lists above. Defaults to None, i.e. no labels.</span>
+<span class="sd">            colors (None, optional): list of colors, of the same size as the lists above. Defaults to None, i.e. select standard colors.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">nlist</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">aa_list</span><span class="p">)</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">nlist</span><span class="o">==</span><span class="nb">len</span><span class="p">(</span><span class="n">yy_list</span><span class="p">))</span>
+
+        <span class="n">yy_pred_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">yy_pred_std_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">aa</span> <span class="ow">in</span> <span class="n">aa_list</span><span class="p">:</span>
+            <span class="n">yy_pred</span><span class="p">,</span> <span class="n">yy_pred_var</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">predicta</span><span class="p">(</span><span class="n">aa</span><span class="p">,</span> <span class="n">msc</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">yy_pred_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">yy_pred</span><span class="p">)</span>
+            <span class="n">yy_pred_std_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">yy_pred_var</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">labels</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;Set </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nlist</span><span class="p">)]</span>
+        <span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span><span class="o">==</span><span class="n">nlist</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">colors</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">nlist</span>
+            <span class="n">colors</span> <span class="o">=</span> <span class="n">colors</span><span class="p">[:</span><span class="n">nlist</span><span class="p">]</span>
+        <span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span><span class="o">==</span><span class="n">nlist</span><span class="p">)</span>
+
+        <span class="n">ee</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">yy_pred_std_list</span><span class="p">,</span> <span class="n">yy_pred_std_list</span><span class="p">))</span>
+
+        <span class="n">plot_dm</span><span class="p">(</span><span class="n">yy_list</span><span class="p">,</span> <span class="n">yy_pred_list</span><span class="p">,</span> <span class="n">errorbars</span><span class="o">=</span><span class="n">ee</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span>
+                <span class="n">axes_labels</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;Data&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;Fit&#39;</span><span class="p">],</span>
+                <span class="n">figname</span><span class="o">=</span><span class="s1">&#39;fitdiag.png&#39;</span><span class="p">,</span>
+                <span class="n">legendpos</span><span class="o">=</span><span class="s1">&#39;in&#39;</span><span class="p">,</span> <span class="n">msize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+
+        <span class="n">res_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y_pred</span><span class="o">-</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">yy_list</span><span class="p">,</span> <span class="n">yy_pred_list</span><span class="p">)]</span>
+        <span class="n">plot_dm</span><span class="p">(</span><span class="n">res_list</span><span class="p">,</span> <span class="n">yy_pred_std_list</span><span class="p">,</span> <span class="n">errorbars</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span>
+                <span class="n">axes_labels</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;|Residual|&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;Fit StDev&#39;</span><span class="p">],</span>
+                <span class="n">figname</span><span class="o">=</span><span class="s1">&#39;resid_vs_std.png&#39;</span><span class="p">,</span>
+                <span class="n">legendpos</span><span class="o">=</span><span class="s1">&#39;in&#39;</span><span class="p">,</span> <span class="n">msize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+
+        <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">y</span><span class="p">,</span> <span class="n">y_pred_std</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">yy_list</span><span class="p">,</span> <span class="n">yy_pred_std_list</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">colors</span><span class="p">):</span>
+            <span class="n">ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">ind</span><span class="p">],</span> <span class="n">y_pred_std</span><span class="p">[</span><span class="n">ind</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Data&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Fit StDev&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;y_ystd.png&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;y_ystd_log.png&#39;</span><span class="p">)</span>
+
+        <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">y_pred_std</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">yy_pred_list</span><span class="p">,</span> <span class="n">yy_pred_std_list</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">colors</span><span class="p">):</span>
+            <span class="n">ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_pred</span><span class="p">[</span><span class="n">ind</span><span class="p">],</span> <span class="n">y_pred_std</span><span class="p">[</span><span class="n">ind</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Fit Mean&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Fit StDev&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;ypred_ystd.png&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;ypred_ystd_log.png&#39;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">y_pred_std</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">yy_list</span><span class="p">,</span> <span class="n">yy_pred_list</span><span class="p">,</span> <span class="n">yy_pred_std_list</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">colors</span><span class="p">):</span>
+            <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="s1">&#39;r--&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_pred_std</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">y_pred</span><span class="p">),</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">label</span> <span class="o">+</span> <span class="s1">&#39; Sample&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Fit StDev / |Residual|&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;ystd_resid_&#39;</span><span class="o">+</span><span class="n">label</span><span class="o">+</span><span class="s1">&#39;.png&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;ystd_resid_&#39;</span><span class="o">+</span><span class="n">label</span><span class="o">+</span><span class="s1">&#39;_log.png&#39;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">y_pred_std</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">yy_list</span><span class="p">,</span> <span class="n">yy_pred_list</span><span class="p">,</span> <span class="n">yy_pred_std_list</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">colors</span><span class="p">):</span>
+            <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="s1">&#39;r--&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">y_pred</span><span class="p">)</span><span class="o">/</span><span class="n">y_pred_std</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">label</span> <span class="o">+</span> <span class="s1">&#39; Sample&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;|Residual| / Fit StDev&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;resid_ystd_&#39;</span><span class="o">+</span><span class="n">label</span><span class="o">+</span><span class="s1">&#39;.png&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;resid_ystd_&#39;</span><span class="o">+</span><span class="n">label</span><span class="o">+</span><span class="s1">&#39;_log.png&#39;</span><span class="p">)</span>
+
+        <span class="c1"># for y, y_pred, y_pred_std, label, color in zip(yy_list, yy_pred_list, yy_pred_std_list, labels, colors):</span>
+        <span class="c1">#     _ = plt.figure(figsize=(10,10))</span>
+        <span class="c1">#     plt.plot(np.abs(y-y_pred), y_pred_std, &#39;o&#39;, color=color)</span>
+        <span class="c1">#     plt.xlabel(&#39;|Residual|&#39;)</span>
+        <span class="c1">#     plt.ylabel(&#39;Fit StDev&#39;)</span>
+        <span class="c1">#     plt.savefig(&#39;resid_vs_ystd_&#39;+label+&#39;.png&#39;)</span>
+        <span class="c1">#     plt.xscale(&#39;log&#39;)</span>
+        <span class="c1">#     plt.yscale(&#39;log&#39;)</span>
+        <span class="c1">#     plt.savefig(&#39;resid_vs_ystd_&#39;+label+&#39;_log.png&#39;)</span>
+
+        <span class="k">for</span> <span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">y_pred_std</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">yy_list</span><span class="p">,</span> <span class="n">yy_pred_list</span><span class="p">,</span> <span class="n">yy_pred_std_list</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">colors</span><span class="p">):</span>
+            <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="n">y_pred</span><span class="o">-</span><span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="n">y_pred_std</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">markeredgecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)],</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$1\sigma$ region&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">label</span> <span class="o">+</span> <span class="s1">&#39; Sample&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Residual / Fit StDev&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">label</span> <span class="o">==</span> <span class="s1">&#39;Training&#39;</span><span class="p">:</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">7.</span><span class="p">,</span> <span class="mf">7.</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="n">label</span> <span class="o">==</span> <span class="s1">&#39;Testing&#39;</span><span class="p">:</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">10.</span><span class="p">,</span> <span class="mf">10.</span><span class="p">])</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;resid_scaled_&#39;</span><span class="o">+</span><span class="n">label</span><span class="o">+</span><span class="s1">&#39;.png&#39;</span><span class="p">)</span></div>
+</div>
+
+
+
+
+
+<div class="viewcode-block" id="lsq">
+<a class="viewcode-back" href="../../../autoapi/pytuq/lreg/lreg/index.html#pytuq.lreg.lreg.lsq">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">lsq</span><span class="p">(</span><span class="n">lreg</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bare minimum least squares solution.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        cf (np.ndarray): An 1d array of coefficients, of size :math:`K`.</span>
+<span class="sd">        cf_cov (np.ndarray): A 2d array of coefficient covariance of size :math:`(K,K)`.</span>
+<span class="sd">        fitted (bool): Flag to indicate whether fit is performed or not.</span>
+<span class="sd">        used (np.ndarray): An array of integers indicating the bases used (i.e. all basis in this case).</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        scipy&#39;s lstsq uses SVD under the hood.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialization.&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="lsq.fita">
+<a class="viewcode-back" href="../../../autoapi/pytuq/lreg/lreg/index.html#pytuq.lreg.lreg.lsq.fita">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fita</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Amat</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Fit given A-matrix of basis evaluations and data array.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            Amat (np.ndarray): A 2d array of size :math:`(N, K)` each row holding basis evaluations at a training point.</span>
+<span class="sd">            y (np.ndarray): An 1d array of size :math:`N` holding the data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cf</span><span class="p">,</span> <span class="n">residues</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">lstsq</span><span class="p">(</span><span class="n">Amat</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mf">1.0e-13</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cf_cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">Amat</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">Amat</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fitted</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">used</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">Amat</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

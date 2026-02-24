@@ -1,0 +1,529 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytuq.utils.maps &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="pytuq.utils.metrics" href="../metrics/index.html" />
+    <link rel="prev" title="pytuq.utils.funcbank" href="../funcbank/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../auto_examples/index.html">Software Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../auto_examples/index.html#surrogates">Surrogates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_pce.html">Polynomial Chaos Expansion Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Section Navigation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">pytuq</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../ftools/index.html">pytuq.ftools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../func/index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rv/index.html">pytuq.rv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../surrogates/index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Section Navigation</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">pytuq</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">pytuq.utils</a></li>
+      <li class="breadcrumb-item active">pytuq.utils.maps</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/autoapi/pytuq/utils/maps/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-pytuq.utils.maps">
+<span id="pytuq-utils-maps"></span><h1>pytuq.utils.maps<a class="headerlink" href="#module-pytuq.utils.maps" title="Link to this heading"></a></h1>
+<p>Module for various mapping functions.</p>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.utils.maps.XMap" title="pytuq.utils.maps.XMap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">XMap</span></code></a></p></td>
+<td><p>Base class for a map.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.utils.maps.Expon" title="pytuq.utils.maps.Expon"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expon</span></code></a></p></td>
+<td><p>Exponential map.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.utils.maps.Logar" title="pytuq.utils.maps.Logar"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Logar</span></code></a></p></td>
+<td><p>Logarithmic map.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.utils.maps.ComposeMap" title="pytuq.utils.maps.ComposeMap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ComposeMap</span></code></a></p></td>
+<td><p>Composition of two maps.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.utils.maps.LinearScaler" title="pytuq.utils.maps.LinearScaler"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LinearScaler</span></code></a></p></td>
+<td><p>Linear scaler map.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.utils.maps.Standardizer" title="pytuq.utils.maps.Standardizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Standardizer</span></code></a></p></td>
+<td><p>Standardizer map, linearly scaling data to zero mean and unit variance.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.utils.maps.Normalizer" title="pytuq.utils.maps.Normalizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Normalizer</span></code></a></p></td>
+<td><p>Normalizer map, linearly scaling data to [0,1].</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.utils.maps.Domainizer" title="pytuq.utils.maps.Domainizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Domainizer</span></code></a></p></td>
+<td><p>Domainizer map, linearly scaling data (assumed to be in [0,1]) to a given domain.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.utils.maps.Affine" title="pytuq.utils.maps.Affine"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Affine</span></code></a></p></td>
+<td><p>Affine map.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.utils.maps.scale01ToDom" title="pytuq.utils.maps.scale01ToDom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scale01ToDom</span></code></a>(xx, dom)</p></td>
+<td><p>Scaling an array to a given domain, assuming        the inputs are in [0,1]^d.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.utils.maps.scaleDomTo01" title="pytuq.utils.maps.scaleDomTo01"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scaleDomTo01</span></code></a>(xx, dom)</p></td>
+<td><p>Scaling an array from a given domain to [0,1]^d.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.utils.maps.scaleTo01" title="pytuq.utils.maps.scaleTo01"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scaleTo01</span></code></a>(xx)</p></td>
+<td><p>Scale an array to [0,1], using dimension-wise min and max.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.utils.maps.standardize" title="pytuq.utils.maps.standardize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">standardize</span></code></a>(xx)</p></td>
+<td><p>Normalize an array, i.e. map it to zero mean and unit variance.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.maps.scale01ToDom">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.maps.</span></span><span class="sig-name descname"><span class="pre">scale01ToDom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dom</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/maps.html#scale01ToDom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.maps.scale01ToDom" title="Link to this definition"></a></dt>
+<dd><p>Scaling an array to a given domain, assuming        the inputs are in [0,1]^d.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xx</strong> (<em>np.ndarray</em>) – Nxd input array.</p></li>
+<li><p><strong>dom</strong> (<em>np.ndarray</em>) – dx2 domain.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Nxd scaled array.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If input is outside [0,1]^d, a warning is given, but the scaling will happen nevertheless.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.maps.scaleDomTo01">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.maps.</span></span><span class="sig-name descname"><span class="pre">scaleDomTo01</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dom</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/maps.html#scaleDomTo01"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.maps.scaleDomTo01" title="Link to this definition"></a></dt>
+<dd><p>Scaling an array from a given domain to [0,1]^d.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xx</strong> (<em>np.ndarray</em>) – Nxd input array.</p></li>
+<li><p><strong>dom</strong> (<em>np.ndarray</em>) – dx2 domain.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Nxd scaled array.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If input is outside domain, a warning is given, but the scaling will happen nevertheless.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.maps.scaleTo01">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.maps.</span></span><span class="sig-name descname"><span class="pre">scaleTo01</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/maps.html#scaleTo01"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.maps.scaleTo01" title="Link to this definition"></a></dt>
+<dd><p>Scale an array to [0,1], using dimension-wise min and max.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>xx</strong> (<em>np.ndarray</em>) – Initial 2d array</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Scaled array.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.utils.maps.standardize">
+<span class="sig-prename descclassname"><span class="pre">pytuq.utils.maps.</span></span><span class="sig-name descname"><span class="pre">standardize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/maps.html#standardize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.maps.standardize" title="Link to this definition"></a></dt>
+<dd><p>Normalize an array, i.e. map it to zero mean and unit variance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>xx</strong> (<em>np.ndarray</em>) – Initial 2d array</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Normalized array.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.utils.maps.XMap">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.utils.maps.</span></span><span class="sig-name descname"><span class="pre">XMap</span></span><a class="reference internal" href="../../../../_modules/pytuq/utils/maps.html#XMap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.maps.XMap" title="Link to this definition"></a></dt>
+<dd><p>Base class for a map.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.utils.maps.XMap.forw">
+<span class="sig-name descname"><span class="pre">forw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/maps.html#XMap.forw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.maps.XMap.forw" title="Link to this definition"></a></dt>
+<dd><p>Forward map.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – 2d numpy input array.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>2d numpy output array.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.utils.maps.XMap.inv">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">inv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/maps.html#XMap.inv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.maps.XMap.inv" title="Link to this definition"></a></dt>
+<dd><p>Inverse of the map.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>xs</strong> (<em>np.ndarray</em>) – 2d numpy array.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>if implemented, 2d numpy array.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.utils.maps.Expon">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.utils.maps.</span></span><span class="sig-name descname"><span class="pre">Expon</span></span><a class="reference internal" href="../../../../_modules/pytuq/utils/maps.html#Expon"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.maps.Expon" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pytuq.utils.maps.XMap" title="pytuq.utils.maps.XMap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">XMap</span></code></a></p>
+<p>Exponential map.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.utils.maps.Expon.inv">
+<span class="sig-name descname"><span class="pre">inv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/maps.html#Expon.inv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.maps.Expon.inv" title="Link to this definition"></a></dt>
+<dd><p>Inverse of the map.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>xs</strong> (<em>np.ndarray</em>) – 2d numpy array.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>if implemented, 2d numpy array.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.utils.maps.Logar">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.utils.maps.</span></span><span class="sig-name descname"><span class="pre">Logar</span></span><a class="reference internal" href="../../../../_modules/pytuq/utils/maps.html#Logar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.maps.Logar" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pytuq.utils.maps.XMap" title="pytuq.utils.maps.XMap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">XMap</span></code></a></p>
+<p>Logarithmic map.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.utils.maps.Logar.inv">
+<span class="sig-name descname"><span class="pre">inv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/maps.html#Logar.inv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.maps.Logar.inv" title="Link to this definition"></a></dt>
+<dd><p>Inverse of the map.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>xs</strong> (<em>np.ndarray</em>) – 2d numpy array.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>if implemented, 2d numpy array.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.utils.maps.ComposeMap">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.utils.maps.</span></span><span class="sig-name descname"><span class="pre">ComposeMap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">map1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">map2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/maps.html#ComposeMap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.maps.ComposeMap" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pytuq.utils.maps.XMap" title="pytuq.utils.maps.XMap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">XMap</span></code></a></p>
+<p>Composition of two maps.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.utils.maps.ComposeMap.map1">
+<span class="sig-name descname"><span class="pre">map1</span></span><a class="reference internal" href="../../../../_modules/pytuq/utils/maps.html#ComposeMap.map1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.maps.ComposeMap.map1" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.utils.maps.ComposeMap.map2">
+<span class="sig-name descname"><span class="pre">map2</span></span><a class="reference internal" href="../../../../_modules/pytuq/utils/maps.html#ComposeMap.map2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.maps.ComposeMap.map2" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.utils.maps.ComposeMap.inv">
+<span class="sig-name descname"><span class="pre">inv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/maps.html#ComposeMap.inv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.maps.ComposeMap.inv" title="Link to this definition"></a></dt>
+<dd><p>Inverse of the map.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>xs</strong> (<em>np.ndarray</em>) – 2d numpy array.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>if implemented, 2d numpy array.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.utils.maps.LinearScaler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.utils.maps.</span></span><span class="sig-name descname"><span class="pre">LinearScaler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/maps.html#LinearScaler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.maps.LinearScaler" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pytuq.utils.maps.XMap" title="pytuq.utils.maps.XMap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">XMap</span></code></a></p>
+<p>Linear scaler map.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.utils.maps.LinearScaler.shift">
+<span class="sig-name descname"><span class="pre">shift</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="reference internal" href="../../../../_modules/pytuq/utils/maps.html#LinearScaler.shift"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.maps.LinearScaler.shift" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.utils.maps.LinearScaler.scale">
+<span class="sig-name descname"><span class="pre">scale</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="reference internal" href="../../../../_modules/pytuq/utils/maps.html#LinearScaler.scale"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.maps.LinearScaler.scale" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.utils.maps.LinearScaler.inv">
+<span class="sig-name descname"><span class="pre">inv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/maps.html#LinearScaler.inv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.maps.LinearScaler.inv" title="Link to this definition"></a></dt>
+<dd><p>Inverse of the map.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>xs</strong> (<em>np.ndarray</em>) – 2d numpy array.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>if implemented, 2d numpy array.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.utils.maps.Standardizer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.utils.maps.</span></span><span class="sig-name descname"><span class="pre">Standardizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/maps.html#Standardizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.maps.Standardizer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pytuq.utils.maps.LinearScaler" title="pytuq.utils.maps.LinearScaler"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LinearScaler</span></code></a></p>
+<p>Standardizer map, linearly scaling data to zero mean and unit variance.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.utils.maps.Normalizer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.utils.maps.</span></span><span class="sig-name descname"><span class="pre">Normalizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nugget</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/maps.html#Normalizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.maps.Normalizer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pytuq.utils.maps.LinearScaler" title="pytuq.utils.maps.LinearScaler"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LinearScaler</span></code></a></p>
+<p>Normalizer map, linearly scaling data to [0,1].</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.utils.maps.Domainizer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.utils.maps.</span></span><span class="sig-name descname"><span class="pre">Domainizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dom</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/maps.html#Domainizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.maps.Domainizer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pytuq.utils.maps.LinearScaler" title="pytuq.utils.maps.LinearScaler"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LinearScaler</span></code></a></p>
+<p>Domainizer map, linearly scaling data (assumed to be in [0,1]) to a given domain.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This also can be accomplished by functions <cite>scaleDomTo01</cite> and its inverse <cite>scale01ToDom</cite>.</p>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.utils.maps.Affine">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.utils.maps.</span></span><span class="sig-name descname"><span class="pre">Affine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bias</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/maps.html#Affine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.maps.Affine" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pytuq.utils.maps.XMap" title="pytuq.utils.maps.XMap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">XMap</span></code></a></p>
+<p>Affine map.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.utils.maps.Affine.weight">
+<span class="sig-name descname"><span class="pre">weight</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="reference internal" href="../../../../_modules/pytuq/utils/maps.html#Affine.weight"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.maps.Affine.weight" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.utils.maps.Affine.bias">
+<span class="sig-name descname"><span class="pre">bias</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="reference internal" href="../../../../_modules/pytuq/utils/maps.html#Affine.bias"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.maps.Affine.bias" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.utils.maps.Affine.inv">
+<span class="sig-name descname"><span class="pre">inv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/utils/maps.html#Affine.inv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.utils.maps.Affine.inv" title="Link to this definition"></a></dt>
+<dd><p>Inverse of the map.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>xs</strong> (<em>np.ndarray</em>) – 2d numpy array.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>if implemented, 2d numpy array.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../funcbank/index.html" class="btn btn-neutral float-left" title="pytuq.utils.funcbank" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../metrics/index.html" class="btn btn-neutral float-right" title="pytuq.utils.metrics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

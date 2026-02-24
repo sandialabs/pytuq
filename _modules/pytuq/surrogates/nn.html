@@ -1,0 +1,575 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytuq.surrogates.nn &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">Software Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/index.html#surrogates">Surrogates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_pce.html">Polynomial Chaos Expansion Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../autoapi/index.html">Section Navigation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../autoapi/pytuq/index.html">pytuq</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/pytuq/index.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/ftools/index.html">pytuq.ftools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/func/index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/minf/index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/rv/index.html">pytuq.rv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/surrogates/index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/utils/index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pytuq.surrogates.nn</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pytuq.surrogates.nn</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+
+<span class="sd">&quot;&quot;&quot;This module provides a QUiNN (Quantification of Uncertainties in Neural Networks) wrapper class to facilitate </span>
+<span class="sd">    the universal coupling of FASTMath UQ tools and libraries. This class focuses on the use case </span>
+<span class="sd">    of a Residual Neural Network fitted with variational inference, keeping in mind </span>
+<span class="sd">    flexibility to implement additional UQ functionalities in the future.</span>
+
+<span class="sd">    The NN class supports a minimal API, with methods to construct the model, build it with training data,</span>
+<span class="sd">    evaluate it with input data, and offer samples of predictions with variance and covariance.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        The current implementation focuses on providing a general foundation for Neural Network surrogate model creation. </span>
+<span class="sd">        While not all construct and build options are currently supported, the class was developed with future growth in mind.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">quinn.nns.rnet</span><span class="w"> </span><span class="kn">import</span> <span class="n">RNet</span><span class="p">,</span> <span class="n">LayerFcn</span><span class="p">,</span> <span class="n">Poly</span><span class="p">,</span> <span class="n">Const</span><span class="p">,</span> <span class="n">Lin</span><span class="p">,</span> <span class="n">Quad</span><span class="p">,</span> <span class="n">Cubic</span><span class="p">,</span> <span class="n">NonPar</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">quinn.solvers.nn_vi</span><span class="w"> </span><span class="kn">import</span> <span class="n">NN_VI</span>
+
+
+<div class="viewcode-block" id="NN">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/nn/index.html#pytuq.surrogates.nn.NN">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">NN</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A wrapper class to access QUiNN functionalities for Neural Network surrogate models. </span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        nnet (RNet object): Neural network, defaults to Residual Neural Network object.</span>
+<span class="sd">        type (str): Type of neural network, defaults to &#39;RNet&#39;.</span>
+<span class="sd">        n_layers (int): Layers in neural network.</span>
+<span class="sd">        n_nodes (int): Nodes per layer.</span>
+<span class="sd">        uqnet (NN_VI object): UQ method, defaults to variational inference object and method.</span>
+<span class="sd">        options (dict): Dictionary with user-specified options for instantiation of Neural Network, building, and evaluating.</span>
+<span class="sd">        _x_trn (np.ndarray): Input training data.</span>
+<span class="sd">        _y_trn (np.ndarray): Output training data.</span>
+<span class="sd">        _x_val (np.ndarray, optional): Input validation data.</span>
+<span class="sd">        _y_val (np.ndarray, optional): Output validation data. </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">n_layers</span><span class="p">,</span> <span class="n">n_nodes</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes a Residual Neural Network (NNet) object with, at minimum:</span>
+<span class="sd">        numbers of layers, number of nodes, and neural network type (defaulting to RNet).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            n_layers (int): Number of layers.</span>
+<span class="sd">            n_nodes (int): Width of the RNet, i.e. number of units in each hidden layer.            </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Input validation for type, n_layers, n_nodes</span>
+        <span class="k">if</span> <span class="nb">type</span> <span class="o">!=</span> <span class="s2">&quot;RNet&quot;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Type of NN must be a Residual Neural Network, RNet.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="nb">type</span>
+        
+        <span class="k">if</span> <span class="n">n_layers</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">n_nodes</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;n_layers and n_nodes must be positive integers.&quot;</span><span class="p">)</span>
+        
+<div class="viewcode-block" id="NN.n_layers">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/nn/index.html#pytuq.surrogates.nn.NN.n_layers">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_layers</span> <span class="o">=</span> <span class="n">n_layers</span></div>
+
+<div class="viewcode-block" id="NN.n_nodes">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/nn/index.html#pytuq.surrogates.nn.NN.n_nodes">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_nodes</span> <span class="o">=</span> <span class="n">n_nodes</span></div>
+
+
+        <span class="c1"># self.options holds net_options and fit_options</span>
+<div class="viewcode-block" id="NN.options">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/nn/index.html#pytuq.surrogates.nn.NN.options">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">kwargs</span> </div>
+
+
+<div class="viewcode-block" id="NN.options_valid">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/nn/index.html#pytuq.surrogates.nn.NN.options_valid">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">options_valid</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_options</span><span class="p">()</span>
+
+        <span class="c1"># Initialize other attributes</span>
+<div class="viewcode-block" id="NN._x_trn">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/nn/index.html#pytuq.surrogates.nn.NN._x_trn">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_x_trn</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="NN._y_trn">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/nn/index.html#pytuq.surrogates.nn.NN._y_trn">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_y_trn</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="NN._x_val">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/nn/index.html#pytuq.surrogates.nn.NN._x_val">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_x_val</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="NN._y_val">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/nn/index.html#pytuq.surrogates.nn.NN._y_val">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_y_val</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="NN.uqnet">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/nn/index.html#pytuq.surrogates.nn.NN.uqnet">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">uqnet</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+
+        <span class="c1"># Deferring construction of NN</span>
+<div class="viewcode-block" id="NN.nnet">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/nn/index.html#pytuq.surrogates.nn.NN.nnet">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nnet</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+        
+
+<div class="viewcode-block" id="NN.read_options_from_file">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/nn/index.html#pytuq.surrogates.nn.NN.read_options_from_file">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_options_from_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">json_filename</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read in options from given json file.&quot;&quot;&quot;</span>
+
+        <span class="c1"># Load JSON file </span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">json_file</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">json_file</span><span class="p">)</span>
+  
+        <span class="c1"># Convert &#39;wp_function_name&#39; and &#39;wp_function_arg&#39; into LayerFcn object</span>
+        <span class="k">if</span> <span class="s1">&#39;wp_function_name&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">:</span>
+            <span class="n">func_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;wp_function_name&#39;</span><span class="p">]</span>
+            <span class="c1"># print(&#39;Instantiating weight parameterization function given&#39;)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">func_name</span> <span class="o">==</span> <span class="s1">&#39;Poly&#39;</span> <span class="ow">or</span> <span class="n">func_name</span> <span class="o">==</span> <span class="s1">&#39;NonPar&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;wp_function_arg&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;wp_function_arg&#39;</span><span class="p">],</span> <span class="nb">int</span><span class="p">)):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The LayerFcn function </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;wp_function_name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> requires a non-negative, integer argument &#39;wp_function_arg&#39;.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">func_name</span> <span class="o">==</span> <span class="s1">&#39;Poly&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;wp_function&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Poly</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;wp_function_arg&#39;</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;wp_function_arg&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">func_name</span> <span class="o">==</span> <span class="s1">&#39;NonPar&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;wp_function&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">NonPar</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;wp_function_arg&#39;</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;wp_function_arg&#39;</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">func_name</span> <span class="o">==</span> <span class="s1">&#39;Cubic&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;wp_function&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Cubic</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">func_name</span> <span class="o">==</span> <span class="s1">&#39;Quad&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;wp_function&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Quad</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">func_name</span> <span class="o">==</span> <span class="s1">&#39;Lin&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;wp_function&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Lin</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">func_name</span> <span class="o">==</span> <span class="s1">&#39;Const&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;wp_function&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Const</span><span class="p">()</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;wp_function_name&#39;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="s1">&#39;wp_function_arg&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The LayerFcn functions Cubic, Quad, Lin, and Const do not take any arguments, but &#39;wp_function_arg&#39; was provided.&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_options</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="NN.check_options">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/nn/index.html#pytuq.surrogates.nn.NN.check_options">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_options</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sanity check on current set of options, including instantiation of neural network, building,</span>
+<span class="sd">            and evaluating. Throws error if invalid option.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">options_valid</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="n">expected_options</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="c1"># net_options for RNet:</span>
+            <span class="s1">&#39;wp_function&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">LayerFcn</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">)),</span>  <span class="c1"># Can be a LayerFcn object or None</span>
+            <span class="s1">&#39;indim&#39;</span><span class="p">:</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">)),</span>             <span class="c1"># Can be an int or None</span>
+            <span class="s1">&#39;outdim&#39;</span><span class="p">:</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">)),</span>
+            <span class="s1">&#39;layer_pre&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+            <span class="s1">&#39;layer_post&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+            <span class="s1">&#39;biasorno&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+            <span class="s1">&#39;nonlin&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+            <span class="s1">&#39;mlp&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+            <span class="s1">&#39;final_layer&#39;</span><span class="p">:</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">)),</span>       <span class="c1"># Can be a string or None</span>
+            <span class="s1">&#39;device&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">,</span> <span class="nb">str</span><span class="p">),</span>          
+            <span class="s1">&#39;init_factor&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+            <span class="s1">&#39;sum_dim&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+            <span class="c1"># fit_options for nn_vi:</span>
+            <span class="s1">&#39;datanoise&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+            <span class="s1">&#39;lrate&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+            <span class="s1">&#39;batch_size&#39;</span><span class="p">:</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">)),</span>
+            <span class="s1">&#39;nepochs&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+            <span class="c1"># build() options:</span>
+            <span class="s1">&#39;verbose&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+            <span class="c1"># evaluate() options:</span>
+            <span class="s1">&#39;msc&#39;</span><span class="p">:</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">)),</span> 
+            <span class="s1">&#39;nsam&#39;</span><span class="p">:</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">)),</span> 
+        <span class="p">}</span>   
+
+        <span class="c1"># Iterate through options in self.options</span>
+        <span class="k">for</span> <span class="n">option</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="c1"># (1) Check if the option is an invalid option name</span>
+            <span class="k">if</span> <span class="n">option</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">expected_options</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid or currently unsupported option: </span><span class="si">{</span><span class="n">option</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+            <span class="c1"># Get the possible valid types for the given option</span>
+            <span class="n">valid_types</span> <span class="o">=</span> <span class="n">expected_options</span><span class="p">[</span><span class="n">option</span><span class="p">]</span>
+
+            <span class="c1"># (2) Validate via isinstance</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">valid_types</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Option &#39;</span><span class="si">{</span><span class="n">option</span><span class="si">}</span><span class="s2">&#39; must be of type </span><span class="si">{</span><span class="n">valid_types</span><span class="si">}</span><span class="s2">, received </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+            <span class="c1"># (3) Special check for positive values</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span> <span class="ow">and</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Option &#39;</span><span class="si">{</span><span class="n">option</span><span class="si">}</span><span class="s2">&#39; must be a non-negative value.&quot;</span><span class="p">)</span>
+            
+            <span class="c1"># TODO: For values that are allowed to be negative/benefit from a range, add a dictionary for valid ranges or multiple options.</span>
+
+            <span class="c1"># (4) Special check for final_layer with specific string types</span>
+            <span class="k">if</span> <span class="n">option</span> <span class="o">==</span> <span class="s1">&#39;final_layer&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">,</span> <span class="s1">&#39;exp&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Option &#39;</span><span class="si">{</span><span class="n">option</span><span class="si">}</span><span class="s2">&#39; can only be &#39;exp&#39;, &#39;sum&#39;, or None.&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">options_valid</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+    
+<div class="viewcode-block" id="NN.get_options">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/nn/index.html#pytuq.surrogates.nn.NN.get_options">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">json_print</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return options in a dictionary and, if provided, write options to a json file.&quot;&quot;&quot;</span>
+        <span class="c1"># TODO: QUINN returns options defaulted to / used -&gt; return library with defaults</span>
+        
+        <span class="c1"># Write read-in options to new JSON file</span>
+        <span class="k">if</span> <span class="n">json_print</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_print</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+                <span class="n">printing_options</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                <span class="k">if</span> <span class="s1">&#39;wp_function&#39;</span> <span class="ow">in</span> <span class="n">printing_options</span><span class="p">:</span>
+                    <span class="n">printing_options</span><span class="p">[</span><span class="s1">&#39;wp_function_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">printing_options</span><span class="p">[</span><span class="s1">&#39;wp_function&#39;</span><span class="p">])</span><span class="o">.</span><span class="vm">__name__</span>
+                    <span class="k">if</span> <span class="n">printing_options</span><span class="p">[</span><span class="s1">&#39;wp_function_name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Poly&#39;</span><span class="p">:</span>
+                        <span class="n">printing_options</span><span class="p">[</span><span class="s1">&#39;wp_function_arg&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">printing_options</span><span class="p">[</span><span class="s1">&#39;wp_function&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">npar</span> <span class="o">-</span> <span class="mi">1</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">printing_options</span><span class="p">[</span><span class="s1">&#39;wp_function_arg&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">printing_options</span><span class="p">[</span><span class="s1">&#39;wp_function&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">npar</span>
+                    <span class="n">printing_options</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;wp_function&#39;</span><span class="p">)</span>
+                <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">printing_options</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span></div>
+
+
+<div class="viewcode-block" id="NN.set_validation_data">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/nn/index.html#pytuq.surrogates.nn.NN.set_validation_data">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_validation_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sets the validation data with input validation (optional). If not implemented,</span>
+<span class="sd">        the fitting method will default to using the training set for validation.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x_val (np.ndarray): Validation input array.</span>
+<span class="sd">            y_val (np.ndarray): Validation output array.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If x_val or y_val do not meet the required dimensions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">x_val</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">and</span> <span class="n">x_val</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;x_val must be a 2D numpy array.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">and</span> <span class="n">y_val</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">y_val</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;y_val must be a 2D numpy array with a single column for scalar-valued outputs.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">x_val</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">y_val</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The number of samples in x_val and y_val must be the same.&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_x_val</span> <span class="o">=</span> <span class="n">x_val</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_y_val</span> <span class="o">=</span> <span class="n">y_val</span></div>
+
+
+<div class="viewcode-block" id="NN.set_training_data">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/nn/index.html#pytuq.surrogates.nn.NN.set_training_data">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_training_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_trn</span><span class="p">,</span> <span class="n">y_trn</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sets the training data with input validation.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x_trn (np.ndarray): Training input array of size (N,d).</span>
+<span class="sd">            y_trn (np.ndarray): Training output array of size (N,o).</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If x_trn or y_trn do not meet the required dimensions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">x_trn</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">and</span> <span class="n">x_trn</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;x_trn must be a 2D numpy array.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">y_trn</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">and</span> <span class="n">y_trn</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">y_trn</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;y_trn must be a 2D numpy array with a single column for scalar-valued outputs.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">x_trn</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">y_trn</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The number of samples in x_trn and y_trn must be the same.&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_x_trn</span> <span class="o">=</span> <span class="n">x_trn</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_y_trn</span> <span class="o">=</span> <span class="n">y_trn</span></div>
+
+
+<div class="viewcode-block" id="NN.instantiate_network">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/nn/index.html#pytuq.surrogates.nn.NN.instantiate_network">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">instantiate_network</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Instantiate neural network with validated options.&quot;&quot;&quot;</span>
+        <span class="c1"># TODO: Make issue to figure out how to expand to multiple different network types; including check_options input validation</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_options</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">options_valid</span><span class="p">:</span>
+            <span class="c1"># List of all possible net options for RNet construction</span>
+            <span class="n">possible_net_options</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="s1">&#39;wp_function&#39;</span><span class="p">,</span> <span class="s1">&#39;indim&#39;</span><span class="p">,</span> <span class="s1">&#39;outdim&#39;</span><span class="p">,</span> <span class="s1">&#39;layer_pre&#39;</span><span class="p">,</span> <span class="s1">&#39;layer_post&#39;</span><span class="p">,</span> <span class="s1">&#39;biasorno&#39;</span><span class="p">,</span>  <span class="s1">&#39;nonlin&#39;</span><span class="p">,</span> <span class="s1">&#39;mlp&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;final_layer&#39;</span><span class="p">,</span>  <span class="s1">&#39;init_factor&#39;</span><span class="p">,</span> <span class="s1">&#39;sum_dim&#39;</span>
+                <span class="p">]</span>
+            <span class="n">net_options</span> <span class="o">=</span> <span class="p">{}</span>
+
+            <span class="c1"># Iterate through self.options, add values to net_options</span>
+            <span class="k">for</span> <span class="n">option</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">option</span> <span class="ow">in</span> <span class="n">possible_net_options</span><span class="p">:</span>
+                    <span class="n">net_options</span><span class="p">[</span><span class="n">option</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;RNet&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">nnet</span> <span class="o">=</span> <span class="n">RNet</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_nodes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_layers</span><span class="p">,</span> <span class="o">**</span><span class="n">net_options</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="NN.update_options">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/nn/index.html#pytuq.surrogates.nn.NN.update_options">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_options</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update only the options for building/fitting and evaluating of neural network.&quot;&quot;&quot;</span>
+        <span class="n">possible_fit_options</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;datanoise&#39;</span><span class="p">,</span> <span class="s1">&#39;lrate&#39;</span><span class="p">,</span> <span class="s1">&#39;batch_size&#39;</span><span class="p">,</span> <span class="s1">&#39;nepochs&#39;</span><span class="p">,</span> <span class="s1">&#39;msc&#39;</span><span class="p">,</span> <span class="s1">&#39;nsam&#39;</span><span class="p">,</span> <span class="s1">&#39;verbose&#39;</span><span class="p">]</span>
+
+        <span class="c1"># Check for invalid options</span>
+        <span class="k">for</span> <span class="n">option</span> <span class="ow">in</span> <span class="n">new_options</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">option</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">possible_fit_options</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid fit or evaluate option: </span><span class="si">{</span><span class="n">option</span><span class="si">}</span><span class="s2">. Please note: cannot update network options through build.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Update self.options with the new fit_options from kwargs</span>
+        <span class="k">for</span> <span class="n">option</span> <span class="ow">in</span> <span class="n">possible_fit_options</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">option</span> <span class="ow">in</span> <span class="n">new_options</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="n">option</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_options</span><span class="p">[</span><span class="n">option</span><span class="p">]</span>
+
+        <span class="c1"># Validate the updated options</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_options</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="NN.nn_vi">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/nn/index.html#pytuq.surrogates.nn.NN.nn_vi">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">nn_vi</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Performs variational inference fitting and training of the neural network using the NN_VI wrapper class.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            val (tuple): x,y tuple of validation points. Default uses the training set for validation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># List of all possible fit options for variational inference </span>
+        <span class="n">possible_fit_options</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;datanoise&#39;</span><span class="p">,</span> <span class="s1">&#39;lrate&#39;</span><span class="p">,</span> <span class="s1">&#39;batch_size&#39;</span><span class="p">,</span> <span class="s1">&#39;nsam&#39;</span><span class="p">,</span> <span class="s1">&#39;nepochs&#39;</span><span class="p">]</span>
+
+        <span class="n">fit_options</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="c1"># Iterate through self.options, add values to fit_options</span>
+        <span class="k">for</span> <span class="n">option</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">option</span> <span class="ow">in</span> <span class="n">possible_fit_options</span><span class="p">:</span>
+                <span class="n">fit_options</span><span class="p">[</span><span class="n">option</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+        <span class="c1"># Instantiate variational inference object </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">uqnet</span> <span class="o">=</span> <span class="n">NN_VI</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nnet</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;verbose&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">))</span>
+
+        <span class="c1"># print(&#39;Fitting neural network with variational inference&#39;)</span>
+        <span class="c1"># Call fit function, pass in fit_options for training of the neural network</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x_val</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y_val</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">uqnet</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_x_trn</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y_trn</span><span class="p">,</span> <span class="o">**</span><span class="n">fit_options</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">uqnet</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_x_trn</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y_trn</span><span class="p">,</span> <span class="n">val</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_x_val</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">_y_val</span><span class="p">],</span> 
+                        <span class="o">**</span><span class="n">fit_options</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="NN.build">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/nn/index.html#pytuq.surrogates.nn.NN.build">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Builds the model with training data by calling the correct fitting method for model training.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            fit_options (dict, optional): Options/training parameters for model fitting.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nnet</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">instantiate_network</span><span class="p">()</span>
+        
+        <span class="k">if</span> <span class="n">kwargs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update_options</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="c1"># Confirm that training data has been set</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x_trn</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y_trn</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Training data must be set using set_training_data() before calling build().&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Fit the neural network with VI</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nn_vi</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="NN.evaluate">
+<a class="viewcode-back" href="../../../autoapi/pytuq/surrogates/nn/index.html#pytuq.surrogates.nn.NN.evaluate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_eval</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Generates samples of predictions.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x_eval (np.ndarray): 2d array of size `(N,d)` as input data for evaluation. Can also be a single sample as input.</span>
+<span class="sd">            nens (int, optional): Number of samples requested, M.</span>
+<span class="sd">            msc (int, optional): Prediction mode: 0 (mean-only), 1 (mean and variance), or 2 (mean, variance and covariance). Defaults to 0.</span>
+<span class="sd">            nens = nsam (int, optional): Number of samples requested, `M`.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            dictionary: Dictionary with samples of predictions.</span>
+<span class="sd">            tuple(np.ndarray, np.ndarray, np.ndarray): triple of Mean (array of size `(N, o)`), </span>
+<span class="sd">            Variance (array of size `(N, o)` or None),</span>
+<span class="sd">            Covariance (array of size `(N, N, o)` or None).</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nnet</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;The neural network must be instantiated with build() before calling evaluate().&quot;</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">kwargs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update_options</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="c1"># Call predict function for mean, variance, and covariance. If a certain value (ex] covariance) is not requested, function returns None.</span>
+        <span class="n">y_eval</span><span class="p">,</span> <span class="n">y_var</span><span class="p">,</span> <span class="n">y_cov</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">uqnet</span><span class="o">.</span><span class="n">predict_mom_sample</span><span class="p">(</span><span class="n">x_eval</span><span class="p">,</span> <span class="n">msc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;msc&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">nsam</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;nsam&#39;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">))</span>
+        
+        <span class="c1"># Return dictionary with the samples of predictions and uncertainties</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;Y_eval&#39;</span><span class="p">:</span> <span class="n">y_eval</span><span class="p">,</span>
+            <span class="s1">&#39;Y_eval_var&#39;</span><span class="p">:</span> <span class="n">y_var</span><span class="p">,</span>
+            <span class="s1">&#39;Y_eval_cov&#39;</span><span class="p">:</span> <span class="n">y_cov</span>
+        <span class="p">}</span></div>
+</div>
+
+    
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

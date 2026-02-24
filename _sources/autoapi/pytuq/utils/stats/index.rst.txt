@@ -1,0 +1,76 @@
+pytuq.utils.stats
+=================
+
+.. py:module:: pytuq.utils.stats
+
+.. autoapi-nested-parse::
+
+   Summary
+
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   pytuq.utils.stats.get_stats
+   pytuq.utils.stats.get_domain
+   pytuq.utils.stats.intersect_domain
+   pytuq.utils.stats.diam
+
+
+Module Contents
+---------------
+
+.. py:function:: get_stats(yy, qt)
+
+   Gets stats of a given dataset to help with plotting.
+
+   :param yy: array of predicted values
+   :type yy: np.ndarray
+   :param qt: whether to compute quantiles or not
+   :type qt: bool
+
+   :returns:
+
+             tuple of np.ndarray, (mean, std, std) or
+                    (median, q50-q25, q75-q50)
+   :rtype: tuple
+
+
+.. py:function:: get_domain(xx)
+
+   Get the domain of a given data array.
+
+   :param xx: A data array of size `(N,d)`.
+   :type xx: np.ndarray
+
+   :returns: `(d,2)` domain array.
+   :rtype: np.ndarray
+
+
+.. py:function:: intersect_domain(dom1, dom2)
+
+   Create an intersection domain/hypercube.
+
+   :param dom1: `(d,2)` first domain array.
+   :type dom1: np.ndarray
+   :param dom2: `(d,2)` second domain array.
+   :type dom2: np.ndarray
+
+   :returns: `(d,2)` intersection domain or None if no intersection.
+   :rtype: np.ndarray
+
+
+.. py:function:: diam(xx)
+
+   Get the diameter of a given data array.
+
+   :param xx: A data array of size `(N,d)`.
+   :type xx: np.ndarray
+
+   :returns: diameter, i.e. max pairwise distance.
+   :rtype: float
+
+

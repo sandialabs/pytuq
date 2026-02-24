@@ -1,0 +1,366 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytuq.minf.minf &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="pytuq.minf.priors" href="../priors/index.html" />
+    <link rel="prev" title="pytuq.minf.mcmc" href="../mcmc/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../auto_examples/index.html">Software Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../auto_examples/index.html#surrogates">Surrogates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_pce.html">Polynomial Chaos Expansion Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Section Navigation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">pytuq</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../ftools/index.html">pytuq.ftools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../func/index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rv/index.html">pytuq.rv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../surrogates/index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Section Navigation</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">pytuq</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">pytuq.minf</a></li>
+      <li class="breadcrumb-item active">pytuq.minf.minf</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/autoapi/pytuq/minf/minf/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-pytuq.minf.minf">
+<span id="pytuq-minf-minf"></span><h1>pytuq.minf.minf<a class="headerlink" href="#module-pytuq.minf.minf" title="Link to this heading"></a></h1>
+<p>Various utilities for model parameter inference and postprocessing.</p>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.minf.minf.model_infer" title="pytuq.minf.minf.model_infer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">model_infer</span></code></a>(ydata, model, model_params, model_pdim[, ...])</p></td>
+<td><p>Main function that performs model parameter inference, with or without embedded model error.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.minf.minf.model_infer_postp" title="pytuq.minf.minf.model_infer_postp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">model_infer_postp</span></code></a>(calib_results[, checkmode, nburn, ...])</p></td>
+<td><p>Postprocessing calibration results.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.minf.minf.plot_1d_data" title="pytuq.minf.minf.plot_1d_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_1d_data</span></code></a>(xdata, ydata[, xygrid_true])</p></td>
+<td><p>Plotting 1d data.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.minf.minf.plot_1d_samples" title="pytuq.minf.minf.plot_1d_samples"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_1d_samples</span></code></a>(xdata, ydata[, xygrid_samples])</p></td>
+<td><p>Plotting 1d data.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.minf.minf.plot_1dfit" title="pytuq.minf.minf.plot_1dfit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_1dfit</span></code></a>(xgrid, ygrid_pred[, ygrid_true, xydata])</p></td>
+<td><p>Plotting 1d fit with total and MAP standard deviation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.minf.minf.plot_1dfit_vars" title="pytuq.minf.minf.plot_1dfit_vars"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_1dfit_vars</span></code></a>(xgrid, ygrid_pred[, xydata])</p></td>
+<td><p>Plotting 1d fit with variance decomposed into posterior uncertainty and model error.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.minf.minf.plot_1dfit_shade" title="pytuq.minf.minf.plot_1dfit_shade"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_1dfit_shade</span></code></a>(xgrid, ygrid_samples[, xydata])</p></td>
+<td><p>Plotting 1d fit with predictive variance shaded by quantiles.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.minf.minf.plot_ndfit_vars" title="pytuq.minf.minf.plot_ndfit_vars"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_ndfit_vars</span></code></a>(ycheck, ycheck_pred)</p></td>
+<td><p>Plots a diagonal plot of model (x-axis) and fit (y-axis)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.minf.minf.model_infer">
+<span class="sig-prename descclassname"><span class="pre">pytuq.minf.minf.</span></span><span class="sig-name descname"><span class="pre">model_infer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ydata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_pdim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inpdf_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pci'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pc_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LU'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outord</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rndind</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fixindnom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ind_calib</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calib_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'amcmc'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calib_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">md_transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datamode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lik_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'classical'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lik_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pr_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'uniform'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pr_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dv_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'var_fixed'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dv_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zflag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/minf/minf.html#model_infer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.minf.minf.model_infer" title="Link to this definition"></a></dt>
+<dd><p>Main function that performs model parameter inference, with or without embedded model error.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ydata</strong> (<em>list</em><em> or </em><em>np.ndarray</em>) – List of <cite>N</cite> 1d arrays corresponding to data for each design location, or a 2d array of size <cite>(N,e)</cite>, or an 1d array of size <cite>N</cite>.</p></li>
+<li><p><strong>model</strong> (<em>callable</em>) – Model with signature <cite>f(p, q)</cite>, where <cite>p</cite> are model parameters of interest, and <cite>q</cite> are other helpful model parameters.</p></li>
+<li><p><strong>model_params</strong> (<em>tuple</em><em> or </em><em>list</em>) – Model parameters <cite>q</cite>.</p></li>
+<li><p><strong>model_pdim</strong> (<em>int</em>) – Parameter dimensionality, i.e. number of model parameters.</p></li>
+<li><p><strong>inpdf_type</strong> (<em>str</em>) – Embedded PDF type. Options are ‘pci’ (default) and ‘pct’.</p></li>
+<li><p><strong>pc_type</strong> (<em>str</em>) – Embedded PC type. Can be ‘LU’ (default) or ‘HG’.</p></li>
+<li><p><strong>outord</strong> (<em>int</em><em>, </em><em>optional</em>) – Order for the output PC in the likelihood computation. Defaults to 0.</p></li>
+<li><p><strong>rndind</strong> (<em>list</em><em>[</em><em>ind</em><em>]</em><em>, </em><em>optional</em>) – List of indices of parameters to be embedded. If None, embeds in all parameters. Default is empty list, i.e. no embedding.</p></li>
+<li><p><strong>fixindnom</strong> (<em>list</em><em>, </em><em>optional</em>) – An array of size <cite>(K,2)</cite>, where first column indicates indices of parameters that are fixed (i.e. not part of the inference), and the second column is their nominal, fixed values. Defaults to an empty list, i.e. all parameters are inferred, none are fixed.</p></li>
+<li><p><strong>ind_calib</strong> (<em>list</em><em>, </em><em>optional</em>) – Model output indices that are used for calibration. Default is None, i.e. all outputs being used for calibration.</p></li>
+<li><p><strong>calib_type</strong> (<em>str</em><em> or </em><em>calib.Calib</em><em>, </em><em>optional</em>) – Calibration type. Only ‘amcmc’ (default) is implemented. Can also be a user-defined Calib object.</p></li>
+<li><p><strong>calib_params</strong> (<em>dict</em><em>, </em><em>optional</em>) – Dictionary of calibration parameters.</p></li>
+<li><p><strong>md_transform</strong> (<em>callable</em><em>, </em><em>optional</em>) – Potentially, a transform to be applied to model and data before the likelihood computation starts. Default is None, i.e. identity function.</p></li>
+<li><p><strong>datamode</strong> (<em>str</em><em>, </em><em>optional</em>) – If ‘mean’, work with data means per location.</p></li>
+<li><p><strong>lik_type</strong> (<em>str</em><em>, </em><em>optional</em>) – Likelihood type: options are ‘classical’, ‘logclassical’, ‘abc’, ‘gausmarg’, ‘dummy’.</p></li>
+<li><p><strong>lik_params</strong> (<em>dict</em><em>, </em><em>optional</em>) – Parameters of likelihood.</p></li>
+<li><p><strong>pr_type</strong> (<em>str</em><em>, </em><em>optional</em>) – Prior type: the options are ‘uniform’ and ‘normal’.</p></li>
+<li><p><strong>pr_params</strong> (<em>dict</em><em>, </em><em>optional</em>) – Parameters of prior.</p></li>
+<li><p><strong>dv_type</strong> (<em>str</em><em>, </em><em>optional</em>) – Data variance treatment type. Options are ‘var_fixed’, ‘std_infer’, ‘std_infer_log’, ‘std_prop_fixed’, ‘var_fromdata_fixed’, ‘log_var_fromdata_fixed’, ‘var_fromdata_infer’, ‘log_var_fromdata_infer’, ‘scale_var’.</p></li>
+<li><p><strong>dv_params</strong> (<em>list</em><em>, </em><em>optional</em>) – Parameter list relevant to data variance computation. Defaults to None.</p></li>
+<li><p><strong>zflag</strong> (<em>bool</em><em>, </em><em>optional</em>) – Controls whether we want to precondition the inference with a deterministic optimization to find a better starting point for the chain.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary of results. Keys are ‘chain’ (chain samples array), ‘mapparams’ (MAP parameters array), ‘maxpost’ (maximal log-post value), ‘accrate’ (acceptance rate), ‘logpost’ (log-post values throughout the chain), ‘alphas’ (acceptance probabilities throughout the chain), ‘post’ (Inference object).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.minf.minf.model_infer_postp">
+<span class="sig-prename descclassname"><span class="pre">pytuq.minf.minf.</span></span><span class="sig-name descname"><span class="pre">model_infer_postp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">calib_results</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">checkmode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nburn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nevery</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nxi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/minf/minf.html#model_infer_postp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.minf.minf.model_infer_postp" title="Link to this definition"></a></dt>
+<dd><p>Postprocessing calibration results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>calib_results</strong> (<em>dict</em>) – Result dictionary, the output of model_infer(…) function.</p></li>
+<li><p><strong>checkmode</strong> (<em>tuple</em><em>, </em><em>optional</em>) – Mode of evaluation a tuple of [model, model_parameters, index of calibrated outputs, final transform]. Defaults to None, which means get the inference object’s internal model features.</p></li>
+<li><p><strong>nburn</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of burned samples from the beginning of the chain. Default is 0, i.e. no burn-in.</p></li>
+<li><p><strong>nevery</strong> (<em>int</em><em>, </em><em>optional</em>) – Thinning of the chain. Default is 1, i.e. no thinning.</p></li>
+<li><p><strong>nxi</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of samples per chain sample.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>ycheck (dictionary of various prediction means and variances), psamples (3d array of parameter samples of size Npost x nxi x pdim), fsamples (3d array of model output samples Npost x nxi x outdim)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.minf.minf.plot_1d_data">
+<span class="sig-prename descclassname"><span class="pre">pytuq.minf.minf.</span></span><span class="sig-name descname"><span class="pre">plot_1d_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xdata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ydata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xygrid_true</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/minf/minf.html#plot_1d_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.minf.minf.plot_1d_data" title="Link to this definition"></a></dt>
+<dd><p>Plotting 1d data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xdata</strong> (<em>np.ndarray</em>) – An 1d array of x-data.</p></li>
+<li><p><strong>ydata</strong> (<em>np.ndarray</em>) – An 1d array of y-data.</p></li>
+<li><p><strong>xygrid_true</strong> (<em>tuple</em><em>, </em><em>optional</em>) – A tuple of gridded x- and y-values, if one wants to plot the true model as well.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.minf.minf.plot_1d_samples">
+<span class="sig-prename descclassname"><span class="pre">pytuq.minf.minf.</span></span><span class="sig-name descname"><span class="pre">plot_1d_samples</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xdata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ydata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xygrid_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/minf/minf.html#plot_1d_samples"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.minf.minf.plot_1d_samples" title="Link to this definition"></a></dt>
+<dd><p>Plotting 1d data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xdata</strong> (<em>np.ndarray</em>) – An 1d array of x-data.</p></li>
+<li><p><strong>ydata</strong> (<em>np.ndarray</em>) – An 1d array of y-data.</p></li>
+<li><p><strong>xygrid_samples</strong> (<em>tuple</em><em>, </em><em>optional</em>) – A tuple of gridded x- and y-values (can be a 2d array to plot many samples of the true model), if one wants to plot the true model as well.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is very similar to plot_1d_data() and could be merged with it.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.minf.minf.plot_1dfit">
+<span class="sig-prename descclassname"><span class="pre">pytuq.minf.minf.</span></span><span class="sig-name descname"><span class="pre">plot_1dfit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xgrid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ygrid_pred</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ygrid_true</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xydata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/minf/minf.html#plot_1dfit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.minf.minf.plot_1dfit" title="Link to this definition"></a></dt>
+<dd><p>Plotting 1d fit with total and MAP standard deviation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xgrid</strong> (<em>np.ndarray</em>) – An 1d array of x-grid</p></li>
+<li><p><strong>ygrid_pred</strong> (<em>dict</em>) – Dictionary containing moments of predictions.</p></li>
+<li><p><strong>ygrid_true</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – If not None, this is the true model values at the x-grid.</p></li>
+<li><p><strong>xydata</strong> (<em>tuple</em><em>, </em><em>optional</em>) – If not None, this is the x- and y-data tuple and plots on top of the fits.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.minf.minf.plot_1dfit_vars">
+<span class="sig-prename descclassname"><span class="pre">pytuq.minf.minf.</span></span><span class="sig-name descname"><span class="pre">plot_1dfit_vars</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xgrid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ygrid_pred</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xydata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/minf/minf.html#plot_1dfit_vars"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.minf.minf.plot_1dfit_vars" title="Link to this definition"></a></dt>
+<dd><p>Plotting 1d fit with variance decomposed into posterior uncertainty and model error.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xgrid</strong> (<em>np.ndarray</em>) – An 1d array of x-grid</p></li>
+<li><p><strong>ygrid_pred</strong> (<em>dict</em>) – Dictionary containing moments of predictions.</p></li>
+<li><p><strong>xydata</strong> (<em>tuple</em><em>, </em><em>optional</em>) – If not None, this is the x- and y-data tuple and plots on top of the fits.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.minf.minf.plot_1dfit_shade">
+<span class="sig-prename descclassname"><span class="pre">pytuq.minf.minf.</span></span><span class="sig-name descname"><span class="pre">plot_1dfit_shade</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xgrid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ygrid_samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xydata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/minf/minf.html#plot_1dfit_shade"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.minf.minf.plot_1dfit_shade" title="Link to this definition"></a></dt>
+<dd><p>Plotting 1d fit with predictive variance shaded by quantiles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xgrid</strong> (<em>np.ndarray</em>) – An 1d array of x-grid</p></li>
+<li><p><strong>ygrid_samples</strong> (<em>np.ndarray</em>) – A 2d array of prediction samples.</p></li>
+<li><p><strong>xydata</strong> (<em>tuple</em><em>, </em><em>optional</em>) – If not None, this is the x- and y-data tuple and plots on top of the fits.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytuq.minf.minf.plot_ndfit_vars">
+<span class="sig-prename descclassname"><span class="pre">pytuq.minf.minf.</span></span><span class="sig-name descname"><span class="pre">plot_ndfit_vars</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ycheck</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ycheck_pred</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/minf/minf.html#plot_ndfit_vars"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.minf.minf.plot_ndfit_vars" title="Link to this definition"></a></dt>
+<dd><p>Plots a diagonal plot of model (x-axis) and fit (y-axis)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ycheck</strong> (<em>np.ndarray</em>) – An 1d array containing the model values.</p></li>
+<li><p><strong>ycheck_pred</strong> (<em>dict</em>) – Dictionary containing moments of predictions.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../mcmc/index.html" class="btn btn-neutral float-left" title="pytuq.minf.mcmc" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../priors/index.html" class="btn btn-neutral float-right" title="pytuq.minf.priors" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,1149 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytuq.ftools.orf &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">Software Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/index.html#surrogates">Surrogates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_pce.html">Polynomial Chaos Expansion Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../autoapi/index.html">Section Navigation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../autoapi/pytuq/index.html">pytuq</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/pytuq/index.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/ftools/index.html">pytuq.ftools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/func/index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/minf/index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/rv/index.html">pytuq.rv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/surrogates/index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/utils/index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pytuq.ftools.orf</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pytuq.ftools.orf</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="sd">&quot;&quot;&quot;Module for orthonormalization of functions using Gram-Schmidt or QR decomposition.</span>
+
+<span class="sd">Written by Habib N. Najm (2025).</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+
+<div class="viewcode-block" id="GLMAP">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.GLMAP">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">GLMAP</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&#39;&#39;&#39;General linear map and data class</span>
+
+<span class="sd">    Attributes:</span>
+
+<span class="sd">        npt (int)       : number of data points</span>
+<span class="sd">        x (np.ndarray)  : 2d float data array of shape :math:`(npt,n)`, i.e. :math:`npt` points each in :math:`R^n`.</span>
+<span class="sd">        L (np.ndarray or callable or None)        : 2d float array of shape :math:`(M,npt)` or a callable user-provided function or None</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        Builds linear map and data object, presumed to underly a regression problem of the form</span>
+<span class="sd">        :math:`y = L(x,f(x;w))`, given data :math:`\{(x_1,y_1),...,(x_{npt},y_{npt})\}` where :math:`x_i \in R^n`, :math:`x \in R^{npt \times n}`, and :math:`y_i\in R`.</span>
+<span class="sd">        and where :math:`w \in R^m` is a vector of parameters to be estimated.</span>
+
+<span class="sd">        L needs to be linear in :math:`f()`, with separate L dependence on :math:`x` being an arbitrary function, so that, with :math:`u = f(x,w) = \sum_k w_k f_k(x)`, we have :math:`y = L(x, \sum_k w_k f_k(x) ) = \sum_k w_k L(x,f_k(x))` or :math:`y = A w` with :math:`A \in R^{npt \times m}` where :math:`A[i,j] = L(x_i,f_j(x_i))`.</span>
+
+<span class="sd">        This class can take specs of different linear maps L on functions :math:`f(x): x \rightarrow u`, with :math:`u \in R^{npt}`. We list here multiple options for illustration. The specification of the linear map ``lmap=gso.GLMAP(x,L)`` can be done with L given as either no spec, a function, or an array</span>
+<span class="sd">            * if L is a user-defined callable L (function), then `lmap.eval(f)` returns :math:`L(x,u)` as specified by the user. If want a map, e.g.: :math:`L(x,f(x)) = e^x + x^3 f(x)`, one can use e.g. ``lmap = gso.GLMAP(x, lambda x, u: np.exp(x) + x**3 * u)``.</span>
+<span class="sd">            * if L is a user-defined array L, i.e. :math:`L(x,u):=Lu`, (L shape needs to be :math:`(M,npt)`) then ``lmap.eval(f)`` returns :math:`Lu`. If we want a linear matrix map, say :math:`L = B` (shape :math:`(m,npt)` ), then can use either ``lmap = gso.GLMAP(x, B)`` or ``lmap = gso.GLMAP(x, lambda x, u: B@u)``.</span>
+<span class="sd">            * if L is None or not specified, then an identiy map is implied, and ``lmap.eval(f)`` returns :math:`L(x,u) = u`; Thus, the following are all equivalent specs of the None option for L</span>
+<span class="sd">                * ``lmap = gso.GLMAP(x)``</span>
+<span class="sd">                * ``lmap = gso.GLMAP(x, np.eye(npt))``</span>
+<span class="sd">                * ``lmap = gso.GLMAP(x, lambda x, u: u)``.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">L</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Initialization.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            x (np.ndarray)  : 2d float data array of shape (npt,n), npt points each in R^n</span>
+<span class="sd">            L (np.ndarray or callable or None)        : 2d float array of shape :math:`(M,npt)` or a callable user-provided function or None.</span>
+<span class="sd">            verbose  (bool) : controls verbosity</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+<div class="viewcode-block" id="GLMAP.x">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.GLMAP.x">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
+
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;x: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="GLMAP.npt">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.GLMAP.npt">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">npt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+
+
+        <span class="k">if</span> <span class="n">L</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">L</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;L: function:&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+                <span class="k">assert</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">npt</span><span class="p">),</span> <span class="s1">&#39;with L as array, it must have shape (:,npt)&#39;</span>
+                <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;L: matrix: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">L</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;L:&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="p">)</span>
+
+        <span class="n">xsln</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">xsln</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x is a single scalar data point&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">xsln</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;x is a 1d array with </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> data points, each being a scalar&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">xsln</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;x is a 2d array with </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> data points, each being a </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">-vector&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;With xsln: </span><span class="si">{</span><span class="n">xsln</span><span class="si">}</span><span class="s1">, x is not allowed&#39;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;GLMAP: x has to be either a scalar, a 1d array, or a 2d array&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Lmapfnc</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">L</span> <span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Lmapfnc</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">L</span> <span class="p">:</span> <span class="n">L</span><span class="nd">@f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Lmapfnc</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">L</span> <span class="p">:</span> <span class="n">L</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+<div class="viewcode-block" id="GLMAP.eval">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.GLMAP.eval">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&#39;&#39;&#39;Evaluate the map on function f.&#39;&#39;&#39;</span>
+        <span class="n">glm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Lmapfnc</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">glm</span></div>
+</div>
+
+
+<div class="viewcode-block" id="HMAT">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.HMAT">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">HMAT</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&#39;&#39;&#39;Utilities class for H matrix construction.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        mgs (object)        : MGS class object handle.</span>
+<span class="sd">        m   (int)           : number of basis functions in expansion.</span>
+<span class="sd">        mat (np.ndarray)    : 3D array where `H` matrix is constructed.</span>
+<span class="sd">        level (int)         : recursion level counter.</span>
+<span class="sd">        verbose (bool)      : controls verbosity.</span>
+<span class="sd">        Fthmap (np.ndarray) : 2d int array, :math:`(i,j)` entry `0/1` =&gt; corresponding :math:`(\theta_i,\theta_j)` inner product has-not/has been evaluated.</span>
+<span class="sd">        Fmap (np.ndarray)   : 2d int array, :math:`(i,j)` entry `0/1` =&gt; corresponding :math:`(\phi_i,\theta_j)` inner product has-not/has been evaluated.</span>
+<span class="sd">        Fthval (np.ndarray) : 2d array of :math:`(\theta,\theta)` inner products.</span>
+<span class="sd">        Fval (np.ndarray)   : 2d array of :math:`(\phi,\theta)` inner products.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">mgs_</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Initialization.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            mgs_ (object)       : MGS class object handle.</span>
+<span class="sd">            verbose (bool)      : control on verbosity.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+<div class="viewcode-block" id="HMAT.mgs">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.HMAT.mgs">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mgs</span> <span class="o">=</span> <span class="n">mgs_</span></div>
+
+<div class="viewcode-block" id="HMAT.m">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.HMAT.m">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m</span>   <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mgs</span><span class="o">.</span><span class="n">m</span></div>
+
+<div class="viewcode-block" id="HMAT.mat">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.HMAT.mat">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="HMAT.level">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.HMAT.level">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="mi">0</span></div>
+
+<div class="viewcode-block" id="HMAT.verbose">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.HMAT.verbose">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span></div>
+
+<div class="viewcode-block" id="HMAT.Fthmap">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.HMAT.Fthmap">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Fthmap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="HMAT.Fmap">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.HMAT.Fmap">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Fmap</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="HMAT.Fthval">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.HMAT.Fthval">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Fthval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="HMAT.Fval">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.HMAT.Fval">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Fval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="HMAT.Fth">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.HMAT.Fth">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">Fth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&#39;&#39;&#39;Evaluate :math:`(\theta_i,\theta_j)` inner product.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            i (int) : :math:`0 &lt;= i &lt; m` index for :math:`\theta_i`</span>
+<span class="sd">            j (int) : :math:`0 &lt;= j &lt; m` index for :math:`\theta_j`</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Fthmap</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Fthmap</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Fthval</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mgs</span><span class="o">.</span><span class="n">iprod</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mgs</span><span class="o">.</span><span class="n">tht</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">mgs</span><span class="o">.</span><span class="n">tht</span><span class="p">[</span><span class="n">j</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="c1">#Fprod(Tht_vec_fnc.f,Tht_vec_fnc.f,i,j,ntrn,g,t,dv,None,None)[0][0]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Fthval</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="HMAT.F">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.HMAT.F">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">F</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&#39;&#39;&#39;Evaluate :math:`(\phi_i,\theta_j)` inner product.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            i (int) : :math:`0 &lt;= i &lt; m` index for :math:`\phi_i`</span>
+<span class="sd">            j (int) : :math:`0 &lt;= j &lt; m` index for :math:`\theta_j`</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Fmap</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Fmap</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Fval</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mgs</span><span class="o">.</span><span class="n">iprod</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mgs</span><span class="o">.</span><span class="n">phi</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">mgs</span><span class="o">.</span><span class="n">tht</span><span class="p">[</span><span class="n">j</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="c1">#Fprod(Phi_vec_fnc.f,Tht_vec_fnc.f,i,j,ntrn,g,t,dv,None,None)[0][0]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Fval</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="HMAT.Heval">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.HMAT.Heval">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">Heval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">ilom</span><span class="p">,</span><span class="n">ihim</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&#39;&#39;&#39;Evaluate :math:`H` matrix recursively.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            n (int)     : summation index limit</span>
+<span class="sd">            r (int)     : summation index limit</span>
+<span class="sd">            ilom (int)  : initial summation index in previous sum</span>
+<span class="sd">            ihim (int)  : final summation index in previous sum</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">ilo</span> <span class="o">=</span> <span class="n">ilom</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">ihi</span> <span class="o">=</span> <span class="n">ihim</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="nb">sum</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+        <span class="k">if</span> <span class="n">ihi</span> <span class="o">==</span> <span class="n">r</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Heval(&#39;</span><span class="p">,</span><span class="n">ilo</span><span class="p">,</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="n">ihi</span><span class="p">,</span><span class="s1">&#39;) : level (last):&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">level</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ilo</span><span class="p">,</span><span class="n">ihi</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span> 
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;idx =&#39;</span><span class="p">,</span><span class="n">idx</span><span class="p">,</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;Fth(&#39;</span><span class="p">,</span><span class="n">ilom</span><span class="p">,</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="n">idx</span><span class="p">,</span><span class="s1">&#39;) * Fth(&#39;</span><span class="p">,</span><span class="n">idx</span><span class="p">,</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s1">&#39;)&#39;</span><span class="p">)</span>
+                <span class="nb">sum</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Fth</span><span class="p">(</span><span class="n">ilom</span><span class="p">,</span><span class="n">idx</span><span class="p">)</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">Fth</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span><span class="n">r</span><span class="p">)</span>
+            <span class="k">return</span> <span class="nb">sum</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Heval(&#39;</span><span class="p">,</span><span class="n">ilo</span><span class="p">,</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="n">ihi</span><span class="p">,</span><span class="s1">&#39;) : level:&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">level</span><span class="p">)</span>    
+        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ilo</span><span class="p">,</span><span class="n">ihi</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span> 
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;idx =&#39;</span><span class="p">,</span><span class="n">idx</span><span class="p">,</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;Fth(&#39;</span><span class="p">,</span><span class="n">ilom</span><span class="p">,</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="n">idx</span><span class="p">,</span><span class="s1">&#39;) * Heval(&#39;</span><span class="p">,</span><span class="n">ilo</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="n">ihi</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;)&#39;</span><span class="p">)</span>
+            <span class="nb">sum</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Fth</span><span class="p">(</span><span class="n">ilom</span><span class="p">,</span><span class="n">idx</span><span class="p">)</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">Heval</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">ilo</span><span class="p">,</span><span class="n">ihi</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Heval(&#39;</span><span class="p">,</span><span class="n">ilo</span><span class="p">,</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="n">ihi</span><span class="p">,</span><span class="s1">&#39;) : level (return):&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">level</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nb">sum</span></div>
+
+
+<div class="viewcode-block" id="HMAT.fill">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.HMAT.fill">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fill</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">i1</span><span class="p">,</span><span class="n">i</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&#39;&#39;&#39;Fill in :math:`H` matrix recursively.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            n (int)  : summation index limit</span>
+<span class="sd">            r (int)  : summation index limit</span>
+<span class="sd">            i1 (int) : initial summation index</span>
+<span class="sd">            i (int)  : relevant i index</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># i relevant here only in terms of checking bounds on n,r</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;fill: n:&#39;</span><span class="p">,</span><span class="n">n</span><span class="p">,</span> <span class="s1">&#39;out of bounds&#39;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;Abort&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="ow">or</span> <span class="n">r</span> <span class="o">&gt;</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;fill: r:&#39;</span><span class="p">,</span><span class="n">r</span><span class="p">,</span> <span class="s1">&#39;out of bounds&#39;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;Abort&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">i1</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">i1</span> <span class="o">&gt;</span> <span class="n">r</span><span class="o">-</span><span class="n">n</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;fill: i1:&#39;</span><span class="p">,</span><span class="n">i1</span><span class="p">,</span> <span class="s1">&#39;out of bounds&#39;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;Abort&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;fill: n=1&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;level: (last)&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">level</span><span class="p">,</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;Fth(&#39;</span><span class="p">,</span><span class="n">i1</span><span class="p">,</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s1">&#39;)&#39;</span><span class="p">)</span>
+            <span class="n">Hnri1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Fth</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span><span class="n">r</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ilo</span> <span class="o">=</span> <span class="n">i1</span>
+            <span class="n">ihi</span> <span class="o">=</span> <span class="n">r</span><span class="o">-</span><span class="n">n</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;fill: n&gt;1&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;level:&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">level</span><span class="p">)</span>
+            <span class="n">Hnri1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Heval</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">ilo</span><span class="p">,</span><span class="n">ihi</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;level (return):&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">level</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;done&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mat</span><span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">i1</span><span class="p">]</span> <span class="o">=</span> <span class="n">Hnri1</span>
+        <span class="k">return</span></div>
+</div>
+
+
+<div class="viewcode-block" id="MGSV">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.MGSV">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MGSV</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&#39;&#39;&#39;Utilities class for :math:`V` matrix construction.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        m   (int)           : number of basis functions in expansion.</span>
+<span class="sd">        mat (np.ndarray)    : 2D :math:`(m, m)` array where the :math:`V` matrix is constructed.</span>
+<span class="sd">        verbose (bool)      : controls verbosity.</span>
+<span class="sd">        Smat (np.ndarray)   : 3D :math:`(m, m, m)` array where the :math:`S` matrix is constructed.</span>
+<span class="sd">        H (object)          : pointer to HMAT object.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">mgs_</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Initialization.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            mgs_ (object)       : MGS class object handle.</span>
+<span class="sd">            verbose (bool)      : control on verbosity.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+<div class="viewcode-block" id="MGSV.m">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.MGSV.m">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m</span>    <span class="o">=</span> <span class="n">mgs_</span><span class="o">.</span><span class="n">m</span></div>
+
+<div class="viewcode-block" id="MGSV.mat">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.MGSV.mat">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mat</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="MGSV.Smat">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.MGSV.Smat">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Smat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="MGSV.H">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.MGSV.H">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">H</span>    <span class="o">=</span> <span class="n">HMAT</span><span class="p">(</span><span class="n">mgs_</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MGSV.fill_row">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.MGSV.fill_row">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fill_row</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">i</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&#39;&#39;&#39;Fill in :math:`V` matrix row.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            i (int)  : row index</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">i</span><span class="p">):</span>
+                <span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">for</span> <span class="n">i1</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">r</span><span class="o">-</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">H</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span> 
+                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;===========================&#39;</span><span class="p">)</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;i:&#39;</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="s1">&#39;n =&#39;</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="s1">&#39;in [1,&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;]  ||  r =&#39;</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s1">&#39;in [&#39;</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;]  ||  i1 = &#39;</span><span class="p">,</span><span class="n">i1</span><span class="p">,</span><span class="s1">&#39; in [0,&#39;</span><span class="p">,</span><span class="n">r</span><span class="o">-</span><span class="n">n</span><span class="p">,</span><span class="s1">&#39;]&#39;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">H</span><span class="o">.</span><span class="n">mat</span><span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">i1</span><span class="p">]:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">H</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">i1</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">H</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span> 
+                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;H matrix:&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">H</span><span class="o">.</span><span class="n">mat</span><span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">i1</span><span class="p">])</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;===========================&#39;</span><span class="p">)</span>
+                    <span class="nb">sum</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">H</span><span class="o">.</span><span class="n">F</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">i1</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">H</span><span class="o">.</span><span class="n">mat</span><span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">i1</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">Smat</span><span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="nb">sum</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">H</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span> 
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Smat[1:&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;,1:&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;]:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">Smat</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mat</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Smat</span><span class="p">[:,</span><span class="n">l</span><span class="p">,</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">H</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Vmat[0:&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;,0:&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;]:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">mat</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">],</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span></div>
+</div>
+
+
+<div class="viewcode-block" id="MGS">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.MGS">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MGS</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&#39;&#39;&#39;Modified Gram-Schmidt (MGS) class. Builds MGS object for functions.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        m   (int)           : number of basis functions in expansion.</span>
+<span class="sd">        phi (np.ndarray)    : 1d numpy array (size :math:`m`) of starting functions.</span>
+<span class="sd">        psi (np.ndarray)    : 1d numpy array (size :math:`m`) of to-be-constructed orthogonal functions.</span>
+<span class="sd">        tht (np.ndarray)    : 1d numpy array (size :math:`m`) of to-be-constructed orthonormal functions.</span>
+<span class="sd">        Lmap (object)       : pointer to local copy of Linear map and data object.</span>
+<span class="sd">        modified (bool)     : True/False for modified/original GS orthogonalization.</span>
+<span class="sd">        V (np.ndarray)      : 2d :math:`(m, m)` numpy array ... the V matrix.</span>
+<span class="sd">        Z (np.ndarray)      : 2d :math:`(m, m)` numpy array ... the Z matrix.</span>
+<span class="sd">        Pmat (np.ndarray)   : 2d :math:`(m, m)` numpy array ... the P projection matrix</span>
+<span class="sd">        lam (np.ndarray)    : 1d numpy array of size :math:`m`.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">phi_</span><span class="p">,</span><span class="n">Lmap</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Initialization.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            phi_ (np.ndarray): input numpy array of pointers to starting functions.</span>
+<span class="sd">            Lmap (object)    : input pointer to Linear map and data object.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+<div class="viewcode-block" id="MGS.phi">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.MGS.phi">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">phi</span>    <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">phi_</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MGS.psi">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.MGS.psi">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">psi</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">phi</span><span class="p">,</span><span class="kc">None</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MGS.tht">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.MGS.tht">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tht</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">phi</span><span class="p">,</span><span class="kc">None</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MGS.m">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.MGS.m">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m</span>      <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">phi</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="MGS.Lmap">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.MGS.Lmap">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Lmap</span>   <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">Lmap</span><span class="p">)</span></div>
+
+        <span class="k">return</span>
+
+<div class="viewcode-block" id="MGS.iprod">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.MGS.iprod">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">iprod</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pk</span><span class="p">,</span> <span class="n">pl</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> 
+<span class="w">        </span><span class="sa">r</span><span class="sd">&#39;&#39;&#39;Pairwise inner product between (lists of) functions.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            pk  : a list|tuple|numpy array of function pointers, or otherwise a function pointer</span>
+<span class="sd">            pl  : a list|tuple|numpy array of function pointers, or otherwise a function pointer</span>
+<span class="sd">            kwargs : optional keyword arguments:</span>
+
+<span class="sd">                - k    (int)  : starting index in `pk`. Required iff `pk` is a list|tuple|array</span>
+<span class="sd">                - l    (int)  : starting index in `pl`. Required iff `pl` is a list|tuple|array</span>
+<span class="sd">                - kmxp (int)  : (default: k+1) max-k plus 1, so that range(k,kmxp) goes over `pk[k], ..., pk[kmxp-1]`</span>
+<span class="sd">                - lmxp (int)  : (default: l+1) max-l plus 1, so that range(l,lmxp) goes over `pl[l], ..., pl[lmxp-1]`</span>
+<span class="sd">                - verbose_warning (bool) : controls verbosity of warnings.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            fklT (np.ndarray)   : 2d float numpy array with `kmxp-k` rows and `lmxp-l` columns</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            Say, we have `pk` list and `pl` single function</span>
+
+<span class="sd">                - ``pk = [lambda x : 2*x, lambda x : x**2, lambda x : x**3]``</span>
+<span class="sd">                - ``pl = lambda x : 10*x``</span>
+<span class="sd">            then</span>
+
+<span class="sd">                - ``iprod(pk[3],pl)`` returns: ``[[&lt;Lmap.eval(pk[3]),Lmap.eval(pl)&gt;]]``, a 2d `(1, 1)` numpy array and</span>
+<span class="sd">                - ``iprod(pk,pl,k=1,kmxp=3)`` returns ``[[&lt;Lmap.eval(pk[1]),Lmap.eval(pl)&gt;, &lt;Lmap.eval(pk[2]),Lmap.eval(pl)&gt;]]``, a 2d `(1, 2)` numpy array.</span>
+<span class="sd">                - ``iprod(pk,pl,k=0,kmxp=3,l=0,lmxp=2)`` returns  ``[ [&lt;Lmap.eval(pk[0]),Lmap.eval(pl[0])&gt;, &lt;Lmap.eval(pk[0]),Lmap.eval(pl[1])&gt;], [&lt;Lmap.eval(pk[1]),Lmap.eval(pl[0])&gt;, &lt;Lmap.eval(pk[1]),Lmap.eval(pl[1])&gt;], [&lt;Lmap.eval(pk[2]),Lmap.eval(pl[0])&gt;, &lt;Lmap.eval(pk[2]),Lmap.eval(pl[1])&gt;]]``  a 2d `(3, 2)` numpy array.</span>
+
+<span class="sd">            NB. if x is an `npt`-long vector of data points, then for any of the above functions, say ``pk[2]``, ``Lmap.eval(pk[2])`` will return a 2d `(1, npt)` numpy array.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="n">k</span>    <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+        <span class="n">kmxp</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;kmxp&#39;</span><span class="p">)</span>
+        <span class="n">l</span>    <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;l&#39;</span><span class="p">)</span>
+        <span class="n">lmxp</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;lmxp&#39;</span><span class="p">)</span>
+        <span class="n">verbose_warning</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;verbose_warning&#39;</span><span class="p">,</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pk</span><span class="p">,(</span><span class="nb">list</span><span class="p">,</span><span class="nb">tuple</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;Need k spec for this pk&#39;</span><span class="p">)</span>            
+            <span class="k">if</span> <span class="n">kmxp</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">kmxp</span> <span class="o">=</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">fk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">Lmap</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">pk</span><span class="p">[</span><span class="n">ki</span><span class="p">])</span> <span class="k">for</span> <span class="n">ki</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">kmxp</span><span class="p">)])</span>
+        <span class="k">elif</span> <span class="nb">callable</span><span class="p">(</span><span class="n">pk</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">v</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">kmxp</span><span class="p">])</span> <span class="ow">and</span> <span class="n">verbose_warning</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Warning: no use for k|kmxp for this pk&#39;</span><span class="p">)</span>            
+            <span class="n">fk</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Lmap</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">pk</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;Unexpected input pk&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pl</span><span class="p">,(</span><span class="nb">list</span><span class="p">,</span><span class="nb">tuple</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">l</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;Need l spec for this pl&#39;</span><span class="p">)</span>            
+            <span class="k">if</span> <span class="n">lmxp</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">lmxp</span> <span class="o">=</span> <span class="n">l</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">fl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">Lmap</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">pl</span><span class="p">[</span><span class="n">li</span><span class="p">])</span> <span class="k">for</span> <span class="n">li</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">lmxp</span><span class="p">)])</span>
+        <span class="k">elif</span> <span class="nb">callable</span><span class="p">(</span><span class="n">pl</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">v</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="n">l</span><span class="p">,</span><span class="n">lmxp</span><span class="p">])</span> <span class="ow">and</span> <span class="n">verbose_warning</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Warning: no use for l|lmxp for this pl&#39;</span><span class="p">)</span>            
+            <span class="n">fl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Lmap</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">pl</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;Unexpected input pl&#39;</span><span class="p">)</span>
+
+        <span class="c1"># for x containing npt data points (whether each is a scalar or a vector is immaterial), </span>
+        <span class="c1"># then fk is a 2d numpy array with kmxp-k rows and npt columns</span>
+        <span class="c1"># and fl is a 2d numpy array with lmxp-l rows and npt columns</span>
+        <span class="c1"># fklT is a 2d numpy array with kmxp-k rows and lmxp-l columns</span>
+
+        <span class="n">fklT</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">fk</span><span class="p">,</span><span class="n">fl</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">fklT</span></div>
+
+
+
+<div class="viewcode-block" id="MGS.bld_psi">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.MGS.bld_psi">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">bld_psi</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">Rinv</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&#39;&#39;&#39;Build and return \psi function for index `i`</span>
+<span class="sd">            </span>
+<span class="sd">        Args:</span>
+<span class="sd">            i (int)             : row index</span>
+<span class="sd">            Rinv (np.ndarray)   : 2d float matrix</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            lfnc (function)     : :math:`\psi` function for index `i`</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">lfnc</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">Rinv</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">phi</span><span class="p">[</span><span class="n">j</span><span class="p">](</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)])</span>
+            <span class="n">sf</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">sf</span>
+        <span class="k">return</span> <span class="n">lfnc</span></div>
+
+
+<div class="viewcode-block" id="MGS.bld_tht">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.MGS.bld_tht">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">bld_tht</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">laml</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&#39;&#39;&#39;Build and return tht (:math:`\theta`) function for index `i`</span>
+<span class="sd">            </span>
+<span class="sd">        Args:</span>
+<span class="sd">            i (int)             : row index</span>
+<span class="sd">            laml (float)        : float specified scale factor to normalize :math:`\psi[i]`</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            lfnc (function)     : tht function for index `i`</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">lfnc</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">laml</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">psi</span><span class="p">[</span><span class="n">i</span><span class="p">](</span><span class="n">x</span><span class="p">)</span> 
+        <span class="k">return</span> <span class="n">lfnc</span></div>
+
+
+<div class="viewcode-block" id="MGS.ortho">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.MGS.ortho">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ortho</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">modified</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">stage</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Orthonormalize phi functions to provide the tht functions            </span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            modified (bool)     : controls whether using modified Gram-Schmidt, or unmodified</span>
+<span class="sd">            verbose (bool)      : controls verbosity</span>
+<span class="sd">            stage (int)         : stage index within multistage Gram-Schmidt</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Pmat (np.ndarray)   : 2d float projection matrix </span>
+<span class="sd">            tht (np.ndarray)    : 1d array of tht function pointers</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ortho: modified =&#39;</span><span class="p">,</span><span class="n">modified</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="n">fname</span> <span class="o">=</span> <span class="s1">&#39;gso_gs&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">stage</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.txt&#39;</span>
+            <span class="k">if</span> <span class="n">modified</span><span class="p">:</span>
+                <span class="n">fname</span> <span class="o">=</span> <span class="s1">&#39;gso_gsmod&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">stage</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.txt&#39;</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;ortho</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">modified</span> <span class="o">=</span> <span class="n">modified</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">modified</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">V</span> <span class="o">=</span> <span class="n">MGSV</span><span class="p">(</span><span class="bp">self</span><span class="p">,)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lam</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">):</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">rgam</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">iprod</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">phi</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">tht</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="n">i</span><span class="p">,</span><span class="n">l</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">kmxp</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">lmxp</span><span class="o">=</span><span class="n">i</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> 
+                <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lam</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="p">]):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">rgam</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">lam</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ortho: i:&#39;</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="s1">&#39;, lam[0:i]:&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">lam</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="p">],</span><span class="s1">&#39; has at least one zero&#39;</span><span class="p">)</span>
+                    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;Aborting&#39;</span><span class="p">)</span>
+
+            <span class="n">Zi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Z</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;i:&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;, Zi:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">Zi</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.18e</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">modified</span><span class="p">:</span>
+                <span class="c1"># fill in row i in V matrix</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">V</span><span class="o">.</span><span class="n">fill_row</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                <span class="n">Vi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">V</span><span class="o">.</span><span class="n">mat</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">Li</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lam</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+                <span class="n">VLi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">Vi</span><span class="p">,</span><span class="n">Li</span><span class="p">)</span>
+                <span class="n">R</span> <span class="o">=</span> <span class="n">Zi</span> <span class="o">-</span> <span class="n">VLi</span>
+                <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;i:&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;, R:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                        <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.18e</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">R</span> <span class="o">=</span> <span class="n">Zi</span>
+
+            <span class="c1"># invert Z matrix, of dimension i+1 x i+1</span>
+            <span class="n">Rinv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;i:&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;, Rinv:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">Rinv</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.18e</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+
+            <span class="c1"># Evaluate Psi = Rinv * Phi, for row i</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">psi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bld_psi</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">Rinv</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;i,psi[i]:&#39;</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">psi</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">psi</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+
+            <span class="c1"># fill i-th entry of Lambda matrix diagonal</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lam</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">iprod</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">psi</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">psi</span><span class="p">[</span><span class="n">i</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;i:&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;, lam:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lam</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.18e</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+
+            <span class="c1"># Evaluate Theta = Lambda * Psi, for row i</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tht</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bld_tht</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">lam</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;i:&#39;</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="s1">&#39;dt:&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="si">%10.3e</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">t1</span><span class="o">-</span><span class="n">t0</span><span class="p">),</span><span class="s1">&#39;sec&#39;</span><span class="p">)</span>
+                <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Rinv:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">Rinv</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;i:&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;, Pmat:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lam</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]),</span><span class="n">Rinv</span><span class="p">),</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.18e</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">Pmat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lam</span><span class="p">),</span><span class="n">Rinv</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">suppress</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;P:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">Pmat</span><span class="p">)</span>    
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Pmat</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tht</span></div>
+
+
+<div class="viewcode-block" id="MGS.ortho_check_phi">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.MGS.ortho_check_phi">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ortho_check_phi</span><span class="p">(</span><span class="bp">self</span><span class="p">,):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Check orthonormality of phi functions</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            ipmat (np.ndarray)  : float 2d array containing orthonormality check matrix output</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">ipmat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">):</span>
+            <span class="n">ipmat</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">iprod</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">phi</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">phi</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="n">i</span><span class="p">,</span><span class="n">l</span><span class="o">=</span><span class="n">i</span><span class="p">,</span><span class="n">kmxp</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">lmxp</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> 
+        <span class="k">return</span> <span class="n">ipmat</span></div>
+
+
+<div class="viewcode-block" id="MGS.ortho_check">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.MGS.ortho_check">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ortho_check</span><span class="p">(</span><span class="bp">self</span><span class="p">,):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Check orthogonality of tht functions</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            ipmat (np.ndarray)  : float 2d array containing orthonormality check matrix output</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">ipmat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">):</span>
+            <span class="n">ipmat</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">iprod</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tht</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">tht</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="n">i</span><span class="p">,</span><span class="n">l</span><span class="o">=</span><span class="n">i</span><span class="p">,</span><span class="n">kmxp</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">lmxp</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> 
+        <span class="k">return</span> <span class="n">ipmat</span></div>
+</div>
+
+
+<div class="viewcode-block" id="MMGS">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.MMGS">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MMGS</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Multistage Modified Gram-Schmidt (MMGS) class.</span>
+<span class="sd">    Builds MMGS object for functions.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        m (int)             : number of functions</span>
+<span class="sd">        phi (np.ndarray)    : 1d numpy array of starting functions</span>
+<span class="sd">        phi_ (np.ndarray)   : 1d numpy array of starting functions</span>
+<span class="sd">        Lmap (object)       : Linear map and data object</span>
+<span class="sd">        Pmat (np.ndarray)   : 2d `(m, m)` numpy array, the projection matrix `P`</span>
+<span class="sd">        mgs (np.ndarray)    : 1d `(nstage,)` array of MGS objects</span>
+<span class="sd">        phia (np.ndarray)   : 2d `(nstage, m)` numpy array of starting functions</span>
+<span class="sd">        thta (np.ndarray)   : 2d `(nstage, m)` numpy array of orthonormalized functions</span>
+<span class="sd">        Parr (np.ndarray)   : 3d `(nstage, m, m)` matrix, holds nstage P matrices</span>
+<span class="sd">    &#39;&#39;&#39;</span> 
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">phi_</span><span class="p">,</span><span class="n">Lmap</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Initialize.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            phi_  : numpy array of starting functions</span>
+<span class="sd">            Lmap  : Linear map and data object</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+<div class="viewcode-block" id="MMGS.phi_">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.MMGS.phi_">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">phi_</span>   <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">phi_</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MMGS.m">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.MMGS.m">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m</span>      <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">phi_</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="MMGS.Lmap">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.MMGS.Lmap">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Lmap</span>   <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">Lmap</span><span class="p">)</span></div>
+
+        <span class="k">return</span>
+
+<div class="viewcode-block" id="MMGS.ortho">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.MMGS.ortho">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ortho</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">modified</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nstage</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&#39;&#39;&#39;Multiscale Modified Gram-Schmidt class orthonormalization</span>
+<span class="sd">        Runs multistage and/or Modified GS for functions</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Pmat (np.ndarray)   : float `(m,m)` aggregated projection matrix</span>
+<span class="sd">            thta[-1]            : 1d array of final tht functions </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="n">nmode</span>        <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mod</span>     <span class="o">=</span> <span class="n">modified</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nstage</span>  <span class="o">=</span> <span class="n">nstage</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Parr</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">nstage</span><span class="p">,</span><span class="n">nmode</span><span class="p">,</span><span class="n">nmode</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">phia</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">nstage</span><span class="p">,</span><span class="n">nmode</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">thta</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">nstage</span><span class="p">,</span><span class="n">nmode</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">phia</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">phi_</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Pmat</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">nmode</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mgs</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">nstage</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">stage</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nstage</span><span class="p">):</span>
+            <span class="c1"># build mgs object </span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mgs</span><span class="p">[</span><span class="n">stage</span><span class="p">]</span>   <span class="o">=</span> <span class="n">MGS</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">phia</span><span class="p">[</span><span class="n">stage</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">Lmap</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">stage</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">ipmat_phi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mgs</span><span class="p">[</span><span class="n">stage</span><span class="p">]</span><span class="o">.</span><span class="n">ortho_check_phi</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ortho check phi_ maxabs:&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">ipmat_phi</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">))))</span>
+
+            <span class="c1"># orthonormalize with MGS</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mgs</span><span class="p">[</span><span class="n">stage</span><span class="p">]</span><span class="o">.</span><span class="n">ortho</span><span class="p">(</span><span class="n">modified</span><span class="o">=</span><span class="n">modified</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span><span class="n">stage</span><span class="o">=</span><span class="n">stage</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="kc">False</span><span class="p">:</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;gso_P&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">stage</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;gso P&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">stage</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mgs</span><span class="p">[</span><span class="n">stage</span><span class="p">]</span><span class="o">.</span><span class="n">Pmat</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.18e</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+                <span class="n">xt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+                <span class="n">phixt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">f</span><span class="p">(</span><span class="n">xt</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mgs</span><span class="p">[</span><span class="n">stage</span><span class="p">]</span><span class="o">.</span><span class="n">phi</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+                <span class="n">thtxt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">f</span><span class="p">(</span><span class="n">xt</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mgs</span><span class="p">[</span><span class="n">stage</span><span class="p">]</span><span class="o">.</span><span class="n">tht</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;gso_phi&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">stage</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;gso phixt&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">stage</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">phixt</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.18e</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;gso_tht&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">stage</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;gso thtxt&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">stage</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">thtxt</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.18e</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">thta</span><span class="p">[</span><span class="n">stage</span><span class="p">]</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mgs</span><span class="p">[</span><span class="n">stage</span><span class="p">]</span><span class="o">.</span><span class="n">tht</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="kc">False</span><span class="p">:</span>
+                <span class="k">def</span><span class="w"> </span><span class="nf">bld_Theta</span><span class="p">(</span><span class="n">P</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">phiv</span><span class="p">):</span>
+                    <span class="k">def</span><span class="w"> </span><span class="nf">lfnc</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+                        <span class="n">Phix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">ph</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">ph</span> <span class="ow">in</span> <span class="n">phiv</span><span class="p">])</span>
+                        <span class="n">arr</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">broadcast_to</span><span class="p">(</span><span class="n">P</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">Phix</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="n">Phix</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                        <span class="k">return</span> <span class="n">arr</span>
+                    <span class="k">return</span> <span class="n">lfnc</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">thta</span><span class="p">[</span><span class="n">stage</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">bld_Theta</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mgs</span><span class="p">[</span><span class="n">stage</span><span class="p">]</span><span class="o">.</span><span class="n">Pmat</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">phia</span><span class="p">[</span><span class="n">stage</span><span class="p">])</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">)])</span>
+
+            <span class="c1"># Save Pmat in Parr</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Parr</span><span class="p">[</span><span class="n">stage</span><span class="p">]</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mgs</span><span class="p">[</span><span class="n">stage</span><span class="p">]</span><span class="o">.</span><span class="n">Pmat</span><span class="p">)</span>
+
+            <span class="c1"># aggregate projector</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Pmat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Parr</span><span class="p">[</span><span class="n">stage</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">Pmat</span><span class="p">)</span>
+
+            <span class="c1"># orthonormality check</span>
+            <span class="n">ipmat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mgs</span><span class="p">[</span><span class="n">stage</span><span class="p">]</span><span class="o">.</span><span class="n">ortho_check</span><span class="p">()</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;stage:&#39;</span><span class="p">,</span><span class="n">stage</span><span class="p">,</span><span class="s1">&#39;, ortho check maxabs:&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">ipmat</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">))))</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;P-stage:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">Parr</span><span class="p">[</span><span class="n">stage</span><span class="p">])</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ortho_check:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">ipmat</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Pmat:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">Pmat</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">stage</span> <span class="o">&lt;</span> <span class="n">nstage</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="c1"># update phi</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">phia</span><span class="p">[</span><span class="n">stage</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mgs</span><span class="p">[</span><span class="n">stage</span><span class="p">]</span><span class="o">.</span><span class="n">tht</span><span class="p">)</span>    
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Pmat</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">thta</span><span class="p">[</span><span class="n">stage</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="MMGS.ortho_check">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.MMGS.ortho_check">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ortho_check</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">stage</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Check orthonormality of tht functions at given stage</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            stage (int)         : stage within multistage MGS</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            ipmat (np.ndarray)  : float 2d array containing orthonormality check matrix output for this stage</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">stage</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">stage</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nstage</span><span class="o">-</span><span class="mi">1</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">mgs</span><span class="p">[</span><span class="n">stage</span><span class="p">]</span><span class="o">.</span><span class="n">ortho_check</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="MMGS.ortho_check_phi">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.MMGS.ortho_check_phi">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ortho_check_phi</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">stage</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Check orthonormality of phi functions at given stage</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            stage (int)         : stage within multistage MGS</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            ipmat (np.ndarray)  : float 2d array containing orthonormality check matrix output for this stage</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">stage</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">stage</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nstage</span><span class="o">-</span><span class="mi">1</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">mgs</span><span class="p">[</span><span class="n">stage</span><span class="p">]</span><span class="o">.</span><span class="n">ortho_check_phi</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="QR">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.QR">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">QR</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&#39;&#39;&#39;QR decomposition class. Builds QR object for functions.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        m   (int)           : number of basis functions in expansion.</span>
+<span class="sd">        phi (np.ndarray)    : 1d numpy array (size :math:`m`) of starting functions.</span>
+<span class="sd">        tht (np.ndarray)    : 1d numpy array (size :math:`m`) of to-be-constructed orthonormal functions.</span>
+<span class="sd">        Lmap (object)       : pointer to local copy of Linear map and data object.</span>
+<span class="sd">        Pmat (np.ndarray)   : 2d :math:`(m, m)` numpy array ... the P projection matrix</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">phi_</span><span class="p">,</span><span class="n">Lmap</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Initialization.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            phi_ (np.ndarray): input numpy array of pointers to starting functions.</span>
+<span class="sd">            Lmap (object)    : input pointer to Linear map and data object.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+<div class="viewcode-block" id="QR.phi">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.QR.phi">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">phi</span>    <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">phi_</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="QR.tht">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.QR.tht">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tht</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">phi</span><span class="p">,</span><span class="kc">None</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="QR.m">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.QR.m">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m</span>      <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">phi</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="QR.Lmap">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.QR.Lmap">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Lmap</span>   <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">Lmap</span><span class="p">)</span></div>
+
+        <span class="k">return</span>
+
+<div class="viewcode-block" id="QR.iprod">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.QR.iprod">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">iprod</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pk</span><span class="p">,</span> <span class="n">pl</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&#39;&#39;&#39;Pairwise inner product between (lists of) functions.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            pk  : a list|tuple|numpy array of function pointers, or otherwise a function pointer</span>
+<span class="sd">            pl  : a list|tuple|numpy array of function pointers, or otherwise a function pointer</span>
+<span class="sd">            kwargs : optional keyword arguments:</span>
+
+<span class="sd">                - k    (int)  : starting index in `pk`. Required iff `pk` is a list|tuple|array</span>
+<span class="sd">                - l    (int)  : starting index in `pl`. Required iff `pl` is a list|tuple|array</span>
+<span class="sd">                - kmxp (int)  : (default: k+1) max-k plus 1, so that range(k,kmxp) goes over `pk[k], ..., pk[kmxp-1]`</span>
+<span class="sd">                - lmxp (int)  : (default: l+1) max-l plus 1, so that range(l,lmxp) goes over `pl[l], ..., pl[lmxp-1]`</span>
+<span class="sd">                - verbose_warning (bool) : controls verbosity of warnings.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            fklT (np.ndarray)   : 2d float numpy array with `kmxp-k` rows and `lmxp-l` columns</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            Say, we have `pk` list and `pl` single function</span>
+
+<span class="sd">                - ``pk = [lambda x : 2*x, lambda x : x**2, lambda x : x**3]``</span>
+<span class="sd">                - ``pl = lambda x : 10*x``</span>
+<span class="sd">            then</span>
+
+<span class="sd">                - ``iprod(pk[3],pl)`` returns: ``[[&lt;Lmap.eval(pk[3]),Lmap.eval(pl)&gt;]]``, a 2d `(1, 1)` numpy array and</span>
+<span class="sd">                - ``iprod(pk,pl,k=1,kmxp=3)`` returns ``[[&lt;Lmap.eval(pk[1]),Lmap.eval(pl)&gt;, &lt;Lmap.eval(pk[2]),Lmap.eval(pl)&gt;]]``, a 2d `(1, 2)` numpy array.</span>
+<span class="sd">                - ``iprod(pk,pl,k=0,kmxp=3,l=0,lmxp=2)`` returns  ``[ [&lt;Lmap.eval(pk[0]),Lmap.eval(pl[0])&gt;, &lt;Lmap.eval(pk[0]),Lmap.eval(pl[1])&gt;], [&lt;Lmap.eval(pk[1]),Lmap.eval(pl[0])&gt;, &lt;Lmap.eval(pk[1]),Lmap.eval(pl[1])&gt;], [&lt;Lmap.eval(pk[2]),Lmap.eval(pl[0])&gt;, &lt;Lmap.eval(pk[2]),Lmap.eval(pl[1])&gt;]]``  a 2d `(3, 2)` numpy array.</span>
+
+<span class="sd">            NB. if x is an `npt`-long vector of data points, then for any of the above functions, say ``pk[2]``, ``Lmap.eval(pk[2])`` will return a 2d `(1, npt)` numpy array.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="n">k</span>    <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+        <span class="n">kmxp</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;kmxp&#39;</span><span class="p">)</span>
+        <span class="n">l</span>    <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;l&#39;</span><span class="p">)</span>
+        <span class="n">lmxp</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;lmxp&#39;</span><span class="p">)</span>
+        <span class="n">verbose_warning</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;verbose_warning&#39;</span><span class="p">,</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pk</span><span class="p">,(</span><span class="nb">list</span><span class="p">,</span><span class="nb">tuple</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;Need k spec for this pk&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">kmxp</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">kmxp</span> <span class="o">=</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">fk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">Lmap</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">pk</span><span class="p">[</span><span class="n">ki</span><span class="p">])</span> <span class="k">for</span> <span class="n">ki</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">kmxp</span><span class="p">)])</span>
+        <span class="k">elif</span> <span class="nb">callable</span><span class="p">(</span><span class="n">pk</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">v</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">kmxp</span><span class="p">])</span> <span class="ow">and</span> <span class="n">verbose_warning</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Warning: no use for k|kmxp for this pk&#39;</span><span class="p">)</span>
+            <span class="n">fk</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Lmap</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">pk</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;Unexpected input pk&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pl</span><span class="p">,(</span><span class="nb">list</span><span class="p">,</span><span class="nb">tuple</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">l</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;Need l spec for this pl&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">lmxp</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">lmxp</span> <span class="o">=</span> <span class="n">l</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">fl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">Lmap</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">pl</span><span class="p">[</span><span class="n">li</span><span class="p">])</span> <span class="k">for</span> <span class="n">li</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">lmxp</span><span class="p">)])</span>
+        <span class="k">elif</span> <span class="nb">callable</span><span class="p">(</span><span class="n">pl</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">v</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="n">l</span><span class="p">,</span><span class="n">lmxp</span><span class="p">])</span> <span class="ow">and</span> <span class="n">verbose_warning</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Warning: no use for l|lmxp for this pl&#39;</span><span class="p">)</span>
+            <span class="n">fl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Lmap</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">pl</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;Unexpected input pl&#39;</span><span class="p">)</span>
+
+        <span class="c1"># for x containing npt data points (whether each is a scalar or a vector is immaterial),</span>
+        <span class="c1"># then fk is a 2d numpy array with kmxp-k rows and npt columns</span>
+        <span class="c1"># and fl is a 2d numpy array with lmxp-l rows and npt columns</span>
+        <span class="c1"># fklT is a 2d numpy array with kmxp-k rows and lmxp-l columns</span>
+
+        <span class="n">fklT</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">fk</span><span class="p">,</span><span class="n">fl</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">fklT</span></div>
+
+
+<div class="viewcode-block" id="QR.bld_tht">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.QR.bld_tht">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">bld_tht</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">P</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">phiv</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&#39;&#39;&#39;Build and return tht (:math:`\theta`) function for index `i`</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            i (int)             : row index</span>
+<span class="sd">            P (p.ndarray)       : 2d float projection matrix</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            lfnc (function)     : tht function for index `i`</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">lfnc</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="n">Phix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">ph</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">ph</span> <span class="ow">in</span> <span class="n">phiv</span><span class="p">])</span>
+            <span class="n">arr</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">broadcast_to</span><span class="p">(</span><span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">Phix</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="n">Phix</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">arr</span>
+        <span class="k">return</span> <span class="n">lfnc</span></div>
+
+
+<div class="viewcode-block" id="QR.ortho">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.QR.ortho">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ortho</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Orthonormalize phi functions to provide the tht functions</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            verbose (bool)      : controls verbosity</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Pmat (np.ndarray)   : 2d float projection matrix</span>
+<span class="sd">            tht (np.ndarray)    : 1d array of tht function pointers</span>
+
+<span class="sd">        Uses QR factorization to find Pmat</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="n">fname</span> <span class="o">=</span> <span class="s1">&#39;qro_qr.txt&#39;</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;ortho QR</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="n">Aphi</span>      <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">Lmap</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">pf</span><span class="p">)</span> <span class="k">for</span> <span class="n">pf</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">phi</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">Q</span><span class="p">,</span> <span class="n">R</span>      <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">qr</span><span class="p">(</span><span class="n">Aphi</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">R</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">R</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Failure in orf: QR.ortho : orthonormalization via QR decomposition&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Aphi:&#39;</span><span class="p">,</span><span class="n">Aphi</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span><span class="s1">&#39;Q:&#39;</span><span class="p">,</span><span class="n">Q</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span><span class="s1">&#39;R:&#39;</span><span class="p">,</span><span class="n">R</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;R is not square, and cannot be inverted&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Make sure you have more data points than basis functions to avoid this failure!&#39;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
+
+        <span class="n">Pqr</span>       <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">Pmat</span> <span class="o">=</span> <span class="n">Pqr</span><span class="o">.</span><span class="n">T</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tht</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">bld_tht</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Pmat</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">phi</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">)])</span>
+
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">suppress</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;P:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">Pmat</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Pmat</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tht</span></div>
+
+
+<div class="viewcode-block" id="QR.ortho_check_phi">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.QR.ortho_check_phi">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ortho_check_phi</span><span class="p">(</span><span class="bp">self</span><span class="p">,):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Check orthonormality of phi functions</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            ipmat (np.ndarray)  : float 2d array containing orthonormality check matrix output</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">ipmat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">):</span>
+            <span class="n">ipmat</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">iprod</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">phi</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">phi</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="n">i</span><span class="p">,</span><span class="n">l</span><span class="o">=</span><span class="n">i</span><span class="p">,</span><span class="n">kmxp</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">lmxp</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">ipmat</span></div>
+
+
+<div class="viewcode-block" id="QR.ortho_check">
+<a class="viewcode-back" href="../../../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.QR.ortho_check">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ortho_check</span><span class="p">(</span><span class="bp">self</span><span class="p">,):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Check orthogonality of tht functions</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            ipmat (np.ndarray)  : float 2d array containing orthonormality check matrix output</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">ipmat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">):</span>
+            <span class="n">ipmat</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">iprod</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tht</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">tht</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="n">i</span><span class="p">,</span><span class="n">l</span><span class="o">=</span><span class="n">i</span><span class="p">,</span><span class="n">kmxp</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">lmxp</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">ipmat</span></div>
+</div>
+
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

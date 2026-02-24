@@ -1,0 +1,453 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytuq.lreg.bcs &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">Software Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/index.html#surrogates">Surrogates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_pce.html">Polynomial Chaos Expansion Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../autoapi/index.html">Section Navigation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../autoapi/pytuq/index.html">pytuq</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/pytuq/index.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/ftools/index.html">pytuq.ftools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/func/index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/minf/index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/rv/index.html">pytuq.rv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/surrogates/index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/utils/index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pytuq.lreg.bcs</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pytuq.lreg.bcs</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="sd">&quot;&quot;&quot;A module for Bayesian compressive sensing.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.lreg</span><span class="w"> </span><span class="kn">import</span> <span class="n">lreg</span>
+
+
+
+<div class="viewcode-block" id="bcs">
+<a class="viewcode-back" href="../../../autoapi/pytuq/lreg/bcs/index.html#pytuq.lreg.bcs.bcs">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">bcs</span><span class="p">(</span><span class="n">lreg</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bayesian compressive sensing (BCS) class.</span>
+
+<span class="sd">    Attributes:</span>
+<div class="viewcode-block" id="bcs.fitted">
+<a class="viewcode-back" href="../../../autoapi/pytuq/lreg/bcs/index.html#pytuq.lreg.bcs.bcs.fitted">[docs]</a>
+<span class="sd">        eta (float): The tolerance parameter of the BCS algorithm.</span></div>
+
+<span class="sd">        datavar_init (float): Initial value of the data variance.</span>
+<span class="sd">        fitted (bool): Indicates whether the fit is done or note.</span>
+<span class="sd">        used (np.ndarray): Indices of retained bases.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eta</span><span class="o">=</span><span class="mf">1.e-8</span><span class="p">,</span> <span class="n">datavar_init</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialization.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            eta (float, optional): The tolerance parameter of the BCS algorithm.</span>
+<span class="sd">            datavar_init (float, optional): Initial value of the data variance to start the algorithm with. If None, picks a rule-of-thumb default value.</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            This is the conventional (not weighted) BCS. The weighted BCS is implemented in UQTk.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+<div class="viewcode-block" id="bcs.eta">
+<a class="viewcode-back" href="../../../autoapi/pytuq/lreg/bcs/index.html#pytuq.lreg.bcs.bcs.eta">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eta</span> <span class="o">=</span> <span class="n">eta</span></div>
+
+<div class="viewcode-block" id="bcs.used">
+<a class="viewcode-back" href="../../../autoapi/pytuq/lreg/bcs/index.html#pytuq.lreg.bcs.bcs.used">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">used</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="bcs.datavar_init">
+<a class="viewcode-back" href="../../../autoapi/pytuq/lreg/bcs/index.html#pytuq.lreg.bcs.bcs.datavar_init">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">datavar_init</span> <span class="o">=</span> <span class="n">datavar_init</span></div>
+
+
+
+<div class="viewcode-block" id="bcs.fita">
+<a class="viewcode-back" href="../../../autoapi/pytuq/lreg/bcs/index.html#pytuq.lreg.bcs.bcs.fita">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fita</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Amat</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Fit given A-matrix of basis evaluations and data array.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            Amat (np.ndarray): A 2d array of size :math:`(N, K)` each row holding basis evaluations at a training point.</span>
+<span class="sd">            y (np.ndarray): An 1d array of size :math:`N` holding the data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">npt</span><span class="p">,</span> <span class="n">nbas</span> <span class="o">=</span> <span class="n">Amat</span><span class="o">.</span><span class="n">shape</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">cf</span><span class="p">,</span> <span class="n">errbars</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">used</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">datavar</span><span class="p">,</span> <span class="n">basis</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cf_cov</span> <span class="o">=</span> <span class="n">bcs_fit</span><span class="p">(</span><span class="n">Amat</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sigma2</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">datavar_init</span><span class="p">,</span> <span class="n">eta</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">eta</span><span class="p">)</span>
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fitted</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">return</span></div>
+</div>
+
+
+<span class="c1">######################################################################</span>
+<span class="c1">######################################################################</span>
+<span class="c1">######################################################################</span>
+
+<div class="viewcode-block" id="bcs_fit">
+<a class="viewcode-back" href="../../../autoapi/pytuq/lreg/bcs/index.html#pytuq.lreg.bcs.bcs_fit">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">bcs_fit</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sigma2</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">eta</span><span class="o">=</span><span class="mf">1.e-8</span><span class="p">,</span> <span class="n">adaptive</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">optimal</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">nugget</span><span class="o">=</span><span class="mf">1.e-6</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;BCS fitting algorithm. See &quot;Bayesian Compressive Sesning&quot; (Preprint, 2007). The algorithm</span>
+<span class="sd">    adopts from the fast RVM algorithm, https://www.miketipping.com/papers/met-fastsbl.pdf [Tipping &amp; Faul, 2003]. Original code in Matlab by Shihao Ji, ECE, Duke University.</span>
+
+
+<span class="sd">    Args:</span>
+<span class="sd">        A (np.ndarray): A 2d array of size :math:`(N, K)` each row holding basis evaluations at a training point.</span>
+<span class="sd">        y (np.ndarray): An 1d array of size :math:`N` holding the data.</span>
+<span class="sd">        sigma2 (None, optional): Initial data variance. Defaults to None, which picks a rule-of-thumb default value.</span>
+<span class="sd">        eta (float, optional): The tolerance parameter of the BCS algorithm. Defaults to 1.e-6.</span>
+<span class="sd">        adaptive (int, optional): Integer-Boolean flag whether to turn on the adaptive algorithm or not. Defaults to 0.</span>
+<span class="sd">        optimal (int, optional): Integer-Boolean flag whether to use the rigorous implementation of adaptive algorithm. Defaults to 1.</span>
+<span class="sd">        scale (float, optional): Diagonal loading parameter of adaptive algorithm. Defaults to 0.1.</span>
+<span class="sd">        nugget (float, optional): Small diagonal nugget to improve the conditioning of matrix :math:`\Sigma`.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple(weights, errbars, used, sigma2, basis, Sig): Tuple of sparse coefficients (weights), one st.dev. errorbars on coefficients, used indices, re-estimated noise variance, the next estimated basis vector (if adaptive method), and covariance matrix (Sig).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+    <span class="k">if</span> <span class="n">sigma2</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">sigma2</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mf">1.e+2</span><span class="p">,</span> <span class="n">nugget</span><span class="p">)</span>
+
+    <span class="c1"># find initial alpha</span>
+    <span class="n">N</span><span class="p">,</span> <span class="n">M</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">Aty</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>  <span class="c1"># (M,)</span>
+    <span class="n">A2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">A</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># (M,)</span>
+    <span class="n">ratio</span> <span class="o">=</span> <span class="p">(</span><span class="n">Aty</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">nugget</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">Aty</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">A2</span> <span class="o">+</span> <span class="n">nugget</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">A2</span><span class="p">))</span> <span class="c1"># (M,)</span>
+
+
+    <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">ratio</span><span class="p">)]</span> <span class="c1"># vector of dynamic size K with values = 0..M-1</span>
+    <span class="n">maxr</span> <span class="o">=</span> <span class="n">ratio</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="c1"># (K,)</span>
+
+    <span class="n">alpha</span> <span class="o">=</span> <span class="n">A2</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">maxr</span> <span class="o">-</span> <span class="n">sigma2</span><span class="p">)</span> <span class="c1"># (K,)</span>
+
+    <span class="c1"># compute initial mu, Sig, S, Q</span>
+    <span class="n">Asl</span> <span class="o">=</span> <span class="n">A</span><span class="p">[:,</span> <span class="n">index</span><span class="p">]</span> <span class="c1"># (N,K)</span>
+    <span class="n">Hessian</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Asl</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">Asl</span><span class="p">)</span> <span class="o">/</span> <span class="n">sigma2</span> <span class="c1"># (K,K)</span>
+    <span class="n">Sig</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="n">Hessian</span> <span class="o">+</span> <span class="n">nugget</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">Hessian</span><span class="p">))</span> <span class="c1"># (K,K)</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,))</span>
+    <span class="n">mu</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">Sig</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">Aty</span><span class="p">[</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">/</span> <span class="n">sigma2</span> <span class="c1"># (K,)</span>
+
+    <span class="n">left</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">Asl</span><span class="p">)</span> <span class="o">/</span> <span class="n">sigma2</span> <span class="c1"># (M,K)</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="n">A2</span> <span class="o">/</span> <span class="n">sigma2</span> <span class="o">-</span> <span class="n">Sig</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">left</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="c1"># (M,)</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="n">Aty</span> <span class="o">/</span> <span class="n">sigma2</span> <span class="o">-</span> <span class="n">Sig</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">Aty</span><span class="p">[</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">/</span> <span class="n">sigma2</span> <span class="o">*</span> <span class="n">left</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="c1"># (M,)</span>
+
+
+    <span class="n">itermax</span> <span class="o">=</span> <span class="mi">100</span>
+    <span class="n">mlhist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">itermax</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">itermax</span><span class="p">):</span>  <span class="c1"># careful with index below</span>
+        <span class="n">ss</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">qq</span> <span class="o">=</span> <span class="n">Q</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="c1">#print(ss.shape, alpha.shape, S.shape, index, A2.shape, maxr.shape, sigma2, ratio.shape, Aty.shape)</span>
+        <span class="n">ss</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">S</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">alpha</span> <span class="o">-</span> <span class="n">S</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+        <span class="n">qq</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">Q</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">alpha</span> <span class="o">-</span> <span class="n">S</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+        <span class="n">theta</span> <span class="o">=</span> <span class="n">qq</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">ss</span> <span class="c1"># (M,)</span>
+
+        <span class="c1"># choose the next alpha that maximizes marginal likelihood</span>
+        <span class="n">ml</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+        <span class="n">ig0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">theta</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># vector of values 0..M-1 of size L&lt;=M</span>
+
+        <span class="c1"># index for re-estimate ire=ig0[foo]=index[which]</span>
+        <span class="n">ire</span><span class="p">,</span> <span class="n">foo</span><span class="p">,</span> <span class="n">which</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">intersect1d</span><span class="p">(</span><span class="n">ig0</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">return_indices</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ire</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">alpha_</span> <span class="o">=</span> <span class="n">ss</span><span class="p">[</span><span class="n">ire</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">theta</span><span class="p">[</span><span class="n">ire</span><span class="p">]</span> <span class="o">+</span> <span class="n">nugget</span>
+
+            <span class="n">delta</span> <span class="o">=</span> <span class="p">(</span><span class="n">alpha</span><span class="p">[</span><span class="n">which</span><span class="p">]</span> <span class="o">-</span> <span class="n">alpha_</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">alpha_</span> <span class="o">*</span> <span class="n">alpha</span><span class="p">[</span><span class="n">which</span><span class="p">])</span>
+            <span class="k">if</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">S</span><span class="p">[</span><span class="n">ire</span><span class="p">]</span> <span class="o">*</span> <span class="n">delta</span><span class="o">&lt;=</span><span class="mf">0.0</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+                <span class="n">ml</span><span class="p">[</span><span class="n">ire</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.e+80</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ml</span><span class="p">[</span><span class="n">ire</span><span class="p">]</span> <span class="o">=</span> <span class="n">Q</span><span class="p">[</span><span class="n">ire</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">delta</span> <span class="o">/</span> <span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="n">ire</span><span class="p">]</span> <span class="o">*</span> <span class="n">delta</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">S</span><span class="p">[</span><span class="n">ire</span><span class="p">]</span> <span class="o">*</span> <span class="n">delta</span><span class="p">)</span>
+
+        <span class="c1"># index for adding</span>
+        <span class="n">iad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">setdiff1d</span><span class="p">(</span><span class="n">ig0</span><span class="p">,</span> <span class="n">ire</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">iad</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="n">iad</span><span class="p">]</span><span class="o">&lt;=</span><span class="mf">0.0</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+                <span class="n">ml</span><span class="p">[</span><span class="n">iad</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.e+80</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ml</span><span class="p">[</span><span class="n">iad</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">Q</span><span class="p">[</span><span class="n">iad</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">S</span><span class="p">[</span><span class="n">iad</span><span class="p">])</span> <span class="o">/</span> <span class="n">S</span><span class="p">[</span><span class="n">iad</span><span class="p">]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="n">iad</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">Q</span><span class="p">[</span><span class="n">iad</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+
+        <span class="n">is0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">setdiff1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">M</span><span class="p">),</span> <span class="n">ig0</span><span class="p">)</span>
+
+        <span class="c1"># index for deleting</span>
+        <span class="n">ide</span><span class="p">,</span> <span class="n">foo</span><span class="p">,</span> <span class="n">which</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">intersect1d</span><span class="p">(</span><span class="n">is0</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">return_indices</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ide</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">ml</span><span class="p">[</span><span class="n">ide</span><span class="p">]</span> <span class="o">=</span> <span class="n">Q</span><span class="p">[</span><span class="n">ide</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="n">ide</span><span class="p">]</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">[</span><span class="n">which</span><span class="p">])</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">S</span><span class="p">[</span><span class="n">ide</span><span class="p">]</span> <span class="o">/</span> <span class="n">alpha</span><span class="p">[</span><span class="n">which</span><span class="p">])</span>
+
+
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">ml</span><span class="p">)</span>  <span class="c1">#TODO check single value?</span>
+        <span class="n">mlhist</span><span class="p">[</span><span class="n">count</span><span class="p">]</span> <span class="o">=</span> <span class="n">ml</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+        <span class="c1"># check if terminates?</span>
+        <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> \
+           <span class="nb">abs</span><span class="p">(</span><span class="n">mlhist</span><span class="p">[</span><span class="n">count</span><span class="p">]</span> <span class="o">-</span> <span class="n">mlhist</span><span class="p">[</span><span class="n">count</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span> <span class="o">&lt;</span> <span class="nb">abs</span><span class="p">(</span><span class="n">mlhist</span><span class="p">[</span><span class="n">count</span><span class="p">]</span> <span class="o">-</span> <span class="n">mlhist</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">eta</span><span class="p">:</span>
+            <span class="k">break</span>
+
+        <span class="c1"># update alphas</span>
+        <span class="n">which</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">index</span> <span class="o">==</span> <span class="n">idx</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># TODO assert length 1?</span>
+        <span class="k">if</span> <span class="n">theta</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">which</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>            <span class="c1"># re-estimate</span>
+                <span class="n">alpha_</span> <span class="o">=</span> <span class="n">ss</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">theta</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">+</span> <span class="n">nugget</span>
+                <span class="n">Sigii</span> <span class="o">=</span> <span class="n">Sig</span><span class="p">[</span><span class="n">which</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">which</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+                <span class="n">mui</span> <span class="o">=</span> <span class="n">mu</span><span class="p">[</span><span class="n">which</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+                <span class="n">Sigi</span> <span class="o">=</span> <span class="n">Sig</span><span class="p">[:,</span> <span class="n">which</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>  <span class="c1"># (K,)</span>
+
+                <span class="n">delta</span> <span class="o">=</span> <span class="n">alpha_</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">[</span><span class="n">which</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+                <span class="n">ki</span> <span class="o">=</span> <span class="n">delta</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">+</span> <span class="n">Sigii</span> <span class="o">*</span> <span class="n">delta</span><span class="p">)</span>
+                <span class="n">comm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Asl</span><span class="p">,</span> <span class="n">Sigi</span><span class="p">)</span> <span class="o">/</span> <span class="n">sigma2</span><span class="p">)</span>  <span class="c1"># (M,)</span>
+                <span class="n">mu</span> <span class="o">=</span> <span class="n">mu</span> <span class="o">-</span> <span class="n">ki</span> <span class="o">*</span> <span class="n">mui</span> <span class="o">*</span> <span class="n">Sigi</span>  <span class="c1"># (K,)</span>
+                <span class="n">Sig</span> <span class="o">=</span> <span class="n">Sig</span> <span class="o">-</span> <span class="n">ki</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Sigi</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">Sigi</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+                <span class="n">comm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Asl</span><span class="p">,</span> <span class="n">Sigi</span><span class="p">)</span> <span class="o">/</span> <span class="n">sigma2</span><span class="p">)</span>  <span class="c1"># (M,)</span>
+
+                <span class="n">S</span> <span class="o">=</span> <span class="n">S</span> <span class="o">+</span> <span class="n">ki</span> <span class="o">*</span> <span class="n">comm</span><span class="o">**</span><span class="mi">2</span> <span class="c1"># (M,)</span>
+                <span class="n">Q</span> <span class="o">=</span> <span class="n">Q</span> <span class="o">+</span> <span class="n">ki</span> <span class="o">*</span> <span class="n">mui</span> <span class="o">*</span> <span class="n">comm</span> <span class="c1"># (M,)</span>
+
+                <span class="n">alpha</span><span class="p">[</span><span class="n">which</span><span class="p">]</span> <span class="o">=</span> <span class="n">alpha_</span>
+            <span class="k">else</span><span class="p">:</span>            <span class="c1"># adding</span>
+                <span class="n">alpha_</span> <span class="o">=</span> <span class="n">ss</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">theta</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">+</span> <span class="n">nugget</span>
+                <span class="n">Ai</span> <span class="o">=</span> <span class="n">A</span><span class="p">[:,</span> <span class="n">idx</span><span class="p">]</span>  <span class="c1"># (N,)</span>
+                <span class="n">Sigii</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="n">alpha_</span> <span class="o">+</span> <span class="n">S</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+                <span class="n">mui</span> <span class="o">=</span> <span class="n">Sigii</span> <span class="o">*</span> <span class="n">Q</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+                <span class="n">comm1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Sig</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Asl</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">Ai</span><span class="p">))</span> <span class="o">/</span> <span class="n">sigma2</span> <span class="c1"># (K,)</span>
+
+                <span class="n">ei</span> <span class="o">=</span> <span class="n">Ai</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Asl</span><span class="p">,</span> <span class="n">comm1</span><span class="p">)</span> <span class="c1"># (N,)</span>
+                <span class="n">off</span> <span class="o">=</span> <span class="o">-</span><span class="n">Sigii</span> <span class="o">*</span> <span class="n">comm1</span> <span class="c1">#( K,)</span>
+                <span class="n">Sig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">block</span><span class="p">([[</span>
+                               <span class="n">Sig</span> <span class="o">+</span> <span class="n">Sigii</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">comm1</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+                                                    <span class="n">comm1</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)),</span>
+                               <span class="n">off</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)],</span>
+                               <span class="p">[</span><span class="n">off</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span>
+                               <span class="n">Sigii</span><span class="p">]])</span>
+
+                <span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mu</span> <span class="o">-</span> <span class="n">mui</span> <span class="o">*</span> <span class="n">comm1</span><span class="p">,</span> <span class="n">mui</span><span class="p">)</span>
+                <span class="n">comm2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">ei</span><span class="p">)</span> <span class="o">/</span> <span class="n">sigma2</span> <span class="c1">#(M,)</span>
+                <span class="n">S</span> <span class="o">=</span> <span class="n">S</span> <span class="o">-</span> <span class="n">Sigii</span> <span class="o">*</span> <span class="n">comm2</span><span class="o">**</span><span class="mi">2</span>
+                <span class="n">Q</span> <span class="o">=</span> <span class="n">Q</span> <span class="o">-</span> <span class="n">mui</span> <span class="o">*</span> <span class="n">comm2</span>
+                <span class="c1">#</span>
+                <span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">idx</span><span class="p">)</span>
+                <span class="n">alpha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">alpha_</span><span class="p">)</span>
+                <span class="n">Asl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">Asl</span><span class="p">,</span> <span class="n">Ai</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span> <span class="c1"># (N, K++)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">which</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>            <span class="c1"># deleting</span>
+                <span class="n">Sigii</span> <span class="o">=</span> <span class="n">Sig</span><span class="p">[</span><span class="n">which</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">which</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+                <span class="n">mui</span> <span class="o">=</span> <span class="n">mu</span><span class="p">[</span><span class="n">which</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+                <span class="n">Sigi</span> <span class="o">=</span> <span class="n">Sig</span><span class="p">[:,</span> <span class="n">which</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="c1"># (K,)</span>
+
+                <span class="n">Sig</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Sigi</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">Sigi</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="n">Sigii</span>
+                <span class="n">Sig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">Sig</span><span class="p">,</span> <span class="n">which</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="n">Sig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">Sig</span><span class="p">,</span> <span class="n">which</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+
+                <span class="n">mu</span> <span class="o">=</span> <span class="n">mu</span> <span class="o">-</span> <span class="p">(</span><span class="n">mui</span> <span class="o">/</span> <span class="n">Sigii</span><span class="p">)</span> <span class="o">*</span> <span class="n">Sigi</span> <span class="c1"># (K,)</span>
+                <span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">which</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">comm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Asl</span><span class="p">,</span> <span class="n">Sigi</span><span class="p">))</span> <span class="o">/</span> <span class="n">sigma2</span> <span class="c1"># (M,)</span>
+                <span class="n">S</span> <span class="o">=</span> <span class="n">S</span> <span class="o">+</span> <span class="p">(</span><span class="n">comm</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">Sigii</span><span class="p">)</span> <span class="c1"># (M,)</span>
+                <span class="n">Q</span> <span class="o">=</span> <span class="n">Q</span> <span class="o">+</span> <span class="p">(</span><span class="n">mui</span> <span class="o">/</span> <span class="n">Sigii</span><span class="p">)</span> <span class="o">*</span> <span class="n">comm</span> <span class="c1"># (M,)</span>
+
+                <span class="c1">#</span>
+                <span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">which</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">alpha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">which</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">Asl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">Asl</span><span class="p">,</span> <span class="n">which</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">which</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">break</span>
+
+    <span class="c1">#print(&quot;MLHIST &quot;, mlhist)</span>
+
+    <span class="n">weights</span> <span class="o">=</span> <span class="n">mu</span>
+    <span class="n">used</span> <span class="o">=</span> <span class="n">index</span>
+    <span class="c1"># re-estimated sigma2</span>
+    <span class="n">sigma2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">y</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Asl</span><span class="p">,</span> <span class="n">mu</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="o">+</span>
+                                                 <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">alpha</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span>
+                                                        <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">Sig</span><span class="p">)))</span>
+
+    <span class="n">detsig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">Sig</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">detsig</span><span class="o">&lt;-</span><span class="n">nugget</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Warning: Sigma matrix has a determinant </span><span class="si">{</span><span class="n">detsig</span><span class="si">}</span><span class="s2"> that is not positive. Use with care.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># assert((np.diag(Sig)&gt;0.0).all())</span>
+    <span class="c1"># if (np.diag(Sig)&lt;0.0).any():</span>
+    <span class="c1">#     print(f&quot;Error: Sigma matrix has a negative diagonal element. Something is wrong. Exiting.&quot;)</span>
+    <span class="c1">#     sys.exit()</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">Sig</span><span class="p">)</span><span class="o">&lt;</span><span class="mf">0.0</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Warning: Sigma matrix has a negative diagonal element. Setting them to zero, but this may lead to inaccuracies.&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Sig</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="k">if</span> <span class="n">Sig</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;</span><span class="mf">0.0</span><span class="p">:</span>
+                <span class="n">Sig</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="mf">0.0</span>
+
+
+    <span class="n">errbars</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">Sig</span><span class="p">))</span>
+
+    <span class="c1"># generate a basis for adaptive CS?</span>
+    <span class="n">basis</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">adaptive</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">optimal</span><span class="p">:</span>
+            <span class="n">D</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">Sig</span><span class="p">)</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">D</span><span class="p">)</span> <span class="c1"># TODO is it a single number?</span>
+            <span class="n">basis</span> <span class="o">=</span> <span class="n">V</span><span class="p">[:,</span> <span class="n">idx</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">temp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Asl</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">Asl</span><span class="p">)</span> <span class="o">/</span> <span class="n">sigma2</span>
+            <span class="n">Sig_inv</span> <span class="o">=</span> <span class="n">temp</span> <span class="o">+</span> <span class="n">scale</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">temp</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">used</span><span class="p">))</span>
+            <span class="n">D</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">Sig_inv</span><span class="p">)</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+            <span class="n">basis</span> <span class="o">=</span> <span class="n">V</span><span class="p">[:,</span> <span class="n">idx</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">weights</span><span class="p">,</span> <span class="n">errbars</span><span class="p">,</span> <span class="n">used</span><span class="p">,</span> <span class="n">sigma2</span><span class="p">,</span> <span class="n">basis</span><span class="p">,</span> <span class="n">Sig</span> <span class="c1"># KS: the last Sig was recently added</span></div>
+
+
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

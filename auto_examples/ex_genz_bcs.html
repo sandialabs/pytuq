@@ -1,0 +1,975 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Function Approximation with Sparse Regression &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Section Navigation" href="../autoapi/index.html" />
+    <link rel="prev" title="Residual Neural Network Construction" href="ex_nn.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Software Tutorials</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#surrogates">Surrogates</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ex_pce.html">Polynomial Chaos Expansion Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../autoapi/index.html">Section Navigation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/index.html">pytuq</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/index.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/ftools/index.html">pytuq.ftools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/minf/index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/rv/index.html">pytuq.rv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/surrogates/index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Software Tutorials</a></li>
+      <li class="breadcrumb-item active">Function Approximation with Sparse Regression</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/auto_examples/ex_genz_bcs.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-auto-examples-ex-genz-bcs-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code.</p>
+</div>
+<section class="sphx-glr-example-title" id="function-approximation-with-sparse-regression">
+<span id="sphx-glr-auto-examples-ex-genz-bcs-py"></span><h1>Function Approximation with Sparse Regression<a class="headerlink" href="#function-approximation-with-sparse-regression" title="Link to this heading"></a></h1>
+<p>In this tutorial, we demonstrate how to approximate a function with sparse regression by constructing a Polynomial Chaos (PC) surrogate with
+Bayesian compressive sensing (BCS). The function we will approximate here is the Genz Oscillatory function, defined as:</p>
+<div class="math notranslate nohighlight">
+\[f(x) = \cos\left(2 \pi s + \sum_{i=1}^d w_i x_i\right)\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(s\)</span>: The shift parameter (<code class="docutils literal notranslate"><span class="pre">self.shift</span></code> in the class).</p></li>
+<li><p><span class="math notranslate nohighlight">\(w_i\)</span>: The weights for each dimension (<code class="docutils literal notranslate"><span class="pre">self.weights</span></code> in the class).</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span>: The input variables.</p></li>
+<li><p><span class="math notranslate nohighlight">\(d\)</span>: The dimensionality of the input <span class="math notranslate nohighlight">\(x\)</span> (number of components in <span class="math notranslate nohighlight">\(x\)</span>).</p></li>
+</ul>
+<p>Through three different build processes, we will construct three PC surrogates to highlight the advantages of BCS and explore the effects of the <cite>eta</cite> hyperparameter on model results.</p>
+<p>First, we’ll build with least squares regression to demonstrate the limitations of non-sparse methods and the need for BCS.
+Then we’ll build with BCS using a given eta of <span class="math notranslate nohighlight">\(1 \times 10^{-10}\)</span> and identify aspects for model improvement.
+Last, we’ll build with the most optimal eta, as found through cross-validation algorithms exposed here. All three surrogates will be evaluated on testing and training data,
+with parity plots and Root Mean Square Error (RMSE) values used to compare their performance.</p>
+<p>To follow along with the cross-validation algorithm for selecting the optimal eta, see section “Functions for cross-validation algorithm” in the second half of the notebook.
+These methods have been implemented under-the-hood in PyTUQ. Refer to example “Polynomial Chaos Expansion Construction” (<code class="docutils literal notranslate"><span class="pre">ex_pce.py</span></code>) for a demonstration of how to use these methods through a direct call to the PCE class.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">root_mean_squared_error</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pytuq.surrogates.pce</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCE</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pytuq.utils.maps</span><span class="w"> </span><span class="kn">import</span> <span class="n">scaleDomTo01</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pytuq.func.genz</span><span class="w"> </span><span class="kn">import</span> <span class="n">GenzOscillatory</span>
+</pre></div>
+</div>
+<section id="constructing-pc-surrogate-and-generating-data">
+<h2>Constructing PC surrogate and generating data<a class="headerlink" href="#constructing-pc-surrogate-and-generating-data" title="Link to this heading"></a></h2>
+<p>To start, we begin with defining our true model and input parameters for our PC surrogate.</p>
+<p>After importing GenzOscillatory from <code class="docutils literal notranslate"><span class="pre">pytuq.func.genz</span></code>, we generate the Genz function below,
+along with training data and testing data with output noise. This data and the corresponding Genz function
+will be used to create the same PC surrogate fitted in all three examples: first with linear regression,
+next using BCS with a given eta, and third using BCS with the most optimal eta.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Random number generator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">qmc</span>
+<span class="n">rng_seed</span> <span class="o">=</span> <span class="mi">43</span>
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define our true model as the Genz Oscillatory function in multiple dimensions</span>
+<span class="n">func_dim</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">func_weights</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="o">/</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">func_dim</span><span class="p">)]</span>
+<span class="n">func</span> <span class="o">=</span> <span class="n">GenzOscillatory</span><span class="p">(</span><span class="n">shift</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">func_weights</span><span class="p">)</span>
+<span class="n">noise_std</span> <span class="o">=</span> <span class="mf">0.025</span>
+
+<span class="n">rng</span> <span class="o">=</span> <span class="n">qmc</span><span class="o">.</span><span class="n">LatinHypercube</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="n">func_dim</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">rng_seed</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># As we choose to use Legendre polynomials later in the surrogate construction, we define the domain of ξ on [-1, 1]^d</span>
+<span class="n">ksi_domain</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]]</span> <span class="o">*</span> <span class="n">func_dim</span><span class="p">)</span>
+
+<span class="c1"># Training data</span>
+<span class="n">n_trn</span> <span class="o">=</span> <span class="mi">70</span>
+<span class="n">value_ksi_trn</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">n_trn</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>            <span class="c1"># Randomly generating 70 data points within the domain of ξ (ksi)</span>
+<span class="n">x_trn</span> <span class="o">=</span> <span class="n">scaleDomTo01</span><span class="p">(</span><span class="n">value_ksi_trn</span><span class="p">,</span> <span class="n">ksi_domain</span><span class="p">)</span>      <span class="c1"># We scale our training data to [0, 1]^d, the domain of the Genz function</span>
+<span class="n">y_trn</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">x_trn</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">noise_std</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="n">n_trn</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># Testing data</span>
+<span class="n">n_tst</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">value_ksi_tst</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">n_tst</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">x_tst</span> <span class="o">=</span> <span class="n">scaleDomTo01</span><span class="p">(</span><span class="n">value_ksi_tst</span><span class="p">,</span> <span class="n">ksi_domain</span><span class="p">)</span>
+<span class="n">y_tst</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">x_tst</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>With a stochastic dimensionality of 4 (defined above) and a chosen polynomial order of 4, we construct the PC surrogate that
+will be used in both builds. By calling the <code class="docutils literal notranslate"><span class="pre">printInfo()</span></code> method from the PCRV variable, you can print the PC surrogate’s
+full basis and current coefficients, before BCS selects and retains the most significant PC terms to reduce the basis.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># (1) Construct a PC surrogate</span>
+<span class="n">order</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">pce_surr</span> <span class="o">=</span> <span class="n">PCE</span><span class="p">(</span><span class="n">func_dim</span><span class="p">,</span> <span class="n">order</span><span class="p">,</span> <span class="s1">&#39;LU&#39;</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Optional verbosity output:</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Full Basis and Current Coefficients:&quot;</span><span class="p">)</span>
+<span class="n">pce_surr</span><span class="o">.</span><span class="n">pcrv</span><span class="o">.</span><span class="n">printInfo</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of Basis Terms:&quot;</span><span class="p">,</span> <span class="n">pce_surr</span><span class="o">.</span><span class="n">get_pc_terms</span><span class="p">())</span>
+
+<span class="c1"># (1.5) Set training data</span>
+<span class="n">pce_surr</span><span class="o">.</span><span class="n">set_training_data</span><span class="p">(</span><span class="n">value_ksi_trn</span><span class="p">,</span> <span class="n">y_trn</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Constructed PC Surrogate with the following attributes:
+[&#39;LU&#39;, &#39;LU&#39;, &#39;LU&#39;, &#39;LU&#39;] PC Random Variable(pdim=1, sdim=4)
+
+Full Basis and Current Coefficients:
+[[0 0 0 0]
+ [1 0 0 0]
+ [0 1 0 0]
+ [0 0 1 0]
+ [0 0 0 1]
+ [2 0 0 0]
+ [1 1 0 0]
+ [1 0 1 0]
+ [1 0 0 1]
+ [0 2 0 0]
+ [0 1 1 0]
+ [0 1 0 1]
+ [0 0 2 0]
+ [0 0 1 1]
+ [0 0 0 2]
+ [3 0 0 0]
+ [2 1 0 0]
+ [2 0 1 0]
+ [2 0 0 1]
+ [1 2 0 0]
+ [1 1 1 0]
+ [1 1 0 1]
+ [1 0 2 0]
+ [1 0 1 1]
+ [1 0 0 2]
+ [0 3 0 0]
+ [0 2 1 0]
+ [0 2 0 1]
+ [0 1 2 0]
+ [0 1 1 1]
+ [0 1 0 2]
+ [0 0 3 0]
+ [0 0 2 1]
+ [0 0 1 2]
+ [0 0 0 3]
+ [4 0 0 0]
+ [3 1 0 0]
+ [3 0 1 0]
+ [3 0 0 1]
+ [2 2 0 0]
+ [2 1 1 0]
+ [2 1 0 1]
+ [2 0 2 0]
+ [2 0 1 1]
+ [2 0 0 2]
+ [1 3 0 0]
+ [1 2 1 0]
+ [1 2 0 1]
+ [1 1 2 0]
+ [1 1 1 1]
+ [1 1 0 2]
+ [1 0 3 0]
+ [1 0 2 1]
+ [1 0 1 2]
+ [1 0 0 3]
+ [0 4 0 0]
+ [0 3 1 0]
+ [0 3 0 1]
+ [0 2 2 0]
+ [0 2 1 1]
+ [0 2 0 2]
+ [0 1 3 0]
+ [0 1 2 1]
+ [0 1 1 2]
+ [0 1 0 3]
+ [0 0 4 0]
+ [0 0 3 1]
+ [0 0 2 2]
+ [0 0 1 3]
+ [0 0 0 4]] [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+Number of Basis Terms: [70]
+</pre></div>
+</div>
+<p>From the input parameters of our PC surrogate, we have 70 basis terms in our PCE. With 70 training points and no noise, having 70 basis terms would mean that we have a fully determined system, as the number of training points is the same as the number of basis terms. However, with the addition of noise in our training data, it becomes harder for the model to accurately fit all basis terms, leading to potential overfitting. This demonstrates the helpful role BCS might play as a choice for our regression build. As a sparse regression approach, BCS uses regularization to select only the most relevant basis terms, making it particularly effective in situations like this, where we do not have enough clear information to fit all basis terms without overfitting.</p>
+<p>In the next sections, we will explore the effects of overfitting in more detail.</p>
+</section>
+<section id="least-squares-regression">
+<h2>Least Squares Regression<a class="headerlink" href="#least-squares-regression" title="Link to this heading"></a></h2>
+<p>To start, we call the PCE class method of <code class="docutils literal notranslate"><span class="pre">build()</span></code> with no arguments to use the default regression option of least squares. Then, through <code class="docutils literal notranslate"><span class="pre">evaluate()</span></code>, we can generate model predictions for our training and testing data.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># (2) Build the linear regression object for fitting</span>
+<span class="n">pce_surr</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+
+<span class="c1"># (3) Evaluate the PC model</span>
+<span class="n">y_trn_approx</span> <span class="o">=</span> <span class="n">pce_surr</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">value_ksi_trn</span><span class="p">)</span>
+<span class="n">y_tst_approx</span> <span class="o">=</span> <span class="n">pce_surr</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">value_ksi_tst</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Regression method: lsq
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the surrogate model&#39;s output vs. the training data output</span>
+<span class="n">y_trn_mM</span> <span class="o">=</span> <span class="p">[</span><span class="n">y_trn</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span><span class="n">y_trn</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()]</span>
+
+<span class="n">fig1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig1</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.80</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">])</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_trn</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">y_trn_approx</span><span class="p">[</span><span class="s2">&quot;Y_eval&quot;</span><span class="p">],</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_trn_mM</span><span class="p">,</span><span class="n">y_trn_mM</span><span class="p">)</span> <span class="c1"># Diagonal line</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Train Data y&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Predicted y&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">16</span><span class="p">);</span>
+</pre></div>
+</div>
+<img src="../_images/sphx_glr_ex_genz_bcs_001.png" srcset="../_images/sphx_glr_ex_genz_bcs_001.png" alt="ex genz bcs" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Text(71.09722222222221, 0.5, &#39;Predicted y&#39;)
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the surrogate model&#39;s output vs. the testing data output</span>
+
+<span class="n">y_tst_mM</span> <span class="o">=</span> <span class="p">[</span><span class="n">y_tst</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span><span class="n">y_tst</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()]</span>
+
+
+<span class="n">fig2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig2</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.80</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">])</span>
+
+
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_tst</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">y_tst_approx</span><span class="p">[</span><span class="s2">&quot;Y_eval&quot;</span><span class="p">],</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_tst_mM</span><span class="p">,</span><span class="n">y_tst_mM</span><span class="p">)</span> <span class="c1"># Diagonal line</span>
+
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Test Data y&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Predicted y&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">16</span><span class="p">);</span>
+</pre></div>
+</div>
+<img src="../_images/sphx_glr_ex_genz_bcs_002.png" srcset="../_images/sphx_glr_ex_genz_bcs_002.png" alt="ex genz bcs" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Text(84.34722222222221, 0.5, &#39;Predicted y&#39;)
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Evaluate goodness of fit with RMSE</span>
+<span class="n">rmse_trn</span> <span class="o">=</span> <span class="n">root_mean_squared_error</span><span class="p">(</span><span class="n">y_trn</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">y_trn_approx</span><span class="p">[</span><span class="s2">&quot;Y_eval&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The training RMSE in the PCE LSQ approximation is </span><span class="si">%.2e</span><span class="s2">&quot;</span><span class="o">%</span><span class="n">rmse_trn</span><span class="p">)</span>
+
+<span class="n">rmse_tst</span> <span class="o">=</span> <span class="n">root_mean_squared_error</span><span class="p">(</span><span class="n">y_tst</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">y_tst_approx</span><span class="p">[</span><span class="s2">&quot;Y_eval&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The testing RMSE in the PCE LSQ approximation is </span><span class="si">%.2e</span><span class="s2">&quot;</span><span class="o">%</span><span class="n">rmse_tst</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>The training RMSE in the PCE LSQ approximation is 1.91e-15
+The testing RMSE in the PCE LSQ approximation is 9.22e-01
+</pre></div>
+</div>
+<p>The results above show us the limitations of using least squares regression to construct our surrogate. From the parity plots, we can see how the testing predictions from the LSQ regression are more spread out from the parity line, while the training predictions are extremely close to the line. Because LSQ fits all the basis terms to the training data, the model fits too closely to the noisy training dataset, and the true underlying pattern of the function is not effectively captured. Our RMSE values align with this as well: while the training RMSE is extremely low, the testing RMSE is significantly higher, as the model struggles to generalize to the unseen test data.</p>
+<p>To improve our model’s generalization, we can build our model with BCS instead. As a sparse regression method, BCS reduces the number of basis terms with which we can fit our data to, reducing the risk of overfitting.</p>
+</section>
+<section id="bcs-with-default-settings-default-eta">
+<h2>BCS with default settings (default eta)<a class="headerlink" href="#bcs-with-default-settings-default-eta" title="Link to this heading"></a></h2>
+<p>In this section, we use the same PC surrogate, <code class="docutils literal notranslate"><span class="pre">pce_surr</span></code>, for the second build. With the flag <code class="docutils literal notranslate"><span class="pre">regression='bcs'</span></code>, we choose the BCS method for the fitting. A user-defined eta of 1e-10 is also passed in.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># (2) Build the linear regression object for fitting</span>
+<span class="n">pce_surr</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">regression</span><span class="o">=</span><span class="s1">&#39;bcs&#39;</span><span class="p">,</span> <span class="n">eta</span><span class="o">=</span><span class="mf">1.e-10</span><span class="p">)</span>
+
+<span class="c1"># Optional verbosity output:</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Retained Basis and Coefficients:&quot;</span><span class="p">)</span>
+<span class="n">pce_surr</span><span class="o">.</span><span class="n">pcrv</span><span class="o">.</span><span class="n">printInfo</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of retained basis terms:&quot;</span><span class="p">,</span> <span class="n">pce_surr</span><span class="o">.</span><span class="n">get_pc_terms</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Regression method: bcs
+Retained Basis and Coefficients:
+[[0 0 0 0]
+ [1 0 0 0]
+ [0 1 0 0]
+ [0 0 0 1]
+ [2 0 0 0]
+ [0 0 1 0]
+ [1 1 0 0]
+ [2 1 0 0]
+ [0 4 0 0]
+ [0 0 3 0]
+ [2 0 2 0]
+ [1 0 0 2]
+ [2 1 1 0]
+ [1 0 2 0]
+ [1 2 1 0]
+ [1 2 0 1]
+ [1 0 0 3]] [-0.62694767 -0.37426547 -0.08797315 -0.02795855  0.04176134 -0.03783695
+  0.01375504  0.02559825 -0.01616989 -0.01758198 -0.02274328  0.01132392
+ -0.01835694 -0.00490663 -0.00938681 -0.00898039  0.00175116]
+Number of retained basis terms: [17]
+</pre></div>
+</div>
+<p>After fitting, we evaluate the PCE using our training and testing data. To analyze the model’s goodness of fit, we first plot the surrogate predictions against the training and testing data respectively.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># (3) Evaluate the PC model</span>
+<span class="n">y_trn_approx</span> <span class="o">=</span> <span class="n">pce_surr</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">value_ksi_trn</span><span class="p">)</span>
+<span class="n">y_tst_approx</span> <span class="o">=</span> <span class="n">pce_surr</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">value_ksi_tst</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the surrogate model&#39;s output vs. the training data output</span>
+<span class="n">y_trn_mM</span> <span class="o">=</span> <span class="p">[</span><span class="n">y_trn</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span><span class="n">y_trn</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()]</span>
+
+<span class="n">fig1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig1</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.80</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">])</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_trn</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">y_trn_approx</span><span class="p">[</span><span class="s2">&quot;Y_eval&quot;</span><span class="p">],</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_trn_mM</span><span class="p">,</span><span class="n">y_trn_mM</span><span class="p">)</span> <span class="c1"># Diagonal line</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Train Data y&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Predicted y&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">16</span><span class="p">);</span>
+</pre></div>
+</div>
+<img src="../_images/sphx_glr_ex_genz_bcs_003.png" srcset="../_images/sphx_glr_ex_genz_bcs_003.png" alt="ex genz bcs" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Text(71.09722222222221, 0.5, &#39;Predicted y&#39;)
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the surrogate model&#39;s output vs. the testing data output</span>
+
+<span class="n">y_tst_mM</span> <span class="o">=</span> <span class="p">[</span><span class="n">y_tst</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span><span class="n">y_tst</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()]</span>
+
+<span class="n">fig2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig2</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.80</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">])</span>
+
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_tst</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">y_tst_approx</span><span class="p">[</span><span class="s2">&quot;Y_eval&quot;</span><span class="p">],</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_tst_mM</span><span class="p">,</span><span class="n">y_tst_mM</span><span class="p">)</span> <span class="c1"># Diagonal line</span>
+
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Test Data y&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Predicted y&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">16</span><span class="p">);</span>
+
+<span class="c1"># sphinx_gallery_thumbnail_number = 2</span>
+</pre></div>
+</div>
+<img src="../_images/sphx_glr_ex_genz_bcs_004.png" srcset="../_images/sphx_glr_ex_genz_bcs_004.png" alt="ex genz bcs" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Text(71.09722222222221, 0.5, &#39;Predicted y&#39;)
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Evaluate goodness of fit with RMSE</span>
+<span class="n">rmse_trn</span> <span class="o">=</span> <span class="n">root_mean_squared_error</span><span class="p">(</span><span class="n">y_trn</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">y_trn_approx</span><span class="p">[</span><span class="s2">&quot;Y_eval&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The training RMSE in the PCE BCS approximation is </span><span class="si">%.2e</span><span class="s2">&quot;</span><span class="o">%</span><span class="n">rmse_trn</span><span class="p">)</span>
+
+<span class="n">rmse_tst</span> <span class="o">=</span> <span class="n">root_mean_squared_error</span><span class="p">(</span><span class="n">y_tst</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">y_tst_approx</span><span class="p">[</span><span class="s2">&quot;Y_eval&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The testing RMSE in the PCE BCS approximation is </span><span class="si">%.2e</span><span class="s2">&quot;</span><span class="o">%</span><span class="n">rmse_tst</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>The training RMSE in the PCE BCS approximation is 1.62e-02
+The testing RMSE in the PCE BCS approximation is 1.80e-02
+</pre></div>
+</div>
+<p>From our parity plots, we can see how BCS already generalizes better to unseen data as compared to LSQ, with reduced error in our testing data predictions. In our RMSE calculations, notice how the training error is smaller than the testing error. Though the difference in value is small, this amount is still significant as we have noise in our training data yet no noise in our testing data. That the testing error is higher than the training error suggests that overfitting is still happening within our model.</p>
+<p>In the next section, we explore how finding the optimal value of eta – the stopping criterion for the BCS parameter of gamma, determined through a Bayesian evidence maximization approach – can impact model sparsity and accuracy to avoid overfitting.</p>
+</section>
+<section id="bcs-with-optimal-eta-found-through-cross-validation">
+<h2>BCS with optimal eta (found through cross-validation)<a class="headerlink" href="#bcs-with-optimal-eta-found-through-cross-validation" title="Link to this heading"></a></h2>
+<p>Before we build our PC surrogate again with the most optimal eta, we first expose the cross-validation algorithm <code class="docutils literal notranslate"><span class="pre">optimize_eta</span></code> and its two helper functions, <code class="docutils literal notranslate"><span class="pre">kfold_split</span></code> and <code class="docutils literal notranslate"><span class="pre">kfold_cv</span></code> below. These functions have been implemented under-the-hood in the PCE surrogate class, but for the purposes of this tutorial, you may find it useful to follow along with the K-fold cross-validation method used to find the most optimal eta (the eta with the lowest validation RMSE across all of its folds).</p>
+<section id="functions-for-cross-validation-algorithm">
+<h3>Functions for cross-validation algorithm<a class="headerlink" href="#functions-for-cross-validation-algorithm" title="Link to this heading"></a></h3>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">kfold_split</span><span class="p">(</span><span class="n">nsamples</span><span class="p">,</span><span class="n">nfolds</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">13</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return dictionary of training and testing pairs using k-fold cross-validation.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        nsamples (int): Total number of training samples.</span>
+<span class="sd">        nfolds (int): Number of folds to use for k-fold cross-validation.</span>
+<span class="sd">        seed (int, optional): Random seed for reproducibility. Defaults to 13.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: A dictionary where each key is the fold number (0 to nfolds-1)</span>
+<span class="sd">        and each value is a dictionary with:</span>
+<span class="sd">            - &quot;train index&quot; (np.ndarray): Indices of training samples.</span>
+<span class="sd">            - &quot;val index&quot; (np.ndarray): Indices of validation samples.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Returns split data where each data is one fold left out</span>
+    <span class="n">KK</span><span class="o">=</span><span class="n">nfolds</span>
+    <span class="n">rn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+
+    <span class="c1"># Creating a random permutation of the samples indices list</span>
+    <span class="n">indp</span><span class="o">=</span><span class="n">rn</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">nsamples</span><span class="p">)</span>
+
+    <span class="c1"># Split the permuted indices into KK (or # folds) equal-sized chunks</span>
+    <span class="n">split_index</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array_split</span><span class="p">(</span><span class="n">indp</span><span class="p">,</span><span class="n">KK</span><span class="p">)</span>
+
+    <span class="c1"># Dictionary to hold the indices of the training and validation samples</span>
+    <span class="n">cvindices</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># create testing and training folds</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">KK</span><span class="p">):</span>
+        <span class="c1"># Iterating through the number of folds</span>
+        <span class="n">fold</span> <span class="o">=</span> <span class="n">j</span>
+        <span class="c1"># Iterate through # folds, if i != fold number,</span>
+        <span class="n">newindex</span> <span class="o">=</span> <span class="p">[</span><span class="n">split_index</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">split_index</span><span class="p">))</span> <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="p">(</span><span class="n">fold</span><span class="p">)]</span>
+        <span class="n">train_ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([],</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int64&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">newindex</span><span class="p">)):</span> <span class="n">train_ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">train_ind</span><span class="p">,</span><span class="n">newindex</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+        <span class="n">test_ind</span> <span class="o">=</span> <span class="n">split_index</span><span class="p">[</span><span class="n">fold</span><span class="p">]</span>
+        <span class="n">cvindices</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;train index&#39;</span><span class="p">:</span> <span class="n">train_ind</span><span class="p">,</span> <span class="s1">&#39;val index&#39;</span><span class="p">:</span> <span class="n">test_ind</span><span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">cvindices</span>
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">kfold_cv</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">nfolds</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">13</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Splits data into training/testing pairs for kfold cross-val</span>
+<span class="sd">    x is a data matrix of size n x d1, d1 is dim of input</span>
+<span class="sd">    y is a data matrix of size n x d2, d2 is dim of output</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">    x (np.ndarray):</span>
+<span class="sd">        Input matrix with shape (n, d1) or 1D array with shape (n,).</span>
+<span class="sd">        Each row is a sample; columns are input features.</span>
+<span class="sd">    y (np.ndarray):</span>
+<span class="sd">        Target array with shape (n,) for single-output, or (n, d2) for</span>
+<span class="sd">        multi-output. If 1D, it is internally reshaped to (n, 1) before</span>
+<span class="sd">        slicing; outputs are `np.squeeze`d per fold.</span>
+<span class="sd">    nfolds (int, optional): Number of folds for cross-validation. Defaults to 3.</span>
+<span class="sd">    seed (int, optional):</span>
+<span class="sd">        Random seed for reproducible shuffling in `kfold_split`. Defaults to 13.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span>
+        <span class="n">n</span><span class="p">,</span><span class="n">d1</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">n</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">ynew</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ynew</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="n">ynew</span> <span class="o">=</span> <span class="n">ynew</span><span class="o">.</span><span class="n">T</span> <span class="c1"># change to shape (n,1)</span>
+    <span class="n">_</span><span class="p">,</span><span class="n">d2</span> <span class="o">=</span> <span class="n">ynew</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">cv_idx</span> <span class="o">=</span> <span class="n">kfold_split</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">nfolds</span><span class="p">,</span><span class="n">seed</span><span class="p">)</span>
+
+    <span class="n">kfold_data</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">cv_idx</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">kfold_data</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;xtrain&#39;</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="n">cv_idx</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="s1">&#39;train index&#39;</span><span class="p">]],</span>
+        <span class="s1">&#39;xval&#39;</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="n">cv_idx</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="s1">&#39;val index&#39;</span><span class="p">]],</span>
+        <span class="s1">&#39;ytrain&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">ynew</span><span class="p">[</span><span class="n">cv_idx</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="s1">&#39;train index&#39;</span><span class="p">]]),</span>
+        <span class="s1">&#39;yval&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">ynew</span><span class="p">[</span><span class="n">cv_idx</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="s1">&#39;val index&#39;</span><span class="p">]])</span>
+        <span class="p">}</span> <span class="c1"># use squeeze to return 1d array</span>
+
+        <span class="c1"># set train and test to the same if 1 fold</span>
+        <span class="k">if</span> <span class="n">nfolds</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">kfold_data</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="s1">&#39;xtrain&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kfold_data</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="s1">&#39;xval&#39;</span><span class="p">]</span>
+            <span class="n">kfold_data</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="s1">&#39;ytrain&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kfold_data</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="s1">&#39;yval&#39;</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">kfold_data</span>
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">optimize_eta</span><span class="p">(</span><span class="n">pce</span><span class="p">,</span> <span class="n">etas</span><span class="p">,</span> <span class="n">nfolds</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Choose the optimum eta for Bayesian compressive sensing. Calculates the RMSE</span>
+<span class="sd">        for each eta for a specified number of folds. Selects the eta with the lowest</span>
+<span class="sd">        RMSE after averaging the RMSEs over the folds.</span>
+
+<span class="sd">    Input:</span>
+<span class="sd">        y:             1D numpy array (vector) with function, evaluated at the</span>
+<span class="sd">                            sample points [#samples,]</span>
+<span class="sd">        x:             N-dimensional NumPy array with sample points [#samples,</span>
+<span class="sd">                            #dimensions]</span>
+<span class="sd">        etas:          NumPy array or list with the threshold for stopping the</span>
+<span class="sd">                            algorithm. Smaller values retain more nonzero</span>
+<span class="sd">                            coefficients</span>
+<span class="sd">        verbose:       Flag for print statements</span>
+<span class="sd">        plot:          Flag for whether to generate a plot for eta optimization</span>
+
+<span class="sd">    Output:</span>
+<span class="sd">        eta_opt:      Optimum eta</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Split data in k folds -&gt; Get dictionary of data split in training + testing folds</span>
+    <span class="n">kfold_data</span> <span class="o">=</span> <span class="n">kfold_cv</span><span class="p">(</span><span class="n">pce</span><span class="o">.</span><span class="n">_x_train</span><span class="p">,</span> <span class="n">pce</span><span class="o">.</span><span class="n">_y_train</span><span class="p">,</span> <span class="n">nfolds</span><span class="p">)</span>
+
+    <span class="c1"># Each value has data for 1 fold. Each value is a list of the RMSEs for each possible eta in the fold.</span>
+    <span class="n">RMSE_list_per_fold_tr</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Same but for testing data</span>
+    <span class="n">RMSE_list_per_fold_test</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Make a copy of the PCE object to run the cross-validation algorithm on</span>
+    <span class="n">pce_copy</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">pce</span><span class="p">)</span>
+    <span class="n">pce_copy</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># Loop through each fold</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nfolds</span><span class="p">):</span>
+
+        <span class="c1"># Get the training and validation data</span>
+        <span class="n">x_tr</span> <span class="o">=</span> <span class="n">kfold_data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;xtrain&#39;</span><span class="p">]</span>
+        <span class="n">y_tr</span> <span class="o">=</span> <span class="n">kfold_data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;ytrain&#39;</span><span class="p">]</span>
+        <span class="n">x_test</span> <span class="o">=</span> <span class="n">kfold_data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;xval&#39;</span><span class="p">]</span>
+        <span class="n">y_test</span> <span class="o">=</span> <span class="n">kfold_data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;yval&#39;</span><span class="p">]</span>
+
+        <span class="c1"># As we conduct BCS for this fold with each separate eta, the RMSEs will be added to these lists</span>
+        <span class="n">RMSE_per_eta_tr</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">RMSE_per_eta_test</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Set the x and y training data for the copied PCE object</span>
+        <span class="n">pce_copy</span><span class="o">.</span><span class="n">set_training_data</span><span class="p">(</span><span class="n">x_tr</span><span class="p">,</span> <span class="n">y_tr</span><span class="p">)</span>
+
+        <span class="c1"># Loop through each eta</span>
+        <span class="k">for</span> <span class="n">eta</span> <span class="ow">in</span> <span class="n">etas</span><span class="p">:</span>
+
+            <span class="c1"># Conduct the BCS fitting. The object is automatically updated with new multiindex and coefficients received from the fitting.</span>
+            <span class="n">cfs</span> <span class="o">=</span> <span class="n">pce_copy</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">regression</span> <span class="o">=</span> <span class="s1">&#39;bcs&#39;</span><span class="p">,</span> <span class="n">eta</span><span class="o">=</span><span class="n">eta</span><span class="p">)</span>
+
+            <span class="c1"># Evaluate the PCE object at the training and validation points</span>
+            <span class="n">y_tr_eval</span> <span class="o">=</span> <span class="p">(</span><span class="n">pce_copy</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x_tr</span><span class="p">))[</span><span class="s1">&#39;Y_eval&#39;</span><span class="p">]</span>
+            <span class="n">y_test_eval</span> <span class="o">=</span> <span class="p">(</span><span class="n">pce_copy</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x_test</span><span class="p">))[</span><span class="s1">&#39;Y_eval&#39;</span><span class="p">]</span>
+
+            <span class="c1"># Print statement for verbose flag</span>
+            <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fold &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;, eta &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">eta</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;, &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cfs</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot; terms retained out of a full basis of size &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pce</span><span class="o">.</span><span class="n">pcrv</span><span class="o">.</span><span class="n">mindices</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+
+            <span class="c1"># Calculate the RMSEs for the training and validation points.</span>
+            <span class="c1"># Append the values into the list of etas per fold.</span>
+            <span class="n">MSE</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">y_tr</span><span class="p">,</span> <span class="n">y_tr_eval</span><span class="p">))</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+            <span class="n">RMSE</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">MSE</span><span class="p">)</span>
+            <span class="n">RMSE_per_eta_tr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RMSE</span><span class="p">)</span>
+
+            <span class="n">MSE</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_test_eval</span><span class="p">))</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+            <span class="n">RMSE</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">MSE</span><span class="p">)</span>
+            <span class="n">RMSE_per_eta_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RMSE</span><span class="p">)</span>
+
+        <span class="c1"># Now, append the fold&#39;s list of RMSEs for each eta into the list carrying the lists for all folds</span>
+        <span class="n">RMSE_list_per_fold_tr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RMSE_per_eta_tr</span><span class="p">)</span>
+        <span class="n">RMSE_list_per_fold_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RMSE_per_eta_test</span><span class="p">)</span>
+
+    <span class="c1"># After compiling the RMSE data for each eta from all the folds, we find the eta with the lowest validation RMSE to be our optimal eta.</span>
+    <span class="c1"># Compute the average and standard deviation of the training and testing RMSEs over the folds</span>
+    <span class="n">avg_RMSE_tr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">RMSE_list_per_fold_tr</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">avg_RMSE_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">RMSE_list_per_fold_test</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">std_RMSE_tr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">RMSE_list_per_fold_tr</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">std_RMSE_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">RMSE_list_per_fold_test</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># Choose the eta with lowest RMSE across all folds&#39; testing data</span>
+    <span class="n">eta_opt</span> <span class="o">=</span> <span class="n">etas</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">avg_RMSE_test</span><span class="p">)]</span>
+
+    <span class="c1"># Plot RMSE vs. eta for training and testing RMSE</span>
+    <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
+
+        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">etas</span><span class="p">,</span> <span class="n">avg_RMSE_tr</span><span class="p">,</span> <span class="n">xerr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">std_RMSE_tr</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Training&#39;</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">etas</span><span class="p">,</span> <span class="n">avg_RMSE_test</span><span class="p">,</span> <span class="n">xerr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">std_RMSE_test</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Validation&#39;</span><span class="p">))</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">eta_opt</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">avg_RMSE_test</span><span class="p">),</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Optimum&quot;</span><span class="p">))</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Eta&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;RMSE&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+        <span class="c1"># Change size of tick labels</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Create legend</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Save</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;eta_opt.pdf&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;pdf&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">1200</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">eta_opt</span>
+</pre></div>
+</div>
+</section>
+<section id="bcs-build-with-the-most-optimal-eta">
+<h3>BCS build with the most optimal eta<a class="headerlink" href="#bcs-build-with-the-most-optimal-eta" title="Link to this heading"></a></h3>
+<p>Instead of using a default eta, here we call the cross-validation algorithm, <code class="docutils literal notranslate"><span class="pre">optimize_eta()</span></code>, to choose the most optimal eta from a range of etas given below.</p>
+<ul class="simple">
+<li><p>With the flag <code class="docutils literal notranslate"><span class="pre">plot=True</span></code>, the CV algorithm produces a graph of the training and testing (validation) data’s RMSE values for each eta. The eta with the smallest RMSE for the validation data is the one chosen as the optimal eta.</p></li>
+</ul>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># We first create a list of possible etas to pass in: [1e-16, 1e-15, ... , 1e-2, 1e-1, 1]</span>
+<span class="n">etas</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="mi">10</span><span class="p">,[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">16</span><span class="p">)])</span>
+
+<span class="c1"># Then, we call the function to choose the optimal eta:</span>
+<span class="n">eta_opt</span> <span class="o">=</span> <span class="n">optimize_eta</span><span class="p">(</span><span class="n">pce_surr</span><span class="p">,</span> <span class="n">etas</span><span class="p">,</span> <span class="n">nfolds</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../_images/sphx_glr_ex_genz_bcs_005.png" srcset="../_images/sphx_glr_ex_genz_bcs_005.png" alt="ex genz bcs" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Fold 1, eta 1.0, 3 terms retained out of a full basis of size 17
+Fold 1, eta 0.1, 3 terms retained out of a full basis of size 17
+Fold 1, eta 0.01, 4 terms retained out of a full basis of size 17
+Fold 1, eta 0.001, 5 terms retained out of a full basis of size 17
+Fold 1, eta 0.0001, 9 terms retained out of a full basis of size 17
+Fold 1, eta 1e-05, 12 terms retained out of a full basis of size 17
+Fold 1, eta 1e-06, 13 terms retained out of a full basis of size 17
+Fold 1, eta 1e-07, 16 terms retained out of a full basis of size 17
+Fold 1, eta 1e-08, 16 terms retained out of a full basis of size 17
+Fold 1, eta 1e-09, 16 terms retained out of a full basis of size 17
+Fold 1, eta 1e-10, 16 terms retained out of a full basis of size 17
+Fold 1, eta 1e-11, 16 terms retained out of a full basis of size 17
+Fold 1, eta 1e-12, 16 terms retained out of a full basis of size 17
+Fold 1, eta 1e-13, 16 terms retained out of a full basis of size 17
+Fold 1, eta 1e-14, 16 terms retained out of a full basis of size 17
+Fold 1, eta 1e-15, 16 terms retained out of a full basis of size 17
+Fold 2, eta 1.0, 3 terms retained out of a full basis of size 17
+Fold 2, eta 0.1, 3 terms retained out of a full basis of size 17
+Fold 2, eta 0.01, 4 terms retained out of a full basis of size 17
+Fold 2, eta 0.001, 5 terms retained out of a full basis of size 17
+Fold 2, eta 0.0001, 9 terms retained out of a full basis of size 17
+Fold 2, eta 1e-05, 12 terms retained out of a full basis of size 17
+Fold 2, eta 1e-06, 16 terms retained out of a full basis of size 17
+Fold 2, eta 1e-07, 18 terms retained out of a full basis of size 17
+Fold 2, eta 1e-08, 18 terms retained out of a full basis of size 17
+Fold 2, eta 1e-09, 18 terms retained out of a full basis of size 17
+Fold 2, eta 1e-10, 18 terms retained out of a full basis of size 17
+Fold 2, eta 1e-11, 18 terms retained out of a full basis of size 17
+Fold 2, eta 1e-12, 18 terms retained out of a full basis of size 17
+Fold 2, eta 1e-13, 18 terms retained out of a full basis of size 17
+Fold 2, eta 1e-14, 18 terms retained out of a full basis of size 17
+Fold 2, eta 1e-15, 18 terms retained out of a full basis of size 17
+Fold 3, eta 1.0, 3 terms retained out of a full basis of size 17
+Fold 3, eta 0.1, 3 terms retained out of a full basis of size 17
+Fold 3, eta 0.01, 4 terms retained out of a full basis of size 17
+Fold 3, eta 0.001, 8 terms retained out of a full basis of size 17
+Fold 3, eta 0.0001, 9 terms retained out of a full basis of size 17
+Fold 3, eta 1e-05, 12 terms retained out of a full basis of size 17
+Fold 3, eta 1e-06, 14 terms retained out of a full basis of size 17
+Fold 3, eta 1e-07, 17 terms retained out of a full basis of size 17
+Fold 3, eta 1e-08, 17 terms retained out of a full basis of size 17
+Fold 3, eta 1e-09, 18 terms retained out of a full basis of size 17
+Fold 3, eta 1e-10, 18 terms retained out of a full basis of size 17
+Fold 3, eta 1e-11, 18 terms retained out of a full basis of size 17
+Fold 3, eta 1e-12, 18 terms retained out of a full basis of size 17
+Fold 3, eta 1e-13, 18 terms retained out of a full basis of size 17
+Fold 3, eta 1e-14, 18 terms retained out of a full basis of size 17
+Fold 3, eta 1e-15, 18 terms retained out of a full basis of size 17
+Fold 4, eta 1.0, 3 terms retained out of a full basis of size 17
+Fold 4, eta 0.1, 3 terms retained out of a full basis of size 17
+Fold 4, eta 0.01, 4 terms retained out of a full basis of size 17
+Fold 4, eta 0.001, 5 terms retained out of a full basis of size 17
+Fold 4, eta 0.0001, 11 terms retained out of a full basis of size 17
+Fold 4, eta 1e-05, 11 terms retained out of a full basis of size 17
+Fold 4, eta 1e-06, 16 terms retained out of a full basis of size 17
+Fold 4, eta 1e-07, 17 terms retained out of a full basis of size 17
+Fold 4, eta 1e-08, 17 terms retained out of a full basis of size 17
+Fold 4, eta 1e-09, 17 terms retained out of a full basis of size 17
+Fold 4, eta 1e-10, 17 terms retained out of a full basis of size 17
+Fold 4, eta 1e-11, 17 terms retained out of a full basis of size 17
+Fold 4, eta 1e-12, 17 terms retained out of a full basis of size 17
+Fold 4, eta 1e-13, 17 terms retained out of a full basis of size 17
+Fold 4, eta 1e-14, 17 terms retained out of a full basis of size 17
+Fold 4, eta 1e-15, 17 terms retained out of a full basis of size 17
+Fold 5, eta 1.0, 3 terms retained out of a full basis of size 17
+Fold 5, eta 0.1, 3 terms retained out of a full basis of size 17
+Fold 5, eta 0.01, 4 terms retained out of a full basis of size 17
+Fold 5, eta 0.001, 7 terms retained out of a full basis of size 17
+Fold 5, eta 0.0001, 10 terms retained out of a full basis of size 17
+Fold 5, eta 1e-05, 12 terms retained out of a full basis of size 17
+Fold 5, eta 1e-06, 14 terms retained out of a full basis of size 17
+Fold 5, eta 1e-07, 14 terms retained out of a full basis of size 17
+Fold 5, eta 1e-08, 14 terms retained out of a full basis of size 17
+Fold 5, eta 1e-09, 14 terms retained out of a full basis of size 17
+Fold 5, eta 1e-10, 14 terms retained out of a full basis of size 17
+Fold 5, eta 1e-11, 14 terms retained out of a full basis of size 17
+Fold 5, eta 1e-12, 14 terms retained out of a full basis of size 17
+Fold 5, eta 1e-13, 14 terms retained out of a full basis of size 17
+Fold 5, eta 1e-14, 14 terms retained out of a full basis of size 17
+Fold 5, eta 1e-15, 14 terms retained out of a full basis of size 17
+Fold 6, eta 1.0, 3 terms retained out of a full basis of size 17
+Fold 6, eta 0.1, 3 terms retained out of a full basis of size 17
+Fold 6, eta 0.01, 4 terms retained out of a full basis of size 17
+Fold 6, eta 0.001, 7 terms retained out of a full basis of size 17
+Fold 6, eta 0.0001, 11 terms retained out of a full basis of size 17
+Fold 6, eta 1e-05, 11 terms retained out of a full basis of size 17
+Fold 6, eta 1e-06, 16 terms retained out of a full basis of size 17
+Fold 6, eta 1e-07, 16 terms retained out of a full basis of size 17
+Fold 6, eta 1e-08, 16 terms retained out of a full basis of size 17
+Fold 6, eta 1e-09, 17 terms retained out of a full basis of size 17
+Fold 6, eta 1e-10, 17 terms retained out of a full basis of size 17
+Fold 6, eta 1e-11, 17 terms retained out of a full basis of size 17
+Fold 6, eta 1e-12, 17 terms retained out of a full basis of size 17
+Fold 6, eta 1e-13, 17 terms retained out of a full basis of size 17
+Fold 6, eta 1e-14, 17 terms retained out of a full basis of size 17
+Fold 6, eta 1e-15, 17 terms retained out of a full basis of size 17
+Fold 7, eta 1.0, 3 terms retained out of a full basis of size 17
+Fold 7, eta 0.1, 3 terms retained out of a full basis of size 17
+Fold 7, eta 0.01, 4 terms retained out of a full basis of size 17
+Fold 7, eta 0.001, 4 terms retained out of a full basis of size 17
+Fold 7, eta 0.0001, 7 terms retained out of a full basis of size 17
+Fold 7, eta 1e-05, 13 terms retained out of a full basis of size 17
+Fold 7, eta 1e-06, 13 terms retained out of a full basis of size 17
+Fold 7, eta 1e-07, 13 terms retained out of a full basis of size 17
+Fold 7, eta 1e-08, 13 terms retained out of a full basis of size 17
+Fold 7, eta 1e-09, 13 terms retained out of a full basis of size 17
+Fold 7, eta 1e-10, 13 terms retained out of a full basis of size 17
+Fold 7, eta 1e-11, 13 terms retained out of a full basis of size 17
+Fold 7, eta 1e-12, 13 terms retained out of a full basis of size 17
+Fold 7, eta 1e-13, 13 terms retained out of a full basis of size 17
+Fold 7, eta 1e-14, 13 terms retained out of a full basis of size 17
+Fold 7, eta 1e-15, 13 terms retained out of a full basis of size 17
+Fold 8, eta 1.0, 3 terms retained out of a full basis of size 17
+Fold 8, eta 0.1, 3 terms retained out of a full basis of size 17
+Fold 8, eta 0.01, 4 terms retained out of a full basis of size 17
+Fold 8, eta 0.001, 7 terms retained out of a full basis of size 17
+Fold 8, eta 0.0001, 10 terms retained out of a full basis of size 17
+Fold 8, eta 1e-05, 11 terms retained out of a full basis of size 17
+Fold 8, eta 1e-06, 15 terms retained out of a full basis of size 17
+Fold 8, eta 1e-07, 16 terms retained out of a full basis of size 17
+Fold 8, eta 1e-08, 16 terms retained out of a full basis of size 17
+Fold 8, eta 1e-09, 16 terms retained out of a full basis of size 17
+Fold 8, eta 1e-10, 16 terms retained out of a full basis of size 17
+Fold 8, eta 1e-11, 16 terms retained out of a full basis of size 17
+Fold 8, eta 1e-12, 16 terms retained out of a full basis of size 17
+Fold 8, eta 1e-13, 16 terms retained out of a full basis of size 17
+Fold 8, eta 1e-14, 16 terms retained out of a full basis of size 17
+Fold 8, eta 1e-15, 16 terms retained out of a full basis of size 17
+Fold 9, eta 1.0, 3 terms retained out of a full basis of size 17
+Fold 9, eta 0.1, 3 terms retained out of a full basis of size 17
+Fold 9, eta 0.01, 4 terms retained out of a full basis of size 17
+Fold 9, eta 0.001, 7 terms retained out of a full basis of size 17
+Fold 9, eta 0.0001, 8 terms retained out of a full basis of size 17
+Fold 9, eta 1e-05, 12 terms retained out of a full basis of size 17
+Fold 9, eta 1e-06, 14 terms retained out of a full basis of size 17
+Fold 9, eta 1e-07, 15 terms retained out of a full basis of size 17
+Fold 9, eta 1e-08, 15 terms retained out of a full basis of size 17
+Fold 9, eta 1e-09, 15 terms retained out of a full basis of size 17
+Fold 9, eta 1e-10, 15 terms retained out of a full basis of size 17
+Fold 9, eta 1e-11, 15 terms retained out of a full basis of size 17
+Fold 9, eta 1e-12, 15 terms retained out of a full basis of size 17
+Fold 9, eta 1e-13, 15 terms retained out of a full basis of size 17
+Fold 9, eta 1e-14, 15 terms retained out of a full basis of size 17
+Fold 9, eta 1e-15, 15 terms retained out of a full basis of size 17
+Fold 10, eta 1.0, 3 terms retained out of a full basis of size 17
+Fold 10, eta 0.1, 3 terms retained out of a full basis of size 17
+Fold 10, eta 0.01, 4 terms retained out of a full basis of size 17
+Fold 10, eta 0.001, 4 terms retained out of a full basis of size 17
+Fold 10, eta 0.0001, 9 terms retained out of a full basis of size 17
+Fold 10, eta 1e-05, 14 terms retained out of a full basis of size 17
+Fold 10, eta 1e-06, 14 terms retained out of a full basis of size 17
+Fold 10, eta 1e-07, 14 terms retained out of a full basis of size 17
+Fold 10, eta 1e-08, 14 terms retained out of a full basis of size 17
+Fold 10, eta 1e-09, 14 terms retained out of a full basis of size 17
+Fold 10, eta 1e-10, 14 terms retained out of a full basis of size 17
+Fold 10, eta 1e-11, 14 terms retained out of a full basis of size 17
+Fold 10, eta 1e-12, 14 terms retained out of a full basis of size 17
+Fold 10, eta 1e-13, 14 terms retained out of a full basis of size 17
+Fold 10, eta 1e-14, 14 terms retained out of a full basis of size 17
+Fold 10, eta 1e-15, 14 terms retained out of a full basis of size 17
+</pre></div>
+</div>
+<p>From our eta plot above, we can see that our most optimal eta falls at <span class="math notranslate nohighlight">\(1 \times 10^{-10}\)</span>, where the validation error is the lowest. While this indicates that the model performs well at this eta value, we can still observe a tendency towards overfitting in the model. For larger eta values, the training and validation RMSE lines are close together, suggesting that the model is performing similarly on both seen and unseen datasets, as would be desired. However, as eta decreases, the training RMSE falls while the validation RMSE rises, highlighting a region where overfitting occurs.</p>
+<p>This behavior is expected because smaller eta values retain more basis terms, increasing the model’s degrees of freedom. While this added flexibility allows the model to fit the training data more closely, it also makes the model more prone to fitting noise rather than capturing the true underlying function. Selecting the most optimal eta of <span class="math notranslate nohighlight">\(1 \times 10^{-4}\)</span>, as compared to the earlier user-defined eta of <span class="math notranslate nohighlight">\(1 \times 10^{-10}\)</span>, allows us to balance model complexity and generalization.</p>
+<p>Now, with the optimum eta obtained, we can run the fitting again and produce parity plots for our predicted output.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build the linear regression object for fitting</span>
+<span class="n">pce_surr</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">regression</span><span class="o">=</span><span class="s1">&#39;bcs&#39;</span><span class="p">,</span> <span class="n">eta</span><span class="o">=</span><span class="n">eta_opt</span><span class="p">)</span>
+
+<span class="c1"># Optional verbosity output:</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Retained Basis and Coefficients:&quot;</span><span class="p">)</span>
+<span class="n">pce_surr</span><span class="o">.</span><span class="n">pcrv</span><span class="o">.</span><span class="n">printInfo</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of retained basis terms:&quot;</span><span class="p">,</span> <span class="n">pce_surr</span><span class="o">.</span><span class="n">get_pc_terms</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Regression method: bcs
+Retained Basis and Coefficients:
+[[0 0 0 0]
+ [1 0 0 0]
+ [0 1 0 0]
+ [0 0 0 1]
+ [2 0 0 0]
+ [0 0 1 0]
+ [1 1 0 0]
+ [2 1 0 0]] [-0.62783727 -0.37134989 -0.08735439 -0.02919352  0.0480559  -0.03471433
+  0.0232746   0.0196456 ]
+Number of retained basis terms: [8]
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Evaluate the PC model with training and testing data</span>
+<span class="n">y_trn_approx</span> <span class="o">=</span> <span class="n">pce_surr</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">value_ksi_trn</span><span class="p">)</span>
+<span class="n">y_tst_approx</span> <span class="o">=</span> <span class="n">pce_surr</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">value_ksi_tst</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the surrogate model&#39;s output vs. the training data output</span>
+<span class="n">y_tst_mM</span> <span class="o">=</span> <span class="p">[</span><span class="n">y_trn</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span><span class="n">y_trn</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()]</span>
+
+<span class="n">fig2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig2</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.80</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">])</span>
+
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_trn</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">y_trn_approx</span><span class="p">[</span><span class="s2">&quot;Y_eval&quot;</span><span class="p">],</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_tst_mM</span><span class="p">,</span><span class="n">y_tst_mM</span><span class="p">)</span> <span class="c1"># Diagonal line</span>
+
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Train Data y&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Predicted y&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">16</span><span class="p">);</span>
+</pre></div>
+</div>
+<img src="../_images/sphx_glr_ex_genz_bcs_006.png" srcset="../_images/sphx_glr_ex_genz_bcs_006.png" alt="ex genz bcs" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Text(71.09722222222221, 0.5, &#39;Predicted y&#39;)
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the surrogate model&#39;s output vs. the testing data output</span>
+<span class="n">y_tst_mM</span> <span class="o">=</span> <span class="p">[</span><span class="n">y_tst</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span><span class="n">y_tst</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()]</span>
+
+<span class="n">fig2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig2</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.80</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">])</span>
+
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_tst</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">y_tst_approx</span><span class="p">[</span><span class="s2">&quot;Y_eval&quot;</span><span class="p">],</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_tst_mM</span><span class="p">,</span><span class="n">y_tst_mM</span><span class="p">)</span> <span class="c1"># Diagonal line</span>
+
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Test Data y&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Predicted y&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">16</span><span class="p">);</span>
+</pre></div>
+</div>
+<img src="../_images/sphx_glr_ex_genz_bcs_007.png" srcset="../_images/sphx_glr_ex_genz_bcs_007.png" alt="ex genz bcs" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Text(71.09722222222221, 0.5, &#39;Predicted y&#39;)
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Evaluate goodness of fit with RMSE</span>
+<span class="n">rmse_trn</span> <span class="o">=</span> <span class="n">root_mean_squared_error</span><span class="p">(</span><span class="n">y_trn</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">y_trn_approx</span><span class="p">[</span><span class="s2">&quot;Y_eval&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The training RMSE in the PCE BCS approximation is </span><span class="si">%.2e</span><span class="s2">&quot;</span><span class="o">%</span><span class="n">rmse_trn</span><span class="p">)</span>
+
+<span class="n">rmse_tst</span> <span class="o">=</span> <span class="n">root_mean_squared_error</span><span class="p">(</span><span class="n">y_tst</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">y_tst_approx</span><span class="p">[</span><span class="s2">&quot;Y_eval&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The testing RMSE in the PCE BCS approximation is </span><span class="si">%.2e</span><span class="s2">&quot;</span><span class="o">%</span><span class="n">rmse_tst</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>The training RMSE in the PCE BCS approximation is 2.02e-02
+The testing RMSE in the PCE BCS approximation is 1.21e-02
+</pre></div>
+</div>
+<p>In these final RMSE calculations, we can see how our training RMSE has decreased from 1.80e-02 to 1.21e-02 by building with the most optimal eta. This indicates that our model has improved in generalization and is performing better on unseen data. Though our training error is still larger than our testing error, this can be attributed to the lack of noise in our testing data, while noise is present in our training data. While the optimal eta reduces overfitting and improves generalization, the noise in our training data still impacts the training error and remains an important consideration during our evaluation of the model performance.</p>
+<p>While this demonstration calls the cross-validation algorithm as a function outside of the PCE class, these methods have been implemented in PyTUQ through the PCE class. The example “Polynomial Chaos Expansion Construction” demonstrates how to call the eta optimization methods directly from the PCE class.</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 10.810 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-ex-genz-bcs-py">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/2dc907937b15ad2d180a99bf8dd8e568/ex_genz_bcs.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">ex_genz_bcs.ipynb</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/42ea783ab0d2e7de641ab72f1e8ef15b/ex_genz_bcs.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">ex_genz_bcs.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-zip docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/17bd0476ad16b4761dbbad2f865f31fe/ex_genz_bcs.zip"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">zipped:</span> <span class="pre">ex_genz_bcs.zip</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ex_nn.html" class="btn btn-neutral float-left" title="Residual Neural Network Construction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../autoapi/index.html" class="btn btn-neutral float-right" title="Section Navigation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

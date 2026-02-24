@@ -1,0 +1,178 @@
+pytuq.minf.likelihoods
+======================
+
+.. py:module:: pytuq.minf.likelihoods
+
+.. autoapi-nested-parse::
+
+   Module for various likelihood options.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.minf.likelihoods.Likelihood
+   pytuq.minf.likelihoods.Likelihood_dummy
+   pytuq.minf.likelihoods.Likelihood_classical
+   pytuq.minf.likelihoods.Likelihood_logclassical
+   pytuq.minf.likelihoods.Likelihood_abc
+   pytuq.minf.likelihoods.Likelihood_gausmarg
+
+
+Module Contents
+---------------
+
+.. py:class:: Likelihood(infer)
+
+   Bases: :py:obj:`object`
+
+
+   Base class for likelihood evaluation.
+
+   .. attribute:: infer
+
+      Inference object containing necessary info for likelihood evaluation.
+
+      :type: infer.Infer
+
+
+   .. py:attribute:: infer
+
+
+   .. py:method:: eval(pp)
+      :abstractmethod:
+
+
+      Evaluation of the likelihood. Not implemented in the base class.
+
+      :param pp: Input array of the size `p`, the dimensionality of the chain.
+      :type pp: np.ndarray
+
+      :raises NotImplementedError: This should be implemented in children classes.
+
+
+
+.. py:class:: Likelihood_dummy(infer)
+
+   Bases: :py:obj:`Likelihood`
+
+
+   Dummy likelihood class. Useful for testing.
+
+
+   .. py:method:: eval(pp)
+
+      Evaluation of the likelihood. Not implemented in the base class.
+
+      :param pp: Input array of the size `p`, the dimensionality of the chain.
+      :type pp: np.ndarray
+
+      :raises NotImplementedError: This should be implemented in children classes.
+
+
+
+.. py:class:: Likelihood_classical(infer)
+
+   Bases: :py:obj:`Likelihood`
+
+
+   Classical likelihood class.
+
+
+   .. py:method:: eval(pp)
+
+      Evaluates the log-likelihood.
+
+      :param pp: Input array of the size `p`, the dimensionality of the chain.
+      :type pp: np.ndarray
+
+      :returns: Value of the log-likelihood.
+      :rtype: float
+
+
+
+.. py:class:: Likelihood_logclassical(infer)
+
+   Bases: :py:obj:`Likelihood`
+
+
+   Log-classical likelihood.
+
+
+   .. py:method:: eval(pp)
+
+      Evaluates the log-likelihood.
+
+      :param pp: Input array of the size `p`, the dimensionality of the chain.
+      :type pp: np.ndarray
+
+      :returns: Value of the log-likelihood.
+      :rtype: float
+
+
+
+.. py:class:: Likelihood_abc(infer, abceps=0.01, abcalpha=1.0)
+
+   Bases: :py:obj:`Likelihood`
+
+
+   ABC likelihood.
+
+   .. attribute:: abceps
+
+      ABC tolerance parameter :math:`\epsilon`.
+
+      :type: float
+
+   .. attribute:: abcalpha
+
+      ABC stdev/residual factor :math:`\alpha`.
+
+      :type: float
+
+
+   .. py:attribute:: abceps
+      :value: 0.01
+
+
+
+   .. py:attribute:: abcalpha
+      :value: 1.0
+
+
+
+   .. py:method:: eval(pp)
+
+      Evaluates the log-likelihood.
+
+      :param pp: Input array of the size `p`, the dimensionality of the chain.
+      :type pp: np.ndarray
+
+      :returns: Value of the log-likelihood.
+      :rtype: float
+
+
+
+.. py:class:: Likelihood_gausmarg(infer)
+
+   Bases: :py:obj:`Likelihood`
+
+
+   IID Likelihood.
+
+
+   .. py:method:: eval(pp)
+
+      Evaluates the log-likelihood.
+
+      :param pp: Input array of the size `p`, the dimensionality of the chain.
+      :type pp: np.ndarray
+
+      :returns: Value of the log-likelihood.
+      :rtype: float
+
+
+

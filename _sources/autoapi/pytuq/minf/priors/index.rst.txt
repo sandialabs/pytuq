@@ -1,0 +1,174 @@
+pytuq.minf.priors
+=================
+
+.. py:module:: pytuq.minf.priors
+
+.. autoapi-nested-parse::
+
+   Module for prior classes
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.minf.priors.Prior
+   pytuq.minf.priors.Prior_uniform
+   pytuq.minf.priors.Prior_normal
+
+
+Module Contents
+---------------
+
+.. py:class:: Prior(infer)
+
+   Bases: :py:obj:`object`
+
+
+   Base class for prior evaluation.
+
+   .. attribute:: infer
+
+      Inference object containing necessary info for prior evaluation.
+
+      :type: infer.Infer
+
+   .. attribute:: prtype
+
+      Prior name. Currently, 'uniform' or 'normal' are implemented.
+
+      :type: str
+
+   .. attribute:: mean
+
+      Prior mean array.
+
+      :type: np.ndarray
+
+
+   .. py:attribute:: infer
+
+
+   .. py:attribute:: prtype
+      :value: None
+
+
+
+   .. py:attribute:: mean
+      :value: None
+
+
+
+   .. py:method:: eval(pp)
+      :abstractmethod:
+
+
+      Evaluation of the prior. Not implemented in the base class.
+
+      :param pp: Input array of the size `p`, the dimensionality of the chain.
+      :type pp: np.ndarray
+
+      :raises NotImplementedError: This should be implemented in children classes.
+
+
+
+   .. py:method:: computeDataPrior(pp)
+
+      Computes the part of the prior for the parameter relevant to data noise, in case the chain includes it.
+
+      :param pp: Input array of the size `p`, the dimensionality of the chain.
+      :type pp: np.ndarray
+
+      :returns: Returns log-prior corresponding to parameter controlling data noise.
+      :rtype: float
+
+
+
+.. py:class:: Prior_uniform(infer, domain=None)
+
+   Bases: :py:obj:`Prior`
+
+
+   Uniform prior class.
+
+   .. attribute:: domain
+
+      A 2d array of size `(d,2)`. Can be None, for uninformative priors with no range constraint.
+
+      :type: np.ndarray
+
+   .. attribute:: factor
+
+      A standard deviation factor outside of which the prior returns very low value. For now, we use :math:`f=3` for HG, and :math:`f=\sqrt{3}` for LU. This is somewhat empiric and should be used with care.
+
+      :type: float
+
+   .. note:: Note that unlike normal prior, this is *not* a uniform prior on all parameters. This is somewhat empirical rejection mechanism if embedded parameter values lead to values outside given ranges.
+
+
+   .. py:attribute:: prtype
+      :value: 'uniform'
+
+
+
+   .. py:attribute:: domain
+      :value: None
+
+
+
+   .. py:method:: eval(pp)
+
+      Evaluate the log-prior.
+
+      :param pp: Input array of the size `p`, the dimensionality of the chain.
+      :type pp: np.ndarray
+
+      :returns: Value of the log-prior.
+      :rtype: float
+
+
+
+.. py:class:: Prior_normal(infer, mean=None, var=None)
+
+   Bases: :py:obj:`Prior`
+
+
+   Normal prior class.
+
+   .. attribute:: mean
+
+      A 1d array of size `p-p_d` for prior mean, where `p` is dimensionality of the chain, and `p_d` is the number of extra inferred parameters.
+
+      :type: np.ndarray
+
+   .. attribute:: var
+
+      A 1d array of size `p-p_d` for prior variance, where `p` is dimensionality of the chain, and `p_d` is the number of extra inferred parameters.
+
+      :type: np.ndarray
+
+
+   .. py:attribute:: prtype
+      :value: 'normal'
+
+
+
+   .. py:attribute:: var
+      :value: None
+
+
+
+   .. py:method:: eval(pp)
+
+      Evaluate the log-prior.
+
+      :param pp: Input array of the size `p`, the dimensionality of the chain.
+      :type pp: np.ndarray
+
+      :returns: Value of the log-prior.
+      :rtype: float
+
+
+

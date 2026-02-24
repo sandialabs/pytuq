@@ -1,0 +1,450 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytuq.minf.priors &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">Software Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/index.html#surrogates">Surrogates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_pce.html">Polynomial Chaos Expansion Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../autoapi/index.html">Section Navigation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../autoapi/pytuq/index.html">pytuq</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/pytuq/index.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/ftools/index.html">pytuq.ftools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/func/index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/minf/index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/rv/index.html">pytuq.rv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/surrogates/index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/utils/index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/pytuq/workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pytuq.minf.priors</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pytuq.minf.priors</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="sd">&quot;&quot;&quot;Module for prior classes&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+
+<div class="viewcode-block" id="Prior">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/priors/index.html#pytuq.minf.priors.Prior">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Prior</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for prior evaluation.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        infer (infer.Infer): Inference object containing necessary info for prior evaluation.</span>
+<span class="sd">        prtype (str): Prior name. Currently, &#39;uniform&#39; or &#39;normal&#39; are implemented.</span>
+<span class="sd">        mean (np.ndarray): Prior mean array.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">infer</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Instantiation of a Prior object.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            infer (infer.Infer): Inference object containing necessary info for the prior.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Prior.infer">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/priors/index.html#pytuq.minf.priors.Prior.infer">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">infer</span> <span class="o">=</span> <span class="n">infer</span></div>
+
+<div class="viewcode-block" id="Prior.prtype">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/priors/index.html#pytuq.minf.priors.Prior.prtype">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prtype</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="Prior_normal.mean">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/priors/index.html#pytuq.minf.priors.Prior_normal.mean">[docs]</a>
+<div class="viewcode-block" id="Prior.mean">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/priors/index.html#pytuq.minf.priors.Prior.mean">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mean</span> <span class="o">=</span> <span class="kc">None</span></div>
+</div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_setMean</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mean</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the mean array.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            mean (np.ndarray): Mean array.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mean</span> <span class="o">=</span> <span class="n">mean</span>
+
+<div class="viewcode-block" id="Prior.eval">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/priors/index.html#pytuq.minf.priors.Prior.eval">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pp</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluation of the prior. Not implemented in the base class.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            pp (np.ndarray): Input array of the size `p`, the dimensionality of the chain.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            NotImplementedError: This should be implemented in children classes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+
+
+<div class="viewcode-block" id="Prior.computeDataPrior">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/priors/index.html#pytuq.minf.priors.Prior.computeDataPrior">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">computeDataPrior</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pp</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Computes the part of the prior for the parameter relevant to data noise, in case the chain includes it.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            pp (np.ndarray): Input array of the size `p`, the dimensionality of the chain.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: Returns log-prior corresponding to parameter controlling data noise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">infer</span><span class="o">.</span><span class="n">dvtype</span> <span class="o">==</span> <span class="s1">&#39;std_infer&#39;</span><span class="p">:</span>
+            <span class="n">logprior_baseline</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">pp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">infer</span><span class="o">.</span><span class="n">dvtype</span> <span class="o">==</span> <span class="s1">&#39;std_infer_log&#39;</span><span class="p">:</span>
+            <span class="n">logprior_baseline</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">infer</span><span class="o">.</span><span class="n">dvtype</span> <span class="o">==</span> <span class="s1">&#39;var_fromdata_infer&#39;</span><span class="p">:</span>
+            <span class="n">logprior_baseline</span> <span class="o">=</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">pp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">infer</span><span class="o">.</span><span class="n">dvtype</span> <span class="o">==</span> <span class="s1">&#39;log_var_fromdata_infer&#39;</span><span class="p">:</span>
+            <span class="n">logprior_baseline</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logprior_baseline</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+        <span class="k">return</span> <span class="n">logprior_baseline</span></div>
+</div>
+
+
+<span class="c1">###############################################################</span>
+<span class="c1">###############################################################</span>
+<span class="c1">###############################################################</span>
+
+<div class="viewcode-block" id="Prior_uniform">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/priors/index.html#pytuq.minf.priors.Prior_uniform">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Prior_uniform</span><span class="p">(</span><span class="n">Prior</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Uniform prior class.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        domain (np.ndarray): A 2d array of size `(d,2)`. Can be None, for uninformative priors with no range constraint.</span>
+<span class="sd">        factor (float): A standard deviation factor outside of which the prior returns very low value. For now, we use :math:`f=3` for HG, and :math:`f=\sqrt{3}` for LU. This is somewhat empiric and should be used with care.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        Note that unlike normal prior, this is *not* a uniform prior on all parameters. This is somewhat empirical rejection mechanism if embedded parameter values lead to values outside given ranges.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">infer</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Instantiates a uniform prior object.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            infer (infer.Infer): Inference object containing necessary info for the prior.</span>
+<span class="sd">            domain (np.ndarray, optional): A 2d array of size `(d,2)`. Default is None, for uninformative priors with no range constraint.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">infer</span><span class="p">)</span>
+<div class="viewcode-block" id="Prior_uniform.prtype">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/priors/index.html#pytuq.minf.priors.Prior_uniform.prtype">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prtype</span> <span class="o">=</span> <span class="s1">&#39;uniform&#39;</span></div>
+
+
+<div class="viewcode-block" id="Prior_uniform.domain">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/priors/index.html#pytuq.minf.priors.Prior_uniform.domain">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">domain</span> <span class="o">=</span> <span class="n">domain</span></div>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_setMean</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_setMean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">infer</span><span class="o">.</span><span class="n">inpcrv</span><span class="o">.</span><span class="n">pdim</span><span class="p">))</span>
+
+
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">infer</span><span class="o">.</span><span class="n">pc_type</span> <span class="o">==</span> <span class="s1">&#39;HG&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">factor</span> <span class="o">=</span> <span class="mf">3.0</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">infer</span><span class="o">.</span><span class="n">pc_type</span> <span class="o">==</span> <span class="s1">&#39;LU&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">factor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Embedded PC type </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">infer</span><span class="o">.</span><span class="n">pc_type</span><span class="si">}</span><span class="s2"> is unknown. Exiting.&quot;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Print representation of a uniform prior object.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: String representation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">stri</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Prior: Uniform with no range constraint&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">stri</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Prior: Uniform with range </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="n">stri</span>
+
+<div class="viewcode-block" id="Prior_uniform.eval">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/priors/index.html#pytuq.minf.priors.Prior_uniform.eval">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pp</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate the log-prior.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            pp (np.ndarray): Input array of the size `p`, the dimensionality of the chain.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: Value of the log-prior.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logprior</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeDataPrior</span><span class="p">(</span><span class="n">pp</span><span class="p">)</span>
+
+        <span class="n">pcf_flat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">infer</span><span class="o">.</span><span class="n">pcflat</span><span class="p">)</span>
+        <span class="n">pcf_flat</span><span class="p">[</span><span class="n">pcf_flat</span><span class="o">==</span><span class="kc">None</span><span class="p">]</span><span class="o">=</span><span class="n">pp</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">pp</span><span class="p">)</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">infer</span><span class="o">.</span><span class="n">extrainferparams</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">infer</span><span class="o">.</span><span class="n">inpcrv</span><span class="o">.</span><span class="n">cfsUnflatten</span><span class="p">(</span><span class="n">pcf_flat</span><span class="p">)</span>
+
+        <span class="n">pmeans</span><span class="p">,</span> <span class="n">pstdevs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">infer</span><span class="o">.</span><span class="n">inpcrv</span><span class="o">.</span><span class="n">computeMean</span><span class="p">(),</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">infer</span><span class="o">.</span><span class="n">inpcrv</span><span class="o">.</span><span class="n">computeVar</span><span class="p">())</span>
+
+        <span class="c1"># for idim in range(self.infer.inpcrv.pdim):</span>
+        <span class="c1">#     cfs = self.infer.inpcrv.coefs[idim]</span>
+
+            <span class="c1"># # For independent embedding, the 1st order coefficient (standard deviation) is positive</span>
+            <span class="c1"># if self.infer.inpdf_type==&#39;pci&#39; and len(cfs)&gt;1 and cfs[1]&lt;0.0:</span>
+            <span class="c1">#     return -1.e+80</span>
+
+            <span class="c1"># # For triangular embedding, all last row of coefficients are positive</span>
+            <span class="c1"># if self.infer.inpdf_type==&#39;pct&#39; and idim==self.infer.rndind[-1] and len(cfs)&gt;1 and not np.prod(cfs[1:]&gt;0.0):</span>
+            <span class="c1">#     return -1.e+80</span>
+
+        <span class="c1"># For independent embedding, the 1st order coefficient (standard deviation) is positive</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">infer</span><span class="o">.</span><span class="n">inpdf_type</span><span class="o">==</span><span class="s1">&#39;pci&#39;</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">chind</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">infer</span><span class="o">.</span><span class="n">chind</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">chind</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">pp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;=</span><span class="mf">0.0</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="o">-</span><span class="mf">1.e+80</span>
+
+        <span class="c1"># For triangular embedding, all last row of coefficients are positive</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">infer</span><span class="o">.</span><span class="n">inpdf_type</span><span class="o">==</span><span class="s1">&#39;pct&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">pp</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">pp</span><span class="p">)</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">infer</span><span class="o">.</span><span class="n">extrainferparams</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">infer</span><span class="o">.</span><span class="n">sdim</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">pp</span><span class="p">)</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">infer</span><span class="o">.</span><span class="n">extrainferparams</span><span class="p">]</span><span class="o">&lt;=</span><span class="mf">0.0</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+                    <span class="k">return</span> <span class="o">-</span><span class="mf">1.e+80</span>
+
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">chind</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">infer</span><span class="o">.</span><span class="n">chind</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">chind</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                    <span class="n">idim</span> <span class="o">=</span> <span class="n">chind</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">pmeans</span><span class="p">[</span><span class="n">idim</span><span class="p">]</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">factor</span> <span class="o">*</span> <span class="n">pstdevs</span><span class="p">[</span><span class="n">idim</span><span class="p">]</span><span class="o">&gt;</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">[</span><span class="n">idim</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="ow">or</span> <span class="n">pmeans</span><span class="p">[</span><span class="n">idim</span><span class="p">]</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">factor</span> <span class="o">*</span> <span class="n">pstdevs</span><span class="p">[</span><span class="n">idim</span><span class="p">]</span><span class="o">&lt;</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">[</span><span class="n">idim</span><span class="p">,</span> <span class="mi">0</span><span class="p">]:</span>
+                        <span class="k">return</span> <span class="o">-</span><span class="mf">1.e+80</span>
+
+
+            <span class="c1">#logprior -= np.log(abs(cfs[1])) this was giving some unexpected behavior (stuck at sigma=0 values)</span>
+            <span class="c1">#print(pmeans, logprior)</span>
+
+        <span class="k">return</span> <span class="n">logprior</span></div>
+</div>
+
+
+
+<span class="c1">###############################################################</span>
+<span class="c1">###############################################################</span>
+<span class="c1">###############################################################</span>
+
+<div class="viewcode-block" id="Prior_normal">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/priors/index.html#pytuq.minf.priors.Prior_normal">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Prior_normal</span><span class="p">(</span><span class="n">Prior</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Normal prior class.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        mean (np.ndarray): A 1d array of size `p-p_d` for prior mean, where `p` is dimensionality of the chain, and `p_d` is the number of extra inferred parameters.</span>
+<span class="sd">        var (np.ndarray): A 1d array of size `p-p_d` for prior variance, where `p` is dimensionality of the chain, and `p_d` is the number of extra inferred parameters.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">infer</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">var</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Instantiates a normal prior object.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            infer (infer.Infer): Inference object containing necessary info for the prior.</span>
+<span class="sd">            mean (np.ndarray): A 1d array of size `d` for prior mean for physical parameters. If None, sets the mean to all zeros.</span>
+<span class="sd">            var (np.ndarray): A 1d array of size `d` for prior variance for physical parameters. If None, effectively sets the variance to all infinite, i.e. no prior.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">infer</span><span class="p">)</span>
+<div class="viewcode-block" id="Prior_normal.prtype">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/priors/index.html#pytuq.minf.priors.Prior_normal.prtype">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prtype</span> <span class="o">=</span> <span class="s1">&#39;normal&#39;</span></div>
+
+
+        <span class="k">if</span> <span class="n">mean</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_setMean</span><span class="p">(</span><span class="n">mean</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_setMean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">infer</span><span class="o">.</span><span class="n">inpcrv</span><span class="o">.</span><span class="n">pdim</span><span class="p">))</span>
+
+<div class="viewcode-block" id="Prior_normal.var">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/priors/index.html#pytuq.minf.priors.Prior_normal.var">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">var</span></div>
+
+
+        <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mean</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="bp">self</span><span class="o">.</span><span class="n">infer</span><span class="o">.</span><span class="n">inpcrv</span><span class="o">.</span><span class="n">pdim</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="bp">self</span><span class="o">.</span><span class="n">infer</span><span class="o">.</span><span class="n">inpcrv</span><span class="o">.</span><span class="n">pdim</span><span class="p">)</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Print representation of a normal prior object.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: String representation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">stri</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Prior: Independent normal with mean </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">mean</span><span class="si">}</span><span class="s2"> and variance </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="k">return</span> <span class="n">stri</span>
+
+<div class="viewcode-block" id="Prior_normal.eval">
+<a class="viewcode-back" href="../../../autoapi/pytuq/minf/priors/index.html#pytuq.minf.priors.Prior_normal.eval">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pp</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate the log-prior.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            pp (np.ndarray): Input array of the size `p`, the dimensionality of the chain.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: Value of the log-prior.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logprior</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeDataPrior</span><span class="p">(</span><span class="n">pp</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">logprior</span>
+
+
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">chind</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">infer</span><span class="o">.</span><span class="n">chind</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">chind</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="n">logprior</span> <span class="o">-=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">2.</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+                <span class="n">logprior</span> <span class="o">-=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="p">)</span>
+                <span class="n">logprior</span> <span class="o">-=</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">pp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">mean</span><span class="p">[</span><span class="n">chind</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="p">[</span><span class="n">chind</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+
+        <span class="k">return</span> <span class="n">logprior</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

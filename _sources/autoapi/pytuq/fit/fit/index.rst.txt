@@ -1,0 +1,87 @@
+pytuq.fit.fit
+=============
+
+.. py:module:: pytuq.fit.fit
+
+.. autoapi-nested-parse::
+
+   Module for general regression base class.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.fit.fit.fitbase
+
+
+Module Contents
+---------------
+
+.. py:class:: fitbase
+
+   Bases: :py:obj:`object`
+
+
+   Base fit class.
+
+   .. attribute:: fitted
+
+      Whether the current instance is fitted or not.
+
+      :type: bool
+
+
+   .. py:attribute:: fitted
+      :value: False
+
+
+
+   .. py:method:: fit(x, y)
+      :abstractmethod:
+
+
+      Fit method.
+
+      :param x: 2d x-data array of size :math:`(N,d)`.
+      :type x: np.ndarray
+      :param y: 1d y-data array of size :math:`N`.
+      :type y: np.ndarray
+
+      :raises NotImplementedError: Base class fit not implemented. This should be implemented in a children class.
+
+
+
+   .. py:method:: predict(x, msc=0, pp=False)
+      :abstractmethod:
+
+
+      Predict method.
+
+      :param x: 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+      :param msc: Prediction mode: 0 (mean-only), 1 (mean and variance), or 2 (mean, variance and covariance). Defaults to 0.
+      :type msc: int, optional
+      :param pp: Whether to compute posterior-predictive (i.e. add data variance) or not.
+      :type pp: bool, optional
+
+      :raises NotImplementedError: Base class predict not implemented. This should be implemented in a children class.
+
+
+
+   .. py:method:: predict_wstd(xc, pp=False)
+
+      Predict mean and standard deviation only.
+
+      :param xc: 2d array of size `(N,d)`.
+      :type xc: np.ndarray
+      :param pp: Whether to compute posterior-predictive (i.e. add data variance) or not.
+      :type pp: bool, optional
+
+      :returns: Tuple of mean and standard deviation arrays each of size `N`.
+      :rtype: tuple(np.ndarray, np.ndarray)
+
+
+

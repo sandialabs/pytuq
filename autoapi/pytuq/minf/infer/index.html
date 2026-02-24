@@ -1,0 +1,764 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytuq.minf.infer &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="pytuq.minf.likelihoods" href="../likelihoods/index.html" />
+    <link rel="prev" title="pytuq.minf.calib" href="../calib/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../auto_examples/index.html">Software Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../auto_examples/index.html#surrogates">Surrogates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_pce.html">Polynomial Chaos Expansion Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Section Navigation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">pytuq</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../ftools/index.html">pytuq.ftools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../func/index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rv/index.html">pytuq.rv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../surrogates/index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Section Navigation</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">pytuq</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">pytuq.minf</a></li>
+      <li class="breadcrumb-item active">pytuq.minf.infer</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/autoapi/pytuq/minf/infer/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-pytuq.minf.infer">
+<span id="pytuq-minf-infer"></span><h1>pytuq.minf.infer<a class="headerlink" href="#module-pytuq.minf.infer" title="Link to this heading"></a></h1>
+<p>Inference module including embedded model error.</p>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.minf.infer.Infer" title="pytuq.minf.infer.Infer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Infer</span></code></a></p></td>
+<td><p>Inference class holding all necessary information of model parameter inference problem.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.minf.infer.</span></span><span class="sig-name descname"><span class="pre">Infer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/minf/infer.html#Infer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.minf.infer.Infer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Inference class holding all necessary information of model parameter inference problem.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.chainInit">
+<span class="sig-name descname"><span class="pre">chainInit</span></span><a class="headerlink" href="#pytuq.minf.infer.Infer.chainInit" title="Link to this definition"></a></dt>
+<dd><p>An array of size <cite>p</cite>, the initial condition of the MCMC.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.chdim">
+<span class="sig-name descname"><span class="pre">chdim</span></span><a class="headerlink" href="#pytuq.minf.infer.Infer.chdim" title="Link to this definition"></a></dt>
+<dd><p>Dimensionality of chain <cite>p</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.chind">
+<span class="sig-name descname"><span class="pre">chind</span></span><a class="headerlink" href="#pytuq.minf.infer.Infer.chind" title="Link to this definition"></a></dt>
+<dd><p>List of pairs (parameter index, coefficient index) for chain elements.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.datavar">
+<span class="sig-name descname"><span class="pre">datavar</span></span><a class="headerlink" href="#pytuq.minf.infer.Infer.datavar" title="Link to this definition"></a></dt>
+<dd><p>Data variance in the inference problem, an array of size <cite>N</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.dvparams">
+<span class="sig-name descname"><span class="pre">dvparams</span></span><a class="headerlink" href="#pytuq.minf.infer.Infer.dvparams" title="Link to this definition"></a></dt>
+<dd><p>Parameter list relevant to data variance computation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list or tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.dvtype">
+<span class="sig-name descname"><span class="pre">dvtype</span></span><a class="headerlink" href="#pytuq.minf.infer.Infer.dvtype" title="Link to this definition"></a></dt>
+<dd><p>Data variance type. Options are ‘var_fixed’, ‘std_infer’, ‘std_infer_log’, ‘std_prop_fixed’, ‘var_fromdata_fixed’, ‘log_var_fromdata_fixed’, ‘var_fromdata_infer’, ‘log_var_fromdata_infer’, ‘scale_var’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.extrainferparams">
+<span class="sig-name descname"><span class="pre">extrainferparams</span></span><a class="reference internal" href="../../../../_modules/pytuq/minf/infer.html#Infer.extrainferparams"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.minf.infer.Infer.extrainferparams" title="Link to this definition"></a></dt>
+<dd><p>Number of extra (hyper-)parameters to infer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.fixindnom">
+<span class="sig-name descname"><span class="pre">fixindnom</span></span><a class="headerlink" href="#pytuq.minf.infer.Infer.fixindnom" title="Link to this definition"></a></dt>
+<dd><p>An array of size <cite>(K,2)</cite>, where first column indicates indices of parameters that are fixed (i.e. not part of the inference), and the second column is their nominal, fixed values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.ind_calib">
+<span class="sig-name descname"><span class="pre">ind_calib</span></span><a class="headerlink" href="#pytuq.minf.infer.Infer.ind_calib" title="Link to this definition"></a></dt>
+<dd><p>Model output indices that are used for calibration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.inpcrv">
+<span class="sig-name descname"><span class="pre">inpcrv</span></span><a class="headerlink" href="#pytuq.minf.infer.Infer.inpcrv" title="Link to this definition"></a></dt>
+<dd><p>Input PC object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>rv.mrv.PCRV</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.inpdf_type">
+<span class="sig-name descname"><span class="pre">inpdf_type</span></span><a class="headerlink" href="#pytuq.minf.infer.Infer.inpdf_type" title="Link to this definition"></a></dt>
+<dd><p>Embedded PDF type. Options are ‘pci’ and ‘pct’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.Likelihood">
+<span class="sig-name descname"><span class="pre">Likelihood</span></span><a class="headerlink" href="#pytuq.minf.infer.Infer.Likelihood" title="Link to this definition"></a></dt>
+<dd><p>Likelihood object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../likelihoods/index.html#pytuq.minf.likelihoods.Likelihood" title="pytuq.minf.likelihoods.Likelihood">likelihoods.Likelihood</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.md_transform">
+<span class="sig-name descname"><span class="pre">md_transform</span></span><a class="headerlink" href="#pytuq.minf.infer.Infer.md_transform" title="Link to this definition"></a></dt>
+<dd><p>Potentially, a transform to be applied to model and data before the likelihood computation starts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>callable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#pytuq.minf.infer.Infer.model" title="Link to this definition"></a></dt>
+<dd><p>Model with signature <cite>f(p, q)</cite>, where <cite>p</cite> are model parameters of interest, and <cite>q</cite> are other helpful model parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>callable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.model_params">
+<span class="sig-name descname"><span class="pre">model_params</span></span><a class="headerlink" href="#pytuq.minf.infer.Infer.model_params" title="Link to this definition"></a></dt>
+<dd><p>Model parameters <cite>q</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple or list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.ndata">
+<span class="sig-name descname"><span class="pre">ndata</span></span><a class="headerlink" href="#pytuq.minf.infer.Infer.ndata" title="Link to this definition"></a></dt>
+<dd><p>Number of data points (design locations) <cite>N</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.neachs">
+<span class="sig-name descname"><span class="pre">neachs</span></span><a class="headerlink" href="#pytuq.minf.infer.Infer.neachs" title="Link to this definition"></a></dt>
+<dd><p>List of size <cite>N</cite> including the number of data samples per location.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.nqd">
+<span class="sig-name descname"><span class="pre">nqd</span></span><a class="headerlink" href="#pytuq.minf.infer.Infer.nqd" title="Link to this definition"></a></dt>
+<dd><p>Number of quadrature points per dimension required for the output PC evaluation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.outord">
+<span class="sig-name descname"><span class="pre">outord</span></span><a class="headerlink" href="#pytuq.minf.infer.Infer.outord" title="Link to this definition"></a></dt>
+<dd><p>Order for the output PC in the likelihood computation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.pc_type">
+<span class="sig-name descname"><span class="pre">pc_type</span></span><a class="headerlink" href="#pytuq.minf.infer.Infer.pc_type" title="Link to this definition"></a></dt>
+<dd><p>Embedded PC type. Can be ‘LU’ or ‘HG’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.pcflat">
+<span class="sig-name descname"><span class="pre">pcflat</span></span><a class="headerlink" href="#pytuq.minf.infer.Infer.pcflat" title="Link to this definition"></a></dt>
+<dd><p>List of flattened PC coefficients. The ones to be inferred are None, to be populated in prior and likelihood computation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.Prior">
+<span class="sig-name descname"><span class="pre">Prior</span></span><a class="headerlink" href="#pytuq.minf.infer.Infer.Prior" title="Link to this definition"></a></dt>
+<dd><p>Prior object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../priors/index.html#pytuq.minf.priors.Prior" title="pytuq.minf.priors.Prior">priors.Prior</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.prior_is_set">
+<span class="sig-name descname"><span class="pre">prior_is_set</span></span><a class="reference internal" href="../../../../_modules/pytuq/minf/infer.html#Infer.prior_is_set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.minf.infer.Infer.prior_is_set" title="Link to this definition"></a></dt>
+<dd><p>Boolean flag indicating that the prior is set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.verbose">
+<span class="sig-name descname"><span class="pre">verbose</span></span><a class="reference internal" href="../../../../_modules/pytuq/minf/infer.html#Infer.verbose"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.minf.infer.Infer.verbose" title="Link to this definition"></a></dt>
+<dd><p>Verbosity level.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.ydata">
+<span class="sig-name descname"><span class="pre">ydata</span></span><a class="headerlink" href="#pytuq.minf.infer.Infer.ydata" title="Link to this definition"></a></dt>
+<dd><p>List of <cite>N</cite> 1d arrays corresponding to data for each design location.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[np.ndarray]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.ydata_var">
+<span class="sig-name descname"><span class="pre">ydata_var</span></span><a class="headerlink" href="#pytuq.minf.infer.Infer.ydata_var" title="Link to this definition"></a></dt>
+<dd><p>An array of size <cite>N</cite> holding data variance for each data location.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">extrainferparams</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="reference internal" href="../../../../_modules/pytuq/minf/infer.html#Infer.extrainferparams"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">verbose</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/pytuq/minf/infer.html#Infer.verbose"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id1" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.data_is_set">
+<span class="sig-name descname"><span class="pre">data_is_set</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="reference internal" href="../../../../_modules/pytuq/minf/infer.html#Infer.data_is_set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.minf.infer.Infer.data_is_set" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.datavar_is_set">
+<span class="sig-name descname"><span class="pre">datavar_is_set</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="reference internal" href="../../../../_modules/pytuq/minf/infer.html#Infer.datavar_is_set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.minf.infer.Infer.datavar_is_set" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.model_is_set">
+<span class="sig-name descname"><span class="pre">model_is_set</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="reference internal" href="../../../../_modules/pytuq/minf/infer.html#Infer.model_is_set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.minf.infer.Infer.model_is_set" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.modelinput_is_set">
+<span class="sig-name descname"><span class="pre">modelinput_is_set</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="reference internal" href="../../../../_modules/pytuq/minf/infer.html#Infer.modelinput_is_set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.minf.infer.Infer.modelinput_is_set" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.modeloutput_is_set">
+<span class="sig-name descname"><span class="pre">modeloutput_is_set</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="reference internal" href="../../../../_modules/pytuq/minf/infer.html#Infer.modeloutput_is_set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.minf.infer.Infer.modeloutput_is_set" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">prior_is_set</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="reference internal" href="../../../../_modules/pytuq/minf/infer.html#Infer.prior_is_set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id2" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.lik_is_set">
+<span class="sig-name descname"><span class="pre">lik_is_set</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="reference internal" href="../../../../_modules/pytuq/minf/infer.html#Infer.lik_is_set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.minf.infer.Infer.lik_is_set" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.setData">
+<span class="sig-name descname"><span class="pre">setData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ydata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datamode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/minf/infer.html#Infer.setData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.minf.infer.Infer.setData" title="Link to this definition"></a></dt>
+<dd><p>Set the data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ydata</strong> (<em>list</em><em> or </em><em>np.ndarray</em>) – List of <cite>N</cite> 1d arrays corresponding to data for each design location, or a 2d array of size <cite>(N,e)</cite>, or an 1d array of size <cite>N</cite>.</p></li>
+<li><p><strong>datamode</strong> (<em>str</em><em>, </em><em>optional</em>) – If ‘mean’, work with data means per location.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.getDataStats">
+<span class="sig-name descname"><span class="pre">getDataStats</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/minf/infer.html#Infer.getDataStats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.minf.infer.Infer.getDataStats" title="Link to this definition"></a></dt>
+<dd><p>Get the first two moments of the data set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Mean and variance arrays of length <cite>N</cite>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.setDataVar">
+<span class="sig-name descname"><span class="pre">setDataVar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dvtype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dvparams</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/minf/infer.html#Infer.setDataVar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.minf.infer.Infer.setDataVar" title="Link to this definition"></a></dt>
+<dd><p>Set data variance for the inference.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dvtype</strong> (<em>str</em>) – Data variance type. Options are ‘var_fixed’, ‘std_infer’, ‘std_infer_log’, ‘std_prop_fixed’, ‘var_fromdata_fixed’, ‘log_var_fromdata_fixed’, ‘var_fromdata_infer’, ‘log_var_fromdata_infer’, ‘scale_var’.</p></li>
+<li><p><strong>dvparams</strong> (<em>list</em><em> or </em><em>tuple</em>) – Parameter list relevant to data variance computation.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.setModelRVoutput">
+<span class="sig-name descname"><span class="pre">setModelRVoutput</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outord</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nqd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/minf/infer.html#Infer.setModelRVoutput"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.minf.infer.Infer.setModelRVoutput" title="Link to this definition"></a></dt>
+<dd><p>Set the model output PC settings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>outord</strong> (<em>int</em>) – Order for the output PC in the likelihood computation.</p></li>
+<li><p><strong>nqd</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of quadrature points per dimension required for the output PC evaluation. If None, sets to 2*outord+1.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.setModelRVinput">
+<span class="sig-name descname"><span class="pre">setModelRVinput</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inpdf_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pc_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rndind</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/minf/infer.html#Infer.setModelRVinput"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.minf.infer.Infer.setModelRVinput" title="Link to this definition"></a></dt>
+<dd><p>Set the model input parameters PC.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inpdf_type</strong> (<em>str</em>) – Embedded PDF type. Options are ‘pci’ and ‘pct’.</p></li>
+<li><p><strong>pc_type</strong> (<em>str</em>) – Embedded PC type. Can be ‘LU’ or ‘HG’.</p></li>
+<li><p><strong>pdim</strong> (<em>int</em>) – Parameter dimensionality, i.e. number of model parameters.</p></li>
+<li><p><strong>rndind</strong> (<em>list</em><em>[</em><em>ind</em><em>]</em>) – List of indices of parameters to be embedded. If None, embeds in all parameters.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.setModel">
+<span class="sig-name descname"><span class="pre">setModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">md_transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fixindnom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ind_calib</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/minf/infer.html#Infer.setModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.minf.infer.Infer.setModel" title="Link to this definition"></a></dt>
+<dd><p>Set the model evaluation necessities.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<em>callable</em>) – Model with signature <cite>f(p, q)</cite>, where <cite>p</cite> are model parameters of interest, and <cite>q</cite> are other helpful model parameters.</p></li>
+<li><p><strong>model_params</strong> (<em>tuple</em><em> or </em><em>list</em>) – Model parameters <cite>q</cite>.</p></li>
+<li><p><strong>md_transform</strong> (<em>callable</em><em>, </em><em>optional</em>) – Potentially, a transform to be applied to model and data before the likelihood computation starts. Default is None, i.e. identity function.</p></li>
+<li><p><strong>fixindnom</strong> (<em>list</em><em>, </em><em>optional</em>) – An array of size <cite>(K,2)</cite>, where first column indicates indices of parameters that are fixed (i.e. not part of the inference), and the second column is their nominal, fixed values. Defaults to an empty list, i.e. all parameters are inferred, none are fixed.</p></li>
+<li><p><strong>ind_calib</strong> (<em>list</em><em>, </em><em>optional</em>) – Model output indices that are used for calibration. Default is None, i.e. all outputs being used for calibration.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.setChain">
+<span class="sig-name descname"><span class="pre">setChain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">default_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/minf/infer.html#Infer.setChain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.minf.infer.Infer.setChain" title="Link to this definition"></a></dt>
+<dd><p>Setting the necessities for the chain.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>default_init</strong> (<em>float</em><em>, </em><em>optional</em>) – Default value for initialization of all chain dimensions. It is used for non-constant PC coefficients, and for constant terms if domain is not given. Defaults to. 0.1.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.setLikelihood">
+<span class="sig-name descname"><span class="pre">setLikelihood</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">likelihood</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/minf/infer.html#Infer.setLikelihood"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.minf.infer.Infer.setLikelihood" title="Link to this definition"></a></dt>
+<dd><p>Setting the likelihood object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>likelihood</strong> (<a class="reference internal" href="../likelihoods/index.html#pytuq.minf.likelihoods.Likelihood" title="pytuq.minf.likelihoods.Likelihood"><em>likelihoods.Likelihood</em></a>) – Likelihood object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.setPrior">
+<span class="sig-name descname"><span class="pre">setPrior</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prior</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/minf/infer.html#Infer.setPrior"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.minf.infer.Infer.setPrior" title="Link to this definition"></a></dt>
+<dd><p>Setting the prior object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>prior</strong> (<a class="reference internal" href="../priors/index.html#pytuq.minf.priors.Prior" title="pytuq.minf.priors.Prior"><em>priors.Prior</em></a>) – Prior object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.evalLogPost">
+<span class="sig-name descname"><span class="pre">evalLogPost</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pp</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/minf/infer.html#Infer.evalLogPost"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.minf.infer.Infer.evalLogPost" title="Link to this definition"></a></dt>
+<dd><p>Evaluating log-posterior.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>pp</strong> (<em>np.ndarray</em>) – Input array of the size <cite>p</cite>, the dimensionality of the chain.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Value of the log-posterior.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.getIOSamples">
+<span class="sig-name descname"><span class="pre">getIOSamples</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nxi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/minf/infer.html#Infer.getIOSamples"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.minf.infer.Infer.getIOSamples" title="Link to this definition"></a></dt>
+<dd><p>Get input and output samples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pp</strong> (<em>np.ndarray</em>) – Input array of the size <cite>p</cite>, the dimensionality of the chain.</p></li>
+<li><p><strong>nxi</strong> (<em>int</em><em> or </em><em>np.ndarray</em><em>, </em><em>optional</em>) – Number of samples requested. It can be integer number of samples, or a presampled array. Defaults to 1.</p></li>
+<li><p><strong>fmode</strong> (<em>tuple</em><em>, </em><em>optional</em>) – Mode of evaluation a tuple of [model, model_parameters, index of calibrated outputs, final transform]. Defaults to None, which means get this objects internal model features.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Tuple of two arrays, one for input samples and one for the output samples.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[np.ndarray]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.getInSamples">
+<span class="sig-name descname"><span class="pre">getInSamples</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nxi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/minf/infer.html#Infer.getInSamples"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.minf.infer.Infer.getInSamples" title="Link to this definition"></a></dt>
+<dd><p>Get input parameter samples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pp</strong> (<em>np.ndarray</em>) – Input array of the size <cite>p</cite>, the dimensionality of the chain.</p></li>
+<li><p><strong>nxi</strong> (<em>int</em><em> or </em><em>np.ndarray</em><em>, </em><em>optional</em>) – Number of samples requested. It can be integer number of samples, or a presampled array. Defaults to 1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of parameter samples.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.getOutSamples">
+<span class="sig-name descname"><span class="pre">getOutSamples</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">psample</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/minf/infer.html#Infer.getOutSamples"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.minf.infer.Infer.getOutSamples" title="Link to this definition"></a></dt>
+<dd><p>Get model output parameter samples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>psample</strong> (<em>np.ndarray</em>) – Input parameter array.</p></li>
+<li><p><strong>fmode</strong> (<em>tuple</em><em>, </em><em>optional</em>) – Mode of evaluation a tuple of [model, model_parameters, index of calibrated outputs, final transform]. Defaults to None, which means get this objects internal model features.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of model output samples.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.getModelMoments_NISP">
+<span class="sig-name descname"><span class="pre">getModelMoments_NISP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/minf/infer.html#Infer.getModelMoments_NISP"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.minf.infer.Infer.getModelMoments_NISP" title="Link to this definition"></a></dt>
+<dd><p>Get model output moments using non-intrusive spectral projection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pp</strong> (<em>np.ndarray</em>) – Input array of the size <cite>p</cite>, the dimensionality of the chain.</p></li>
+<li><p><strong>fmode</strong> (<em>tuple</em><em>, </em><em>optional</em>) – Mode of evaluation a tuple of [model, model_parameters, index of calibrated outputs, final transform]. Defaults to None, which means get this objects internal model features.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Tuple of two elements, means and variances of model outputs.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.minf.infer.Infer.getDataVar">
+<span class="sig-name descname"><span class="pre">getDataVar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pp</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/minf/infer.html#Infer.getDataVar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.minf.infer.Infer.getDataVar" title="Link to this definition"></a></dt>
+<dd><p>Get data variance depending on the model of data variance treatment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>pp</strong> (<em>np.ndarray</em>) – Input array of the size <cite>p</cite>, the dimensionality of the chain.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An array of size <cite>N</cite> for data variance per data location.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../calib/index.html" class="btn btn-neutral float-left" title="pytuq.minf.calib" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../likelihoods/index.html" class="btn btn-neutral float-right" title="pytuq.minf.likelihoods" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

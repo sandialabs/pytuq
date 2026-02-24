@@ -1,0 +1,1118 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytuq.rv.mrv &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="pytuq.rv.pcrv" href="../pcrv/index.html" />
+    <link rel="prev" title="pytuq.rv" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../auto_examples/index.html">Software Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../auto_examples/index.html#surrogates">Surrogates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_pce.html">Polynomial Chaos Expansion Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Section Navigation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">pytuq</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../fit/index.html">pytuq.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../ftools/index.html">pytuq.ftools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../func/index.html">pytuq.func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../gsa/index.html">pytuq.gsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../linred/index.html">pytuq.linred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../lreg/index.html">pytuq.lreg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/index.html">pytuq.minf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../optim/index.html">pytuq.optim</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">pytuq.rv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../surrogates/index.html">pytuq.surrogates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/index.html">pytuq.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../workflows/index.html">pytuq.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/indices.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Section Navigation</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">pytuq</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">pytuq.rv</a></li>
+      <li class="breadcrumb-item active">pytuq.rv.mrv</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/autoapi/pytuq/rv/mrv/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-pytuq.rv.mrv">
+<span id="pytuq-rv-mrv"></span><h1>pytuq.rv.mrv<a class="headerlink" href="#module-pytuq.rv.mrv" title="Link to this heading"></a></h1>
+<p>Classes for various multivariate random variables.</p>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.rv.mrv.MRV" title="pytuq.rv.mrv.MRV"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MRV</span></code></a></p></td>
+<td><p>Base class for multivariate random variables.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.rv.mrv.GMM" title="pytuq.rv.mrv.GMM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GMM</span></code></a></p></td>
+<td><p>Gaussian mixture model random variable.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.rv.mrv.Mixture" title="pytuq.rv.mrv.Mixture"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Mixture</span></code></a></p></td>
+<td><p>A class for a mixture of random variables.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.rv.mrv.Inverse" title="pytuq.rv.mrv.Inverse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Inverse</span></code></a></p></td>
+<td><p>Class for an inverse of a random variable.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.rv.mrv.Pareto_1d" title="pytuq.rv.mrv.Pareto_1d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Pareto_1d</span></code></a></p></td>
+<td><p>A class for univariate Pareto distribution.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.rv.mrv.Normal_1d" title="pytuq.rv.mrv.Normal_1d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Normal_1d</span></code></a></p></td>
+<td><p>A class for univariate Normal distribution.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.rv.mrv.Lognormal_1d" title="pytuq.rv.mrv.Lognormal_1d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Lognormal_1d</span></code></a></p></td>
+<td><p>A class for univariate Lognormal distribution.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.rv.mrv.Weibull_1d" title="pytuq.rv.mrv.Weibull_1d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Weibull_1d</span></code></a></p></td>
+<td><p>A class for univariate Weibull distribution.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.rv.mrv.MCMCRV" title="pytuq.rv.mrv.MCMCRV"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MCMCRV</span></code></a></p></td>
+<td><p>A class for MCMC-based random variable.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.MRV">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.rv.mrv.</span></span><span class="sig-name descname"><span class="pre">MRV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pdim</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#MRV"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.MRV" title="Link to this definition"></a></dt>
+<dd><p>Base class for multivariate random variables.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.MRV.pdim">
+<span class="sig-name descname"><span class="pre">pdim</span></span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#MRV.pdim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.MRV.pdim" title="Link to this definition"></a></dt>
+<dd><p>The dimensionality of the random variable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">pdim</span></span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#MRV.pdim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.MRV.sample">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nsam</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#MRV.sample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.MRV.sample" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.MRV.pdf">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#MRV.pdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.MRV.pdf" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.MRV.logpdf">
+<span class="sig-name descname"><span class="pre">logpdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#MRV.logpdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.MRV.logpdf" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.MRV.cdf">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#MRV.cdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.MRV.cdf" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.MRV.sample_indomain">
+<span class="sig-name descname"><span class="pre">sample_indomain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nsam</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">itry_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#MRV.sample_indomain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.MRV.sample_indomain" title="Link to this definition"></a></dt>
+<dd><p>Sampling according to the distribution truncated within a given domain.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nsam</strong> (<em>int</em>) – Number of samples requested, <span class="math notranslate nohighlight">\(N\)</span>.</p></li>
+<li><p><strong>domain</strong> (<em>np.ndarray</em>) – A domain given as a 2d array of size <span class="math notranslate nohighlight">\((d,2)\)</span>.</p></li>
+<li><p><strong>itry_max</strong> (<em>int</em>) – maximum number of chunks of <span class="math notranslate nohighlight">\(N\)</span> sampled. Effectively this is the rejection ratio. If too high, end without having <span class="math notranslate nohighlight">\(N\)</span> samples in the domain and provide a warning.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A 2d array of samples of size <cite>(N,d)</cite>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is based on rejection sampling, and if the domain has small intersection with the volume of sampling, it may take long time.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.MRV.volume_indomain">
+<span class="sig-name descname"><span class="pre">volume_indomain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#MRV.volume_indomain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.MRV.volume_indomain" title="Link to this definition"></a></dt>
+<dd><p>Compute volume of the PDF of this random variable truncated within a given domain.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>domain</strong> (<em>np.ndarray</em>) – A domain given as a 2d array of size <span class="math notranslate nohighlight">\((d,2)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Volume of the PDF inside the given domain.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>see <a href="#id1"><span class="problematic" id="id2">:cite:t:`Kan:2017`</span></a> or <a class="reference external" href="https://www.cesarerobotti.com/wp-content/uploads/2019/04/JCGS-KR.pdf">https://www.cesarerobotti.com/wp-content/uploads/2019/04/JCGS-KR.pdf</a> for the math.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.GMM">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.rv.mrv.</span></span><span class="sig-name descname"><span class="pre">GMM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">means</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#GMM"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.GMM" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pytuq.rv.mrv.MRV" title="pytuq.rv.mrv.MRV"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MRV</span></code></a></p>
+<p>Gaussian mixture model random variable.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.GMM.means">
+<span class="sig-name descname"><span class="pre">means</span></span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#GMM.means"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.GMM.means" title="Link to this definition"></a></dt>
+<dd><p>List of <span class="math notranslate nohighlight">\(K\)</span> means, each a 1d array of size <span class="math notranslate nohighlight">\(d\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[np.ndarray]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.GMM.covs">
+<span class="sig-name descname"><span class="pre">covs</span></span><a class="headerlink" href="#pytuq.rv.mrv.GMM.covs" title="Link to this definition"></a></dt>
+<dd><p>List of <span class="math notranslate nohighlight">\(K\)</span> covariances, each a 2d array of size <span class="math notranslate nohighlight">\((d, d)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[np.ndarray]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.GMM.weights">
+<span class="sig-name descname"><span class="pre">weights</span></span><a class="headerlink" href="#pytuq.rv.mrv.GMM.weights" title="Link to this definition"></a></dt>
+<dd><p>An 1d array of size <span class="math notranslate nohighlight">\(K\)</span> for the mixture weights.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">means</span></span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#GMM.means"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id3" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.GMM.size_checks">
+<span class="sig-name descname"><span class="pre">size_checks</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#GMM.size_checks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.GMM.size_checks" title="Link to this definition"></a></dt>
+<dd><p>Size checks to make sure everything is consistent.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.GMM.sample">
+<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nsam</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#GMM.sample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.GMM.sample" title="Link to this definition"></a></dt>
+<dd><p>Sampling function for this random variable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>nsam</strong> (<em>int</em>) – Number of requested samples <span class="math notranslate nohighlight">\(N\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.GMM.pdf">
+<span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xdata</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#GMM.pdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.GMM.pdf" title="Link to this definition"></a></dt>
+<dd><p>PDF evaluated at given points.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>xdata</strong> (<em>np.ndarray</em>) – A 2d array of size <span class="math notranslate nohighlight">\((M,d)\)</span> for <span class="math notranslate nohighlight">\(M\)</span> points at which PDF is evaluated.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A 1d array of size <span class="math notranslate nohighlight">\(M\)</span> for PDF evaluation at the given points.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.GMM.cdf">
+<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xdata</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#GMM.cdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.GMM.cdf" title="Link to this definition"></a></dt>
+<dd><p>CDF evaluated at given points.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>xdata</strong> (<em>np.ndarray</em>) – A 2d array of size <span class="math notranslate nohighlight">\((M,d)\)</span> for <span class="math notranslate nohighlight">\(M\)</span> points at which CDF is evaluated.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A 1d array of size <span class="math notranslate nohighlight">\(M\)</span> for CDF evaluation at the given points.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Mixture">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.rv.mrv.</span></span><span class="sig-name descname"><span class="pre">Mixture</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rv_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Mixture"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Mixture" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pytuq.rv.mrv.MRV" title="pytuq.rv.mrv.MRV"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MRV</span></code></a></p>
+<p>A class for a mixture of random variables.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Mixture.rv_list">
+<span class="sig-name descname"><span class="pre">rv_list</span></span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Mixture.rv_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Mixture.rv_list" title="Link to this definition"></a></dt>
+<dd><p>List of Multivariate Random Variable objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="#pytuq.rv.mrv.MRV" title="pytuq.rv.mrv.MRV">rv.mrv.MRV</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Mixture.weights">
+<span class="sig-name descname"><span class="pre">weights</span></span><a class="headerlink" href="#pytuq.rv.mrv.Mixture.weights" title="Link to this definition"></a></dt>
+<dd><p>Mixture weights, an 1d array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id4">
+<span class="sig-name descname"><span class="pre">rv_list</span></span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Mixture.rv_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id4" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Mixture.sample">
+<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nsam</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Mixture.sample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Mixture.sample" title="Link to this definition"></a></dt>
+<dd><p>Sampling routine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>nsam</strong> (<em>int</em>) – Number of samples requested.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A 1d array of samples.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Mixture.pdf">
+<span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Mixture.pdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Mixture.pdf" title="Link to this definition"></a></dt>
+<dd><p>Evaluate the PDF.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – 1d array at which PDF is evaluated.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>1d array of PDF values.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Mixture.cdf">
+<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Mixture.cdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Mixture.cdf" title="Link to this definition"></a></dt>
+<dd><p>Evaluate the CDF.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – 1d array at which CDF is evaluated.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>1d array of CDF values.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Inverse">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.rv.mrv.</span></span><span class="sig-name descname"><span class="pre">Inverse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rv</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Inverse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Inverse" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pytuq.rv.mrv.MRV" title="pytuq.rv.mrv.MRV"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MRV</span></code></a></p>
+<p>Class for an inverse of a random variable.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Inverse.rv">
+<span class="sig-name descname"><span class="pre">rv</span></span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Inverse.rv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Inverse.rv" title="Link to this definition"></a></dt>
+<dd><p>Underlying original Multivariate Random Variable object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pytuq.rv.mrv.MRV" title="pytuq.rv.mrv.MRV">rv.mrv.MRV</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id5">
+<span class="sig-name descname"><span class="pre">rv</span></span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Inverse.rv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id5" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Inverse.sample">
+<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nsam</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Inverse.sample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Inverse.sample" title="Link to this definition"></a></dt>
+<dd><p>Sampling routine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>nsam</strong> (<em>int</em>) – Number of samples requested.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A 1d array of samples.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Inverse.pdf">
+<span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Inverse.pdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Inverse.pdf" title="Link to this definition"></a></dt>
+<dd><p>Evaluate the PDF.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – 1d array at which PDF is evaluated.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>1d array of PDF values.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Inverse.logpdf">
+<span class="sig-name descname"><span class="pre">logpdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Inverse.logpdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Inverse.logpdf" title="Link to this definition"></a></dt>
+<dd><p>Evaluate the log-PDF.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – 1d array at which log-PDF is evaluated.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>1d array of log-PDF values.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Inverse.cdf">
+<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Inverse.cdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Inverse.cdf" title="Link to this definition"></a></dt>
+<dd><p>Evaluate the CDF.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – 1d array at which CDF is evaluated.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>1d array of CDF values.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Pareto_1d">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.rv.mrv.</span></span><span class="sig-name descname"><span class="pre">Pareto_1d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Pareto_1d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Pareto_1d" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pytuq.rv.mrv.MRV" title="pytuq.rv.mrv.MRV"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MRV</span></code></a></p>
+<p>A class for univariate Pareto distribution.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Pareto_1d.b">
+<span class="sig-name descname"><span class="pre">b</span></span><a class="headerlink" href="#pytuq.rv.mrv.Pareto_1d.b" title="Link to this definition"></a></dt>
+<dd><p>Power parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Pareto_1d.alpha">
+<span class="sig-name descname"><span class="pre">alpha</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1.0</span></em><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Pareto_1d.alpha"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Pareto_1d.alpha" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Pareto_1d.xm">
+<span class="sig-name descname"><span class="pre">xm</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1.0</span></em><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Pareto_1d.xm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Pareto_1d.xm" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Pareto_1d.params">
+<span class="sig-name descname"><span class="pre">params</span></span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Pareto_1d.params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Pareto_1d.params" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Pareto_1d.sample">
+<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nsam</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Pareto_1d.sample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Pareto_1d.sample" title="Link to this definition"></a></dt>
+<dd><p>Sampling routine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>nsam</strong> (<em>int</em>) – Number of samples requested.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A 1d array of samples.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Pareto_1d.pdf">
+<span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Pareto_1d.pdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Pareto_1d.pdf" title="Link to this definition"></a></dt>
+<dd><p>Evaluate the PDF.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – 1d array at which PDF is evaluated.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>1d array of PDF values.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Pareto_1d.logpdf">
+<span class="sig-name descname"><span class="pre">logpdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Pareto_1d.logpdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Pareto_1d.logpdf" title="Link to this definition"></a></dt>
+<dd><p>Evaluate the log-PDF.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – 1d array at which log-PDF is evaluated.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>1d array of log-PDF values.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Pareto_1d.cdf">
+<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Pareto_1d.cdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Pareto_1d.cdf" title="Link to this definition"></a></dt>
+<dd><p>Evaluate the CDF.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – 1d array at which CDF is evaluated.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>1d array of CDF values.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Normal_1d">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.rv.mrv.</span></span><span class="sig-name descname"><span class="pre">Normal_1d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Normal_1d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Normal_1d" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pytuq.rv.mrv.MRV" title="pytuq.rv.mrv.MRV"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MRV</span></code></a></p>
+<p>A class for univariate Normal distribution.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Normal_1d.mu">
+<span class="sig-name descname"><span class="pre">mu</span></span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Normal_1d.mu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Normal_1d.mu" title="Link to this definition"></a></dt>
+<dd><p>Location parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Normal_1d.sigma">
+<span class="sig-name descname"><span class="pre">sigma</span></span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Normal_1d.sigma"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Normal_1d.sigma" title="Link to this definition"></a></dt>
+<dd><p>Scale parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id6">
+<span class="sig-name descname"><span class="pre">mu</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.0</span></em><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Normal_1d.mu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id6" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id7">
+<span class="sig-name descname"><span class="pre">sigma</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1.0</span></em><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Normal_1d.sigma"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id7" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Normal_1d.params">
+<span class="sig-name descname"><span class="pre">params</span></span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Normal_1d.params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Normal_1d.params" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Normal_1d.sample">
+<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nsam</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Normal_1d.sample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Normal_1d.sample" title="Link to this definition"></a></dt>
+<dd><p>Sampling routine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>nsam</strong> (<em>int</em>) – Number of samples requested.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A 1d array of samples.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Normal_1d.pdf">
+<span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Normal_1d.pdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Normal_1d.pdf" title="Link to this definition"></a></dt>
+<dd><p>Evaluate the PDF.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – 1d array at which PDF is evaluated.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>1d array of PDF values.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Normal_1d.logpdf">
+<span class="sig-name descname"><span class="pre">logpdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Normal_1d.logpdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Normal_1d.logpdf" title="Link to this definition"></a></dt>
+<dd><p>Evaluate the log-PDF.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – 1d array at which log-PDF is evaluated.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>1d array of log-PDF values.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Normal_1d.cdf">
+<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Normal_1d.cdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Normal_1d.cdf" title="Link to this definition"></a></dt>
+<dd><p>Evaluate the CDF.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – 1d array at which CDF is evaluated.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>1d array of CDF values.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Lognormal_1d">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.rv.mrv.</span></span><span class="sig-name descname"><span class="pre">Lognormal_1d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Lognormal_1d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Lognormal_1d" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pytuq.rv.mrv.MRV" title="pytuq.rv.mrv.MRV"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MRV</span></code></a></p>
+<p>A class for univariate Lognormal distribution.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Lognormal_1d.mu">
+<span class="sig-name descname"><span class="pre">mu</span></span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Lognormal_1d.mu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Lognormal_1d.mu" title="Link to this definition"></a></dt>
+<dd><p>Location parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Lognormal_1d.sigma">
+<span class="sig-name descname"><span class="pre">sigma</span></span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Lognormal_1d.sigma"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Lognormal_1d.sigma" title="Link to this definition"></a></dt>
+<dd><p>Scale parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id8">
+<span class="sig-name descname"><span class="pre">mu</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.0</span></em><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Lognormal_1d.mu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id8" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id9">
+<span class="sig-name descname"><span class="pre">sigma</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1.0</span></em><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Lognormal_1d.sigma"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id9" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Lognormal_1d.params">
+<span class="sig-name descname"><span class="pre">params</span></span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Lognormal_1d.params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Lognormal_1d.params" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Lognormal_1d.sample">
+<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nsam</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Lognormal_1d.sample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Lognormal_1d.sample" title="Link to this definition"></a></dt>
+<dd><p>Sampling routine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>nsam</strong> (<em>int</em>) – Number of samples requested.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A 1d array of samples.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Lognormal_1d.pdf">
+<span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Lognormal_1d.pdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Lognormal_1d.pdf" title="Link to this definition"></a></dt>
+<dd><p>Evaluate the PDF.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – 1d array at which PDF is evaluated.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>1d array of PDF values.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Lognormal_1d.logpdf">
+<span class="sig-name descname"><span class="pre">logpdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Lognormal_1d.logpdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Lognormal_1d.logpdf" title="Link to this definition"></a></dt>
+<dd><p>Evaluate the log-PDF.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – 1d array at which log-PDF is evaluated.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>1d array of log-PDF values.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Lognormal_1d.cdf">
+<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Lognormal_1d.cdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Lognormal_1d.cdf" title="Link to this definition"></a></dt>
+<dd><p>Evaluate the CDF.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – 1d array at which CDF is evaluated.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>1d array of CDF values.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Weibull_1d">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.rv.mrv.</span></span><span class="sig-name descname"><span class="pre">Weibull_1d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lam</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Weibull_1d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Weibull_1d" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pytuq.rv.mrv.MRV" title="pytuq.rv.mrv.MRV"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MRV</span></code></a></p>
+<p>A class for univariate Weibull distribution.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Weibull_1d.k">
+<span class="sig-name descname"><span class="pre">k</span></span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Weibull_1d.k"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Weibull_1d.k" title="Link to this definition"></a></dt>
+<dd><p>Shape parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Weibull_1d.lam">
+<span class="sig-name descname"><span class="pre">lam</span></span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Weibull_1d.lam"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Weibull_1d.lam" title="Link to this definition"></a></dt>
+<dd><p>Scale parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id10">
+<span class="sig-name descname"><span class="pre">lam</span></span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Weibull_1d.lam"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id10" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id11">
+<span class="sig-name descname"><span class="pre">k</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1.0</span></em><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Weibull_1d.k"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id11" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Weibull_1d.params">
+<span class="sig-name descname"><span class="pre">params</span></span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Weibull_1d.params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Weibull_1d.params" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Weibull_1d.sample">
+<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nsam</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Weibull_1d.sample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Weibull_1d.sample" title="Link to this definition"></a></dt>
+<dd><p>Sampling routine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>nsam</strong> (<em>int</em>) – Number of samples requested.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A 1d array of samples.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Weibull_1d.pdf">
+<span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Weibull_1d.pdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Weibull_1d.pdf" title="Link to this definition"></a></dt>
+<dd><p>Evaluate the PDF.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – 1d array at which PDF is evaluated.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>1d array of PDF values.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Weibull_1d.logpdf">
+<span class="sig-name descname"><span class="pre">logpdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Weibull_1d.logpdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Weibull_1d.logpdf" title="Link to this definition"></a></dt>
+<dd><p>Evaluate the log-PDF.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – 1d array at which log-PDF is evaluated.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>1d array of log-PDF values.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.Weibull_1d.cdf">
+<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#Weibull_1d.cdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.Weibull_1d.cdf" title="Link to this definition"></a></dt>
+<dd><p>Evaluate the CDF.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – 1d array at which PDF is evaluated.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>1d array of PDF values.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.MCMCRV">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.rv.mrv.</span></span><span class="sig-name descname"><span class="pre">MCMCRV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pdim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logpost</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param_ini</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nmcmc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#MCMCRV"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.MCMCRV" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pytuq.rv.mrv.MRV" title="pytuq.rv.mrv.MRV"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MRV</span></code></a></p>
+<p>A class for MCMC-based random variable.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.MCMCRV.logpost">
+<span class="sig-name descname"><span class="pre">logpost</span></span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#MCMCRV.logpost"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.MCMCRV.logpost" title="Link to this definition"></a></dt>
+<dd><p>Function evaluator np.ndarray-&gt;float for log-posterior. Can take optional keyword arguments as well.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>callable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.MCMCRV.nmcmc">
+<span class="sig-name descname"><span class="pre">nmcmc</span></span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#MCMCRV.nmcmc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.MCMCRV.nmcmc" title="Link to this definition"></a></dt>
+<dd><p>Number of MCMC steps</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.MCMCRV.param_ini">
+<span class="sig-name descname"><span class="pre">param_ini</span></span><a class="headerlink" href="#pytuq.rv.mrv.MCMCRV.param_ini" title="Link to this definition"></a></dt>
+<dd><p>Initial condition of the chain, a 1d array of size <span class="math notranslate nohighlight">\(d\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id12">
+<span class="sig-name descname"><span class="pre">logpost</span></span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#MCMCRV.logpost"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id12" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id13">
+<span class="sig-name descname"><span class="pre">nmcmc</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10000</span></em><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#MCMCRV.nmcmc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id13" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.MCMCRV.sample">
+<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nsam</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">post_info</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#MCMCRV.sample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.MCMCRV.sample" title="Link to this definition"></a></dt>
+<dd><p>Sampling function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nsam</strong> (<em>int</em>) – Number of requested samples <span class="math notranslate nohighlight">\(N\)</span>.</p></li>
+<li><p><strong>post_info</strong> (<em>dict</em>) – Dictionary keyword arguments for the logpost function.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.MCMCRV.pdf_unscaled">
+<span class="sig-name descname"><span class="pre">pdf_unscaled</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#MCMCRV.pdf_unscaled"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.MCMCRV.pdf_unscaled" title="Link to this definition"></a></dt>
+<dd><p>PDF evaluation without scaling.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – 1d array of size <span class="math notranslate nohighlight">\(M\)</span> where PDF is evaluated.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>PDF evaluated at requested points, an array of size <span class="math notranslate nohighlight">\(M\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>PDF is unscaled, i.e. only evaluates exponential of the log-posterior.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.MCMCRV.pdf">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#MCMCRV.pdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.MCMCRV.pdf" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.rv.mrv.MCMCRV.cdf">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/rv/mrv.html#MCMCRV.cdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.rv.mrv.MCMCRV.cdf" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="pytuq.rv" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../pcrv/index.html" class="btn btn-neutral float-right" title="pytuq.rv.pcrv" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

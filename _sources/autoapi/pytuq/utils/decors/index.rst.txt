@@ -1,0 +1,57 @@
+pytuq.utils.decors
+==================
+
+.. py:module:: pytuq.utils.decors
+
+.. autoapi-nested-parse::
+
+   Module for various decorators.
+
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   pytuq.utils.decors.timer
+   pytuq.utils.decors.show_start_end
+   pytuq.utils.decors.repeat
+
+
+Module Contents
+---------------
+
+.. py:function:: timer(func)
+
+   Prints the runtime of the decorated function.
+
+   :param func: Original function.
+   :type func: callable
+
+   :returns: Decorated function.
+   :rtype: callable
+
+
+.. py:function:: show_start_end(func)
+
+   Highlights start and end of the function.
+
+   :param func: Original function.
+   :type func: callable
+
+   :returns: Decorated function.
+   :rtype: callable
+
+
+.. py:function:: repeat(number_of_times)
+
+   Repeats the function many times.
+
+   :param number_of_times: Number of times to repeat.
+   :type number_of_times: int
+
+   :returns: Decorated function.
+   :rtype: callable
+
+

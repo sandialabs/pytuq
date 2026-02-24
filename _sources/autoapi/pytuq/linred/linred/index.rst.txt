@@ -1,0 +1,195 @@
+pytuq.linred.linred
+===================
+
+.. py:module:: pytuq.linred.linred
+
+.. autoapi-nested-parse::
+
+   Module for parent linear dimensionality reduction class.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.linred.linred.LinRed
+
+
+Module Contents
+---------------
+
+.. py:class:: LinRed
+
+   Bases: :py:obj:`object`
+
+
+   Class for linear dimensionality reduction.
+
+   .. attribute:: eigval
+
+      An array of size `K` storing eigenvalues.
+
+      :type: np.ndarray
+
+   .. attribute:: mean
+
+      An array of size `N` storing the mean.
+
+      :type: np.ndarray
+
+   .. attribute:: modes
+
+      A 2d array of size `(N,K)` consisting of all eigenvectors.
+
+      :type: np.ndarray
+
+   .. attribute:: xi
+
+      An array of size `(M,K)` for latent features.
+
+      :type: np.ndarray
+
+   .. attribute:: built
+
+      Flag to indicate if the dimensionality redution is built or not.
+
+      :type: bool
+
+   .. note:: Unless truncation is done, `K=N`.
+
+
+   .. py:attribute:: built
+      :value: False
+
+
+
+   .. py:attribute:: mean
+      :value: None
+
+
+
+   .. py:attribute:: eigval
+      :value: None
+
+
+
+   .. py:attribute:: modes
+      :value: None
+
+
+
+   .. py:attribute:: xi
+      :value: None
+
+
+
+   .. py:method:: build(data, plot=True)
+      :abstractmethod:
+
+
+      Build method that should be implemented in children classes.
+
+      :param data: Data array of size `(N,M)`.
+      :type data: np.ndarray
+      :param plot: Flag indicating if auxilliary figures need to be made.
+      :type plot: bool, optional
+
+      :raises NotImplementedError: Not implemented in this parent class.
+
+
+
+   .. py:method:: project(data, subtract_mean=True)
+
+      Projecting data to the built bases.
+
+      :param data: Data array of size `(N,M)`.
+      :type data: np.ndarray
+      :param subtract_mean: Whether to subtract the mean before projection or not. Defaults to True. Useful without subtraction, e.g. if we are projecting perturbations or standard deviations.
+      :type subtract_mean: bool, optional
+
+      :returns: Array of latent features of size `(N,K)`.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: eval(xi=None, neig=None, add_mean=True)
+
+      Evaluate the expansion at given latent features, up to a given number of eigenvalues.
+
+      :param xi: Array of latent features of size `(M,K)`. Default is None, which takes the pre-build latent features.
+      :type xi: np.ndarray, optional
+      :param neig: Number of requested eigenvalues in the evaluation. Defaults to None, which takes all eigenvalues.
+      :type neig: int, optional
+      :param add_mean: Whether to add the mean before evaluation or not. Defaults to True. Useful without addition, e.g. if we are evaluating perturbations or standard deviations.
+      :type add_mean: bool, optional
+
+      :returns: Reduced-dimensional data array of size `(N,M)`.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: eigval_clip()
+
+      Clip low or numerically negative eigenvalues.
+
+
+
+   .. py:method:: compute_relvar()
+
+      Compute relative cumulative variances
+
+      :returns: An array of size `(N,K)` for cumulative variance fractions.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: plot_modes(imodes=None)
+
+      Plot eigenmodes.
+
+      :param imodes: The number of requested modes. Defaults to None, which plots all of them.
+      :type imodes: int, optional
+
+
+
+   .. py:method:: plot_eig()
+
+      Plots the eigenvalues on both linear and log scales.
+
+
+
+   .. py:method:: plot_expvar()
+
+      Plots the explained variance.
+
+
+
+   .. py:method:: plot_all()
+
+      Executes all plotting routines.
+
+
+
+   .. py:method:: get_neig(threshold=0.99)
+
+      Computes the number of eigenvalues needed for a given threshold.
+
+      :param threshold: Threshold value. Defaults to 0.99.
+      :type threshold: float, optional
+
+      :returns: Number of eigenvalues needed such that the explained variance fraction is above the given threshold.
+      :rtype: int
+
+
+
+   .. py:method:: modes_clip(neig_clip=None)
+
+      Clips the modes to reduce potential storage cost.
+
+      :param neig_clip: Number of eigenvalues requested for truncation.
+      :type neig_clip: int, optional
+
+
+
