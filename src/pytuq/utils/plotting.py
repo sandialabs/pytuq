@@ -682,7 +682,7 @@ def plot_tri(xi, names=None, msize=3, axarr=None, clr='b', yy=None, lsize=12, zo
 
 #############################################################
 
-def plot_pdf1d(sams, pltype='hist', color='b',
+def plot_pdf1d(sams, pltype='hist', color='b', lstyle='--',
                lw=1.0, nom_height_factor=10., histalpha=1.0, label='', ax=None):
     """Plotting 1d PDFs of samples.
 
@@ -690,6 +690,7 @@ def plot_pdf1d(sams, pltype='hist', color='b',
         sams (np.ndarray): The `(N,)` samples of interest.
         pltype (str, optional): Plot type. Options are 'kde' (Kernel Density Estimation), 'hist' (Histogram), 'sam' (plot samples as dots on x-axis), 'nom' (plot a nominal vertical line)
         color (str, optional): Color.
+        lstyle (str, optional): Line style.
         lw (float, optional): Line width, when relevant.
         nom_height_factor (float, optional): Controls the height of the nominal vertical bar.
         histalpha (float, optional): Opacity of histogram, between `0` and `1`.
@@ -723,7 +724,7 @@ def plot_pdf1d(sams, pltype='hist', color='b',
         y1, y2 = ax.get_ylim()
         y2f = nom_height_factor
         for sam in sams:
-            ax.plot([sam, sam], [y1, y2 / y2f], '--', color=color, linewidth=lw, label=label)
+            ax.plot([sam, sam], [y1, y2 / y2f], lstyle, color=color, linewidth=lw, label=label)
 
     else:
         print("Plot type is not recognized. Exiting")
