@@ -10,7 +10,7 @@ def sin4(xx):
         f(x_1, ..., x_d) = \sin(2\sum_{i=1}^d x_i - 0.3)^4.
 
     Args:
-        xx (np.ndarray): 2d input array :math:`x` of size `(N,d)`.
+        xx (np.ndarray): 2d input array `x` of size :math:`(N,d)`.
 
     Returns:
         np.ndarray: 1d array of size `N`.
@@ -27,7 +27,7 @@ def const(xx):
         f(x_1,...,x_d)=3.
 
     Args:
-        xx (np.ndarray): 2d input array :math:`x` of size `(N,d)` or 1d array of size `N`.
+        xx (np.ndarray): 2d input array `x` of size :math:`(N,d)` or 1d array of size `N`.
 
     Returns:
         np.ndarray: 1d array of size `N`.
@@ -45,7 +45,7 @@ def f2d(xx):
         f(x_1,x_2)=-x_1+x_2^2.
 
     Args:
-        xx (np.ndarray): 2d input array :math:`x` of size `(N,2)`.
+        xx (np.ndarray): 2d input array `x` of size :math:`(N,2)`.
 
     Returns:
         np.ndarray: 1d array of size `N`.
@@ -64,7 +64,7 @@ def cosine(xx):
         f(x_1,...,x_d)=\cos(x_1).
 
     Args:
-        xx (np.ndarray): 2d input array :math:`x` of size `(N,d)`.
+        xx (np.ndarray): 2d input array `x` of size :math:`(N,d)`.
 
     Returns:
         np.ndarray: 1d array of size `N`.
@@ -82,7 +82,7 @@ def sinsum(xx):
         f(x_1, ..., x_d) = \sin(\sum_{i=1}^d x_i).
 
     Args:
-        xx (np.ndarray): 2d input array :math:`x` of size `(N,d)`.
+        xx (np.ndarray): 2d input array `x` of size :math:`(N,d)`.
 
     Returns:
         np.ndarray: 1d array of size `N`.
@@ -100,7 +100,7 @@ def prodabs(xx):
         f(x_1, ..., x_d) = \prod_{i=1}^d |x_i|).
 
     Args:
-        xx (np.ndarray): 2d input array :math:`x` of size `(N,d)`.
+        xx (np.ndarray): 2d input array `x` of size :math:`(N,d)`.
 
     Returns:
         np.ndarray: 1d array of size `N`.

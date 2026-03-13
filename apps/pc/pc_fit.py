@@ -1,5 +1,32 @@
 #!/usr/bin/env python
-"""App to build PC surrogates of multioutput models."""
+"""Build Polynomial Chaos (PC) surrogates of multioutput models.
+
+This script fits a PC expansion to input/output data using a chosen
+regression method, produces parity plots and per-sample fit comparisons,
+computes Sobol sensitivity indices, and saves the resulting surrogate.
+
+Outputs:
+    ``dm_*.png``      : Parity (model vs approximation) plots per output.
+    ``fit_s*.png``    : Per-sample overlay of original and PC-predicted outputs.
+    ``sens_pc.png``   : Global sensitivity bar chart.
+    ``pcrv.pk``       : Pickled ``PCRV`` surrogate object.
+    ``lregs.pk``      : Pickled linear regression objects.
+
+Example::
+
+    python pc_fit.py -x ptrain.txt -y ytrain.txt -m bcs -c LU -o 3
+
+Command-line arguments:
+    -x, --xdata          Input data file (default: ``ptrain.txt``).
+    -y, --ydata          Output data file (default: ``ytrain.txt``).
+    -d, --xcond          Conditioning x-grid file.
+    -q, --outnames_file  Output names file (default: ``outnames.txt``).
+    -p, --pnames_file    Parameter names file (default: ``pnames.txt``).
+    -t, --trnfactor      Fraction of data used for training (default: 0.9).
+    -m, --method         Fitting method: ``lsq``, ``bcs``, or ``anl`` (default: ``bcs``).
+    -c, --pctype         PC basis type: ``LU`` or ``HG`` (default: ``LU``).
+    -o, --order          Polynomial chaos order (default: 1).
+"""
 
 import argparse
 import numpy as np

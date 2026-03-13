@@ -29,7 +29,7 @@ class Ackley(Function):
         f(x)=-c_1e^{-c_2\sqrt{\sum_{i=1}^{d}x_1^2}}-e^{\frac{1}{d}\sum_{i=1}^{d}\cos(c_3x_i)}+c_4+e
 
 
-    Default constant values are :math:`c = (20., 0.2, 2\pi)` and :math:`d = 2`.
+    Default constant values are :math:`c = (20., 0.2, 2\pi, 20.)` and :math:`d = 2`.
     """
     def __init__(self, c1=20., c2=0.2, c3=2*np.pi, c4=20., d=2, name="Ackley"):
         super().__init__(name=name)
@@ -247,7 +247,7 @@ class CosineMixture(Function):
         f(x)=-c_1 \sum_{i=1}^n \cos(c_2 \pi x_i) - \sum_{i=1}^n x_i^2
 
 
-    Default constant values are :math:`c = (0.1, 5.0)
+    Default constant values are :math:`c = (0.1, 5.0)`.
     """
     def __init__(self, c1=0.1, c2=5.0, d=2, name="CosineMixture"):
         super().__init__(name=name)

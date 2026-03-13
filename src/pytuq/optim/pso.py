@@ -21,6 +21,8 @@ class PSO(OptBase):
     def __init__(self, dim):
         """Initialization.
 
+        Args:
+            dim (int): Dimensionality of the optimization problem.
         """
         super().__init__()
         self.dim = dim

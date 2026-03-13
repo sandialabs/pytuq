@@ -1,8 +1,10 @@
 #!/usr/bin/env python
+"""PC from Rosenblatt Transformation
+===================================
 
-"""Example demonstrating PC construction given samples.
-
-Uses Rosenblatt transformation and regression.
+Constructs a polynomial chaos representation from samples using Rosenblatt
+transformation and regression. Maps samples to uniform via the Rosenblatt map,
+then fits PC coefficients to the inverse map using analytical regression.
 """
 
 import numpy as np

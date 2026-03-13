@@ -7,14 +7,14 @@ from .linred import LinRed
 
 
 class KLE(LinRed):
-    r"""Class for Karhunen-Loeve expansion.
+    r"""Class for Karhunen-Loeve expansion :cite:t:`loeve:1978`.
 
     Attributes:
         eigval (np.ndarray): An array of size `K` storing eigenvalues.
         mean (np.ndarray): An array of size `N` storing the mean.
-        modes (np.ndarray): A 2d array of size `(N,K)` consisting of all eigenvectors.
+        modes (np.ndarray): A 2d array of size :math:`(N,K)` consisting of all eigenvectors.
         weights2 (np.ndarray): Working array of integration weights.
-        xi (np.ndarray): An array of size `(M,K)` for latent features of KLE.
+        xi (np.ndarray): An array of size :math:`(M,K)` for latent features of KLE.
         built (bool): Flag to indicate if KLE is built or not.
 
     Note:
@@ -31,7 +31,7 @@ class KLE(LinRed):
         r"""Building KLE dimensionality reduction.
 
         Args:
-            data (np.ndarray): Data array of size `(N,M)`.
+            data (np.ndarray): Data array of size :math:`(N,M)`.
             plot (bool, optional): Flag indicating if auxilliary figures need to be made.
         """
         nx, nsam = data.shape
@@ -68,11 +68,11 @@ class KLE(LinRed):
         """Projecting data to the built bases.
 
         Args:
-            data (np.ndarray): Data array of size `(N,M)`.
+            data (np.ndarray): Data array of size :math:`(N,M)`.
             subtract_mean (bool, optional): Whether to subtract the mean before projection or not. Defaults to True. Useful without subtraction, e.g. if we are projecting perturbations or standard deviations.
 
         Returns:
-            np.ndarray: Array of latent features of size `(N,K)`.
+            np.ndarray: Array of latent features of size :math:`(N,K)`.
         """
         assert(self.built)
         # check the number of modes kept

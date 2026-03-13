@@ -9,10 +9,6 @@ import numpy as np
 
 from pytuq.linred.svd import SVD
 
-
-####################################################################
-####################################################################
-
 # Number of samples (N), dimensionality of input (d), dimensionality of output (M)
 nsam, ndim, nout = 111, 5, 33
 # Input parameter

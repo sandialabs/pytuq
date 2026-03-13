@@ -48,8 +48,8 @@ This example below outlines how to:
 
 .. GENERATED FROM PYTHON SOURCE LINES 27-29
 
-#######################################################
-#######################################################
+Setup
+-----
 
 .. GENERATED FROM PYTHON SOURCE LINES 29-36
 
@@ -65,8 +65,8 @@ This example below outlines how to:
 
 .. GENERATED FROM PYTHON SOURCE LINES 37-39
 
-#######################################################
-#######################################################
+Generate data
+-------------
 
 .. GENERATED FROM PYTHON SOURCE LINES 39-90
 

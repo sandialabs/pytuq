@@ -50,18 +50,56 @@ Check out the :ref:`Getting Started <about>` section for further information, in
 
 .. toctree::
    :maxdepth: 4
+   :caption: Examples
+
+   examples/pc
+   examples/regression
+   examples/inference
+   examples/sensitivity
+   examples/rosenblatt
+   examples/rv
+   examples/functions
+   examples/plotting
+
+.. toctree::
+   :maxdepth: 4
+   :caption: Apps
+
+   apps/pc
+   apps/surrogates
+   apps/plot
+   apps/uqpc
+   apps/iuq
+   apps/other
+   apps/awkies
+
+.. toctree::
+   :maxdepth: 4
    :caption: Tutorials
 
    auto_examples/index
 
 .. toctree::
    :maxdepth: 4
-   :caption: API Reference
+   :caption: List of Modules
 
-   autoapi/index
+   autoapi/pytuq/fit/index
+   autoapi/pytuq/ftools/index
+   autoapi/pytuq/func/index
+   autoapi/pytuq/gsa/index
+   autoapi/pytuq/linred/index
+   autoapi/pytuq/lreg/index
+   autoapi/pytuq/minf/index
+   autoapi/pytuq/optim/index
+   autoapi/pytuq/rv/index
+   autoapi/pytuq/surrogates/index
+   autoapi/pytuq/utils/index
+   autoapi/pytuq/workflows/index
 
 .. toctree::
    :maxdepth: 4
-   :caption: Extra
+   :caption: Misc
 
    misc/indices
+   misc/references
+   misc/diagram

@@ -1,4 +1,25 @@
 #!/usr/bin/env python
+"""Plot outputs versus pairs of inputs in a triangular layout.
+
+This script reads input and output data and produces triangular
+scatter-plot grids for each output, colour-coded by the output value.
+This is useful for identifying interaction effects between input
+dimensions.
+
+Outputs:
+    ``yxx_<iout>.png`` : Triangular pair-plot for each output index.
+
+Example::
+
+    python plot_yxx.py -x qtrain.txt -y ytrain.txt -e 2
+
+Command-line arguments:
+    -x, --xdata          Input data file (default: ``qtrain.txt``).
+    -y, --ydata          Output data file (default: ``ytrain.txt``).
+    -o, --outnames_file  Output names file (default: ``outnames.txt``).
+    -p, --pnames_file    Parameter names file (default: ``pnames.txt``).
+    -e, --every          Sample thinning factor (default: 1).
+"""
 
 import os
 import argparse

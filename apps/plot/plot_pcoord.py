@@ -1,4 +1,28 @@
 #!/usr/bin/env python
+"""Plot parallel-coordinate diagrams for multivariate data.
+
+This script reads input (and optionally output) data and renders
+parallel-coordinate plots, useful for visualising high-dimensional
+parameter spaces.  Data are normalised to [-1, 1] before plotting.
+Optional label files allow colour-coding by group.
+
+Outputs:
+    ``pcoord_*.png`` : Parallel-coordinate plots (one per chunk when
+    ``--ndcut`` is used).
+
+Example::
+
+    python plot_pcoord.py -x ptrain.txt -y ytrain.txt -e 5
+
+Command-line arguments:
+    -x, --xdata          Input data file (default: ``ptrain.txt``).
+    -y, --ydata          Optional output data file.
+    -o, --outnames_file  Output names file (default: ``outnames.txt``).
+    -p, --pnames_file    Parameter names file (default: ``pnames.txt``).
+    -e, --every          Sample thinning factor (default: 1).
+    -l, --labels_file    Label file for group colouring.
+    -c, --ndcut          Chunk size for splitting dimensions (0 = all).
+"""
 
 import os
 import argparse

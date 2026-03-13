@@ -10,12 +10,15 @@ import numpy as np
 from pytuq.rv.pcrv import PCRV
 from pytuq.utils.mindex import get_mi
 
+# PC setup
 order = 3
 dim = 2
 
+# Build multiindex and random coefficients
 mi = get_mi(order, dim)
 cfs = np.random.rand(mi.shape[0])
 
+# Create Hermite-Gauss PCRV
 hgrv = PCRV(1, dim, 'HG', mi=mi, cfs=cfs)
 # Can also do mixed PC where some dimensions are HG and some are LU
 # hgrv = PCRV(dim, ['HG', 'LU'], mi=mi, cfs=cfs)

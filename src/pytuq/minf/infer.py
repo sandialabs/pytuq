@@ -19,7 +19,7 @@ class Infer(object):
         dvparams (list or tuple): Parameter list relevant to data variance computation.
         dvtype (str): Data variance type. Options are 'var_fixed', 'std_infer', 'std_infer_log', 'std_prop_fixed', 'var_fromdata_fixed', 'log_var_fromdata_fixed', 'var_fromdata_infer', 'log_var_fromdata_infer', 'scale_var'.
         extrainferparams (int): Number of extra (hyper-)parameters to infer.
-        fixindnom (np.ndarray): An array of size `(K,2)`, where first column indicates indices of parameters that are fixed (i.e. not part of the inference), and the second column is their nominal, fixed values.
+        fixindnom (np.ndarray): An array of size :math:`(K,2)`, where first column indicates indices of parameters that are fixed (i.e. not part of the inference), and the second column is their nominal, fixed values.
         ind_calib (list): Model output indices that are used for calibration.
         inpcrv (rv.mrv.PCRV): Input PC object.
         inpdf_type (str): Embedded PDF type. Options are 'pci' and 'pct'.
@@ -65,7 +65,7 @@ class Infer(object):
         """Set the data.
 
         Args:
-            ydata (list or np.ndarray): List of `N` 1d arrays corresponding to data for each design location, or a 2d array of size `(N,e)`, or an 1d array of size `N`.
+            ydata (list or np.ndarray): List of `N` 1d arrays corresponding to data for each design location, or a 2d array of size :math:`(N,e)`, or an 1d array of size `N`.
             datamode (str, optional): If 'mean', work with data means per location.
         """
         if isinstance(ydata, list):
@@ -236,7 +236,7 @@ class Infer(object):
             model (callable): Model with signature `f(p, q)`, where `p` are model parameters of interest, and `q` are other helpful model parameters.
             model_params (tuple or list): Model parameters `q`.
             md_transform (callable, optional): Potentially, a transform to be applied to model and data before the likelihood computation starts. Default is None, i.e. identity function.
-            fixindnom (list, optional): An array of size `(K,2)`, where first column indicates indices of parameters that are fixed (i.e. not part of the inference), and the second column is their nominal, fixed values. Defaults to an empty list, i.e. all parameters are inferred, none are fixed.
+            fixindnom (list, optional): An array of size :math:`(K,2)`, where first column indicates indices of parameters that are fixed (i.e. not part of the inference), and the second column is their nominal, fixed values. Defaults to an empty list, i.e. all parameters are inferred, none are fixed.
             ind_calib (list, optional): Model output indices that are used for calibration. Default is None, i.e. all outputs being used for calibration.
         """
         assert(self.data_is_set)

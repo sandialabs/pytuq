@@ -1,5 +1,8 @@
 #!/usr/bin/env python
-"""Module for various MCMC flavors."""
+r"""Module for various MCMC flavors.
+
+See :cite:t:`brooks:2011` for an overview.
+"""
 
 import numpy as np
 from .calib import MCMCBase
@@ -8,7 +11,7 @@ class AMCMC(MCMCBase):
     r"""Adaptive MCMC class. Based on :cite:t:`Haario:2001`.
 
     Attributes:
-        cov_ini (np.ndarray): Initial covariance array of size `(p,p)`.
+        cov_ini (np.ndarray): Initial covariance array of size :math:`(p,p)`.
         gamma (float): Proposal jump size factor :math:`\gamma`.
         propcov (np.ndarray): Proposal covariance, working array.
         t0 (int): Step where adaptivity begins.
@@ -19,7 +22,7 @@ class AMCMC(MCMCBase):
 
         Args:
             cov_ini (None, optional): Initial covariance. Defaults to None, in which case it is set to be proportional to the current state.
-            gamma (float, optional): $\gamma$ parameter, effectively step size. Defaults to 0.1.
+            gamma (float, optional): :math:`\gamma` parameter, effectively step size. Defaults to 0.1.
             t0 (int, optional): When adaptivity starts. Defaults to 100.
             tadapt (int, optional): Adapting frequency. Defaults to 1000.
         """
@@ -76,12 +79,12 @@ class AMCMC(MCMCBase):
 
 
 class HMC(MCMCBase):
-    # Implementation based on Neal, 2011. https://arxiv.org/pdf/1206.1901.pdf
+    r"""Hamiltonian Monte Carlo class. Based on :cite:t:`neal:2011`."""
     def __init__(self, epsilon=0.05, L=3):
         r"""Initialization.
 
         Args:
-            epsilon (float, optional): $\epsilon$ discretization time-step.
+            epsilon (float, optional): :math:`\epsilon` discretization time-step.
             L (int, optional): L, step count.
         """
         super().__init__()
@@ -136,13 +139,12 @@ class HMC(MCMCBase):
 
 
 class MALA(MCMCBase):
-    # Note: MALA is actually exactly HMC with L=1.
-    # See Girolami paper https://statmodeling.stat.columbia.edu/wp-content/uploads/2010/04/RMHMC_MG_BC_SC_REV_08_04_10.pdf
+    r"""Metropolis-Adjusted Langevin Algorithm. Based on :cite:t:`girolami:2011`."""
     def __init__(self, epsilon=0.05):
         r"""Initialization.
 
         Args:
-            epsilon (float, optional): $\epsilon$ discretization time-step.
+            epsilon (float, optional): :math:`\epsilon` discretization time-step.
         """
         super().__init__()
         self.epsilon = epsilon

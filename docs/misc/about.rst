@@ -7,7 +7,7 @@ About
 Overview
 ----------
 
-The Python Toolkit for Uncertainty Quantification (PyTUQ) is a Python-only set of tools designed for uncertainty quantification. Key PyTUQ capabilities include, but are not limited to:
+The Python Toolkit for Uncertainty Quantification (PyTUQ) is a Python-only set of tools designed for uncertainty quantification, inspired by UQTk :cite:t:`debusschere:2017`. Key PyTUQ capabilities include, but are not limited to:
 
 - Methods for Gaussian process regression
 - Global sensitivity analysis methods

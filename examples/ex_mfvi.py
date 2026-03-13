@@ -22,11 +22,7 @@ from pytuq.utils.plotting import plot_dm, myrc
 
 myrc()
 
-
-#########################################################################
-#########################################################################
-#########################################################################
-
+# Generate noisy training data from a benchmark function
 domain = np.array([[-20., 60.]])
 
 ngr = 133
@@ -37,7 +33,6 @@ xtrn = scale01ToDom(np.random.rand(ntrn), domain)[:, np.newaxis]
 fcn = TFData()
 
 ytrn = fcn(xtrn) + np.random.randn(ntrn, 1)
-
 ytrn = (ytrn - ytrn.mean()) / ytrn.std()
 
 print(xtrn.shape, ytrn.shape)
@@ -51,6 +46,7 @@ print(xtrn.shape, ytrn.shape)
 pdim = 2
 
 
+# Simple linear model y = a*x + b
 class linear_model(Function):
     def __init__(self, xdata):
         super().__init__()
@@ -69,6 +65,8 @@ xgrid = np.linspace(domain[0, 0], domain[0, 1], ngr)
 # modelpar_true = (3, -2)
 # ygrid_true = linear_model(xgrid, modelpar_true[0], modelpar_true[1])
 
+nsteps = 10000
+param_ini = np.random.rand(2 * pdim)
 
 # Set the initial parameters and run Optimization
 nsteps = 10000  # number of steps
@@ -78,7 +76,7 @@ lossinfo = {'nmc': 222, 'datasigma': 0.01*np.ones(ntrn)}
 mfvi = MFVI(linear_model(xtrn), ytrn[:,0], pdim, lossinfo, reparam='logexp')
 objective, objectivegrad, objectiveinfo = mfvi.eval_loss_gmarg, None, {}
 
-
+# Optimize the variational objective with PSO
 myopt = PSO(2*pdim)
 myopt.setObjective(objective, objectivegrad, **objectiveinfo)
 results = myopt.run(100, np.random.rand(2*pdim,))
@@ -96,11 +94,10 @@ cmode, pmode = results['best'], results['bestobj']
 
 print(cmode, pmode)
 
-
-# Postprocess
-
+# Plot the approximate posterior marginals
 mfvi.plot_parpdf(cmode)
 
+# Posterior predictive samples and data-model comparison
 nsam = 1000
 ypred_all = mfvi.compute_pred(cmode, nsam)
 q1, ypred_med, q2 = np.quantile(ypred_all, [0.05, 0.5, 0.95], axis=0)
@@ -110,8 +107,7 @@ plot_dm([ytrn], [ypred_med],
         axes_labels=['Data', 'Model'], figname='dm_mfvi.png',
         legendpos='in', msize=8)
 
-
-# For 1d x-values, plot the fit
+# Plot the posterior fit with uncertainty bands
 grid_model = linear_model(xgrid)
 ypred_grid_all = mfvi.compute_pred(cmode, nsam, grid_model)
 q1, ygrid_pred_med, q2 = np.quantile(ypred_grid_all, [0.05, 0.5, 0.95], axis=0)

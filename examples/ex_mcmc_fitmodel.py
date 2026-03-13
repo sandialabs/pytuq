@@ -59,15 +59,12 @@ def logpost(modelpars, lpinfo):
 
     return lpostm
 
-###
-# Create synthetic data
-###
-# Define parameters for synthetic data generation
-npt = 13   # no. of data points
+# Create noisy synthetic data from the linear model
+npt = 13
 pdim = 3
 W = np.random.randn(pdim, npt)
 b = np.random.randn(npt)
-sigma = 0.2  # std.dev. for data perturbations
+sigma = 0.2
 ncheck = 7
 
 true_model_input = np.random.randn(pdim)
@@ -75,28 +72,13 @@ true_model_input = np.random.randn(pdim)
 true_model, true_model_params = linear_model, {'W': W, 'b': b}
 calib_model = linear_model
 
-# from quinn.nns.nnwrap import nn_surrogate
-# torch.set_default_tensor_type(torch.DoubleTensor)
-# nnlin=torch.nn.Linear(pdim, npt)
-# true_model, true_model_params = nn_surrogate, nnlin
-# calib_model = nn_surrogate
-
-
 yd = true_model(true_model_input, true_model_params)
-# Add noise
+# Replicate and perturb to create multiple noisy observations
 neach = 5
 yd = np.tile(yd, (neach,1)).T
 yd += sigma * np.random.randn(npt, neach)
-#yd = yd.reshape(-1,1)
 
-
-
-###
-# Run MCMC
-###
-
-
-# Set the initial parameters and run MCMC
+# MCMC settings
 zflag = True
 nmcmc = 10000  # number of MCMC samples requested
 gamma = 0.1  # gamma parameter (jump size) of aMCMC
@@ -106,21 +88,21 @@ tadapt = 100  # how often adaptive proposal covariance is updated
 
 
 
-param_ini = np.random.rand(pdim)  # initial parameter values
+param_ini = np.random.rand(pdim)
 
-
-# Set dictionary info for posterior computation
+# Log-posterior info: model, data, and likelihood specification
 lpinfo = {'model': calib_model,
           'modelpars': true_model_params, 'yd': [y for y in yd],
           'ltype': 'classical',
           'lparams': {'sigma': sigma}}
 
-
+# Optionally pre-optimize to find a good MCMC starting point
 if zflag:
     res = minimize(negfcn, param_ini, args=(logpost,lpinfo), method='BFGS',options={'gtol': 1e-13})
     print('Opt:', res.x)
     param_ini = res.x
 
+# Run adaptive MCMC
 my_amcmc = AMCMC(t0=t0, tadapt=tadapt, gamma=gamma)
 my_amcmc.setLogPost(logpost, None, lpinfo=lpinfo)
 mcmc_results = my_amcmc.run(param_ini=param_ini, nmcmc=nmcmc)
@@ -128,30 +110,27 @@ mcmc_results = my_amcmc.run(param_ini=param_ini, nmcmc=nmcmc)
 samples, cmode, pmode = mcmc_results['chain'], mcmc_results['mapparams'], mcmc_results['maxpost']
 np.savetxt('chain.txt', samples)
 
-
 print("True values :", true_model_input)
 print("MAP values  :", cmode)
 
-# Get MAP sample
+# Posterior predictive: MAP prediction and MCMC ensemble
 ycheck_pred = calib_model(cmode, true_model_params)
-# Get MCMC prediction samples
 ycheck_mcmc = np.empty((nmcmc, npt))
 for i, sam in enumerate(samples[1:]):
     ycheck_mcmc[i, :] = calib_model(sam, true_model_params)
 ycheck_mean = np.average(ycheck_mcmc, axis=0)
 ycheck_std = np.std(ycheck_mcmc, axis=0)
 
+# Plot mean +/- std, MAP, and data
 p, = plt.plot(np.arange(npt), ycheck_mean, 'b-', label='Mean')
 lc = lighten_color(p.get_color(), 0.5)
 plt.fill_between(np.arange(npt), ycheck_mean - ycheck_std,
                  ycheck_mean + ycheck_std, color=lc, alpha=1.0, label='StDev')
 
-
 plt.plot(np.arange(npt), ycheck_pred, 'g-', label='MAP')
 plt.plot(np.arange(npt), yd, 'ko', label='Data')
+# Deduplicate legend entries for repeated 'Data' handles
 h, l = plt.gca().get_legend_handles_labels()
-# indexes = [l.index(x) for x in set(l)]
-# h, l = [h[i] for i in indexes], [l[i] for i in indexes]
 h, l = [h[-2]]+[h[0]]+[h[-1]]+[h[1]], [l[-2]]+[l[0]]+[l[-1]]+[l[1]]
 plt.legend(h, l)
 plt.savefig('fitmodel.png')

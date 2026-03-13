@@ -1,5 +1,25 @@
 #!/usr/bin/env python
+"""Build Karhunen-Loeve (KL) decompositions of multioutput data.
 
+This script reads a multioutput dataset, performs a KL expansion to
+reduce its dimensionality, and generates diagnostic plots including
+explained-variance curves, data-vs-approximation scatter plots, and
+sample-wise fit comparisons.
+
+Outputs:
+    ``dm_*.png``    : Diagonal model-vs-approximation scatter plots per output.
+    ``fit_s*.png``  : Per-sample overlay of original and KL-reconstructed outputs.
+    Explained-variance plot produced by the KLE object.
+
+Example::
+
+    python kl_fit.py -y ydata.txt -e 5
+
+Command-line arguments:
+    -d, --xcond     Conditioning x-grid file (default: index array).
+    -y, --ydata     Multioutput data file (default: ``ydata.txt``).
+    -e, --neig      Number of eigenvalues to retain (default: auto at 99%%).
+"""
 
 import argparse
 import numpy as np

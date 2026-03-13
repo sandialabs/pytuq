@@ -1,5 +1,42 @@
 #!/usr/bin/env python
+"""Build PC surrogates of multioutput models with full UQ workflow.
 
+This is the main UQPC workflow script.  It supports three run regimes:
+
+* ``online_example`` — Use a built-in benchmark function (Ishigami by default).
+* ``online_bb``      — Call a user-supplied black-box executable.
+* ``offline``        — Read pre-computed training data from files.
+
+The script constructs input PC representations, generates or reads
+training/testing samples, fits a PC surrogate, computes Sobol
+sensitivity indices, and bundles everything into ``results.pk``.
+
+Outputs:
+    ``results.pk``   : Pickled dictionary with the surrogate, training/testing
+                       data, and sensitivity indices.
+    ``ptrain.txt``, ``qtrain.txt``, ``ytrain.txt`` : Training data.
+    ``ptest.txt``, ``qtest.txt``, ``ytest.txt``    : Testing data.
+
+Example::
+
+    python uq_pc.py -r online_example -t 3 -n 7 -m anl
+    python uq_pc.py -r offline -p pdom.txt -t 2 -m bcs
+
+Command-line arguments:
+    -r, --regime    Run regime: ``online_example``, ``online_bb``, or ``offline``.
+    -p, --pdom      Parameter domain file (two columns: lower, upper).
+    -c, --pcfile    Input PC coefficient file.
+    -d, --pcdim     Stochastic dimensionality of the input PC.
+    -x, --pctype    PC basis type: ``LU``, ``HG``, etc. (default: ``LU``).
+    -o, --pcord     Input PC order (default: 1).
+    -m, --method    Fitting method: ``anl``, ``lsq``, or ``bcs`` (default: ``anl``).
+    -s, --sampl     Sampling method: ``quad`` or ``rand`` (default: ``quad``).
+    -n, --nqd       Number of quadrature points per dim / training points (default: 7).
+    -v, --ntst      Number of testing points (default: 0).
+    -t, --outord    Output PC order (default: 3).
+    -e, --tol       Tolerance for BCS (default: 1e-3).
+    -z, --seed      Random seed for reproducibility.
+"""
 
 #=====================================================================================
 #=====================================================================================

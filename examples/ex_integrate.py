@@ -8,10 +8,12 @@ functions, comparing numerical results with analytical solutions.
 import numpy as np
 from pytuq.ftools.integr import *
 
+# Test function: single Gaussian
 def single_gaussian(x, w=1.0):
 
     return np.exp(-0.5*np.sum((x/w)**2, axis=1))
 
+# Test function: sum of two Gaussians (one shifted)
 def double_gaussian(x):
     shift=11.0
     y1 = np.exp(-np.sum(x**2, axis=1))
@@ -33,6 +35,7 @@ int_exact = w**dim * np.sqrt((2.*np.pi)**dim)
 # func_args = {}
 # int_exact = np.sqrt(np.pi**dim)+0.2*(2**dim)*np.sqrt(np.pi**dim)
 
+# Integration via MCMC importance sampling
 domain = np.tile(np.array([-np.inf,np.inf]), (dim,1))
 intg = IntegratorMCMC()
 int_mcmc, results = intg.integrate(myfunc,

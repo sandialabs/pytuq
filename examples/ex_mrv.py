@@ -55,26 +55,31 @@ from pytuq.rv.pcrv import PCRV_iid, PCRV_mvn
 
 pdim = 5
 inpdf_type='pct'
-pc_type='HG' #can be a list
+pc_type='HG'
 rndind=[1, 2, 4]
 
+# Create PC r.v. with selected random dimensions
 if inpdf_type=='pci':
+    # Independent PC: set orders only for random dimensions
     orders = np.zeros(pdim, dtype=int)
     orders[rndind]=1
     mypcrv = PCRV_iid(pdim, pc_type, orders=orders)
 elif inpdf_type=='pct':
+    # Multivariate normal PC: only HG supported
     assert(pc_type=='HG')
     mypcrv = PCRV_mvn(pdim, rndind=rndind)
+
 print(mypcrv.pind)
 mypcrv.printInfo()
 print(mypcrv.rndind, mypcrv.detind, mypcrv.sdim)
+
+# Set random coefficients and evaluate
 mypcrv.setRandomCfs()
 print(mypcrv.coefs)
 xx = mypcrv.sampleGerm(1000)
 yy = mypcrv.evalPC(xx)
 
-
-#setRandomCfs
+# Test flatten/unflatten round-trip for coefficients
 cfs_flat=mypcrv.cfsFlatten()
 print(cfs_flat)
 mypcrv.cfsUnflatten(cfs_flat)

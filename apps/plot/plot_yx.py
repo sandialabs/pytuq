@@ -1,4 +1,27 @@
 #!/usr/bin/env python
+"""Plot outputs versus one input dimension at a time.
+
+This script reads input and output data and produces a grid of scatter
+plots showing each output versus every input dimension, on both linear
+and log scales.
+
+Outputs:
+    ``yx_<outname>.png``     : Linear-scale scatter grid for each output.
+    ``yx_<outname>_log.png`` : Log-scale scatter grid for each output.
+
+Example::
+
+    python plot_yx.py -x qtrain.txt -y ytrain.txt -c 4 -r 3
+
+Command-line arguments:
+    -x, --xdata          Input data file (default: ``qtrain.txt``).
+    -y, --ydata          Output data file (default: ``ytrain.txt``).
+    -o, --outnames_file  Output names file (default: ``outnames.txt``).
+    -p, --pnames_file    Parameter names file (default: ``pnames.txt``).
+    -e, --every          Sample thinning factor (default: 1).
+    -c, --cols           Number of subplot columns (default: 4).
+    -r, --rows           Number of subplot rows (default: 6).
+"""
 
 import os
 import argparse

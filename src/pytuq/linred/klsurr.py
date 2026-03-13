@@ -62,8 +62,8 @@ class KLSurr():
         """Build the KL+Surrogate.
 
         Args:
-            ptrain (np.ndarray): An input array of size `(M,d)`.
-            ytrain (np.ndarray): Output training data array of size `(M,N)`.
+            ptrain (np.ndarray): An input array of size :math:`(M,d)`.
+            ytrain (np.ndarray): Output training data array of size :math:`(M,N)`.
             neig (int, optional): Number of eigenvalues. Defaults to None, which means all eigenvalues are retained.
             surr (str, optional): Surrogate type, PC or NN. Defaults to PC.
             tr_frac (float, optional): Fraction of samples used for training. Defaults to 0.9.
@@ -145,11 +145,11 @@ class KLSurr():
         r"""Evaluates new latent features at given inputs.
 
         Args:
-            ptrain (np.ndarray): Input array of size `(M, d)`.
+            ptrain (np.ndarray): Input array of size :math:`(M, d)`.
             otherpars (None, optional): Optional parameters (unused currently).
 
         Returns:
-            np.ndarray: Predictions of latent features, an array of size `(M, K)`.
+            np.ndarray: Predictions of latent features, an array of size :math:`(M, K)`.
         """
         assert(self.built)
         xi_pred = self.xisurr(ptrain)
@@ -160,11 +160,11 @@ class KLSurr():
         r"""Evaluate the KL+Surrogate at given inputs.
 
         Args:
-            ptrain (np.ndarray): Input array of size `(M, d)`.
+            ptrain (np.ndarray): Input array of size :math:`(M, d)`.
             neig (int, optional): Number of eigenvalues. Defaults to None, which means all eigenvalues are retained.
 
         Returns:
-            np.ndarray: Output array of size `(M,N)`.
+            np.ndarray: Output array of size :math:`(M,N)`.
         """
         assert(self.built)
 
@@ -199,14 +199,14 @@ class KLSurr():
         r"""Computes and plots Sobol sensitivities via sampling.
 
         Args:
-            domain (np.ndarray): Domain of input, array of size `(d,2)`.
+            domain (np.ndarray): Domain of input, array of size :math:`(d,2)`.
             npar (int): Number of parameters.
             colors (None, optional): Optional list of colors for plotting.
             pnames (None, optional): Optional list of names for plotting.
             totmain (str, optional): Total or main sensitivity. Defaults to main.
 
         Returns:
-            np.ndarray: Returns Sobol sensitivities, an array of size `(N,d)`.
+            np.ndarray: Returns Sobol sensitivities, an array of size :math:`(N,d)`.
         """
         ndim, two = domain.shape
         assert(two==2)
@@ -253,7 +253,7 @@ class KLSurr():
             totmain (str, optional): Total or main sensitivity. Defaults to main.
 
         Returns:
-            np.ndarray: Returns Sobol sensitivities, an array of size `(N,d)`.
+            np.ndarray: Returns Sobol sensitivities, an array of size :math:`(N,d)`.
         """
         assert(isinstance(self.smodel, PCRV))
         mindex_all, cfs_all = micf_join(self.smodel.mindices, self.smodel.coefs)

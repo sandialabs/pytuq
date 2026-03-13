@@ -1,8 +1,9 @@
 #!/usr/bin/env python
+"""Per-Sample PC from Rosenblatt Transformation.
 
-"""Example demonstrating joint PC construction given samples.
-
-Uses Rosenblatt transformation and joint regression in parameteric/stochastic space.
+Constructs polynomial chaos representations from samples using separate
+regressions for each parameter value. Contrasts with the joint approach
+in ``ex_ros_pcj.py`` by building independent PC fits per parameter sample.
 """
 
 import numpy as np

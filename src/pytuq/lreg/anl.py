@@ -12,7 +12,7 @@ class anl(lreg):
     """Bayesian linear regression class.
 
     Attributes:
-        cf (np.ndarray): An 1d array of coefficients, of size :math:`K`.
+        cf (np.ndarray): An 1d array of coefficients, of size `K`.
         cf_cov (np.ndarray): A 2d array of coefficient covariance of size :math:`(K,K)`.
         cov_nugget (float): A diagonal covariance nugget to regularize the matrix inversion.
         datavar (float): A single value for homogenous data variance.
@@ -26,10 +26,10 @@ class anl(lreg):
         """Initialization.
 
         Args:
-            method (string, optional): Method of fitting. Can be 'full' (the conventional Bayesian linear regression) or 'vi' (the variational approximation, still available analytically). Defaults to 'full'.
             datavar (float, optional): A single value for homogenous data variance. Defaults to None, which means compute the optimal value.
             prior_var (float, optional): A single value for homogenous prior variance. Defaults to None, which means ignore the prior variance (infinite variance).
             cov_nugget (float, optional): A diagonal covariance nugget to regularize the matrix inversion. Defaults to 0.0.
+            method (string, optional): Method of fitting. Can be 'full' (the conventional Bayesian linear regression) or 'vi' (the variational approximation, still available analytically). Defaults to 'full'.
         """
         super().__init__()
         self.prior_var = prior_var
@@ -48,7 +48,7 @@ class anl(lreg):
 
         Args:
             Amat (np.ndarray): A 2d array of size :math:`(N, K)` each row holding basis evaluations at a training point.
-            y (np.ndarray): An 1d array of size :math:`N` holding the data.
+            y (np.ndarray): An 1d array of size `N` holding the data.
 
         Returns:
             float: Best estimate of variance, :math:`\hat{\sigma}^2`.
@@ -71,7 +71,7 @@ class anl(lreg):
 
         Args:
             Amat (np.ndarray): A 2d array of size :math:`(N, K)` each row holding basis evaluations at a training point.
-            y (np.ndarray): An 1d array of size :math:`N` holding the data.
+            y (np.ndarray): An 1d array of size `N` holding the data.
         """
         npt, nbas = Amat.shape
 
@@ -111,7 +111,7 @@ class anl(lreg):
 
         Args:
             Amat (np.ndarray): A 2d array of size :math:`(N, K)` each row holding basis evaluations at a training point.
-            ydata (np.ndarray): An 1d array of size :math:`N` holding the data.
+            ydata (np.ndarray): An 1d array of size `N` holding the data.
 
         Returns:
             float: log-evidence value

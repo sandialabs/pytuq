@@ -23,9 +23,9 @@ import pytuq.utils.funcbank as fcb
 from pytuq.surrogates.pce import PCE
 from pytuq.utils.maps import scale01ToDom
 
-########################################################
-########################################################
-########################################################
+# %%
+# Setup
+# -----
 
 N = 14                      # Number of data points to generate
 order = 4                   # Polynomial order
@@ -33,9 +33,9 @@ true_model = fcb.sin4       # Function to approximate
 dim = 3                     # Dimensionality of input data
 # dim = 1
 
-########################################################
-########################################################
-########################################################
+# %%
+# Generate data
+# -------------
 
 np.random.seed(42) 
 

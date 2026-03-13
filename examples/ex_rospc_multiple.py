@@ -1,7 +1,9 @@
 #!/usr/bin/env python
-"""Run script testing PC construction given samples.
+"""Repeated PC from Rosenblatt Tests.
 
-Uses Rosenblatt transformation and regression.
+Repeatedly builds PC representations from random samples using the Rosenblatt
+transformation workflow to assess consistency of the estimated mean and
+standard deviation across replicas.
 """
 
 import numpy as np

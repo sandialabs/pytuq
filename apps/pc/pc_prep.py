@@ -1,4 +1,29 @@
 #!/usr/bin/env python
+"""Generate input Polynomial Chaos representations from marginal PCs, samples, or multivariate normals.
+
+This script accepts one of three input formats and produces a PC
+coefficient file (``pcf.txt``) that encodes the input random variable
+in a polynomial chaos basis:
+
+* ``marg`` — marginal PC coefficients (one line per dimension).
+* ``sam``  — raw samples; a Rosenblatt/PC transform is fitted.
+* ``mvn``  — mean vector + covariance matrix of a multivariate normal.
+
+Outputs:
+    ``pcf.txt`` : PC coefficient matrix, each column corresponding to one
+    input dimension.
+
+Example::
+
+    python pc_prep.py -f sam -i xsam.txt -p 2 -t HG
+
+Command-line arguments:
+    -f, --fmt     Input format: ``marg``, ``sam``, or ``mvn`` (default: ``sam``).
+    -i, --inp     Input filename (default: ``xsam.txt``).
+    -c, --cov     Covariance filename, used when format is ``mvn`` (default: ``cov.txt``).
+    -p, --pco     PC order (default: 1).
+    -t, --pct     PC type: ``LU`` or ``HG`` (default: ``HG``).
+"""
 
 import argparse
 import numpy as np

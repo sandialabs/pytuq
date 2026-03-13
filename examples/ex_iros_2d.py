@@ -1,6 +1,10 @@
 #!/usr/bin/env python
+"""2D Rosenblatt Transformation.
 
-"""Example demonstrating Rosenblatt transformation."""
+Demonstrates forward and inverse Rosenblatt transformations in 2D.
+Constructs a Rosenblatt map from samples drawn from an exponential-uniform
+distribution and plots the conditional mapping slices for each dimension.
+"""
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -51,12 +55,9 @@ ngr = 33
 # Original samples that are used to construct Rosenblatt map
 xsam = sampling_true(nsam, ndim)
 
-ros = Rosenblatt(xsam)#, sigmas=0.2*np.ones(ndim))
+ros = Rosenblatt(xsam)
 
-
-####
-#### Plot forward Rosenblatt function
-####
+# Evaluate forward Rosenblatt on a 2D grid
 ygr1 = np.linspace(0., 4., ngr)
 ygr2 = np.linspace(0., 4., ngr)
 X, Y = np.meshgrid(ygr1, ygr2)
@@ -80,11 +81,7 @@ for idim in range(ndim):
     plt.clf()
 
 
-####
-#### Plot inverse Rosenblatt function
-####
-
-# Sample new uniform r.v.
+# Evaluate inverse Rosenblatt on a uniform 2D grid
 xgr1 = np.linspace(0.00001, 1.-0.00001, ngr)
 xgr2 = np.linspace(0.00001, 1.-0.00001, ngr)
 X, Y = np.meshgrid(xgr1, xgr2)

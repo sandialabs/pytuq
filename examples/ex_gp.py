@@ -18,20 +18,7 @@ from pytuq.utils.plotting import myrc, lighten_color, plot_vars, plot_dm
 
 myrc()
 
-########################################################
-########################################################
-########################################################
-
-
-########################################################
-########################################################
-########################################################
-
-########################################################
-########################################################
-########################################################
-
-# 1D example
+# Training/testing setup
 ntrn = 11
 ntst = 33
 true_model = sin4
@@ -40,14 +27,16 @@ datastd = 0.02
 
 domain = np.ones((dim, 2))*np.array([-1.,1.])
 
+# PC basis for GP regression component
 order = 4
 pcrv = PCRV(1, dim, 'LU', mi=get_mi(order, dim))
 
+# Wrapper to evaluate PC bases as GP regression bases
 def basisevaluator(x, pars):
     pcrv, = pars
     return pcrv.evalBases(x, 0)
 
-
+# Generate noisy training data
 x = scale01ToDom(np.random.rand(ntrn,dim), domain)
 y = true_model(x)+datastd*np.random.randn(ntrn)
 
@@ -71,25 +60,27 @@ print("Kernel parameters:", gpr.kernel_params)
 #y_pred, y_std = gpr.predict(x, return_std=True)
 y_pred, y_std = gpr.predict_wstd(x)
 
+# Plot negative log marginal likelihood landscape
 agrid = np.linspace(0.01, 1., 133)
 plt.plot(agrid, np.array([gpr.neglogmarglik([aa], x, y) for aa in agrid]))
 plt.ylim(ymin=-10., ymax=100.)
 plt.savefig('neglogmarglik.png')
 
-
+# Evaluate on test data
 xtst = scale01ToDom(np.random.rand(ntst,dim), domain)
 ytst = true_model(xtst)+datastd*np.random.randn(ntst)
 
 #ytst_pred, ytst_predstd = gpr.predict(xtst, return_std=True)
 ytst_pred, ytst_predstd = gpr.predict_wstd(xtst)
 
-
+# Diagonal model-data comparison plot
 plot_dm([y, ytst], [y_pred, ytst_pred],
         errorbars=[[y_std,y_std], [ytst_predstd,ytst_predstd]],
         labels=['Training', 'Testing'],
         axes_labels=['Data', 'GP Fit'], figname='dm.png', msize=6)
 
 if dim==1:
+    # Plot the GP fit with uncertainty bands
     ngr = 111
     xgrid = np.linspace(domain[0,0]-0., domain[0,1]+0., ngr)[:, np.newaxis]
     ygrid = true_model(xgrid)

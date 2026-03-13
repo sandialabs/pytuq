@@ -34,7 +34,7 @@ def get_mi(ord, dim):
         dim (int): Dimension `d`
 
     Returns:
-        int np.ndarray: Multiindex array of size `(K,d)`, where `K=(p+d)!/p!d!`.
+        int np.ndarray: Multiindex array of size :math:`(K,d)`, where `K=(p+d)!/p!d!`.
     """
 
     assert(dim>0)

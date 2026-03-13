@@ -9,7 +9,7 @@ from .lreg import lreg
 
 
 class bcs(lreg):
-    """Bayesian compressive sensing (BCS) class.
+    r"""Bayesian compressive sensing (BCS) class :cite:t:`sargsyan:2014`.
 
     Attributes:
         eta (float): The tolerance parameter of the BCS algorithm.
@@ -39,7 +39,7 @@ class bcs(lreg):
 
         Args:
             Amat (np.ndarray): A 2d array of size :math:`(N, K)` each row holding basis evaluations at a training point.
-            y (np.ndarray): An 1d array of size :math:`N` holding the data.
+            y (np.ndarray): An 1d array of size `N` holding the data.
         """
 
         npt, nbas = Amat.shape
@@ -62,9 +62,9 @@ def bcs_fit(A, y, sigma2=None, eta=1.e-8, adaptive=0, optimal=1, scale=0.1, nugg
 
     Args:
         A (np.ndarray): A 2d array of size :math:`(N, K)` each row holding basis evaluations at a training point.
-        y (np.ndarray): An 1d array of size :math:`N` holding the data.
+        y (np.ndarray): An 1d array of size `N` holding the data.
         sigma2 (None, optional): Initial data variance. Defaults to None, which picks a rule-of-thumb default value.
-        eta (float, optional): The tolerance parameter of the BCS algorithm. Defaults to 1.e-6.
+        eta (float, optional): The tolerance parameter of the BCS algorithm. Defaults to 1.e-8.
         adaptive (int, optional): Integer-Boolean flag whether to turn on the adaptive algorithm or not. Defaults to 0.
         optimal (int, optional): Integer-Boolean flag whether to use the rigorous implementation of adaptive algorithm. Defaults to 1.
         scale (float, optional): Diagonal loading parameter of adaptive algorithm. Defaults to 0.1.

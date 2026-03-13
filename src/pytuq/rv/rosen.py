@@ -34,7 +34,7 @@ class Rosenblatt():
             x (np.ndarray): Where Rosenblatt is evaluated. A 2d array of size :math:`(N, d)`.
 
         Returns:
-            np.ndarray: Rosenblatt output, an array of size :math:`d`.
+            np.ndarray: Rosenblatt output, an array of size `d`.
         """
         nsam, ndim = self.xsam.shape
         assert(x.shape[0]==ndim)
@@ -56,11 +56,11 @@ class Rosenblatt():
         r"""Inverse Rosenblatt evaluator, where minimization is done with LBFGS.
 
         Args:
-            u (np.ndarray): An input array of size :math:`d`, all elements of which should in :math:`[0,1]`.
+            u (np.ndarray): An input array of size `d`, all elements of which should in :math:`[0,1]`.
             f (float, optional): Cushion factor for the root search.
 
         Returns:
-            np.ndarray: Output array of size :math:`d`.
+            np.ndarray: Output array of size `d`.
 
         Note:
             This is not being used, since for monotone function we can use hand-made bisection method, see inv().
@@ -86,7 +86,7 @@ class Rosenblatt():
 
         Args:
             x (np.ndarray): Input 2d array of size :math:`(N,d)`
-            u (np.ndarray): The 'uniform' sample, an array of size :math:`d`.
+            u (np.ndarray): The 'uniform' sample, an array of size `d`.
             idim (int): Which dimension we are computing the residual for.
 
         Returns:
@@ -107,11 +107,11 @@ class Rosenblatt():
         r"""Inverse Rosenblatt evaluator, where minimization is done with bisection.
 
         Args:
-            u (np.ndarray): An input array of size :math:`d`, all elements of which should in :math:`[0,1]`.
+            u (np.ndarray): An input array of size `d`, all elements of which should in :math:`[0,1]`.
             f (float, optional): Cushion factor for the root search.
 
         Returns:
-            np.ndarray: Output array of size :math:`d`.
+            np.ndarray: Output array of size `d`.
         """
         u[u==0]=1.e-6
         u[u==1]=1.-1.e-6

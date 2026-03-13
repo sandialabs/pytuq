@@ -9,19 +9,14 @@ import numpy as np
 
 from pytuq.rv.pcrv import PCRV_mvn
 
+# Generate random PC coefficients for a 14-dimensional PCRV
+covMatSize=14
+pcfs = np.random.rand(covMatSize, covMatSize+1)
 
-covMatSize=14 #dimension of L and C
-pcfs = np.random.rand(covMatSize, covMatSize+1) #np.loadtxt('pcf.txt').T
-
-#pcrv_mvn = PCRV_mvn(pdim=covMatSize,cfs=pcfs)
-
-# pcrv_mvn = PCRV_mvn(pdim=covMatSize)
-# pcrv_mvn.setCfs(cfs=[pcfs[j,:j+2] for j in range(covMatSize)])
-
+# Create PCRV_mvn from mean and covariance derived from random coefficients
 pcrv_mvn = PCRV_mvn(pdim=covMatSize, mean=pcfs[:,0], cov=np.dot(pcfs[:,1:], pcfs[:,1:].T))
-#pcrv_mvn = PCRV_mvn(pdim=covMatSize)
-#pcrv_mvn.setCfs(cfs=[pcfs[j,:j+2] for j in range(covMatSize)])
 
+# Sample and print info
 output_samples = pcrv_mvn.sample(20)
 
 pcrv_mvn.printInfo()

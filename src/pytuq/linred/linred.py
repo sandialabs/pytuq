@@ -15,8 +15,8 @@ class LinRed(object):
     Attributes:
         eigval (np.ndarray): An array of size `K` storing eigenvalues.
         mean (np.ndarray): An array of size `N` storing the mean.
-        modes (np.ndarray): A 2d array of size `(N,K)` consisting of all eigenvectors.
-        xi (np.ndarray): An array of size `(M,K)` for latent features.
+        modes (np.ndarray): A 2d array of size :math:`(N,K)` consisting of all eigenvectors.
+        xi (np.ndarray): An array of size :math:`(M,K)` for latent features.
         built (bool): Flag to indicate if the dimensionality redution is built or not.
 
     Note:
@@ -34,7 +34,7 @@ class LinRed(object):
         r"""Build method that should be implemented in children classes.
 
         Args:
-            data (np.ndarray): Data array of size `(N,M)`.
+            data (np.ndarray): Data array of size :math:`(N,M)`.
             plot (bool, optional): Flag indicating if auxilliary figures need to be made.
 
         Raises:
@@ -46,11 +46,11 @@ class LinRed(object):
         r"""Projecting data to the built bases.
 
         Args:
-            data (np.ndarray): Data array of size `(N,M)`.
+            data (np.ndarray): Data array of size :math:`(N,M)`.
             subtract_mean (bool, optional): Whether to subtract the mean before projection or not. Defaults to True. Useful without subtraction, e.g. if we are projecting perturbations or standard deviations.
 
         Returns:
-            np.ndarray: Array of latent features of size `(N,K)`.
+            np.ndarray: Array of latent features of size :math:`(N,K)`.
         """
         assert(self.built)
         xi = np.dot(data.T - int(subtract_mean)* self.mean, self.modes) / np.sqrt(self.eigval) #nsam, neig
@@ -62,12 +62,12 @@ class LinRed(object):
         """Evaluate the expansion at given latent features, up to a given number of eigenvalues.
 
         Args:
-            xi (np.ndarray, optional): Array of latent features of size `(M,K)`. Default is None, which takes the pre-build latent features.
+            xi (np.ndarray, optional): Array of latent features of size :math:`(M,K)`. Default is None, which takes the pre-build latent features.
             neig (int, optional): Number of requested eigenvalues in the evaluation. Defaults to None, which takes all eigenvalues.
             add_mean (bool, optional): Whether to add the mean before evaluation or not. Defaults to True. Useful without addition, e.g. if we are evaluating perturbations or standard deviations.
 
         Returns:
-            np.ndarray: Reduced-dimensional data array of size `(N,M)`.
+            np.ndarray: Reduced-dimensional data array of size :math:`(N,M)`.
         """
         assert(self.built)
 
@@ -92,7 +92,7 @@ class LinRed(object):
         r"""Compute relative cumulative variances
 
         Returns:
-            np.ndarray: An array of size `(N,K)` for cumulative variance fractions.
+            np.ndarray: An array of size :math:`(N,K)` for cumulative variance fractions.
         """
         assert(self.built)
 

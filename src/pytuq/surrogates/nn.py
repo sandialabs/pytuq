@@ -42,8 +42,9 @@ class NN:
         numbers of layers, number of nodes, and neural network type (defaulting to RNet).
 
         Args:
+            type (str): Type of neural network. Must be 'RNet'.
             n_layers (int): Number of layers.
-            n_nodes (int): Width of the RNet, i.e. number of units in each hidden layer.            
+            n_nodes (int): Width of the RNet, i.e. number of units in each hidden layer.
         """
 
         # Input validation for type, n_layers, n_nodes
@@ -269,9 +270,6 @@ class NN:
 
     def nn_vi(self):
         """Performs variational inference fitting and training of the neural network using the NN_VI wrapper class.
-
-        Args:
-            val (tuple): x,y tuple of validation points. Default uses the training set for validation.
         """
         # List of all possible fit options for variational inference 
         possible_fit_options = ['datanoise', 'lrate', 'batch_size', 'nsam', 'nepochs']
@@ -299,7 +297,7 @@ class NN:
         """Builds the model with training data by calling the correct fitting method for model training.
 
         Args:
-            fit_options (dict, optional): Options/training parameters for model fitting.
+            **kwargs: Options/training parameters for model fitting, passed to :meth:`update_options`.
         """
         if self.nnet is None:
             self.instantiate_network()
@@ -319,15 +317,14 @@ class NN:
         r"""Generates samples of predictions.
 
         Args:
-            x_eval (np.ndarray): 2d array of size `(N,d)` as input data for evaluation. Can also be a single sample as input.
-            nens (int, optional): Number of samples requested, M.
+            x_eval (np.ndarray): 2d array of size :math:`(N,d)` as input data for evaluation. Can also be a single sample as input.
             msc (int, optional): Prediction mode: 0 (mean-only), 1 (mean and variance), or 2 (mean, variance and covariance). Defaults to 0.
-            nens = nsam (int, optional): Number of samples requested, `M`.
+            nsam (int, optional): Number of samples requested, `M`.
         Returns:
             dictionary: Dictionary with samples of predictions.
-            tuple(np.ndarray, np.ndarray, np.ndarray): triple of Mean (array of size `(N, o)`), 
-            Variance (array of size `(N, o)` or None),
-            Covariance (array of size `(N, N, o)` or None).
+            tuple(np.ndarray, np.ndarray, np.ndarray): triple of Mean (array of size :math:`(N, o)`), 
+            Variance (array of size :math:`(N, o)` or None),
+            Covariance (array of size :math:`(N, N, o)` or None).
 
         """
         if self.nnet is None:

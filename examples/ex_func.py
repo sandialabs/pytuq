@@ -13,6 +13,7 @@ from pytuq.utils.plotting import myrc
 
 myrc()
 
+# Collection of function objects: wrappers, arithmetic, composition, gradients
 fcns = [
         func.ModelWrapperFcn(lambda x,p : x[:,0]**p[0]+np.sin(x[:,1]**p[0]), 3, modelpar=[3]), \
         oper.PickDim(2, 1, cf=100.)+chem.MullerBrown(),\
@@ -50,6 +51,7 @@ fcns = [
         ]
 
 
+# Validate gradient, minimize, and plot each function
 for fcn in fcns:
     print(f"========== Function {fcn.name} ==================")
     print("Gradient check")

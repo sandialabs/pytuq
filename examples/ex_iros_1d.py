@@ -1,6 +1,10 @@
 #!/usr/bin/env python
+"""1D Rosenblatt Transformation.
 
-"""Example demonstrating Rosenblatt transformation."""
+Demonstrates forward and inverse Rosenblatt transformations in 1D.
+Constructs a Rosenblatt map from samples of an exponential-uniform distribution
+and plots both the forward and inverse maps against the true transformation.
+"""
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -41,20 +45,12 @@ xsam = sampling_true(nsam, ndim)
 
 ros = Rosenblatt(xsam, sigmas=None)
 
-
-
-####
-#### Plot forward Rosenblatt function
-####
+# Evaluate forward Rosenblatt on a grid in the original space
 ygr = np.linspace(np.exp(-1.0), np.exp(1.3), ngr).reshape(-1,1)
 fros_ygr = np.array([ros(x) for x in ygr])
 
 
-####
-#### Plot inverse Rosenblatt function
-####
-
-# Sample new uniform r.v.
+# Evaluate inverse Rosenblatt on a uniform grid
 xgr = np.linspace(0.00000, 1.-0.000001, ngr).reshape(-1,1)
 iros_xgr = np.array([ros.inv(u) for u in xgr])
 # print(ros.inv(np.array([0.0])))
@@ -63,6 +59,7 @@ iros_xgr = np.array([ros.inv(u) for u in xgr])
 # print(ros.inv(np.array([1.0])))
 
 
+# Compare forward and inverse maps with the true transformation
 plt.plot(xgr, iros_xgr, 'b-', label='Inverse')
 plt.plot(fros_ygr, ygr, 'r-', label='Forward')
 plt.plot(xgr, np.exp(xgr), 'g--', label='True Map')
