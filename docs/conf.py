@@ -63,7 +63,9 @@ extensions += ['sphinxcontrib.bibtex']
 bibtex_bibfiles = ['references.bib']
 bibtex_reference_style = 'label'
 
-numpydoc_show_class_members = False 
+numpydoc_show_class_members = False
+
+graphviz_output_format = 'png'
 
 napoleon_use_admonition_for_examples = True
 
