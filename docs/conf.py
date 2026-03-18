@@ -132,7 +132,6 @@ html_theme_options = {
     'logo_only': True,
     'style_external_links': False,
     'vcs_pageview_mode': '',
-    'flyout_display': 'hidden',
     # Toc options
     'collapse_navigation': False,
     'sticky_navigation': True,
