@@ -57,6 +57,12 @@ extensions += ['matplotlib.sphinxext.plot_directive',
 
 extensions += ['sphinx_gallery.gen_gallery']
 
+extensions += ['sphinx.ext.inheritance_diagram']
+
+extensions += ['sphinxcontrib.bibtex']
+bibtex_bibfiles = ['references.bib']
+bibtex_reference_style = 'label'
+
 numpydoc_show_class_members = False 
 
 napoleon_use_admonition_for_examples = True
@@ -70,7 +76,7 @@ autoapi_dirs = ['../src'] # Where the PyTUQ source code is
 autoapi_type = "python"
 autoapi_template_dir = "_templates/autoapi" # Templates for AutoAPI documentation
 # autoapi_add_toctree_entry = False  # Adding the generateed documentation into the TOC Tree
-suppress_warnings = ["autoapi", 'ref.python', 'toc.excluded']
+suppress_warnings = ["autoapi", 'ref.python', 'toc.excluded', 'toc.not_readable', 'toc.not_included']
 autoapi_options = [
     "members",
     "undoc-members",
@@ -103,7 +109,7 @@ pygments_style = "trac"
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', '_templates']
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output

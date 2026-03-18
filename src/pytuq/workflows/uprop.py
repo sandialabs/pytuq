@@ -1,8 +1,20 @@
 #!/usr/bin/env python
+"""Module for uncertainty propagation workflows via polynomial chaos."""
 
 import numpy as np
 
 def uprop_proj(in_pc, model, nqd, out_pc):
+    """Uncertainty propagation via spectral projection.
+
+    Evaluates the model on quadrature points induced by the input PC germ,
+    and computes the output PC coefficients via Galerkin projection.
+
+    Args:
+        in_pc (PCRV): Input PC random variable.
+        model (callable): Model function taking an :math:`(N, d)`-sized array and returning an :math:`(N, o)`-sized array.
+        nqd (int): Number of quadrature points per stochastic dimension.
+        out_pc (PCRV): Output PC random variable (coefficients are set in-place).
+    """
     dim = in_pc.sdim
     qdpts, wghts = in_pc.quadGerm([nqd]*dim)
 
@@ -27,6 +39,17 @@ def uprop_proj(in_pc, model, nqd, out_pc):
     return
 
 def uprop_regr(in_pc, model, nsam, out_pc):
+    """Uncertainty propagation via regression.
+
+    Evaluates the model on random germ samples from the input PC and computes
+    the output PC coefficients via least-squares regression.
+
+    Args:
+        in_pc (PCRV): Input PC random variable.
+        model (callable): Model function taking an :math:`(N, d)`-sized array and returning an :math:`(N, o)`-sized array.
+        nsam (int): Number of random samples.
+        out_pc (PCRV): Output PC random variable (coefficients are set in-place).
+    """
     dim = in_pc.sdim
     samples_germ = in_pc.sampleGerm(nsam)
 

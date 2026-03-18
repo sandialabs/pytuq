@@ -16,10 +16,6 @@ from pytuq.utils.mindex import micf_join
 
 myrc()
 
-
-####################################################################
-####################################################################
-
 # Number of samples (N), dimensionality of input (d), dimensionality of output (M)
 nsam, ndim, nout = 111, 5, 33
 # Input parameter

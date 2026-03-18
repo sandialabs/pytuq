@@ -11,8 +11,8 @@ class SVD(LinRed):
     Attributes:
         eigval (np.ndarray): An array of size `K` storing eigenvalues.
         mean (np.ndarray): An array of size `N` storing the mean.
-        modes (np.ndarray): A 2d array of size `(N,K)` consisting of all eigenvectors.
-        xi (np.ndarray): An array of size `(M,K)` for left eigenvectors of SVD.
+        modes (np.ndarray): A 2d array of size :math:`(N,K)` consisting of all eigenvectors.
+        xi (np.ndarray): An array of size :math:`(M,K)` for left eigenvectors of SVD.
         built (bool): Flag to indicate if SVD is built or not.
 
     Note:
@@ -29,7 +29,7 @@ class SVD(LinRed):
         """Building SVD-based dimensionality reduction.
 
         Args:
-            data (np.ndarray): Data array of size `(N,M)`.
+            data (np.ndarray): Data array of size :math:`(N,M)`.
             plot (bool, optional): Flag indicating if auxilliary figures need to be made.
         """
         nx, nsam = data.shape

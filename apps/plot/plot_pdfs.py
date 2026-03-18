@@ -1,4 +1,28 @@
 #!/usr/bin/env python
+"""Plot probability density functions from MCMC or other samples.
+
+This script reads a samples file and produces either a triangular
+pair-plot or individual marginal PDF plots (histograms or KDEs).
+It supports burn-in trimming, thinning, optional prior-range overlays,
+and nominal-value markers.
+
+Example::
+
+    python plot_pdfs.py -p pchain.dat -t tri -b 1000 -e 5
+
+Command-line arguments:
+    Positional            Indices of parameters to show (default: all).
+    -p, --samples_file    Samples file (default: ``pchain.dat``).
+    -n, --names_file      Parameter names file.
+    -l, --nominal_file    Nominal parameter values file.
+    -g, --prange_file     Prior range file.
+    -t, --plot_type       ``tri`` (triangular), ``ind`` (individual), or ``inds``.
+    -f, --pdf_type        ``hist`` or ``kde`` (default: ``hist``).
+    -b, --burnin          Number of burn-in samples to discard (default: 0).
+    -e, --every           Thinning interval (default: 1).
+    -x, --lsize           Axes label font size (default: 10).
+    -z, --zsize           Tick label font size (default: 10).
+"""
 
 import argparse
 

@@ -14,30 +14,30 @@ from ..utils.xutils import cartes_list, safe_cholesky
 
 
 class PCRV(MRV):
-    r"""A class for a multivariate PC random variable.
+    r"""A class for a multivariate PC random variable :cite:t:`xiu:2002`.
 
     Attributes:
-        sdim (int): Stochastic dimension :math:`s`, i.e. germ dimensionality.
-        mindices (list[np.ndarray]): List of :math:`d` multiindex arrays, each of size :math:`(K_i,s)`.
-        coefs (list[np.ndarray]): List of :math:`d` coefficient arrays, each of size :math:`K_i` for :math:`i=1,\dots,d`.
-        maxOrd (np.ndarray): A 1d array of size :math:`s` indicating maximal order across all physical dimensions.
-        pind (list[tuple]): List of tuples :math:`(i,k)` accounting for all coefficients: the first element is the physical dimension :math:`i` (between :math:`0` and :math:`d-1`), and the second element is the coefficient index :math:`k` (between :math:`0` and :math:`K_i`).
+        sdim (int): Stochastic dimension `s`, i.e. germ dimensionality.
+        mindices (list[np.ndarray]): List of `d` multiindex arrays, each of size :math:`(K_i,s)`.
+        coefs (list[np.ndarray]): List of `d` coefficient arrays, each of size :math:`K_i` for :math:`i=1,\dots,d`.
+        maxOrd (np.ndarray): A 1d array of size `s` indicating maximal order across all physical dimensions.
+        pind (list[tuple]): List of tuples :math:`(i,k)` accounting for all coefficients: the first element is the physical dimension `i` (between :math:`0` and :math:`d-1`), and the second element is the coefficient index `k` (between :math:`0` and :math:`K_i`).
         rndind (list[int]): Indices of random physical dimensions, each entry is between :math:`0` and :math:`d-1`.
         detind (list[int]): Indices of deterministic physical dimensions, each entry is between :math:`0` and :math:`d-1`.
         function (callable): PC evaluator function, :math:`(N,s)\rightarrow N`.
-        pctypes (list[str]): List of :math:`s` PC types, one for each stochastic dimension.
-        PC1ds (list[PC1d]): List of :math:`s` 1d PC objects that comprise this multivariate PC random variable.
+        pctypes (list[str]): List of `s` PC types, one for each stochastic dimension.
+        PC1ds (list[PC1d]): List of `s` 1d PC objects that comprise this multivariate PC random variable.
     """
 
     def __init__(self, pdim, sdim, pctype, mi=None, cfs=None):
         r"""Initialization.
 
         Args:
-            pdim (int): Physical dimensionality :math:`d` of the PC random variable/vector.
-            sdim (int): Stochastic dimensionality :math:`s` of the PC random variable/vector.
-            pctype (str or list): PC type. Either a list of :math:`s` strings (one per stochastic dimension), or a single string for all dimensions.
-            mi (list or np.ndarray, optional): List of :math:`d` multiindex arrays, each of size :math:`(K_i,s)` for :math:`i=1, \dots, d`. Or a single multiindex array of size :math:`(K,s)`, meaning all dimensions get the same multiindex. Defaults to None, which is a single 1d constant random variable i.e. a multiindex of all zeros.
-            cfs (list or np.ndarray, optional): List of :math:`d` coefficient arrays, each of size :math:`K_i` for :math:`i=1, \dots, d`. Or a single coefficient array of size :math:`K`, meaning all dimensions get the same coefficient array. Or a 2d array of size :math:`(K,d)`. Defaults to None, which is populating coefficients with all zeros.
+            pdim (int): Physical dimensionality `d` of the PC random variable/vector.
+            sdim (int): Stochastic dimensionality `s` of the PC random variable/vector.
+            pctype (str or list): PC type. Either a list of `s` strings (one per stochastic dimension), or a single string for all dimensions.
+            mi (list or np.ndarray, optional): List of `d` multiindex arrays, each of size :math:`(K_i,s)` for :math:`i=1, \dots, d`. Or a single multiindex array of size :math:`(K,s)`, meaning all dimensions get the same multiindex. Defaults to None, which is a single 1d constant random variable i.e. a multiindex of all zeros.
+            cfs (list or np.ndarray, optional): List of `d` coefficient arrays, each of size :math:`K_i` for :math:`i=1, \dots, d`. Or a single coefficient array of size `K`, meaning all dimensions get the same coefficient array. Or a 2d array of size :math:`(K,d)`. Defaults to None, which is populating coefficients with all zeros.
         """
         assert(pdim>0)
         super().__init__(pdim)
@@ -74,8 +74,8 @@ class PCRV(MRV):
         r"""Sets the multiindex and coefficients together.
 
         Args:
-            mi (list or np.ndarray): List of :math:`d` multiindex arrays, each of size :math:`(K_i,s)` for :math:`i=1, \dots, d`. Or a single multiindex array of size :math:`(K,s)`, meaning all dimensions get the same multiindex.
-            cfs (list or np.ndarray, optional): List of :math:`d` coefficient arrays, each of size :math:`K_i` for :math:`i=1, \dots, d`. Or a single coefficient array of size :math:`K`, meaning all dimensions get the same coefficient array. Or a 2d array of size :math:`(d, K)`. Defaults to None, which is populating coefficients with all zeros.
+            mi (list or np.ndarray): List of `d` multiindex arrays, each of size :math:`(K_i,s)` for :math:`i=1, \dots, d`. Or a single multiindex array of size :math:`(K,s)`, meaning all dimensions get the same multiindex.
+            cfs (list or np.ndarray, optional): List of `d` coefficient arrays, each of size :math:`K_i` for :math:`i=1, \dots, d`. Or a single coefficient array of size `K`, meaning all dimensions get the same coefficient array. Or a 2d array of size :math:`(d, K)`. Defaults to None, which is populating coefficients with all zeros.
         """
         self.setMi(mi)
         self.setCfs(cfs=cfs)
@@ -85,7 +85,7 @@ class PCRV(MRV):
         r"""Sets the multiindex.
 
         Args:
-            mi (list or np.ndarray): List of :math:`d` multiindex arrays, each of size :math:`(K_i,s)` for :math:`i=1, \dots, d`. Or a single multiindex array of size :math:`(K,s)`, meaning all dimensions get the same multiindex.
+            mi (list or np.ndarray): List of `d` multiindex arrays, each of size :math:`(K_i,s)` for :math:`i=1, \dots, d`. Or a single multiindex array of size :math:`(K,s)`, meaning all dimensions get the same multiindex.
 
         Note:
             Dangerous to use externally, as it may conflict with other attributes/sizes. Prefer to use setMiCfs() externally.
@@ -118,7 +118,7 @@ class PCRV(MRV):
         r"""Sets the coefficients. Dangerous to use externally, as it may conflict with other attributes/sizes. Prefer to use setMiCfs() externally.
 
         Args:
-            cfs (list or np.ndarray): List of :math:`d` coefficient arrays, each of size :math:`K_i` for :math:`i=1, \dots, d`. Or a single coefficient array of size :math:`K`, meaning all dimensions get the same coefficient array. Or a 2d array of size :math:`(d, K)`. Defaults to None, which is populating coefficients with all zeros.
+            cfs (list or np.ndarray): List of `d` coefficient arrays, each of size :math:`K_i` for :math:`i=1, \dots, d`. Or a single coefficient array of size `K`, meaning all dimensions get the same coefficient array. Or a 2d array of size :math:`(d, K)`. Defaults to None, which is populating coefficients with all zeros.
 
         Note:
            Dangerous to use externally, as it may conflict with other attributes. Prefer to use setMiCfs() externally.
@@ -203,7 +203,7 @@ class PCRV(MRV):
         r"""Computes the mean of the random variable.
 
         Returns:
-            np.ndarray: A 1d array of size :math:`d` for means per physical dimension.
+            np.ndarray: A 1d array of size `d` for means per physical dimension.
         """
         mean = np.zeros((self.pdim))
         for i in range(self.pdim):
@@ -218,7 +218,7 @@ class PCRV(MRV):
         r"""Computes the variance of the random variable.
 
         Returns:
-            np.ndarray: A 1d array of size :math:`d` for variance per physical dimension.
+            np.ndarray: A 1d array of size `d` for variance per physical dimension.
         """
         var = np.zeros((self.pdim))
         for i in range(self.pdim):
@@ -315,7 +315,7 @@ class PCRV(MRV):
             paramIndices (list): List of indices to group. Each element should be between :math:`0` and :math:`s-1`.
 
         Returns:
-            np.ndarray: An 1d array of size `d` for sensitivities of this group for all :math:`d` dimensions.
+            np.ndarray: An 1d array of size `d` for sensitivities of this group for all `d` dimensions.
         """
         var = self.computeVar()
         nind = len(paramIndices)
@@ -340,7 +340,7 @@ class PCRV(MRV):
     def slice_1d(self, jdim):
         r"""Extracts a 1d PC random variable along a given stochastic dimension.
         Args:
-            jdim (int): The index :math:`j` of the stochastic dimension. Should be between :math:`0` and :math:`s-1`.
+            jdim (int): The index `j` of the stochastic dimension. Should be between :math:`0` and :math:`s-1`.
 
         Returns:
             PCRV: A 1d PC random variable object along the given stochastic dimension.
@@ -380,10 +380,10 @@ class PCRV(MRV):
         r"""Generates quadrature samples of PC germ vector.
 
         Args:
-            pts (np.ndarray, optional): An integer 1d array of size :math:`s` indicating how many points per each stochastic dimension, :math:`q_i` for :math:`i=1, \dots, s`. Default is None, which means 2 points per stochastic dimension.
+            pts (np.ndarray, optional): An integer 1d array of size `s` indicating how many points per each stochastic dimension, :math:`q_i` for :math:`i=1, \dots, s`. Default is None, which means 2 points per stochastic dimension.
 
         Returns:
-            tuple[np.ndarray, np.ndarray]: A pair of arrays: a 2d array of quadrature points of size :math:`(Q,s)` and corresponding 1d array of weights of size :math:`Q`, where :math:`Q=q_1 q_2 \cdots q_s` is the total number of points.
+            tuple[np.ndarray, np.ndarray]: A pair of arrays: a 2d array of quadrature points of size :math:`(Q,s)` and corresponding 1d array of weights of size `Q`, where :math:`Q=q_1 q_2 \cdots q_s` is the total number of points.
 
         Note:
             This is full tensor product quadrature. Sparse quadrature is not implemented.
@@ -415,10 +415,10 @@ class PCRV(MRV):
 
         Args:
             xi (np.ndarray): A 2d array of size :math:`(M,s)` for the input.
-            jdim (int): The index :math:`i` of the PC random variable/vector. Should be between :math:`0` and :math:`d-1`.
+            jdim (int): The index `i` of the PC random variable/vector. Should be between :math:`0` and :math:`d-1`.
 
         Returns:
-            np.ndarray: A 2d output array of size :math:`(M, K_i)` where :math:`K_i` is the number of PC bases for the :math:`i`-th dimension.
+            np.ndarray: A 2d output array of size :math:`(M, K_i)` where :math:`K_i` is the number of PC bases for the `i`-th dimension.
         """
         nxi, xidim = xi.shape
         assert(xidim==self.sdim)
@@ -445,10 +445,10 @@ class PCRV(MRV):
         r"""Evaluates bases norms-squared for a given physical dimension.
 
         Args:
-            jdim (int): The index of :math:`i` of the PC random variable/vector. Should be between :math:`0` and :math:`d-1`.
+            jdim (int): The index of `i` of the PC random variable/vector. Should be between :math:`0` and :math:`d-1`.
 
         Returns:
-            np.ndarray: An 1d array of size :math:`K_i`, the number of bases for the :math:`i`-th dimension.
+            np.ndarray: An 1d array of size :math:`K_i`, the number of bases for the `i`-th dimension.
         """
         assert(jdim>=0 and jdim<self.pdim)
         mindex = self.mindices[jdim]
@@ -512,7 +512,7 @@ class PCRV(MRV):
         r"""Sample from the PC random variable. Basically chaining sampling the germ and evaluating the PC.
 
         Args:
-            nsam (int): Number of samples requested, :math:`M`.
+            nsam (int): Number of samples requested, `M`.
             seed (None, optional): Seed for the random generation. Default is None, which does not set any seed.
 
         Returns:
@@ -637,10 +637,10 @@ class PCRV_iid(PCRV):
 
         Args:
 
-            pdim (int): The number of dimensions, :math:`d`. Same as stochastic dimensions, `s`.
-            pctype (str or list): PC type. Either a list of :math:`s` strings (one per stochastic dimension), or a single string for all dimensions.
-            orders (np.ndarray, optional): An integer array of size :math:`d` indicating the PC order :math:`p_i` for each physical dimension for :math:`i=1,\dots,d`. Defaults to None, which sets order :math:`p_i=1` for all dimensions.
-            cfs (list or np.ndarray, optional): List of :math:`d` coefficient arrays, each of size :math:`p_i+1` for :math:`i=1,\dots,d`. Or a single coefficient array of size :math:`p+1`, meaning all dimensions get the same coefficient array (assuming all orders are the same). Or a 2d array of size :math:`(p+1,d)` (again, assuming all orders are the same). Defaults to None, which is populating coefficients with all zeros.
+            pdim (int): The number of dimensions, `d`. Same as stochastic dimensions, `s`.
+            pctype (str or list): PC type. Either a list of `s` strings (one per stochastic dimension), or a single string for all dimensions.
+            orders (np.ndarray, optional): An integer array of size `d` indicating the PC order :math:`p_i` for each physical dimension for :math:`i=1,\dots,d`. Defaults to None, which sets order :math:`p_i=1` for all dimensions.
+            cfs (list or np.ndarray, optional): List of `d` coefficient arrays, each of size :math:`p_i+1` for :math:`i=1,\dots,d`. Or a single coefficient array of size :math:`p+1`, meaning all dimensions get the same coefficient array (assuming all orders are the same). Or a 2d array of size :math:`(p+1,d)` (again, assuming all orders are the same). Defaults to None, which is populating coefficients with all zeros.
         """
         if orders is None:
             orders = np.ones((pdim,), dtype=int)
@@ -669,9 +669,9 @@ class PCRV_mvn(PCRV):
         r"""Initialization of MVN PC random variable.
 
         Args:
-            pdim (int): The number of dimensions, :math:`d`. Same as stochastic dimensions, :math:`s`.
-            rndind (None, optional): List of :math:`r` indices indicating the ones that are random. Each element must be between :math:`0` and :math:`d-1`. Defaults to None, which means all dimensions are random.
-            mean (np.ndarray, optional): An array for the mean of size :math:`d`. Defaults to None, which means all zeros.
+            pdim (int): The number of dimensions, `d`. Same as stochastic dimensions, `s`.
+            rndind (None, optional): List of `r` indices indicating the ones that are random. Each element must be between :math:`0` and :math:`d-1`. Defaults to None, which means all dimensions are random.
+            mean (np.ndarray, optional): An array for the mean of size `d`. Defaults to None, which means all zeros.
             cov (np.ndarray, optional): A 2d array of size :math:`(r, r)`. Defaults to None, which is means identity covariance.
         """
         if rndind is None:
@@ -785,8 +785,8 @@ class PC1d():
         r"""The function call of the 1d PC object.
 
         Args:
-            x (np.ndarray): A size :math:`M` 1d array of inputs at which PC is evaluated.
-            order (int): The requested order :math:`p`.
+            x (np.ndarray): A size `M` 1d array of inputs at which PC is evaluated.
+            order (int): The requested order `p`.
 
         Returns:
             list[np.ndarray]: A list of size :math:`p+1` containing 1d arrays of the PC bases evaluated at the requested points.
@@ -808,10 +808,10 @@ class PC1d():
         r"""Evaluate the germ cumulative distribution functions (CDFs).
 
         Args:
-            x (np.ndarray): A size :math:`M` 1d array of inputs at which CDF is evaluated.
+            x (np.ndarray): A size `M` 1d array of inputs at which CDF is evaluated.
 
         Returns:
-            np.ndarray: A size :math:`M` 1d array of outputs containing CDF evaluations.
+            np.ndarray: A size `M` 1d array of outputs containing CDF evaluations.
         """
         if self.pctype == 'LU' or self.pctype == 'nLU':
             cdf = (x+1.)/2.
@@ -829,10 +829,10 @@ class PC1d():
         r"""Samples the germ.
 
         Args:
-            nsam (int): Input number of samples requested, :math:`M`.
+            nsam (int): Input number of samples requested, `M`.
 
         Returns:
-            np.ndarray: A 1d array of size :math:`M` containing the germ samples.
+            np.ndarray: A 1d array of size `M` containing the germ samples.
         """
         if self.pctype == 'LU' or self.pctype == 'nLU':
             germ_sam = np.random.rand(nsam)*2.0-1.0
@@ -848,10 +848,10 @@ class PC1d():
         r"""Computes norm-squared of a basis with a given order.
 
         Args:
-            ord (int): Requested order :math:`p`.
+            ord (int): Requested order `p`.
 
         Returns:
-            float: The norm-squared of the basis of order :math:`p`.
+            float: The norm-squared of the basis of order `p`.
         """
         if self.pctype == 'LU':
             val = 1./(2.*float(ord)+1.)

@@ -10,9 +10,9 @@ def distance(x, aw, bw):
     r"""Quadratic (least-squares) distance metric.
 
     Args:
-        x (np.ndarray): A 1d coefficient array of size :math:`K`.
+        x (np.ndarray): A 1d coefficient array of size `K`.
         aw (np.ndarray): A 2d array of size :math:`(N, K)` each row holding basis evaluations at a training point.
-        bw (np.ndarray): An 1d array of size :math:`N` holding the data.
+        bw (np.ndarray): An 1d array of size `N` holding the data.
 
     Returns:
         float: Squared-residual distance.
@@ -24,12 +24,12 @@ def distance_grad(x, aw, bw):
     r"""Gradient of the distance metric, analytically avaliable.
 
     Args:
-        x (np.ndarray): A 1d coefficient array of size :math:`K`.
+        x (np.ndarray): A 1d coefficient array of size `K`.
         aw (np.ndarray): A 2d array of size :math:`(N, K)` each row holding basis evaluations at a training point.
-        bw (np.ndarray): An 1d array of size :math:`N` holding the data.
+        bw (np.ndarray): An 1d array of size `N` holding the data.
 
     Returns:
-        np.ndarray: Gradient array of size :math:`K`.
+        np.ndarray: Gradient array of size `K`.
     """
     return 2.0*np.dot(aw.T, np.dot(aw, x) - bw)
 
@@ -47,7 +47,7 @@ class opt(lreg):
 
         Args:
             Amat (np.ndarray): A 2d array of size :math:`(N, K)` each row holding basis evaluations at a training point.
-            y (np.ndarray): An 1d array of size :math:`N` holding the data.
+            y (np.ndarray): An 1d array of size `N` holding the data.
         """
         param_ini = np.random.randn(Amat.shape[1], )
         res = minimize(distance, param_ini, args=(Amat, y), method='BFGS', options={'gtol': 1e-13}, jac=distance_grad)

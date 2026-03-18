@@ -1,4 +1,23 @@
 #!/usr/bin/env python
+"""Sample from a multivariate Polynomial Chaos random variable.
+
+This script reads a PC coefficient file, constructs a ``PCRV`` object,
+draws samples from its germ and evaluates the PC expansion to obtain
+samples in physical space.
+
+Outputs:
+    ``psam.txt`` : Samples in physical (PC-transformed) space.
+    ``qsam.txt`` : Samples in the germ (standard normal or uniform) space.
+
+Example::
+
+    python pc_sam.py -f pcf.txt -t HG -n 500
+
+Command-line arguments:
+    -f, --pcf     PC coefficient file (default: ``pcf.txt``).
+    -t, --pct     PC type: ``LU`` or ``HG`` (default: ``HG``).
+    -n, --nsam    Number of samples to draw (default: 111).
+"""
 
 import argparse
 import numpy as np

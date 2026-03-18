@@ -42,7 +42,7 @@
    {{ obj.docstring|indent(3) }}
    {% endif %}
    {% for obj_item in visible_children %}
-      {% if obj_item.type not in own_page_types %}
+      {% if obj_item.type not in own_page_types and obj_item.type != "attribute" %}
 
    {{ obj_item.render()|indent(3) }}
       {% endif %}

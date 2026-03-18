@@ -19,10 +19,10 @@ class fitbase(object):
 
         Args:
             x (np.ndarray): 2d x-data array of size :math:`(N,d)`.
-            y (np.ndarray): 1d y-data array of size :math:`N`.
+            y (np.ndarray): 1d y-data array of size `N`.
 
         Raises:
-            NotImplementedError: Base class fit not implemented. This should be implemented in a children class.
+            NotImplementedError: Base class fit not implemented. This should be implemented in a derived class.
         """
         raise NotImplementedError
 
@@ -35,7 +35,7 @@ class fitbase(object):
             pp (bool, optional): Whether to compute posterior-predictive (i.e. add data variance) or not.
 
         Raises:
-            NotImplementedError: Base class predict not implemented. This should be implemented in a children class.
+            NotImplementedError: Base class predict not implemented. This should be implemented in a derived class.
         """
         raise NotImplementedError
 
@@ -44,7 +44,7 @@ class fitbase(object):
         """Predict mean and standard deviation only.
 
         Args:
-            xc (np.ndarray): 2d array of size `(N,d)`.
+            xc (np.ndarray): 2d array of size :math:`(N,d)`.
             pp (bool, optional): Whether to compute posterior-predictive (i.e. add data variance) or not.
 
         Returns:

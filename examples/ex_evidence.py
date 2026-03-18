@@ -22,6 +22,7 @@ myrc()
 ########################################################
 ########################################################
 
+# Alternative true models for testing
 def true_model_0(xx):
     y = 0.0*xx[:,0]
 
@@ -52,6 +53,7 @@ orders = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 ########################################################
 ########################################################
 
+# Generate noisy data from the true model
 domain = np.ones((dim, 2))*np.array([-1.,1.])
 x = scale01ToDom(np.random.rand(N,dim), domain)
 y = true_model(x)
@@ -60,6 +62,7 @@ y+=np.sqrt(datavar)*np.random.randn(N,)
 xg = np.linspace(-1., 1., 100).reshape(-1, 1)
 yg = true_model(xg)
 
+# Fit PC of each order and compute Bayesian evidence
 ypreds = []
 evids = []
 for iord, order in enumerate(orders):
@@ -95,6 +98,7 @@ for iord, order in enumerate(orders):
     plt.savefig(f'fit_o{order}.png')
     plt.clf()
 
+# Summary plot: all fits + evidence vs. order
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(20,10))
 ax1.plot(x, y, 'ko', ms=11, markeredgecolor='w', label='Data', zorder=1000)
 ax1.plot(xg, yg, 'k--', label='True model', zorder=10000)

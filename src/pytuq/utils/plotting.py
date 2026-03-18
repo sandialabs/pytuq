@@ -202,7 +202,7 @@ def plot_xrv(xsam, prefix='xsam'):
     """Plotting samples one at a time, and one dimension vs the other.
 
     Args:
-        xsam (np.ndarray): A `(N,d)` numpy array of samples
+        xsam (np.ndarray): A :math:`(N,d)` numpy array of samples
         prefix (str, optional): Prefix for filenames of the figures.
     """
     nsam, ndim = xsam.shape
@@ -224,7 +224,7 @@ def parallel_coordinates(parnames, values, labels, savefig='pcoord'):
 
     Args:
         parnames (list[str]): list of `d` parameter names
-        values (np.ndarray): `(d, N)` array of `N` data points with `d` parameters
+        values (np.ndarray): :math:`(d, N)` array of `N` data points with `d` parameters
         labels (list[str]): list of `N` labels/categories, one per point
         savefig (str, optional): figure name to save
     """
@@ -281,8 +281,8 @@ def plot_yx(x, y, rowcols=None, ylabel='', xlabels=None,
     """Plots an output vs one input at a time in a matrix of figures.
 
     Args:
-        x (np.ndarray): An `(N,d)` input array.
-        y (np.ndarray): An `(N,)` output array.
+        x (np.ndarray): An :math:`(N,d)` input array.
+        y (np.ndarray): An :math:`(N,)` output array.
         rowcols (tuple[int], optional): A pair of integers, rows and columns.
         ylabel (str, optional): Y-axis label.
         xlabels (list[str], optional): List of X-axis labels.
@@ -347,7 +347,7 @@ def plot_sens(sensdata, pars, cases,
     """Plots sensitivities for multiple observables with respect to multiple parameters.
 
     Args:
-        sensdata (np.ndarray): An array of sensitivities of size `(o,d)`.
+        sensdata (np.ndarray): An array of sensitivities of size :math:`(o,d)`.
         pars (list[int]): List of parameter indices to use. All should be less than `d`.
         cases (list[int]): List of output indices to use. All should be less than `o`.
         vis (str, optional): Plot type 'bar' or 'graph' (the latter is not used/tested often).
@@ -609,14 +609,14 @@ def plot_tri(xi, names=None, msize=3, axarr=None, clr='b', yy=None, lsize=12, zo
     """Plots multidimensional samples in a triangular way, i.e. 1d and 2d cuts.
 
     Args:
-        xi (np.ndarray): `(N,d)` array to plot.
+        xi (np.ndarray): :math:`(N,d)` array to plot.
         names (list[str], optional): List of `d` names.
         msize (int, optional): Markersize of the 2d plots.
         axarr (None, optional): Optional array of axes.
         clr (str, optional): Optional color.
         yy (None, optional): Optional if we want to color-code by value. Overwrites clr.
-        zorder (None, optional): Order of plotting.
         lsize (int, optional): Label size. Defaults to 12.
+        zorder (None, optional): Order of plotting.
         figname (str, optional): Figure file name.
 
     """
@@ -687,7 +687,7 @@ def plot_pdf1d(sams, pltype='hist', color='b', lstyle='--',
     """Plotting 1d PDFs of samples.
 
     Args:
-        sams (np.ndarray): The `(N,)` samples of interest.
+        sams (np.ndarray): The :math:`(N,)` samples of interest.
         pltype (str, optional): Plot type. Options are 'kde' (Kernel Density Estimation), 'hist' (Histogram), 'sam' (plot samples as dots on x-axis), 'nom' (plot a nominal vertical line)
         color (str, optional): Color.
         lstyle (str, optional): Line style.
@@ -741,8 +741,8 @@ def plot_pdf2d(samsx, samsy, pltype='kde', ncont=10,
     """Plot 2d contour plot of a PDF given two sets of samples.
 
     Args:
-        samsx (np.ndarray): First `(N,)` samples of interest.
-        samsy (np.ndarray): Second `(N,)` samples of interest.
+        samsx (np.ndarray): First :math:`(N,)` samples of interest.
+        samsy (np.ndarray): Second :math:`(N,)` samples of interest.
         pltype (str, optional): Plot type. Options are Options are 'kde' (Kernel Density Estimation), 'sam' (plot samples only).
         ncont (int, optional): Number of contours.
         color (str, optional): Color. If None, uses the multicolor default of matplotlib.
@@ -800,12 +800,12 @@ def plot_pdfs(ind_show=None, plot_type='tri', pdf_type='hist',
         ind_show (list[int], optional): Indices of dimensions (columns of samples) to show.
         plot_type (str, optional): Plot type. Options are 'tri' (trianguar plot of 1d/2d marginals), 'inds' (1d marginals in a single figure), 'ind' (individual files for 1d and 2d marginal PDFs)
         pdf_type (str, optional): 1d PDF type. Options are 'hist' (histogram) or 'kde' (Kernel Density Estimation)
-        samples_ (str or np.ndarray, optional): Filename or `(N,d)` numpy array of samples.
+        samples_ (str or np.ndarray, optional): Filename or :math:`(N,d)` numpy array of samples.
         burnin (int, optional): Number of samples to throw away from the beginning of samples.
         every (int, optional): Stratification: use every `k`-th sample.
         names_ (str or list[str], optional): Filename containing the names of dimensions or list of names. Default is None, that leads to generic names.
-        nominal_ (str or np.ndarray, optional): Filename or `(d,)` numpy array of nominals to be shown as vertical bars on top of 1d PDFs, and dots on top of 2d PDFs.
-        prange_ (str or np.ndarray, optional): Filename or `(d,2)` numpy array of dimensional ranges to be shown as 'box' priors.
+        nominal_ (str or np.ndarray, optional): Filename or :math:`(d,)` numpy array of nominals to be shown as vertical bars on top of 1d PDFs, and dots on top of 2d PDFs.
+        prange_ (str or np.ndarray, optional): Filename or :math:`(d,2)` numpy array of dimensional ranges to be shown as 'box' priors.
         show_2dsamples (bool, optional): Whether or not to display the samples on top of 2d contour plots.
         lsize (int or float, optional): Title size and X- and Y- label size.
         zsize (int or float, optional): X- and Y- tick label size.
@@ -996,8 +996,8 @@ def plot_ens(xdata, ydata,
     """Plotting an ensemble of `y` values versus input `x`.
 
     Args:
-        xdata (np.ndarray): Input values, an 1d array of size `(N,)`.
-        ydata (np.ndarray): Output values, a 2d array of size `(N,M)`.
+        xdata (np.ndarray): Input values, an 1d array of size :math:`(N,)`.
+        ydata (np.ndarray): Output values, a 2d array of size :math:`(N,M)`.
         color (str, optional): Plot color.
         lw (int or float, optional): Linewidth.
         ms (int or float, optional): Markersize.
@@ -1006,7 +1006,7 @@ def plot_ens(xdata, ydata,
         mec (str, optional): Marker edge color
         connected (bool, optional): Whether to connect the data dots or not.
         interp (bool, optional): Whether to have smooth interpolation or not.
-        offset (tuple, optional): Tuple of (shift, scale) to preprocess y-data, if needed, both shift and scale are either None or 1d arrays of size `(d,)`.
+        offset (tuple, optional): Tuple of (shift, scale) to preprocess y-data, if needed, both shift and scale are either None or 1d arrays of size :math:`(d,)`.
         ax (plt.Axes, optional): Axis handle. If None, use the current axis.
     Note:
         ax is changed as a result of this function. Further beautification and figure saving should be done outside this function.
@@ -1069,17 +1069,17 @@ def plot_vars(xdata, ydata, variances=None, ysam=None, stdfactor=1.,
     """Plotting mean predictions with multicolor variances as error bars.
 
     Args:
-        xdata (np.ndarray): Input values, an 1d array of size `(N,)`.
-        ydata (np.ndarray): Output values, a 1d array of size `(N,)`.
-        variances (None, optional): Variances, a 2d array of size `(N,K)`.
-        ysam (None, optional): True samples, a 2d array of size `(N,M)`.
+        xdata (np.ndarray): Input values, an 1d array of size :math:`(N,)`.
+        ydata (np.ndarray): Output values, a 1d array of size :math:`(N,)`.
+        variances (None, optional): Variances, a 2d array of size :math:`(N,K)`.
+        ysam (None, optional): True samples, a 2d array of size :math:`(N,M)`.
         stdfactor (float, optional): Factor in front of st.dev. for plotting (e.g. `1.0` or `3.0`).
         varlabels (list[str], optional): List of `K` labels for each variance. If None, the code comes up with generic names.
         varcolors (list[str], optional): List of `K` variance colors. If None, the code uses shades of grey (not fifty).
         grid_show (bool, optional): Whether or not to show the grid.
         connected (bool, optional): Whether to connect the data dots or not.
         interp (bool, optional): Whether to have smooth interpolation or not.
-        offset (tuple, optional): Tuple of (shift, scale) to preprocess y-data, if needed, both shift and scale are either None or 1d arrays of size `(d,)`.
+        offset (tuple, optional): Tuple of (shift, scale) to preprocess y-data, if needed, both shift and scale are either None or 1d arrays of size :math:`(d,)`.
         ax (plt.Axes, optional): Axis handle. If None, use the current axis.
     Note:
         ax is changed as a result of this function. Further beautification and figure saving should be done outside this function.
@@ -1176,8 +1176,8 @@ def plot_shade(xdata, ydata, nq=51, cmap=mpl.cm.BuGn,
     """Plotting quantile-shaded predictions given dataset.
 
     Args:
-        xdata (np.ndarray): Input values, an 1d array of size `(N,)`.
-        ydata (np.ndarray): Output values, a 2d array of size `(N,M)`.
+        xdata (np.ndarray): Input values, an 1d array of size :math:`(N,)`.
+        ydata (np.ndarray): Output values, a 2d array of size :math:`(N,M)`.
         nq (int, optional): Number of quantiles.
         cmap (mpl.Cm, optional): Colormap. Defaults to BuGn.
         bounds_show (bool, optional): Whether to highlight the bounds.
@@ -1308,7 +1308,6 @@ def plot_1d_anchored(models, modelpars,
         modellabels (None, optional): Labels/names of the models for legend.
         legend_show (bool, optional): Whether to show the legend or not.
         clearax (bool, optional): Clear axes ticks and labels for less busy plotting.
-        verbose_labels (bool, optional): Optionally, annotates the points showing their coordinates. Makes sense for low-dim cases.
         ncolrow (tuple, optional): Number of columns and rows in a tuple. Defaults to (3, 5).
     """
     ncol, nrow = ncolrow
@@ -1509,9 +1508,9 @@ def plot_fcn_1d_slice(fcn, domain, idim=0, nom=None, ngr=133, color='b', lw=2, a
 
     Args:
         fcn (callable): Function evaluator.
-        domain (np.ndarray): Domain of evaluation, a 2d array of size `(d, 2)`.
+        domain (np.ndarray): Domain of evaluation, a 2d array of size :math:`(d, 2)`.
         idim (int, optional): Dimension, with respect to which the slice is plotted.
-        nom (None, optional): Nominal values, an 1d array of size `(d,)`.
+        nom (None, optional): Nominal values, an 1d array of size :math:`(d,)`.
         ngr (int, optional): Number of grid points, i.e. resolution.
         color (str, optional): Color of the plot.
         lw (int, optional): Line width.
@@ -1541,12 +1540,11 @@ def plot_fcn_2d_slice(fcn, domain, idim=0, jdim=1, nom=None, ngr=33, ax=None):
 
     Args:
         fcn (callable): Function evaluator.
-        domain (np.ndarray): Domain of evaluation, a 2d array of size `(d, 2)`.
+        domain (np.ndarray): Domain of evaluation, a 2d array of size :math:`(d, 2)`.
         idim (int, optional): First dimension, with respect to which the slice is plotted.
         jdim (int, optional): Second dimension, with respect to which the slice is plotted.
-        nom (None, optional): Nominal values, an 1d array of size `(d,)`.
+        nom (None, optional): Nominal values, an 1d array of size :math:`(d,)`.
         ngr (int, optional): Number of grid points per dimension, i.e. resolution.
-        color (str, optional): Color of the plot.
         ax (plt.Axes, optional): Axis handle. If None, use the current axis.
     Note:
         ax is changed as a result of this function. Further beautification and figure saving should be done outside this function.
@@ -1581,8 +1579,8 @@ def plot_uc_sample(pred_sam, data, nqt=111, label='', ax=None):
     """Plotting uncertainty calibration figure given samples.
 
     Args:
-        pred_sam (np.ndarray): Samples, in a 2d array of size `(M,N)`.
-        data (np.ndarray): Data, in a 1d array of size `(N,)`.
+        pred_sam (np.ndarray): Samples, in a 2d array of size :math:`(M,N)`.
+        data (np.ndarray): Data, in a 1d array of size :math:`(N,)`.
         nqt (int, optional): Number of quantiles used. Essentially, the resolution.
         label (str, optional): Custom label.
         ax (plt.Axes, optional): Axis handle. If None, use the current axis.
@@ -1622,9 +1620,9 @@ def plot_uc_exact(pred_mean, pred_std, data, nqt=111, label='', ax=None):
     """Plotting uncertainty calibration figure given mean and standard deviation of predictions.
 
     Args:
-        pred_mean (np.ndarray): Prediction mean, in a 1d array of size `(N,)`.
-        pred_std (np.ndarray): Prediction standard deviation, in a 1d array of size `(N,)`.
-        data (np.ndarray): Data, in a 1d array of size `(N,)`.
+        pred_mean (np.ndarray): Prediction mean, in a 1d array of size :math:`(N,)`.
+        pred_std (np.ndarray): Prediction standard deviation, in a 1d array of size :math:`(N,)`.
+        data (np.ndarray): Data, in a 1d array of size :math:`(N,)`.
         nqt (int, optional): Number of quantiles used. Essentially, the resolution.
         label (str, optional): Custom label.
         ax (plt.Axes, optional): Axis handle. If None, use the current axis.
@@ -1710,11 +1708,11 @@ def plot_1d(func, domain, ax=None, idim=0, odim=0, nom=None, ngr=100, color='ora
 
     Args:
         func (callable): The callable function of interest.
-        domain (np.ndarray): A dx2 array indicating the domain of the function.
+        domain (np.ndarray): A :math:`(d,2)` array indicating the domain of the function.
         ax (None, optional): Axis object to plot on. If None, plots on current axis.
         idim (int, optional): Input dimension to plot against.
         odim (int, optional): Output QoI to plot against. Useful for multioutput funtions.
-        nom (np.ndarray, optional): Nominal value to fix non-plotted dimensions at. An array of size d. If None, uses the domain center.
+        nom (np.ndarray, optional): Nominal value to fix non-plotted dimensions at. An array of size `d`. If None, uses the domain center.
         ngr (int, optional): Number of grid points.
         color (str, optional): Color of the graph.
         label (str, optional): Label of the graph.
@@ -1746,12 +1744,12 @@ def plot_2d(func, domain, ax=None, idim=0, jdim=1, odim=0, nom=None, ngr=33, fig
 
     Args:
         func (callable): The callable function of interest.
-        domain (np.ndarray): A dx2 array indicating the domain of the function.
+        domain (np.ndarray): A :math:`(d,2)` array indicating the domain of the function.
         ax (None, optional): Axis object to plot on. If None, plots on current axis.
         idim (int, optional): First input dimension to plot against.
         jdim (int, optional): Second input dimension to plot against.
         odim (int, optional): Output QoI to plot against. Useful for multioutput funtions.
-        nom (np.ndarray, optional): Nominal value to fix non-plotted dimensions at. An array of size d. If None, uses the domain center.
+        nom (np.ndarray, optional): Nominal value to fix non-plotted dimensions at. An array of size `d`. If None, uses the domain center.
         ngr (int, optional): Number of grid points.
         figname (str, optional): Figure name to save.
     """
@@ -1812,8 +1810,8 @@ def plot_cov(mm, cc, ngr=100, f=3., pnames=None, ax=None, savefig=False):
     """Plotting covariance contour given mean and covariance matrix.
 
     Args:
-        mm (np.ndarray): Mean, an 1d array of size `(2,)`.
-        cc (np.ndarray): Covariance matrix, a 2d array of size `(2,2)`.
+        mm (np.ndarray): Mean, an 1d array of size :math:`(2,)`.
+        cc (np.ndarray): Covariance matrix, a 2d array of size :math:`(2,2)`.
         ngr (int, optional): Number of grid points per dimension, i.e. resolution.
         f (float, optional): Factor for the plotting range in terms of standard deviations.
         pnames (list, optional): List of parameter names. If None, generic names are used.
@@ -1850,8 +1848,8 @@ def plot_cov_tri(mean, cov, names=None, figname='cov_tri.png'):
     """Plots covariance in a triangular pairwise way.
 
     Args:
-        mean (np.ndarray): Mean, an 1d array of size `(npar,)`.
-        cov (np.ndarray): Covariance matrix, a 2d array of size `(npar,npar)`.
+        mean (np.ndarray): Mean, an 1d array of size :math:`(npar,)`.
+        cov (np.ndarray): Covariance matrix, a 2d array of size :math:`(npar,npar)`.
         names (list, optional): List of parameter names. If None, generic names are used.
         figname (str, optional): Figure filename to save.
     """
@@ -1910,8 +1908,8 @@ def plot_sensmat(sensdata,pars,cases,par_labels=[],case_labels=[],cutoff=-1000.,
         sensdata (np.ndarray): 2d array of sensitivity data, size (ncases, npars).
         pars (list): List of parameter names.
         cases (list): List of case names.
-        par_labels (list, optional): List of parameter labels for plotting. Defaults to None, which uses generic names.
-        case_labels (list, optional): List of case labels for plotting. Defaults to None, which uses generic names.
+        par_labels (list, optional): List of parameter labels for plotting. Defaults to ``[]``, which uses generic names.
+        case_labels (list, optional): List of case labels for plotting. Defaults to ``[]``, which uses generic names.
         cutoff (float, optional): Cutoff value for sensitivity inclusion. Defaults to -1000.
         figname (str, optional): Figure filename to save. Defaults to 'sensmat.png'.
     """
@@ -2010,11 +2008,11 @@ def plot_joy(sams_list, xcond, outnames, color_list, nominal=None, offset_factor
     r"""Plots a joyplot of multiple sample sets along given output conditions.
 
     Args:
-        sams_list (list[np.ndarray]): List of sample sets, each in a 2d array of size `(M,N)`.
+        sams_list (list[np.ndarray]): List of sample sets, each in a 2d array of size :math:`(M,N)`.
         xcond (list[float]): List of output condition values, length N.
         outnames (list[str]): List of output condition names, length N.
         color_list (list[str]): List of colors for each sample set.
-        nominal (np.ndarray, optional): Nominal values for each output condition, an 1d array of size `(N,)`. Defaults to None.
+        nominal (np.ndarray, optional): Nominal values for each output condition, an 1d array of size :math:`(N,)`. Defaults to None.
         offset_factor (float, optional): Factor to scale the pdf heights. Defaults to 1.0.
         ax (plt.Axes, optional): Axis handle. If None, use the current axis.
         figname (str, optional): Figure filename to save.

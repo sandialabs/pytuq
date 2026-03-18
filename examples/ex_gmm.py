@@ -11,11 +11,13 @@ import matplotlib.pyplot as plt
 from pytuq.rv.mrv import GMM
 from pytuq.utils.plotting import plot_pdfs, plot_xrv
 
+# Define 2D GMM with 2 components
 means = np.array([[2.0, 0.0], [12.0, 4.0]])
 ncl, dim = means.shape
 weights = [4., 2.]
 mygmm = GMM(means, weights=weights)
 
+# Sample within a rectangular domain
 domain = np.array([[-20., 30.], [-10., 20.]])
 sam = mygmm.sample_indomain(11111, domain)
 #sam = mygmm.sample(333)

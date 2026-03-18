@@ -1,3 +1,5 @@
+:orphan:
+
 Section Navigation
 ==================
 

@@ -1,5 +1,33 @@
 #!/usr/bin/env python
-"""App to build KL-pbased reduced-dimensional surrogates of multioutput models."""
+"""Build KL-based reduced-dimensional surrogates of multioutput models.
+
+This script combines a Karhunen-Loeve expansion with surrogate modelling
+(Polynomial Chaos or Neural Network) to construct a reduced-dimensional
+surrogate for multioutput data.  It produces parity plots, per-sample fit
+comparisons, and global sensitivity bar charts.
+
+Outputs:
+    ``dm_*.png``         : Parity plots per output.
+    ``fit_s*.png``       : Per-sample overlay of model and KL+surrogate predictions.
+    ``sens_klsurr.png``  : Global sensitivity bar chart.
+    ``klsurr.pk``        : Pickled ``KLSurr`` object.
+
+Example::
+
+    python klsurr_fit.py -x ptrain.txt -y ytrain.txt -s PC -m bcs -o 3
+
+Command-line arguments:
+    -x, --xdata          Input data file (default: ``ptrain.txt``).
+    -y, --ydata          Output data file (default: ``ytrain.txt``).
+    -d, --xcond          Conditioning x-grid file.
+    -q, --outnames_file  Output names file (default: ``outnames.txt``).
+    -p, --pnames_file    Parameter names file (default: ``pnames.txt``).
+    -t, --trnfactor      Fraction of data used for training (default: 0.9).
+    -s, --surr           Surrogate type: ``PC`` or ``NN`` (default: ``PC``).
+    -m, --method         Fitting method: ``lsq``, ``bcs``, or ``anl`` (default: ``bcs``).
+    -c, --pctype         PC basis type: ``LU`` or ``HG`` (default: ``LU``).
+    -o, --order          Polynomial chaos order (default: 1).
+"""
 
 import argparse
 import numpy as np

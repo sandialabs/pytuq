@@ -22,8 +22,8 @@ def model_sens(model, model_params, domain, method='SamSobol', nsam=100, plot=Tr
     r"""Sensitivities of a multioutput model.
 
     Args:
-        model (callable): Model of a form :math:`M(x, p)` where we are interesting in sensitivities with respect to :math:`x`, and :math:`p` are auxiliary parameters. The model is multioutput, taking :math:`(N,d)`-sized array, and returning a :math:`(N,o)`-sized array.
-        model_params (list): List of model's auxiliary parameters :math:`p`.
+        model (callable): Model of a form :math:`M(x, p)` where we are interesting in sensitivities with respect to `x`, and `p` are auxiliary parameters. The model is multioutput, taking :math:`(N,d)`-sized array, and returning a :math:`(N,o)`-sized array.
+        model_params (list): List of model's auxiliary parameters `p`.
         domain (np.ndarray): Domain of input, a 2d array of size :math:`(d,2)`.
         method (str, optional): Sensitivity method. Default is SamSobol. Other options are PCSobol, LinReg or Moat.
         nsam (int, optional): Number of samples. Note that for some methods this is not the number of model evaluations needed.
@@ -90,7 +90,7 @@ class SensMethod():
         r"""Sampling routine.
 
         Args:
-            nsam (int): Number of requested samples, :math:`N`. Note that for some methods this is not the number of model evaluations needed.
+            nsam (int): Number of requested samples, `N`. Note that for some methods this is not the number of model evaluations needed.
 
         Raises:
             NotImplementedError: Should be implemented in children classes.
@@ -117,7 +117,7 @@ class Linreg(SensMethod):
     r"""Sensitivities computed via linear regression.
 
     Attributes:
-        nsam (int): Number of samples requested, :math:`N`.
+        nsam (int): Number of samples requested, `N`.
         sens (dict): Dictionary of sensitivities.
         sens_names (list): Names of sensitivities: 'src' (scaled regression coefficient) or 'pear' (pearson).
         xsam (np.ndarray): Model evaluation input samples, a 2d array of size :math:`(N,d)`.
@@ -138,7 +138,7 @@ class Linreg(SensMethod):
         """Sampling routine.
 
         Args:
-            nsam (int): Number of requested samples, :math:`N`.
+            nsam (int): Number of requested samples, `N`.
 
         Returns:
             np.ndarray: Model evaluation input samples, a 2d array of size :math:`(N,d)`.
@@ -187,14 +187,14 @@ class Linreg(SensMethod):
 ###################################################################
 
 class Moat(SensMethod):
-    """Class for MOAT (Morris One At a Time) sensitivities.
+    r"""Class for MOAT (Morris One At a Time) sensitivities :cite:t:`morris:1991`.
 
     Attributes:
         delta (int): Delta-parameter of the method.
         indmap (np.ndarray): Working 2d array of size :math:`(d,2)`.
         nlev (int): Number of levels parameter of the method.
         nsam (int): Number of model evaluations :math:`M=R(d+1)`.
-        repl (int): Number of replicas, :math:`R`.
+        repl (int): Number of replicas, `R`.
         sens (dict): Dictionary of sensitivities.
         sens_names (list): Sensitivity names: mu, amu or sig.
     """
@@ -218,7 +218,7 @@ class Moat(SensMethod):
         r"""Sampling routine.
 
         Args:
-            repl (int): Number of replicas, :math:`R`.
+            repl (int): Number of replicas, `R`.
 
         Returns:
             np.ndarray: Model evaluation input samples, a 2d array of size :math:`(M,d)`, where :math:`M=R(d+1)`.
@@ -292,7 +292,7 @@ class Moat(SensMethod):
 ###################################################################
 
 class SamSobol(SensMethod):
-    """Computing of sampling based main and total sensitivities, see Saltelli 2010.
+    r"""Computing of sampling-based main and total Sobol sensitivities :cite:t:`sobol:2001`, :cite:t:`saltelli:2002`.
 
     Attributes:
         nsam (int): Number of model evaluations.
@@ -319,7 +319,7 @@ class SamSobol(SensMethod):
         r"""Sampling routine.
 
         Args:
-            ninit (int): Initial number of samples, :math:`N`.
+            ninit (int): Initial number of samples, `N`.
 
         Returns:
             np.ndarray: Model evaluation input samples, a 2d array of size :math:`(M,d)`, where :math:`M=N(d+2)`.
@@ -381,7 +381,7 @@ class SamSobol(SensMethod):
 ###################################################################
 
 class PCSobol(SensMethod):
-    r"""PC-based Sobol senitivity computation.
+    r"""PC-based Sobol sensitivity computation :cite:t:`sudret:2008`.
 
     Attributes:
         nsam (int): Number of model evaluations.
@@ -413,7 +413,7 @@ class PCSobol(SensMethod):
         r"""Sampling routine.
 
         Args:
-            nsam (int): Number of requested samples, :math:`N`.
+            nsam (int): Number of requested samples, `N`.
 
         Returns:
             np.ndarray: Model evaluation input samples, a 2d array of size :math:`(N,d)`.

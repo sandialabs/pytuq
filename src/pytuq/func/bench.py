@@ -273,7 +273,7 @@ class Friedman(Function):
     A 5d trigonometric function, linear in :math:`x_4` and :math:`x_5`
 
 
-    Default constant values are :math:`c = (10., 20., 0.5, 2., 10., 5.)`
+    Default constant values are :math:`c = (10., 20., -0.5, 2., 10., 5.)`
 
     .. math::
         f(x)=c_1\sin(\pi x_1x_2)+c_2(x_3-c_3)^{c_4}+c_5x_4+c_6x_5

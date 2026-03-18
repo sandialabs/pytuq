@@ -12,11 +12,11 @@ from pytuq.utils.plotting import myrc, set_colors
 
 myrc()
 
-
+# Generate a palette of 30 distinct colors
 ncol = 30
 clrs = set_colors(ncol)
-#print(clrs)
 
+# Display as horizontal bars
 plt.barh(range(1, ncol + 1),
          [1] * ncol,
          color=clrs)

@@ -35,16 +35,19 @@ dim = 1
 
 domain = np.ones((dim, 2))*np.array([-1.,1.])
 
+# Generate random x-data and evaluate true model
 x = scale01ToDom(np.random.rand(N,dim), domain)
 y = true_model(x)
 
+# Create PC basis
 pcrv = PCRV(1, dim, 'LU', mi=get_mi(order, dim))
 
+# Define a basis evaluator wrapper for the PC object
 def basisevaluator(x, pars):
     pcrv, = pars
     return pcrv.evalBases(x, 0)
 
-
+# Regression fit using analytical method
 lreg = anl()
 #lreg = lsq()
 #lreg = opt()
@@ -53,10 +56,10 @@ lreg.setBasisEvaluator(basisevaluator, (pcrv,))
 lreg.fit(x, y)
 print(lreg.cf)
 
-
+# Predict and compute standard deviations
 y_pred, y_std = lreg.predict_wstd(x)
 
-
+# Diagonal fit plot
 plot_dm([y], [y_pred],
         errorbars=[[y_std,y_std]],
         labels=['Training'], colors=None,
@@ -64,6 +67,7 @@ plot_dm([y], [y_pred],
         figname='dm.png', msize=4)
 
 if dim==1:
+    # Plot the fit with uncertainty bands
     ngr = 111
     xgrid = np.linspace(domain[0,0], domain[0,1], ngr)[:, np.newaxis]
     ygrid = true_model(xgrid)

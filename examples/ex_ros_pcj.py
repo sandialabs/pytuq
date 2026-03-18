@@ -1,8 +1,10 @@
 #!/usr/bin/env python
+"""Joint PC from Rosenblatt Transformation.
 
-"""Example demonstrating joint PC construction given samples.
-
-Uses Rosenblatt transformation and joint regression in parameteric/stochastic space.
+Constructs a polynomial chaos representation from samples using a joint
+regression approach in the combined parametric and stochastic space.
+Uses the Rosenblatt transformation to map samples to uniform, then
+fits PC coefficients jointly across all parameter values.
 """
 
 import numpy as np

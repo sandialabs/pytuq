@@ -1,6 +1,12 @@
 #!/usr/bin/env python
+"""Rosenblatt Transformation
+=========================
 
-"""Example demonstrating Rosenblatt transformation."""
+Demonstrates forward and inverse Rosenblatt transformations in 2D.
+Constructs a Rosenblatt map from exponential-uniform samples, verifies that
+the forward map produces uniform samples, and that the inverse resamples
+from the original distribution. Compares PDFs of original vs. resampled data.
+"""
 
 import numpy as np
 

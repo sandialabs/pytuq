@@ -1,4 +1,23 @@
 #!/usr/bin/env python
+"""Plot 2-D marginal covariance ellipses for a multivariate normal.
+
+This script reads a mean vector and covariance matrix and produces
+pairwise 2-D covariance ellipse plots as well as a triangular grid of
+all pairs.
+
+Outputs:
+    Pairwise covariance ellipse PNG files (one per pair).
+    Triangular covariance grid plot.
+
+Example::
+
+    python plot_cov.py -m mean.txt -c cov.txt 0 1 2
+
+Command-line arguments:
+    Positional   Indices of parameters to show (default: all).
+    -m, --mean   Mean file (default: ``mean.txt``).
+    -c, --cov    Covariance file (default: ``cov.txt``).
+"""
 
 import sys
 import argparse

@@ -26,7 +26,7 @@ class MRV():
         r"""Initializing function.
 
         Args:
-            pdim (int): The dimensionality :math:`d` of the multivariate random variable/vector.
+            pdim (int): The dimensionality `d` of the multivariate random variable/vector.
         """
         self.pdim = pdim
 
@@ -50,12 +50,12 @@ class MRV():
         r"""Sampling according to the distribution truncated within a given domain.
 
         Args:
-            nsam (int): Number of samples requested, :math:`N`.
+            nsam (int): Number of samples requested, `N`.
             domain (np.ndarray): A domain given as a 2d array of size :math:`(d,2)`.
-            itry_max (int): maximum number of chunks of :math:`N` sampled. Effectively this is the rejection ratio. If too high, end without having :math:`N` samples in the domain and provide a warning.
+            itry_max (int): maximum number of chunks of `N` sampled. Effectively this is the rejection ratio. If too high, end without having `N` samples in the domain and provide a warning.
 
         Returns:
-            np.ndarray: A 2d array of samples of size `(N,d)`.
+            np.ndarray: A 2d array of samples of size :math:`(N,d)`.
 
         Note:
             This is based on rejection sampling, and if the domain has small intersection with the volume of sampling, it may take long time.
@@ -102,17 +102,17 @@ class GMM(MRV):
     r"""Gaussian mixture model random variable.
 
     Attributes:
-        means (list[np.ndarray]): List of :math:`K` means, each a 1d array of size :math:`d`.
-        covs (list[np.ndarray]): List of :math:`K` covariances, each a 2d array of size :math:`(d, d)`.
-        weights (np.ndarray): An 1d array of size :math:`K` for the mixture weights.
+        means (list[np.ndarray]): List of `K` means, each a 1d array of size `d`.
+        covs (list[np.ndarray]): List of `K` covariances, each a 2d array of size :math:`(d, d)`.
+        weights (np.ndarray): An 1d array of size `K` for the mixture weights.
     """
     def __init__(self, means, covs=None, weights=None):
         r"""Initialization.
 
         Args:
-            means (list[np.ndarray]): List of :math:`K` means, each a 1d array of size :math:`d`.
-            covs (list[np.ndarray], optional): List of :math:`K` covariances, each a 2d array of size :math:`(d, d)`. Default is None, which means identity covariance for all mixtures.
-            weights (np.ndarray, optional): An 1d array of size :math:`K` for the mixture weights. Default is None, which means equal weights to all mixtures.
+            means (list[np.ndarray]): List of `K` means, each a 1d array of size `d`.
+            covs (list[np.ndarray], optional): List of `K` covariances, each a 2d array of size :math:`(d, d)`. Default is None, which means identity covariance for all mixtures.
+            weights (np.ndarray, optional): An 1d array of size `K` for the mixture weights. Default is None, which means equal weights to all mixtures.
         """
         super().__init__(len(means[0]))
 
@@ -144,7 +144,7 @@ class GMM(MRV):
         r"""Sampling function for this random variable.
 
         Args:
-            nsam (int): Number of requested samples :math:`N`.
+            nsam (int): Number of requested samples `N`.
 
         Returns:
             np.ndarray: A 2d array of size :math:`(N,d)`.
@@ -164,10 +164,10 @@ class GMM(MRV):
         r"""PDF evaluated at given points.
 
         Args:
-            xdata (np.ndarray): A 2d array of size :math:`(M,d)` for :math:`M` points at which PDF is evaluated.
+            xdata (np.ndarray): A 2d array of size :math:`(M,d)` for `M` points at which PDF is evaluated.
 
         Returns:
-            np.ndarray: A 1d array of size :math:`M` for PDF evaluation at the given points.
+            np.ndarray: A 1d array of size `M` for PDF evaluation at the given points.
         """
         gmm_pdf = 0.0
         for mean, cov, weight in zip(self.means, self.covs, self.weights):
@@ -179,10 +179,10 @@ class GMM(MRV):
         r"""CDF evaluated at given points.
 
         Args:
-            xdata (np.ndarray): A 2d array of size :math:`(M,d)` for :math:`M` points at which CDF is evaluated.
+            xdata (np.ndarray): A 2d array of size :math:`(M,d)` for `M` points at which CDF is evaluated.
 
         Returns:
-            np.ndarray: A 1d array of size :math:`M` for CDF evaluation at the given points.
+            np.ndarray: A 1d array of size `M` for CDF evaluation at the given points.
         """
         gmm_cdf = 0.0
         for mean, cov, weight in zip(self.means, self.covs, self.weights):
@@ -351,7 +351,9 @@ class Pareto_1d(MRV):
     """A class for univariate Pareto distribution.
 
     Attributes:
-        b (float): Power parameter.
+        alpha (float): Power parameter.
+        xm (float): The domain minimum.
+        params (list): List of parameters ``[alpha, xm]``.
     """
 
     def __init__(self, alpha=1.0, xm=1.0):
@@ -674,7 +676,7 @@ class MCMCRV(MRV):
     Attributes:
         logpost (callable): Function evaluator np.ndarray->float for log-posterior. Can take optional keyword arguments as well.
         nmcmc (int): Number of MCMC steps
-        param_ini (np.ndarray): Initial condition of the chain, a 1d array of size :math:`d`.
+        param_ini (np.ndarray): Initial condition of the chain, a 1d array of size `d`.
     """
 
     def __init__(self, pdim, logpost, param_ini=None, nmcmc=10000):
@@ -683,7 +685,7 @@ class MCMCRV(MRV):
         Args:
             pdim (int): The dimensionality of the random variable.
             logpost (callable): Function evaluator :math:`(N,)`->scalar for log-posterior.
-            param_ini (None, optional): Initial condition of the chain, a 1d array of size :math:`d`. Defaults to None, which populates the array with hardwired 0.1 values.
+            param_ini (None, optional): Initial condition of the chain, a 1d array of size `d`. Defaults to None, which populates the array with hardwired 0.1 values.
             nmcmc (int, optional): Number of MCMC steps, defaults to 10000.
         """
         super().__init__(pdim)
@@ -699,7 +701,7 @@ class MCMCRV(MRV):
         r"""Sampling function.
 
         Args:
-            nsam (int): Number of requested samples :math:`N`.
+            nsam (int): Number of requested samples `N`.
             post_info (dict): Dictionary keyword arguments for the logpost function.
 
         Returns:
@@ -731,10 +733,10 @@ class MCMCRV(MRV):
         r"""PDF evaluation without scaling.
 
         Args:
-            x (np.ndarray): 1d array of size :math:`M` where PDF is evaluated.
+            x (np.ndarray): 1d array of size `M` where PDF is evaluated.
 
         Returns:
-            np.ndarray: PDF evaluated at requested points, an array of size :math:`M`.
+            np.ndarray: PDF evaluated at requested points, an array of size `M`.
 
         Note:
             PDF is unscaled, i.e. only evaluates exponential of the log-posterior.

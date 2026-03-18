@@ -53,7 +53,7 @@ def logpost_emb(x, aw=None, bw=None, ind_embed=None, dvinfo=None, multiplicative
     Args:
         x (np.ndarray): An 1d array input to log-posterior, i.e. the dimensionality is the chain dimensionality.
         aw (None, optional): The A-matrix of size :math:`(N,K)` of basis evaluations at training points. Default None should not be used, and is made keyword out of convenience.
-        bw (None, optional): An 1d array of data if size :math:`N`. Default None should not be used, and is made keyword out of convenience.
+        bw (None, optional): An 1d array of data if size `N`. Default None should not be used, and is made keyword out of convenience.
         ind_embed (None, optional): Indices of parameters/coefficients/bases to embed model error in. Defaults to None, which means embed in all.
         dvinfo (dict, optional): Dictionary of parameters controlling data variance. Keys are 'npar' (number of parameters), 'fcn' (callable to return data variance vector given the last part of the chain, and auxiliary paraemters), 'aux' (auxiliary parameters of the data variance function). Default is None, but should not be used.
         multiplicative (bool, optional): Indicates whether the embedding is multiplicative. Defaults to False.
@@ -142,10 +142,10 @@ def logpost_emb(x, aw=None, bw=None, ind_embed=None, dvinfo=None, multiplicative
 
 
 class lreg_merr(lreg):
-    r"""A class for model error embedded linear regression.
+    r"""A class for model error embedded linear regression :cite:t:`sargsyan:2019`.
 
     Attributes:
-        cf (np.ndarray): An 1d array of coefficients, of size :math:`K`.
+        cf (np.ndarray): An 1d array of coefficients, of size `K`.
         cf_cov (np.ndarray): A 2d array of coefficient covariance of size :math:`(K,K)`.
         dvinfo (dict): Dictionary of parameters controlling data variance. Keys are 'npar' (number of parameters), 'fcn' (callable to return data variance vector given the last part of the chain, and auxiliary paraemters), 'aux' (auxiliary parameters of the data variance function).
         embedding (str): Model error embedding type. Options are 'iid' and 'mvn'.
@@ -187,7 +187,7 @@ class lreg_merr(lreg):
 
         Args:
             A (np.ndarray): A 2d array of size :math:`(N, K)` each row holding basis evaluations at a training point.
-            y (np.ndarray): An 1d array of size :math:`N` holding the data.
+            y (np.ndarray): An 1d array of size `N` holding the data.
         """
         npts, nbas = A.shape
         assert(y.shape[0] == npts)

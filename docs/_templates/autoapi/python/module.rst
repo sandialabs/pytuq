@@ -1,8 +1,8 @@
 {% if obj.display %}
    {% if is_own_page %}
-{{ obj.id }}
-{{ "=" * obj.id|length }}
-
+{% set short_name = obj.id.split('.')[-1] %}
+{{ short_name }}
+{{ "=" * short_name|length }}
 .. py:module:: {{ obj.name }}
 
       {% if obj.docstring %}
@@ -17,8 +17,6 @@
          {% set visible_submodules = obj.submodules|selectattr("display")|list %}
          {% set visible_submodules = (visible_subpackages + visible_submodules)|sort %}
          {% if visible_submodules %}
-Submodules
-----------
 
 .. toctree::
    :maxdepth: 1

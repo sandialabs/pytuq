@@ -14,11 +14,14 @@ myrc()
 
 dim = 3
 
+# Only dimension 1 is random, others are deterministic
 rndind = [1]
 
+# Create PCRV_mvn with random coefficients
 pc_rv = PCRV_mvn(dim, rndind=rndind)
 pc_rv.setRandomCfs()
 
+# Sample and save
 xsam = pc_rv.sample(1000)
 
 
@@ -27,5 +30,6 @@ plot_xrv(xsam)
 
 print(pc_rv)
 
+# Compress to remove deterministic dimensions
 pc_rv_new = pc_rv.compressPC()
 print(pc_rv_new)

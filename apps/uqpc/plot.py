@@ -1,4 +1,28 @@
 #!/usr/bin/env python
+"""Visualise results produced by the UQPC surrogate-building workflow.
+
+This script reads ``results.pk`` and generates a variety of plots
+depending on the requested plot type.  Available sub-commands:
+
+* ``sens``    — Sensitivity bar charts (main or total).
+* ``jsens``   — Circular joint-sensitivity plots.
+* ``sensmat`` — Sensitivity matrix heatmaps.
+* ``dm``      — Model-vs-surrogate parity plots.
+* ``fit``     — Per-sample model-vs-surrogate overlays.
+* ``1d``      — 1-D surrogate slices with optional data overlay.
+* ``2d``      — 2-D surrogate contour plots.
+* ``pdf``     — Output probability density plots.
+* ``joy``     — Joy (ridge-line) plots.
+
+Parameter and output names are read from ``pnames.txt`` and
+``outnames.txt`` when present.
+
+Example::
+
+    python plot.py sens main
+    python plot.py dm training testing
+    python plot.py 1d 0 training
+"""
 
 import sys
 import argparse

@@ -13,7 +13,7 @@ class lreg(fitbase):
     """Base class for linear regression.
 
     Attributes:
-        cf (np.ndarray): An 1d array of coefficients, of size :math:`K`.
+        cf (np.ndarray): An 1d array of coefficients, of size `K`.
         cf_cov (np.ndarray): A 2d array of coefficient covariance of size :math:`(K,K)`.
         datavar (float): A single value for homogenous data variance.
         basisEval (callable): Basis evaluator function.
@@ -51,7 +51,7 @@ class lreg(fitbase):
 
         Args:
             Amat (np.ndarray): A 2d array of size :math:`(N, K)` each row holding basis evaluations at a training point.
-            y (np.ndarray): An 1d array of size :math:`N` holding the data.
+            y (np.ndarray): An 1d array of size `N` holding the data.
 
         Raises:
             NotImplementedError: Not implemented in the base class.
@@ -78,7 +78,7 @@ class lreg(fitbase):
 
 
     def predict(self, x, msc=0, pp=False):
-        r"""Predict function, given input :math:`x`, assuming the basis evaluator is set.
+        r"""Predict function, given input `x`, assuming the basis evaluator is set.
 
         Args:
             x (np.ndarray): A 2d array of inputs of size :math:`(N,d)` at which bases are evaluated.
@@ -86,7 +86,7 @@ class lreg(fitbase):
             pp (bool, optional): Whether to compute posterior-predictive (i.e. add data variance) or not.
 
         Returns:
-            tuple(np.ndarray, np.ndarray, np.ndarray): triple of Mean (array of size `N`), Variance (array of size `N` or None), Covariance (array of size `(N, N)` or None).
+            tuple(np.ndarray, np.ndarray, np.ndarray): triple of Mean (array of size `N`), Variance (array of size `N` or None), Covariance (array of size :math:`(N, N)` or None).
         """
         assert(self.basisEvaluatorSet)
         Amat = self.basisEval(x, self.basisEvalPars)
@@ -94,7 +94,7 @@ class lreg(fitbase):
         return self.predicta(Amat, msc=msc, pp=pp)
 
     def predict_samples(self, x, nsamples=100):
-        r"""Predict samples given input :math:`x`, assuming the basis evaluator is set.
+        r"""Predict samples given input `x`, assuming the basis evaluator is set.
 
         Args:
             x (np.ndarray): A 2d array of inputs of size :math:`(N,d)` at which bases are evaluated.
@@ -118,7 +118,7 @@ class lreg(fitbase):
             pp (bool, optional): Whether to compute posterior-predictive (i.e. add data variance) or not.
 
         Returns:
-            tuple(np.ndarray, np.ndarray, np.ndarray): triple of Mean (array of size `N`), Variance (array of size `N` or None), Covariance (array of size `(N, N)` or None).
+            tuple(np.ndarray, np.ndarray, np.ndarray): triple of Mean (array of size `N`), Variance (array of size `N` or None), Covariance (array of size :math:`(N, N)` or None).
         """
         assert(self.fitted)
 
@@ -169,7 +169,7 @@ class lreg(fitbase):
             method (str, optional): Method of computation. Options are 'chol' (cholesky), 'choleye' (cholesky with regularization), 'svd' (SVD), 'loop' (slow and painful), 'fullcov' (slow-ish and memory intensive).
 
         Returns:
-            np.ndarray: An 1d array of pushed-forward standard deviation, of size :math:`N`.
+            np.ndarray: An 1d array of pushed-forward standard deviation, of size `N`.
         """
         assert(self.cf_cov is not None)
         if method == "chol":
@@ -311,7 +311,7 @@ class lsq(lreg):
     """Bare minimum least squares solution.
 
     Attributes:
-        cf (np.ndarray): An 1d array of coefficients, of size :math:`K`.
+        cf (np.ndarray): An 1d array of coefficients, of size `K`.
         cf_cov (np.ndarray): A 2d array of coefficient covariance of size :math:`(K,K)`.
         fitted (bool): Flag to indicate whether fit is performed or not.
         used (np.ndarray): An array of integers indicating the bases used (i.e. all basis in this case).
@@ -330,7 +330,7 @@ class lsq(lreg):
 
         Args:
             Amat (np.ndarray): A 2d array of size :math:`(N, K)` each row holding basis evaluations at a training point.
-            y (np.ndarray): An 1d array of size :math:`N` holding the data.
+            y (np.ndarray): An 1d array of size `N` holding the data.
         """
         self.cf, residues, rank, s = lstsq(Amat, y, 1.0e-13)
         self.cf_cov = np.zeros((Amat.shape[1], Amat.shape[1]))

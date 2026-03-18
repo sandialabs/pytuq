@@ -5,6 +5,9 @@
 
    {% endif %}
 .. py:{{ obj.type }}:: {% if is_own_page %}{{ obj.id }}{% else %}{{ obj.name }}{% endif %}
+
+{% if not is_own_page %}   :noindex:
+{% endif %}
    {% if obj.annotation is not none %}
 
    :type: {% if obj.annotation %} {{ obj.annotation }}{% endif %}

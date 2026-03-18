@@ -29,6 +29,7 @@ class ScipyWrapper(OptBase):
         """An optimization run.
 
         Args:
+            nsteps (int): Number of optimization steps (unused in scipy wrapper, kept for API compatibility).
             param_ini (np.ndarray): Initial position, an 1d array.
 
         Returns:

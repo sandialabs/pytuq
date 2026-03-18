@@ -14,9 +14,6 @@ import pytuq.ftools.orf as orf
 
 np.set_printoptions(precision=6, linewidth=200, suppress=False, threshold=np.inf)
 
-###############################################################################
-###############################################################################
-###############################################################################
 # define some options
 #Method     (str)  : specifies if you want to use QR ('QR') or Gram-Schmidt ('GS')
 #modified   (bool) : specifies modified GS, or not (ignored if using QR)
@@ -52,10 +49,6 @@ plot     = args.plot
 # numpy rng initialization
 rng       = np.random.default_rng(345126)     
 np.random.seed(345126)
-
-###############################################################################
-###############################################################################
-###############################################################################
 
 #==============================================================================
 # specify the set of starting functions phi0, with shape (ntrm,)

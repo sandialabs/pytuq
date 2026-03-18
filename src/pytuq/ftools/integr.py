@@ -22,11 +22,11 @@ class Integrator():
         r"""Dummy method to be implemented by children classes.
 
         Args:
-            function (callable): The function to integrate f(x, **func_args), where the first argument should be a 2d array of size `(N, d)`.
-            domain (None, optional): Optionally provide a domain of integration, `(d, 2)`.
+            function (callable): The function to integrate ``f(x, **func_args)``, where the first argument should be a 2d array of size :math:`(N, d)`.
+            domain (None, optional): Optionally provide a domain of integration, :math:`(d, 2)`.
             func_args (None, optional): Optional keyword arguments of the function.
             xdata (None, optional): Provide input samples, if needed by the integrator.
-            **kw_args: Other keyword arguments necessary for the integrator at hand.
+            \*\*kw_args: Other keyword arguments necessary for the integrator at hand.
 
         Raises:
             NotImplementedError: This needs to be implemented by children classes.
@@ -52,7 +52,7 @@ class Integrator():
 
         Args:
             f_arg_list (list[tuple]): List of pairs (function, argument).
-            **kwargs: Keyword arguments for the function.
+            \*\*kwargs: Keyword arguments for the function.
 
         Returns:
             list[float]: List of integral values.
@@ -92,8 +92,8 @@ class IntegratorScipy(Integrator):
         """Integration via SciPy.
 
         Args:
-            function (callable): The function to integrate f(x, **func_args), where the first argument should be a 2d array of size `(N, d)`.
-            domain (None, optional): Optionally provide a domain of integration, `(d, 2)`.
+            function (callable): The function to integrate ``f(x, **func_args)``, where the first argument should be a 2d array of size :math:`(N, d)`.
+            domain (None, optional): Optionally provide a domain of integration, :math:`(d, 2)`.
             func_args (None, optional): Optional keyword arguments of the function.
             xdata (None, optional): Provide input samples, if needed by the integrator.
             epsrel (float, optional): Integration tolerance. Defaults to 1.e-5.
@@ -134,8 +134,8 @@ class IntegratorMCMC(Integrator):
         """Integrate via MCMC sampling.
 
         Args:
-            function (callable): The function to integrate f(x, **func_args), where the first argument should be a 2d array of size `(N, d)`.
-            domain (None, optional): Optionally provide a domain of integration, `(d, 2)`.
+            function (callable): The function to integrate ``f(x, **func_args)``, where the first argument should be a 2d array of size :math:`(N, d)`.
+            domain (None, optional): Optionally provide a domain of integration, :math:`(d, 2)`.
             func_args (None, optional): Optional keyword arguments of the function.
             xdata (None, optional): Provide input samples, if needed by the integrator.
             nmc (int, optional): Number of requested samples. Defaults to 100.
@@ -180,8 +180,8 @@ class IntegratorMC(Integrator):
         """Integration via Monte-Carlo.
 
          Args:
-            function (callable): The function to integrate f(x, **func_args), where the first argument should be a 2d array of size `(N, d)`.
-            domain (None, optional): Optionally provide a domain of integration, `(d, 2)`.
+            function (callable): The function to integrate ``f(x, **func_args)``, where the first argument should be a 2d array of size :math:`(N, d)`.
+            domain (None, optional): Optionally provide a domain of integration, :math:`(d, 2)`.
             func_args (None, optional): Optional keyword arguments of the function.
             xdata (None, optional): Provide input samples, if needed by the integrator.
             nmc (int, optional): Number of requested samples. Defaults to 100.
@@ -220,11 +220,11 @@ class IntegratorWMC(Integrator):
         """Integration by weighted single Gaussian.
 
         Args:
-            function (callable): The function to integrate f(x, **func_args), where the first argument should be a 2d array of size `(N, d)`.
+            function (callable): The function to integrate ``f(x, **func_args)``, where the first argument should be a 2d array of size :math:`(N, d)`.
             func_args (None, optional): Optional keyword arguments of the function.
             xdata (None, optional): Provide input samples, if needed by the integrator.
             mean (None, optional): Mean array of size `d` of the associated gaussian weight. This argument is not optional.
-            cov (None, optional): Covariance matrix of size `(d,d)` of the associated gaussian weight. Defaults to identity matrix.
+            cov (None, optional): Covariance matrix of size :math:`(d,d)` of the associated gaussian weight. Defaults to identity matrix.
             nmc (int, optional): Number of requested samples. Defaults to 100.
 
         Returns:
@@ -269,7 +269,7 @@ class IntegratorGMM(Integrator):
         """Integration by Gaussian mixtures.
 
         Args:
-            function (callable): The function to integrate f(x, **func_args), where the first argument should be a 2d array of size `(N, d)`.
+            function (callable): The function to integrate ``f(x, **func_args)``, where the first argument should be a 2d array of size :math:`(N, d)`.
             func_args (None, optional): Optional keyword arguments of the function.
             xdata (None, optional): Provide input samples, if needed by the integrator.
             weights (list[float], optional): Weights of associated mixtures. Defaults to None, which automatically picks the weights based on function values and its width at the peaks.
@@ -317,8 +317,8 @@ class IntegratorGMMT(Integrator):
         """Integration by truncated Gaussian mixtures.
 
         Args:
-            function (callable): The function to integrate f(x, **func_args), where the first argument should be a 2d array of size `(N, d)`.
-            domain (None, optional): Provide a domain of integration/truncation, `(d, 2)`.
+            function (callable): The function to integrate ``f(x, **func_args)``, where the first argument should be a 2d array of size :math:`(N, d)`.
+            domain (None, optional): Provide a domain of integration/truncation, :math:`(d, 2)`.
             func_args (None, optional): Optional keyword arguments of the function.
             xdata (None, optional): Provide input samples, if needed by the integrator.
             weights (list[float], optional): Weights of associated mixtures. Defaults to None, which automatically picks the weights based on function values and its width at the peaks.

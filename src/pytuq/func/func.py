@@ -15,12 +15,12 @@ class Function():
     r"""Base class for a function.
 
     Attributes:
-        dim (int): Input dimensionality, :math:`d`.
+        dim (int): Input dimensionality, `d`.
         dmax (float): Default domain half-size. That is, default domain is :math:`[-d_{max}, + d_{max}]`.
         domain (np.ndarray): A 2d array of size :math:`(d,2)` indicating the input domain of the function.
         eval (callable): Callable evaluator of the function.
         name (str): Name of the function.
-        outdim (int): Output dimensionality, :math:`o`.
+        outdim (int): Output dimensionality, `o`.
     """
 
     def __init__(self, name='Base'):
@@ -161,7 +161,7 @@ class Function():
         r"""Setting the input dimensionality of the function.
 
         Args:
-            dim (int): Dimensionality, :math:`d`.
+            dim (int): Dimensionality, `d`.
 
         Note:
             No need to use this function externally. Use :func:`setDimDom()` instead.
@@ -183,7 +183,19 @@ class Function():
 
 
     def setDimDom(self, domain=None, dimension=None):
+        r"""Set input dimensionality and domain.
 
+        Exactly one of ``domain`` or ``dimension`` must be provided.
+        If ``dimension`` is given, the domain defaults to
+        :math:`[-d_{max}, +d_{max}]^d`.
+
+        Args:
+            domain (np.ndarray, optional): A 2d array of size :math:`(d,2)` specifying the domain.
+            dimension (int, optional): Input dimensionality `d`.
+
+        Raises:
+            AssertionError: If both or neither of ``domain`` and ``dimension`` are provided.
+        """
         if domain is None:
             assert(dimension is not None)
             dim, dom = dimension, np.tile(np.array([-self.dmax, self.dmax]), (dimension, 1))
@@ -196,6 +208,14 @@ class Function():
 
 
     def inDomain(self, x):
+        r"""Check whether all points lie inside the function domain.
+
+        Args:
+            x (np.ndarray): Input 2d array of size :math:`(N,d)`.
+
+        Returns:
+            bool: True if all rows of ``x`` are within the domain.
+        """
         assert(x.shape[1]==self.dim)
 
         return np.array([(x[:, i] >= self.domain[i, 0]) *
@@ -203,17 +223,40 @@ class Function():
                          for i in range(self.dim)]).all()
 
     def checkDomain(self, x):
+        r"""Raise an error if any point lies outside the function domain.
+
+        Args:
+            x (np.ndarray): Input 2d array of size :math:`(N,d)`.
+
+        Raises:
+            ValueError: If any row of ``x`` is outside the domain.
+        """
         if not self.inDomain(x):
             raise ValueError("Function input is outside the domain. Exiting.")
 
 
     def checkDim(self, x):
+        r"""Assert that input has the correct shape.
+
+        Args:
+            x (np.ndarray): Input 2d array of size :math:`(N,d)`.
+
+        Raises:
+            AssertionError: If ``x`` is not 2d or the second dimension does not match ``dim``.
+        """
         assert(len(x.shape)==2)
         assert(x.shape[1]==self.dim)
 
 
     def sample_uniform(self, nsam):
+        r"""Draw uniform random samples from the function domain.
 
+        Args:
+            nsam (int): Number of samples.
+
+        Returns:
+            np.ndarray: A 2d array of size :math:`(N,d)` with samples.
+        """
         rsams = np.random.rand(nsam, self.dim)
         sams = scale01ToDom(rsams, self.domain)
 
@@ -221,7 +264,13 @@ class Function():
 
 
     def plot_1d(self, nom=None, ngr=133):
+        """Plot 1d slices of the function for all input-output dimension pairs.
 
+        Args:
+            nom (np.ndarray, optional): Nominal input values for non-plotted dimensions.
+                Defaults to None (midpoint of the domain).
+            ngr (int, optional): Number of grid points. Defaults to 133.
+        """
         for odim in range(self.outdim):
             for idim in range(self.dim):
                 plot_1d(self.__call__, self.domain, idim=idim, odim=odim,
@@ -232,7 +281,13 @@ class Function():
 
 
     def plot_2d(self, nom=None, ngr=33):
+        """Plot 2d slices of the function for all input dimension pairs.
 
+        Args:
+            nom (np.ndarray, optional): Nominal input values for non-plotted dimensions.
+                Defaults to None (midpoint of the domain).
+            ngr (int, optional): Number of grid points per dimension. Defaults to 33.
+        """
         for odim in range(self.outdim):
             for idim in range(self.dim):
                 for jdim in range(idim+1, self.dim):
@@ -244,6 +299,15 @@ class Function():
 
 
     def grad_(self, x, eps=1.e-5):
+        r"""Numerical gradient via central finite differences.
+
+        Args:
+            x (np.ndarray): Input 2d array of size :math:`(N,d)`.
+            eps (float, optional): Finite-difference step size. Defaults to 1e-5.
+
+        Returns:
+            np.ndarray: Gradient 3d array of size :math:`(N,o,d)`.
+        """
         grad = np.zeros((x.shape[0], self.outdim, self.dim))
         for idim in range(self.dim):
             xx2 = x.copy()
@@ -255,6 +319,15 @@ class Function():
         return grad
 
     def hess_(self, x, eps=1.e-5):
+        r"""Numerical Hessian via central finite differences.
+
+        Args:
+            x (np.ndarray): Input 2d array of size :math:`(N,d)`.
+            eps (float, optional): Finite-difference step size. Defaults to 1e-5.
+
+        Returns:
+            np.ndarray: Hessian 4d array of size :math:`(N,o,d,d)`.
+        """
         hess = np.zeros((x.shape[0], self.outdim, self.dim, self.dim))
 
         for idim in range(self.dim):
@@ -278,6 +351,17 @@ class Function():
         return hess
 
     def minimize(self, odim=0, return_res=False):
+        """Minimize the function using L-BFGS-B.
+
+        Args:
+            odim (int, optional): Output dimension index to minimize. Defaults to 0.
+            return_res (bool, optional): If True, return the full optimization result.
+                If False, return only the optimal input. Defaults to False.
+
+        Returns:
+            np.ndarray or scipy.optimize.OptimizeResult: Optimal input array,
+                or the full result object if ``return_res`` is True.
+        """
         # Function wrapper for a single evaluation
         def ff(x, fcn):
             return fcn(x.reshape(1, fcn.dim))[0, odim]
@@ -305,6 +389,21 @@ class Function():
     #     return np.allclose(hess_min, hess_[0])
 
     def eval_slice(self, x, ind=[0], nom=None):
+        r"""Evaluate the function on a lower-dimensional slice.
+
+        Non-sliced dimensions are fixed at their nominal values.
+
+        Args:
+            x (np.ndarray): Input 2d array of size :math:`(N, |ind|)` with values
+                for the selected dimensions.
+            ind (list of int, optional): Indices of the active input dimensions.
+                Defaults to [0].
+            nom (np.ndarray, optional): Full nominal input of length `d`.
+                Defaults to None (midpoint of the domain).
+
+        Returns:
+            np.ndarray: Output 2d array of size :math:`(N,o)`.
+        """
         nx = x.shape[0]
         assert(x.shape[1]==len(ind))
         if nom is None:
@@ -317,6 +416,21 @@ class Function():
         return self.__call__(xg)
 
     def evalgrad_slice(self, x, ind=[0], nom=None):
+        r"""Evaluate the gradient on a lower-dimensional slice.
+
+        Non-sliced dimensions are fixed at their nominal values.
+
+        Args:
+            x (np.ndarray): Input 2d array of size :math:`(N, |ind|)` with values
+                for the selected dimensions.
+            ind (list of int, optional): Indices of the active input dimensions.
+                Defaults to [0].
+            nom (np.ndarray, optional): Full nominal input of length `d`.
+                Defaults to None (midpoint of the domain).
+
+        Returns:
+            np.ndarray: Gradient 3d array of size :math:`(N, o, |ind|)`.
+        """
         nx = x.shape[0]
         assert(x.shape[1]==len(ind))
         if nom is None:
@@ -331,7 +445,21 @@ class Function():
 
 
 class AddFcn(Function):
+    """Sum of two functions.
+
+    Attributes:
+        fcn1 (Function): First operand.
+        fcn2 (Function): Second operand.
+    """
+
     def __init__(self, fcn1, fcn2, name='Sum'):
+        """Initialization.
+
+        Args:
+            fcn1 (Function): First function.
+            fcn2 (Function): Second function.
+            name (str, optional): Name. Defaults to 'Sum'.
+        """
         super().__init__()
         assert(fcn1.dim==fcn2.dim)
         assert(fcn1.outdim==fcn2.outdim)
@@ -343,15 +471,45 @@ class AddFcn(Function):
         self.outdim = fcn1.outdim
 
     def __call__(self, x):
+        r"""Evaluate the sum.
+
+        Args:
+            x (np.ndarray): Input 2d array of size :math:`(N,d)`.
+
+        Returns:
+            np.ndarray: Output 2d array of size :math:`(N,o)`.
+        """
         return self.fcn1(x) + self.fcn2(x)
 
     def grad(self, x):
+        r"""Evaluate the gradient of the sum.
+
+        Args:
+            x (np.ndarray): Input 2d array of size :math:`(N,d)`.
+
+        Returns:
+            np.ndarray: Gradient 3d array of size :math:`(N,o,d)`.
+        """
         return self.fcn1.grad(x) + self.fcn2.grad(x)
 
 
 
 class SubFcn(Function):
+    """Difference of two functions.
+
+    Attributes:
+        fcn1 (Function): First operand.
+        fcn2 (Function): Second operand.
+    """
+
     def __init__(self, fcn1, fcn2, name='Subtraction'):
+        """Initialization.
+
+        Args:
+            fcn1 (Function): First function.
+            fcn2 (Function): Second function.
+            name (str, optional): Name. Defaults to 'Subtraction'.
+        """
         super().__init__()
         assert(fcn1.dim==fcn2.dim)
         assert(fcn1.outdim==fcn2.outdim)
@@ -366,16 +524,46 @@ class SubFcn(Function):
 
 
     def __call__(self, x):
+        r"""Evaluate the difference.
+
+        Args:
+            x (np.ndarray): Input 2d array of size :math:`(N,d)`.
+
+        Returns:
+            np.ndarray: Output 2d array of size :math:`(N,o)`.
+        """
         return self.fcn1(x) - self.fcn2(x)
 
     def grad(self, x):
+        r"""Evaluate the gradient of the difference.
+
+        Args:
+            x (np.ndarray): Input 2d array of size :math:`(N,d)`.
+
+        Returns:
+            np.ndarray: Gradient 3d array of size :math:`(N,o,d)`.
+        """
         return self.fcn1.grad(x) - self.fcn2.grad(x)
 
 
 
 
 class MultFcn(Function):
+    """Element-wise product of two functions.
+
+    Attributes:
+        fcn1 (Function): First operand.
+        fcn2 (Function): Second operand.
+    """
+
     def __init__(self, fcn1, fcn2, name='Product'):
+        """Initialization.
+
+        Args:
+            fcn1 (Function): First function.
+            fcn2 (Function): Second function.
+            name (str, optional): Name. Defaults to 'Product'.
+        """
         super().__init__()
         assert(fcn1.dim==fcn2.dim)
         self.fcn1 = fcn1
@@ -389,14 +577,44 @@ class MultFcn(Function):
         return
 
     def __call__(self, x):
+        r"""Evaluate the product.
+
+        Args:
+            x (np.ndarray): Input 2d array of size :math:`(N,d)`.
+
+        Returns:
+            np.ndarray: Output 2d array of size :math:`(N,o)`.
+        """
         return self.fcn1(x) * self.fcn2(x)
 
     def grad(self, x):
+        r"""Evaluate the gradient of the product via the product rule.
+
+        Args:
+            x (np.ndarray): Input 2d array of size :math:`(N,d)`.
+
+        Returns:
+            np.ndarray: Gradient 3d array of size :math:`(N,o,d)`.
+        """
         return self.fcn1.grad(x) * self.fcn2(x)[:, :, np.newaxis] + self.fcn2.grad(x) * self.fcn1(x)[:, :, np.newaxis]
 
 
 class DivFcn(Function):
+    """Element-wise quotient of two functions.
+
+    Attributes:
+        fcn1 (Function): Numerator function.
+        fcn2 (Function): Denominator function.
+    """
+
     def __init__(self, fcn1, fcn2, name='Quotient'):
+        """Initialization.
+
+        Args:
+            fcn1 (Function): Numerator function.
+            fcn2 (Function): Denominator function.
+            name (str, optional): Name. Defaults to 'Quotient'.
+        """
         super().__init__()
         assert(fcn1.dim==fcn2.dim)
         self.fcn1 = fcn1
@@ -410,13 +628,43 @@ class DivFcn(Function):
         return
 
     def __call__(self, x):
+        r"""Evaluate the quotient.
+
+        Args:
+            x (np.ndarray): Input 2d array of size :math:`(N,d)`.
+
+        Returns:
+            np.ndarray: Output 2d array of size :math:`(N,o)`.
+        """
         return self.fcn1(x) / self.fcn2(x)
 
     def grad(self, x):
+        r"""Evaluate the gradient of the quotient via the quotient rule.
+
+        Args:
+            x (np.ndarray): Input 2d array of size :math:`(N,d)`.
+
+        Returns:
+            np.ndarray: Gradient 3d array of size :math:`(N,o,d)`.
+        """
         return ( self.fcn1.grad(x) * self.fcn2(x)[:, :, np.newaxis] - self.fcn2.grad(x) * self.fcn1(x)[:, :, np.newaxis] ) / self.fcn2(x)[:, :, np.newaxis]**2
 
 class PowFcn(Function):
+    """Element-wise power of a function.
+
+    Attributes:
+        fcn (Function): Base function.
+        power (float): Exponent.
+    """
+
     def __init__(self, fcn, power, name='Power'):
+        """Initialization.
+
+        Args:
+            fcn (Function): Base function.
+            power (float): Exponent value.
+            name (str, optional): Name. Defaults to 'Power'.
+        """
         super().__init__()
         self.fcn = fcn
         self.name = name
@@ -427,14 +675,52 @@ class PowFcn(Function):
         return
 
     def __call__(self, x):
+        r"""Evaluate the power function.
+
+        Args:
+            x (np.ndarray): Input 2d array of size :math:`(N,d)`.
+
+        Returns:
+            np.ndarray: Output 2d array of size :math:`(N,o)`.
+        """
         return np.power(self.fcn(x), self.power)
 
     def grad(self, x):
+        r"""Evaluate the gradient via the power rule.
+
+        Args:
+            x (np.ndarray): Input 2d array of size :math:`(N,d)`.
+
+        Returns:
+            np.ndarray: Gradient 3d array of size :math:`(N,o,d)`.
+        """
         return self.power * self.fcn.grad(x) * np.power(self.fcn(x), self.power-1)[:, :, np.newaxis]
 
 
 class ModelWrapperFcn(Function):
+    """Wrapper that turns a generic callable into a Function.
+
+    Wraps a model callable (with optional parameters) so it can be
+    used wherever a :class:`Function` is expected.
+
+    Attributes:
+        model (callable): The underlying model callable.
+        modelpar: Optional model parameters passed as a second argument.
+        ndim (int): Input dimensionality.
+    """
+
     def __init__(self, model, ndim, modelpar=None, name='ModelWrapper'):
+        r"""Initialization.
+
+        Args:
+            model (callable): A callable that accepts an :math:`(N,d)` array
+                (and optionally model parameters) and returns an array of
+                length `N`.
+            ndim (int): Input dimensionality, `d`.
+            modelpar (optional): Extra parameter object passed to ``model``
+                as a second argument. Defaults to None.
+            name (str, optional): Name. Defaults to 'ModelWrapper'.
+        """
         super().__init__(name=name)
         self.model = model
         self.modelpar = modelpar
@@ -443,6 +729,14 @@ class ModelWrapperFcn(Function):
         self.outdim = 1
 
     def __call__(self, x):
+        r"""Evaluate the wrapped model.
+
+        Args:
+            x (np.ndarray): Input 2d array of size :math:`(N,d)`.
+
+        Returns:
+            np.ndarray: Output 2d array of size :math:`(N,1)`.
+        """
         self.checkDim(x)
         if self.modelpar is None:
             return self.model(x).reshape(-1,1)

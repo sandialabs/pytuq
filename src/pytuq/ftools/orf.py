@@ -16,7 +16,7 @@ class GLMAP:
     Attributes:
 
         npt (int)       : number of data points
-        x (np.ndarray)  : 2d float data array of shape :math:`(npt,n)`, i.e. :math:`npt` points each in :math:`R^n`.
+        x (np.ndarray)  : 2d float data array of shape :math:`(npt,n)`, i.e. `npt` points each in :math:`R^n`.
         L (np.ndarray or callable or None)        : 2d float array of shape :math:`(M,npt)` or a callable user-provided function or None
 
     Notes:
@@ -24,11 +24,11 @@ class GLMAP:
         :math:`y = L(x,f(x;w))`, given data :math:`\{(x_1,y_1),...,(x_{npt},y_{npt})\}` where :math:`x_i \in R^n`, :math:`x \in R^{npt \times n}`, and :math:`y_i\in R`.
         and where :math:`w \in R^m` is a vector of parameters to be estimated.
 
-        L needs to be linear in :math:`f()`, with separate L dependence on :math:`x` being an arbitrary function, so that, with :math:`u = f(x,w) = \sum_k w_k f_k(x)`, we have :math:`y = L(x, \sum_k w_k f_k(x) ) = \sum_k w_k L(x,f_k(x))` or :math:`y = A w` with :math:`A \in R^{npt \times m}` where :math:`A[i,j] = L(x_i,f_j(x_i))`.
+        L needs to be linear in :math:`f()`, with separate L dependence on `x` being an arbitrary function, so that, with :math:`u = f(x,w) = \sum_k w_k f_k(x)`, we have :math:`y = L(x, \sum_k w_k f_k(x) ) = \sum_k w_k L(x,f_k(x))` or :math:`y = A w` with :math:`A \in R^{npt \times m}` where :math:`A[i,j] = L(x_i,f_j(x_i))`.
 
         This class can take specs of different linear maps L on functions :math:`f(x): x \rightarrow u`, with :math:`u \in R^{npt}`. We list here multiple options for illustration. The specification of the linear map ``lmap=gso.GLMAP(x,L)`` can be done with L given as either no spec, a function, or an array
             * if L is a user-defined callable L (function), then `lmap.eval(f)` returns :math:`L(x,u)` as specified by the user. If want a map, e.g.: :math:`L(x,f(x)) = e^x + x^3 f(x)`, one can use e.g. ``lmap = gso.GLMAP(x, lambda x, u: np.exp(x) + x**3 * u)``.
-            * if L is a user-defined array L, i.e. :math:`L(x,u):=Lu`, (L shape needs to be :math:`(M,npt)`) then ``lmap.eval(f)`` returns :math:`Lu`. If we want a linear matrix map, say :math:`L = B` (shape :math:`(m,npt)` ), then can use either ``lmap = gso.GLMAP(x, B)`` or ``lmap = gso.GLMAP(x, lambda x, u: B@u)``.
+            * if L is a user-defined array L, i.e. :math:`L(x,u):=Lu`, (L shape needs to be :math:`(M,npt)`) then ``lmap.eval(f)`` returns `Lu`. If we want a linear matrix map, say :math:`L = B` (shape :math:`(m,npt)` ), then can use either ``lmap = gso.GLMAP(x, B)`` or ``lmap = gso.GLMAP(x, lambda x, u: B@u)``.
             * if L is None or not specified, then an identiy map is implied, and ``lmap.eval(f)`` returns :math:`L(x,u) = u`; Thus, the following are all equivalent specs of the None option for L
                 * ``lmap = gso.GLMAP(x)``
                 * ``lmap = gso.GLMAP(x, np.eye(npt))``
@@ -143,7 +143,7 @@ class HMAT:
         return self.Fval[i,j]
 
     def Heval(self,n,r,ilom,ihim):
-        r'''Evaluate :math:`H` matrix recursively.
+        r'''Evaluate `H` matrix recursively.
 
         Args:
             n (int)     : summation index limit
@@ -176,7 +176,7 @@ class HMAT:
         return sum
 
     def fill(self,n,r,i1,i):
-        r'''Fill in :math:`H` matrix recursively.
+        r'''Fill in `H` matrix recursively.
 
         Args:
             n (int)  : summation index limit
@@ -213,13 +213,13 @@ class HMAT:
         return
 
 class MGSV:
-    r'''Utilities class for :math:`V` matrix construction.
+    r'''Utilities class for `V` matrix construction.
 
     Attributes:
         m   (int)           : number of basis functions in expansion.
-        mat (np.ndarray)    : 2D :math:`(m, m)` array where the :math:`V` matrix is constructed.
+        mat (np.ndarray)    : 2D :math:`(m, m)` array where the `V` matrix is constructed.
         verbose (bool)      : controls verbosity.
-        Smat (np.ndarray)   : 3D :math:`(m, m, m)` array where the :math:`S` matrix is constructed.
+        Smat (np.ndarray)   : 3D :math:`(m, m, m)` array where the `S` matrix is constructed.
         H (object)          : pointer to HMAT object.
     '''
 
@@ -236,7 +236,7 @@ class MGSV:
         self.H    = HMAT(mgs_,verbose=False)
 
     def fill_row(self,i):
-        r'''Fill in :math:`V` matrix row.
+        r'''Fill in `V` matrix row.
 
         Args:
             i (int)  : row index
@@ -270,15 +270,15 @@ class MGS:
 
     Attributes:
         m   (int)           : number of basis functions in expansion.
-        phi (np.ndarray)    : 1d numpy array (size :math:`m`) of starting functions.
-        psi (np.ndarray)    : 1d numpy array (size :math:`m`) of to-be-constructed orthogonal functions.
-        tht (np.ndarray)    : 1d numpy array (size :math:`m`) of to-be-constructed orthonormal functions.
+        phi (np.ndarray)    : 1d numpy array (size `m`) of starting functions.
+        psi (np.ndarray)    : 1d numpy array (size `m`) of to-be-constructed orthogonal functions.
+        tht (np.ndarray)    : 1d numpy array (size `m`) of to-be-constructed orthonormal functions.
         Lmap (object)       : pointer to local copy of Linear map and data object.
         modified (bool)     : True/False for modified/original GS orthogonalization.
         V (np.ndarray)      : 2d :math:`(m, m)` numpy array ... the V matrix.
         Z (np.ndarray)      : 2d :math:`(m, m)` numpy array ... the Z matrix.
         Pmat (np.ndarray)   : 2d :math:`(m, m)` numpy array ... the P projection matrix
-        lam (np.ndarray)    : 1d numpy array of size :math:`m`.
+        lam (np.ndarray)    : 1d numpy array of size `m`.
     '''
 
     def __init__(self,phi_,Lmap):
@@ -317,13 +317,14 @@ class MGS:
 
                 - ``pk = [lambda x : 2*x, lambda x : x**2, lambda x : x**3]``
                 - ``pl = lambda x : 10*x``
+
             then
 
-                - ``iprod(pk[3],pl)`` returns: ``[[<Lmap.eval(pk[3]),Lmap.eval(pl)>]]``, a 2d `(1, 1)` numpy array and
-                - ``iprod(pk,pl,k=1,kmxp=3)`` returns ``[[<Lmap.eval(pk[1]),Lmap.eval(pl)>, <Lmap.eval(pk[2]),Lmap.eval(pl)>]]``, a 2d `(1, 2)` numpy array.
-                - ``iprod(pk,pl,k=0,kmxp=3,l=0,lmxp=2)`` returns  ``[ [<Lmap.eval(pk[0]),Lmap.eval(pl[0])>, <Lmap.eval(pk[0]),Lmap.eval(pl[1])>], [<Lmap.eval(pk[1]),Lmap.eval(pl[0])>, <Lmap.eval(pk[1]),Lmap.eval(pl[1])>], [<Lmap.eval(pk[2]),Lmap.eval(pl[0])>, <Lmap.eval(pk[2]),Lmap.eval(pl[1])>]]``  a 2d `(3, 2)` numpy array.
+                - ``iprod(pk[3],pl)`` returns: ``[[<Lmap.eval(pk[3]),Lmap.eval(pl)>]]``, a 2d :math:`(1, 1)` numpy array and
+                - ``iprod(pk,pl,k=1,kmxp=3)`` returns ``[[<Lmap.eval(pk[1]),Lmap.eval(pl)>, <Lmap.eval(pk[2]),Lmap.eval(pl)>]]``, a 2d :math:`(1, 2)` numpy array.
+                - ``iprod(pk,pl,k=0,kmxp=3,l=0,lmxp=2)`` returns  ``[ [<Lmap.eval(pk[0]),Lmap.eval(pl[0])>, <Lmap.eval(pk[0]),Lmap.eval(pl[1])>], [<Lmap.eval(pk[1]),Lmap.eval(pl[0])>, <Lmap.eval(pk[1]),Lmap.eval(pl[1])>], [<Lmap.eval(pk[2]),Lmap.eval(pl[0])>, <Lmap.eval(pk[2]),Lmap.eval(pl[1])>]]``  a 2d :math:`(3, 2)` numpy array.
 
-            NB. if x is an `npt`-long vector of data points, then for any of the above functions, say ``pk[2]``, ``Lmap.eval(pk[2])`` will return a 2d `(1, npt)` numpy array.
+            NB. if x is an `npt`-long vector of data points, then for any of the above functions, say ``pk[2]``, ``Lmap.eval(pk[2])`` will return a 2d :math:`(1, npt)` numpy array.
 
         '''
 
@@ -533,11 +534,11 @@ class MMGS:
         phi (np.ndarray)    : 1d numpy array of starting functions
         phi_ (np.ndarray)   : 1d numpy array of starting functions
         Lmap (object)       : Linear map and data object
-        Pmat (np.ndarray)   : 2d `(m, m)` numpy array, the projection matrix `P`
-        mgs (np.ndarray)    : 1d `(nstage,)` array of MGS objects
-        phia (np.ndarray)   : 2d `(nstage, m)` numpy array of starting functions
-        thta (np.ndarray)   : 2d `(nstage, m)` numpy array of orthonormalized functions
-        Parr (np.ndarray)   : 3d `(nstage, m, m)` matrix, holds nstage P matrices
+        Pmat (np.ndarray)   : 2d :math:`(m, m)` numpy array, the projection matrix `P`
+        mgs (np.ndarray)    : 1d :math:`(nstage,)` array of MGS objects
+        phia (np.ndarray)   : 2d :math:`(nstage, m)` numpy array of starting functions
+        thta (np.ndarray)   : 2d :math:`(nstage, m)` numpy array of orthonormalized functions
+        Parr (np.ndarray)   : 3d :math:`(nstage, m, m)` matrix, holds nstage P matrices
     ''' 
     def __init__(self,phi_,Lmap):
         '''Initialize.
@@ -555,7 +556,7 @@ class MMGS:
         Runs multistage and/or Modified GS for functions
 
         Returns:
-            Pmat (np.ndarray)   : float `(m,m)` aggregated projection matrix
+            Pmat (np.ndarray)   : float :math:`(m,m)` aggregated projection matrix
             thta[-1]            : 1d array of final tht functions 
         '''
 
@@ -659,8 +660,8 @@ class QR:
 
     Attributes:
         m   (int)           : number of basis functions in expansion.
-        phi (np.ndarray)    : 1d numpy array (size :math:`m`) of starting functions.
-        tht (np.ndarray)    : 1d numpy array (size :math:`m`) of to-be-constructed orthonormal functions.
+        phi (np.ndarray)    : 1d numpy array (size `m`) of starting functions.
+        tht (np.ndarray)    : 1d numpy array (size `m`) of to-be-constructed orthonormal functions.
         Lmap (object)       : pointer to local copy of Linear map and data object.
         Pmat (np.ndarray)   : 2d :math:`(m, m)` numpy array ... the P projection matrix
     '''
@@ -700,13 +701,14 @@ class QR:
 
                 - ``pk = [lambda x : 2*x, lambda x : x**2, lambda x : x**3]``
                 - ``pl = lambda x : 10*x``
+
             then
 
-                - ``iprod(pk[3],pl)`` returns: ``[[<Lmap.eval(pk[3]),Lmap.eval(pl)>]]``, a 2d `(1, 1)` numpy array and
-                - ``iprod(pk,pl,k=1,kmxp=3)`` returns ``[[<Lmap.eval(pk[1]),Lmap.eval(pl)>, <Lmap.eval(pk[2]),Lmap.eval(pl)>]]``, a 2d `(1, 2)` numpy array.
-                - ``iprod(pk,pl,k=0,kmxp=3,l=0,lmxp=2)`` returns  ``[ [<Lmap.eval(pk[0]),Lmap.eval(pl[0])>, <Lmap.eval(pk[0]),Lmap.eval(pl[1])>], [<Lmap.eval(pk[1]),Lmap.eval(pl[0])>, <Lmap.eval(pk[1]),Lmap.eval(pl[1])>], [<Lmap.eval(pk[2]),Lmap.eval(pl[0])>, <Lmap.eval(pk[2]),Lmap.eval(pl[1])>]]``  a 2d `(3, 2)` numpy array.
+                - ``iprod(pk[3],pl)`` returns: ``[[<Lmap.eval(pk[3]),Lmap.eval(pl)>]]``, a 2d :math:`(1, 1)` numpy array and
+                - ``iprod(pk,pl,k=1,kmxp=3)`` returns ``[[<Lmap.eval(pk[1]),Lmap.eval(pl)>, <Lmap.eval(pk[2]),Lmap.eval(pl)>]]``, a 2d :math:`(1, 2)` numpy array.
+                - ``iprod(pk,pl,k=0,kmxp=3,l=0,lmxp=2)`` returns  ``[ [<Lmap.eval(pk[0]),Lmap.eval(pl[0])>, <Lmap.eval(pk[0]),Lmap.eval(pl[1])>], [<Lmap.eval(pk[1]),Lmap.eval(pl[0])>, <Lmap.eval(pk[1]),Lmap.eval(pl[1])>], [<Lmap.eval(pk[2]),Lmap.eval(pl[0])>, <Lmap.eval(pk[2]),Lmap.eval(pl[1])>]]``  a 2d :math:`(3, 2)` numpy array.
 
-            NB. if x is an `npt`-long vector of data points, then for any of the above functions, say ``pk[2]``, ``Lmap.eval(pk[2])`` will return a 2d `(1, npt)` numpy array.
+            NB. if x is an `npt`-long vector of data points, then for any of the above functions, say ``pk[2]``, ``Lmap.eval(pk[2])`` will return a 2d :math:`(1, npt)` numpy array.
 
         '''
 

@@ -1,5 +1,27 @@
 #!/usr/bin/env python
-"""This script generates training data for benchmark functions."""
+"""Generate training data for benchmark functions.
+
+This script evaluates a chosen benchmark function at random or user-supplied
+input points and saves the resulting input/output pairs to text files.
+Optionally, it can also compute and save gradients.
+
+Outputs:
+    ``xtrain.txt`` : Input sample array of shape ``(n, d)``.
+    ``ytrain.txt`` : Output array of shape ``(n, m)``.
+    ``gtrain.txt`` : *(optional, with* ``-g`` *)* Gradient array of shape ``(n, m*d)``.
+
+Example::
+
+    python create_data.py -f Ishigami -n 200 -s 0.01
+
+Command-line arguments:
+    -n, --npts      Number of sample points (default: 100).
+    -f, --func      Benchmark function name (see ``--help`` for choices).
+    -x, --xtrain    Optional file of pre-generated input samples.
+    -s, --sigma     Standard deviation of additive Gaussian noise (default: 0.0).
+    -g              Compute and save gradients.
+    -z, --seed      Random seed for reproducibility.
+"""
 import sys
 import argparse
 import numpy as np

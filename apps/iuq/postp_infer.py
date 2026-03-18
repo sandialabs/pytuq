@@ -1,4 +1,24 @@
 #!/usr/bin/env python
+"""Post-process Bayesian inference results from the IUQ workflow.
+
+This script loads calibration and surrogate results, generates MCMC chain
+diagnostics, posterior predictive checks, marginal PDF plots, posterior
+samples, and various comparison visualisations.
+
+Expected inputs:
+    ``results.pk``         : Pickled surrogate results from the UQPC workflow.
+    ``calib_results.pk``   : Pickled calibration results from ``run_infer.py``.
+    ``ydata.txt``          : Observational data.
+    ``ydatavar.txt``       : Data-noise variance.
+    ``surr_error_var.txt`` : Surrogate approximation error variance.
+
+Example::
+
+    python postp_infer.py -c p_true.txt
+
+Command-line arguments:
+    -c, --cfile   True-parameters file for overlay on posteriors (optional).
+"""
 
 import os
 import argparse

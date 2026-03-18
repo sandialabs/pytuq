@@ -1,4 +1,27 @@
 #!/usr/bin/env python
+"""Run Bayesian inference using a pre-constructed PC surrogate.
+
+This script loads a PC surrogate from ``results.pk``, configures the
+likelihood, prior, and MCMC sampler, and performs Bayesian model
+calibration.  The calibration results are saved for subsequent
+post-processing by ``postp_infer.py``.
+
+Expected inputs:
+    ``results.pk``   : Pickled surrogate results from the UQPC workflow.
+    ``ydata.txt``    : Observational data.
+    ``ydatavar.txt`` : Data-noise variance.
+
+Outputs:
+    ``calib_results.pk``   : Pickled calibration results.
+    ``surr_error_var.txt`` : Surrogate approximation error variance.
+
+Example::
+
+    python run_infer.py --merr
+
+Command-line arguments:
+    -m, --merr    Enable model-error inference (default: False).
+"""
 
 import argparse
 import numpy as np

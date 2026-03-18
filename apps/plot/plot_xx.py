@@ -1,4 +1,22 @@
 #!/usr/bin/env python
+"""Plot pairwise scatter plots of input data.
+
+This script reads a multivariate input-data file and produces scatter
+plots for every pair of dimensions, optionally colour-coded by label.
+
+Outputs:
+    ``xx_<dim1>_<dim2>.png`` : One scatter plot per dimension pair.
+
+Example::
+
+    python plot_xx.py -x qtrain.txt -e 2
+
+Command-line arguments:
+    -x, --xdata          Input data file (default: ``qtrain.txt``).
+    -p, --pnames_file    Parameter names file (default: ``pnames.txt``).
+    -e, --every          Sample thinning factor (default: 1).
+    -l, --labels_file    Label file for group colouring.
+"""
 
 import os
 import argparse

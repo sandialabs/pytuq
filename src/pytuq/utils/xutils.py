@@ -113,7 +113,7 @@ def sample_sphere(center=None, rad=1.0, nsam=100):
         nsam (int, optional): Number of samples requested. Defaults to 100.
 
     Returns:
-        np.ndarray: Array of size `(N,d)`
+        np.ndarray: Array of size :math:`(N,d)`
     """
     if center is None:
         center = np.zeros((3,))
@@ -136,7 +136,7 @@ def get_opt_bw(xsam, bwf=1.0):
     """Get the rule-of-thumb optimal bandwidth for kernel density estimation.
 
     Args:
-        xsam (np.ndarray): Data array, `(N,d)`
+        xsam (np.ndarray): Data array, :math:`(N,d)`
         bwf (float): Factor behind the scaling optimal rule
     Returns:
         np.ndarray: Array of length `d`, the optimal per-dimension bandwidth
@@ -162,8 +162,8 @@ def get_pdf(data, target):
     """Compute PDF given data at target points.
 
     Args:
-        data (np.ndarray): an `(N,d)` array of `N` samples in `d` dimensions
-        target np.ndarray): an `(M,d)` array of target points
+        data (np.ndarray): an :math:`(N,d)` array of `N` samples in `d` dimensions
+        target np.ndarray): an :math:`(M,d)` array of target points
 
     Returns:
         np.ndarray: PDF values at target

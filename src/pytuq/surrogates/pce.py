@@ -48,19 +48,19 @@ class PCE:
         stochastic dimensionality, order, and polynomial chaos (PC) type. 
 
         Args:
-            pce_dim (int): Stochastic dimensionality :math:`d` of the PC random variable/vector. 
+            pce_dim (int): Stochastic dimensionality `d` of the PC random variable/vector. 
                 The number of sources of uncertainty (sdim).
             pce_order (int): Order of the PC expansion.
-            pce_type (str or list): PC type. Either a list of :math:`s` strings (one per stochastic dimension), 
+            pce_type (str or list): PC type. Either a list of `s` strings (one per stochastic dimension), 
                 or a single string for all dimensions. Supported types include 'LU' (Legendre) and 'HG' (Hermite-Gaussian).
             verbose (int): Output verbosity. Higher values print out more information. Default of 0
-            pce_outdim (int, optional): Physical dimensionality :math:`s` of the PC random variable/vector.
+            pce_outdim (int, optional): Physical dimensionality `s` of the PC random variable/vector.
                 Default of 1 indicates a scalar-valued output.
-            mi (list or np.ndarray, optional): List of :math:`d` multiindex arrays, each of size :math:`(K_i,s)` for :math:`i=1, \dots, d`. 
+            mi (list or np.ndarray, optional): List of `d` multiindex arrays, each of size :math:`(K_i,s)` for :math:`i=1, \dots, d`. 
                 Or a single multiindex array of size :math:`(K,s)`, meaning all dimensions get the same multiindex. 
                 Defaults to None, which is a single 1d constant random variable i.e. a multiindex of all zeros.
-            cfs (list or np.ndarray, optional): List of :math:`d` coefficient arrays, each of size :math:`K_i` for :math:`i=1, \dots, d`. 
-                Or a single coefficient array of size :math:`K`, meaning all dimensions get the same coefficient array. 
+            cfs (list or np.ndarray, optional): List of `d` coefficient arrays, each of size :math:`K_i` for :math:`i=1, \dots, d`. 
+                Or a single coefficient array of size `K`, meaning all dimensions get the same coefficient array. 
                 Or a 2d array of size :math:`(K,d)`. Defaults to None, which is populating coefficients with all zeros.
         
         Note:
@@ -95,7 +95,7 @@ class PCE:
         r"""Sets the training data with validation.
 
         Args:
-            x_train (np.ndarray): 2d array of size `(N, d)` representing training input data,
+            x_train (np.ndarray): 2d array of size :math:`(N, d)` representing training input data,
                 where `N` is the number of samples and `d` is the dimensionality (sdim) of each sample.
             y_train (np.ndarray): 1d array of size `N` representing the training output data,
                 where each element corresponds to the output value for each input sample in `x_train`.
@@ -134,10 +134,10 @@ class PCE:
             seed (int, optional): Random seed for reproducibility. Defaults to 13.
 
         Returns:
-            dict: A dictionary where each key is the fold number (0 to nfolds-1) 
-            and each value is a dictionary with:
-                - "train index" (np.ndarray): Indices of training samples.
-                - "val index" (np.ndarray): Indices of validation samples.
+            dict: A dictionary where each key is the fold number (0 to nfolds-1)
+                and each value is a dictionary with
+                ``"train index"`` (np.ndarray) for training sample indices and
+                ``"val index"`` (np.ndarray) for validation sample indices.
         """
         # Returns split data where each data is one fold left out
         KK = nfolds
@@ -167,13 +167,13 @@ class PCE:
     
 
     def kfold_cv(self, x, y, nfolds=3,seed=13):
-        """Splits data into training/testing pairs for kfold cross-val
-        x is a data matrix of size n x d1, d1 is dim of input
-        y is a data matrix of size n x d2, d2 is dim of output
+        """Splits data into training/testing pairs for kfold cross-val.
+        `x` is a data matrix of size :math:`(n, d_1)`, `d1` is dim of input.
+        `y` is a data matrix of size :math:`(n, d_2)`, `d2` is dim of output.
 
         Args:
             x (np.ndarray): Input matrix with shape (n, d1) or 1D array with shape (n,). Each row is a sample; columns are input features.
-            y (np.ndarray): Target array with shape (n,) for single-output, or (n, d2) for multi-output. If 1D, it is internally reshaped to (n, 1) before slicing; outputs are `np.squeeze`d per fold.
+            y (np.ndarray): Target array with shape (n,) for single-output, or (n, d2) for multi-output. If 1D, it is internally reshaped to (n, 1) before slicing; outputs are squeezed via ``np.squeeze`` per fold.
             nfolds (int, optional): Number of folds for cross-validation. Defaults to 3.
             seed (int, optional): Random seed for reproducible shuffling in `kfold_split`. Defaults to 13.
         """
@@ -208,12 +208,11 @@ class PCE:
         """Choose the optimum eta for Bayesian compressive sensing. Calculates the RMSE for each eta for a specified number of folds. 
         Selects the eta with the lowest RMSE after averaging the RMSEs over the folds.
 
-        Arg:
-            y: 1D numpy array (vector) with function, evaluated at the sample points [#samples,]
-            x: N-dimensional NumPy array with sample points [#samples, #dimensions]
-            etas: NumPy array or list with the threshold for stopping the algorithm. Smaller values retain more nonzero coefficients.
-            plot: Flag for whether to generate a plot for eta optimization
-            verbose: Flag for print statements during cross-validation 
+        Args:
+            etas (np.ndarray or list): Threshold values for stopping the BCS algorithm. Smaller values retain more nonzero coefficients.
+            verbose (int, optional): Verbosity flag for print statements during cross-validation. Defaults to 0.
+            nfolds (int, optional): Number of cross-validation folds. Defaults to 3.
+            plot (bool, optional): Flag for whether to generate a plot for eta optimization. Defaults to False.
 
         Returns:
             eta_opt: Optimum eta value to be used in BCS build
@@ -394,7 +393,7 @@ class PCE:
         Returns predicted y-values, along with standard deviation, covariance, and variance of predictions if applicable. 
 
         Args:
-            x_eval (np.ndarray): 2d array of size `(N,d)` as input data for evaluation. Can also be a single sample as input.
+            x_eval (np.ndarray): 2d array of size :math:`(N,d)` as input data for evaluation. Can also be a single sample as input.
             data_variance (bool, optional): Whether to compute posterior-predictive (i.e. add data variance) or not.
 
         Returns:

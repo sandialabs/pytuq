@@ -1,4 +1,24 @@
 #!/usr/bin/env python
+"""Create synthetic PC-based observational data for inference testing.
+
+This script loads a previously built PC surrogate (from ``results.pk``),
+evaluates it at a true parameter vector, adds Gaussian noise, and writes
+out synthetic data and variance files for use by the inference workflow.
+
+Outputs:
+    ``p_true.txt``    : True parameter vector used for data generation.
+    ``ydata.txt``     : Synthetic observational data of shape ``(outdim, neach)``.
+    ``ydatavar.txt``   : Data-noise variance array of shape ``(outdim,)``.
+
+Example::
+
+    python create_data_truepc.py -s 0.5 -e 3 -c p_true_input.txt
+
+Command-line arguments:
+    -s, --sig     Noise standard deviation (default: 0.5).
+    -e, --each    Number of replicate samples per output location (default: 1).
+    -c, --cfile   File of true coefficients; if omitted, random values are drawn.
+"""
 
 import argparse
 import numpy as np

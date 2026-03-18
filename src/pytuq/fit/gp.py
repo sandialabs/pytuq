@@ -35,17 +35,17 @@ def kernel_sin(x, y, corlength, period):
     return np.exp((-2./corlength**2)*np.sin(np.pi*np.linalg.norm(x-y)/period)**2)
 
 class gp(fitbase):
-    r"""Gaussian process class.
+    r"""Gaussian process class :cite:t:`rasmussen:2006`.
 
     Attributes:
-        nbas (int): Number of regression bases, :math:`K`.
-        basisEval (callable): Basis evaluator function of signature :math:`f(x,p_{bas})`, where :math:`x` is a 2d array of size `(N,d)` and output is a 2d array of size :math:`(N, K)`.
+        nbas (int): Number of regression bases, `K`.
+        basisEval (callable): Basis evaluator function of signature :math:`f(x,p_{bas})`, where `x` is a 2d array of size :math:`(N,d)` and output is a 2d array of size :math:`(N, K)`.
         basisEvalPars (list): Parameters :math:`p_{bas}` of the basis evaluator.
         basisEvaluatorSet (bool): Indicates whether the basis evaluator is set or not.
         AinvH (np.ndarray): A 2d matrix :math:`A^{-1}H` of size :math:`(N,K)`.
-        c_hat (np.ndarray): The best regression coefficient, an 1d array :math:`\hat{c}` of size :math:`K`.
+        c_hat (np.ndarray): The best regression coefficient, an 1d array :math:`\hat{c}` of size `K`.
         fitted (bool): Indicates whether the GP is already built.
-        kernel (callable): Kernel evaluator function of signature :math:`K(x_1, x_2, p_{ker})`, where :math:`x_1` and :math:`x_2` are 1d arrays of size :math:`d`, and the output is a scalar.
+        kernel (callable): Kernel evaluator function of signature :math:`K(x_1, x_2, p_{ker})`, where :math:`x_1` and :math:`x_2` are 1d arrays of size `d`, and the output is a scalar.
         kernel_params (list): Parameters :math:`p_{ker}` of the kernel.
         kernel_params_range (list[tuple]): List of (min, max) tuples of size of kernel parameter list.
         LVst (np.ndarray): Cholesky factor of :math:`V^*`, a 2d array of size :math:`(K,K)`.
@@ -53,26 +53,26 @@ class gp(fitbase):
         sigma2 (float): Data variance, given or inferred.
         nugget (float): Covariance nugget :math:`\epsilon` to improve conditioning.
         prior_invcov (np.ndarray): Inverse-covariance of the prior, a 2d array of size :math:`(K,K)`.
-        prior_mean (np.ndarray): Mean of the prior, a 1d array of size :math:`(K,K)`.
-        kf_ (np.ndarray): An 1d array :math:`k_f` of size :math:`N`.
+        prior_mean (np.ndarray): Mean of the prior, a 1d array of size `K`.
+        kf_ (np.ndarray): An 1d array :math:`k_f` of size `N`.
         L_ (np.ndarray): Cholesky factor, a 2d array of size :math:`(N,N)`.
         x_ (np.ndarray): An 2d array of size :math:`(N,d)`, the training x-data.
-        y_ (np.ndarray): An 1d array of size :math:`N`, the training y-data.
+        y_ (np.ndarray): An 1d array of size `N`, the training y-data.
     """
 
     def __init__(self, kernel, kernel_params, kernel_params_range=None, sigma2=None, nugget=0.0, sigma2prior=None, prior_mean=None, prior_invcov=None, basis=None):
         r"""Initialization.
 
         Args:
-            kernel (callable): Kernel evaluator function of signature :math:`K(x_1, x_2, p_{ker})`, where :math:`x_1` and :math:`x_2` are 1d arrays of size :math:`d`, and the output is a scalar.
+            kernel (callable): Kernel evaluator function of signature :math:`K(x_1, x_2, p_{ker})`, where :math:`x_1` and :math:`x_2` are 1d arrays of size `d`, and the output is a scalar.
             kernel_params (list): Parameters :math:`p_{ker}` of the kernel.
             kernel_params_range (list[tuple], optional): List of (min, max) tuples of size of kernel parameter list. Defaults to None, i.e. no bounds in optimizing kernel parameters.
-            sigma2 (float): Data variance, given or inferred.
-            nugget (float): Covariance nugget :math:`\epsilon` to improve conditioning.
-            prior_invcov (np.ndarray): Inverse-covariance of the prior, a 2d array of size :math:`(K,K)`.
-            prior_mean (np.ndarray): Mean of the prior, a 1d array of size :math:`(K,K)`.
-            basis (tuple, optional): A tuple of (Basis evaluator, Basis evaluator parameters). Defaults to None, in which case no basis (i.e. no regression) is used.
+            sigma2 (float, optional): Data variance, given or inferred. Defaults to None.
+            nugget (float, optional): Covariance nugget :math:`\epsilon` to improve conditioning. Defaults to 0.0.
             sigma2prior (tuple, optional): A tuple of :math:`(\alpha, \beta)` parameters of data variance prior. Defaults to None, in which case both parameters are set to zero, corresponding to prior :math:`p(\sigma^2)=1/\sigma^2`.
+            prior_mean (np.ndarray, optional): Mean of the prior, a 1d array of size `K`. Defaults to None.
+            prior_invcov (np.ndarray, optional): Inverse-covariance of the prior, a 2d array of size :math:`(K,K)`. Defaults to None.
+            basis (tuple, optional): A tuple of (Basis evaluator, Basis evaluator parameters). Defaults to None, in which case no basis (i.e. no regression) is used.
         """
         super().__init__()
 
@@ -104,7 +104,7 @@ class gp(fitbase):
         """Setting basis evaluator.
 
         Args:
-            basiseval (callable): Basis evaluator function of signature :math:`f(x,p_{bas})`, where :math:`x` is a 2d array of size `(N,d)` and output is a 2d array of size :math:`(N, K)`.
+            basiseval (callable): Basis evaluator function of signature :math:`f(x,p_{bas})`, where `x` is a 2d array of size :math:`(N,d)` and output is a 2d array of size :math:`(N, K)`.
             basisevalpars (list): Parameters :math:`p_{bas}` of the basis evaluator.
         """
         self.basisEval = basiseval
@@ -126,7 +126,7 @@ class gp(fitbase):
         r"""Get best variance.
 
         Args:
-            y (np.ndarray): An 1d array of training y-data of size :math:`N`.
+            y (np.ndarray): An 1d array of training y-data of size `N`.
 
         Returns:
             float: Best data variance, :math:`\hat{\sigma}^2`.
@@ -153,7 +153,7 @@ class gp(fitbase):
 
         Args:
             x (np.ndarray): An 2d array of size :math:`(N,d)`, the training x-data.
-            y (np.ndarray): An 1d array of size :math:`N`, the training y-data.
+            y (np.ndarray): An 1d array of size `N`, the training y-data.
 
         """
         self.x_ = x
@@ -187,7 +187,7 @@ class gp(fitbase):
         _ = self.get_sigma2hat(y)
 
     def predict(self, xc, msc=0, pp=False):
-        r"""Predict function, given input :math:`x`, assuming the GP is built.
+        r"""Predict function, given input `x`, assuming the GP is built.
 
         Args:
             xc (np.ndarray): A 2d array of inputs of size :math:`(N,d)` at which bases are evaluated.
@@ -195,7 +195,7 @@ class gp(fitbase):
             pp (bool, optional): Whether to compute posterior-predictive (i.e. add data variance) or not.
 
         Returns:
-            tuple(np.ndarray, np.ndarray, np.ndarray): triple of Mean (array of size :math:`N`), Variance (array of size :math:`N` or None), Covariance (array of size :math:`(N, N)` or None).
+            tuple(np.ndarray, np.ndarray, np.ndarray): triple of Mean (array of size `N`), Variance (array of size `N` or None), Covariance (array of size :math:`(N, N)` or None).
         """
         assert(self.fitted)
 
@@ -230,7 +230,7 @@ class gp(fitbase):
         """Set the kernel function.
 
         Args:
-            kernel (callable): Kernel evaluator function of signature :math:`K(x_1, x_2, p_{ker})`, where :math:`x_1` and :math:`x_2` are 1d arrays of size :math:`d`, and the output is a scalar.
+            kernel (callable): Kernel evaluator function of signature :math:`K(x_1, x_2, p_{ker})`, where :math:`x_1` and :math:`x_2` are 1d arrays of size `d`, and the output is a scalar.
             kernel_params (list): Parameters :math:`p_{ker}` of the kernel.
             kernel_params_range (list[tuple], optional): List of (min, max) tuples of size of kernel parameter list. Defaults to None, i.e. no bounds in optimizing kernel parameters.
         """
@@ -253,7 +253,7 @@ class gp(fitbase):
 
         Args:
             x (np.ndarray): A 2d array of inputs of size :math:`(N,d)` at which kernel is evaluated.
-            kernel_params (list): Parameters :math:`p_{ker}` of the kernel.
+            kernel_params (list, optional): Parameters :math:`p_{ker}` of the kernel. Defaults to None, using the stored kernel parameters.
 
         Returns:
             np.ndarray: Kernel matrix, a 2d array of size :math:`(N,N)`.
@@ -275,7 +275,7 @@ class gp(fitbase):
 
         Args:
             xc (np.ndarray): A 2d array of inputs of size :math:`(N,d)` at which kernel is evaluated.
-            kernel_params (list): Parameters :math:`p_{ker}` of the kernel.
+            kernel_params (list, optional): Parameters :math:`p_{ker}` of the kernel. Defaults to None, using the stored kernel parameters.
 
         Returns:
             np.ndarray: Kernel matrix, a 2d array of size :math:`(N,N_{tr})`.
@@ -301,7 +301,7 @@ class gp(fitbase):
         Args:
             params (list): Parameters :math:`p_{ker}` of the kernel to be optimized.
             x (np.ndarray): An 2d array x-data of size :math:`(N,d)`.
-            y (np.ndarray): An 1d array y-data of size :math:`N`.
+            y (np.ndarray): An 1d array y-data of size `N`.
 
         Returns:
             float: The scalar value of the negative log-likelihood.

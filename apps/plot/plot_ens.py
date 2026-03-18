@@ -1,4 +1,19 @@
 #!/usr/bin/env python
+"""Plot an ensemble of output data curves.
+
+This script reads a multioutput data file and overlays all samples
+on a single figure, producing an ensemble (spaghetti) plot.
+
+Outputs:
+    ``ensemble.png`` : Overlay plot of all output samples.
+
+Example::
+
+    python plot_ens.py -y ytrain.dat
+
+Command-line arguments:
+    -y, --ydata   Output data file (default: ``ytrain.dat``).
+"""
 
 import os
 import argparse

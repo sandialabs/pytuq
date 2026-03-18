@@ -1,5 +1,10 @@
 #!/usr/bin/env python
-"""An example parameter inference sketch for 1-dimensional data."""
+"""Parameter Inference Sketch.
+
+Comprehensive parameter inference example for 1D data using MCMC.
+Demonstrates configuring likelihood types, prior options, data variance
+treatment, and post-processing the calibration results.
+"""
 
 try:
     import pprint

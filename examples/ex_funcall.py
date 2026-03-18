@@ -11,10 +11,12 @@ from pytuq.utils.plotting import myrc
 from pytuq.utils.xutils import instantiate_classes_from_module
 myrc()
 
+# Auto-instantiate all function classes from each submodule
 objects = []
 for submod in ['bench', 'bench1d', 'bench2d', 'benchNd', 'chem', 'genz', 'poly', 'toy']:
     this_objects = instantiate_classes_from_module(f"pytuq.func.{submod}")
     for j in this_objects:
+        # Skip abstract base classes
         if j.name not in ['GenzBase', 'Poly']:
             objects.append(j)
 

@@ -1,5 +1,28 @@
 #!/usr/bin/env python
-"""App to build NN-based surrogates for multioutput models."""
+"""Build neural-network-based surrogates for multioutput models.
+
+This script trains a Residual Network (``RNet`` from QUiNN) on
+user-supplied input/output data, splits the data into training and
+testing sets, and produces parity plots and per-sample fit comparisons.
+
+Requires the `QUiNN <https://github.com/sandialabs/quinn>`_ package.
+
+Outputs:
+    ``dm_*.png``    : Parity (model vs approximation) plots per output.
+    ``fit_s*.png``  : Per-sample overlay of original and NN-predicted outputs.
+
+Example::
+
+    python nn_fit.py -x ptrain.txt -y ytrain.txt -t 0.8
+
+Command-line arguments:
+    -x, --xdata          Input data file (default: ``ptrain.txt``).
+    -y, --ydata          Output data file (default: ``ytrain.txt``).
+    -d, --xcond          Conditioning x-grid file.
+    -q, --outnames_file  Output names file (default: ``outnames.txt``).
+    -p, --pnames_file    Parameter names file (default: ``pnames.txt``).
+    -t, --trnfactor      Fraction of data used for training (default: 0.9).
+"""
 import sys
 import torch
 import argparse
@@ -92,6 +115,14 @@ mynn = RNet(111, 3, NonPar(4),
             indim=ndim, outdim=nout, layer_pre=True, layer_post=True, biasorno=True, nonlin=True, mlp=False, final_layer=None)
 
 def lrsched(epoch):
+  """Learning rate schedule for NN training.
+
+  Args:
+      epoch (int): Current epoch number.
+
+  Returns:
+      float: Learning rate for the given epoch.
+  """
   return 0.001 #np.exp(np.sin(0.002* np.pi*epoch)-5.)
 
   if epoch>15000:

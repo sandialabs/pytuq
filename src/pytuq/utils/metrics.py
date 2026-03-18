@@ -61,8 +61,8 @@ def fast_auc(y_prob, targets):
     See: https://www.kaggle.com/c/microsoft-malware-prediction/discussion/76013
 
     Args:
-        targets (int np.ndarray): true array
         y_prob (float np.ndarray): predicted probabilities
+        targets (int np.ndarray): true array
 
     Returns:
         float: AUC metric
@@ -116,16 +116,20 @@ def crps_samples(y, samples):
     Compute CRPS from predictive samples.
 
     Args:
-        y (np.ndarray): true array of shape `(M,)` or scalar
-        samples (np.ndarray): predictive samples of shape `(M, N)` or `(N,)`.
+        y (np.ndarray): true array of shape :math:`(M,)` or scalar
+        samples (np.ndarray): predictive samples of shape :math:`(M, N)` or :math:`(N,)`.
 
     Returns:
-        np.ndarray: CRPS metric of shape `(M,)`
+        np.ndarray: CRPS metric of shape :math:`(M,)`
 
     Notes:
         Empirical CRPS:
-        CRPS = mean(|X - y|) - 0.5 * mean(|X_i - X_j|)
-        where X_i are Monte Carlo samples from the predictive distribution.
+
+        .. math::
+
+            \\text{CRPS} = \\text{mean}(|X - y|) - 0.5 \\cdot \\text{mean}(|X_i - X_j|)
+
+        where :math:`X_i` are Monte Carlo samples from the predictive distribution.
     """
     samples = np.asarray(samples)
     y = np.asarray(y)

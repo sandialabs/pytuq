@@ -24,10 +24,10 @@ def model_infer(ydata, model, model_params, model_pdim,
                 pr_type='uniform', pr_params={},
                 dv_type='var_fixed', dv_params=None,
                 zflag=True):
-    """Main function that performs model parameter inference, with or without embedded model error.
+    r"""Main function that performs model parameter inference, with or without embedded model error :cite:t:`kennedy:2001`.
 
     Args:
-        ydata (list or np.ndarray): List of `N` 1d arrays corresponding to data for each design location, or a 2d array of size `(N,e)`, or an 1d array of size `N`.
+        ydata (list or np.ndarray): List of `N` 1d arrays corresponding to data for each design location, or a 2d array of size :math:`(N,e)`, or an 1d array of size `N`.
         model (callable): Model with signature `f(p, q)`, where `p` are model parameters of interest, and `q` are other helpful model parameters.
         model_params (tuple or list): Model parameters `q`.
         model_pdim (int): Parameter dimensionality, i.e. number of model parameters.
@@ -35,7 +35,7 @@ def model_infer(ydata, model, model_params, model_pdim,
         pc_type (str): Embedded PC type. Can be 'LU' (default) or 'HG'.
         outord (int, optional): Order for the output PC in the likelihood computation. Defaults to 0.
         rndind (list[ind], optional): List of indices of parameters to be embedded. If None, embeds in all parameters. Default is empty list, i.e. no embedding.
-        fixindnom (list, optional): An array of size `(K,2)`, where first column indicates indices of parameters that are fixed (i.e. not part of the inference), and the second column is their nominal, fixed values. Defaults to an empty list, i.e. all parameters are inferred, none are fixed.
+        fixindnom (list, optional): An array of size :math:`(K,2)`, where first column indicates indices of parameters that are fixed (i.e. not part of the inference), and the second column is their nominal, fixed values. Defaults to an empty list, i.e. all parameters are inferred, none are fixed.
         ind_calib (list, optional): Model output indices that are used for calibration. Default is None, i.e. all outputs being used for calibration.
         calib_type (str or calib.Calib, optional): Calibration type. Only 'amcmc' (default) is implemented. Can also be a user-defined Calib object.
         calib_params (dict, optional): Dictionary of calibration parameters.

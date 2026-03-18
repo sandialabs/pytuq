@@ -9,9 +9,9 @@ def pce_eval(xdata, pctype, mi, pccf):
     """Evaluates Polynomial Chaos (PC) expansion.
 
     Args:
-        xdata (np.ndarray): 2d input array of size `(N,d)`.
+        xdata (np.ndarray): 2d input array of size :math:`(N,d)`.
         pctype (str): PC type.
-        mi (np.ndarray): 2d integer array of multiindex, of size `(K,d)`.
+        mi (np.ndarray): 2d integer array of multiindex, of size :math:`(K,d)`.
         pccf (np.ndarray): 1d array of coefficients of size `K`.
 
     Returns:
@@ -39,12 +39,12 @@ def pce_sens(pctype, mi, pccf, mv=False):
 
     Args:
         pctype (str): PC type.
-        mi (np.ndarray): 2d integer array of multiindex, of size `(K,d)`.
+        mi (np.ndarray): 2d integer array of multiindex, of size :math:`(K,d)`.
         pccf (np.ndarray): 1d array of coefficients of size `K`.
         mv (bool, optional): Whether to return mean and variance as well
 
     Returns:
-        (np.ndarray, np.ndarray, np.ndarray): tuple of main (1d array of size `d`), total (1d array of size `d`) and joint (2d array of size `(d,d)`) sensitivities. Optionally, extra two elements are returned, mean and variance.
+        (np.ndarray, np.ndarray, np.ndarray): tuple of main (1d array of size `d`), total (1d array of size `d`) and joint (2d array of size :math:`(d,d)`) sensitivities. Optionally, extra two elements are returned, mean and variance.
     """
     uqtkbin = os.environ['UQTK_INS'] + os.sep + 'bin'
     np.savetxt('mi', mi, fmt="%d")
@@ -75,8 +75,8 @@ def get_pdf_uqtk(data,target, verbose=1):
     Compute PDF given data at target points with the UQTk app.
 
     Args:
-        data (np.ndarray): `(N,d) array of N samples in d dimensions.
-        target (np.ndarray):  `(M,d) array of target points. Can be an integer, in which case it is interpreted as the number of grid points per dimension for a target grid.
+        data (np.ndarray): ``(N,d)`` array of N samples in d dimensions.
+        target (np.ndarray): ``(M,d)`` array of target points. Can be an integer, in which case it is interpreted as the number of grid points per dimension for a target grid.
         verbose (int, optional): Verbosity on the screen, 0, 1, or 2. Defaults to 1.
 
     Returns:

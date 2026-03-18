@@ -16,9 +16,12 @@ sdim = 5
 pc_type='HG'
 mi=get_mi(4,sdim)
 
+# Create a PCRV with random coefficients
 pcrv = PCRV(pdim, sdim, pctype=pc_type, mi=mi)
 pcrv.setRandomCfs()
 pcrv.printInfo()
+
+# Slice the PC by fixing dimensions 0, 1, 3 at nominal value 1.0
 print("==========")
 pcrv_new = pcrv.slicePC(fixind=[0,1,3],nominal=np.ones((sdim,)))
 pcrv_new.printInfo()

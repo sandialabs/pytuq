@@ -1554,7 +1554,7 @@ class Quadratic2d(Function):
     .. math::
         f(x)=0.5 (x - c)^T H (x - c)
 
-    where :math:`H` is the Hessian matrix, and :math:`c` is the center.
+    where `H` is the Hessian matrix, and `c` is the center.
 
     """
     def __init__(self, center=[0., 0.], hess=[[1., 0.], [0., 1.]], name='Quadratic2d'):

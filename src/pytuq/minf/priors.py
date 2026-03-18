@@ -74,7 +74,7 @@ class Prior_uniform(Prior):
     r"""Uniform prior class.
 
     Attributes:
-        domain (np.ndarray): A 2d array of size `(d,2)`. Can be None, for uninformative priors with no range constraint.
+        domain (np.ndarray): A 2d array of size :math:`(d,2)`. Can be None, for uninformative priors with no range constraint.
         factor (float): A standard deviation factor outside of which the prior returns very low value. For now, we use :math:`f=3` for HG, and :math:`f=\sqrt{3}` for LU. This is somewhat empiric and should be used with care.
 
     Note:
@@ -86,7 +86,7 @@ class Prior_uniform(Prior):
 
         Args:
             infer (infer.Infer): Inference object containing necessary info for the prior.
-            domain (np.ndarray, optional): A 2d array of size `(d,2)`. Default is None, for uninformative priors with no range constraint.
+            domain (np.ndarray, optional): A 2d array of size :math:`(d,2)`. Default is None, for uninformative priors with no range constraint.
         """
         super().__init__(infer)
         self.prtype = 'uniform'

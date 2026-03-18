@@ -18,17 +18,17 @@ myrc()
 
 fcn = chem.LennardJones()
 
-
+# Verify analytical gradient matches numerical finite-difference gradient
 print("Gradient check")
 x = np.random.rand(111, fcn.dim)
 assert(np.allclose(fcn.grad_(x, eps=1.e-7), fcn.grad(x)))
 
-
+# Evaluate function and gradient on a grid
 xx = np.linspace(fcn.domain[0, 0], fcn.domain[0, 1], 111)
 yy = fcn(xx.reshape(-1,1))
 gg = fcn.grad(xx.reshape(-1,1))[:,0,0]
 
-
+# Plot function and derivative on twin axes
 fig = plt.figure(figsize=(15,9))
 plt.plot(xx, yy, 'b-')
 
