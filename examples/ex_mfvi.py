@@ -17,6 +17,7 @@ from pytuq.minf.mcmc import AMCMC
 
 from pytuq.func.func import Function
 from pytuq.func.bench1d import TFData
+from pytuq.optim.sciwrap import ScipyWrapper
 from pytuq.utils.maps import scale01ToDom
 from pytuq.utils.plotting import plot_dm, myrc
 
@@ -75,9 +76,11 @@ param_ini = np.random.rand(2 * pdim)  # initial parameter values
 lossinfo = {'nmc': 222, 'datasigma': 0.01*np.ones(ntrn)}
 mfvi = MFVI(linear_model(xtrn), ytrn[:,0], pdim, lossinfo, reparam='logexp')
 objective, objectivegrad, objectiveinfo = mfvi.eval_loss_gmarg, None, {}
+#objective, objectivegrad, objectiveinfo = mfvi.eval_loss_elbo, mfvi.eval_loss_elbo_grad_, {}
 
 # Optimize the variational objective with PSO
 myopt = PSO(2*pdim)
+#myopt = ScipyWrapper(method='L-BFGS-B')
 myopt.setObjective(objective, objectivegrad, **objectiveinfo)
 results = myopt.run(100, np.random.rand(2*pdim,))
 cmode, pmode = results['best'], results['bestobj']

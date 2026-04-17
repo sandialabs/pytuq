@@ -926,7 +926,7 @@ def plot_pdfs(ind_show=None, plot_type='tri', pdf_type='hist',
                 thisax.set_ylabel(names[ind_show[i]], size=lsize)
             if i == npar - 1:
                 thisax.set_xlabel(names[ind_show[i]], size=lsize)
-                thisax.tick_params(axis='x', which='major', labelsize=zsize)
+            thisax.tick_params(axis='x', which='major', labelsize=zsize)
             if i > 0:
                 thisax.yaxis.set_ticks_position("right")
 
@@ -968,10 +968,10 @@ def plot_pdfs(ind_show=None, plot_type='tri', pdf_type='hist',
             if plot_type == 'tri':
                 if j == 0:
                     thisax.set_ylabel(names[ind_show[i]], size=lsize)
-                    thisax.tick_params(axis='y', which='major', labelsize=zsize)
+                thisax.tick_params(axis='y', which='major', labelsize=zsize)
                 if i == npar - 1:
                     thisax.set_xlabel(names[ind_show[j]], size=lsize)
-                    thisax.tick_params(axis='x', which='major', labelsize=zsize)
+                thisax.tick_params(axis='x', which='major', labelsize=zsize)
             elif plot_type == 'ind':
                 thisax.set_ylabel(names[ind_show[i]], size=lsize)
                 thisax.set_xlabel(names[ind_show[j]], size=lsize)
@@ -1585,7 +1585,7 @@ def plot_uc_sample(pred_sam, data, nqt=111, label='', ax=None):
         label (str, optional): Custom label.
         ax (plt.Axes, optional): Axis handle. If None, use the current axis.
     Returns:
-        tuple: Data fractions and quantile values corresponding to these fractions.
+        tuple: Data fractions, quantile values, and area to the diagonal.
     Note:
         ax is changed as a result of this function. Further beautification and figure saving should be done outside this function.
     """
@@ -1597,6 +1597,8 @@ def plot_uc_sample(pred_sam, data, nqt=111, label='', ax=None):
     frac_qq = np.zeros_like(qq)
     for i in range(nqt):
         frac_qq[i] = np.sum(np.array([int(j) for j in data<pred_qt[i,:]]))/nx
+
+    area_to_diagonal = np.trapezoid(np.abs(frac_qq - qq), qq)
 
     if ax is None:
         plt.figure(figsize=(9,9))
@@ -1612,7 +1614,7 @@ def plot_uc_sample(pred_sam, data, nqt=111, label='', ax=None):
         ax.plot([0,1], [0,1], '--', linewidth=2)
 
 
-    return frac_qq, qq
+    return frac_qq, qq, area_to_diagonal
 
 #############################################################
 
@@ -1627,7 +1629,7 @@ def plot_uc_exact(pred_mean, pred_std, data, nqt=111, label='', ax=None):
         label (str, optional): Custom label.
         ax (plt.Axes, optional): Axis handle. If None, use the current axis.
     Returns:
-        tuple: Data fractions and quantile values corresponding to these fractions.
+        tuple: Data fractions, quantile values, and area to the diagonal.
     Note:
         ax is changed as a result of this function. Further beautification and figure saving should be done outside this function.
     """
@@ -1645,6 +1647,8 @@ def plot_uc_exact(pred_mean, pred_std, data, nqt=111, label='', ax=None):
     for i in range(nqt):
         frac_qq_exact[i] = np.sum(np.array([int(j) for j in data<pred_qt_exact[i,:]]))/nx
 
+    area_to_diagonal = np.trapezoid(np.abs(frac_qq_exact - qq), qq)
+
     if ax is None:
         plt.figure(figsize=(9,9))
         plt.plot(qq, frac_qq_exact, 'o-', markersize=1, label=label)
@@ -1659,7 +1663,7 @@ def plot_uc_exact(pred_mean, pred_std, data, nqt=111, label='', ax=None):
         ax.plot([0,1], [0,1], '--', linewidth=2)
 
 
-    return frac_qq_exact, qq
+    return frac_qq_exact, qq, area_to_diagonal
 
 
 def plot_samples_pdfs(xx_list, legends=None, colors=None, file_prefix='x', title=''):
@@ -1806,7 +1810,7 @@ def plot_parity(y1, y2, labels=['y1', 'y2'], filename='parity.png'):
 
 #############################################################
 
-def plot_cov(mm, cc, ngr=100, f=3., pnames=None, ax=None, savefig=False):
+def plot_cov(mm, cc, ngr=100, f=3., pnames=None, color=None, ax=None, savefig=False):
     """Plotting covariance contour given mean and covariance matrix.
 
     Args:
@@ -1815,6 +1819,7 @@ def plot_cov(mm, cc, ngr=100, f=3., pnames=None, ax=None, savefig=False):
         ngr (int, optional): Number of grid points per dimension, i.e. resolution.
         f (float, optional): Factor for the plotting range in terms of standard deviations.
         pnames (list, optional): List of parameter names. If None, generic names are used.
+        color (str, optional): Color of the contour. If None, use default color cycle.
         ax (plt.Axes, optional): Axis handle. If None, use the current axis.
         savefig (bool, optional): Whether to save the figure or not.
     """
@@ -1833,7 +1838,7 @@ def plot_cov(mm, cc, ngr=100, f=3., pnames=None, ax=None, savefig=False):
         XY = np.dstack((X, Y))
 
         Z = rv.pdf(XY)
-        ax.contour(X,Y,Z)
+        ax.contour(X,Y,Z, colors=color)
 
         if savefig:
             ax.set_xlabel(pnames[0])
@@ -1841,21 +1846,29 @@ def plot_cov(mm, cc, ngr=100, f=3., pnames=None, ax=None, savefig=False):
             plt.savefig(f'cov_{pnames[0]}_{pnames[1]}.png')
 
     except ValueError:
-        print(f"Covariance for pair ({i},{j}) is not positive-semidefinite.")
+        print(f"Covariance is not positive-semidefinite.")
 
 
-def plot_cov_tri(mean, cov, names=None, figname='cov_tri.png'):
+def plot_cov_tri(mean, cov, names=None, color=None, axarr=None, figname='cov_tri.png'):
     """Plots covariance in a triangular pairwise way.
 
     Args:
         mean (np.ndarray): Mean, an 1d array of size :math:`(npar,)`.
         cov (np.ndarray): Covariance matrix, a 2d array of size :math:`(npar,npar)`.
         names (list, optional): List of parameter names. If None, generic names are used.
+        color (str, optional): Color of the contour. If None, use default color cycle.
+        axarr (np.ndarray, optional): Array of axes. If None, a new figure is created.
         figname (str, optional): Figure filename to save.
+
+    Returns:
+        np.ndarray: Array of axes used for plotting.
     """
     npar = mean.shape[0]
-    figs, axarr = plt.subplots(npar, npar, figsize=(15, 15))
-    if npar==1: axarr=[[axarr]]
+
+    if axarr is None:
+        figs, axarr = plt.subplots(npar, npar, figsize=(15, 15))
+        if npar==1: axarr=[[axarr]]
+
 
     if names is None:
         names = ['p'+str(j) for j in range(npar)]
@@ -1866,7 +1879,7 @@ def plot_cov_tri(mean, cov, names=None, figname='cov_tri.png'):
         x = np.linspace(mean[i]-3.0*np.sqrt(cov[i,i]), mean[i]+3.0*np.sqrt(cov[i,i]), 100)
         rv = ss.norm(mean[i], np.sqrt(cov[i,i]))
         z = rv.pdf(x)
-        thisax.plot(x, z, 'b-')
+        thisax.plot(x, z, '-', color=color)
 
         if i == 0:
             thisax.set_ylabel(names[i])
@@ -1883,7 +1896,7 @@ def plot_cov_tri(mean, cov, names=None, figname='cov_tri.png'):
 
             mm = np.array([mean[j], mean[i]])
             cc = np.array([[cov[j,j], cov[i,j]],[cov[j,i], cov[i,i]]])
-            plot_cov(mm, cc, f=3., pnames=[f'p{i}', f'p{j}'], ngr=100, ax=thisax, savefig=False)
+            plot_cov(mm, cc, f=3., pnames=[f'p{i}', f'p{j}'], color=color, ngr=100, ax=thisax, savefig=False)
 
             # x0, x1 = thisax.get_xlim()
             # y0, y1 = thisax.get_ylim()
@@ -1897,6 +1910,8 @@ def plot_cov_tri(mean, cov, names=None, figname='cov_tri.png'):
                 thisax.yaxis.set_ticklabels([])
 
     plt.savefig(figname)
+
+    return axarr
 
 ####################################################################################
 

@@ -5,7 +5,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+from pytuq.utils.mindex import get_mi
+from pytuq.workflows.uprop import uprop_proj
 from pytuq.rv.mrv import Normal_1d
+from pytuq.rv.pcrv import PCRV, PCRV_mvn
 
 class MFVI():
     def __init__(self, model, y_data, pdim, lossinfo, reparam=None, priors=None):
@@ -88,7 +91,6 @@ class MFVI():
         assert(len(var_params) == 2 * self.pdim)
         means = var_params[:self.pdim]
         sigmas = [self.sigma(s) for s in var_params[self.pdim:]]
-
         # Set up the posteriors
         var_posteriors = []
 
@@ -99,19 +101,28 @@ class MFVI():
         return var_posteriors
 
 
-    def eval_loss_gmarg(self, var_params, ps=None):
+    def eval_loss_gmarg(self, var_params, ps=None, mean_fixed=None):
         """Evaluate the negative log posterior with gauss-marginal approximation.
 
         Args:
-            var_params (np.ndarray): Variational parameters array of shape (2d,).
+            var_params (np.ndarray): Variational parameters array.
             ps (np.ndarray, optional): Previous parameter samples of shape (nmc, pdim). Defaults to None.
+            mean_fixed (np.ndarray, optional): Fixed mean values for the variational parameters. Defaults to None.
 
         Returns:
             float: Negative log posterior value.
         """
         #print("Evaluating Loss ========================")
         # Set up the posteriors
-        var_posteriors = self.get_posteriors(var_params)
+        if mean_fixed is not None:
+            assert(len(mean_fixed) == self.pdim)
+            assert(len(var_params) == self.pdim)
+            var_params_all = np.concatenate([mean_fixed, var_params])
+        else:
+            assert(len(var_params) == 2 * self.pdim)
+            var_params_all = var_params
+
+        var_posteriors = self.get_posteriors(var_params_all)
         #print("Means ", [vp.mu for vp in var_posteriors])
         # Sample model parameters
         if ps is not None:
@@ -126,9 +137,17 @@ class MFVI():
 
         # Evaluate model
         y_samples = self.model(self.par_samples)  # nmc, ndata
-
+        
         ymean = np.mean(y_samples, axis=0)
         yvar = np.var(y_samples, axis=0)
+
+        # # This works but in high-d we will need sparse quadrature or regression-based propagation to get the moments more accurately.
+        # in_pc = PCRV_mvn(self.pdim, mean=var_params[:self.pdim], cov=np.diag([self.sigma(s)**2 for s in var_params[self.pdim:]]))
+        # out_pc = PCRV(self.y_data.shape[0], self.pdim, 'HG', mi=get_mi(1, self.pdim))
+        # uprop_proj(in_pc, self.model, 3, out_pc)
+        # ymean = out_pc.computeMean()
+        # yvar = out_pc.computeVar()
+
 
         residual = ymean - self.y_data
         neg_log_likelihood = 0.5 * np.sum(np.log(2.0 * np.pi * (yvar + self.datasigma**2)))
@@ -155,8 +174,11 @@ class MFVI():
         # var_loss = variational_logpost - log_prior + neg_log_likelihood
 
         log_prior = 0.0
-        for ipar in range(self.pdim):
-            log_prior += self.priors[ipar].logpdf(var_params[ipar])
+        if mean_fixed is None:
+            for ipar in range(self.pdim):
+                log_prior += self.priors[ipar].logpdf(var_params[ipar])
+
+        # TODO add prior for sigmas?
 
 
         #print("Neg Log Likelihood: ", neg_log_likelihood, " Neg Log Prior: ", - log_prior)
@@ -212,30 +234,32 @@ class MFVI():
         #print("Neg Log Likelihood: ", neg_log_likelihood, " Neg Log Prior: ", - log_prior)
         return -log_prior + neg_log_likelihood
 
-    def eval_loss_elbo(self, var_params, ps=None):
+    def eval_loss_elbo(self, var_params, xi=None):
         """Evaluate the ELBO.
 
         Args:
             var_params (np.ndarray): Variational parameters array of shape (2d,).
-            ps (np.ndarray, optional): Previous parameter samples of shape (nmc, pdim). Defaults to None.
+            xi (np.ndarray, optional): Standard-normal noise samples of shape (nmc, pdim)
+                used for the reparameterization trick. When provided, parameter samples
+                are reconstructed as theta = mu + sigma * xi so that gradients flow
+                through the likelihood. Defaults to None (fresh samples are drawn).
 
         Returns:
-            float: Negative log posterior value.
+            float: Negative ELBO value.
         """
         #print("Evaluating Loss ========================")
         # Set up the posteriors
         var_posteriors = self.get_posteriors(var_params)
-        #print("Means ", [vp.mu for vp in var_posteriors])
-        # Sample model parameters
-        if ps is not None:
-            #print("Grabbing previous parsample")
-            self.par_samples = ps
+        means  = var_params[:self.pdim]
+        sigmas = np.array([self.sigma(s) for s in var_params[self.pdim:]])
+
+        # Sample model parameters via the reparameterization trick: theta = mu + sigma * xi
+        if xi is not None:
+            self.xi_samples = xi
         else:
-            #print("Creating new parsample")
-            self.par_samples = np.empty((self.nmc, self.pdim))
-            for ipar in range(self.pdim):
-                self.par_samples[:, ipar] = var_posteriors[ipar].sample(self.nmc)
-            # need to trace back to xi_samples for grad computation
+            self.xi_samples = np.random.randn(self.nmc, self.pdim)
+
+        self.par_samples = means + sigmas * self.xi_samples
 
         # Evaluate model
         y_samples = self.model(self.par_samples)  # nmc, ndata
@@ -281,8 +305,8 @@ class MFVI():
             xx2[idim] += eps
             xx1 = x.copy()
             xx1[idim] -= eps
-            grad[idim] = (self.eval_loss(xx2, ps=self.par_samples) -
-                          self.eval_loss(xx1, ps=self.par_samples)) / (2. * eps)
+            grad[idim] = (self.eval_loss_elbo(xx2, xi=self.xi_samples) -
+                          self.eval_loss_elbo(xx1, xi=self.xi_samples)) / (2. * eps)
         return grad
 
     def plot_parpdf(self, var_params, ax=None):
