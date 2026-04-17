@@ -25,12 +25,13 @@ class ScipyWrapper(OptBase):
         self.bounds = bounds
         self.options = options
 
-    def run(self, nsteps, param_ini):
+    def run(self, nsteps, param_ini, verbose=False):
         """An optimization run.
 
         Args:
             nsteps (int): Number of optimization steps (unused in scipy wrapper, kept for API compatibility).
             param_ini (np.ndarray): Initial position, an 1d array.
+            verbose (bool, optional): If True, print optimization results. Defaults to False.
 
         Returns:
             dict: Dictionary of results. Keys are 'samples' (history array of parameters), 'objvalues' (history of objective values), 'best' (best parameters array), 'bestobj' (best objective value).
@@ -57,7 +58,8 @@ class ScipyWrapper(OptBase):
                        bounds = self.bounds,
                        options=self.options,
                        callback=self.store_history)
-        print('Opt:', res.x)
+        if verbose:
+            print('Opt:', res.x)
         #print(res)
 
         results = {
