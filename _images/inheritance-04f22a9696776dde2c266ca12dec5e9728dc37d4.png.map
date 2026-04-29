@@ -1,0 +1,6 @@
+<map id="inheritancedd9a1213d4" name="inheritancedd9a1213d4">
+<area shape="rect" id="node1" href="../autoapi/pytuq/fit/fit/index.html#pytuq.fit.fit.fitbase" target="_top" title="Base fit class." alt="" coords="5,31,77,56"/>
+<area shape="rect" id="node2" href="../autoapi/pytuq/fit/gp/index.html#pytuq.fit.gp.gp" target="_top" title="Gaussian process class :cite:t:`rasmussen:2006`." alt="" coords="125,5,197,31"/>
+<area shape="rect" id="node3" href="../autoapi/pytuq/lreg/lreg/index.html#pytuq.lreg.lreg.lreg" target="_top" title="Base class for linear regression." alt="" coords="125,55,197,80"/>
+<area shape="rect" id="node4" href="../autoapi/pytuq/lreg/lreg/index.html#pytuq.lreg.lreg.lsq" target="_top" title="Bare minimum least squares solution." alt="" coords="245,55,317,80"/>
+</map>

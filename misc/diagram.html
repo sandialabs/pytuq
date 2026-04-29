@@ -1,0 +1,1161 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Class Inheritance Diagrams &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="References" href="references.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../examples/pc.html">Polynomial Chaos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/pc.html#ex-pcbasis1d-py">ex_pcbasis1d.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/pc.html#ex-pcrv-py">ex_pcrv.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/pc.html#ex-pcrv1-py">ex_pcrv1.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/pc.html#ex-pcrv2-py">ex_pcrv2.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/pc.html#ex-pcrv-mvn-py">ex_pcrv_mvn.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/pc.html#ex-mrv-py">ex_mrv.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/pc.html#ex-mindex-py">ex_mindex.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/pc.html#ex-quad-py">ex_quad.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/pc.html#ex-uprop-py">ex_uprop.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/pc.html#ex-uprop2-py">ex_uprop2.py</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/regression.html">Regression &amp; Surrogates</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/regression.html#ex-lreg-py">ex_lreg.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/regression.html#ex-lreg-basiseval-py">ex_lreg_basiseval.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/regression.html#ex-lreg-merr-py">ex_lreg_merr.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/regression.html#ex-bcs-py-demo">ex_bcs.py (<span class="xref std std-doc">demo</span>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/regression.html#ex-bcs-mindex-growth-py">ex_bcs_mindex_growth.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/regression.html#ex-gp-py">ex_gp.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/regression.html#ex-kl-py">ex_kl.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/regression.html#ex-klpc-py">ex_klpc.py</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/inference.html">Bayesian Inference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/inference.html#ex-mcmc-banana-py">ex_mcmc_banana.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/inference.html#ex-mcmc-fitline-py">ex_mcmc_fitline.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/inference.html#ex-mcmc-fitmodel-py">ex_mcmc_fitmodel.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/inference.html#ex-mfvi-py">ex_mfvi.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/inference.html#ex-minf-py">ex_minf.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/inference.html#ex-minf-sketch-py-demo">ex_minf_sketch.py (<span class="xref std std-doc">demo</span>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/inference.html#ex-evidence-py">ex_evidence.py</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/sensitivity.html">Sensitivity Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/sensitivity.html#ex-gsa-py">ex_gsa.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/sensitivity.html#ex-gsa-multi-py">ex_gsa_multi.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/sensitivity.html#ex-pcgsa-py">ex_pcgsa.py</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/rosenblatt.html">Rosenblatt Transformation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/rosenblatt.html#ex-ros-py">ex_ros.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/rosenblatt.html#ex-iros-1d-py">ex_iros_1d.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/rosenblatt.html#ex-iros-2d-py">ex_iros_2d.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/rosenblatt.html#ex-ros-pc-py">ex_ros_pc.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/rosenblatt.html#ex-ros-pcj-py">ex_ros_pcj.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/rosenblatt.html#ex-ros-pcs-py">ex_ros_pcs.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/rosenblatt.html#ex-rospc-multiple-py">ex_rospc_multiple.py</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/rv.html">Random Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/rv.html#ex-gmm-py">ex_gmm.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/rv.html#ex-sampling-py">ex_sampling.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/rv.html#ex-mixture-py">ex_mixture.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/rv.html#ex-webull-py">ex_webull.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/rv.html#ex-mcmcrv-py">ex_mcmcrv.py</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/functions.html">Functions &amp; Optimization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/functions.html#ex-func-py">ex_func.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/functions.html#ex-funcall-py">ex_funcall.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/functions.html#ex-funcgrad-py">ex_funcgrad.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/functions.html#ex-genz1d-py">ex_genz1d.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/functions.html#ex-optim-py">ex_optim.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/functions.html#ex-integrate-py">ex_integrate.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/functions.html#ex-orf-py">ex_orf.py</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/plotting.html">Plotting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/plotting.html#ex-colors-py">ex_colors.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/plotting.html#ex-plot-fcn-py">ex_plot_fcn.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/plotting.html#ex-slice-py">ex_slice.py</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Apps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../apps/pc.html">Polynomial Chaos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../apps/pc.html#pc-fit-py">pc_fit.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps/pc.html#pc-prep-py">pc_prep.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps/pc.html#pc-sam-py">pc_sam.py</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../apps/surrogates.html">Multioutput Fits</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../apps/surrogates.html#kl-fit-py">kl_fit.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps/surrogates.html#klsurr-fit-py">klsurr_fit.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps/surrogates.html#nn-fit-py">nn_fit.py</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../apps/plot.html">Plotting Apps</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../apps/plot.html#plot-cov-py">plot_cov.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps/plot.html#plot-ens-py">plot_ens.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps/plot.html#plot-pcoord-py">plot_pcoord.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps/plot.html#plot-pdfs-py">plot_pdfs.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps/plot.html#plot-xx-py">plot_xx.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps/plot.html#plot-yx-py">plot_yx.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps/plot.html#plot-yxx-py">plot_yxx.py</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../apps/uqpc.html">Forward UQ</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../apps/uqpc.html#workflow-overview">Workflow overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps/uqpc.html#uq-pc-py">uq_pc.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps/uqpc.html#model-x">model.x</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps/uqpc.html#plot-py">plot.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps/uqpc.html#workflow-uqpc-x">workflow_uqpc.x</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../apps/iuq.html">Inverse UQ</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../apps/iuq.html#workflow-overview">Workflow overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps/iuq.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps/iuq.html#create-data-truepc-py">create_data_truepc.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps/iuq.html#prep-data-x">prep_data.x</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps/iuq.html#run-infer-py">run_infer.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps/iuq.html#postp-infer-py">postp_infer.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps/iuq.html#workflow-iuq-x">workflow_iuq.x</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../apps/other.html">Other Apps</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../apps/other.html#create-data-py">create_data.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps/other.html#mrun-py">mrun.py</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../apps/awkies.html">Shell Utilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../apps/awkies.html#getrange-x">getrange.x</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps/awkies.html#scale-x">scale.x</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apps/awkies.html#transpose-x">transpose.x</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../auto_examples/index.html">Software Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/index.html#surrogates">Surrogates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../auto_examples/ex_pce.html">Polynomial Chaos Expansion Construction</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../auto_examples/ex_pce.html#setup">Setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../auto_examples/ex_pce.html#generate-data">Generate data</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../auto_examples/ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../auto_examples/ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../auto_examples/ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../auto_examples/ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../auto_examples/ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../auto_examples/ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">List of Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../autoapi/pytuq/fit/index.html">fit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/fit/fit/index.html">fit</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/fit/fit/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/fit/fit/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/fit/fit/index.html#pytuq.fit.fit.fitbase"><code class="docutils literal notranslate"><span class="pre">fitbase</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/fit/gp/index.html">gp</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/fit/gp/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/fit/gp/index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/fit/gp/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/fit/gp/index.html#pytuq.fit.gp.kernel_rbf"><code class="docutils literal notranslate"><span class="pre">kernel_rbf()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/fit/gp/index.html#pytuq.fit.gp.kernel_sin"><code class="docutils literal notranslate"><span class="pre">kernel_sin()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/fit/gp/index.html#pytuq.fit.gp.gp"><code class="docutils literal notranslate"><span class="pre">gp</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../autoapi/pytuq/ftools/index.html">ftools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/ftools/integr/index.html">integr</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/ftools/integr/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/ftools/integr/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/ftools/integr/index.html#pytuq.ftools.integr.Integrator"><code class="docutils literal notranslate"><span class="pre">Integrator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/ftools/integr/index.html#pytuq.ftools.integr.IntegratorScipy"><code class="docutils literal notranslate"><span class="pre">IntegratorScipy</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/ftools/integr/index.html#pytuq.ftools.integr.IntegratorMCMC"><code class="docutils literal notranslate"><span class="pre">IntegratorMCMC</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/ftools/integr/index.html#pytuq.ftools.integr.IntegratorMC"><code class="docutils literal notranslate"><span class="pre">IntegratorMC</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/ftools/integr/index.html#pytuq.ftools.integr.IntegratorWMC"><code class="docutils literal notranslate"><span class="pre">IntegratorWMC</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/ftools/integr/index.html#pytuq.ftools.integr.IntegratorGMM"><code class="docutils literal notranslate"><span class="pre">IntegratorGMM</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/ftools/integr/index.html#pytuq.ftools.integr.IntegratorGMMT"><code class="docutils literal notranslate"><span class="pre">IntegratorGMMT</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/ftools/orf/index.html">orf</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/ftools/orf/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/ftools/orf/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.GLMAP"><code class="docutils literal notranslate"><span class="pre">GLMAP</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.HMAT"><code class="docutils literal notranslate"><span class="pre">HMAT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.MGSV"><code class="docutils literal notranslate"><span class="pre">MGSV</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.MGS"><code class="docutils literal notranslate"><span class="pre">MGS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.MMGS"><code class="docutils literal notranslate"><span class="pre">MMGS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/ftools/orf/index.html#pytuq.ftools.orf.QR"><code class="docutils literal notranslate"><span class="pre">QR</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../autoapi/pytuq/func/index.html">func</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/func/bench/index.html">bench</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/func/bench/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/func/bench/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.Ishigami"><code class="docutils literal notranslate"><span class="pre">Ishigami</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.Wolfe"><code class="docutils literal notranslate"><span class="pre">Wolfe</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.Colville"><code class="docutils literal notranslate"><span class="pre">Colville</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.MieleCantrell"><code class="docutils literal notranslate"><span class="pre">MieleCantrell</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.Powell"><code class="docutils literal notranslate"><span class="pre">Powell</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.Dolan"><code class="docutils literal notranslate"><span class="pre">Dolan</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.Friedman"><code class="docutils literal notranslate"><span class="pre">Friedman</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench/index.html#pytuq.func.bench.GramacyLee"><code class="docutils literal notranslate"><span class="pre">GramacyLee</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/func/bench1d/index.html">bench1d</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/func/bench1d/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/func/bench1d/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench1d/index.html#pytuq.func.bench1d.TFData"><code class="docutils literal notranslate"><span class="pre">TFData</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench1d/index.html#pytuq.func.bench1d.SineSum"><code class="docutils literal notranslate"><span class="pre">SineSum</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench1d/index.html#pytuq.func.bench1d.SineSum2"><code class="docutils literal notranslate"><span class="pre">SineSum2</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench1d/index.html#pytuq.func.bench1d.QuadxExp"><code class="docutils literal notranslate"><span class="pre">QuadxExp</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench1d/index.html#pytuq.func.bench1d.LinxSin"><code class="docutils literal notranslate"><span class="pre">LinxSin</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench1d/index.html#pytuq.func.bench1d.SinexExp"><code class="docutils literal notranslate"><span class="pre">SinexExp</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench1d/index.html#pytuq.func.bench1d.SineLogSum"><code class="docutils literal notranslate"><span class="pre">SineLogSum</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench1d/index.html#pytuq.func.bench1d.CosineSum"><code class="docutils literal notranslate"><span class="pre">CosineSum</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench1d/index.html#pytuq.func.bench1d.Sinex"><code class="docutils literal notranslate"><span class="pre">Sinex</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench1d/index.html#pytuq.func.bench1d.CosineSum2"><code class="docutils literal notranslate"><span class="pre">CosineSum2</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench1d/index.html#pytuq.func.bench1d.Sinusoidal"><code class="docutils literal notranslate"><span class="pre">Sinusoidal</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench1d/index.html#pytuq.func.bench1d.Forrester"><code class="docutils literal notranslate"><span class="pre">Forrester</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench1d/index.html#pytuq.func.bench1d.GramacyLee2"><code class="docutils literal notranslate"><span class="pre">GramacyLee2</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench1d/index.html#pytuq.func.bench1d.Higdon"><code class="docutils literal notranslate"><span class="pre">Higdon</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench1d/index.html#pytuq.func.bench1d.Holsclaw"><code class="docutils literal notranslate"><span class="pre">Holsclaw</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench1d/index.html#pytuq.func.bench1d.DampedCosine"><code class="docutils literal notranslate"><span class="pre">DampedCosine</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html">bench2d</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Adjiman"><code class="docutils literal notranslate"><span class="pre">Adjiman</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.BartelsConn"><code class="docutils literal notranslate"><span class="pre">BartelsConn</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Bird"><code class="docutils literal notranslate"><span class="pre">Bird</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Branin"><code class="docutils literal notranslate"><span class="pre">Branin</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Branin01"><code class="docutils literal notranslate"><span class="pre">Branin01</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Branin02"><code class="docutils literal notranslate"><span class="pre">Branin02</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Brent"><code class="docutils literal notranslate"><span class="pre">Brent</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Bukin02"><code class="docutils literal notranslate"><span class="pre">Bukin02</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Bukin04"><code class="docutils literal notranslate"><span class="pre">Bukin04</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Bukin6"><code class="docutils literal notranslate"><span class="pre">Bukin6</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.CarromTable"><code class="docutils literal notranslate"><span class="pre">CarromTable</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.ChengSandu"><code class="docutils literal notranslate"><span class="pre">ChengSandu</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Chichinadze"><code class="docutils literal notranslate"><span class="pre">Chichinadze</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.CrossInTray"><code class="docutils literal notranslate"><span class="pre">CrossInTray</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Damavandi"><code class="docutils literal notranslate"><span class="pre">Damavandi</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.DeckkersAarts"><code class="docutils literal notranslate"><span class="pre">DeckkersAarts</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.EggCrate"><code class="docutils literal notranslate"><span class="pre">EggCrate</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.EggHolder"><code class="docutils literal notranslate"><span class="pre">EggHolder</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.ElAttarVidyasagarDutta"><code class="docutils literal notranslate"><span class="pre">ElAttarVidyasagarDutta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.FreudensteinRoth"><code class="docutils literal notranslate"><span class="pre">FreudensteinRoth</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Franke"><code class="docutils literal notranslate"><span class="pre">Franke</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.GoldsteinPrice"><code class="docutils literal notranslate"><span class="pre">GoldsteinPrice</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.HimmelBlau"><code class="docutils literal notranslate"><span class="pre">HimmelBlau</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Hosaki"><code class="docutils literal notranslate"><span class="pre">Hosaki</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Keane"><code class="docutils literal notranslate"><span class="pre">Keane</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Leon"><code class="docutils literal notranslate"><span class="pre">Leon</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Levy13"><code class="docutils literal notranslate"><span class="pre">Levy13</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Lim"><code class="docutils literal notranslate"><span class="pre">Lim</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Matyas"><code class="docutils literal notranslate"><span class="pre">Matyas</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Mishra03"><code class="docutils literal notranslate"><span class="pre">Mishra03</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Mishra04"><code class="docutils literal notranslate"><span class="pre">Mishra04</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Mishra05"><code class="docutils literal notranslate"><span class="pre">Mishra05</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Mishra06"><code class="docutils literal notranslate"><span class="pre">Mishra06</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.McCormick"><code class="docutils literal notranslate"><span class="pre">McCormick</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.NewFunction03"><code class="docutils literal notranslate"><span class="pre">NewFunction03</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Parsopoulos"><code class="docutils literal notranslate"><span class="pre">Parsopoulos</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Price01"><code class="docutils literal notranslate"><span class="pre">Price01</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Price02"><code class="docutils literal notranslate"><span class="pre">Price02</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Price03"><code class="docutils literal notranslate"><span class="pre">Price03</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Price04"><code class="docutils literal notranslate"><span class="pre">Price04</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Quadratic"><code class="docutils literal notranslate"><span class="pre">Quadratic</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Quadratic2d"><code class="docutils literal notranslate"><span class="pre">Quadratic2d</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.RosenbrockModified"><code class="docutils literal notranslate"><span class="pre">RosenbrockModified</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.RotatedEllipse01"><code class="docutils literal notranslate"><span class="pre">RotatedEllipse01</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.RotatedEllipse02"><code class="docutils literal notranslate"><span class="pre">RotatedEllipse02</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Schaffer01"><code class="docutils literal notranslate"><span class="pre">Schaffer01</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Schaffer02"><code class="docutils literal notranslate"><span class="pre">Schaffer02</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Schaffer04"><code class="docutils literal notranslate"><span class="pre">Schaffer04</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Schwefel36"><code class="docutils literal notranslate"><span class="pre">Schwefel36</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.SixHumpCamel"><code class="docutils literal notranslate"><span class="pre">SixHumpCamel</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.ThreeHumpCamel"><code class="docutils literal notranslate"><span class="pre">ThreeHumpCamel</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Treccani"><code class="docutils literal notranslate"><span class="pre">Treccani</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Trefethen"><code class="docutils literal notranslate"><span class="pre">Trefethen</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Ursem01"><code class="docutils literal notranslate"><span class="pre">Ursem01</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Ursem03"><code class="docutils literal notranslate"><span class="pre">Ursem03</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Ursem04"><code class="docutils literal notranslate"><span class="pre">Ursem04</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.UrsemWaves"><code class="docutils literal notranslate"><span class="pre">UrsemWaves</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.VenterSobiezcczanskiSobieski"><code class="docutils literal notranslate"><span class="pre">VenterSobiezcczanskiSobieski</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.WayburnSeader01"><code class="docutils literal notranslate"><span class="pre">WayburnSeader01</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.WayburnSeader02"><code class="docutils literal notranslate"><span class="pre">WayburnSeader02</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Zettl"><code class="docutils literal notranslate"><span class="pre">Zettl</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.Zirilli"><code class="docutils literal notranslate"><span class="pre">Zirilli</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/bench2d/index.html#pytuq.func.bench2d.DropWave"><code class="docutils literal notranslate"><span class="pre">DropWave</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/func/benchNd/index.html">benchNd</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/func/benchNd/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/func/benchNd/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/benchNd/index.html#pytuq.func.benchNd.Ackley"><code class="docutils literal notranslate"><span class="pre">Ackley</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/benchNd/index.html#pytuq.func.benchNd.Alpine01"><code class="docutils literal notranslate"><span class="pre">Alpine01</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/benchNd/index.html#pytuq.func.benchNd.Alpine02"><code class="docutils literal notranslate"><span class="pre">Alpine02</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/benchNd/index.html#pytuq.func.benchNd.AMGM"><code class="docutils literal notranslate"><span class="pre">AMGM</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/benchNd/index.html#pytuq.func.benchNd.Bohachevsky"><code class="docutils literal notranslate"><span class="pre">Bohachevsky</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/benchNd/index.html#pytuq.func.benchNd.Cigar"><code class="docutils literal notranslate"><span class="pre">Cigar</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/benchNd/index.html#pytuq.func.benchNd.CosineMixture"><code class="docutils literal notranslate"><span class="pre">CosineMixture</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/benchNd/index.html#pytuq.func.benchNd.Griewank"><code class="docutils literal notranslate"><span class="pre">Griewank</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/benchNd/index.html#pytuq.func.benchNd.Mishra07"><code class="docutils literal notranslate"><span class="pre">Mishra07</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/benchNd/index.html#pytuq.func.benchNd.MVN"><code class="docutils literal notranslate"><span class="pre">MVN</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/benchNd/index.html#pytuq.func.benchNd.NegAlpineN2"><code class="docutils literal notranslate"><span class="pre">NegAlpineN2</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/benchNd/index.html#pytuq.func.benchNd.Sobol"><code class="docutils literal notranslate"><span class="pre">Sobol</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/benchNd/index.html#pytuq.func.benchNd.SumSquares"><code class="docutils literal notranslate"><span class="pre">SumSquares</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/func/chem/index.html">chem</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/func/chem/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/func/chem/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/chem/index.html#pytuq.func.chem.LennardJones"><code class="docutils literal notranslate"><span class="pre">LennardJones</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/chem/index.html#pytuq.func.chem.MullerBrown"><code class="docutils literal notranslate"><span class="pre">MullerBrown</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/func/func/index.html">func</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/func/func/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/func/func/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/func/index.html#pytuq.func.func.Function"><code class="docutils literal notranslate"><span class="pre">Function</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/func/index.html#pytuq.func.func.AddFcn"><code class="docutils literal notranslate"><span class="pre">AddFcn</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/func/index.html#pytuq.func.func.SubFcn"><code class="docutils literal notranslate"><span class="pre">SubFcn</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/func/index.html#pytuq.func.func.MultFcn"><code class="docutils literal notranslate"><span class="pre">MultFcn</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/func/index.html#pytuq.func.func.DivFcn"><code class="docutils literal notranslate"><span class="pre">DivFcn</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/func/index.html#pytuq.func.func.PowFcn"><code class="docutils literal notranslate"><span class="pre">PowFcn</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/func/index.html#pytuq.func.func.ModelWrapperFcn"><code class="docutils literal notranslate"><span class="pre">ModelWrapperFcn</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/func/genz/index.html">genz</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/func/genz/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/func/genz/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/genz/index.html#pytuq.func.genz.GenzBase"><code class="docutils literal notranslate"><span class="pre">GenzBase</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/genz/index.html#pytuq.func.genz.GenzOscillatory"><code class="docutils literal notranslate"><span class="pre">GenzOscillatory</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/genz/index.html#pytuq.func.genz.GenzQuadOscillatory"><code class="docutils literal notranslate"><span class="pre">GenzQuadOscillatory</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/genz/index.html#pytuq.func.genz.GenzSum"><code class="docutils literal notranslate"><span class="pre">GenzSum</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/genz/index.html#pytuq.func.genz.GenzCornerPeak"><code class="docutils literal notranslate"><span class="pre">GenzCornerPeak</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/func/oper/index.html">oper</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/func/oper/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/func/oper/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/oper/index.html#pytuq.func.oper.CartesProdFcn"><code class="docutils literal notranslate"><span class="pre">CartesProdFcn</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/oper/index.html#pytuq.func.oper.GradFcn"><code class="docutils literal notranslate"><span class="pre">GradFcn</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/oper/index.html#pytuq.func.oper.ComposeFcn"><code class="docutils literal notranslate"><span class="pre">ComposeFcn</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/oper/index.html#pytuq.func.oper.SliceFcn"><code class="docutils literal notranslate"><span class="pre">SliceFcn</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/oper/index.html#pytuq.func.oper.ShiftFcn"><code class="docutils literal notranslate"><span class="pre">ShiftFcn</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/oper/index.html#pytuq.func.oper.LinTransformFcn"><code class="docutils literal notranslate"><span class="pre">LinTransformFcn</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/oper/index.html#pytuq.func.oper.PickDim"><code class="docutils literal notranslate"><span class="pre">PickDim</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/func/poly/index.html">poly</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/func/poly/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/func/poly/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/poly/index.html#pytuq.func.poly.PolyBase"><code class="docutils literal notranslate"><span class="pre">PolyBase</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/poly/index.html#pytuq.func.poly.Leg"><code class="docutils literal notranslate"><span class="pre">Leg</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/poly/index.html#pytuq.func.poly.Mon"><code class="docutils literal notranslate"><span class="pre">Mon</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/func/toy/index.html">toy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/func/toy/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/func/toy/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/toy/index.html#pytuq.func.toy.Constant"><code class="docutils literal notranslate"><span class="pre">Constant</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/toy/index.html#pytuq.func.toy.Identity"><code class="docutils literal notranslate"><span class="pre">Identity</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/toy/index.html#pytuq.func.toy.Quad"><code class="docutils literal notranslate"><span class="pre">Quad</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/toy/index.html#pytuq.func.toy.Quad2d"><code class="docutils literal notranslate"><span class="pre">Quad2d</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/toy/index.html#pytuq.func.toy.Exp"><code class="docutils literal notranslate"><span class="pre">Exp</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/func/toy/index.html#pytuq.func.toy.Log"><code class="docutils literal notranslate"><span class="pre">Log</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../autoapi/pytuq/gsa/index.html">gsa</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/gsa/gsa/index.html">gsa</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/gsa/gsa/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/gsa/gsa/index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/gsa/gsa/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.model_sens"><code class="docutils literal notranslate"><span class="pre">model_sens()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.SensMethod"><code class="docutils literal notranslate"><span class="pre">SensMethod</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.Linreg"><code class="docutils literal notranslate"><span class="pre">Linreg</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.Moat"><code class="docutils literal notranslate"><span class="pre">Moat</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.SamSobol"><code class="docutils literal notranslate"><span class="pre">SamSobol</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.PCSobol"><code class="docutils literal notranslate"><span class="pre">PCSobol</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../autoapi/pytuq/linred/index.html">linred</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/linred/kle/index.html">kle</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/linred/kle/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/linred/kle/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/linred/kle/index.html#pytuq.linred.kle.KLE"><code class="docutils literal notranslate"><span class="pre">KLE</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/linred/klnn/index.html">klnn</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/linred/klnn/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/linred/klnn/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/linred/klnn/index.html#pytuq.linred.klnn.KLNN"><code class="docutils literal notranslate"><span class="pre">KLNN</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/linred/klsurr/index.html">klsurr</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/linred/klsurr/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/linred/klsurr/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/linred/klsurr/index.html#pytuq.linred.klsurr.KLSurr"><code class="docutils literal notranslate"><span class="pre">KLSurr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/linred/linred/index.html">linred</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/linred/linred/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/linred/linred/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/linred/linred/index.html#pytuq.linred.linred.LinRed"><code class="docutils literal notranslate"><span class="pre">LinRed</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/linred/svd/index.html">svd</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/linred/svd/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/linred/svd/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/linred/svd/index.html#pytuq.linred.svd.SVD"><code class="docutils literal notranslate"><span class="pre">SVD</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../autoapi/pytuq/lreg/index.html">lreg</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/lreg/anl/index.html">anl</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/lreg/anl/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/lreg/anl/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/lreg/anl/index.html#pytuq.lreg.anl.anl"><code class="docutils literal notranslate"><span class="pre">anl</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/lreg/bcs/index.html">bcs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/lreg/bcs/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/lreg/bcs/index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/lreg/bcs/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/lreg/bcs/index.html#pytuq.lreg.bcs.bcs"><code class="docutils literal notranslate"><span class="pre">bcs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/lreg/bcs/index.html#pytuq.lreg.bcs.bcs_fit"><code class="docutils literal notranslate"><span class="pre">bcs_fit()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/lreg/lreg/index.html">lreg</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/lreg/lreg/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/lreg/lreg/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/lreg/lreg/index.html#pytuq.lreg.lreg.lreg"><code class="docutils literal notranslate"><span class="pre">lreg</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/lreg/lreg/index.html#pytuq.lreg.lreg.lsq"><code class="docutils literal notranslate"><span class="pre">lsq</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/lreg/merr/index.html">merr</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/lreg/merr/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/lreg/merr/index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/lreg/merr/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/lreg/merr/index.html#pytuq.lreg.merr.map_flat_to_tri"><code class="docutils literal notranslate"><span class="pre">map_flat_to_tri()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/lreg/merr/index.html#pytuq.lreg.merr.logpost_emb"><code class="docutils literal notranslate"><span class="pre">logpost_emb()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/lreg/merr/index.html#pytuq.lreg.merr.lreg_merr"><code class="docutils literal notranslate"><span class="pre">lreg_merr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/lreg/opt/index.html">opt</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/lreg/opt/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/lreg/opt/index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/lreg/opt/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/lreg/opt/index.html#pytuq.lreg.opt.distance"><code class="docutils literal notranslate"><span class="pre">distance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/lreg/opt/index.html#pytuq.lreg.opt.distance_grad"><code class="docutils literal notranslate"><span class="pre">distance_grad()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/lreg/opt/index.html#pytuq.lreg.opt.opt"><code class="docutils literal notranslate"><span class="pre">opt</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../autoapi/pytuq/minf/index.html">minf</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/minf/calib/index.html">calib</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/minf/calib/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/minf/calib/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/minf/calib/index.html#pytuq.minf.calib.MCMCBase"><code class="docutils literal notranslate"><span class="pre">MCMCBase</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/minf/infer/index.html">infer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/minf/infer/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/minf/infer/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/minf/infer/index.html#pytuq.minf.infer.Infer"><code class="docutils literal notranslate"><span class="pre">Infer</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/minf/likelihoods/index.html">likelihoods</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/minf/likelihoods/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/minf/likelihoods/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/minf/likelihoods/index.html#pytuq.minf.likelihoods.Likelihood"><code class="docutils literal notranslate"><span class="pre">Likelihood</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/minf/likelihoods/index.html#pytuq.minf.likelihoods.Likelihood_dummy"><code class="docutils literal notranslate"><span class="pre">Likelihood_dummy</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/minf/likelihoods/index.html#pytuq.minf.likelihoods.Likelihood_classical"><code class="docutils literal notranslate"><span class="pre">Likelihood_classical</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/minf/likelihoods/index.html#pytuq.minf.likelihoods.Likelihood_logclassical"><code class="docutils literal notranslate"><span class="pre">Likelihood_logclassical</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/minf/likelihoods/index.html#pytuq.minf.likelihoods.Likelihood_abc"><code class="docutils literal notranslate"><span class="pre">Likelihood_abc</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/minf/likelihoods/index.html#pytuq.minf.likelihoods.Likelihood_gausmarg"><code class="docutils literal notranslate"><span class="pre">Likelihood_gausmarg</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/minf/mcmc/index.html">mcmc</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/minf/mcmc/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/minf/mcmc/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/minf/mcmc/index.html#pytuq.minf.mcmc.AMCMC"><code class="docutils literal notranslate"><span class="pre">AMCMC</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/minf/mcmc/index.html#pytuq.minf.mcmc.HMC"><code class="docutils literal notranslate"><span class="pre">HMC</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/minf/mcmc/index.html#pytuq.minf.mcmc.MALA"><code class="docutils literal notranslate"><span class="pre">MALA</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/minf/minf/index.html">minf</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/minf/minf/index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/minf/minf/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/minf/minf/index.html#pytuq.minf.minf.model_infer"><code class="docutils literal notranslate"><span class="pre">model_infer()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/minf/minf/index.html#pytuq.minf.minf.model_infer_postp"><code class="docutils literal notranslate"><span class="pre">model_infer_postp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/minf/minf/index.html#pytuq.minf.minf.plot_1d_data"><code class="docutils literal notranslate"><span class="pre">plot_1d_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/minf/minf/index.html#pytuq.minf.minf.plot_1d_samples"><code class="docutils literal notranslate"><span class="pre">plot_1d_samples()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/minf/minf/index.html#pytuq.minf.minf.plot_1dfit"><code class="docutils literal notranslate"><span class="pre">plot_1dfit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/minf/minf/index.html#pytuq.minf.minf.plot_1dfit_vars"><code class="docutils literal notranslate"><span class="pre">plot_1dfit_vars()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/minf/minf/index.html#pytuq.minf.minf.plot_1dfit_shade"><code class="docutils literal notranslate"><span class="pre">plot_1dfit_shade()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/minf/minf/index.html#pytuq.minf.minf.plot_ndfit_vars"><code class="docutils literal notranslate"><span class="pre">plot_ndfit_vars()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/minf/priors/index.html">priors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/minf/priors/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/minf/priors/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/minf/priors/index.html#pytuq.minf.priors.Prior"><code class="docutils literal notranslate"><span class="pre">Prior</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/minf/priors/index.html#pytuq.minf.priors.Prior_uniform"><code class="docutils literal notranslate"><span class="pre">Prior_uniform</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/minf/priors/index.html#pytuq.minf.priors.Prior_normal"><code class="docutils literal notranslate"><span class="pre">Prior_normal</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/minf/vi/index.html">vi</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/minf/vi/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/minf/vi/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/minf/vi/index.html#pytuq.minf.vi.MFVI"><code class="docutils literal notranslate"><span class="pre">MFVI</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../autoapi/pytuq/optim/index.html">optim</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/optim/gd/index.html">gd</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/optim/gd/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/optim/gd/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/optim/gd/index.html#pytuq.optim.gd.GD"><code class="docutils literal notranslate"><span class="pre">GD</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/optim/gd/index.html#pytuq.optim.gd.SGD"><code class="docutils literal notranslate"><span class="pre">SGD</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/optim/gd/index.html#pytuq.optim.gd.Adam"><code class="docutils literal notranslate"><span class="pre">Adam</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/optim/optim/index.html">optim</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/optim/optim/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/optim/optim/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/optim/optim/index.html#pytuq.optim.optim.OptBase"><code class="docutils literal notranslate"><span class="pre">OptBase</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/optim/pso/index.html">pso</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/optim/pso/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/optim/pso/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/optim/pso/index.html#pytuq.optim.pso.PSO"><code class="docutils literal notranslate"><span class="pre">PSO</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/optim/sciwrap/index.html">sciwrap</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/optim/sciwrap/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/optim/sciwrap/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/optim/sciwrap/index.html#pytuq.optim.sciwrap.ScipyWrapper"><code class="docutils literal notranslate"><span class="pre">ScipyWrapper</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../autoapi/pytuq/rv/index.html">rv</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/rv/mrv/index.html">mrv</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/rv/mrv/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/rv/mrv/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.MRV"><code class="docutils literal notranslate"><span class="pre">MRV</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.GMM"><code class="docutils literal notranslate"><span class="pre">GMM</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Mixture"><code class="docutils literal notranslate"><span class="pre">Mixture</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Inverse"><code class="docutils literal notranslate"><span class="pre">Inverse</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Pareto_1d"><code class="docutils literal notranslate"><span class="pre">Pareto_1d</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Normal_1d"><code class="docutils literal notranslate"><span class="pre">Normal_1d</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Lognormal_1d"><code class="docutils literal notranslate"><span class="pre">Lognormal_1d</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Weibull_1d"><code class="docutils literal notranslate"><span class="pre">Weibull_1d</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.MCMCRV"><code class="docutils literal notranslate"><span class="pre">MCMCRV</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/rv/pcrv/index.html">pcrv</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/rv/pcrv/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/rv/pcrv/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV"><code class="docutils literal notranslate"><span class="pre">PCRV</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV_iid"><code class="docutils literal notranslate"><span class="pre">PCRV_iid</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV_mvn"><code class="docutils literal notranslate"><span class="pre">PCRV_mvn</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PC1d"><code class="docutils literal notranslate"><span class="pre">PC1d</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/rv/rosen/index.html">rosen</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/rv/rosen/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/rv/rosen/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/rv/rosen/index.html#pytuq.rv.rosen.Rosenblatt"><code class="docutils literal notranslate"><span class="pre">Rosenblatt</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../autoapi/pytuq/surrogates/index.html">surrogates</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/surrogates/nn/index.html">nn</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/surrogates/nn/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/surrogates/nn/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/surrogates/nn/index.html#pytuq.surrogates.nn.NN"><code class="docutils literal notranslate"><span class="pre">NN</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/surrogates/pce/index.html">pce</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/surrogates/pce/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/surrogates/pce/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/surrogates/pce/index.html#pytuq.surrogates.pce.PCE"><code class="docutils literal notranslate"><span class="pre">PCE</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../autoapi/pytuq/utils/index.html">utils</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/utils/decors/index.html">decors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/utils/decors/index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/utils/decors/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/decors/index.html#pytuq.utils.decors.timer"><code class="docutils literal notranslate"><span class="pre">timer()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/decors/index.html#pytuq.utils.decors.show_start_end"><code class="docutils literal notranslate"><span class="pre">show_start_end()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/decors/index.html#pytuq.utils.decors.repeat"><code class="docutils literal notranslate"><span class="pre">repeat()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/utils/funcbank/index.html">funcbank</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/utils/funcbank/index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/utils/funcbank/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/funcbank/index.html#pytuq.utils.funcbank.sin4"><code class="docutils literal notranslate"><span class="pre">sin4()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/funcbank/index.html#pytuq.utils.funcbank.const"><code class="docutils literal notranslate"><span class="pre">const()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/funcbank/index.html#pytuq.utils.funcbank.f2d"><code class="docutils literal notranslate"><span class="pre">f2d()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/funcbank/index.html#pytuq.utils.funcbank.cosine"><code class="docutils literal notranslate"><span class="pre">cosine()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/funcbank/index.html#pytuq.utils.funcbank.sinsum"><code class="docutils literal notranslate"><span class="pre">sinsum()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/funcbank/index.html#pytuq.utils.funcbank.prodabs"><code class="docutils literal notranslate"><span class="pre">prodabs()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/utils/maps/index.html">maps</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/utils/maps/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/utils/maps/index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/utils/maps/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.scale01ToDom"><code class="docutils literal notranslate"><span class="pre">scale01ToDom()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.scaleDomTo01"><code class="docutils literal notranslate"><span class="pre">scaleDomTo01()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.scaleTo01"><code class="docutils literal notranslate"><span class="pre">scaleTo01()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.standardize"><code class="docutils literal notranslate"><span class="pre">standardize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.XMap"><code class="docutils literal notranslate"><span class="pre">XMap</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.Expon"><code class="docutils literal notranslate"><span class="pre">Expon</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.Logar"><code class="docutils literal notranslate"><span class="pre">Logar</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.ComposeMap"><code class="docutils literal notranslate"><span class="pre">ComposeMap</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.LinearScaler"><code class="docutils literal notranslate"><span class="pre">LinearScaler</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.Standardizer"><code class="docutils literal notranslate"><span class="pre">Standardizer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.Normalizer"><code class="docutils literal notranslate"><span class="pre">Normalizer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.Domainizer"><code class="docutils literal notranslate"><span class="pre">Domainizer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/maps/index.html#pytuq.utils.maps.Affine"><code class="docutils literal notranslate"><span class="pre">Affine</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/utils/metrics/index.html">metrics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/utils/metrics/index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/utils/metrics/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/metrics/index.html#pytuq.utils.metrics.rel_l2"><code class="docutils literal notranslate"><span class="pre">rel_l2()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/metrics/index.html#pytuq.utils.metrics.rmse"><code class="docutils literal notranslate"><span class="pre">rmse()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/metrics/index.html#pytuq.utils.metrics.rel_rmse"><code class="docutils literal notranslate"><span class="pre">rel_rmse()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/metrics/index.html#pytuq.utils.metrics.norm_rmse"><code class="docutils literal notranslate"><span class="pre">norm_rmse()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/metrics/index.html#pytuq.utils.metrics.fast_auc"><code class="docutils literal notranslate"><span class="pre">fast_auc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/metrics/index.html#pytuq.utils.metrics.mae"><code class="docutils literal notranslate"><span class="pre">mae()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/metrics/index.html#pytuq.utils.metrics.crps_gauss"><code class="docutils literal notranslate"><span class="pre">crps_gauss()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/metrics/index.html#pytuq.utils.metrics.crps_samples"><code class="docutils literal notranslate"><span class="pre">crps_samples()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/utils/mindex/index.html">mindex</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/utils/mindex/index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/utils/mindex/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/mindex/index.html#pytuq.utils.mindex.get_npc"><code class="docutils literal notranslate"><span class="pre">get_npc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/mindex/index.html#pytuq.utils.mindex.get_mi"><code class="docutils literal notranslate"><span class="pre">get_mi()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/mindex/index.html#pytuq.utils.mindex.encode_mindex"><code class="docutils literal notranslate"><span class="pre">encode_mindex()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/mindex/index.html#pytuq.utils.mindex.micf_join"><code class="docutils literal notranslate"><span class="pre">micf_join()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/mindex/index.html#pytuq.utils.mindex.mi_addfront_cons"><code class="docutils literal notranslate"><span class="pre">mi_addfront_cons()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/mindex/index.html#pytuq.utils.mindex.mi_addfront"><code class="docutils literal notranslate"><span class="pre">mi_addfront()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/utils/plotting/index.html">plotting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/utils/plotting/index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/utils/plotting/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/plotting/index.html#pytuq.utils.plotting.myrc"><code class="docutils literal notranslate"><span class="pre">myrc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/plotting/index.html#pytuq.utils.plotting.saveplot"><code class="docutils literal notranslate"><span class="pre">saveplot()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/plotting/index.html#pytuq.utils.plotting.set_colors"><code class="docutils literal notranslate"><span class="pre">set_colors()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/plotting/index.html#pytuq.utils.plotting.lighten_color"><code class="docutils literal notranslate"><span class="pre">lighten_color()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/plotting/index.html#pytuq.utils.plotting.plot_dm"><code class="docutils literal notranslate"><span class="pre">plot_dm()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/plotting/index.html#pytuq.utils.plotting.plot_xrv"><code class="docutils literal notranslate"><span class="pre">plot_xrv()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/plotting/index.html#pytuq.utils.plotting.parallel_coordinates"><code class="docutils literal notranslate"><span class="pre">parallel_coordinates()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/plotting/index.html#pytuq.utils.plotting.plot_yx"><code class="docutils literal notranslate"><span class="pre">plot_yx()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/plotting/index.html#pytuq.utils.plotting.plot_sens"><code class="docutils literal notranslate"><span class="pre">plot_sens()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/plotting/index.html#pytuq.utils.plotting.plot_jsens"><code class="docutils literal notranslate"><span class="pre">plot_jsens()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/plotting/index.html#pytuq.utils.plotting.plot_tri"><code class="docutils literal notranslate"><span class="pre">plot_tri()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/plotting/index.html#pytuq.utils.plotting.plot_pdf1d"><code class="docutils literal notranslate"><span class="pre">plot_pdf1d()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/plotting/index.html#pytuq.utils.plotting.plot_pdf2d"><code class="docutils literal notranslate"><span class="pre">plot_pdf2d()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/plotting/index.html#pytuq.utils.plotting.plot_pdfs"><code class="docutils literal notranslate"><span class="pre">plot_pdfs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/plotting/index.html#pytuq.utils.plotting.plot_ens"><code class="docutils literal notranslate"><span class="pre">plot_ens()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/plotting/index.html#pytuq.utils.plotting.plot_vars"><code class="docutils literal notranslate"><span class="pre">plot_vars()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/plotting/index.html#pytuq.utils.plotting.plot_shade"><code class="docutils literal notranslate"><span class="pre">plot_shade()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/plotting/index.html#pytuq.utils.plotting.plot_1d_anchored_single"><code class="docutils literal notranslate"><span class="pre">plot_1d_anchored_single()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/plotting/index.html#pytuq.utils.plotting.plot_1d_anchored"><code class="docutils literal notranslate"><span class="pre">plot_1d_anchored()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/plotting/index.html#pytuq.utils.plotting.plot_2d_anchored_single"><code class="docutils literal notranslate"><span class="pre">plot_2d_anchored_single()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/plotting/index.html#pytuq.utils.plotting.plot_2d_anchored"><code class="docutils literal notranslate"><span class="pre">plot_2d_anchored()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/plotting/index.html#pytuq.utils.plotting.plot_fcn_1d_slice"><code class="docutils literal notranslate"><span class="pre">plot_fcn_1d_slice()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/plotting/index.html#pytuq.utils.plotting.plot_fcn_2d_slice"><code class="docutils literal notranslate"><span class="pre">plot_fcn_2d_slice()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/plotting/index.html#pytuq.utils.plotting.plot_uc_sample"><code class="docutils literal notranslate"><span class="pre">plot_uc_sample()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/plotting/index.html#pytuq.utils.plotting.plot_uc_exact"><code class="docutils literal notranslate"><span class="pre">plot_uc_exact()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/plotting/index.html#pytuq.utils.plotting.plot_samples_pdfs"><code class="docutils literal notranslate"><span class="pre">plot_samples_pdfs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/plotting/index.html#pytuq.utils.plotting.plot_1d"><code class="docutils literal notranslate"><span class="pre">plot_1d()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/plotting/index.html#pytuq.utils.plotting.plot_2d"><code class="docutils literal notranslate"><span class="pre">plot_2d()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/plotting/index.html#pytuq.utils.plotting.plot_parity"><code class="docutils literal notranslate"><span class="pre">plot_parity()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/plotting/index.html#pytuq.utils.plotting.plot_cov"><code class="docutils literal notranslate"><span class="pre">plot_cov()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/plotting/index.html#pytuq.utils.plotting.plot_cov_tri"><code class="docutils literal notranslate"><span class="pre">plot_cov_tri()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/plotting/index.html#pytuq.utils.plotting.plot_sensmat"><code class="docutils literal notranslate"><span class="pre">plot_sensmat()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/plotting/index.html#pytuq.utils.plotting.plot_joy"><code class="docutils literal notranslate"><span class="pre">plot_joy()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/utils/stats/index.html">stats</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/utils/stats/index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/utils/stats/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/stats/index.html#pytuq.utils.stats.get_stats"><code class="docutils literal notranslate"><span class="pre">get_stats()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/stats/index.html#pytuq.utils.stats.get_domain"><code class="docutils literal notranslate"><span class="pre">get_domain()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/stats/index.html#pytuq.utils.stats.intersect_domain"><code class="docutils literal notranslate"><span class="pre">intersect_domain()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/stats/index.html#pytuq.utils.stats.diam"><code class="docutils literal notranslate"><span class="pre">diam()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/utils/uqtk_utils/index.html">uqtk_utils</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/utils/uqtk_utils/index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/utils/uqtk_utils/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/uqtk_utils/index.html#pytuq.utils.uqtk_utils.pce_eval"><code class="docutils literal notranslate"><span class="pre">pce_eval()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/uqtk_utils/index.html#pytuq.utils.uqtk_utils.pce_sens"><code class="docutils literal notranslate"><span class="pre">pce_sens()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/uqtk_utils/index.html#pytuq.utils.uqtk_utils.get_pdf_uqtk"><code class="docutils literal notranslate"><span class="pre">get_pdf_uqtk()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/utils/xutils/index.html">xutils</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/utils/xutils/index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/utils/xutils/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/xutils/index.html#pytuq.utils.xutils.idt"><code class="docutils literal notranslate"><span class="pre">idt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/xutils/index.html#pytuq.utils.xutils.savepk"><code class="docutils literal notranslate"><span class="pre">savepk()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/xutils/index.html#pytuq.utils.xutils.loadpk"><code class="docutils literal notranslate"><span class="pre">loadpk()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/xutils/index.html#pytuq.utils.xutils.cartes_list"><code class="docutils literal notranslate"><span class="pre">cartes_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/xutils/index.html#pytuq.utils.xutils.read_textlist"><code class="docutils literal notranslate"><span class="pre">read_textlist()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/xutils/index.html#pytuq.utils.xutils.sample_sphere"><code class="docutils literal notranslate"><span class="pre">sample_sphere()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/xutils/index.html#pytuq.utils.xutils.get_opt_bw"><code class="docutils literal notranslate"><span class="pre">get_opt_bw()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/xutils/index.html#pytuq.utils.xutils.get_pdf"><code class="docutils literal notranslate"><span class="pre">get_pdf()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/xutils/index.html#pytuq.utils.xutils.strarr"><code class="docutils literal notranslate"><span class="pre">strarr()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/xutils/index.html#pytuq.utils.xutils.project"><code class="docutils literal notranslate"><span class="pre">project()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/xutils/index.html#pytuq.utils.xutils.pick_basis"><code class="docutils literal notranslate"><span class="pre">pick_basis()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/xutils/index.html#pytuq.utils.xutils.safe_cholesky"><code class="docutils literal notranslate"><span class="pre">safe_cholesky()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/utils/xutils/index.html#pytuq.utils.xutils.instantiate_classes_from_module"><code class="docutils literal notranslate"><span class="pre">instantiate_classes_from_module()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../autoapi/pytuq/workflows/index.html">workflows</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/workflows/fits/index.html">fits</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/workflows/fits/index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/workflows/fits/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/workflows/fits/index.html#pytuq.workflows.fits.pc_fit"><code class="docutils literal notranslate"><span class="pre">pc_fit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/workflows/fits/index.html#pytuq.workflows.fits.pc_ros"><code class="docutils literal notranslate"><span class="pre">pc_ros()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/pytuq/workflows/uprop/index.html">uprop</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/workflows/uprop/index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/pytuq/workflows/uprop/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/workflows/uprop/index.html#pytuq.workflows.uprop.uprop_proj"><code class="docutils literal notranslate"><span class="pre">uprop_proj()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/pytuq/workflows/uprop/index.html#pytuq.workflows.uprop.uprop_regr"><code class="docutils literal notranslate"><span class="pre">uprop_regr()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Misc</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="indices.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Class Inheritance Diagrams</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#fitting">Fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#linear-regression">Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mcmc-samplers">MCMC Samplers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#priors">Priors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#likelihoods">Likelihoods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#random-variables">Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#functions">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#global-sensitivity-analysis">Global Sensitivity Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#linear-dimensionality-reduction">Linear Dimensionality Reduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#optimisers">Optimisers</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Class Inheritance Diagrams</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/misc/diagram.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="class-inheritance-diagrams">
+<h1>Class Inheritance Diagrams<a class="headerlink" href="#class-inheritance-diagrams" title="Link to this heading"></a></h1>
+<p>The diagrams below highlight the essential inheritance relationships
+in PyTUQ — groups where classes form multi-level hierarchies.</p>
+<section id="fitting">
+<h2>Fitting<a class="headerlink" href="#fitting" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">fitbase</span></code> is the root fitting class, extended by <code class="docutils literal notranslate"><span class="pre">gp</span></code> (Gaussian‑process
+fitting) and <code class="docutils literal notranslate"><span class="pre">lreg</span></code> (linear regression).</p>
+<div class="graphviz"><img src="../_images/inheritance-04f22a9696776dde2c266ca12dec5e9728dc37d4.png" alt="Inheritance diagram of pytuq.fit.fit, pytuq.fit.gp, pytuq.lreg.lreg" usemap="#inheritancedd9a1213d4" class="inheritance graphviz" /></div>
+<map id="inheritancedd9a1213d4" name="inheritancedd9a1213d4">
+<area shape="rect" id="node1" href="../autoapi/pytuq/fit/fit/index.html#pytuq.fit.fit.fitbase" target="_top" title="Base fit class." alt="" coords="5,31,77,56"/>
+<area shape="rect" id="node2" href="../autoapi/pytuq/fit/gp/index.html#pytuq.fit.gp.gp" target="_top" title="Gaussian process class :cite:t:`rasmussen:2006`." alt="" coords="125,5,197,31"/>
+<area shape="rect" id="node3" href="../autoapi/pytuq/lreg/lreg/index.html#pytuq.lreg.lreg.lreg" target="_top" title="Base class for linear regression." alt="" coords="125,55,197,80"/>
+<area shape="rect" id="node4" href="../autoapi/pytuq/lreg/lreg/index.html#pytuq.lreg.lreg.lsq" target="_top" title="Bare minimum least squares solution." alt="" coords="245,55,317,80"/>
+</map></section>
+<section id="linear-regression">
+<h2>Linear Regression<a class="headerlink" href="#linear-regression" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">lreg</span></code> inherits from <code class="docutils literal notranslate"><span class="pre">fitbase</span></code> and is specialised into several
+solvers: <code class="docutils literal notranslate"><span class="pre">lsq</span></code> (least squares), <code class="docutils literal notranslate"><span class="pre">anl</span></code> (analytical Bayesian),
+<code class="docutils literal notranslate"><span class="pre">bcs</span></code> (Bayesian compressive sensing), <code class="docutils literal notranslate"><span class="pre">opt</span></code> (optimisation‑based),
+and <code class="docutils literal notranslate"><span class="pre">lreg_merr</span></code> (model‑error regression).</p>
+<div class="graphviz"><img src="../_images/inheritance-8276fce663f20e943f224fc35b84f5fda16adcaf.png" alt="Inheritance diagram of pytuq.lreg.lreg, pytuq.lreg.anl, pytuq.lreg.bcs, pytuq.lreg.opt, pytuq.lreg.merr" usemap="#inheritance53fffaa7f3" class="inheritance graphviz" /></div>
+<map id="inheritance53fffaa7f3" name="inheritance53fffaa7f3">
+<area shape="rect" id="node1" href="../autoapi/pytuq/lreg/anl/index.html#pytuq.lreg.anl.anl" target="_top" title="Bayesian linear regression class." alt="" coords="132,5,204,31"/>
+<area shape="rect" id="node2" href="../autoapi/pytuq/lreg/lreg/index.html#pytuq.lreg.lreg.lreg" target="_top" title="Base class for linear regression." alt="" coords="5,104,77,129"/>
+<area shape="rect" id="node3" href="../autoapi/pytuq/lreg/bcs/index.html#pytuq.lreg.bcs.bcs" target="_top" title="Bayesian compressive sensing (BCS) class :cite:t:`sargsyan:2014`." alt="" coords="132,55,204,80"/>
+<area shape="rect" id="node4" href="../autoapi/pytuq/lreg/merr/index.html#pytuq.lreg.merr.lreg_merr" target="_top" title="A class for model error embedded linear regression :cite:t:`sargsyan:2019`." alt="" coords="125,104,211,129"/>
+<area shape="rect" id="node5" href="../autoapi/pytuq/lreg/lreg/index.html#pytuq.lreg.lreg.lsq" target="_top" title="Bare minimum least squares solution." alt="" coords="132,153,204,179"/>
+<area shape="rect" id="node6" href="../autoapi/pytuq/lreg/opt/index.html#pytuq.lreg.opt.opt" target="_top" title="A class of a simple quadratic optimization to fit the coefficients." alt="" coords="132,203,204,228"/>
+</map></section>
+<section id="mcmc-samplers">
+<h2>MCMC Samplers<a class="headerlink" href="#mcmc-samplers" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">MCMCBase</span></code> is the common ancestor of the three samplers:
+<code class="docutils literal notranslate"><span class="pre">AMCMC</span></code> (adaptive Metropolis), <code class="docutils literal notranslate"><span class="pre">HMC</span></code> (Hamiltonian Monte Carlo),
+and <code class="docutils literal notranslate"><span class="pre">MALA</span></code> (Metropolis‑Adjusted Langevin Algorithm).</p>
+<div class="graphviz"><img src="../_images/inheritance-f8bd38a7b4a49b52b030af28b4983c8c87c9411b.png" alt="Inheritance diagram of pytuq.minf.calib, pytuq.minf.mcmc" usemap="#inheritancefc45432591" class="inheritance graphviz" /></div>
+<map id="inheritancefc45432591" name="inheritancefc45432591">
+<area shape="rect" id="node1" href="../autoapi/pytuq/minf/mcmc/index.html#pytuq.minf.mcmc.AMCMC" target="_top" title="Adaptive MCMC class. Based on :cite:t:`Haario:2001`." alt="" coords="149,5,223,31"/>
+<area shape="rect" id="node2" href="../autoapi/pytuq/minf/calib/index.html#pytuq.minf.calib.MCMCBase" target="_top" title="Base class for calibration." alt="" coords="5,55,101,80"/>
+<area shape="rect" id="node3" href="../autoapi/pytuq/minf/mcmc/index.html#pytuq.minf.mcmc.HMC" target="_top" title="Hamiltonian Monte Carlo class. Based on :cite:t:`neal:2011`." alt="" coords="150,55,222,80"/>
+<area shape="rect" id="node4" href="../autoapi/pytuq/minf/mcmc/index.html#pytuq.minf.mcmc.MALA" target="_top" title="Metropolis&#45;Adjusted Langevin Algorithm. Based on :cite:t:`girolami:2011`." alt="" coords="150,104,222,129"/>
+</map></section>
+<section id="priors">
+<h2>Priors<a class="headerlink" href="#priors" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Prior</span></code> is specialised into <code class="docutils literal notranslate"><span class="pre">Prior_uniform</span></code> and <code class="docutils literal notranslate"><span class="pre">Prior_normal</span></code>.</p>
+<div class="graphviz"><img src="../_images/inheritance-1548a87462a014d7445dc31fca8d11ee7100f0c7.png" alt="Inheritance diagram of pytuq.minf.priors" usemap="#inheritance90f6ce540e" class="inheritance graphviz" /></div>
+<map id="inheritance90f6ce540e" name="inheritance90f6ce540e">
+<area shape="rect" id="node1" href="../autoapi/pytuq/minf/priors/index.html#pytuq.minf.priors.Prior" target="_top" title="Base class for prior evaluation." alt="" coords="5,31,77,56"/>
+<area shape="rect" id="node2" href="../autoapi/pytuq/minf/priors/index.html#pytuq.minf.priors.Prior_normal" target="_top" title="Normal prior class." alt="" coords="128,5,233,31"/>
+<area shape="rect" id="node3" href="../autoapi/pytuq/minf/priors/index.html#pytuq.minf.priors.Prior_uniform" target="_top" title="Uniform prior class." alt="" coords="125,55,236,80"/>
+</map></section>
+<section id="likelihoods">
+<h2>Likelihoods<a class="headerlink" href="#likelihoods" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Likelihood</span></code> branches into several concrete likelihood models.</p>
+<div class="graphviz"><img src="../_images/inheritance-3f775533c9108306927d1a99abf41d48719c3054.png" alt="Inheritance diagram of pytuq.minf.likelihoods" usemap="#inheritancea8ea6c78b2" class="inheritance graphviz" /></div>
+<map id="inheritancea8ea6c78b2" name="inheritancea8ea6c78b2">
+<area shape="rect" id="node1" href="../autoapi/pytuq/minf/likelihoods/index.html#pytuq.minf.likelihoods.Likelihood" target="_top" title="Base class for likelihood evaluation." alt="" coords="5,104,93,129"/>
+<area shape="rect" id="node2" href="../autoapi/pytuq/minf/likelihoods/index.html#pytuq.minf.likelihoods.Likelihood_abc" target="_top" title="ABC likelihood." alt="" coords="167,5,286,31"/>
+<area shape="rect" id="node3" href="../autoapi/pytuq/minf/likelihoods/index.html#pytuq.minf.likelihoods.Likelihood_classical" target="_top" title="Classical likelihood class." alt="" coords="151,55,302,80"/>
+<area shape="rect" id="node4" href="../autoapi/pytuq/minf/likelihoods/index.html#pytuq.minf.likelihoods.Likelihood_dummy" target="_top" title="Dummy likelihood class. Useful for testing." alt="" coords="154,104,299,129"/>
+<area shape="rect" id="node5" href="../autoapi/pytuq/minf/likelihoods/index.html#pytuq.minf.likelihoods.Likelihood_gausmarg" target="_top" title="IID Likelihood." alt="" coords="147,153,307,179"/>
+<area shape="rect" id="node6" href="../autoapi/pytuq/minf/likelihoods/index.html#pytuq.minf.likelihoods.Likelihood_logclassical" target="_top" title="Log&#45;classical likelihood." alt="" coords="141,203,312,228"/>
+</map></section>
+<section id="random-variables">
+<h2>Random Variables<a class="headerlink" href="#random-variables" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">MRV</span></code> is the multivariate random variable base class, extended by
+<code class="docutils literal notranslate"><span class="pre">GMM</span></code>, <code class="docutils literal notranslate"><span class="pre">Mixture</span></code>, <code class="docutils literal notranslate"><span class="pre">Inverse</span></code>, and several 1‑D distributions.
+<code class="docutils literal notranslate"><span class="pre">PCRV</span></code> (polynomial‑chaos random variable) has its own sub‑hierarchy.</p>
+<div class="graphviz"><img src="../_images/inheritance-a3a8046b90c69a464ce5f9de6b90281c521c3749.png" alt="Inheritance diagram of pytuq.rv.mrv, pytuq.rv.pcrv" usemap="#inheritance105f8dfcc8" class="inheritance graphviz" /></div>
+<map id="inheritance105f8dfcc8" name="inheritance105f8dfcc8">
+<area shape="rect" id="node1" href="../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.GMM" target="_top" title="Gaussian mixture model random variable." alt="" coords="147,5,219,31"/>
+<area shape="rect" id="node2" href="../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.MRV" target="_top" title="Base class for multivariate random variables." alt="" coords="5,203,77,228"/>
+<area shape="rect" id="node3" href="../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Inverse" target="_top" title="Class for an inverse of a random variable." alt="" coords="147,55,219,80"/>
+<area shape="rect" id="node4" href="../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Lognormal_1d" target="_top" title="A class for univariate Lognormal distribution." alt="" coords="125,104,240,129"/>
+<area shape="rect" id="node5" href="../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.MCMCRV" target="_top" title="A class for MCMC&#45;based random variable." alt="" coords="141,153,224,179"/>
+<area shape="rect" id="node6" href="../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Mixture" target="_top" title="A class for a mixture of random variables." alt="" coords="147,203,219,228"/>
+<area shape="rect" id="node7" href="../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Normal_1d" target="_top" title="A class for univariate Normal distribution." alt="" coords="136,252,229,277"/>
+<area shape="rect" id="node9" href="../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV" target="_top" title="A class for a multivariate PC random variable :cite:t:`xiu:2002`." alt="" coords="147,301,219,327"/>
+<area shape="rect" id="node12" href="../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Pareto_1d" target="_top" title="A class for univariate Pareto distribution." alt="" coords="139,351,226,376"/>
+<area shape="rect" id="node13" href="../autoapi/pytuq/rv/mrv/index.html#pytuq.rv.mrv.Weibull_1d" target="_top" title="A class for univariate Weibull distribution." alt="" coords="136,400,229,425"/>
+<area shape="rect" id="node8" href="../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PC1d" target="_top" title="1&#45;dimensional PC random variable." alt="" coords="5,153,77,179"/>
+<area shape="rect" id="node10" href="../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV_iid" target="_top" title="A PC random variable/vector with a special structure of one germ per dimension. As a consequence, the number of stochastic and physical dimensions coincide. It inherits all the attributes of the parent PCRV class." alt="" coords="295,277,375,303"/>
+<area shape="rect" id="node11" href="../autoapi/pytuq/rv/pcrv/index.html#pytuq.rv.pcrv.PCRV_mvn" target="_top" title="A PC random variable/vector that is a multivariate normal. As a consequence, the number of stochastic and physical dimensions coincide and PC type is Gauss&#45;Hermite for all dimensions. It inherits all the attributes of the parent PCRV class." alt="" coords="288,327,381,352"/>
+</map></section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Function</span></code> is the base for all test functions, operators, and
+benchmark functions in PyTUQ.</p>
+<div class="graphviz"><img src="../_images/inheritance-38b8007d046def49c5bc932f75df13d284364f9e.png" alt="Inheritance diagram of pytuq.func.func, pytuq.func.poly, pytuq.func.genz, pytuq.func.oper, pytuq.func.toy" usemap="#inheritance510314a5fa" class="inheritance graphviz" /></div>
+<map id="inheritance510314a5fa" name="inheritance510314a5fa">
+<area shape="rect" id="node1" href="../autoapi/pytuq/func/func/index.html#pytuq.func.func.AddFcn" target="_top" title="Sum of two functions." alt="" coords="165,5,237,31"/>
+<area shape="rect" id="node2" href="../autoapi/pytuq/func/func/index.html#pytuq.func.func.Function" target="_top" title="Base class for a function." alt="" coords="5,499,83,524"/>
+<area shape="rect" id="node3" href="../autoapi/pytuq/func/oper/index.html#pytuq.func.oper.CartesProdFcn" target="_top" title="Cartesian product of two functions." alt="" coords="143,55,259,80"/>
+<area shape="rect" id="node4" href="../autoapi/pytuq/func/oper/index.html#pytuq.func.oper.ComposeFcn" target="_top" title="Function composition." alt="" coords="147,104,254,129"/>
+<area shape="rect" id="node5" href="../autoapi/pytuq/func/toy/index.html#pytuq.func.toy.Constant" target="_top" title="Multioutput Constant function" alt="" coords="161,153,241,179"/>
+<area shape="rect" id="node6" href="../autoapi/pytuq/func/func/index.html#pytuq.func.func.DivFcn" target="_top" title="Element&#45;wise quotient of two functions." alt="" coords="165,203,237,228"/>
+<area shape="rect" id="node7" href="../autoapi/pytuq/func/toy/index.html#pytuq.func.toy.Exp" target="_top" title="Exponential function with weighted input" alt="" coords="165,252,237,277"/>
+<area shape="rect" id="node8" href="../autoapi/pytuq/func/genz/index.html#pytuq.func.genz.GenzBase" target="_top" title="Base class for Genz function family" alt="" coords="157,301,244,327"/>
+<area shape="rect" id="node13" href="../autoapi/pytuq/func/oper/index.html#pytuq.func.oper.GradFcn" target="_top" title="Gradient extraction function." alt="" coords="163,351,239,376"/>
+<area shape="rect" id="node14" href="../autoapi/pytuq/func/toy/index.html#pytuq.func.toy.Identity" target="_top" title="Identity function" alt="" coords="165,400,237,425"/>
+<area shape="rect" id="node16" href="../autoapi/pytuq/func/poly/index.html#pytuq.func.poly.PolyBase" target="_top" title="Base class for polynomial functions" alt="" coords="159,449,242,475"/>
+<area shape="rect" id="node17" href="../autoapi/pytuq/func/oper/index.html#pytuq.func.oper.LinTransformFcn" target="_top" title="Linear transformation of function output." alt="" coords="136,499,265,524"/>
+<area shape="rect" id="node18" href="../autoapi/pytuq/func/toy/index.html#pytuq.func.toy.Log" target="_top" title="Logarithm function with weighted input" alt="" coords="165,548,237,573"/>
+<area shape="rect" id="node19" href="../autoapi/pytuq/func/func/index.html#pytuq.func.func.ModelWrapperFcn" target="_top" title="Wrapper that turns a generic callable into a Function." alt="" coords="131,597,271,623"/>
+<area shape="rect" id="node21" href="../autoapi/pytuq/func/func/index.html#pytuq.func.func.MultFcn" target="_top" title="Element&#45;wise product of two functions." alt="" coords="163,647,238,672"/>
+<area shape="rect" id="node22" href="../autoapi/pytuq/func/oper/index.html#pytuq.func.oper.PickDim" target="_top" title="Dimension picking function." alt="" coords="163,696,239,721"/>
+<area shape="rect" id="node23" href="../autoapi/pytuq/func/func/index.html#pytuq.func.func.PowFcn" target="_top" title="Element&#45;wise power of a function." alt="" coords="165,745,237,771"/>
+<area shape="rect" id="node24" href="../autoapi/pytuq/func/toy/index.html#pytuq.func.toy.Quad" target="_top" title="Quadratic function." alt="" coords="165,795,237,820"/>
+<area shape="rect" id="node25" href="../autoapi/pytuq/func/toy/index.html#pytuq.func.toy.Quad2d" target="_top" title="2D Quadratic function" alt="" coords="165,844,237,869"/>
+<area shape="rect" id="node26" href="../autoapi/pytuq/func/oper/index.html#pytuq.func.oper.ShiftFcn" target="_top" title="Shifted function." alt="" coords="163,893,238,919"/>
+<area shape="rect" id="node27" href="../autoapi/pytuq/func/oper/index.html#pytuq.func.oper.SliceFcn" target="_top" title="Sliced function evaluation." alt="" coords="163,943,239,968"/>
+<area shape="rect" id="node28" href="../autoapi/pytuq/func/func/index.html#pytuq.func.func.SubFcn" target="_top" title="Difference of two functions." alt="" coords="165,992,237,1017"/>
+<area shape="rect" id="node9" href="../autoapi/pytuq/func/genz/index.html#pytuq.func.genz.GenzCornerPeak" target="_top" title="Genz Corner Peak function" alt="" coords="333,228,463,253"/>
+<area shape="rect" id="node10" href="../autoapi/pytuq/func/genz/index.html#pytuq.func.genz.GenzOscillatory" target="_top" title="Genz Oscillatory function" alt="" coords="335,277,461,303"/>
+<area shape="rect" id="node11" href="../autoapi/pytuq/func/genz/index.html#pytuq.func.genz.GenzQuadOscillatory" target="_top" title="Genz Quadratic Oscillatory function" alt="" coords="319,327,477,352"/>
+<area shape="rect" id="node12" href="../autoapi/pytuq/func/genz/index.html#pytuq.func.genz.GenzSum" target="_top" title="Genz Summation function" alt="" coords="356,376,440,401"/>
+<area shape="rect" id="node15" href="../autoapi/pytuq/func/poly/index.html#pytuq.func.poly.Leg" target="_top" title="Legendre polynomial expansion" alt="" coords="362,425,434,451"/>
+<area shape="rect" id="node20" href="../autoapi/pytuq/func/poly/index.html#pytuq.func.poly.Mon" target="_top" title="Monomial polynomial expansion" alt="" coords="362,475,434,500"/>
+</map></section>
+<section id="global-sensitivity-analysis">
+<h2>Global Sensitivity Analysis<a class="headerlink" href="#global-sensitivity-analysis" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">SensMethod</span></code> is the root for all GSA methods.</p>
+<div class="graphviz"><img src="../_images/inheritance-8c7f1781755edc5d220337eaba171b3c396fbddc.png" alt="Inheritance diagram of pytuq.gsa.gsa" usemap="#inheritanceed0a97d165" class="inheritance graphviz" /></div>
+<map id="inheritanceed0a97d165" name="inheritanceed0a97d165">
+<area shape="rect" id="node1" href="../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.Linreg" target="_top" title="Sensitivities computed via linear regression." alt="" coords="163,5,235,31"/>
+<area shape="rect" id="node2" href="../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.SensMethod" target="_top" title="Base class for various sensitivity methods implementation." alt="" coords="5,80,108,105"/>
+<area shape="rect" id="node3" href="../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.Moat" target="_top" title="Class for MOAT (Morris One At a Time) sensitivities :cite:t:`morris:1991`." alt="" coords="163,55,235,80"/>
+<area shape="rect" id="node4" href="../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.PCSobol" target="_top" title="PC&#45;based Sobol sensitivity computation :cite:t:`sudret:2008`." alt="" coords="162,104,237,129"/>
+<area shape="rect" id="node5" href="../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.SamSobol" target="_top" title="Computing of sampling&#45;based main and total Sobol sensitivities :cite:t:`sobol:2001`, :cite:t:`saltelli:2002`." alt="" coords="156,153,243,179"/>
+</map></section>
+<section id="linear-dimensionality-reduction">
+<h2>Linear Dimensionality Reduction<a class="headerlink" href="#linear-dimensionality-reduction" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">LinRed</span></code> is extended by <code class="docutils literal notranslate"><span class="pre">KLE</span></code> (Karhunen–Loève) and <code class="docutils literal notranslate"><span class="pre">SVD</span></code>.</p>
+<div class="graphviz"><img src="../_images/inheritance-9021df731b9c25d96e12942b4caa10ba60f08138.png" alt="Inheritance diagram of pytuq.linred.linred, pytuq.linred.kle, pytuq.linred.svd" usemap="#inheritanceae89c03869" class="inheritance graphviz" /></div>
+<map id="inheritanceae89c03869" name="inheritanceae89c03869">
+<area shape="rect" id="node1" href="../autoapi/pytuq/linred/kle/index.html#pytuq.linred.kle.KLE" target="_top" title="Class for Karhunen&#45;Loeve expansion :cite:t:`loeve:1978`." alt="" coords="125,5,197,31"/>
+<area shape="rect" id="node2" href="../autoapi/pytuq/linred/linred/index.html#pytuq.linred.linred.LinRed" target="_top" title="Class for linear dimensionality reduction." alt="" coords="5,31,77,56"/>
+<area shape="rect" id="node3" href="../autoapi/pytuq/linred/svd/index.html#pytuq.linred.svd.SVD" target="_top" title="Class for SVD&#45;based dimensionality reduction." alt="" coords="125,55,197,80"/>
+</map></section>
+<section id="optimisers">
+<h2>Optimisers<a class="headerlink" href="#optimisers" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">OptBase</span></code> is the optimiser base class, with gradient‑descent variants
+(<code class="docutils literal notranslate"><span class="pre">GD</span></code>, <code class="docutils literal notranslate"><span class="pre">SGD</span></code>, <code class="docutils literal notranslate"><span class="pre">Adam</span></code>), particle‑swarm (<code class="docutils literal notranslate"><span class="pre">PSO</span></code>), and a SciPy wrapper.</p>
+<div class="graphviz"><img src="../_images/inheritance-c4043e35db5d7fa9c064010ad492267f5b1db7a0.png" alt="Inheritance diagram of pytuq.optim.optim, pytuq.optim.gd, pytuq.optim.pso, pytuq.optim.sciwrap" usemap="#inheritance7d8579d0c5" class="inheritance graphviz" /></div>
+<map id="inheritance7d8579d0c5" name="inheritance7d8579d0c5">
+<area shape="rect" id="node1" href="../autoapi/pytuq/optim/gd/index.html#pytuq.optim.gd.Adam" target="_top" title="Simple Adam optimizer that performs gradient descent." alt="" coords="151,5,223,31"/>
+<area shape="rect" id="node2" href="../autoapi/pytuq/optim/optim/index.html#pytuq.optim.optim.OptBase" target="_top" title="Base class for optimization." alt="" coords="5,104,83,129"/>
+<area shape="rect" id="node3" href="../autoapi/pytuq/optim/gd/index.html#pytuq.optim.gd.GD" target="_top" title="&quot;Gradient descent optimization class." alt="" coords="151,55,223,80"/>
+<area shape="rect" id="node4" href="../autoapi/pytuq/optim/pso/index.html#pytuq.optim.pso.PSO" target="_top" title="&quot;Particle swarm optimization class." alt="" coords="151,104,223,129"/>
+<area shape="rect" id="node5" href="../autoapi/pytuq/optim/gd/index.html#pytuq.optim.gd.SGD" target="_top" title="&quot;Stochastic gradient descent optimization class." alt="" coords="151,153,223,179"/>
+<area shape="rect" id="node6" href="../autoapi/pytuq/optim/sciwrap/index.html#pytuq.optim.sciwrap.ScipyWrapper" target="_top" title="&quot;Optimization class wrapper to scipy options. See https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html." alt="" coords="131,203,243,228"/>
+</map></section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="references.html" class="btn btn-neutral float-left" title="References" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

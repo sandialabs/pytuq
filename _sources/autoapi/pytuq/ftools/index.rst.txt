@@ -1,0 +1,13 @@
+ftools
+======
+.. py:module:: pytuq.ftools
+
+
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/pytuq/ftools/integr/index
+   /autoapi/pytuq/ftools/orf/index
+
+

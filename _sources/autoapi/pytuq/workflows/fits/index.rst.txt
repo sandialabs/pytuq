@@ -1,0 +1,70 @@
+fits
+====
+.. py:module:: pytuq.workflows.fits
+
+.. autoapi-nested-parse::
+
+   Module for PC fitting workflows.
+
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   pytuq.workflows.fits.pc_fit
+   pytuq.workflows.fits.pc_ros
+
+
+Module Contents
+---------------
+
+.. py:function:: pc_fit(x, y, order=3, pctype='LU', method='anl', **kwargs)
+
+   Fit a PC surrogate to input-output data via regression.
+
+   For each output dimension, constructs a basis matrix from the PC representation
+   and fits coefficients using the chosen linear regression method.
+
+   :param x: A 2d input array of size :math:`(N, d)`.
+   :type x: np.ndarray
+   :param y: A 2d output array of size :math:`(N, o)`.
+   :type y: np.ndarray
+   :param order: PC order. Defaults to 3.
+   :type order: int, optional
+   :param pctype: PC type, e.g. ``'LU'`` or ``'HG'``. Defaults to ``'LU'``.
+   :type pctype: str, optional
+   :param method: Fitting method: ``'anl'``, ``'bcs'``, or ``'lsq'``. Defaults to ``'anl'``.
+   :type method: str, optional
+   :param \*\*kwargs: Additional keyword arguments passed to the regression method (e.g. ``eta`` for BCS).
+
+   :returns: A pair of the fitted PCRV object and a list of regression objects.
+   :rtype: tuple[PCRV, list]
+
+
+.. py:function:: pc_ros(xsam, pctype='HG', order=1, nreg=13, n_pcsam=None, bwfactor=1.0)
+
+   Create a PC representation from samples using a Rosenblatt map.
+
+   Builds a Rosenblatt map from the input samples, generates germ samples,
+   evaluates the inverse Rosenblatt, and fits PC coefficients per dimension.
+   Optionally resamples from the resulting PC and plots comparison PDFs.
+
+   :param xsam: A 2d sample array of size :math:`(N, d)`.
+   :type xsam: np.ndarray
+   :param pctype: PC type, e.g. ``'HG'`` or ``'LU'``. Defaults to ``'HG'``.
+   :type pctype: str, optional
+   :param order: PC order. Defaults to 1.
+   :type order: int, optional
+   :param nreg: Number of regression points. Defaults to 13.
+   :type nreg: int, optional
+   :param n_pcsam: Number of PC samples to draw. If None, uses `N`. Defaults to None.
+   :type n_pcsam: int or None, optional
+   :param bwfactor: Bandwidth scaling factor for the Rosenblatt map. Defaults to 1.0.
+   :type bwfactor: float, optional
+
+   :returns: The fitted PCRV object.
+   :rtype: PCRV
+
+

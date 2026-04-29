@@ -1,0 +1,12 @@
+gsa
+===
+.. py:module:: pytuq.gsa
+
+
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/pytuq/gsa/gsa/index
+
+

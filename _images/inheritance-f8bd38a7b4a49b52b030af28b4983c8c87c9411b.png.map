@@ -1,0 +1,6 @@
+<map id="inheritancefc45432591" name="inheritancefc45432591">
+<area shape="rect" id="node1" href="../autoapi/pytuq/minf/mcmc/index.html#pytuq.minf.mcmc.AMCMC" target="_top" title="Adaptive MCMC class. Based on :cite:t:`Haario:2001`." alt="" coords="149,5,223,31"/>
+<area shape="rect" id="node2" href="../autoapi/pytuq/minf/calib/index.html#pytuq.minf.calib.MCMCBase" target="_top" title="Base class for calibration." alt="" coords="5,55,101,80"/>
+<area shape="rect" id="node3" href="../autoapi/pytuq/minf/mcmc/index.html#pytuq.minf.mcmc.HMC" target="_top" title="Hamiltonian Monte Carlo class. Based on :cite:t:`neal:2011`." alt="" coords="150,55,222,80"/>
+<area shape="rect" id="node4" href="../autoapi/pytuq/minf/mcmc/index.html#pytuq.minf.mcmc.MALA" target="_top" title="Metropolis&#45;Adjusted Langevin Algorithm. Based on :cite:t:`girolami:2011`." alt="" coords="150,104,222,129"/>
+</map>

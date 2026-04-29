@@ -1,0 +1,121 @@
+mcmc
+====
+.. py:module:: pytuq.minf.mcmc
+
+.. autoapi-nested-parse::
+
+   Module for various MCMC flavors.
+
+   See :cite:t:`brooks:2011` for an overview.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.minf.mcmc.AMCMC
+   pytuq.minf.mcmc.HMC
+   pytuq.minf.mcmc.MALA
+
+
+Module Contents
+---------------
+
+.. py:class:: AMCMC(cov_ini=None, gamma=0.1, t0=100, tadapt=1000)
+
+   Bases: :py:obj:`pytuq.minf.calib.MCMCBase`
+
+
+   Adaptive MCMC class. Based on :cite:t:`Haario:2001`.
+
+   .. attribute:: cov_ini
+
+      Initial covariance array of size :math:`(p,p)`.
+
+      :type: np.ndarray
+
+   .. attribute:: gamma
+
+      Proposal jump size factor :math:`\gamma`.
+
+      :type: float
+
+   .. attribute:: propcov
+
+      Proposal covariance, working array.
+
+      :type: np.ndarray
+
+   .. attribute:: t0
+
+      Step where adaptivity begins.
+
+      :type: int
+
+   .. attribute:: tadapt
+
+      Adapt/update covariance every `tadapt` steps.
+
+      :type: int
+
+
+   .. py:method:: sampler(current, imcmc)
+
+      Sampler function of a single step.
+
+      :param current: The current chain state.
+      :type current: np.ndarray
+      :param imcmc: Current step.
+      :type imcmc: int
+
+      :returns: Current proposal, and two auxiliary ratios.
+      :rtype: tuple(float, float, float)
+
+
+
+.. py:class:: HMC(epsilon=0.05, L=3)
+
+   Bases: :py:obj:`pytuq.minf.calib.MCMCBase`
+
+
+   Hamiltonian Monte Carlo class. Based on :cite:t:`neal:2011`.
+
+
+   .. py:method:: sampler(current, imcmc)
+
+      Sampler function of a single step.
+
+      :param current: The current chain state.
+      :type current: np.ndarray
+      :param imcmc: Current step.
+      :type imcmc: int
+
+      :returns: Current proposal, and two auxiliary ratios.
+      :rtype: tuple(float, float, float)
+
+
+
+.. py:class:: MALA(epsilon=0.05)
+
+   Bases: :py:obj:`pytuq.minf.calib.MCMCBase`
+
+
+   Metropolis-Adjusted Langevin Algorithm. Based on :cite:t:`girolami:2011`.
+
+
+   .. py:method:: sampler(current, imcmc)
+
+      Sampler function of a single step.
+
+      :param current: The current chain state.
+      :type current: np.ndarray
+      :param imcmc: Current step.
+      :type imcmc: int
+
+      :returns: Current proposal, and two auxiliary ratios.
+      :rtype: tuple(float, float, float)
+
+
+

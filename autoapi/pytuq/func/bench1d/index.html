@@ -1,0 +1,1521 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bench1d &mdash; PyTUQ 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="bench2d" href="../bench2d/index.html" />
+    <link rel="prev" title="bench" href="../bench/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/pytuq logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/installation.html#install-from-source">Install from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/about.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/pc.html">Polynomial Chaos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/pc.html#ex-pcbasis1d-py">ex_pcbasis1d.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/pc.html#ex-pcrv-py">ex_pcrv.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/pc.html#ex-pcrv1-py">ex_pcrv1.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/pc.html#ex-pcrv2-py">ex_pcrv2.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/pc.html#ex-pcrv-mvn-py">ex_pcrv_mvn.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/pc.html#ex-mrv-py">ex_mrv.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/pc.html#ex-mindex-py">ex_mindex.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/pc.html#ex-quad-py">ex_quad.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/pc.html#ex-uprop-py">ex_uprop.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/pc.html#ex-uprop2-py">ex_uprop2.py</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/regression.html">Regression &amp; Surrogates</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/regression.html#ex-lreg-py">ex_lreg.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/regression.html#ex-lreg-basiseval-py">ex_lreg_basiseval.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/regression.html#ex-lreg-merr-py">ex_lreg_merr.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/regression.html#ex-bcs-py-demo">ex_bcs.py (<span class="xref std std-doc">demo</span>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/regression.html#ex-bcs-mindex-growth-py">ex_bcs_mindex_growth.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/regression.html#ex-gp-py">ex_gp.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/regression.html#ex-kl-py">ex_kl.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/regression.html#ex-klpc-py">ex_klpc.py</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/inference.html">Bayesian Inference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/inference.html#ex-mcmc-banana-py">ex_mcmc_banana.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/inference.html#ex-mcmc-fitline-py">ex_mcmc_fitline.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/inference.html#ex-mcmc-fitmodel-py">ex_mcmc_fitmodel.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/inference.html#ex-mfvi-py">ex_mfvi.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/inference.html#ex-minf-py">ex_minf.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/inference.html#ex-minf-sketch-py-demo">ex_minf_sketch.py (<span class="xref std std-doc">demo</span>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/inference.html#ex-evidence-py">ex_evidence.py</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/sensitivity.html">Sensitivity Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/sensitivity.html#ex-gsa-py">ex_gsa.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/sensitivity.html#ex-gsa-multi-py">ex_gsa_multi.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/sensitivity.html#ex-pcgsa-py">ex_pcgsa.py</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/rosenblatt.html">Rosenblatt Transformation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/rosenblatt.html#ex-ros-py">ex_ros.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/rosenblatt.html#ex-iros-1d-py">ex_iros_1d.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/rosenblatt.html#ex-iros-2d-py">ex_iros_2d.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/rosenblatt.html#ex-ros-pc-py">ex_ros_pc.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/rosenblatt.html#ex-ros-pcj-py">ex_ros_pcj.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/rosenblatt.html#ex-ros-pcs-py">ex_ros_pcs.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/rosenblatt.html#ex-rospc-multiple-py">ex_rospc_multiple.py</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/rv.html">Random Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/rv.html#ex-gmm-py">ex_gmm.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/rv.html#ex-sampling-py">ex_sampling.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/rv.html#ex-mixture-py">ex_mixture.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/rv.html#ex-webull-py">ex_webull.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/rv.html#ex-mcmcrv-py">ex_mcmcrv.py</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/functions.html">Functions &amp; Optimization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/functions.html#ex-func-py">ex_func.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/functions.html#ex-funcall-py">ex_funcall.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/functions.html#ex-funcgrad-py">ex_funcgrad.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/functions.html#ex-genz1d-py">ex_genz1d.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/functions.html#ex-optim-py">ex_optim.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/functions.html#ex-integrate-py">ex_integrate.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/functions.html#ex-orf-py">ex_orf.py</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/plotting.html">Plotting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/plotting.html#ex-colors-py">ex_colors.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/plotting.html#ex-plot-fcn-py">ex_plot_fcn.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/plotting.html#ex-slice-py">ex_slice.py</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Apps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../apps/pc.html">Polynomial Chaos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../apps/pc.html#pc-fit-py">pc_fit.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../apps/pc.html#pc-prep-py">pc_prep.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../apps/pc.html#pc-sam-py">pc_sam.py</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../apps/surrogates.html">Multioutput Fits</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../apps/surrogates.html#kl-fit-py">kl_fit.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../apps/surrogates.html#klsurr-fit-py">klsurr_fit.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../apps/surrogates.html#nn-fit-py">nn_fit.py</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../apps/plot.html">Plotting Apps</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../apps/plot.html#plot-cov-py">plot_cov.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../apps/plot.html#plot-ens-py">plot_ens.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../apps/plot.html#plot-pcoord-py">plot_pcoord.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../apps/plot.html#plot-pdfs-py">plot_pdfs.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../apps/plot.html#plot-xx-py">plot_xx.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../apps/plot.html#plot-yx-py">plot_yx.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../apps/plot.html#plot-yxx-py">plot_yxx.py</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../apps/uqpc.html">Forward UQ</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../apps/uqpc.html#workflow-overview">Workflow overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../apps/uqpc.html#uq-pc-py">uq_pc.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../apps/uqpc.html#model-x">model.x</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../apps/uqpc.html#plot-py">plot.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../apps/uqpc.html#workflow-uqpc-x">workflow_uqpc.x</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../apps/iuq.html">Inverse UQ</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../apps/iuq.html#workflow-overview">Workflow overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../apps/iuq.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../apps/iuq.html#create-data-truepc-py">create_data_truepc.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../apps/iuq.html#prep-data-x">prep_data.x</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../apps/iuq.html#run-infer-py">run_infer.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../apps/iuq.html#postp-infer-py">postp_infer.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../apps/iuq.html#workflow-iuq-x">workflow_iuq.x</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../apps/other.html">Other Apps</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../apps/other.html#create-data-py">create_data.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../apps/other.html#mrun-py">mrun.py</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../apps/awkies.html">Shell Utilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../apps/awkies.html#getrange-x">getrange.x</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../apps/awkies.html#scale-x">scale.x</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../apps/awkies.html#transpose-x">transpose.x</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../auto_examples/index.html">Software Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../auto_examples/index.html#surrogates">Surrogates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_pce.html">Polynomial Chaos Expansion Construction</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_pce.html#setup">Setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_pce.html#generate-data">Generate data</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_nn.html">Residual Neural Network Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html">Function Approximation with Sparse Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#constructing-pc-surrogate-and-generating-data">Constructing PC surrogate and generating data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#least-squares-regression">Least Squares Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#bcs-with-default-settings-default-eta">BCS with default settings (default eta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../auto_examples/ex_genz_bcs.html#bcs-with-optimal-eta-found-through-cross-validation">BCS with optimal eta (found through cross-validation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">List of Modules</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../fit/index.html">fit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fit/fit/index.html">fit</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../fit/fit/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../fit/fit/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../fit/fit/index.html#pytuq.fit.fit.fitbase"><code class="docutils literal notranslate"><span class="pre">fitbase</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../fit/gp/index.html">gp</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../fit/gp/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../fit/gp/index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../fit/gp/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../fit/gp/index.html#pytuq.fit.gp.kernel_rbf"><code class="docutils literal notranslate"><span class="pre">kernel_rbf()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../fit/gp/index.html#pytuq.fit.gp.kernel_sin"><code class="docutils literal notranslate"><span class="pre">kernel_sin()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../fit/gp/index.html#pytuq.fit.gp.gp"><code class="docutils literal notranslate"><span class="pre">gp</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../ftools/index.html">ftools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ftools/integr/index.html">integr</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ftools/integr/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ftools/integr/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../ftools/integr/index.html#pytuq.ftools.integr.Integrator"><code class="docutils literal notranslate"><span class="pre">Integrator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../ftools/integr/index.html#pytuq.ftools.integr.IntegratorScipy"><code class="docutils literal notranslate"><span class="pre">IntegratorScipy</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../ftools/integr/index.html#pytuq.ftools.integr.IntegratorMCMC"><code class="docutils literal notranslate"><span class="pre">IntegratorMCMC</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../ftools/integr/index.html#pytuq.ftools.integr.IntegratorMC"><code class="docutils literal notranslate"><span class="pre">IntegratorMC</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../ftools/integr/index.html#pytuq.ftools.integr.IntegratorWMC"><code class="docutils literal notranslate"><span class="pre">IntegratorWMC</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../ftools/integr/index.html#pytuq.ftools.integr.IntegratorGMM"><code class="docutils literal notranslate"><span class="pre">IntegratorGMM</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../ftools/integr/index.html#pytuq.ftools.integr.IntegratorGMMT"><code class="docutils literal notranslate"><span class="pre">IntegratorGMMT</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../ftools/orf/index.html">orf</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ftools/orf/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ftools/orf/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../ftools/orf/index.html#pytuq.ftools.orf.GLMAP"><code class="docutils literal notranslate"><span class="pre">GLMAP</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../ftools/orf/index.html#pytuq.ftools.orf.HMAT"><code class="docutils literal notranslate"><span class="pre">HMAT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../ftools/orf/index.html#pytuq.ftools.orf.MGSV"><code class="docutils literal notranslate"><span class="pre">MGSV</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../ftools/orf/index.html#pytuq.ftools.orf.MGS"><code class="docutils literal notranslate"><span class="pre">MGS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../ftools/orf/index.html#pytuq.ftools.orf.MMGS"><code class="docutils literal notranslate"><span class="pre">MMGS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../ftools/orf/index.html#pytuq.ftools.orf.QR"><code class="docutils literal notranslate"><span class="pre">QR</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">func</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../bench/index.html">bench</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../bench/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bench/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../bench/index.html#pytuq.func.bench.Ishigami"><code class="docutils literal notranslate"><span class="pre">Ishigami</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench/index.html#pytuq.func.bench.Wolfe"><code class="docutils literal notranslate"><span class="pre">Wolfe</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench/index.html#pytuq.func.bench.Colville"><code class="docutils literal notranslate"><span class="pre">Colville</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench/index.html#pytuq.func.bench.MieleCantrell"><code class="docutils literal notranslate"><span class="pre">MieleCantrell</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench/index.html#pytuq.func.bench.Powell"><code class="docutils literal notranslate"><span class="pre">Powell</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench/index.html#pytuq.func.bench.Dolan"><code class="docutils literal notranslate"><span class="pre">Dolan</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench/index.html#pytuq.func.bench.Friedman"><code class="docutils literal notranslate"><span class="pre">Friedman</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench/index.html#pytuq.func.bench.GramacyLee"><code class="docutils literal notranslate"><span class="pre">GramacyLee</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">bench1d</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pytuq.func.bench1d.TFData"><code class="docutils literal notranslate"><span class="pre">TFData</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pytuq.func.bench1d.SineSum"><code class="docutils literal notranslate"><span class="pre">SineSum</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pytuq.func.bench1d.SineSum2"><code class="docutils literal notranslate"><span class="pre">SineSum2</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pytuq.func.bench1d.QuadxExp"><code class="docutils literal notranslate"><span class="pre">QuadxExp</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pytuq.func.bench1d.LinxSin"><code class="docutils literal notranslate"><span class="pre">LinxSin</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pytuq.func.bench1d.SinexExp"><code class="docutils literal notranslate"><span class="pre">SinexExp</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pytuq.func.bench1d.SineLogSum"><code class="docutils literal notranslate"><span class="pre">SineLogSum</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pytuq.func.bench1d.CosineSum"><code class="docutils literal notranslate"><span class="pre">CosineSum</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pytuq.func.bench1d.Sinex"><code class="docutils literal notranslate"><span class="pre">Sinex</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pytuq.func.bench1d.CosineSum2"><code class="docutils literal notranslate"><span class="pre">CosineSum2</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pytuq.func.bench1d.Sinusoidal"><code class="docutils literal notranslate"><span class="pre">Sinusoidal</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pytuq.func.bench1d.Forrester"><code class="docutils literal notranslate"><span class="pre">Forrester</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pytuq.func.bench1d.GramacyLee2"><code class="docutils literal notranslate"><span class="pre">GramacyLee2</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pytuq.func.bench1d.Higdon"><code class="docutils literal notranslate"><span class="pre">Higdon</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pytuq.func.bench1d.Holsclaw"><code class="docutils literal notranslate"><span class="pre">Holsclaw</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pytuq.func.bench1d.DampedCosine"><code class="docutils literal notranslate"><span class="pre">DampedCosine</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../bench2d/index.html">bench2d</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../bench2d/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bench2d/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Adjiman"><code class="docutils literal notranslate"><span class="pre">Adjiman</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.BartelsConn"><code class="docutils literal notranslate"><span class="pre">BartelsConn</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Bird"><code class="docutils literal notranslate"><span class="pre">Bird</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Branin"><code class="docutils literal notranslate"><span class="pre">Branin</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Branin01"><code class="docutils literal notranslate"><span class="pre">Branin01</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Branin02"><code class="docutils literal notranslate"><span class="pre">Branin02</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Brent"><code class="docutils literal notranslate"><span class="pre">Brent</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Bukin02"><code class="docutils literal notranslate"><span class="pre">Bukin02</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Bukin04"><code class="docutils literal notranslate"><span class="pre">Bukin04</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Bukin6"><code class="docutils literal notranslate"><span class="pre">Bukin6</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.CarromTable"><code class="docutils literal notranslate"><span class="pre">CarromTable</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.ChengSandu"><code class="docutils literal notranslate"><span class="pre">ChengSandu</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Chichinadze"><code class="docutils literal notranslate"><span class="pre">Chichinadze</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.CrossInTray"><code class="docutils literal notranslate"><span class="pre">CrossInTray</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Damavandi"><code class="docutils literal notranslate"><span class="pre">Damavandi</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.DeckkersAarts"><code class="docutils literal notranslate"><span class="pre">DeckkersAarts</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.EggCrate"><code class="docutils literal notranslate"><span class="pre">EggCrate</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.EggHolder"><code class="docutils literal notranslate"><span class="pre">EggHolder</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.ElAttarVidyasagarDutta"><code class="docutils literal notranslate"><span class="pre">ElAttarVidyasagarDutta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.FreudensteinRoth"><code class="docutils literal notranslate"><span class="pre">FreudensteinRoth</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Franke"><code class="docutils literal notranslate"><span class="pre">Franke</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.GoldsteinPrice"><code class="docutils literal notranslate"><span class="pre">GoldsteinPrice</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.HimmelBlau"><code class="docutils literal notranslate"><span class="pre">HimmelBlau</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Hosaki"><code class="docutils literal notranslate"><span class="pre">Hosaki</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Keane"><code class="docutils literal notranslate"><span class="pre">Keane</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Leon"><code class="docutils literal notranslate"><span class="pre">Leon</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Levy13"><code class="docutils literal notranslate"><span class="pre">Levy13</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Lim"><code class="docutils literal notranslate"><span class="pre">Lim</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Matyas"><code class="docutils literal notranslate"><span class="pre">Matyas</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Mishra03"><code class="docutils literal notranslate"><span class="pre">Mishra03</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Mishra04"><code class="docutils literal notranslate"><span class="pre">Mishra04</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Mishra05"><code class="docutils literal notranslate"><span class="pre">Mishra05</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Mishra06"><code class="docutils literal notranslate"><span class="pre">Mishra06</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.McCormick"><code class="docutils literal notranslate"><span class="pre">McCormick</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.NewFunction03"><code class="docutils literal notranslate"><span class="pre">NewFunction03</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Parsopoulos"><code class="docutils literal notranslate"><span class="pre">Parsopoulos</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Price01"><code class="docutils literal notranslate"><span class="pre">Price01</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Price02"><code class="docutils literal notranslate"><span class="pre">Price02</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Price03"><code class="docutils literal notranslate"><span class="pre">Price03</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Price04"><code class="docutils literal notranslate"><span class="pre">Price04</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Quadratic"><code class="docutils literal notranslate"><span class="pre">Quadratic</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Quadratic2d"><code class="docutils literal notranslate"><span class="pre">Quadratic2d</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.RosenbrockModified"><code class="docutils literal notranslate"><span class="pre">RosenbrockModified</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.RotatedEllipse01"><code class="docutils literal notranslate"><span class="pre">RotatedEllipse01</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.RotatedEllipse02"><code class="docutils literal notranslate"><span class="pre">RotatedEllipse02</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Schaffer01"><code class="docutils literal notranslate"><span class="pre">Schaffer01</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Schaffer02"><code class="docutils literal notranslate"><span class="pre">Schaffer02</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Schaffer04"><code class="docutils literal notranslate"><span class="pre">Schaffer04</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Schwefel36"><code class="docutils literal notranslate"><span class="pre">Schwefel36</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.SixHumpCamel"><code class="docutils literal notranslate"><span class="pre">SixHumpCamel</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.ThreeHumpCamel"><code class="docutils literal notranslate"><span class="pre">ThreeHumpCamel</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Treccani"><code class="docutils literal notranslate"><span class="pre">Treccani</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Trefethen"><code class="docutils literal notranslate"><span class="pre">Trefethen</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Ursem01"><code class="docutils literal notranslate"><span class="pre">Ursem01</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Ursem03"><code class="docutils literal notranslate"><span class="pre">Ursem03</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Ursem04"><code class="docutils literal notranslate"><span class="pre">Ursem04</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.UrsemWaves"><code class="docutils literal notranslate"><span class="pre">UrsemWaves</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.VenterSobiezcczanskiSobieski"><code class="docutils literal notranslate"><span class="pre">VenterSobiezcczanskiSobieski</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.WayburnSeader01"><code class="docutils literal notranslate"><span class="pre">WayburnSeader01</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.WayburnSeader02"><code class="docutils literal notranslate"><span class="pre">WayburnSeader02</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Zettl"><code class="docutils literal notranslate"><span class="pre">Zettl</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.Zirilli"><code class="docutils literal notranslate"><span class="pre">Zirilli</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bench2d/index.html#pytuq.func.bench2d.DropWave"><code class="docutils literal notranslate"><span class="pre">DropWave</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../benchNd/index.html">benchNd</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../benchNd/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../benchNd/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../benchNd/index.html#pytuq.func.benchNd.Ackley"><code class="docutils literal notranslate"><span class="pre">Ackley</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../benchNd/index.html#pytuq.func.benchNd.Alpine01"><code class="docutils literal notranslate"><span class="pre">Alpine01</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../benchNd/index.html#pytuq.func.benchNd.Alpine02"><code class="docutils literal notranslate"><span class="pre">Alpine02</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../benchNd/index.html#pytuq.func.benchNd.AMGM"><code class="docutils literal notranslate"><span class="pre">AMGM</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../benchNd/index.html#pytuq.func.benchNd.Bohachevsky"><code class="docutils literal notranslate"><span class="pre">Bohachevsky</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../benchNd/index.html#pytuq.func.benchNd.Cigar"><code class="docutils literal notranslate"><span class="pre">Cigar</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../benchNd/index.html#pytuq.func.benchNd.CosineMixture"><code class="docutils literal notranslate"><span class="pre">CosineMixture</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../benchNd/index.html#pytuq.func.benchNd.Griewank"><code class="docutils literal notranslate"><span class="pre">Griewank</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../benchNd/index.html#pytuq.func.benchNd.Mishra07"><code class="docutils literal notranslate"><span class="pre">Mishra07</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../benchNd/index.html#pytuq.func.benchNd.MVN"><code class="docutils literal notranslate"><span class="pre">MVN</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../benchNd/index.html#pytuq.func.benchNd.NegAlpineN2"><code class="docutils literal notranslate"><span class="pre">NegAlpineN2</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../benchNd/index.html#pytuq.func.benchNd.Sobol"><code class="docutils literal notranslate"><span class="pre">Sobol</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../benchNd/index.html#pytuq.func.benchNd.SumSquares"><code class="docutils literal notranslate"><span class="pre">SumSquares</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../chem/index.html">chem</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../chem/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../chem/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../chem/index.html#pytuq.func.chem.LennardJones"><code class="docutils literal notranslate"><span class="pre">LennardJones</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../chem/index.html#pytuq.func.chem.MullerBrown"><code class="docutils literal notranslate"><span class="pre">MullerBrown</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../func/index.html">func</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../func/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../func/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../func/index.html#pytuq.func.func.Function"><code class="docutils literal notranslate"><span class="pre">Function</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../func/index.html#pytuq.func.func.AddFcn"><code class="docutils literal notranslate"><span class="pre">AddFcn</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../func/index.html#pytuq.func.func.SubFcn"><code class="docutils literal notranslate"><span class="pre">SubFcn</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../func/index.html#pytuq.func.func.MultFcn"><code class="docutils literal notranslate"><span class="pre">MultFcn</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../func/index.html#pytuq.func.func.DivFcn"><code class="docutils literal notranslate"><span class="pre">DivFcn</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../func/index.html#pytuq.func.func.PowFcn"><code class="docutils literal notranslate"><span class="pre">PowFcn</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../func/index.html#pytuq.func.func.ModelWrapperFcn"><code class="docutils literal notranslate"><span class="pre">ModelWrapperFcn</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../genz/index.html">genz</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../genz/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../genz/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../genz/index.html#pytuq.func.genz.GenzBase"><code class="docutils literal notranslate"><span class="pre">GenzBase</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../genz/index.html#pytuq.func.genz.GenzOscillatory"><code class="docutils literal notranslate"><span class="pre">GenzOscillatory</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../genz/index.html#pytuq.func.genz.GenzQuadOscillatory"><code class="docutils literal notranslate"><span class="pre">GenzQuadOscillatory</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../genz/index.html#pytuq.func.genz.GenzSum"><code class="docutils literal notranslate"><span class="pre">GenzSum</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../genz/index.html#pytuq.func.genz.GenzCornerPeak"><code class="docutils literal notranslate"><span class="pre">GenzCornerPeak</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../oper/index.html">oper</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../oper/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../oper/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../oper/index.html#pytuq.func.oper.CartesProdFcn"><code class="docutils literal notranslate"><span class="pre">CartesProdFcn</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../oper/index.html#pytuq.func.oper.GradFcn"><code class="docutils literal notranslate"><span class="pre">GradFcn</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../oper/index.html#pytuq.func.oper.ComposeFcn"><code class="docutils literal notranslate"><span class="pre">ComposeFcn</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../oper/index.html#pytuq.func.oper.SliceFcn"><code class="docutils literal notranslate"><span class="pre">SliceFcn</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../oper/index.html#pytuq.func.oper.ShiftFcn"><code class="docutils literal notranslate"><span class="pre">ShiftFcn</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../oper/index.html#pytuq.func.oper.LinTransformFcn"><code class="docutils literal notranslate"><span class="pre">LinTransformFcn</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../oper/index.html#pytuq.func.oper.PickDim"><code class="docutils literal notranslate"><span class="pre">PickDim</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../poly/index.html">poly</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../poly/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../poly/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../poly/index.html#pytuq.func.poly.PolyBase"><code class="docutils literal notranslate"><span class="pre">PolyBase</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../poly/index.html#pytuq.func.poly.Leg"><code class="docutils literal notranslate"><span class="pre">Leg</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../poly/index.html#pytuq.func.poly.Mon"><code class="docutils literal notranslate"><span class="pre">Mon</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../toy/index.html">toy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../toy/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../toy/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../toy/index.html#pytuq.func.toy.Constant"><code class="docutils literal notranslate"><span class="pre">Constant</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../toy/index.html#pytuq.func.toy.Identity"><code class="docutils literal notranslate"><span class="pre">Identity</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../toy/index.html#pytuq.func.toy.Quad"><code class="docutils literal notranslate"><span class="pre">Quad</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../toy/index.html#pytuq.func.toy.Quad2d"><code class="docutils literal notranslate"><span class="pre">Quad2d</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../toy/index.html#pytuq.func.toy.Exp"><code class="docutils literal notranslate"><span class="pre">Exp</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../toy/index.html#pytuq.func.toy.Log"><code class="docutils literal notranslate"><span class="pre">Log</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../gsa/index.html">gsa</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../gsa/gsa/index.html">gsa</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../gsa/gsa/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../gsa/gsa/index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../gsa/gsa/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../gsa/gsa/index.html#pytuq.gsa.gsa.model_sens"><code class="docutils literal notranslate"><span class="pre">model_sens()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../gsa/gsa/index.html#pytuq.gsa.gsa.SensMethod"><code class="docutils literal notranslate"><span class="pre">SensMethod</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../gsa/gsa/index.html#pytuq.gsa.gsa.Linreg"><code class="docutils literal notranslate"><span class="pre">Linreg</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../gsa/gsa/index.html#pytuq.gsa.gsa.Moat"><code class="docutils literal notranslate"><span class="pre">Moat</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../gsa/gsa/index.html#pytuq.gsa.gsa.SamSobol"><code class="docutils literal notranslate"><span class="pre">SamSobol</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../gsa/gsa/index.html#pytuq.gsa.gsa.PCSobol"><code class="docutils literal notranslate"><span class="pre">PCSobol</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../linred/index.html">linred</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../linred/kle/index.html">kle</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../linred/kle/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../linred/kle/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../linred/kle/index.html#pytuq.linred.kle.KLE"><code class="docutils literal notranslate"><span class="pre">KLE</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../linred/klnn/index.html">klnn</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../linred/klnn/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../linred/klnn/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../linred/klnn/index.html#pytuq.linred.klnn.KLNN"><code class="docutils literal notranslate"><span class="pre">KLNN</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../linred/klsurr/index.html">klsurr</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../linred/klsurr/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../linred/klsurr/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../linred/klsurr/index.html#pytuq.linred.klsurr.KLSurr"><code class="docutils literal notranslate"><span class="pre">KLSurr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../linred/linred/index.html">linred</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../linred/linred/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../linred/linred/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../linred/linred/index.html#pytuq.linred.linred.LinRed"><code class="docutils literal notranslate"><span class="pre">LinRed</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../linred/svd/index.html">svd</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../linred/svd/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../linred/svd/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../linred/svd/index.html#pytuq.linred.svd.SVD"><code class="docutils literal notranslate"><span class="pre">SVD</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../lreg/index.html">lreg</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../lreg/anl/index.html">anl</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../lreg/anl/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../lreg/anl/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../lreg/anl/index.html#pytuq.lreg.anl.anl"><code class="docutils literal notranslate"><span class="pre">anl</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../lreg/bcs/index.html">bcs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../lreg/bcs/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../lreg/bcs/index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../lreg/bcs/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../lreg/bcs/index.html#pytuq.lreg.bcs.bcs"><code class="docutils literal notranslate"><span class="pre">bcs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../lreg/bcs/index.html#pytuq.lreg.bcs.bcs_fit"><code class="docutils literal notranslate"><span class="pre">bcs_fit()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../lreg/lreg/index.html">lreg</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../lreg/lreg/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../lreg/lreg/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../lreg/lreg/index.html#pytuq.lreg.lreg.lreg"><code class="docutils literal notranslate"><span class="pre">lreg</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../lreg/lreg/index.html#pytuq.lreg.lreg.lsq"><code class="docutils literal notranslate"><span class="pre">lsq</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../lreg/merr/index.html">merr</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../lreg/merr/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../lreg/merr/index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../lreg/merr/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../lreg/merr/index.html#pytuq.lreg.merr.map_flat_to_tri"><code class="docutils literal notranslate"><span class="pre">map_flat_to_tri()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../lreg/merr/index.html#pytuq.lreg.merr.logpost_emb"><code class="docutils literal notranslate"><span class="pre">logpost_emb()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../lreg/merr/index.html#pytuq.lreg.merr.lreg_merr"><code class="docutils literal notranslate"><span class="pre">lreg_merr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../lreg/opt/index.html">opt</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../lreg/opt/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../lreg/opt/index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../lreg/opt/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../lreg/opt/index.html#pytuq.lreg.opt.distance"><code class="docutils literal notranslate"><span class="pre">distance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../lreg/opt/index.html#pytuq.lreg.opt.distance_grad"><code class="docutils literal notranslate"><span class="pre">distance_grad()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../lreg/opt/index.html#pytuq.lreg.opt.opt"><code class="docutils literal notranslate"><span class="pre">opt</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../minf/index.html">minf</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../minf/calib/index.html">calib</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../minf/calib/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../minf/calib/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/calib/index.html#pytuq.minf.calib.MCMCBase"><code class="docutils literal notranslate"><span class="pre">MCMCBase</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../minf/infer/index.html">infer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../minf/infer/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../minf/infer/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/infer/index.html#pytuq.minf.infer.Infer"><code class="docutils literal notranslate"><span class="pre">Infer</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../minf/likelihoods/index.html">likelihoods</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../minf/likelihoods/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../minf/likelihoods/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/likelihoods/index.html#pytuq.minf.likelihoods.Likelihood"><code class="docutils literal notranslate"><span class="pre">Likelihood</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/likelihoods/index.html#pytuq.minf.likelihoods.Likelihood_dummy"><code class="docutils literal notranslate"><span class="pre">Likelihood_dummy</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/likelihoods/index.html#pytuq.minf.likelihoods.Likelihood_classical"><code class="docutils literal notranslate"><span class="pre">Likelihood_classical</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/likelihoods/index.html#pytuq.minf.likelihoods.Likelihood_logclassical"><code class="docutils literal notranslate"><span class="pre">Likelihood_logclassical</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/likelihoods/index.html#pytuq.minf.likelihoods.Likelihood_abc"><code class="docutils literal notranslate"><span class="pre">Likelihood_abc</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/likelihoods/index.html#pytuq.minf.likelihoods.Likelihood_gausmarg"><code class="docutils literal notranslate"><span class="pre">Likelihood_gausmarg</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../minf/mcmc/index.html">mcmc</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../minf/mcmc/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../minf/mcmc/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/mcmc/index.html#pytuq.minf.mcmc.AMCMC"><code class="docutils literal notranslate"><span class="pre">AMCMC</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/mcmc/index.html#pytuq.minf.mcmc.HMC"><code class="docutils literal notranslate"><span class="pre">HMC</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/mcmc/index.html#pytuq.minf.mcmc.MALA"><code class="docutils literal notranslate"><span class="pre">MALA</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../minf/minf/index.html">minf</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../minf/minf/index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../minf/minf/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/minf/index.html#pytuq.minf.minf.model_infer"><code class="docutils literal notranslate"><span class="pre">model_infer()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/minf/index.html#pytuq.minf.minf.model_infer_postp"><code class="docutils literal notranslate"><span class="pre">model_infer_postp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/minf/index.html#pytuq.minf.minf.plot_1d_data"><code class="docutils literal notranslate"><span class="pre">plot_1d_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/minf/index.html#pytuq.minf.minf.plot_1d_samples"><code class="docutils literal notranslate"><span class="pre">plot_1d_samples()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/minf/index.html#pytuq.minf.minf.plot_1dfit"><code class="docutils literal notranslate"><span class="pre">plot_1dfit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/minf/index.html#pytuq.minf.minf.plot_1dfit_vars"><code class="docutils literal notranslate"><span class="pre">plot_1dfit_vars()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/minf/index.html#pytuq.minf.minf.plot_1dfit_shade"><code class="docutils literal notranslate"><span class="pre">plot_1dfit_shade()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/minf/index.html#pytuq.minf.minf.plot_ndfit_vars"><code class="docutils literal notranslate"><span class="pre">plot_ndfit_vars()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../minf/priors/index.html">priors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../minf/priors/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../minf/priors/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/priors/index.html#pytuq.minf.priors.Prior"><code class="docutils literal notranslate"><span class="pre">Prior</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/priors/index.html#pytuq.minf.priors.Prior_uniform"><code class="docutils literal notranslate"><span class="pre">Prior_uniform</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/priors/index.html#pytuq.minf.priors.Prior_normal"><code class="docutils literal notranslate"><span class="pre">Prior_normal</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../minf/vi/index.html">vi</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../minf/vi/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../minf/vi/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../minf/vi/index.html#pytuq.minf.vi.MFVI"><code class="docutils literal notranslate"><span class="pre">MFVI</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../optim/index.html">optim</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../optim/gd/index.html">gd</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../optim/gd/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../optim/gd/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../optim/gd/index.html#pytuq.optim.gd.GD"><code class="docutils literal notranslate"><span class="pre">GD</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../optim/gd/index.html#pytuq.optim.gd.SGD"><code class="docutils literal notranslate"><span class="pre">SGD</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../optim/gd/index.html#pytuq.optim.gd.Adam"><code class="docutils literal notranslate"><span class="pre">Adam</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../optim/optim/index.html">optim</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../optim/optim/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../optim/optim/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../optim/optim/index.html#pytuq.optim.optim.OptBase"><code class="docutils literal notranslate"><span class="pre">OptBase</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../optim/pso/index.html">pso</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../optim/pso/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../optim/pso/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../optim/pso/index.html#pytuq.optim.pso.PSO"><code class="docutils literal notranslate"><span class="pre">PSO</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../optim/sciwrap/index.html">sciwrap</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../optim/sciwrap/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../optim/sciwrap/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../optim/sciwrap/index.html#pytuq.optim.sciwrap.ScipyWrapper"><code class="docutils literal notranslate"><span class="pre">ScipyWrapper</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../rv/index.html">rv</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../rv/mrv/index.html">mrv</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../rv/mrv/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../rv/mrv/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rv/mrv/index.html#pytuq.rv.mrv.MRV"><code class="docutils literal notranslate"><span class="pre">MRV</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rv/mrv/index.html#pytuq.rv.mrv.GMM"><code class="docutils literal notranslate"><span class="pre">GMM</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rv/mrv/index.html#pytuq.rv.mrv.Mixture"><code class="docutils literal notranslate"><span class="pre">Mixture</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rv/mrv/index.html#pytuq.rv.mrv.Inverse"><code class="docutils literal notranslate"><span class="pre">Inverse</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rv/mrv/index.html#pytuq.rv.mrv.Pareto_1d"><code class="docutils literal notranslate"><span class="pre">Pareto_1d</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rv/mrv/index.html#pytuq.rv.mrv.Normal_1d"><code class="docutils literal notranslate"><span class="pre">Normal_1d</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rv/mrv/index.html#pytuq.rv.mrv.Lognormal_1d"><code class="docutils literal notranslate"><span class="pre">Lognormal_1d</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rv/mrv/index.html#pytuq.rv.mrv.Weibull_1d"><code class="docutils literal notranslate"><span class="pre">Weibull_1d</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rv/mrv/index.html#pytuq.rv.mrv.MCMCRV"><code class="docutils literal notranslate"><span class="pre">MCMCRV</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../rv/pcrv/index.html">pcrv</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../rv/pcrv/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../rv/pcrv/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rv/pcrv/index.html#pytuq.rv.pcrv.PCRV"><code class="docutils literal notranslate"><span class="pre">PCRV</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rv/pcrv/index.html#pytuq.rv.pcrv.PCRV_iid"><code class="docutils literal notranslate"><span class="pre">PCRV_iid</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rv/pcrv/index.html#pytuq.rv.pcrv.PCRV_mvn"><code class="docutils literal notranslate"><span class="pre">PCRV_mvn</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rv/pcrv/index.html#pytuq.rv.pcrv.PC1d"><code class="docutils literal notranslate"><span class="pre">PC1d</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../rv/rosen/index.html">rosen</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../rv/rosen/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../rv/rosen/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rv/rosen/index.html#pytuq.rv.rosen.Rosenblatt"><code class="docutils literal notranslate"><span class="pre">Rosenblatt</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../surrogates/index.html">surrogates</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../surrogates/nn/index.html">nn</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../surrogates/nn/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../surrogates/nn/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../surrogates/nn/index.html#pytuq.surrogates.nn.NN"><code class="docutils literal notranslate"><span class="pre">NN</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../surrogates/pce/index.html">pce</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../surrogates/pce/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../surrogates/pce/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../surrogates/pce/index.html#pytuq.surrogates.pce.PCE"><code class="docutils literal notranslate"><span class="pre">PCE</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../utils/index.html">utils</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../utils/decors/index.html">decors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/decors/index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/decors/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/decors/index.html#pytuq.utils.decors.timer"><code class="docutils literal notranslate"><span class="pre">timer()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/decors/index.html#pytuq.utils.decors.show_start_end"><code class="docutils literal notranslate"><span class="pre">show_start_end()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/decors/index.html#pytuq.utils.decors.repeat"><code class="docutils literal notranslate"><span class="pre">repeat()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../utils/funcbank/index.html">funcbank</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/funcbank/index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/funcbank/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/funcbank/index.html#pytuq.utils.funcbank.sin4"><code class="docutils literal notranslate"><span class="pre">sin4()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/funcbank/index.html#pytuq.utils.funcbank.const"><code class="docutils literal notranslate"><span class="pre">const()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/funcbank/index.html#pytuq.utils.funcbank.f2d"><code class="docutils literal notranslate"><span class="pre">f2d()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/funcbank/index.html#pytuq.utils.funcbank.cosine"><code class="docutils literal notranslate"><span class="pre">cosine()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/funcbank/index.html#pytuq.utils.funcbank.sinsum"><code class="docutils literal notranslate"><span class="pre">sinsum()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/funcbank/index.html#pytuq.utils.funcbank.prodabs"><code class="docutils literal notranslate"><span class="pre">prodabs()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../utils/maps/index.html">maps</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/maps/index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/maps/index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/maps/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/maps/index.html#pytuq.utils.maps.scale01ToDom"><code class="docutils literal notranslate"><span class="pre">scale01ToDom()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/maps/index.html#pytuq.utils.maps.scaleDomTo01"><code class="docutils literal notranslate"><span class="pre">scaleDomTo01()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/maps/index.html#pytuq.utils.maps.scaleTo01"><code class="docutils literal notranslate"><span class="pre">scaleTo01()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/maps/index.html#pytuq.utils.maps.standardize"><code class="docutils literal notranslate"><span class="pre">standardize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/maps/index.html#pytuq.utils.maps.XMap"><code class="docutils literal notranslate"><span class="pre">XMap</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/maps/index.html#pytuq.utils.maps.Expon"><code class="docutils literal notranslate"><span class="pre">Expon</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/maps/index.html#pytuq.utils.maps.Logar"><code class="docutils literal notranslate"><span class="pre">Logar</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/maps/index.html#pytuq.utils.maps.ComposeMap"><code class="docutils literal notranslate"><span class="pre">ComposeMap</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/maps/index.html#pytuq.utils.maps.LinearScaler"><code class="docutils literal notranslate"><span class="pre">LinearScaler</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/maps/index.html#pytuq.utils.maps.Standardizer"><code class="docutils literal notranslate"><span class="pre">Standardizer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/maps/index.html#pytuq.utils.maps.Normalizer"><code class="docutils literal notranslate"><span class="pre">Normalizer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/maps/index.html#pytuq.utils.maps.Domainizer"><code class="docutils literal notranslate"><span class="pre">Domainizer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/maps/index.html#pytuq.utils.maps.Affine"><code class="docutils literal notranslate"><span class="pre">Affine</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../utils/metrics/index.html">metrics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/metrics/index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/metrics/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/metrics/index.html#pytuq.utils.metrics.rel_l2"><code class="docutils literal notranslate"><span class="pre">rel_l2()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/metrics/index.html#pytuq.utils.metrics.rmse"><code class="docutils literal notranslate"><span class="pre">rmse()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/metrics/index.html#pytuq.utils.metrics.rel_rmse"><code class="docutils literal notranslate"><span class="pre">rel_rmse()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/metrics/index.html#pytuq.utils.metrics.norm_rmse"><code class="docutils literal notranslate"><span class="pre">norm_rmse()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/metrics/index.html#pytuq.utils.metrics.fast_auc"><code class="docutils literal notranslate"><span class="pre">fast_auc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/metrics/index.html#pytuq.utils.metrics.mae"><code class="docutils literal notranslate"><span class="pre">mae()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/metrics/index.html#pytuq.utils.metrics.crps_gauss"><code class="docutils literal notranslate"><span class="pre">crps_gauss()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/metrics/index.html#pytuq.utils.metrics.crps_samples"><code class="docutils literal notranslate"><span class="pre">crps_samples()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../utils/mindex/index.html">mindex</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/mindex/index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/mindex/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/mindex/index.html#pytuq.utils.mindex.get_npc"><code class="docutils literal notranslate"><span class="pre">get_npc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/mindex/index.html#pytuq.utils.mindex.get_mi"><code class="docutils literal notranslate"><span class="pre">get_mi()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/mindex/index.html#pytuq.utils.mindex.encode_mindex"><code class="docutils literal notranslate"><span class="pre">encode_mindex()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/mindex/index.html#pytuq.utils.mindex.micf_join"><code class="docutils literal notranslate"><span class="pre">micf_join()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/mindex/index.html#pytuq.utils.mindex.mi_addfront_cons"><code class="docutils literal notranslate"><span class="pre">mi_addfront_cons()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/mindex/index.html#pytuq.utils.mindex.mi_addfront"><code class="docutils literal notranslate"><span class="pre">mi_addfront()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../utils/plotting/index.html">plotting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/plotting/index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/plotting/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/plotting/index.html#pytuq.utils.plotting.myrc"><code class="docutils literal notranslate"><span class="pre">myrc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/plotting/index.html#pytuq.utils.plotting.saveplot"><code class="docutils literal notranslate"><span class="pre">saveplot()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/plotting/index.html#pytuq.utils.plotting.set_colors"><code class="docutils literal notranslate"><span class="pre">set_colors()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/plotting/index.html#pytuq.utils.plotting.lighten_color"><code class="docutils literal notranslate"><span class="pre">lighten_color()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/plotting/index.html#pytuq.utils.plotting.plot_dm"><code class="docutils literal notranslate"><span class="pre">plot_dm()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/plotting/index.html#pytuq.utils.plotting.plot_xrv"><code class="docutils literal notranslate"><span class="pre">plot_xrv()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/plotting/index.html#pytuq.utils.plotting.parallel_coordinates"><code class="docutils literal notranslate"><span class="pre">parallel_coordinates()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/plotting/index.html#pytuq.utils.plotting.plot_yx"><code class="docutils literal notranslate"><span class="pre">plot_yx()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/plotting/index.html#pytuq.utils.plotting.plot_sens"><code class="docutils literal notranslate"><span class="pre">plot_sens()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/plotting/index.html#pytuq.utils.plotting.plot_jsens"><code class="docutils literal notranslate"><span class="pre">plot_jsens()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/plotting/index.html#pytuq.utils.plotting.plot_tri"><code class="docutils literal notranslate"><span class="pre">plot_tri()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/plotting/index.html#pytuq.utils.plotting.plot_pdf1d"><code class="docutils literal notranslate"><span class="pre">plot_pdf1d()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/plotting/index.html#pytuq.utils.plotting.plot_pdf2d"><code class="docutils literal notranslate"><span class="pre">plot_pdf2d()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/plotting/index.html#pytuq.utils.plotting.plot_pdfs"><code class="docutils literal notranslate"><span class="pre">plot_pdfs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/plotting/index.html#pytuq.utils.plotting.plot_ens"><code class="docutils literal notranslate"><span class="pre">plot_ens()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/plotting/index.html#pytuq.utils.plotting.plot_vars"><code class="docutils literal notranslate"><span class="pre">plot_vars()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/plotting/index.html#pytuq.utils.plotting.plot_shade"><code class="docutils literal notranslate"><span class="pre">plot_shade()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/plotting/index.html#pytuq.utils.plotting.plot_1d_anchored_single"><code class="docutils literal notranslate"><span class="pre">plot_1d_anchored_single()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/plotting/index.html#pytuq.utils.plotting.plot_1d_anchored"><code class="docutils literal notranslate"><span class="pre">plot_1d_anchored()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/plotting/index.html#pytuq.utils.plotting.plot_2d_anchored_single"><code class="docutils literal notranslate"><span class="pre">plot_2d_anchored_single()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/plotting/index.html#pytuq.utils.plotting.plot_2d_anchored"><code class="docutils literal notranslate"><span class="pre">plot_2d_anchored()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/plotting/index.html#pytuq.utils.plotting.plot_fcn_1d_slice"><code class="docutils literal notranslate"><span class="pre">plot_fcn_1d_slice()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/plotting/index.html#pytuq.utils.plotting.plot_fcn_2d_slice"><code class="docutils literal notranslate"><span class="pre">plot_fcn_2d_slice()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/plotting/index.html#pytuq.utils.plotting.plot_uc_sample"><code class="docutils literal notranslate"><span class="pre">plot_uc_sample()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/plotting/index.html#pytuq.utils.plotting.plot_uc_exact"><code class="docutils literal notranslate"><span class="pre">plot_uc_exact()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/plotting/index.html#pytuq.utils.plotting.plot_samples_pdfs"><code class="docutils literal notranslate"><span class="pre">plot_samples_pdfs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/plotting/index.html#pytuq.utils.plotting.plot_1d"><code class="docutils literal notranslate"><span class="pre">plot_1d()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/plotting/index.html#pytuq.utils.plotting.plot_2d"><code class="docutils literal notranslate"><span class="pre">plot_2d()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/plotting/index.html#pytuq.utils.plotting.plot_parity"><code class="docutils literal notranslate"><span class="pre">plot_parity()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/plotting/index.html#pytuq.utils.plotting.plot_cov"><code class="docutils literal notranslate"><span class="pre">plot_cov()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/plotting/index.html#pytuq.utils.plotting.plot_cov_tri"><code class="docutils literal notranslate"><span class="pre">plot_cov_tri()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/plotting/index.html#pytuq.utils.plotting.plot_sensmat"><code class="docutils literal notranslate"><span class="pre">plot_sensmat()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/plotting/index.html#pytuq.utils.plotting.plot_joy"><code class="docutils literal notranslate"><span class="pre">plot_joy()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../utils/stats/index.html">stats</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/stats/index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/stats/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/stats/index.html#pytuq.utils.stats.get_stats"><code class="docutils literal notranslate"><span class="pre">get_stats()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/stats/index.html#pytuq.utils.stats.get_domain"><code class="docutils literal notranslate"><span class="pre">get_domain()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/stats/index.html#pytuq.utils.stats.intersect_domain"><code class="docutils literal notranslate"><span class="pre">intersect_domain()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/stats/index.html#pytuq.utils.stats.diam"><code class="docutils literal notranslate"><span class="pre">diam()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../utils/uqtk_utils/index.html">uqtk_utils</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/uqtk_utils/index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/uqtk_utils/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/uqtk_utils/index.html#pytuq.utils.uqtk_utils.pce_eval"><code class="docutils literal notranslate"><span class="pre">pce_eval()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/uqtk_utils/index.html#pytuq.utils.uqtk_utils.pce_sens"><code class="docutils literal notranslate"><span class="pre">pce_sens()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/uqtk_utils/index.html#pytuq.utils.uqtk_utils.get_pdf_uqtk"><code class="docutils literal notranslate"><span class="pre">get_pdf_uqtk()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../utils/xutils/index.html">xutils</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/xutils/index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/xutils/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/xutils/index.html#pytuq.utils.xutils.idt"><code class="docutils literal notranslate"><span class="pre">idt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/xutils/index.html#pytuq.utils.xutils.savepk"><code class="docutils literal notranslate"><span class="pre">savepk()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/xutils/index.html#pytuq.utils.xutils.loadpk"><code class="docutils literal notranslate"><span class="pre">loadpk()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/xutils/index.html#pytuq.utils.xutils.cartes_list"><code class="docutils literal notranslate"><span class="pre">cartes_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/xutils/index.html#pytuq.utils.xutils.read_textlist"><code class="docutils literal notranslate"><span class="pre">read_textlist()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/xutils/index.html#pytuq.utils.xutils.sample_sphere"><code class="docutils literal notranslate"><span class="pre">sample_sphere()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/xutils/index.html#pytuq.utils.xutils.get_opt_bw"><code class="docutils literal notranslate"><span class="pre">get_opt_bw()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/xutils/index.html#pytuq.utils.xutils.get_pdf"><code class="docutils literal notranslate"><span class="pre">get_pdf()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/xutils/index.html#pytuq.utils.xutils.strarr"><code class="docutils literal notranslate"><span class="pre">strarr()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/xutils/index.html#pytuq.utils.xutils.project"><code class="docutils literal notranslate"><span class="pre">project()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/xutils/index.html#pytuq.utils.xutils.pick_basis"><code class="docutils literal notranslate"><span class="pre">pick_basis()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/xutils/index.html#pytuq.utils.xutils.safe_cholesky"><code class="docutils literal notranslate"><span class="pre">safe_cholesky()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/xutils/index.html#pytuq.utils.xutils.instantiate_classes_from_module"><code class="docutils literal notranslate"><span class="pre">instantiate_classes_from_module()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../workflows/index.html">workflows</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../workflows/fits/index.html">fits</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../workflows/fits/index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../workflows/fits/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../workflows/fits/index.html#pytuq.workflows.fits.pc_fit"><code class="docutils literal notranslate"><span class="pre">pc_fit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../workflows/fits/index.html#pytuq.workflows.fits.pc_ros"><code class="docutils literal notranslate"><span class="pre">pc_ros()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../workflows/uprop/index.html">uprop</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../workflows/uprop/index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../workflows/uprop/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../workflows/uprop/index.html#pytuq.workflows.uprop.uprop_proj"><code class="docutils literal notranslate"><span class="pre">uprop_proj()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../workflows/uprop/index.html#pytuq.workflows.uprop.uprop_regr"><code class="docutils literal notranslate"><span class="pre">uprop_regr()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Misc</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/indices.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../misc/diagram.html">Class Inheritance Diagrams</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/diagram.html#fitting">Fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/diagram.html#linear-regression">Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/diagram.html#mcmc-samplers">MCMC Samplers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/diagram.html#priors">Priors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/diagram.html#likelihoods">Likelihoods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/diagram.html#random-variables">Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/diagram.html#functions">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/diagram.html#global-sensitivity-analysis">Global Sensitivity Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/diagram.html#linear-dimensionality-reduction">Linear Dimensionality Reduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../misc/diagram.html#optimisers">Optimisers</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">PyTUQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">func</a></li>
+      <li class="breadcrumb-item active">bench1d</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/autoapi/pytuq/func/bench1d/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-pytuq.func.bench1d">
+<span id="bench1d"></span><h1>bench1d<a class="headerlink" href="#module-pytuq.func.bench1d" title="Link to this heading"></a></h1>
+<p>1d benchmark functions module.</p>
+<p>Most of the functions are taken from <a class="reference external" href="https://github.com/Vahanosi4ek/pytuq_funcs">https://github.com/Vahanosi4ek/pytuq_funcs</a>.</p>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.func.bench1d.TFData" title="pytuq.func.bench1d.TFData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TFData</span></code></a></p></td>
+<td><p>TensorFlow function</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.func.bench1d.SineSum" title="pytuq.func.bench1d.SineSum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SineSum</span></code></a></p></td>
+<td><p>Simple sum of sines</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.func.bench1d.SineSum2" title="pytuq.func.bench1d.SineSum2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SineSum2</span></code></a></p></td>
+<td><p>A more complex sum of sines</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.func.bench1d.QuadxExp" title="pytuq.func.bench1d.QuadxExp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">QuadxExp</span></code></a></p></td>
+<td><p>Product of quadratic and exponent</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.func.bench1d.LinxSin" title="pytuq.func.bench1d.LinxSin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LinxSin</span></code></a></p></td>
+<td><p>Product of linear and sine functions</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.func.bench1d.SinexExp" title="pytuq.func.bench1d.SinexExp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SinexExp</span></code></a></p></td>
+<td><p>Product of sine and exp functions</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.func.bench1d.SineLogSum" title="pytuq.func.bench1d.SineLogSum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SineLogSum</span></code></a></p></td>
+<td><p>Sum of sine and log functions</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.func.bench1d.CosineSum" title="pytuq.func.bench1d.CosineSum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CosineSum</span></code></a></p></td>
+<td><p>Simple sum of cosines</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.func.bench1d.Sinex" title="pytuq.func.bench1d.Sinex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Sinex</span></code></a></p></td>
+<td><p>Product of x and sine function</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.func.bench1d.CosineSum2" title="pytuq.func.bench1d.CosineSum2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CosineSum2</span></code></a></p></td>
+<td><p>Simple sum of cosines</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.func.bench1d.Sinusoidal" title="pytuq.func.bench1d.Sinusoidal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Sinusoidal</span></code></a></p></td>
+<td><p>Simple 1d sine function</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.func.bench1d.Forrester" title="pytuq.func.bench1d.Forrester"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Forrester</span></code></a></p></td>
+<td><p>Forrester function</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.func.bench1d.GramacyLee2" title="pytuq.func.bench1d.GramacyLee2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GramacyLee2</span></code></a></p></td>
+<td><p>Complicated oscillatory 1d function</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.func.bench1d.Higdon" title="pytuq.func.bench1d.Higdon"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Higdon</span></code></a></p></td>
+<td><p>Higdon function</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytuq.func.bench1d.Holsclaw" title="pytuq.func.bench1d.Holsclaw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Holsclaw</span></code></a></p></td>
+<td><p>Holsclaw function</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytuq.func.bench1d.DampedCosine" title="pytuq.func.bench1d.DampedCosine"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DampedCosine</span></code></a></p></td>
+<td><p>A simple 1d cosine function</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.TFData">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.bench1d.</span></span><span class="sig-name descname"><span class="pre">TFData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tfdata'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#TFData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.TFData" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>TensorFlow function</p>
+<p>Data generating toy model inspired by <a class="reference external" href="https://colab.research.google.com/github/tensorflow/probability/blob/master/tensorflow_probability/examples/jupyter_notebooks/Probabilistic_Layers_Regression.ipynb#scrollTo=5zCEYpzu7bDX">https://colab.research.google.com/github/tensorflow/probability/blob/master/tensorflow_probability/examples/jupyter_notebooks/Probabilistic_Layers_Regression.ipynb#scrollTo=5zCEYpzu7bDX</a> .</p>
+<div class="math notranslate nohighlight">
+\[f(x)=w_0 x (1 + \sin(x)) + b_0\]</div>
+<p>Default constant values are <span class="math notranslate nohighlight">\(w_0 = 0.125\)</span>, <span class="math notranslate nohighlight">\(b_0 = 5.0\)</span>, <span class="math notranslate nohighlight">\(a = -20.0\)</span>, <span class="math notranslate nohighlight">\(b = 60.0\)</span>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.TFData.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#TFData.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.TFData.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.SineSum">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.bench1d.</span></span><span class="sig-name descname"><span class="pre">SineSum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span> <span class="pre">/</span> <span class="pre">3.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'SineSum'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#SineSum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.SineSum" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>Simple sum of sines</p>
+<p>Problem 02 [<a class="reference external" href="https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem02">https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem02</a>]</p>
+<div class="math notranslate nohighlight">
+\[f(x)=\sin(c_1x)+\sin(c_2x)\]</div>
+<p>Default constant values are <span class="math notranslate nohighlight">\(c = (1., 10./3.)\)</span>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.SineSum.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#SineSum.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.SineSum.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.SineSum2">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.bench1d.</span></span><span class="sig-name descname"><span class="pre">SineSum2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'SineSum2'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#SineSum2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.SineSum2" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>A more complex sum of sines</p>
+<p>Problem 03 [<a class="reference external" href="https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem03">https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem03</a>]</p>
+<div class="math notranslate nohighlight">
+\[f(x)=-\sum_{k=1}^{c_1}k\sin((k+1)x+k)\]</div>
+<p>Default constant value is <span class="math notranslate nohighlight">\(c = 6\)</span>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.SineSum2.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#SineSum2.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.SineSum2.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.QuadxExp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.bench1d.</span></span><span class="sig-name descname"><span class="pre">QuadxExp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">16.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-24.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c3</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'QuadxExp'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#QuadxExp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.QuadxExp" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>Product of quadratic and exponent</p>
+<p>Problem 04 [<a class="reference external" href="https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem04">https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem04</a>]</p>
+<div class="math notranslate nohighlight">
+\[f(x)=-(c_1x^2+c_2x+c_3)e^{-x}\]</div>
+<p>Default constant values are <span class="math notranslate nohighlight">\(c = (16., -24., 5.)\)</span>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.QuadxExp.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#QuadxExp.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.QuadxExp.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.LinxSin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.bench1d.</span></span><span class="sig-name descname"><span class="pre">LinxSin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-3.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c3</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">18.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LinxSin'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#LinxSin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.LinxSin" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>Product of linear and sine functions</p>
+<p>Problem 05 [<a class="reference external" href="https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem05">https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem05</a>]</p>
+<div class="math notranslate nohighlight">
+\[f(x)=-(c_1-c_2x)sin(c_3x)\]</div>
+<p>Default constant values are <span class="math notranslate nohighlight">\(c = (1.4, -3., 18.)\)</span>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.LinxSin.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#LinxSin.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.LinxSin.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.SinexExp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.bench1d.</span></span><span class="sig-name descname"><span class="pre">SinexExp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'SinexExp'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#SinexExp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.SinexExp" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>Product of sine and exp functions</p>
+<p>Problem06 [<a class="reference external" href="https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem06">https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem06</a>]</p>
+<div class="math notranslate nohighlight">
+\[f(x)=-(x+\sin(x))e^{-x^2}\]</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.SinexExp.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#SinexExp.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.SinexExp.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.SineLogSum">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.bench1d.</span></span><span class="sig-name descname"><span class="pre">SineLogSum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span> <span class="pre">/</span> <span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c3</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">np.exp(1)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c4</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-0.84</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c5</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'SineLogSum'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#SineLogSum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.SineLogSum" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>Sum of sine and log functions</p>
+<p>Problem07 [<a class="reference external" href="https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem07">https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem07</a>]</p>
+<div class="math notranslate nohighlight">
+\[f(x)=\sin(c_1x) + \sin(c_2x) + \log_{c_3}(x) + c_4x + c_5\]</div>
+<p>Default constant values are <span class="math notranslate nohighlight">\(c = (1., 10/3, e, -0.84, 3.)\)</span>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.SineLogSum.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#SineLogSum.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.SineLogSum.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.CosineSum">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.bench1d.</span></span><span class="sig-name descname"><span class="pre">CosineSum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'CosineSum'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#CosineSum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.CosineSum" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>Simple sum of cosines</p>
+<p>Problem 08 [<a class="reference external" href="https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem08">https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem08</a>]</p>
+<div class="math notranslate nohighlight">
+\[f(x)=-\sum_{k=1}^{c_1}k\cos((k+1)x+k)\]</div>
+<p>Default constant value is <span class="math notranslate nohighlight">\(c = 6\)</span>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.CosineSum.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#CosineSum.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.CosineSum.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.Sinex">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.bench1d.</span></span><span class="sig-name descname"><span class="pre">Sinex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Sinex'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#Sinex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.Sinex" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>Product of x and sine function</p>
+<p>Problem10 [<a class="reference external" href="https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem10">https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem10</a>]</p>
+<div class="math notranslate nohighlight">
+\[f(x)=-x\sin(x)\]</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.Sinex.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#Sinex.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.Sinex.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.CosineSum2">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.bench1d.</span></span><span class="sig-name descname"><span class="pre">CosineSum2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'CosineSum2'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#CosineSum2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.CosineSum2" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>Simple sum of cosines</p>
+<p>Problem11 [<a class="reference external" href="https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem11">https://infinity77.net/global_optimization/test_functions_1d.html#go_benchmark.Problem11</a>]</p>
+<div class="math notranslate nohighlight">
+\[f(x)=c_1\cos(x) + \cos(c_2x)\]</div>
+<p>Default constant values are <span class="math notranslate nohighlight">\(c = (2., 2.)\)</span>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.CosineSum2.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#CosineSum2.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.CosineSum2.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.Sinusoidal">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.bench1d.</span></span><span class="sig-name descname"><span class="pre">Sinusoidal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Sinusoidal'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#Sinusoidal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.Sinusoidal" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>Simple 1d sine function</p>
+<p>Sinusoidal [<a class="reference external" href="https://www.sfu.ca/~ssurjano/curretal88sin.html">https://www.sfu.ca/~ssurjano/curretal88sin.html</a>]</p>
+<div class="math notranslate nohighlight">
+\[f(x)=\sin(c_1\pi(x-c_2))\]</div>
+<p>Default constant values are <span class="math notranslate nohighlight">\(c = (2., 0.1)\)</span>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.Sinusoidal.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#Sinusoidal.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.Sinusoidal.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.Forrester">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.bench1d.</span></span><span class="sig-name descname"><span class="pre">Forrester</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c3</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">12.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c4</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Forrester'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#Forrester"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.Forrester" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>Forrester function</p>
+<p>Forrester [<a class="reference external" href="https://www.sfu.ca/~ssurjano/forretal08.html">https://www.sfu.ca/~ssurjano/forretal08.html</a>]</p>
+<div class="math notranslate nohighlight">
+\[f(x)=(c_1x-c_2)^2\sin(c_3x-c_4)\]</div>
+<p>Default constant values are <span class="math notranslate nohighlight">\(c = (6., 2., 12., 4)\)</span>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.Forrester.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#Forrester.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.Forrester.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.GramacyLee2">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.bench1d.</span></span><span class="sig-name descname"><span class="pre">GramacyLee2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c3</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c4</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'GramacyLee2'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#GramacyLee2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.GramacyLee2" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>Complicated oscillatory 1d function</p>
+<p>Gramacy and Lee (2012) [<a class="reference external" href="https://www.sfu.ca/~ssurjano/grlee12.html">https://www.sfu.ca/~ssurjano/grlee12.html</a>]</p>
+<div class="math notranslate nohighlight">
+\[f(x)=\frac{\sin(c_1\pi x)}{c_2x}+(x-c_3)^{c_4}\]</div>
+<p>Default constant values are <span class="math notranslate nohighlight">\(c = (10., 2., 1., 4.)\)</span>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.GramacyLee2.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#GramacyLee2.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.GramacyLee2.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.Higdon">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.bench1d.</span></span><span class="sig-name descname"><span class="pre">Higdon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c3</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Higdon'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#Higdon"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.Higdon" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>Higdon function</p>
+<p>Higdon (2002) [<a class="reference external" href="https://www.sfu.ca/~ssurjano/hig02.html">https://www.sfu.ca/~ssurjano/hig02.html</a>]</p>
+<div class="math notranslate nohighlight">
+\[f(x)=\sin(2\pi x/c_1) + c_2\sin(2\pi x/c_3)\]</div>
+<p>Default constant values are <span class="math notranslate nohighlight">\(c = (10., 0.2, 2.5)\)</span>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.Higdon.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#Higdon.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.Higdon.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.Holsclaw">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.bench1d.</span></span><span class="sig-name descname"><span class="pre">Holsclaw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Holsclaw'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#Holsclaw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.Holsclaw" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>Holsclaw function</p>
+<p>Holsclaw et al. [<a class="reference external" href="https://www.sfu.ca/~ssurjano/holsetal13sin.html">https://www.sfu.ca/~ssurjano/holsetal13sin.html</a>]</p>
+<div class="math notranslate nohighlight">
+\[f(x)=\frac{x\sin(x)}{c_1}\]</div>
+<p>Default constant value is <span class="math notranslate nohighlight">\(c = 10.0\)</span>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.Holsclaw.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#Holsclaw.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.Holsclaw.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.DampedCosine">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytuq.func.bench1d.</span></span><span class="sig-name descname"><span class="pre">DampedCosine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1.4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'DampedCosine'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#DampedCosine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.DampedCosine" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../func/index.html#pytuq.func.func.Function" title="pytuq.func.func.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytuq.func.func.Function</span></code></a></p>
+<p>A simple 1d cosine function</p>
+<p>Damped Cosine [<a class="reference external" href="https://www.sfu.ca/~ssurjano/santetal03dc.html">https://www.sfu.ca/~ssurjano/santetal03dc.html</a>]</p>
+<div class="math notranslate nohighlight">
+\[f(x)=e^{c_1x}\cos(c_2\pi x)\]</div>
+<p>Default constant values are <span class="math notranslate nohighlight">\(c = (-1.4, 3.5)\)</span>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pytuq.func.bench1d.DampedCosine.grad">
+<span class="sig-name descname"><span class="pre">grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pytuq/func/bench1d.html#DampedCosine.grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytuq.func.bench1d.DampedCosine.grad" title="Link to this definition"></a></dt>
+<dd><p>Gradient evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – Input 2d array of size <span class="math notranslate nohighlight">\((N,d)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output 3d array of size <span class="math notranslate nohighlight">\((N,o,d)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../bench/index.html" class="btn btn-neutral float-left" title="bench" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../bench2d/index.html" class="btn btn-neutral float-right" title="bench2d" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bert Debusschere, Khachik Sargsyan, Emilie Baillo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
