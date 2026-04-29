@@ -799,7 +799,8 @@ def plot_pdfs(ind_show=None, plot_type='tri', pdf_type='hist',
     Args:
         ind_show (list[int], optional): Indices of dimensions (columns of samples) to show.
         plot_type (str, optional): Plot type. Options are 'tri' (trianguar plot of 1d/2d marginals), 'inds' (1d marginals in a single figure), 'ind' (individual files for 1d and 2d marginal PDFs)
-        pdf_type (str, optional): 1d PDF type. Options are 'hist' (histogram) or 'kde' (Kernel Density Estimation)
+        pdf_type (str, optional): 1d PDF type. Options are 'hist' (histogram),
+            'kde' (Kernel Density Estimation), or 'sam' (raw samples only).
         samples_ (str or np.ndarray, optional): Filename or :math:`(N,d)` numpy array of samples.
         burnin (int, optional): Number of samples to throw away from the beginning of samples.
         every (int, optional): Stratification: use every `k`-th sample.
@@ -904,8 +905,11 @@ def plot_pdfs(ind_show=None, plot_type='tri', pdf_type='hist',
             axarr.append(thisax)
             figs.append(fig)
 
-        plot_pdf1d(samples[:, i], pltype=pdf_type, ax=thisax)
-        thisax.set_ylim(bottom=0)
+        if pdf_type == 'sam':
+            thisax.plot(np.arange(samples.shape[0]), samples[:, i], '-', linewidth=1.0)
+        else:
+            plot_pdf1d(samples[:, i], pltype=pdf_type, ax=thisax)
+            thisax.set_ylim(bottom=0)
 
         if nominal_ is not None:
             plot_pdf1d(np.array(nominals[ind_show[i]], ndmin=2), pltype='nom',
@@ -919,7 +923,7 @@ def plot_pdfs(ind_show=None, plot_type='tri', pdf_type='hist',
         x0, x1 = thisax.get_xlim()
         y0, y1 = thisax.get_ylim()
         # thisax.set_aspect((x1 - x0) / (y1 - y0))
-        thisax.set_title('PDF of ' + names[ind_show[i]], fontsize=lsize)
+        thisax.set_title(names[ind_show[i]], fontsize=lsize)
 
         if plot_type == 'tri':
             if i == 0:
@@ -952,10 +956,14 @@ def plot_pdfs(ind_show=None, plot_type='tri', pdf_type='hist',
             elif plot_type == 'inds':
                 break
 
-            plot_pdf2d(samples[:, j], samples[:, i],
-                       pltype='kde', color='b', ncont=15, lwidth=1, ax=thisax)
-            if show_2dsamples:
-                thisax.plot(samples[:, j], samples[:, i], 'ko', markeredgecolor='white', markersize=5, zorder=-1000)
+            if pdf_type == 'sam':
+                plot_pdf2d(samples[:, j], samples[:, i],
+                           pltype='sam', color='k', mstyle='o', ax=thisax)
+            else:
+                plot_pdf2d(samples[:, j], samples[:, i],
+                           pltype='kde', color='b', ncont=15, lwidth=1, ax=thisax)
+                if show_2dsamples:
+                    thisax.plot(samples[:, j], samples[:, i], 'ko', markeredgecolor='white', markersize=5, zorder=-1000)
 
             if nominal_ is not None:
                 plot_pdf2d(nominals[ind_show[j]], nominals[ind_show[i]],
