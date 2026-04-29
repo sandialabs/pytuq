@@ -44,7 +44,7 @@ parser.add_argument("-g", "--prange_file", dest="prange_file", type=str, default
 parser.add_argument("-t", "--plot_type", dest="plot_type", type=str, default='tri',
                     help="Plot type", choices=['tri', 'ind', 'inds'])
 parser.add_argument("-f", "--pdf_type", dest="pdf_type", type=str, default='hist',
-                    help="Histogram or KDE", choices=['hist', 'kde'])
+                    help="Histogram or KDE", choices=['hist', 'kde', 'sam'])
 parser.add_argument("-b", "--burnin", dest="burnin", type=int, default=0,
                     help="Samples burnin")
 parser.add_argument("-e", "--every", dest="every", type=int, default=1,
