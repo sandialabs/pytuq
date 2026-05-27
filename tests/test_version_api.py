@@ -3,7 +3,6 @@
 
 import sys
 import os
-sys.path.insert(0, '/projects/pytuq/src')
 
 def test_version_api():
     """Test the PyTUQ version API."""
