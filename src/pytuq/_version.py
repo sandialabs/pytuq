@@ -110,8 +110,11 @@ def _get_version_info() -> Dict:
     # Try different methods in priority order
     version_info = _try_importlib_metadata()
     
+    git_info = _try_git_version()
     if version_info is None:
-        version_info = _try_git_version()
+        version_info = git_info
+    else:
+        version_info['git'] = git_info
 
     if version_info is None:
         version_info = _try_pyproject_toml()
