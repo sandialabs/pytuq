@@ -1,0 +1,5 @@
+<map id="inheritanceae89c03869" name="inheritanceae89c03869">
+<area shape="rect" id="node1" href="../autoapi/pytuq/linred/kle/index.html#pytuq.linred.kle.KLE" target="_top" title="Class for Karhunen&#45;Loeve expansion :cite:t:`loeve:1978`." alt="" coords="125,5,197,31"/>
+<area shape="rect" id="node2" href="../autoapi/pytuq/linred/linred/index.html#pytuq.linred.linred.LinRed" target="_top" title="Class for linear dimensionality reduction." alt="" coords="5,31,77,56"/>
+<area shape="rect" id="node3" href="../autoapi/pytuq/linred/svd/index.html#pytuq.linred.svd.SVD" target="_top" title="Class for SVD&#45;based dimensionality reduction." alt="" coords="125,55,197,80"/>
+</map>

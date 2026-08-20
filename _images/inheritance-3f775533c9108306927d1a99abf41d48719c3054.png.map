@@ -1,0 +1,8 @@
+<map id="inheritancea8ea6c78b2" name="inheritancea8ea6c78b2">
+<area shape="rect" id="node1" href="../autoapi/pytuq/minf/likelihoods/index.html#pytuq.minf.likelihoods.Likelihood" target="_top" title="Base class for likelihood evaluation." alt="" coords="5,104,93,129"/>
+<area shape="rect" id="node2" href="../autoapi/pytuq/minf/likelihoods/index.html#pytuq.minf.likelihoods.Likelihood_abc" target="_top" title="ABC likelihood." alt="" coords="167,5,286,31"/>
+<area shape="rect" id="node3" href="../autoapi/pytuq/minf/likelihoods/index.html#pytuq.minf.likelihoods.Likelihood_classical" target="_top" title="Classical likelihood class." alt="" coords="151,55,302,80"/>
+<area shape="rect" id="node4" href="../autoapi/pytuq/minf/likelihoods/index.html#pytuq.minf.likelihoods.Likelihood_dummy" target="_top" title="Dummy likelihood class. Useful for testing." alt="" coords="154,104,299,129"/>
+<area shape="rect" id="node5" href="../autoapi/pytuq/minf/likelihoods/index.html#pytuq.minf.likelihoods.Likelihood_gausmarg" target="_top" title="IID Likelihood." alt="" coords="147,153,307,179"/>
+<area shape="rect" id="node6" href="../autoapi/pytuq/minf/likelihoods/index.html#pytuq.minf.likelihoods.Likelihood_logclassical" target="_top" title="Log&#45;classical likelihood." alt="" coords="141,203,312,228"/>
+</map>

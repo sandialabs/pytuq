@@ -1,0 +1,8 @@
+<map id="inheritance53fffaa7f3" name="inheritance53fffaa7f3">
+<area shape="rect" id="node1" href="../autoapi/pytuq/lreg/anl/index.html#pytuq.lreg.anl.anl" target="_top" title="Bayesian linear regression class." alt="" coords="132,5,204,31"/>
+<area shape="rect" id="node2" href="../autoapi/pytuq/lreg/lreg/index.html#pytuq.lreg.lreg.lreg" target="_top" title="Base class for linear regression." alt="" coords="5,104,77,129"/>
+<area shape="rect" id="node3" href="../autoapi/pytuq/lreg/bcs/index.html#pytuq.lreg.bcs.bcs" target="_top" title="Bayesian compressive sensing (BCS) class :cite:t:`sargsyan:2014`." alt="" coords="132,55,204,80"/>
+<area shape="rect" id="node4" href="../autoapi/pytuq/lreg/merr/index.html#pytuq.lreg.merr.lreg_merr" target="_top" title="A class for model error embedded linear regression :cite:t:`sargsyan:2019`." alt="" coords="125,104,211,129"/>
+<area shape="rect" id="node5" href="../autoapi/pytuq/lreg/lreg/index.html#pytuq.lreg.lreg.lsq" target="_top" title="Bare minimum least squares solution." alt="" coords="132,153,204,179"/>
+<area shape="rect" id="node6" href="../autoapi/pytuq/lreg/opt/index.html#pytuq.lreg.opt.opt" target="_top" title="A class of a simple quadratic optimization to fit the coefficients." alt="" coords="132,203,204,228"/>
+</map>

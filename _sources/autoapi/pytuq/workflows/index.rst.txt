@@ -1,0 +1,18 @@
+workflows
+=========
+.. py:module:: pytuq.workflows
+
+.. autoapi-nested-parse::
+
+   Workflows subpackage for common multi-step UQ tasks.
+
+
+
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/pytuq/workflows/fits/index
+   /autoapi/pytuq/workflows/uprop/index
+
+

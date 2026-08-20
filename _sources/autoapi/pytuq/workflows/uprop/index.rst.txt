@@ -1,0 +1,56 @@
+uprop
+=====
+.. py:module:: pytuq.workflows.uprop
+
+.. autoapi-nested-parse::
+
+   Module for uncertainty propagation workflows via polynomial chaos.
+
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   pytuq.workflows.uprop.uprop_proj
+   pytuq.workflows.uprop.uprop_regr
+
+
+Module Contents
+---------------
+
+.. py:function:: uprop_proj(in_pc, model, nqd, out_pc)
+
+   Uncertainty propagation via spectral projection.
+
+   Evaluates the model on quadrature points induced by the input PC germ,
+   and computes the output PC coefficients via Galerkin projection.
+
+   :param in_pc: Input PC random variable.
+   :type in_pc: PCRV
+   :param model: Model function taking an :math:`(N, d)`-sized array and returning an :math:`(N, o)`-sized array.
+   :type model: callable
+   :param nqd: Number of quadrature points per stochastic dimension.
+   :type nqd: int
+   :param out_pc: Output PC random variable (coefficients are set in-place).
+   :type out_pc: PCRV
+
+
+.. py:function:: uprop_regr(in_pc, model, nsam, out_pc)
+
+   Uncertainty propagation via regression.
+
+   Evaluates the model on random germ samples from the input PC and computes
+   the output PC coefficients via least-squares regression.
+
+   :param in_pc: Input PC random variable.
+   :type in_pc: PCRV
+   :param model: Model function taking an :math:`(N, d)`-sized array and returning an :math:`(N, o)`-sized array.
+   :type model: callable
+   :param nsam: Number of random samples.
+   :type nsam: int
+   :param out_pc: Output PC random variable (coefficients are set in-place).
+   :type out_pc: PCRV
+
+

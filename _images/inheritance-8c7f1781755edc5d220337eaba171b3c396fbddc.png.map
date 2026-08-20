@@ -1,0 +1,7 @@
+<map id="inheritanceed0a97d165" name="inheritanceed0a97d165">
+<area shape="rect" id="node1" href="../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.Linreg" target="_top" title="Sensitivities computed via linear regression." alt="" coords="163,5,235,31"/>
+<area shape="rect" id="node2" href="../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.SensMethod" target="_top" title="Base class for various sensitivity methods implementation." alt="" coords="5,80,108,105"/>
+<area shape="rect" id="node3" href="../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.Moat" target="_top" title="Class for MOAT (Morris One At a Time) sensitivities :cite:t:`morris:1991`." alt="" coords="163,55,235,80"/>
+<area shape="rect" id="node4" href="../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.PCSobol" target="_top" title="PC&#45;based Sobol sensitivity computation :cite:t:`sudret:2008`." alt="" coords="162,104,237,129"/>
+<area shape="rect" id="node5" href="../autoapi/pytuq/gsa/gsa/index.html#pytuq.gsa.gsa.SamSobol" target="_top" title="Computing of sampling&#45;based main and total Sobol sensitivities :cite:t:`sobol:2001`, :cite:t:`saltelli:2002`." alt="" coords="156,153,243,179"/>
+</map>
