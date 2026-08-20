@@ -79,6 +79,35 @@ $ pip install 'pytuq[dev]'
 * Joy Bahr-Mueller (Sandia National Laboratories)
 * Vahan Sargsyan (Stuyvesant High School)
 
+## Version Information
+
+PyTUQ provides a comprehensive version API that works across different installation methods:
+
+```python
+import pytuq
+
+# Simple version string
+print(pytuq.__version__)  # e.g., "v1.0.0z-65-g660525a"
+
+# Comprehensive version information
+version_info = pytuq.get_version_info()
+# Returns: {'version': '...', 'git_commit': '...', 'git_tag': '...', 
+#           'source': 'git', 'install_method': 'source', 'tpl_versions': {...}}
+
+# Git-specific information
+git_info = pytuq.get_git_info()
+# Returns: {'commit': '...', 'tag': '...'}
+
+# Third-party library versions  
+tpl_versions = pytuq.get_tpl_versions()
+# Returns: {'numpy': '...', 'scipy': '...', 'matplotlib': '...', ...}
+```
+
+The version API automatically detects the installation method and provides appropriate information:
+- **Source development**: Uses git commit hash and tags
+- **Installed packages**: Uses package metadata (pip/spack)
+- **Fallback**: Uses pyproject.toml version
+
 ## License
 Distributed under BSD 3-Clause License. See `LICENSE.txt` for more information.
 
