@@ -11,7 +11,6 @@ sys.path.insert(0, os.path.abspath('../src'))
 
 # from sphinx_gallery.sorting import FileNameSortKey
 import warnings
-import pkg_resources
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
@@ -24,13 +23,13 @@ copyright = f"{year}, {author}"
 source_suffix = ".rst"
 master_doc = "index"
 
-from pkg_resources import get_distribution, DistributionNotFound
+# pkg_resources is gone from recent setuptools (and setuptools is not preinstalled on Python>=3.12)
+from importlib.metadata import version as _pkg_version, PackageNotFoundError
 
 try:
-    version = get_distribution("package-name").version
-except DistributionNotFound:
+    version = release = _pkg_version("pytuq")
+except PackageNotFoundError:
     version = release = "1.0.0"
-    pass
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
