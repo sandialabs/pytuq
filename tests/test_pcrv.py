@@ -2,6 +2,7 @@
 """Test script for PC random variables."""
 
 import numpy as np
+import pytest
 from pytuq.rv.pcrv import PC1d, PCRV, PCRV_mvn
 
 
@@ -71,6 +72,59 @@ def test_pcrv_mean_var():
     assert(np.isclose(var[0], var_expected))
 
 
+def test_pcrv_setcfs_column_vector_list():
+    # A list of (K,1) column-vector coefficients (e.g. from a regression on an
+    # (N,1) data array) should be stored as 1d arrays, giving the same moments
+    mi = np.array([[0], [1], [2]])
+    cfs = np.array([3.0, 2.0, 1.0])
+
+    pcrv_ref = PCRV(1, 1, 'LU', mi=mi, cfs=[cfs])
+    pcrv = PCRV(1, 1, 'LU', mi=mi)
+    pcrv.setCfs([cfs.reshape(-1, 1)])
+
+    assert(pcrv.coefs[0].shape == (3,))
+    assert(np.allclose(pcrv.computeMean(), pcrv_ref.computeMean()))
+    assert(np.allclose(pcrv.computeVar(), pcrv_ref.computeVar()))
+
+
+def test_pcrv_setcfs_column_vector_array_pdim1():
+    # For a single physical dimension, a (K,1) array is unambiguously a
+    # column vector of K coefficients
+    mi = np.array([[0], [1], [2]])
+    cfs = np.array([3.0, 2.0, 1.0])
+
+    pcrv = PCRV(1, 1, 'LU', mi=mi, cfs=cfs.reshape(-1, 1))
+
+    assert(pcrv.coefs[0].shape == (3,))
+    assert(np.allclose(pcrv.coefs[0], cfs))
+
+
+def test_pcrv_setcfs_rejects_multicolumn():
+    # A (K,2) array per physical dimension is not a valid coefficient array
+    mi = np.array([[0], [1], [2]])
+    pcrv = PCRV(1, 1, 'LU', mi=mi)
+
+    with pytest.raises(ValueError, match="1d"):
+        pcrv.setCfs([np.ones((3, 2))])
+
+
+@pytest.mark.filterwarnings("error::DeprecationWarning")
+def test_pcrv_slice():
+    # Fixing a germ dimension at a nominal value gives a PC in the remaining
+    # dimension that agrees with the original PC along that slice
+    mi = np.array([[0, 0], [1, 0], [0, 1], [1, 1], [2, 0]])
+    cfs = np.array([1.0, 2.0, -1.0, 0.5, 0.3])
+    pcrv = PCRV(1, 2, 'LU', mi=mi, cfs=cfs)
+
+    nominal = np.array([0.4, 0.0])
+    pcrv_sliced = pcrv.slicePC(fixind=[0], nominal=nominal)
+
+    xi = np.linspace(-1., 1., 7).reshape(-1, 1)
+    xi_full = np.hstack((np.full_like(xi, nominal[0]), xi))
+    assert(pcrv_sliced.sdim == 1)
+    assert(np.allclose(pcrv_sliced.evalPC(xi), pcrv.evalPC(xi_full)))
+
+
 def test_pcrv_sample_shape():
     # Sampling should produce correct shape
     pdim = 2
@@ -126,6 +180,10 @@ if __name__ == '__main__':
     test_pc1d_normsq_hermite()
     test_pc1d_quadrature()
     test_pcrv_mean_var()
+    test_pcrv_setcfs_column_vector_list()
+    test_pcrv_setcfs_column_vector_array_pdim1()
+    test_pcrv_setcfs_rejects_multicolumn()
+    test_pcrv_slice()
     test_pcrv_sample_shape()
     test_pcrv_mvn_mean_cov()
     test_pcrv_mvn_sampling()

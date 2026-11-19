@@ -436,11 +436,19 @@ class PCSobol(SensMethod):
         r"""Computing sensitivities.
 
         Args:
-            ysam (np.ndarray): A 2d array of size :math:`(N, d)`.
+            ysam (np.ndarray): A 1d array of size `N` of model evaluations for a single output. A 2d column array of size :math:`(N, 1)` is also accepted.
 
         Returns:
             dict: Dictionary with keys main, total and jointt.
+
+        Raises:
+            ValueError: If ysam holds more than one output column. For multioutput models, call compute() for each output separately, or use model_sens().
         """
+        ysam = np.asarray(ysam)
+        if ysam.ndim == 2 and ysam.shape[1] == 1:
+            ysam = ysam[:, 0]
+        if ysam.ndim != 1:
+            raise ValueError(f"PCSobol.compute() expects model evaluations of a single output, of size (N,) or (N,1); got an array of size {ysam.shape}. For multioutput models, call compute() for each output separately, or use model_sens().")
         assert(ysam.shape[0]==self.nsam)
 
         Amat = self.pcrv.evalBases(self.germ_sam, 0)
