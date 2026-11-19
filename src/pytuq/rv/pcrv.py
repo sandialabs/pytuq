@@ -118,7 +118,10 @@ class PCRV(MRV):
         r"""Sets the coefficients. Dangerous to use externally, as it may conflict with other attributes/sizes. Prefer to use setMiCfs() externally.
 
         Args:
-            cfs (list or np.ndarray): List of `d` coefficient arrays, each of size :math:`K_i` for :math:`i=1, \dots, d`. Or a single coefficient array of size `K`, meaning all dimensions get the same coefficient array. Or a 2d array of size :math:`(d, K)`. Defaults to None, which is populating coefficients with all zeros.
+            cfs (list or np.ndarray): List of `d` coefficient arrays, each of size :math:`K_i` for :math:`i=1, \dots, d`. Or a single coefficient array of size `K`, meaning all dimensions get the same coefficient array. Or a 2d array of size :math:`(d, K)`. Defaults to None, which is populating coefficients with all zeros. Column vectors of size :math:`(K_i,1)` (e.g. regression output for an :math:`(N,1)` data array) are flattened to 1d; for :math:`d=1`, a 2d array of size :math:`(K,1)` is accepted, too.
+
+        Raises:
+            ValueError: If a coefficient array can not be interpreted as a 1d array.
 
         Note:
            Dangerous to use externally, as it may conflict with other attributes. Prefer to use setMiCfs() externally.
@@ -129,6 +132,8 @@ class PCRV(MRV):
             if len(cfs.shape)==1:
                 self.coefs = [cfs] * self.pdim
             elif len(cfs.shape)==2:
+                if self.pdim == 1 and cfs.shape[1] == 1:
+                    cfs = cfs.T # a (K,1) column vector for a single physical dimension
                 assert(cfs.shape[0] == self.pdim)
                 self.coefs = [cfs[j, :] for j in range(self.pdim)]
             else:
@@ -136,13 +141,35 @@ class PCRV(MRV):
                 sys.exit()
         elif isinstance(cfs, list):
             assert(len(cfs) == self.pdim)
-            self.coefs = cfs.copy()
+            self.coefs = [self._cfsTo1d(cf) for cf in cfs]
         else:
             print(f"Coefs {cfs} type is not recognized. Exiting.")
             sys.exit()
 
+        self.checkMiCfsizes()
 
         return
+
+    @staticmethod
+    def _cfsTo1d(cf):
+        r"""Converts a single coefficient array to a 1d array, flattening column (or row) vectors.
+
+        Args:
+            cf (np.ndarray or list): Coefficient array of size :math:`K`, :math:`(K,1)` or :math:`(1,K)`.
+
+        Returns:
+            np.ndarray: A 1d array of size `K`.
+
+        Raises:
+            ValueError: If the array has more than one non-singleton dimension.
+        """
+        cf = np.asarray(cf)
+        if cf.ndim == 2 and 1 in cf.shape:
+            cf = cf.reshape(-1)
+        if cf.ndim != 1:
+            raise ValueError(f"Each PC coefficient array should be 1d of size K (or a (K,1) column); got an array of size {cf.shape}.")
+
+        return cf
 
     def checkMiCfsizes(self):
         """Checks the multiindex and coeffient list for any size incompatibility.
@@ -603,7 +630,8 @@ class PCRV(MRV):
         pcs_list=[]
         for i in fixind:
             assert(i<self.sdim)
-            pcs_list.append(self.PC1ds[i](nominal[i].reshape(1,1), self.maxOrd[i]))
+            # Bases evaluated at a single nominal point, as scalars
+            pcs_list.append([np.asarray(pcval).item() for pcval in self.PC1ds[i](nominal[i].reshape(1,1), self.maxOrd[i])])
 
         cfs_new=[]
         for j in range(self.pdim):

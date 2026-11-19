@@ -242,7 +242,7 @@ class Mixture(MRV):
 
         samples = np.empty((nsam,))
         for i in range(nsam):
-            samples[i] = self.rv_list[imix[i]].sample(1)
+            samples[i] = np.asarray(self.rv_list[imix[i]].sample(1)).item()
 
         return samples
 
