@@ -1,0 +1,30 @@
+<map id="inheritance510314a5fa" name="inheritance510314a5fa">
+<area shape="rect" id="node1" href="../autoapi/pytuq/func/func/index.html#pytuq.func.func.AddFcn" target="_top" title="Sum of two functions." alt="" coords="163,5,235,33"/>
+<area shape="rect" id="node2" href="../autoapi/pytuq/func/func/index.html#pytuq.func.func.Function" target="_top" title="Base class for a function." alt="" coords="5,525,82,553"/>
+<area shape="rect" id="node3" href="../autoapi/pytuq/func/oper/index.html#pytuq.func.oper.CartesProdFcn" target="_top" title="Cartesian product of two functions." alt="" coords="142,57,257,85"/>
+<area shape="rect" id="node4" href="../autoapi/pytuq/func/oper/index.html#pytuq.func.oper.ComposeFcn" target="_top" title="Function composition." alt="" coords="147,109,252,137"/>
+<area shape="rect" id="node5" href="../autoapi/pytuq/func/toy/index.html#pytuq.func.toy.Constant" target="_top" title="Multioutput Constant function" alt="" coords="160,161,239,189"/>
+<area shape="rect" id="node6" href="../autoapi/pytuq/func/func/index.html#pytuq.func.func.DivFcn" target="_top" title="Element&#45;wise quotient of two functions." alt="" coords="163,213,235,241"/>
+<area shape="rect" id="node7" href="../autoapi/pytuq/func/toy/index.html#pytuq.func.toy.Exp" target="_top" title="Exponential function with weighted input" alt="" coords="163,265,235,293"/>
+<area shape="rect" id="node8" href="../autoapi/pytuq/func/genz/index.html#pytuq.func.genz.GenzBase" target="_top" title="Base class for Genz function family" alt="" coords="156,317,242,345"/>
+<area shape="rect" id="node13" href="../autoapi/pytuq/func/oper/index.html#pytuq.func.oper.GradFcn" target="_top" title="Gradient extraction function." alt="" coords="162,369,237,397"/>
+<area shape="rect" id="node14" href="../autoapi/pytuq/func/toy/index.html#pytuq.func.toy.Identity" target="_top" title="Identity function" alt="" coords="163,421,235,449"/>
+<area shape="rect" id="node16" href="../autoapi/pytuq/func/poly/index.html#pytuq.func.poly.PolyBase" target="_top" title="Base class for polynomial functions" alt="" coords="159,473,240,501"/>
+<area shape="rect" id="node17" href="../autoapi/pytuq/func/oper/index.html#pytuq.func.oper.LinTransformFcn" target="_top" title="Linear transformation of function output." alt="" coords="135,525,264,553"/>
+<area shape="rect" id="node18" href="../autoapi/pytuq/func/toy/index.html#pytuq.func.toy.Log" target="_top" title="Logarithm function with weighted input" alt="" coords="163,577,235,605"/>
+<area shape="rect" id="node19" href="../autoapi/pytuq/func/func/index.html#pytuq.func.func.ModelWrapperFcn" target="_top" title="Wrapper that turns a generic callable into a Function." alt="" coords="130,629,269,657"/>
+<area shape="rect" id="node21" href="../autoapi/pytuq/func/func/index.html#pytuq.func.func.MultFcn" target="_top" title="Element&#45;wise product of two functions." alt="" coords="163,681,236,709"/>
+<area shape="rect" id="node22" href="../autoapi/pytuq/func/oper/index.html#pytuq.func.oper.PickDim" target="_top" title="Dimension picking function." alt="" coords="162,733,237,761"/>
+<area shape="rect" id="node23" href="../autoapi/pytuq/func/func/index.html#pytuq.func.func.PowFcn" target="_top" title="Element&#45;wise power of a function." alt="" coords="163,785,235,813"/>
+<area shape="rect" id="node24" href="../autoapi/pytuq/func/toy/index.html#pytuq.func.toy.Quad" target="_top" title="Quadratic function." alt="" coords="163,837,235,865"/>
+<area shape="rect" id="node25" href="../autoapi/pytuq/func/toy/index.html#pytuq.func.toy.Quad2d" target="_top" title="2D Quadratic function" alt="" coords="163,889,235,917"/>
+<area shape="rect" id="node26" href="../autoapi/pytuq/func/oper/index.html#pytuq.func.oper.ShiftFcn" target="_top" title="Shifted function." alt="" coords="163,941,236,969"/>
+<area shape="rect" id="node27" href="../autoapi/pytuq/func/oper/index.html#pytuq.func.oper.SliceFcn" target="_top" title="Sliced function evaluation." alt="" coords="162,993,237,1021"/>
+<area shape="rect" id="node28" href="../autoapi/pytuq/func/func/index.html#pytuq.func.func.SubFcn" target="_top" title="Difference of two functions." alt="" coords="163,1045,235,1073"/>
+<area shape="rect" id="node9" href="../autoapi/pytuq/func/genz/index.html#pytuq.func.genz.GenzCornerPeak" target="_top" title="Genz Corner Peak function" alt="" coords="332,227,461,254"/>
+<area shape="rect" id="node10" href="../autoapi/pytuq/func/genz/index.html#pytuq.func.genz.GenzOscillatory" target="_top" title="Genz Oscillatory function" alt="" coords="334,279,458,306"/>
+<area shape="rect" id="node11" href="../autoapi/pytuq/func/genz/index.html#pytuq.func.genz.GenzQuadOscillatory" target="_top" title="Genz Quadratic Oscillatory function" alt="" coords="317,331,475,358"/>
+<area shape="rect" id="node12" href="../autoapi/pytuq/func/genz/index.html#pytuq.func.genz.GenzSum" target="_top" title="Genz Summation function" alt="" coords="354,383,438,410"/>
+<area shape="rect" id="node15" href="../autoapi/pytuq/func/poly/index.html#pytuq.func.poly.Leg" target="_top" title="Legendre polynomial expansion" alt="" coords="360,460,432,488"/>
+<area shape="rect" id="node20" href="../autoapi/pytuq/func/poly/index.html#pytuq.func.poly.Mon" target="_top" title="Monomial polynomial expansion" alt="" coords="360,512,432,540"/>
+</map>

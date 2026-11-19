@@ -1,0 +1,87 @@
+pytuq
+=====
+.. py:module:: pytuq
+
+.. autoapi-nested-parse::
+
+   PyTUQ - Python Toolkit for Uncertainty Quantification.
+
+
+
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/pytuq/fit/index
+   /autoapi/pytuq/ftools/index
+   /autoapi/pytuq/func/index
+   /autoapi/pytuq/gsa/index
+   /autoapi/pytuq/linred/index
+   /autoapi/pytuq/lreg/index
+   /autoapi/pytuq/minf/index
+   /autoapi/pytuq/optim/index
+   /autoapi/pytuq/rv/index
+   /autoapi/pytuq/surrogates/index
+   /autoapi/pytuq/utils/index
+   /autoapi/pytuq/workflows/index
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   pytuq.get_version
+   pytuq.get_git_info
+   pytuq.get_all_dependency_versions
+   pytuq.get_dependency_versions
+   pytuq.get_version_info
+   pytuq.get_tpl_versions
+
+
+Package Contents
+----------------
+
+.. py:function:: get_version() -> str
+
+   Get the PyTUQ version string.
+
+
+.. py:function:: get_git_info() -> Dict
+
+   Get git-specific version information.
+
+
+.. py:function:: get_all_dependency_versions() -> Dict[str, Optional[str]]
+
+   Get versions of all dependencies (core + optional).
+
+
+.. py:function:: get_dependency_versions() -> Dict[str, Dict[str, Optional[str]]]
+
+   Get organized dependency versions.
+
+
+.. py:function:: get_version_info()
+
+   Get comprehensive version information about PyTUQ.
+
+   :returns:
+
+             Dictionary containing version information including:
+                 - version: PyTUQ version string
+                 - source: How version was determined (importlib_metadata, git, pyproject.toml, fallback)
+                 - install_method: Installation method (installed, source, unknown)
+                 - git_commit: Git commit hash (if available)
+                 - git_tag: Git tag (if available)
+   :rtype: dict
+
+
+.. py:function:: get_tpl_versions()
+
+   Get versions of third-party libraries used by PyTUQ.
+
+   :returns: Dictionary containing versions of all dependencies
+   :rtype: dict
+
+

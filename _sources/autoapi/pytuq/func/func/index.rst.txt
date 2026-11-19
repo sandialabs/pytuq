@@ -1,0 +1,475 @@
+func
+====
+.. py:module:: pytuq.func.func
+
+.. autoapi-nested-parse::
+
+   Module for a general multioutput function class and some basic operations.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pytuq.func.func.Function
+   pytuq.func.func.AddFcn
+   pytuq.func.func.SubFcn
+   pytuq.func.func.MultFcn
+   pytuq.func.func.DivFcn
+   pytuq.func.func.PowFcn
+   pytuq.func.func.ModelWrapperFcn
+
+
+Module Contents
+---------------
+
+.. py:class:: Function(name='Base')
+
+   Base class for a function.
+
+   .. attribute:: dim
+
+      Input dimensionality, `d`.
+
+      :type: int
+
+   .. attribute:: dmax
+
+      Default domain half-size. That is, default domain is :math:`[-d_{max}, + d_{max}]`.
+
+      :type: float
+
+   .. attribute:: domain
+
+      A 2d array of size :math:`(d,2)` indicating the input domain of the function.
+
+      :type: np.ndarray
+
+   .. attribute:: eval
+
+      Callable evaluator of the function.
+
+      :type: callable
+
+   .. attribute:: name
+
+      Name of the function.
+
+      :type: str
+
+   .. attribute:: outdim
+
+      Output dimensionality, `o`.
+
+      :type: int
+
+
+   .. py:method:: grad(x)
+
+      Gradient evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: hess(x)
+
+      Hessian evaluator.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Output 4d array of size :math:`(N,o,d,d)`.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: setCall(eval)
+
+      Setting the evaluator function.
+
+      :param eval: Callable function from :math:`(N,d)` to :math:`(N,o)`.
+      :type eval: callable
+
+
+
+   .. py:method:: call1d(odim=0)
+
+      Wrapper function for single output evaluation.
+
+      :param odim: Output dimension index. Defaults to 0.
+      :type odim: int, optional
+
+      :returns: A callable function from :math:`(N,d)` to :math:`(N,)`.
+      :rtype: callable
+
+
+
+   .. py:method:: setDimDom(domain=None, dimension=None)
+
+      Set input dimensionality and domain.
+
+      Exactly one of ``domain`` or ``dimension`` must be provided.
+      If ``dimension`` is given, the domain defaults to
+      :math:`[-d_{max}, +d_{max}]^d`.
+
+      :param domain: A 2d array of size :math:`(d,2)` specifying the domain.
+      :type domain: np.ndarray, optional
+      :param dimension: Input dimensionality `d`.
+      :type dimension: int, optional
+
+      :raises AssertionError: If both or neither of ``domain`` and ``dimension`` are provided.
+
+
+
+   .. py:method:: inDomain(x)
+
+      Check whether all points lie inside the function domain.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: True if all rows of ``x`` are within the domain.
+      :rtype: bool
+
+
+
+   .. py:method:: checkDomain(x)
+
+      Raise an error if any point lies outside the function domain.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :raises ValueError: If any row of ``x`` is outside the domain.
+
+
+
+   .. py:method:: checkDim(x)
+
+      Assert that input has the correct shape.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :raises AssertionError: If ``x`` is not 2d or the second dimension does not match ``dim``.
+
+
+
+   .. py:method:: sample_uniform(nsam)
+
+      Draw uniform random samples from the function domain.
+
+      :param nsam: Number of samples.
+      :type nsam: int
+
+      :returns: A 2d array of size :math:`(N,d)` with samples.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: plot_1d(nom=None, ngr=133)
+
+      Plot 1d slices of the function for all input-output dimension pairs.
+
+      :param nom: Nominal input values for non-plotted dimensions.
+                  Defaults to None (midpoint of the domain).
+      :type nom: np.ndarray, optional
+      :param ngr: Number of grid points. Defaults to 133.
+      :type ngr: int, optional
+
+
+
+   .. py:method:: plot_2d(nom=None, ngr=33)
+
+      Plot 2d slices of the function for all input dimension pairs.
+
+      :param nom: Nominal input values for non-plotted dimensions.
+                  Defaults to None (midpoint of the domain).
+      :type nom: np.ndarray, optional
+      :param ngr: Number of grid points per dimension. Defaults to 33.
+      :type ngr: int, optional
+
+
+
+   .. py:method:: grad_(x, eps=1e-05)
+
+      Numerical gradient via central finite differences.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+      :param eps: Finite-difference step size. Defaults to 1e-5.
+      :type eps: float, optional
+
+      :returns: Gradient 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: hess_(x, eps=1e-05)
+
+      Numerical Hessian via central finite differences.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+      :param eps: Finite-difference step size. Defaults to 1e-5.
+      :type eps: float, optional
+
+      :returns: Hessian 4d array of size :math:`(N,o,d,d)`.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: minimize(odim=0, return_res=False)
+
+      Minimize the function using L-BFGS-B.
+
+      :param odim: Output dimension index to minimize. Defaults to 0.
+      :type odim: int, optional
+      :param return_res: If True, return the full optimization result.
+                         If False, return only the optimal input. Defaults to False.
+      :type return_res: bool, optional
+
+      :returns:
+
+                Optimal input array,
+                    or the full result object if ``return_res`` is True.
+      :rtype: np.ndarray or scipy.optimize.OptimizeResult
+
+
+
+   .. py:method:: eval_slice(x, ind=[0], nom=None)
+
+      Evaluate the function on a lower-dimensional slice.
+
+      Non-sliced dimensions are fixed at their nominal values.
+
+      :param x: Input 2d array of size :math:`(N, |ind|)` with values
+                for the selected dimensions.
+      :type x: np.ndarray
+      :param ind: Indices of the active input dimensions.
+                  Defaults to [0].
+      :type ind: list of int, optional
+      :param nom: Full nominal input of length `d`.
+                  Defaults to None (midpoint of the domain).
+      :type nom: np.ndarray, optional
+
+      :returns: Output 2d array of size :math:`(N,o)`.
+      :rtype: np.ndarray
+
+
+
+   .. py:method:: evalgrad_slice(x, ind=[0], nom=None)
+
+      Evaluate the gradient on a lower-dimensional slice.
+
+      Non-sliced dimensions are fixed at their nominal values.
+
+      :param x: Input 2d array of size :math:`(N, |ind|)` with values
+                for the selected dimensions.
+      :type x: np.ndarray
+      :param ind: Indices of the active input dimensions.
+                  Defaults to [0].
+      :type ind: list of int, optional
+      :param nom: Full nominal input of length `d`.
+                  Defaults to None (midpoint of the domain).
+      :type nom: np.ndarray, optional
+
+      :returns: Gradient 3d array of size :math:`(N, o, |ind|)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: AddFcn(fcn1, fcn2, name='Sum')
+
+   Bases: :py:obj:`Function`
+
+
+   Sum of two functions.
+
+   .. attribute:: fcn1
+
+      First operand.
+
+      :type: Function
+
+   .. attribute:: fcn2
+
+      Second operand.
+
+      :type: Function
+
+
+   .. py:method:: grad(x)
+
+      Evaluate the gradient of the sum.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Gradient 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: SubFcn(fcn1, fcn2, name='Subtraction')
+
+   Bases: :py:obj:`Function`
+
+
+   Difference of two functions.
+
+   .. attribute:: fcn1
+
+      First operand.
+
+      :type: Function
+
+   .. attribute:: fcn2
+
+      Second operand.
+
+      :type: Function
+
+
+   .. py:method:: grad(x)
+
+      Evaluate the gradient of the difference.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Gradient 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: MultFcn(fcn1, fcn2, name='Product')
+
+   Bases: :py:obj:`Function`
+
+
+   Element-wise product of two functions.
+
+   .. attribute:: fcn1
+
+      First operand.
+
+      :type: Function
+
+   .. attribute:: fcn2
+
+      Second operand.
+
+      :type: Function
+
+
+   .. py:method:: grad(x)
+
+      Evaluate the gradient of the product via the product rule.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Gradient 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: DivFcn(fcn1, fcn2, name='Quotient')
+
+   Bases: :py:obj:`Function`
+
+
+   Element-wise quotient of two functions.
+
+   .. attribute:: fcn1
+
+      Numerator function.
+
+      :type: Function
+
+   .. attribute:: fcn2
+
+      Denominator function.
+
+      :type: Function
+
+
+   .. py:method:: grad(x)
+
+      Evaluate the gradient of the quotient via the quotient rule.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Gradient 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: PowFcn(fcn, power, name='Power')
+
+   Bases: :py:obj:`Function`
+
+
+   Element-wise power of a function.
+
+   .. attribute:: fcn
+
+      Base function.
+
+      :type: Function
+
+   .. attribute:: power
+
+      Exponent.
+
+      :type: float
+
+
+   .. py:method:: grad(x)
+
+      Evaluate the gradient via the power rule.
+
+      :param x: Input 2d array of size :math:`(N,d)`.
+      :type x: np.ndarray
+
+      :returns: Gradient 3d array of size :math:`(N,o,d)`.
+      :rtype: np.ndarray
+
+
+
+.. py:class:: ModelWrapperFcn(model, ndim, modelpar=None, name='ModelWrapper')
+
+   Bases: :py:obj:`Function`
+
+
+   Wrapper that turns a generic callable into a Function.
+
+   Wraps a model callable (with optional parameters) so it can be
+   used wherever a :class:`Function` is expected.
+
+   .. attribute:: model
+
+      The underlying model callable.
+
+      :type: callable
+
+   .. attribute:: modelpar
+
+      Optional model parameters passed as a second argument.
+
+   .. attribute:: ndim
+
+      Input dimensionality.
+
+      :type: int
+
+

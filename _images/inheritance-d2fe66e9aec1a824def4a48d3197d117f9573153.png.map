@@ -1,0 +1,8 @@
+<map id="inheritance7d8579d0c5" name="inheritance7d8579d0c5">
+<area shape="rect" id="node1" href="../autoapi/pytuq/optim/gd/index.html#pytuq.optim.gd.Adam" target="_top" title="Simple Adam optimizer that performs gradient descent." alt="" coords="149,5,221,33"/>
+<area shape="rect" id="node2" href="../autoapi/pytuq/optim/optim/index.html#pytuq.optim.optim.OptBase" target="_top" title="Base class for optimization." alt="" coords="5,109,82,137"/>
+<area shape="rect" id="node3" href="../autoapi/pytuq/optim/gd/index.html#pytuq.optim.gd.GD" target="_top" title="&quot;Gradient descent optimization class." alt="" coords="149,57,221,85"/>
+<area shape="rect" id="node4" href="../autoapi/pytuq/optim/pso/index.html#pytuq.optim.pso.PSO" target="_top" title="&quot;Particle swarm optimization class." alt="" coords="149,109,221,137"/>
+<area shape="rect" id="node5" href="../autoapi/pytuq/optim/gd/index.html#pytuq.optim.gd.SGD" target="_top" title="&quot;Stochastic gradient descent optimization class." alt="" coords="149,161,221,189"/>
+<area shape="rect" id="node6" href="../autoapi/pytuq/optim/sciwrap/index.html#pytuq.optim.sciwrap.ScipyWrapper" target="_top" title="&quot;Optimization class wrapper to scipy options. See https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html." alt="" coords="130,213,241,241"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="inheritance90f6ce540e" name="inheritance90f6ce540e">
+<area shape="rect" id="node1" href="../autoapi/pytuq/minf/priors/index.html#pytuq.minf.priors.Prior" target="_top" title="Base class for prior evaluation." alt="" coords="5,32,77,60"/>
+<area shape="rect" id="node2" href="../autoapi/pytuq/minf/priors/index.html#pytuq.minf.priors.Prior_normal" target="_top" title="Normal prior class." alt="" coords="128,5,232,33"/>
+<area shape="rect" id="node3" href="../autoapi/pytuq/minf/priors/index.html#pytuq.minf.priors.Prior_uniform" target="_top" title="Uniform prior class." alt="" coords="125,57,235,85"/>
+</map>
