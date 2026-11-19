@@ -13,7 +13,7 @@ authors = [
 maintainers = [ 
   {name = "Emilie Grace Baillo"}
 ]
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 
 readme = "README.md"
 license = {file = "LICENSE.txt"}
@@ -24,6 +24,8 @@ classifiers = [
     'Programming Language :: Python :: 3.11',
     'Programming Language :: Python :: 3.12',
     'Programming Language :: Python :: 3.13',
+    'Programming Language :: Python :: 3.14',
+    'Programming Language :: Python :: 3.15',
     'Programming Language :: Python :: 3 :: Only',
     'Intended Audience :: Science/Research',
     'Topic :: Scientific/Engineering :: Mathematics',
